@@ -1,11 +1,13 @@
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useAuth } from '../contexts/AuthContext'
+import { useTheme } from '../contexts/ThemeContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 export function Perfil() {
   const { user } = useAuth()
+  const { theme, setTheme } = useTheme()
   const navigate = useNavigate()
   const [loggingOut, setLoggingOut] = useState(false)
 
@@ -31,6 +33,30 @@ export function Perfil() {
         )}
         <h1 className="perfil-name">{user?.displayName ?? 'Usuário'}</h1>
         <p className="perfil-email">{user?.email}</p>
+      </div>
+
+      <div className="perfil-section">
+        <h2 className="perfil-section-title">Aparência</h2>
+        <div className="perfil-info-list" style={{ display: 'flex', padding: '16px', gap: '8px' }}>
+          {(['light', 'dark', 'system'] as const).map((t) => (
+            <button
+              key={t}
+              onClick={() => setTheme(t)}
+              style={{
+                flex: 1,
+                padding: '10px',
+                borderRadius: '8px',
+                border: theme === t ? '2px solid #6750A4' : '1px solid #E7E0EC',
+                background: theme === t ? '#E8DEF8' : '#F4EFF4',
+                cursor: 'pointer',
+                fontWeight: 600,
+                color: theme === t ? '#6750A4' : '#49454F'
+              }}
+            >
+              {t.charAt(0).toUpperCase() + t.slice(1)}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="perfil-section">

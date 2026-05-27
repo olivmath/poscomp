@@ -23,17 +23,17 @@ function ProtectedLayout({ children }: { children: React.ReactNode }) {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+import { ThemeProvider } from './contexts/ThemeContext'
+// ...
       <AuthProvider>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<ProtectedLayout><Home /></ProtectedLayout>} />
-          <Route path="/historico" element={<ProtectedLayout><Historico /></ProtectedLayout>} />
-          <Route path="/analises" element={<ProtectedLayout><Analises /></ProtectedLayout>} />
-          <Route path="/perfil" element={<ProtectedLayout><Perfil /></ProtectedLayout>} />
-          <Route path="/simulado" element={<ProtectedLayout><Simulado /></ProtectedLayout>} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <ThemeProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+// ...
+          </Routes>
+        </ThemeProvider>
       </AuthProvider>
+// ...
     </BrowserRouter>
   </StrictMode>,
 )
