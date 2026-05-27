@@ -19,7 +19,10 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: process.env.CI ? 'pnpm preview' : 'pnpm build --mode test && pnpm preview',
+    // No CI o dist já existe (step de build anterior). Localmente builda com .env.test.
+    command: process.env.CI
+      ? 'pnpm preview'
+      : 'pnpm build --mode test && pnpm preview',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
