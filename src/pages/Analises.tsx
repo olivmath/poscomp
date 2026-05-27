@@ -163,8 +163,10 @@ export function Analises() {
                 return (
                   <div key={area} className="analises-area-row">
                     <div className="analises-area-header">
-                      <span className="material-symbols-outlined">{AREA_ICONS[area]}</span>
-                      <span className="analises-area-name">{area}</span>
+                      <div className="analises-area-label">
+                        <span className="material-symbols-outlined analises-area-icon">{AREA_ICONS[area]}</span>
+                        <span className="analises-area-name">{area}</span>
+                      </div>
                       <span className="analises-area-stats">
                         {s.correct}/{s.total} — {s.pct}%
                       </span>
@@ -281,9 +283,12 @@ export function Analises() {
         <div className="analises-slide" data-testid="slide-relaxar">
           <h3 className="analises-section-title">Pode relaxar</h3>
           {analytics.canRelax.length === 0 ? (
-            <p className="analises-empty-msg">
-              Ainda nenhuma área com certeza ≥ 70% e acurácia ≥ 80%. Continue praticando!
-            </p>
+            <div className="analises-empty-state">
+              <span className="material-symbols-outlined analises-empty-icon">sentiment_satisfied</span>
+              <p className="analises-empty-msg">
+                Ainda nenhuma área com certeza ≥ 70% e acurácia ≥ 80%.<br/>Continue praticando!
+              </p>
+            </div>
           ) : (
             <ul className="priority-list">
               {analytics.canRelax.map((area) => {
