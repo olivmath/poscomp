@@ -6,10 +6,10 @@ import type { Area } from '../types'
 const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
 
 function SparkBar({ pct }: { pct: number }) {
-  const color = pct >= 80 ? '#386A20' : pct >= 60 ? '#7B5800' : '#8C1D18'
+  const cls = pct >= 80 ? 'spark-bar-fill--high' : pct >= 60 ? 'spark-bar-fill--mid' : 'spark-bar-fill--low'
   return (
     <div className="spark-bar-bg">
-      <div className="spark-bar-fill" style={{ width: `${pct}%`, background: color }} />
+      <div className={`spark-bar-fill ${cls}`} style={{ width: `${pct}%` }} />
     </div>
   )
 }
@@ -25,14 +25,14 @@ function ScoreTimeline({ scores }: { scores: Array<{ score: number; total: numbe
         {[...scores].reverse().map((s, i) => {
           const heightPct = max > 0 ? (s.score / max) * 100 : 0
           const pct = Math.round((s.score / s.total) * 100)
-          const color = pct >= 80 ? '#386A20' : pct >= 60 ? '#7B5800' : '#8C1D18'
+          const tier = pct >= 80 ? 'high' : pct >= 60 ? 'mid' : 'low'
           return (
             <div key={i} className="timeline-bar-col" data-testid="timeline-bar">
-              <span className="timeline-score" style={{ color }}>{s.score}</span>
+              <span className={`timeline-score timeline-score--${tier}`}>{s.score}</span>
               <div className="timeline-bar-track">
                 <div
-                  className="timeline-bar-fill"
-                  style={{ height: `${heightPct}%`, background: color }}
+                  className={`timeline-bar-fill timeline-bar-fill--${tier}`}
+                  style={{ height: `${heightPct}%` }}
                 />
               </div>
               <span className="timeline-date">

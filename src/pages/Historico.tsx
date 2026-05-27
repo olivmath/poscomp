@@ -27,8 +27,7 @@ function formatDuration(seconds: number): string {
 function ResultCard({ result }: { result: SimuladoResult }) {
   const [expanded, setExpanded] = useState(false)
   const pct = Math.round((result.score / result.totalQuestions) * 100)
-  const scoreColor = pct >= 80 ? '#386A20' : pct >= 60 ? '#7B5800' : '#8C1D18'
-  const scoreBg = pct >= 80 ? '#DCEDC8' : pct >= 60 ? '#FFF3CD' : '#FDECEA'
+  const scoreClass = pct >= 80 ? 'hist-score--high' : pct >= 60 ? 'hist-score--mid' : 'hist-score--low'
 
   return (
     <div
@@ -40,7 +39,7 @@ function ResultCard({ result }: { result: SimuladoResult }) {
     >
       <div className="hist-card-row">
         <span className="hist-date">{formatDate(result)}</span>
-        <span className="hist-score" style={{ color: scoreColor, background: scoreBg }}>
+        <span className={`hist-score ${scoreClass}`}>
           {result.score}/{result.totalQuestions}
         </span>
         <span className="hist-time">{formatDuration(result.timeSpentSeconds)}</span>
