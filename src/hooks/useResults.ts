@@ -246,6 +246,8 @@ export function useResults(): UseResultsReturn {
           areaConfidence,
           reviewPriority,
           canRelax,
+          streak,
+          weeklyFrequency,
         })
       })
       .catch(() => {
