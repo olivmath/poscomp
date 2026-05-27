@@ -24,14 +24,21 @@ export interface AreaBreakdown {
   total: number
 }
 
+export interface SimuladoConfig {
+  areas: Area[] // [] = todas
+  totalQuestions: 5 | 10 | 20 | number // number para o caso 'max'
+  timerMode: 'none' | 'per-question'
+  secondsPerQuestion?: number
+}
+
 export interface SimuladoResult {
   id: string
   completedAt: Timestamp
   score: number
-  totalQuestions: 10
+  totalQuestions: number
   timeSpentSeconds: number
   areaBreakdown: Record<Area, AreaBreakdown>
   answers: AnswerRecord[]
 }
 
-export type SimuladoState = 'idle' | 'running' | 'finished'
+export type SimuladoState = 'idle' | 'config' | 'running' | 'finished'

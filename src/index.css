@@ -425,6 +425,54 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   SIMULADO — Configuration
+═══════════════════════════════════════════════════════════ */
+.config-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.config-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface-variant);
+  text-align: center;
+}
+
+.segmented-buttons {
+  display: flex;
+  background: var(--color-surface-elevated);
+  padding: 4px;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.segmented-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface-variant);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.segmented-btn.active {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: 0 2px 8px rgba(103, 80, 164, 0.25);
+}
+
+.dark .segmented-btn.active {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════
    SIMULADO — Idle & Finished
 ═══════════════════════════════════════════════════════════ */
 .simulado-container {

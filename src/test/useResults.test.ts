@@ -6,7 +6,7 @@ import { useResults } from '../hooks/useResults'
 
 vi.mock('../firebase', () => ({ db: {} }))
 
-vi.mock('../contexts/AuthContext', () => ({
+vi.mock('../hooks/useAuth', () => ({
   useAuth: vi.fn(),
 }))
 
