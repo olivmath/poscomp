@@ -15,7 +15,23 @@ vi.mock('firebase/firestore', () => ({
   collection: vi.fn(),
   getDocs: vi.fn(),
   addDoc: vi.fn(),
+  setDoc: vi.fn(),
+  doc: vi.fn(),
   serverTimestamp: vi.fn(() => ({ seconds: 0, nanoseconds: 0 })),
+  Timestamp: {
+    fromDate: (d: Date) => ({ seconds: Math.floor(d.getTime() / 1000), nanoseconds: 0 }),
+    now: () => ({ seconds: Math.floor(Date.now() / 1000), nanoseconds: 0 }),
+  },
+}))
+
+vi.mock('../hooks/useSrs', () => ({
+  useSrs: vi.fn(() => ({
+    pendingCards: [],
+    totalPending: 0,
+    loading: false,
+    upsertFromResult: vi.fn().mockResolvedValue(undefined),
+    updateCard: vi.fn().mockResolvedValue(undefined),
+  })),
 }))
 
 import { useAuth } from '../hooks/useAuth'

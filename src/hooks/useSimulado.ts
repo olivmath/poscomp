@@ -7,6 +7,7 @@ import {
 } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
+import { useSrs } from '../hooks/useSrs'
 import type {
   Question,
   Option,
@@ -53,6 +54,7 @@ interface UseSimuladoReturn {
 
 export function useSimulado(): UseSimuladoReturn {
   const { user } = useAuth()
+  const { upsertFromResult } = useSrs()
 
   const [state, setState] = useState<SimuladoState>('idle')
   const [questions, setQuestions] = useState<Question[]>([])
@@ -156,8 +158,10 @@ export function useSimulado(): UseSimuladoReturn {
       setResult(fullResult)
       setLastResult(fullResult)
       setState('finished')
+      // SM-2: persist SRS cards after simulado finishes
+      upsertFromResult(fullResult).catch(() => {/* silently ignore SRS errors */})
     },
-    [user, questions]
+    [user, questions, upsertFromResult]
   )
 
   // ── timer ────────────────────────────────────────────────────────────────
