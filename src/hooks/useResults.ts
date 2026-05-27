@@ -34,6 +34,8 @@ interface Analytics {
   areaConfidence: Partial<Record<Area, AreaConfidenceStats>>
   reviewPriority: Area[]
   canRelax: Area[]
+  streak: number
+  weeklyFrequency: number // % de dias na semana com atividade
 }
 
 interface UseResultsReturn {
@@ -123,6 +125,36 @@ export function useResults(): UseResultsReturn {
           total: r.totalQuestions,
           date: r.completedAt?.toDate ? r.completedAt.toDate() : new Date(),
         }))
+
+        // ── streak & frequency ───────────────────────────────────────────
+        const dates = docs.map(d => {
+          const dt = d.completedAt?.toDate ? d.completedAt.toDate() : new Date()
+          return dt.toISOString().split('T')[0]
+        })
+        const uniqueDates = Array.from(new Set(dates)).sort().reverse()
+        
+        let streak = 0
+        const today = new Date().toISOString().split('T')[0]
+        const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0]
+        
+        if (uniqueDates[0] === today || uniqueDates[0] === yesterday) {
+          streak = 1
+          for (let i = 0; i < uniqueDates.length - 1; i++) {
+            const d1 = new Date(uniqueDates[i])
+            const d2 = new Date(uniqueDates[i+1])
+            const diff = (d1.getTime() - d2.getTime()) / 86400000
+            if (diff === 1) streak++
+            else break
+          }
+        }
+
+        const last7Days = Array.from({ length: 7 }, (_, i) => {
+          const d = new Date()
+          d.setDate(d.getDate() - i)
+          return d.toISOString().split('T')[0]
+        })
+        const daysWithActivity = last7Days.filter(d => dates.includes(d)).length
+        const weeklyFrequency = Math.round((daysWithActivity / 7) * 100)
 
         // ── confidence stats ─────────────────────────────────────────────
         const allAnswers = docs.flatMap((r) => r.answers ?? [])

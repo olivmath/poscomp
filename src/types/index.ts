@@ -55,6 +55,8 @@ export interface SrsCard {
   dueDate: Timestamp      // próxima data de revisão
   createdAt: Timestamp
   lastConfidence: Confidence | null
+  studied: boolean        // usuário já estudou esse conteúdo?
+  simuladoCorrect: boolean // foi acertado no simulado original?
 }
 
 export type Grade = 1 | 3 | 5

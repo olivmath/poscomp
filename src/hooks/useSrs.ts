@@ -59,7 +59,7 @@ export function useSrs(): UseSrsReturn {
           !answer.correct || answer.skipped || answer.confidence === 'unsure'
 
         if (needsReview) {
-          const card = existing ?? buildNewCard(answer.questionId, answer.confidence)
+          const card = existing ?? buildNewCard(answer.questionId, answer.confidence, answer.correct)
           const grade = gradeFromResult(answer.correct, answer.confidence)
           const updated = sm2Update({ ...card, lastConfidence: answer.confidence }, grade)
           await upsertCard(user.uid, answer.questionId, { ...card, ...updated })
@@ -77,7 +77,7 @@ export function useSrs(): UseSrsReturn {
   )
 
   const updateCard = useCallback(
-    async (questionId: string, grade: Grade): Promise<void> => {
+    async (questionId: string, grade: Grade, studied?: boolean): Promise<void> => {
       if (!user) return
 
       const cardsSnap = await getDocs(collection(db, 'users', user.uid, 'srs_cards'))
@@ -86,7 +86,8 @@ export function useSrs(): UseSrsReturn {
 
       const card = { questionId, ...docData.data() } as SrsCard
       const updated = sm2Update(card, grade)
-      await upsertCard(user.uid, questionId, { ...card, ...updated })
+      const finalStudied = studied ?? card.studied
+      await upsertCard(user.uid, questionId, { ...card, ...updated, studied: finalStudied })
       await loadPendingCards(user.uid)
     },
     [user]
@@ -103,7 +104,11 @@ export function useSrs(): UseSrsReturn {
 
 ///// AUX FUNCTIONS
 
-function buildNewCard(questionId: string, confidence: import('../types').Confidence): SrsCard {
+function buildNewCard(
+  questionId: string,
+  confidence: import('../types').Confidence,
+  simuladoCorrect: boolean
+): SrsCard {
   return {
     questionId,
     easeFactor: 2.5,
@@ -112,6 +117,8 @@ function buildNewCard(questionId: string, confidence: import('../types').Confide
     dueDate: Timestamp.fromDate(new Date()),
     createdAt: Timestamp.now(),
     lastConfidence: confidence,
+    studied: false,
+    simuladoCorrect,
   }
 }
 
