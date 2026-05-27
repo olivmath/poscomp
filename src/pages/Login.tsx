@@ -44,7 +44,7 @@ export function Login() {
         ) : (
           <md-filled-button
             onClick={handleGoogleSignIn}
-            className="btn-primary"
+            className="btn-wide"
           >
             {/* Ícone Google com cores reais */}
             <svg slot="icon" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
