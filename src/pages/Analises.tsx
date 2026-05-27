@@ -93,23 +93,25 @@ export function Analises() {
       <p className="hist-subtitle">{analytics.totalSimulados} simulado{analytics.totalSimulados !== 1 ? 's' : ''} realizados</p>
 
       {/* Hero metrics */}
-      <div className="analises-hero" data-testid="analises-hero">
-        <div className="analises-metric-card">
-          <span className="analises-metric-value">{analytics.overallAccuracy}%</span>
-          <span className="analises-metric-label">Acurácia geral</span>
+      <div className="analises-stat-row" data-testid="analises-hero">
+        <div className="analises-stat-chip">
+          <span className="analises-stat-value">{analytics.overallAccuracy}%</span>
+          <span className="analises-stat-label">acurácia</span>
         </div>
         {analytics.bestArea && (
-          <div className="analises-metric-card analises-metric-card--green">
-            <span className="material-symbols-outlined md-icon--md md-icon--filled md-icon--green">emoji_events</span>
-            <span className="analises-metric-value analises-metric-value--sm">{analytics.bestArea}</span>
-            <span className="analises-metric-label">Melhor área — {analytics.byArea[analytics.bestArea]?.pct}%</span>
+          <div className="analises-stat-chip analises-stat-chip--green">
+            <span className="analises-stat-value analises-stat-value--sm">
+              {analytics.bestArea} {analytics.byArea[analytics.bestArea]?.pct}%
+            </span>
+            <span className="analises-stat-label">melhor área</span>
           </div>
         )}
         {analytics.worstArea && analytics.worstArea !== analytics.bestArea && (
-          <div className="analises-metric-card analises-metric-card--red">
-            <span className="material-symbols-outlined md-icon--md md-icon--filled md-icon--red">menu_book</span>
-            <span className="analises-metric-value analises-metric-value--sm">{analytics.worstArea}</span>
-            <span className="analises-metric-label">Área mais fraca — {analytics.byArea[analytics.worstArea]?.pct}%</span>
+          <div className="analises-stat-chip analises-stat-chip--red">
+            <span className="analises-stat-value analises-stat-value--sm">
+              {analytics.worstArea} {analytics.byArea[analytics.worstArea]?.pct}%
+            </span>
+            <span className="analises-stat-label">área mais fraca</span>
           </div>
         )}
       </div>
