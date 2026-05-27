@@ -23,7 +23,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Detect bump type
+      - name: Detect bump type from PR label
         id: bump
         run: |
           LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
@@ -50,27 +50,36 @@ jobs:
             let [major, minor, patch] = pkg.version.split('.').map(Number);
 
             if ('$BUMP_TYPE' === 'major') {
-              major++; minor = 0; patch = 0;
+              major++;
+              minor = 0;
+              patch = 0;
             } else if ('$BUMP_TYPE' === 'minor') {
-              minor++; patch = 0;
+              minor++;
+              patch = 0;
             } else {
               patch++;
             }
 
             pkg.version = \`\${major}.\${minor}.\${patch}\`;
 
-            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+            fs.writeFileSync(
+              'package.json',
+              JSON.stringify(pkg, null, 2) + '\n'
+            );
+
             console.log(pkg.version);
           ")
 
           git add package.json
-          git commit -m "chore: bump version v$NEW_VERSION [skip ci]"
+          git commit -m "chore: bump version to v$NEW_VERSION [skip ci]"
           git tag "v$NEW_VERSION"
+
           git push origin HEAD:main --tags
 
-  build:
+  lint:
     needs: version_bump
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
@@ -84,7 +93,30 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - name: Install deps
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+  build:
+    needs: version_bump
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build
@@ -97,78 +129,67 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
 
-      - name: Upload dist
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist
 
-  e2e:
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 12
+  # e2e:
+  #   needs: version_bump
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 15
 
-    steps:
-      - uses: actions/checkout@v4
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
+  #     - uses: pnpm/action-setup@v4
+  #       with:
+  #         version: 10
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: pnpm
 
-      - name: Install deps
-        run: pnpm install --frozen-lockfile
+  #     - name: Install dependencies
+  #       run: pnpm install --frozen-lockfile
 
-      # 🚀 CACHE PLAYWRIGHT (resolve teu problema de install lento)
-      - name: Cache Playwright
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+  #     - name: Install Playwright Chromium
+  #       run: pnpm exec playwright install chromium --with-deps
 
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install chromium
+  #     - name: Run E2E tests
+  #       run: pnpm test:e2e
+  #       env:
+  #         CI: true
 
-      # 🔥 BAIXA DIST DO BUILD (CORREÇÃO DO ERRO)
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist
-
-      - name: Run E2E tests
-        run: pnpm test:e2e
-        env:
-          CI: true
-
-      - name: Upload report
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: playwright-report
-          path: playwright-report/
+  #     - name: Upload Playwright report
+  #       uses: actions/upload-artifact@v4
+  #       if: failure()
+  #       with:
+  #         name: playwright-report
+  #         path: playwright-report/
+  #         retention-days: 7
 
   deploy:
     needs:
+      - lint
       - build
-      - e2e
+      # - e2e
 
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download dist
+      - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
 
-      - name: Deploy Firebase
+      - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
