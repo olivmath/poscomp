@@ -131,4 +131,10 @@ VITE_FIREBASE_APP_ID=
 - Se errado, corrigir com: `git config user.signingkey 84768563AAC6281C`
 - Verificar assinatura após commit: `git log -1 --show-signature`
 
+## Workflow Rules — OBRIGATÓRIO
+
+- **Sem planos**: implemente diretamente, sem criar documentos de plano ou pedir aprovação prévia
+- **PRs com labels**: sempre criar PRs com labels `major`, `minor` ou `patch` conforme o impacto
+- **Fidelidade ao padrão**: ser objetivo e seguir os padrões já implementados no projeto
+
 <!-- token-policy: v1.0 -->
