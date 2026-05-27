@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useSrs } from '../hooks/useSrs'
 import { useResults } from '../hooks/useResults'
-import { AREA_ICONS } from '../utils/areaIcons'
 import type { Area } from '../types'
 
 const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
