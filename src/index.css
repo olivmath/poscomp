@@ -680,7 +680,13 @@ md-outlined-button {
 
 md-filled-button.btn-primary,
 md-outlined-button.btn-secondary {
-  min-width: 140px;
+  /* min-width garante que o .label interno (overflow:hidden) não clippe o texto */
+  min-width: 180px;
+}
+
+md-filled-button.btn-wide,
+md-outlined-button.btn-wide {
+  min-width: 240px;
 }
 
 md-filled-button.btn-full,
