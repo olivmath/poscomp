@@ -61,8 +61,8 @@ Mesmo carrossel da antiga página Análises. 5 slides com scroll horizontal e do
 │                                         │
 │   72%  acertos  ·  43 questões          │
 │   ─────────────────────────────         │
-│   Forte:       [ ] Redes                │
-│   Fraco:       [ ] Algoritmos           │
+│   Forte:      Redes                     │
+│   Fraco:      Algoritmos                │
 │                                         │
 └─────────────────────────────────────────┘
 ```
@@ -73,22 +73,16 @@ Mesmo carrossel da antiga página Análises. 5 slides com scroll horizontal e do
 ┌─────────────────────────────────────────┐
 │  Por área                               │
 │                                         │
-│  ⚙ Algoritmos   ████████░░  78%        │
-│  ∑ Matemática   ██████░░░░  61%        │
-│  🧠 Lógica      █████████░  88%        │
-│  🗃 Banco Dados  ████░░░░░░  43%        │
-│  🌐 Redes        ███████░░░  70%        │
+│  Lógica       █████████░  88%           │
+|  Algoritmos   ████████░░  78%           │
+│  Redes        ███████░░░  70%           │
+|  Matemática   ██████░░░░  61%           │
+│  Banco Dados  ████░░░░░░  43%           │
 │                                         │
 └─────────────────────────────────────────┘
 ```
 
-│   27/04  03/05  10/05  20/05  27/05     │
-│     ▓▓     ▓▓▓    ▓▓▓▓   ▓▓▓▓▓  ▓▓▓▓▓ │
-│     55%    60%    65%    70%    72%     │
-└─────────────────────────────────────────┘
-```
-
-### Slide 2 — Calibração (confiança)
+### Slide 3 — Calibração (confiança)
 
 ```
 ┌─────────────────────────────────────────┐
@@ -103,41 +97,39 @@ Mesmo carrossel da antiga página Análises. 5 slides com scroll horizontal e do
 ```
 
 
-### Slide 4 — Revisar (áreas com mais erros)
+### Slide 4 — Analises
 
 ```
 ┌─────────────────────────────────────────┐
 │  Precisa revisar                        │
 │                                         │
-│  🗃 Banco Dados  ████░░░░░░  43%        │
-│  ∑ Matemática   ██████░░░░  61%        │
-│  🌐 Redes        ███████░░░  70%        │
+│  Banco Dados  ████░░░░░░  43%           │
+│  Matemática   ██████░░░░  61%           │
+│                                         │
+├─────────────────────────────────────────┤
+│  Estudo completo                        │
+│  Lógica       █████████░  88%           │
+|  Algoritmos   ████████░░  78%           │
 │                                         │
 └─────────────────────────────────────────┘
 ```
 
-### Slide 5 — Relaxar (áreas dominadas)
+### Slide 5 — Linha do tempo
 
 ```
 ┌─────────────────────────────────────────┐
-│  Pode relaxar ✅                         │
-│                                         │
-│  🧠 Lógica      █████████░  88%        │
-│  ⚙ Algoritmos   ████████░░  78%        │
-│                                         │
+│ Progresso
+  [ grafico de linha com acurácia por simulado ]
+
 └─────────────────────────────────────────┘
 ```
+
+
 
 ---
 
 ## Barra de frequência
 
 - Baseada em dias com pelo menos 1 atividade (simulado ou revisão)
-- Mostra: `% da semana` + `X dias seguidos`
+- Mostra: `X dias seguidos`
 - Cor: verde ≥ 80%, amarelo ≥ 50%, vermelho < 50%
-
-## Banner de revisão
-
-- Visível somente quando `totalPending > 0`
-- Clique → navega para `/revisao`
-- Texto: `"{N} questões para revisar"`
