@@ -118,9 +118,21 @@ Mesmo carrossel da antiga página Análises. 5 slides com scroll horizontal e do
 
 ```
 ┌─────────────────────────────────────────┐
-│ Progresso
-  [ grafico de linha com acurácia por simulado ]
-
+│  Progresso                              │
+│                                         │
+│  100% ┤                                 │
+│   90% ┤                            ●    │
+│   80% ┤                      ●─────╯    │
+│   70% ┤                ●─────╯          │
+│   60% ┤          ●─────╯                │
+│   50% ┤    ●─────╯                      │
+│   40% ┤ ●─╯                             │
+│       └──────────────────────────────   │
+│        S1   S2   S3   S4   S5   S6      │
+│                                         │
+│  Último simulado: 84%                   │
+│  Tendência: +12% nos últimos 7 dias     │
+│                                         │
 └─────────────────────────────────────────┘
 ```
 
