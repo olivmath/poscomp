@@ -1,8 +1,6 @@
 import '@material/web/button/filled-button.js'
 import '@material/web/button/outlined-button.js'
 import '@material/web/progress/circular-progress.js'
-import '@material/web/chips/filter-chip.js'
-import '@material/web/chips/chip-set.js'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSimulado } from '../hooks/useSimulado'
@@ -252,25 +250,27 @@ function ConfigScreen({
 
         <div className="config-section" style={{ width: '100%' }}>
           <p className="config-label">Temas</p>
-          <md-chip-set style={{ marginTop: '8px', justifyContent: 'center' }}>
-            <md-filter-chip
-              label="Todas"
-              selected={areas.length === 0}
+          <div className="area-chips" style={{ marginTop: '8px' }}>
+            <button
+              className={`area-chip${areas.length === 0 ? ' area-chip--active' : ''}`}
               onClick={() => setAreas([])}
               data-testid="chip-all"
-            />
+            >
+              <span className="material-symbols-outlined area-chip-icon">select_all</span>
+              Todas
+            </button>
             {AREAS.map(area => (
-              <md-filter-chip
+              <button
                 key={area}
-                label={area}
-                selected={areas.includes(area)}
+                className={`area-chip${areas.includes(area) ? ' area-chip--active' : ''}`}
                 onClick={() => toggleArea(area)}
                 data-testid={`chip-${area}`}
               >
-                <span slot="icon" className="material-symbols-outlined">{AREA_ICONS[area]}</span>
-              </md-filter-chip>
+                <span className="material-symbols-outlined area-chip-icon">{AREA_ICONS[area]}</span>
+                {area}
+              </button>
             ))}
-          </md-chip-set>
+          </div>
         </div>
 
         <div className="config-section" style={{ width: '100%', marginTop: '8px' }}>

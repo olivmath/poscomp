@@ -67,12 +67,28 @@ export function Analises() {
   useEffect(() => {
     const el = carouselRef.current
     if (!el) return
-    const handler = () => {
+
+    // atualiza dot ativo ao scrollar
+    const onScroll = () => {
       const idx = Math.round(el.scrollLeft / el.clientWidth)
       setActiveSlide(idx)
     }
-    el.addEventListener('scroll', handler, { passive: true })
-    return () => el.removeEventListener('scroll', handler)
+
+    // scroll horizontal via wheel (desktop) sem precisar de Shift
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return // trackpad horizontal nativo
+      e.preventDefault()
+      const dir = e.deltaY > 0 ? 1 : -1
+      const next = Math.round(el.scrollLeft / el.clientWidth) + dir
+      el.scrollTo({ left: next * el.clientWidth, behavior: 'smooth' })
+    }
+
+    el.addEventListener('scroll', onScroll, { passive: true })
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => {
+      el.removeEventListener('scroll', onScroll)
+      el.removeEventListener('wheel', onWheel)
+    }
   }, [analytics])
 
   const goToSlide = (idx: number) => {
