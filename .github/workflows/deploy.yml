@@ -1,14 +1,14 @@
 name: CI → Deploy
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - main
-      - reinvented-adasaurus
 
 jobs:
   ci_deploy:
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -31,15 +31,31 @@ jobs:
           cache: 'pnpm'
 
       # ── 0. Version bump ────────────────────────────────────────────────
-      - name: Bump version (patch)
+      - name: Detect bump type from PR label
+        id: bump
+        run: |
+          LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
+          if echo "$LABELS" | grep -qi "major"; then
+            echo "type=major" >> "$GITHUB_OUTPUT"
+          elif echo "$LABELS" | grep -qi "minor"; then
+            echo "type=minor" >> "$GITHUB_OUTPUT"
+          else
+            echo "type=patch" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump version (${{ steps.bump.outputs.type }})
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          BUMP_TYPE="${{ steps.bump.outputs.type }}"
           NEW_VERSION=$(node -e "
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-            const [major, minor, patch] = pkg.version.split('.').map(Number);
-            pkg.version = \`\${major}.\${minor}.\${patch + 1}\`;
+            let [major, minor, patch] = pkg.version.split('.').map(Number);
+            if ('$BUMP_TYPE' === 'major') { major++; minor = 0; patch = 0; }
+            else if ('$BUMP_TYPE' === 'minor') { minor++; patch = 0; }
+            else { patch++; }
+            pkg.version = \`\${major}.\${minor}.\${patch}\`;
             fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
             console.log(pkg.version);
           ")
@@ -47,7 +63,7 @@ jobs:
           git add package.json
           git commit -m "chore: bump version to v$NEW_VERSION [skip ci]"
           git tag "v$NEW_VERSION"
-          git push origin "HEAD:${{ github.ref }}" --tags || git push origin ${{ github.ref }} --tags
+          git push origin HEAD:main --tags
 
       # ── 1. Install ──────────────────────────────────────────────────────
       - name: Install dependencies
