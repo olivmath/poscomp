@@ -6,16 +6,19 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+
 jobs:
-  ci_deploy:
+  version_bump:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 5
 
-    permissions:
-      contents: write
-      checks: write
-      pull-requests: write
+    outputs:
+      version: ${{ steps.bump_version.outputs.version }}
 
     steps:
       - uses: actions/checkout@v4
@@ -23,20 +26,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-
-      # ── 0. Version bump ────────────────────────────────────────────────
       - name: Detect bump type from PR label
         id: bump
         run: |
           LABELS="${{ join(github.event.pull_request.labels.*.name, ',') }}"
+
           if echo "$LABELS" | grep -qi "major"; then
             echo "type=major" >> "$GITHUB_OUTPUT"
           elif echo "$LABELS" | grep -qi "minor"; then
@@ -45,37 +39,92 @@ jobs:
             echo "type=patch" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Bump version (${{ steps.bump.outputs.type }})
+      - name: Bump version
+        id: bump_version
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+
           BUMP_TYPE="${{ steps.bump.outputs.type }}"
+
           NEW_VERSION=$(node -e "
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+
             let [major, minor, patch] = pkg.version.split('.').map(Number);
-            if ('$BUMP_TYPE' === 'major') { major++; minor = 0; patch = 0; }
-            else if ('$BUMP_TYPE' === 'minor') { minor++; patch = 0; }
-            else { patch++; }
+
+            if ('$BUMP_TYPE' === 'major') {
+              major++;
+              minor = 0;
+              patch = 0;
+            } else if ('$BUMP_TYPE' === 'minor') {
+              minor++;
+              patch = 0;
+            } else {
+              patch++;
+            }
+
             pkg.version = \`\${major}.\${minor}.\${patch}\`;
-            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+
+            fs.writeFileSync(
+              'package.json',
+              JSON.stringify(pkg, null, 2) + '\n'
+            );
+
             console.log(pkg.version);
           ")
-          echo "NEW_VERSION=$NEW_VERSION" >> "$GITHUB_ENV"
+
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
           git add package.json
           git commit -m "chore: bump version to v$NEW_VERSION [skip ci]"
           git tag "v$NEW_VERSION"
+
           git push origin HEAD:main --tags
 
-      # ── 1. Install ──────────────────────────────────────────────────────
+  lint:
+    needs: version_bump
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # ── 1.5 Lint ────────────────────────────────────────────────────────
       - name: Lint
         run: pnpm lint
 
-      # ── 2. Build (produção) ─────────────────────────────────────────────
+  build:
+    needs: version_bump
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build
         run: pnpm build
         env:
@@ -86,7 +135,35 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
 
-      # ── 3. Testes E2E ───────────────────────────────────────────────────
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+  e2e:
+    needs:
+      - lint
+      - build
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Install Playwright Chromium
         run: pnpm exec playwright install chromium --with-deps
 
@@ -95,7 +172,7 @@ jobs:
         env:
           CI: true
 
-      - name: Upload Playwright report (só em falha)
+      - name: Upload Playwright report
         uses: actions/upload-artifact@v4
         if: failure()
         with:
@@ -103,7 +180,24 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
-      # ── 4. Deploy (só se testes passarem) ──────────────────────────────
+  deploy:
+    needs:
+      - lint
+      - build
+      - e2e
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
