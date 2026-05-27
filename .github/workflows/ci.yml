@@ -110,6 +110,9 @@ jobs:
     needs: [lint, typecheck, build, test]
     runs-on: ubuntu-latest
     if: success()
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Enable auto-merge
         env:
