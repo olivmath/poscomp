@@ -1493,8 +1493,19 @@ md-outlined-button.btn-full {
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 
-.analises-stat-chip--green { border-top: 3px solid var(--color-score-high); }
-.analises-stat-chip--red   { border-top: 3px solid var(--color-score-low); }
+/* tinted bg em vez de border-top — segue o design system MD3 */
+.analises-stat-chip--green {
+  background: var(--color-score-high-bg);
+}
+.analises-stat-chip--green .analises-stat-value--sm {
+  color: var(--color-score-high);
+}
+.analises-stat-chip--red {
+  background: var(--color-score-low-bg);
+}
+.analises-stat-chip--red .analises-stat-value--sm {
+  color: var(--color-score-low);
+}
 
 .analises-stat-value {
   font-size: 22px;
@@ -1665,25 +1676,36 @@ md-outlined-button.btn-full {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  background: var(--color-card-bg);
+  background: var(--color-surface-elevated);
   border-radius: 16px;
   padding: var(--space-md);
-  box-shadow: 0 1px 8px rgba(103, 80, 164, 0.08);
-  border-left: 4px solid transparent;
+  /* sem border colorida — segue MD3 */
 }
 
 .dark .analises-cal-card {
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  background: var(--color-surface-elevated);
 }
 
-.analises-cal-card--certain { border-left-color: var(--color-score-high); }
-.analises-cal-card--unsure  { border-left-color: #90CAF9; }
-.analises-cal-card--skip    { border-left-color: var(--color-score-mid); }
+/* Tinted bg + icon color por tipo — design system consistente */
+.analises-cal-card--certain { background: var(--color-score-high-bg); }
+.analises-cal-card--unsure  { background: #E3F2FD; }
+.analises-cal-card--skip    { background: var(--color-score-mid-bg); }
+.dark .analises-cal-card--certain { background: rgba(56, 106, 32, 0.18); }
+.dark .analises-cal-card--unsure  { background: rgba(144, 202, 249, 0.12); }
+.dark .analises-cal-card--skip    { background: rgba(123, 88, 0, 0.18); }
 
+/* Icon pill — 40px circle com bg chip */
 .analises-cal-icon {
-  font-size: 28px;
+  font-size: 22px;
   flex-shrink: 0;
-  color: var(--md-sys-color-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.6);
+  color: var(--md-sys-color-on-surface);
 }
 
 .analises-cal-body {
@@ -1693,14 +1715,16 @@ md-outlined-button.btn-full {
 }
 
 .analises-cal-label {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--md-sys-color-on-surface-variant);
+  line-height: 1.3;
 }
 
 .analises-cal-value {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-  color: var(--color-score-primary);
+  color: var(--md-sys-color-on-surface);
+  line-height: 1.2;
 }
 
 /* Confidence heatmap table */
@@ -1741,10 +1765,18 @@ md-outlined-button.btn-full {
 .ct-col--area {
   text-align: left !important;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  /* display:flex é inválido em <td> — usar padding e vertical-align */
   padding-left: var(--space-sm) !important;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Ícone dentro da célula área via inline-flex wrapper */
+.ct-col--area .material-symbols-outlined {
+  vertical-align: middle;
+  margin-right: 4px;
+  font-size: 16px;
+  opacity: 0.7;
 }
 
 .cell--danger {
@@ -1791,7 +1823,8 @@ md-outlined-button.btn-full {
 }
 
 .priority-list-item--safe {
-  border-left: 4px solid var(--color-score-high);
+  /* sem border colorida — usa tinted bg como o resto do design system */
+  background: var(--color-score-high-bg);
 }
 
 .priority-list-body {
