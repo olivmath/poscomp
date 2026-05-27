@@ -18,17 +18,29 @@ Minimal React web app with Google authentication powered by Firebase and the ful
 | Storage | Firebase Storage (when needed) |
 | Styling | Tailwind CSS |
 
+## Package Manager
+
+**SEMPRE usar `pnpm`** — nunca `npm` ou `yarn` neste projeto.
+
+```bash
+pnpm install      # instalar dependências
+pnpm dev          # dev server
+pnpm build        # build produção
+pnpm lint         # lint
+pnpm typecheck    # type check
+```
+
 ## Commands
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Dev server
-npm run dev
+pnpm dev
 
 # Build for production
-npm run build
+pnpm build
 
 # Deploy to Firebase Hosting
 firebase deploy
@@ -40,16 +52,16 @@ firebase deploy --only hosting
 firebase deploy --only functions
 
 # Run tests
-npm test
+pnpm test
 
 # Run single test file
-npm test -- src/path/to/file.test.ts
+pnpm test -- src/path/to/file.test.ts
 
 # Lint
-npm run lint
+pnpm lint
 
 # Type check
-npm run typecheck
+pnpm typecheck
 ```
 
 ## Architecture
@@ -86,5 +98,15 @@ VITE_FIREBASE_STORAGE_BUCKET=
 VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
 ```
+
+## Accounts & Identity
+
+| Serviço | Conta a usar |
+|---------|-------------|
+| gcloud / Firebase | `olivmath97@gmail.com` (conta pessoal) |
+| git / GitHub | `olivmath` — **NÃO** usar `olivmath-oken` neste projeto |
+
+- Firebase project criado do zero com `olivmath97@gmail.com`
+- Sempre ativar conta antes de usar gcloud: `gcloud config set account olivmath97@gmail.com`
 
 <!-- token-policy: v1.0 -->

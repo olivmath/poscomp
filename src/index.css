@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap');
+
+:root {
+  --md-sys-color-primary: #6750A4;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-surface: #FFFBFE;
+  --md-sys-color-surface-variant: #E7E0EC;
+  --md-sys-color-on-surface: #1C1B1F;
+  --md-sys-color-on-surface-variant: #49454F;
+  --md-sys-color-outline: #79747E;
+
+  --md-filled-button-container-color: #6750A4;
+  --md-filled-button-label-text-color: #FFFFFF;
+  --md-filled-button-container-shape: 12px;
+
+  font-family: 'Google Sans', system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  min-height: 100vh;
+}
+
+/* ── Login ── */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #F3EFF4 0%, #EAE2F8 100%);
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  border-radius: 28px;
+  padding: 48px 40px;
+  box-shadow: 0 2px 20px rgba(103, 80, 164, 0.12);
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-logo { margin-bottom: 8px; }
+
+.login-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--md-sys-color-primary);
+  letter-spacing: -0.5px;
+}
+
+.login-subtitle {
+  font-size: 16px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: 8px;
+}
+
+.login-error {
+  color: #B3261E;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ── Home ── */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, #F3EFF4 0%, #EAE2F8 100%);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.home-container.bye-bye {
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+}
+
+.home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  border-radius: 28px;
+  padding: 48px 40px;
+  box-shadow: 0 2px 20px rgba(103, 80, 164, 0.12);
+  max-width: 400px;
+  width: 100%;
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.home-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--md-sys-color-surface-variant);
+  margin-bottom: 8px;
+}
+
+.home-greeting {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+  text-align: center;
+}
+
+.home-email {
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.home-actions {
+  margin-top: 16px;
+}
