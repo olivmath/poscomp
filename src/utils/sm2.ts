@@ -1,7 +1,15 @@
 import { Timestamp } from 'firebase/firestore'
 import type { SrsCard, Grade, Confidence } from '../types'
 
-export function sm2Update(card: SrsCard, grade: Grade): Omit<SrsCard, 'questionId' | 'createdAt'> {
+export interface Sm2Result {
+  easeFactor: number
+  interval: number
+  repetitions: number
+  dueDate: Timestamp
+  lastConfidence: Confidence
+}
+
+export function sm2Update(card: SrsCard, grade: Grade): Sm2Result {
   const ef = calcEaseFactor(card.easeFactor, grade)
 
   if (grade < 3) {
