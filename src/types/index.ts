@@ -3,6 +3,8 @@ import type { Timestamp } from 'firebase/firestore'
 export type Area = 'Matemática' | 'Algoritmos' | 'Lógica' | 'Banco de Dados' | 'Redes'
 export type Difficulty = 'fácil' | 'médio' | 'difícil'
 export type Option = 'A' | 'B' | 'C' | 'D' | 'E'
+export type Confidence = 'unsure' | 'certain' | null
+export type QuestionStatus = 'unvisited' | 'skipped' | 'unsure' | 'certain'
 
 export interface Question {
   id: string
@@ -17,6 +19,8 @@ export interface AnswerRecord {
   questionId: string
   selected: Option | null
   correct: boolean
+  skipped: boolean
+  confidence: Confidence
 }
 
 export interface AreaBreakdown {

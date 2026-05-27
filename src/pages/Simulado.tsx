@@ -6,15 +6,18 @@ import '@material/web/chips/chip-set.js'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSimulado } from '../hooks/useSimulado'
-import type { Option, Area, SimuladoConfig } from '../types'
+import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
+import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence } from '../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
 const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
 
 function formatTime(seconds: number): string {
-  const m = Math.floor(seconds / 60)
+  const h = Math.floor(seconds / 3600)
+  const m = Math.floor((seconds % 3600) / 60)
   const s = seconds % 60
-  return `${m}:${String(s).padStart(2, '0')}`
+  if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
 }
 
 function formatDuration(seconds: number): string {
@@ -24,7 +27,135 @@ function formatDuration(seconds: number): string {
   return `${m}min ${s}s`
 }
 
-// ── Idle Screen ─────────────────────────────────────────────────────────────
+// ── Exit Confirmation Modal ──────────────────────────────────────────────────
+function ExitModal({ onConfirm, onCancel }: { onConfirm: () => void; onCancel: () => void }) {
+  return (
+    <div className="immersive-modal-overlay" onClick={onCancel}>
+      <div className="immersive-exit-modal" onClick={(e) => e.stopPropagation()}>
+        <span className="material-symbols-outlined md-icon--lg md-icon--warning">
+          warning
+        </span>
+        <h3 className="exit-modal-title">Sair do simulado?</h3>
+        <p className="exit-modal-body">Seu progresso será perdido. Esta ação não pode ser desfeita.</p>
+        <div className="exit-modal-actions">
+          <button className="exit-modal-btn exit-modal-btn--cancel" onClick={onCancel}>
+            Continuar
+          </button>
+          <button className="exit-modal-btn exit-modal-btn--confirm" onClick={onConfirm}>
+            Sair
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Question Map Modal ───────────────────────────────────────────────────────
+function QuestionMapModal({
+  statuses,
+  currentIndex,
+  onGo,
+  onClose,
+}: {
+  statuses: QuestionStatus[]
+  currentIndex: number
+  onGo: (index: number) => void
+  onClose: () => void
+}) {
+  const legend = [
+    { status: 'unvisited', label: 'Não visitada' },
+    { status: 'skipped',   label: 'Pulada' },
+    { status: 'unsure',    label: 'Não sei' },
+    { status: 'certain',   label: 'Certeza' },
+  ] as const
+
+  return (
+    <div className="immersive-modal-overlay" onClick={onClose}>
+      <div className="question-map-sheet" onClick={(e) => e.stopPropagation()}>
+        <div className="question-map-header">
+          <span className="question-map-title">Mapa de questões</span>
+          <button className="question-map-close" onClick={onClose} aria-label="Fechar mapa">
+            <span className="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <div className="question-map-grid" data-testid="question-map-grid">
+          {statuses.map((status, i) => (
+            <button
+              key={i}
+              className={`question-map-btn question-map-btn--${status} ${i === currentIndex ? 'question-map-btn--current' : ''}`}
+              onClick={() => { onGo(i); onClose() }}
+              aria-label={`Questão ${i + 1} — ${status}`}
+              data-testid={`map-q-${i + 1}`}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+
+        <div className="question-map-legend">
+          {legend.map(({ status, label }) => (
+            <span key={status} className="map-legend-item">
+              <span className={`map-legend-dot map-legend-dot--${status}`} />
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Immersive Bar ────────────────────────────────────────────────────────────
+function ImmersiveBar({
+  questionNumber,
+  totalQuestions,
+  secondsLeft,
+  timerMode,
+  onExit,
+  onMap,
+}: {
+  questionNumber: number
+  totalQuestions: number
+  secondsLeft: number
+  timerMode: 'none' | 'per-question'
+  onExit: () => void
+  onMap: () => void
+}) {
+  const isRed = secondsLeft < 60 && timerMode === 'per-question'
+
+  return (
+    <div className="immersive-bar" data-testid="immersive-bar">
+      <button className="immersive-bar-exit" onClick={onExit} aria-label="Sair do simulado" data-testid="exit-btn">
+        <span className="material-symbols-outlined immersive-bar-exit-icon">close</span>
+        <span className="immersive-bar-exit-label">Sair</span>
+      </button>
+
+      <span className="immersive-bar-progress" data-testid="question-progress">
+        Q. {questionNumber}/{totalQuestions}
+      </span>
+
+      {timerMode === 'per-question' && (
+        <span
+          className={`immersive-bar-timer ${isRed ? 'immersive-bar-timer--red' : ''}`}
+          data-testid="timer"
+        >
+          <span className="material-symbols-outlined immersive-bar-timer-icon">
+            timer
+          </span>
+          {formatTime(secondsLeft)}
+        </span>
+      )}
+
+      <button className="immersive-bar-map" onClick={onMap} aria-label="Mapa de questões" data-testid="map-btn">
+        <span className="material-symbols-outlined">grid_view</span>
+        <span className="immersive-bar-map-label">Mapa</span>
+      </button>
+    </div>
+  )
+}
+
+// ── Idle Screen ──────────────────────────────────────────────────────────────
 function IdleScreen({
   onStart,
   onConfig,
@@ -81,7 +212,7 @@ function IdleScreen({
   )
 }
 
-// ── Config Screen ───────────────────────────────────────────────────────────
+// ── Config Screen ────────────────────────────────────────────────────────────
 function ConfigScreen({
   initialConfig,
   onStart,
@@ -99,7 +230,7 @@ function ConfigScreen({
   const [secondsPerQuestion, setSecondsPerQuestion] = useState<number>(initialConfig.secondsPerQuestion ?? 120)
 
   const toggleArea = (area: Area) => {
-    setAreas(prev => 
+    setAreas(prev =>
       prev.includes(area) ? prev.filter(a => a !== area) : [...prev, area]
     )
   }
@@ -167,14 +298,14 @@ function ConfigScreen({
             </button>
             <button
               className={`segmented-btn ${timerMode === 'per-question' && secondsPerQuestion === 60 ? 'active' : ''}`}
-              onClick={() => { setTimerMode('per-question'); setSecondsPerQuestion(60); }}
+              onClick={() => { setTimerMode('per-question'); setSecondsPerQuestion(60) }}
               data-testid="t-1min"
             >
               1 min
             </button>
             <button
               className={`segmented-btn ${timerMode === 'per-question' && secondsPerQuestion === 120 ? 'active' : ''}`}
-              onClick={() => { setTimerMode('per-question'); setSecondsPerQuestion(120); }}
+              onClick={() => { setTimerMode('per-question'); setSecondsPerQuestion(120) }}
               data-testid="t-2min"
             >
               2 min
@@ -188,7 +319,7 @@ function ConfigScreen({
           </md-outlined-button>
           <md-filled-button
             onClick={handleStart}
-            disabled={loading || (areas.length === 0 && AREAS.every(a => !areas.includes(a)) && false)} // Simplificando: sempre habilitado pois [] = todas
+            disabled={loading}
             className="btn-primary"
             data-testid="start-config-btn"
           >
@@ -208,8 +339,13 @@ function RunningScreen({
   selectedOption,
   secondsLeft,
   timerMode,
+  questionStatuses,
+  currentIndex,
   onSelect,
   onNext,
+  onSkip,
+  onGoToQuestion,
+  onQuit,
 }: {
   question: { text: string; options: Record<Option, string> }
   questionNumber: number
@@ -217,67 +353,119 @@ function RunningScreen({
   selectedOption: Option | null
   secondsLeft: number
   timerMode: 'none' | 'per-question'
+  questionStatuses: QuestionStatus[]
+  currentIndex: number
   onSelect: (opt: Option) => void
-  onNext: () => void
+  onNext: (confidence: Confidence) => void
+  onSkip: () => void
+  onGoToQuestion: (index: number) => void
+  onQuit: () => void
 }) {
+  const [showExitModal, setShowExitModal] = useState(false)
+  const [showMap, setShowMap] = useState(false)
   const isLast = questionNumber === totalQuestions
-  const isRed = secondsLeft < 60 && timerMode === 'per-question'
+  const hasSelection = selectedOption !== null
 
   return (
-    <div className="simulado-running" data-testid="simulado-running">
-      {/* Header */}
-      <div className="simulado-header">
-        <span className="simulado-progress" data-testid="question-progress">
-          {questionNumber} / {totalQuestions}
-        </span>
-        {timerMode === 'per-question' && (
-          <span
-            className={`simulado-timer ${isRed ? 'simulado-timer--red' : ''}`}
-            data-testid="timer"
-          >
-            {formatTime(secondsLeft)}
-          </span>
-        )}
-      </div>
+    <div className="simulado-running-immersive" data-testid="simulado-running">
+      {/* Immersive top bar */}
+      <ImmersiveBar
+        questionNumber={questionNumber}
+        totalQuestions={totalQuestions}
+        secondsLeft={secondsLeft}
+        timerMode={timerMode}
+        onExit={() => setShowExitModal(true)}
+        onMap={() => setShowMap(true)}
+      />
 
       {/* Progress bar */}
-      <div className="simulado-progress-bar">
+      <div className="immersive-progress-bar">
         <div
-          className="simulado-progress-fill"
+          className="immersive-progress-fill"
           style={{ width: `${(questionNumber / totalQuestions) * 100}%` }}
         />
       </div>
 
-      {/* Question */}
-      <div className="simulado-question-card">
-        <p className="simulado-question-text" data-testid="question-text">
-          {question.text}
-        </p>
+      {/* Question card */}
+      <div className="immersive-question-wrap">
+        <div className="simulado-question-card">
+          <p className="simulado-question-text" data-testid="question-text">
+            {question.text}
+          </p>
 
-        <div className="simulado-options">
-          {OPTIONS.map((opt) => (
+          <div className="simulado-options">
+            {OPTIONS.map((opt) => (
+              <button
+                key={opt}
+                className={`simulado-option ${selectedOption === opt ? 'simulado-option--selected' : ''}`}
+                onClick={() => onSelect(opt)}
+                data-testid={`option-${opt}`}
+              >
+                <span className="simulado-option-letter">{opt}</span>
+                <span className="simulado-option-text">{question.options[opt]}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Confidence buttons */}
+          <div className="confidence-buttons">
             <button
-              key={opt}
-              className={`simulado-option ${selectedOption === opt ? 'simulado-option--selected' : ''}`}
-              onClick={() => onSelect(opt)}
-              data-testid={`option-${opt}`}
+              className="confidence-btn confidence-btn--unsure"
+              disabled={!hasSelection}
+              onClick={() => onNext('unsure')}
+              data-testid="btn-unsure"
             >
-              <span className="simulado-option-letter">{opt}</span>
-              <span className="simulado-option-text">{question.options[opt]}</span>
+              <span className="confidence-btn-icon">🤷</span>
+              <span className="confidence-btn-label">Não sei</span>
+              <span className="material-symbols-outlined confidence-btn-arrow">
+                arrow_forward
+              </span>
             </button>
-          ))}
-        </div>
 
-        <md-filled-button
-          onClick={onNext}
-          disabled={selectedOption === null}
-          className="btn-full"
-          style={{ marginTop: '16px' }}
-          data-testid="next-btn"
-        >
-          {isLast ? 'Finalizar' : 'Próxima'}
-        </md-filled-button>
+            <button
+              className="confidence-btn confidence-btn--certain"
+              disabled={!hasSelection}
+              onClick={() => onNext('certain')}
+              data-testid="btn-certain"
+            >
+              <span className="confidence-btn-icon">✓</span>
+              <span className="confidence-btn-label">
+                {isLast ? 'Finalizar' : 'Tenho certeza'}
+              </span>
+              <span className="material-symbols-outlined confidence-btn-arrow">
+                {isLast ? 'check_circle' : 'arrow_forward'}
+              </span>
+            </button>
+          </div>
+
+          {/* Skip button */}
+          <button
+            className="skip-btn"
+            onClick={onSkip}
+            data-testid="skip-btn"
+          >
+            <span className="material-symbols-outlined skip-btn-icon">skip_next</span>
+            {isLast ? 'Pular e finalizar' : 'Pular questão'}
+          </button>
+        </div>
       </div>
+
+      {/* Modals */}
+      {showExitModal && (
+        <ExitModal
+          onConfirm={onQuit}
+          onCancel={() => setShowExitModal(false)}
+        />
+      )}
+
+      {showMap && (
+        <QuestionMapModal
+          statuses={questionStatuses}
+          currentIndex={currentIndex}
+          onGo={onGoToQuestion}
+          onClose={() => setShowMap(false)}
+        />
+      )}
     </div>
   )
 }
@@ -306,7 +494,6 @@ function FinishedScreen({
         </div>
         {timeSpent > 0 && <p className="simulado-time-spent">{formatDuration(timeSpent)}</p>}
 
-        {/* Breakdown */}
         <div className="simulado-breakdown">
           <table className="simulado-breakdown-table" data-testid="breakdown-table">
             <tbody>
@@ -317,7 +504,7 @@ function FinishedScreen({
                     <td className="bd-area">{area}</td>
                     <td className="bd-score">{data.correct}/{data.total}</td>
                     <td className="bd-icon">
-                      <span 
+                      <span
                         className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}
                         role="img"
                         aria-label={ok ? 'Aprovado' : 'Requer atenção'}
@@ -348,6 +535,7 @@ function FinishedScreen({
 // ── Main Component ───────────────────────────────────────────────────────────
 export function Simulado() {
   const navigate = useNavigate()
+  const { setImmersive } = useImmersiveMode()
   const {
     state,
     questions,
@@ -359,12 +547,21 @@ export function Simulado() {
     result,
     lastResult,
     config,
+    questionStatuses,
     goToConfig,
     start,
     select,
     next,
+    skip,
+    goToQuestion,
     retry,
   } = useSimulado()
+
+  // Sync immersive mode with simulado state
+  useEffect(() => {
+    setImmersive(state === 'running')
+    return () => setImmersive(false)
+  }, [state, setImmersive])
 
   if (state === 'idle') {
     return (
@@ -399,8 +596,13 @@ export function Simulado() {
         selectedOption={selectedOption}
         secondsLeft={secondsLeft}
         timerMode={config.timerMode}
+        questionStatuses={questionStatuses}
+        currentIndex={currentIndex}
         onSelect={select}
         onNext={next}
+        onSkip={skip}
+        onGoToQuestion={goToQuestion}
+        onQuit={retry}
       />
     )
   }
