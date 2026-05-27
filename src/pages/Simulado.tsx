@@ -37,7 +37,6 @@ function IdleScreen({
   return (
     <div className="simulado-container" data-testid="simulado-idle">
       <div className="simulado-card">
-        <div className="simulado-idle-icon">🎓</div>
         <h1 className="simulado-idle-title">Simulado POSCOMP</h1>
         <div className="simulado-info-chips">
           <span className="simulado-chip">10 questões</span>
@@ -98,7 +97,7 @@ function RunningScreen({
           className={`simulado-timer ${isRed ? 'simulado-timer--red' : ''}`}
           data-testid="timer"
         >
-          ⏱ {formatTime(secondsLeft)}
+          {formatTime(secondsLeft)}
         </span>
       </div>
 
@@ -160,16 +159,14 @@ function FinishedScreen({
   onHistory: () => void
 }) {
   const pct = Math.round((score / totalQuestions) * 100)
-  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👍' : '📚'
 
   return (
     <div className="simulado-container" data-testid="simulado-finished">
       <div className="simulado-card">
-        <div className="simulado-result-emoji">{emoji}</div>
         <div className="simulado-score" data-testid="final-score">
           {score} <span className="simulado-score-total">/ {totalQuestions}</span>
         </div>
-        <p className="simulado-time-spent">⏱ {formatDuration(timeSpent)}</p>
+        <p className="simulado-time-spent">{formatDuration(timeSpent)}</p>
 
         {/* Breakdown */}
         <div className="simulado-breakdown">
@@ -181,7 +178,7 @@ function FinishedScreen({
                   <tr key={area}>
                     <td className="bd-area">{area}</td>
                     <td className="bd-score">{data.correct}/{data.total}</td>
-                    <td className="bd-icon">{ok ? '✅' : '⚠️'}</td>
+                    <td className="bd-icon"><span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>{ok ? 'check_circle' : 'warning'}</span></td>
                   </tr>
                 )
               })}
