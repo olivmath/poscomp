@@ -39,7 +39,7 @@ function ResultCard({ result }: { result: SimuladoResult }) {
       data-testid="result-card"
     >
       <div className="hist-card-row">
-        <span className="hist-date">📅 {formatDate(result)}</span>
+        <span className="hist-date">{formatDate(result)}</span>
         <span className="hist-score" style={{ color: scoreColor, background: scoreBg }}>
           {result.score}/{result.totalQuestions}
         </span>
@@ -59,7 +59,7 @@ function ResultCard({ result }: { result: SimuladoResult }) {
                   <tr key={area}>
                     <td className="hbd-area">{area}</td>
                     <td className="hbd-score">{b.correct}/{b.total}</td>
-                    <td className="hbd-icon">{ok ? '✅' : '⚠️'}</td>
+                    <td className="hbd-icon"><span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>{ok ? 'check_circle' : 'warning'}</span></td>
                   </tr>
                 )
               })}
@@ -78,7 +78,7 @@ export function Historico() {
   if (loading) {
     return (
       <div className="page-placeholder">
-        <div className="hist-spinner">⏳</div>
+        <div className="spinner" />
         <p>Carregando histórico...</p>
       </div>
     )
@@ -87,7 +87,7 @@ export function Historico() {
   if (error) {
     return (
       <div className="page-placeholder">
-        <div className="page-placeholder-icon">⚠️</div>
+        <span className="material-symbols-outlined md-icon--lg md-icon--red">error</span>
         <p className="simulado-error">{error}</p>
       </div>
     )
@@ -96,7 +96,7 @@ export function Historico() {
   if (results.length === 0) {
     return (
       <div className="page-placeholder" data-testid="historico-empty">
-        <div className="page-placeholder-icon">🕐</div>
+        <span className="material-symbols-outlined md-icon--lg md-icon--muted">history</span>
         <h2 className="page-placeholder-title">Histórico</h2>
         <p className="page-placeholder-subtitle">
           Nenhum simulado realizado ainda. Comece agora!
