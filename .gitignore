@@ -24,4 +24,5 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 .playwright-mcp/
+.playwright-screenshots/
 .env
