@@ -11,19 +11,11 @@ Ponto de entrada principal. Agrega frequência, banner de revisão e carrossel d
 ```
 ┌─────────────────────────────────────────┐
 │                                         │
-│  Olá, Lucas! 👋                         │
-│  ████████░░  80%  · 7 dias seguidos     │  ← frequência
+│  Olá, Lucas! 👋    ██████████░░░░░░     │  ← frequência
 │                                         │
 ├─────────────────────────────────────────┤
 │                                         │
-│  ┌─────────────────────────────────┐    │
-│  │ 🧠  5 questões para revisar     │    │  ← banner SRS
-│  │           Revisar agora  →      │    │
-│  └─────────────────────────────────┘    │
-│                                         │
-├─────────────────────────────────────────┤
-│                                         │
-│  ANÁLISES                   ◀ ●○○○○ ▶  │
+│  ANÁLISES                   ◀ ●○○○○ ▶   │
 │  ┌─────────────────────────────────┐    │
 │  │                                 │    │
 │  │   [Slide 1 — Geral]             │    │
@@ -42,12 +34,11 @@ Ponto de entrada principal. Agrega frequência, banner de revisão e carrossel d
 ```
 ┌─────────────────────────────────────────┐
 │                                         │
-│  Olá, Lucas! 👋                         │
-│  ████████░░  80%  · 7 dias seguidos     │
+│  Olá, Lucas! 👋    ██████████░░░░░░     │  ← frequência
 │                                         │
 ├─────────────────────────────────────────┤
 │                                         │
-│  ANÁLISES                   ◀ ●○○○○ ▶  │
+│  ANÁLISES                   ◀ ●○○○○ ▶   │
 │  ┌─────────────────────────────────┐    │
 │  │   [carrossel de análises]       │    │
 │  └─────────────────────────────────┘    │
@@ -70,9 +61,27 @@ Mesmo carrossel da antiga página Análises. 5 slides com scroll horizontal e do
 │                                         │
 │   72%  acertos  ·  43 questões          │
 │   ─────────────────────────────         │
-│   [timeline de barras dos últimos       │
-│    simulados com data e score]          │
+│   Forte:       [ ] Redes                │
+│   Fraco:       [ ] Algoritmos           │
 │                                         │
+└─────────────────────────────────────────┘
+```
+
+### Slide 2 — Desempenho (por área)
+
+```
+┌─────────────────────────────────────────┐
+│  Por área                               │
+│                                         │
+│  ⚙ Algoritmos   ████████░░  78%        │
+│  ∑ Matemática   ██████░░░░  61%        │
+│  🧠 Lógica      █████████░  88%        │
+│  🗃 Banco Dados  ████░░░░░░  43%        │
+│  🌐 Redes        ███████░░░  70%        │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
 │   27/04  03/05  10/05  20/05  27/05     │
 │     ▓▓     ▓▓▓    ▓▓▓▓   ▓▓▓▓▓  ▓▓▓▓▓ │
 │     55%    60%    65%    70%    72%     │
@@ -93,20 +102,6 @@ Mesmo carrossel da antiga página Análises. 5 slides com scroll horizontal e do
 └─────────────────────────────────────────┘
 ```
 
-### Slide 3 — Heatmap (por área)
-
-```
-┌─────────────────────────────────────────┐
-│  Por área                               │
-│                                         │
-│  ⚙ Algoritmos   ████████░░  78%        │
-│  ∑ Matemática   ██████░░░░  61%        │
-│  🧠 Lógica      █████████░  88%        │
-│  🗃 Banco Dados  ████░░░░░░  43%        │
-│  🌐 Redes        ███████░░░  70%        │
-│                                         │
-└─────────────────────────────────────────┘
-```
 
 ### Slide 4 — Revisar (áreas com mais erros)
 
