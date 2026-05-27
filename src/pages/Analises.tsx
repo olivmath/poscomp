@@ -53,7 +53,7 @@ export function Analises() {
   if (loading) {
     return (
       <div className="page-placeholder">
-        <div className="hist-spinner">⏳</div>
+        <div className="spinner" />
         <p>Carregando análises...</p>
       </div>
     )
@@ -62,7 +62,7 @@ export function Analises() {
   if (error) {
     return (
       <div className="page-placeholder">
-        <div className="page-placeholder-icon">⚠️</div>
+        <span className="material-symbols-outlined md-icon--lg md-icon--red">error</span>
         <p className="simulado-error">{error}</p>
       </div>
     )
@@ -71,7 +71,7 @@ export function Analises() {
   if (!analytics) {
     return (
       <div className="page-placeholder" data-testid="analises-empty">
-        <div className="page-placeholder-icon">📊</div>
+        <span className="material-symbols-outlined md-icon--lg md-icon--muted">bar_chart</span>
         <h2 className="page-placeholder-title">Análises</h2>
         <p className="page-placeholder-subtitle">
           Complete pelo menos um simulado para ver suas análises.
@@ -100,14 +100,14 @@ export function Analises() {
         </div>
         {analytics.bestArea && (
           <div className="analises-metric-card analises-metric-card--green">
-            <span className="analises-metric-icon">🏆</span>
+            <span className="material-symbols-outlined md-icon--md md-icon--filled md-icon--green">emoji_events</span>
             <span className="analises-metric-value analises-metric-value--sm">{analytics.bestArea}</span>
             <span className="analises-metric-label">Melhor área — {analytics.byArea[analytics.bestArea]?.pct}%</span>
           </div>
         )}
         {analytics.worstArea && analytics.worstArea !== analytics.bestArea && (
           <div className="analises-metric-card analises-metric-card--red">
-            <span className="analises-metric-icon">📚</span>
+            <span className="material-symbols-outlined md-icon--md md-icon--filled md-icon--red">menu_book</span>
             <span className="analises-metric-value analises-metric-value--sm">{analytics.worstArea}</span>
             <span className="analises-metric-label">Área mais fraca — {analytics.byArea[analytics.worstArea]?.pct}%</span>
           </div>
