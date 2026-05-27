@@ -1,1 +1,5 @@
-{ "projects": { "default": "FIREBASE_PROJECT_ID_PLACEHOLDER" } }
+{
+  "projects": {
+    "default": "poscomp-olivmath"
+  }
+}
