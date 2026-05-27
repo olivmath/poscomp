@@ -1,0 +1,15 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: CI ready (build steps added in Task 2)
+        run: echo "CI pipeline ready — React build steps pending"
