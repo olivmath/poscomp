@@ -55,7 +55,8 @@ function IdleScreen({
         <md-filled-button
           onClick={onStart}
           disabled={loading}
-          style={{ marginTop: '8px', minWidth: '200px' }}
+          className="btn-primary"
+          style={{ marginTop: '8px' }}
           data-testid="start-btn"
         >
           {loading ? 'Carregando...' : 'Começar'}
@@ -132,7 +133,8 @@ function RunningScreen({
         <md-filled-button
           onClick={onNext}
           disabled={selectedOption === null}
-          style={{ width: '100%', marginTop: '16px' }}
+          className="btn-full"
+          style={{ marginTop: '16px' }}
           data-testid="next-btn"
         >
           {isLast ? 'Finalizar' : 'Próxima'}
@@ -185,10 +187,10 @@ function FinishedScreen({
         </div>
 
         <div className="simulado-actions">
-          <md-outlined-button onClick={onRetry} data-testid="retry-btn">
+          <md-outlined-button onClick={onRetry} className="btn-secondary" data-testid="retry-btn">
             Refazer
           </md-outlined-button>
-          <md-filled-button onClick={onHistory} data-testid="history-btn">
+          <md-filled-button onClick={onHistory} className="btn-primary" data-testid="history-btn">
             Ver Histórico
           </md-filled-button>
         </div>
