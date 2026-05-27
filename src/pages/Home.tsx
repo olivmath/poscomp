@@ -1,13 +1,10 @@
-import '@material/web/button/filled-button.js'
 import { useRef, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
-import { useSrs } from '../hooks/useSrs'
 import { useResults } from '../hooks/useResults'
 import type { Area } from '../types'
 
 const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
-const SLIDES = ['Geral', 'Calibração', 'Heatmap', 'Revisar', 'Relaxar'] as const
+const SLIDES = ['Geral', 'Desempenho', 'Calibração', 'Análises', 'Progresso'] as const
 
 function SparkBar({ pct, invert }: { pct: number; invert?: boolean }) {
   const colorPct = invert ? 100 - pct : pct
@@ -19,33 +16,96 @@ function SparkBar({ pct, invert }: { pct: number; invert?: boolean }) {
   )
 }
 
-function ScoreTimeline({ scores }: { scores: Array<{ score: number; total: number; date: Date }> }) {
-  if (scores.length === 0) return null
-  const max = Math.max(...scores.map((s) => s.score))
+function ProgressChart({ scores }: { scores: Array<{ score: number; total: number; date: Date }> }) {
+  if (scores.length < 2) {
+    return (
+      <div className="progress-chart-empty">
+        <p>Realize mais simulados para ver o progresso.</p>
+      </div>
+    )
+  }
+
+  const chronological = [...scores].reverse()
+  const pcts = chronological.map(s => Math.round((s.score / s.total) * 100))
+  const latest = pcts[pcts.length - 1]
+
+  const now = Date.now()
+  const sevenDaysAgo = now - 7 * 86400000
+  const recent = chronological.filter(s => s.date.getTime() >= sevenDaysAgo)
+  const older = chronological.filter(s => s.date.getTime() < sevenDaysAgo)
+
+  let tendencia: number | null = null
+  if (recent.length > 0 && older.length > 0) {
+    const avgRecent = Math.round(recent.reduce((acc, r) => acc + Math.round((r.score / r.total) * 100), 0) / recent.length)
+    const avgOlder = Math.round(older.reduce((acc, r) => acc + Math.round((r.score / r.total) * 100), 0) / older.length)
+    tendencia = avgRecent - avgOlder
+  }
+
+  const W = 280, H = 120
+  const PAD = { top: 10, right: 16, bottom: 24, left: 36 }
+  const chartW = W - PAD.left - PAD.right
+  const chartH = H - PAD.top - PAD.bottom
+
+  const toX = (i: number) => PAD.left + (pcts.length > 1 ? (i / (pcts.length - 1)) * chartW : chartW / 2)
+  const toY = (v: number) => PAD.top + chartH - (v / 100) * chartH
+
+  const points = pcts.map((p, i) => `${toX(i)},${toY(p)}`).join(' ')
+  const gridLines = [40, 60, 80, 100]
 
   return (
-    <div className="timeline-section">
-      <h3 className="analises-section-title">Últimos simulados</h3>
-      <div className="timeline-bars">
-        {[...scores].reverse().map((s, i) => {
-          const heightPct = max > 0 ? (s.score / max) * 100 : 0
-          const pct = Math.round((s.score / s.total) * 100)
-          const tier = pct >= 80 ? 'high' : pct >= 60 ? 'mid' : 'low'
-          return (
-            <div key={i} className="timeline-bar-col">
-              <span className={`timeline-score timeline-score--${tier}`}>{s.score}</span>
-              <div className="timeline-bar-track">
-                <div
-                  className={`timeline-bar-fill timeline-bar-fill--${tier}`}
-                  style={{ height: `${heightPct}%` }}
-                />
-              </div>
-              <span className="timeline-date">
-                {s.date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })}
-              </span>
-            </div>
-          )
-        })}
+    <div className="progress-chart-wrap">
+      <svg viewBox={`0 0 ${W} ${H}`} className="progress-chart-svg">
+        {gridLines.map(v => (
+          <g key={v}>
+            <line
+              x1={PAD.left} y1={toY(v)}
+              x2={W - PAD.right} y2={toY(v)}
+              stroke="var(--color-divider-subtle)" strokeWidth="1"
+            />
+            <text
+              x={PAD.left - 4} y={toY(v) + 4}
+              textAnchor="end" fontSize="9"
+              fill="var(--md-sys-color-on-surface-variant)"
+            >
+              {v}%
+            </text>
+          </g>
+        ))}
+        <polyline
+          points={points}
+          fill="none"
+          stroke="var(--md-sys-color-primary)"
+          strokeWidth="2"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+        {pcts.map((p, i) => (
+          <circle
+            key={i} cx={toX(i)} cy={toY(p)} r="4"
+            fill="var(--md-sys-color-primary)"
+            stroke="var(--color-card-bg)" strokeWidth="2"
+          />
+        ))}
+        {pcts.map((_, i) => (
+          <text
+            key={i} x={toX(i)} y={H - 4}
+            textAnchor="middle" fontSize="9"
+            fill="var(--md-sys-color-on-surface-variant)"
+          >
+            S{i + 1}
+          </text>
+        ))}
+      </svg>
+
+      <div className="progress-chart-footer">
+        <span className="progress-latest">
+          Último simulado: <strong>{latest}%</strong>
+        </span>
+        {tendencia !== null && (
+          <span className={`progress-trend ${tendencia >= 0 ? 'trend--up' : 'trend--down'}`}>
+            Tendência: {tendencia >= 0 ? '+' : ''}{tendencia}% nos últimos 7 dias
+          </span>
+        )}
       </div>
     </div>
   )
@@ -53,22 +113,18 @@ function ScoreTimeline({ scores }: { scores: Array<{ score: number; total: numbe
 
 export function Home() {
   const { user } = useAuth()
-  const { totalPending } = useSrs()
   const { analytics, loading: analyticsLoading } = useResults()
-  const navigate = useNavigate()
-  
+
   const carouselRef = useRef<HTMLDivElement>(null)
   const [activeSlide, setActiveSlide] = useState(0)
 
   useEffect(() => {
     const el = carouselRef.current
     if (!el) return
-
     const onScroll = () => {
       const idx = Math.round(el.scrollLeft / el.clientWidth)
       setActiveSlide(idx)
     }
-
     el.addEventListener('scroll', onScroll, { passive: true })
     return () => el.removeEventListener('scroll', onScroll)
   }, [analytics])
@@ -80,43 +136,28 @@ export function Home() {
     setActiveSlide(idx)
   }
 
+  const firstName = user?.displayName?.split(' ')[0]
+  const freq = analytics?.weeklyFrequency ?? 0
+  const freqClass = freq >= 80 ? 'high' : freq >= 50 ? 'mid' : 'low'
+  const totalAnswered = AREAS.reduce((sum, area) => sum + (analytics?.byArea[area]?.total ?? 0), 0)
+
   return (
     <div className="home-container home-container--dashboard">
-      {/* Header with Greeting & Frequência */}
+      {/* Header: greeting + freq bar inline */}
       <header className="home-header">
-        <div className="home-greeting-row">
-          <h1 className="home-greeting">Olá, {user?.displayName?.split(' ')[0]}! 👋</h1>
-          {user?.photoURL && (
-            <img src={user.photoURL} alt="" className="home-header-avatar" />
-          )}
-        </div>
-        
-        <div className="home-frequency-bar">
-          <div className="home-freq-track">
-            <div 
-              className={`home-freq-fill ${analytics && analytics.weeklyFrequency >= 80 ? 'high' : analytics && analytics.weeklyFrequency >= 50 ? 'mid' : 'low'}`}
-              style={{ width: `${analytics?.weeklyFrequency ?? 0}%` }}
-            />
-          </div>
-          <div className="home-freq-labels">
-            <span className="home-freq-pct">{analytics?.weeklyFrequency ?? 0}% da semana</span>
-            <span className="home-freq-streak">🔥 {analytics?.streak ?? 0} dias seguidos</span>
+        <div className="home-header-row">
+          <h1 className="home-greeting">Olá, {firstName}! 👋</h1>
+          <div className="home-freq-inline">
+            <div className="home-freq-track">
+              <div className={`home-freq-fill ${freqClass}`} style={{ width: `${freq}%` }} />
+            </div>
+            <div className="home-freq-meta">
+              <span>{freq}% da semana</span>
+              <span>🔥 {analytics?.streak ?? 0} dias</span>
+            </div>
           </div>
         </div>
       </header>
-
-      {/* Banner de Revisão */}
-      {totalPending > 0 && (
-        <section className="home-revisao-banner" onClick={() => navigate('/revisao')}>
-          <div className="home-revisao-banner-content">
-            <span className="material-symbols-outlined home-revisao-icon">psychology</span>
-            <div className="home-revisao-banner-text">
-              <span className="home-revisao-count">{totalPending} questões para revisar</span>
-              <span className="home-revisao-cta">Revisar agora →</span>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Carrossel de Análises */}
       <section className="home-analises">
@@ -124,8 +165,8 @@ export function Home() {
           <h2 className="home-analises-title">ANÁLISES</h2>
           <div className="home-analises-dots">
             {SLIDES.map((_, i) => (
-              <button 
-                key={i} 
+              <button
+                key={i}
                 className={`analises-dot ${activeSlide === i ? 'analises-dot--active' : ''}`}
                 onClick={() => goToSlide(i)}
               />
@@ -140,12 +181,7 @@ export function Home() {
                 {analyticsLoading ? (
                   <p>Carregando análises...</p>
                 ) : (
-                  <>
-                    <p>Faça seu primeiro simulado para ver suas análises aqui!</p>
-                    <md-filled-button onClick={() => navigate('/simulado')}>
-                      Começar Simulado
-                    </md-filled-button>
-                  </>
+                  <p>Faça seu primeiro simulado para ver suas análises aqui!</p>
                 )}
               </div>
             ) : (
@@ -153,103 +189,129 @@ export function Home() {
                 {/* Slide 1 — Geral */}
                 <div className="analises-slide">
                   <h3 className="analises-section-title">Geral</h3>
-                  <div className="analises-stat-row">
-                    <div className="analises-stat-chip">
-                      <span className="analises-stat-value">{analytics.overallAccuracy}%</span>
-                      <span className="analises-stat-label">acurácia</span>
-                    </div>
-                    <div className="analises-stat-chip">
-                      <span className="analises-stat-value">{analytics.totalSimulados}</span>
-                      <span className="analises-stat-label">simulados</span>
-                    </div>
+                  <div className="geral-main-stat">
+                    <span className="geral-pct">{analytics.overallAccuracy}%</span>
+                    <span className="geral-detail">acertos · {totalAnswered} questões</span>
                   </div>
-                  <ScoreTimeline scores={analytics.recentScores} />
-                </div>
-
-                {/* Slide 2 — Calibração */}
-                <div className="analises-slide">
-                  <h3 className="analises-section-title">Calibração</h3>
-                  <div className="analises-calibration-cards">
-                    <div className="analises-cal-card certain">
-                      <span className="analises-cal-label">Certeza e Acerto</span>
-                      <span className="analises-cal-value">{analytics.confidenceStats.certainAccuracy}%</span>
-                    </div>
-                    <div className="analises-cal-card unsure">
-                      <span className="analises-cal-label">Dúvida e Acerto</span>
-                      <span className="analises-cal-value">{analytics.confidenceStats.unsureAccuracy}%</span>
-                    </div>
+                  <div className="geral-highlights">
+                    {analytics.bestArea && (
+                      <div className="geral-highlight-item geral-highlight--forte">
+                        <span className="geral-highlight-label">Forte:</span>
+                        <span className="geral-highlight-area">{analytics.bestArea}</span>
+                      </div>
+                    )}
+                    {analytics.worstArea && (
+                      <div className="geral-highlight-item geral-highlight--fraco">
+                        <span className="geral-highlight-label">Fraco:</span>
+                        <span className="geral-highlight-area">{analytics.worstArea}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                {/* Slide 3 — Heatmap */}
+                {/* Slide 2 — Desempenho (Por área) */}
                 <div className="analises-slide">
                   <h3 className="analises-section-title">Por área</h3>
                   <div className="analises-area-list">
-                    {AREAS.map(area => {
-                      const s = analytics.byArea[area]
-                      if (!s || s.total === 0) return null
-                      return (
-                        <div key={area} className="analises-area-row">
-                          <div className="analises-area-header">
-                            <span className="analises-area-name">{area}</span>
-                            <span className="analises-area-pct">{s.pct}%</span>
+                    {AREAS
+                      .filter(area => (analytics.byArea[area]?.total ?? 0) > 0)
+                      .sort((a, b) => (analytics.byArea[b]?.pct ?? 0) - (analytics.byArea[a]?.pct ?? 0))
+                      .map(area => {
+                        const s = analytics.byArea[area]!
+                        return (
+                          <div key={area} className="analises-area-row">
+                            <div className="analises-area-header">
+                              <span className="analises-area-name">{area}</span>
+                              <span className="analises-area-stats">{s.pct}%</span>
+                            </div>
+                            <SparkBar pct={s.pct} />
                           </div>
-                          <SparkBar pct={s.pct} />
-                        </div>
-                      )
-                    })}
+                        )
+                      })}
                   </div>
                 </div>
 
-                {/* Slide 4 — Revisar */}
+                {/* Slide 3 — Calibração */}
                 <div className="analises-slide">
-                  <h3 className="analises-section-title">Precisa revisar</h3>
-                  <ul className="priority-list">
-                    {analytics.reviewPriority.slice(0, 3).map(area => {
-                      const s = analytics.byArea[area]
-                      return (
-                        <li key={area} className="priority-list-item">
-                          <span className="priority-list-area">{area}</span>
-                          <SparkBar pct={s?.pct ?? 0} invert />
-                        </li>
-                      )
-                    })}
-                  </ul>
+                  <h3 className="analises-section-title">Calibração</h3>
+                  <div className="analises-area-list">
+                    {[
+                      { label: 'Tenho certeza e acertei', pct: analytics.confidenceStats.certainAccuracy },
+                      { label: 'Tenho certeza e errei',   pct: 100 - analytics.confidenceStats.certainAccuracy },
+                      { label: 'Não sei e acertei',        pct: analytics.confidenceStats.unsureAccuracy },
+                      { label: 'Não sei e errei',          pct: 100 - analytics.confidenceStats.unsureAccuracy },
+                    ].map(({ label, pct }) => (
+                      <div key={label} className="analises-area-row">
+                        <div className="analises-area-header">
+                          <span className="analises-area-name">{label}</span>
+                          <span className="analises-area-stats">{pct}%</span>
+                        </div>
+                        <SparkBar pct={pct} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Slide 5 — Relaxar */}
+                {/* Slide 4 — Análises: Precisa revisar + Estudo completo */}
                 <div className="analises-slide">
-                  <h3 className="analises-section-title">Pode relaxar ✅</h3>
-                  <ul className="priority-list">
-                    {analytics.canRelax.length > 0 ? (
-                      analytics.canRelax.map(area => (
-                        <li key={area} className="priority-list-item safe">
-                          <span className="priority-list-area">{area}</span>
-                          <SparkBar pct={analytics.byArea[area]?.pct ?? 0} />
-                        </li>
-                      ))
-                    ) : (
-                      <p className="analises-empty-msg">Continue praticando!</p>
-                    )}
-                  </ul>
+                  <div className="analises-dual-section">
+                    <div>
+                      <h3 className="analises-section-title">Precisa revisar</h3>
+                      <div className="analises-area-list">
+                        {analytics.reviewPriority
+                          .filter(area => (analytics.byArea[area]?.pct ?? 100) < 80)
+                          .slice(0, 3)
+                          .map(area => {
+                            const s = analytics.byArea[area]!
+                            return (
+                              <div key={area} className="analises-area-row">
+                                <div className="analises-area-header">
+                                  <span className="analises-area-name">{area}</span>
+                                  <span className="analises-area-stats">{s.pct}%</span>
+                                </div>
+                                <SparkBar pct={s.pct} />
+                              </div>
+                            )
+                          })}
+                        {analytics.reviewPriority.filter(a => (analytics.byArea[a]?.pct ?? 100) < 80).length === 0 && (
+                          <p className="analises-empty-msg">Nenhuma área crítica 🎉</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="analises-section-divider" />
+
+                    <div>
+                      <h3 className="analises-section-title">Estudo completo</h3>
+                      <div className="analises-area-list">
+                        {analytics.canRelax.length > 0 ? (
+                          analytics.canRelax.map(area => (
+                            <div key={area} className="analises-area-row">
+                              <div className="analises-area-header">
+                                <span className="analises-area-name">{area}</span>
+                                <span className="analises-area-stats">{analytics.byArea[area]?.pct ?? 0}%</span>
+                              </div>
+                              <SparkBar pct={analytics.byArea[area]?.pct ?? 0} />
+                            </div>
+                          ))
+                        ) : (
+                          <p className="analises-empty-msg">Continue praticando!</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Slide 5 — Progresso */}
+                <div className="analises-slide">
+                  <h3 className="analises-section-title">Progresso</h3>
+                  <ProgressChart scores={analytics.recentScores} />
                 </div>
               </>
             )}
           </div>
         </div>
       </section>
-
-      {/* Primary Action if no pending reviews */}
-      {totalPending === 0 && (
-        <div className="home-actions-main">
-          <md-filled-button 
-            className="btn-hero"
-            onClick={() => navigate('/simulado')}
-          >
-            Fazer Novo Simulado
-          </md-filled-button>
-        </div>
-      )}
     </div>
   )
 }

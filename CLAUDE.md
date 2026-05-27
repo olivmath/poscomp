@@ -134,7 +134,10 @@ VITE_FIREBASE_APP_ID=
 ## Workflow Rules — OBRIGATÓRIO
 
 - **Sem planos**: implemente diretamente, sem criar documentos de plano ou pedir aprovação prévia
-- **PRs com labels**: sempre criar PRs com labels `major`, `minor` ou `patch` conforme o impacto
+- **PRs com labels**: SEMPRE criar PRs com `gh pr create --label "<major|minor|patch>"` — nunca subir PR sem label
+  - `major`: breaking change ou redesign completo
+  - `minor`: nova feature ou mudança visível ao usuário
+  - `patch`: bugfix ou ajuste interno sem impacto na UX
 - **Fidelidade ao padrão**: ser objetivo e seguir os padrões já implementados no projeto
 
 <!-- token-policy: v1.0 -->
