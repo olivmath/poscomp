@@ -1,9 +1,126 @@
-export function Historico() {
+import '@material/web/button/filled-button.js'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useResults } from '../hooks/useResults'
+import type { Area, SimuladoResult } from '../types'
+
+const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
+
+function formatDate(result: SimuladoResult): string {
+  try {
+    const d = result.completedAt?.toDate
+      ? result.completedAt.toDate()
+      : new Date((result.completedAt as unknown as { seconds: number }).seconds * 1000)
+    return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+  } catch {
+    return '—'
+  }
+}
+
+function formatDuration(seconds: number): string {
+  const m = Math.floor(seconds / 60)
+  const s = seconds % 60
+  if (m === 0) return `${s}s`
+  return `${m}min${s > 0 ? ` ${s}s` : ''}`
+}
+
+function ResultCard({ result }: { result: SimuladoResult }) {
+  const [expanded, setExpanded] = useState(false)
+  const pct = Math.round((result.score / result.totalQuestions) * 100)
+  const scoreColor = pct >= 80 ? '#386A20' : pct >= 60 ? '#7B5800' : '#8C1D18'
+  const scoreBg = pct >= 80 ? '#DCEDC8' : pct >= 60 ? '#FFF3CD' : '#FDECEA'
+
   return (
-    <div className="page-placeholder">
-      <div className="page-placeholder-icon">🕐</div>
-      <h2 className="page-placeholder-title">Histórico</h2>
-      <p className="page-placeholder-subtitle">Seus simulados anteriores aparecerão aqui.</p>
+    <div
+      className="hist-card"
+      onClick={() => setExpanded((e) => !e)}
+      role="button"
+      aria-expanded={expanded}
+      data-testid="result-card"
+    >
+      <div className="hist-card-row">
+        <span className="hist-date">📅 {formatDate(result)}</span>
+        <span className="hist-score" style={{ color: scoreColor, background: scoreBg }}>
+          {result.score}/{result.totalQuestions}
+        </span>
+        <span className="hist-time">{formatDuration(result.timeSpentSeconds)}</span>
+        <span className="hist-chevron">{expanded ? '▲' : '▼'}</span>
+      </div>
+
+      {expanded && result.areaBreakdown && (
+        <div className="hist-breakdown" data-testid="breakdown">
+          <table className="hist-breakdown-table">
+            <tbody>
+              {AREAS.map((area) => {
+                const b = result.areaBreakdown[area]
+                if (!b) return null
+                const ok = b.correct === b.total
+                return (
+                  <tr key={area}>
+                    <td className="hbd-area">{area}</td>
+                    <td className="hbd-score">{b.correct}/{b.total}</td>
+                    <td className="hbd-icon">{ok ? '✅' : '⚠️'}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export function Historico() {
+  const { results, loading, error } = useResults()
+  const navigate = useNavigate()
+
+  if (loading) {
+    return (
+      <div className="page-placeholder">
+        <div className="hist-spinner">⏳</div>
+        <p>Carregando histórico...</p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="page-placeholder">
+        <div className="page-placeholder-icon">⚠️</div>
+        <p className="simulado-error">{error}</p>
+      </div>
+    )
+  }
+
+  if (results.length === 0) {
+    return (
+      <div className="page-placeholder" data-testid="historico-empty">
+        <div className="page-placeholder-icon">🕐</div>
+        <h2 className="page-placeholder-title">Histórico</h2>
+        <p className="page-placeholder-subtitle">
+          Nenhum simulado realizado ainda. Comece agora!
+        </p>
+        <md-filled-button
+          onClick={() => navigate('/simulado')}
+          style={{ marginTop: '8px' }}
+          data-testid="go-simulado-btn"
+        >
+          Começar Simulado
+        </md-filled-button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="hist-page" data-testid="historico-list">
+      <h2 className="hist-title">Histórico</h2>
+      <p className="hist-subtitle">{results.length} simulado{results.length !== 1 ? 's' : ''} realizados</p>
+      <div className="hist-list">
+        {results.map((r) => (
+          <ResultCard key={r.id} result={r} />
+        ))}
+      </div>
     </div>
   )
 }
