@@ -204,21 +204,27 @@ export function Analises() {
 
           <div className="analises-calibration-cards">
             <div className="analises-cal-card analises-cal-card--certain">
-              <span className="material-symbols-outlined analises-cal-icon">verified</span>
+              <div className="analises-cal-icon-pill">
+                <span className="material-symbols-outlined analises-cal-icon">verified</span>
+              </div>
               <div className="analises-cal-body">
                 <span className="analises-cal-label">Quando digo "Tenho certeza"</span>
                 <span className="analises-cal-value">{analytics.confidenceStats.certainAccuracy}% de acerto</span>
               </div>
             </div>
             <div className="analises-cal-card analises-cal-card--unsure">
-              <span className="material-symbols-outlined analises-cal-icon">help</span>
+              <div className="analises-cal-icon-pill">
+                <span className="material-symbols-outlined analises-cal-icon">help</span>
+              </div>
               <div className="analises-cal-body">
                 <span className="analises-cal-label">Quando digo "Não sei"</span>
                 <span className="analises-cal-value">{analytics.confidenceStats.unsureAccuracy}% de acerto</span>
               </div>
             </div>
             <div className="analises-cal-card analises-cal-card--skip">
-              <span className="material-symbols-outlined analises-cal-icon">skip_next</span>
+              <div className="analises-cal-icon-pill">
+                <span className="material-symbols-outlined analises-cal-icon">skip_next</span>
+              </div>
               <div className="analises-cal-body">
                 <span className="analises-cal-label">Taxa de questões puladas</span>
                 <span className="analises-cal-value">{analytics.confidenceStats.skipRate}%</span>
