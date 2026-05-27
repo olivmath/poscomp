@@ -99,6 +99,16 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
 ```
 
+## Playwright (inspeção visual)
+
+- MCP server: `playwright` — use para tirar screenshots e inspecionar o app rodando
+- Screenshots ficam em `.playwright-screenshots/` (ignorado pelo git)
+- Snapshots/logs do MCP ficam em `.playwright-mcp/` (ignorado pelo git)
+- Para inspecionar Shadow DOM de Web Components (ex: `md-filled-button`):
+  - `getComputedStyle` no host **não** reflete o interior — use `element.shadowRoot.querySelector(...)`
+  - CSS custom properties (`--md-*`) **penetram** o Shadow DOM; `font-family` herdado **não** penetra
+- Antes de rodar Playwright, garantir que `.env.local` existe no worktree (copiar de `~/Documents/dev/poscomp/.env.local`)
+
 ## Accounts & Identity
 
 | Serviço | Conta a usar |
