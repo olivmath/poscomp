@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSimulado } from '../hooks/useSimulado'
 import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
+import { AREA_ICONS } from '../utils/areaIcons'
 import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence } from '../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
@@ -63,10 +64,10 @@ function QuestionMapModal({
   onClose: () => void
 }) {
   const legend = [
-    { status: 'unvisited', label: 'Não visitada' },
-    { status: 'skipped',   label: 'Pulada' },
-    { status: 'unsure',    label: 'Não sei' },
-    { status: 'certain',   label: 'Certeza' },
+    { status: 'unvisited', label: 'Não visitada', icon: 'radio_button_unchecked' },
+    { status: 'skipped',   label: 'Pulada',        icon: 'skip_next' },
+    { status: 'unsure',    label: 'Não sei',        icon: 'help_outline' },
+    { status: 'certain',   label: 'Certeza',        icon: 'verified' },
   ] as const
 
   return (
@@ -94,9 +95,9 @@ function QuestionMapModal({
         </div>
 
         <div className="question-map-legend">
-          {legend.map(({ status, label }) => (
+          {legend.map(({ status, label, icon }) => (
             <span key={status} className="map-legend-item">
-              <span className={`map-legend-dot map-legend-dot--${status}`} />
+              <span className={`material-symbols-outlined map-legend-icon map-legend-icon--${status}`}>{icon}</span>
               {label}
             </span>
           ))}
@@ -265,7 +266,9 @@ function ConfigScreen({
                 selected={areas.includes(area)}
                 onClick={() => toggleArea(area)}
                 data-testid={`chip-${area}`}
-              />
+              >
+                <span slot="icon" className="material-symbols-outlined">{AREA_ICONS[area]}</span>
+              </md-filter-chip>
             ))}
           </md-chip-set>
         </div>
@@ -415,7 +418,7 @@ function RunningScreen({
               onClick={() => onNext('unsure')}
               data-testid="btn-unsure"
             >
-              <span className="confidence-btn-icon">🤷</span>
+              <span className="material-symbols-outlined confidence-btn-icon">help_outline</span>
               <span className="confidence-btn-label">Não sei</span>
               <span className="material-symbols-outlined confidence-btn-arrow">
                 arrow_forward
@@ -428,7 +431,7 @@ function RunningScreen({
               onClick={() => onNext('certain')}
               data-testid="btn-certain"
             >
-              <span className="confidence-btn-icon">✓</span>
+              <span className="material-symbols-outlined confidence-btn-icon">verified</span>
               <span className="confidence-btn-label">
                 {isLast ? 'Finalizar' : 'Tenho certeza'}
               </span>

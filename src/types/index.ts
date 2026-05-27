@@ -46,3 +46,15 @@ export interface SimuladoResult {
 }
 
 export type SimuladoState = 'idle' | 'config' | 'running' | 'finished'
+
+export interface SrsCard {
+  questionId: string
+  easeFactor: number      // inicia em 2.5
+  interval: number        // dias até próxima revisão
+  repetitions: number     // nº de revisões bem-sucedidas consecutivas
+  dueDate: Timestamp      // próxima data de revisão
+  createdAt: Timestamp
+  lastConfidence: Confidence | null
+}
+
+export type Grade = 1 | 3 | 5

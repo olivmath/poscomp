@@ -10,6 +10,19 @@ interface AreaStats {
   pct: number
 }
 
+interface ConfidenceStats {
+  certainAccuracy: number
+  unsureAccuracy: number
+  skipRate: number
+}
+
+interface AreaConfidenceStats {
+  certainCorrect: number
+  certainWrong: number
+  unsureCorrect: number
+  total: number
+}
+
 interface Analytics {
   totalSimulados: number
   overallAccuracy: number
@@ -17,6 +30,10 @@ interface Analytics {
   worstArea: Area | null
   byArea: Partial<Record<Area, AreaStats>>
   recentScores: Array<{ score: number; total: number; date: Date }>
+  confidenceStats: ConfidenceStats
+  areaConfidence: Partial<Record<Area, AreaConfidenceStats>>
+  reviewPriority: Area[]
+  canRelax: Area[]
 }
 
 interface UseResultsReturn {
@@ -107,6 +124,82 @@ export function useResults(): UseResultsReturn {
           date: r.completedAt?.toDate ? r.completedAt.toDate() : new Date(),
         }))
 
+        // ── confidence stats ─────────────────────────────────────────────
+        const allAnswers = docs.flatMap((r) => r.answers ?? [])
+        const totalAnswersCount = allAnswers.length
+
+        const certainAnswers = allAnswers.filter((a) => a.confidence === 'certain' && !a.skipped)
+        const unsureAnswers  = allAnswers.filter((a) => a.confidence === 'unsure'  && !a.skipped)
+        const skippedAnswers = allAnswers.filter((a) => a.skipped)
+
+        const certainAccuracy = certainAnswers.length > 0
+          ? Math.round((certainAnswers.filter((a) => a.correct).length / certainAnswers.length) * 100)
+          : 0
+        const unsureAccuracy = unsureAnswers.length > 0
+          ? Math.round((unsureAnswers.filter((a) => a.correct).length / unsureAnswers.length) * 100)
+          : 0
+        const skipRate = totalAnswersCount > 0
+          ? Math.round((skippedAnswers.length / totalAnswersCount) * 100)
+          : 0
+
+        // ── area confidence ──────────────────────────────────────────────
+        const areaConfidence: Partial<Record<Area, AreaConfidenceStats>> = {}
+        for (const area of AREAS) {
+          areaConfidence[area] = { certainCorrect: 0, certainWrong: 0, unsureCorrect: 0, total: 0 }
+        }
+
+        for (const r of docs) {
+          for (const answer of r.answers ?? []) {
+            if (answer.skipped) continue
+            // find the area for this answer via question data is not available here —
+            // we use areaBreakdown per result instead; skip per-answer area mapping
+          }
+        }
+
+        // ── area confidence from areaBreakdown + answers cross-reference ─
+        // Since answers don't carry area directly, aggregate per-result via
+        // a question lookup is unavailable. We compute from available data:
+        // iterate docs, and for each result that has both answers and areaBreakdown,
+        // distribute confidence signals proportionally. This is an approximation.
+        // If future QuestionId→Area lookup is added, replace this block.
+        for (const r of docs) {
+          if (!r.answers?.length) continue
+          const nonSkipped = r.answers.filter((a) => !a.skipped)
+          for (const area of AREAS) {
+            const b = r.areaBreakdown?.[area]
+            if (!b || b.total === 0) continue
+            const areaShare = b.total / r.totalQuestions
+            const areaAnswers = nonSkipped.slice(0, Math.round(nonSkipped.length * areaShare))
+            const ac = areaConfidence[area]!
+            ac.total += b.total
+            const certAns = areaAnswers.filter((a) => a.confidence === 'certain')
+            const certCorrect = Math.round((certAns.filter((a) => a.correct).length / Math.max(certAns.length, 1)) * b.correct)
+            ac.certainCorrect += certCorrect
+            ac.certainWrong   += Math.max(0, certAns.length - certCorrect)
+            const unsureAns = areaAnswers.filter((a) => a.confidence === 'unsure')
+            ac.unsureCorrect  += unsureAns.filter((a) => a.correct).length
+          }
+        }
+
+        // ── review priority ──────────────────────────────────────────────
+        const reviewPriority = areasWithData.slice().sort((a, b) => {
+          const statsA = byArea[a]!
+          const statsB = byArea[b]!
+          const scoreA = statsA.total > 0 ? (statsA.total - statsA.correct) / statsA.total : 0
+          const scoreB = statsB.total > 0 ? (statsB.total - statsB.correct) / statsB.total : 0
+          return scoreB - scoreA
+        })
+
+        // ── can relax ────────────────────────────────────────────────────
+        const canRelax = areasWithData.filter((area) => {
+          const ac = areaConfidence[area]!
+          const areaStats = byArea[area]!
+          const certainRate = ac.total > 0
+            ? (ac.certainCorrect / ac.total) * 100
+            : 0
+          return certainRate >= 70 && areaStats.pct >= 80
+        })
+
         setAnalytics({
           totalSimulados: docs.length,
           overallAccuracy:
@@ -117,6 +210,10 @@ export function useResults(): UseResultsReturn {
           worstArea,
           byArea,
           recentScores,
+          confidenceStats: { certainAccuracy, unsureAccuracy, skipRate },
+          areaConfidence,
+          reviewPriority,
+          canRelax,
         })
       })
       .catch(() => {

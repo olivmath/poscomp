@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useSrs } from '../hooks/useSrs'
 
 const TABS = [
   {
@@ -87,9 +88,15 @@ const TABS = [
   },
 ]
 
+// TODO(SM-2): Add "Revisar" tab pointing to /revisar when the review screen is built.
+// When added, render a badge with `totalPending` from useSrs() on that tab item.
+// Example badge: {totalPending > 0 && <span className="bottom-nav-badge">{totalPending}</span>}
+
 export function BottomNav() {
   const location = useLocation()
   const navigate = useNavigate()
+  // SM-2: track pending SRS cards — badge will appear on "Revisar" tab once that route exists
+  const { totalPending } = useSrs()
 
   const isActive = (path: string) =>
     path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)
@@ -98,6 +105,8 @@ export function BottomNav() {
     <nav className="bottom-nav">
       {TABS.map((tab) => {
         const active = isActive(tab.path)
+        // TODO(SM-2): when /revisar tab is added, show badge: totalPending > 0
+        void totalPending
         return (
           <button
             key={tab.path}
