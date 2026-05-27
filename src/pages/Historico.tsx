@@ -43,7 +43,9 @@ function ResultCard({ result }: { result: SimuladoResult }) {
           {result.score}/{result.totalQuestions}
         </span>
         <span className="hist-time">{formatDuration(result.timeSpentSeconds)}</span>
-        <span className="hist-chevron">{expanded ? '▲' : '▼'}</span>
+        <span className="hist-chevron material-symbols-outlined">
+          {expanded ? 'expand_less' : 'expand_more'}
+        </span>
       </div>
 
       {expanded && result.areaBreakdown && (
@@ -58,7 +60,15 @@ function ResultCard({ result }: { result: SimuladoResult }) {
                   <tr key={area}>
                     <td className="hbd-area">{area}</td>
                     <td className="hbd-score">{b.correct}/{b.total}</td>
-                    <td className="hbd-icon"><span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>{ok ? 'check_circle' : 'warning'}</span></td>
+                    <td className="hbd-icon">
+                      <span 
+                        className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}
+                        role="img"
+                        aria-label={ok ? 'Aprovado' : 'Requer atenção'}
+                      >
+                        {ok ? 'check_circle' : 'warning'}
+                      </span>
+                    </td>
                   </tr>
                 )
               })}
