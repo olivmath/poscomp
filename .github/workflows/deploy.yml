@@ -1,13 +1,16 @@
-name: Deploy to Firebase Hosting
+name: CI → Deploy
 
 on:
   push:
     branches:
       - main
+      - reinvented-adasaurus
 
 jobs:
-  build_and_deploy:
+  ci_deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,9 +23,11 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
+      # ── 1. Install ──────────────────────────────────────────────────────
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # ── 2. Build (produção) ─────────────────────────────────────────────
       - name: Build
         run: pnpm build
         env:
@@ -33,6 +38,24 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
 
+      # ── 3. Testes E2E ───────────────────────────────────────────────────
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install chromium --with-deps
+
+      - name: Run E2E tests
+        run: pnpm test:e2e
+        env:
+          CI: true
+
+      - name: Upload Playwright report (só em falha)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      # ── 4. Deploy (só se testes passarem) ──────────────────────────────
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

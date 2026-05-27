@@ -1,4 +1,5 @@
 import '@material/web/button/outlined-button.js'
+import '@material/web/button/filled-button.js'
 import '@material/web/button/filled-tonal-button.js'
 import { signOut } from 'firebase/auth'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
@@ -63,7 +64,14 @@ export function Home() {
         <p className="home-email">{user?.email}</p>
 
         <div className="home-actions">
-          <md-outlined-button onClick={handleLogout} disabled={loggingOut}>
+          <md-filled-button
+            onClick={() => navigate('/simulado')}
+            style={{ minWidth: '200px' }}
+            data-testid="start-simulado-btn"
+          >
+            🎓 Começar Simulado
+          </md-filled-button>
+          <md-outlined-button onClick={handleLogout} disabled={loggingOut} style={{ marginTop: '8px' }}>
             {loggingOut ? 'Tchau! 👋' : 'Sair'}
           </md-outlined-button>
         </div>
