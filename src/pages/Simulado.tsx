@@ -178,7 +178,15 @@ function FinishedScreen({
                   <tr key={area}>
                     <td className="bd-area">{area}</td>
                     <td className="bd-score">{data.correct}/{data.total}</td>
-                    <td className="bd-icon"><span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>{ok ? 'check_circle' : 'warning'}</span></td>
+                    <td className="bd-icon">
+                      <span 
+                        className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}
+                        role="img"
+                        aria-label={ok ? 'Aprovado' : 'Requer atenção'}
+                      >
+                        {ok ? 'check_circle' : 'warning'}
+                      </span>
+                    </td>
                   </tr>
                 )
               })}
