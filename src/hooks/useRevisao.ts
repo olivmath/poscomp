@@ -98,6 +98,7 @@ export function useRevisao() {
     // "Não estudei" -> pushes to end of queue, grade 1 (reset interval)
     const grade: Grade = studied ? 3 : 1
     await updateCard(currentCard.questionId, grade, studied)
+    
 
     if (currentIndex < sortedCards.length - 1) {
       setCurrentIndex(i => i + 1)
