@@ -4,88 +4,86 @@ const TABS = [
   {
     path: '/',
     label: 'Home',
-    icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
-          fill={active ? '#6750A4' : 'none'}
-          stroke={active ? '#6750A4' : '#79747E'}
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
+    icon: (active: boolean) => {
+      const c = active ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline)'
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+            style={{ fill: active ? c : 'none', stroke: c }}
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
+        </svg>
+      )
+    },
   },
   {
     path: '/historico',
     label: 'Histórico',
-    icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle
-          cx="12"
-          cy="12"
-          r="9"
-          stroke={active ? '#6750A4' : '#79747E'}
-          strokeWidth="1.5"
-        />
-        <path
-          d="M12 7v5l3.5 2"
-          stroke={active ? '#6750A4' : '#79747E'}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
+    icon: (active: boolean) => {
+      const c = active ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline)'
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" style={{ stroke: c }} strokeWidth="1.5" />
+          <path
+            d="M12 7v5l3.5 2"
+            style={{ stroke: c }}
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      )
+    },
   },
   {
     path: '/analises',
     label: 'Análises',
-    icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <rect
-          x="4" y="14" width="4" height="6"
-          rx="1"
-          fill={active ? '#6750A4' : 'none'}
-          stroke={active ? '#6750A4' : '#79747E'}
-          strokeWidth="1.5"
-        />
-        <rect
-          x="10" y="9" width="4" height="11"
-          rx="1"
-          fill={active ? '#6750A4' : 'none'}
-          stroke={active ? '#6750A4' : '#79747E'}
-          strokeWidth="1.5"
-        />
-        <rect
-          x="16" y="4" width="4" height="16"
-          rx="1"
-          fill={active ? '#6750A4' : 'none'}
-          stroke={active ? '#6750A4' : '#79747E'}
-          strokeWidth="1.5"
-        />
-      </svg>
-    ),
+    icon: (active: boolean) => {
+      const c = active ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline)'
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect
+            x="4" y="14" width="4" height="6" rx="1"
+            style={{ fill: active ? c : 'none', stroke: c }}
+            strokeWidth="1.5"
+          />
+          <rect
+            x="10" y="9" width="4" height="11" rx="1"
+            style={{ fill: active ? c : 'none', stroke: c }}
+            strokeWidth="1.5"
+          />
+          <rect
+            x="16" y="4" width="4" height="16" rx="1"
+            style={{ fill: active ? c : 'none', stroke: c }}
+            strokeWidth="1.5"
+          />
+        </svg>
+      )
+    },
   },
   {
     path: '/perfil',
     label: 'Perfil',
-    icon: (active: boolean) => (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle
-          cx="12" cy="8" r="4"
-          fill={active ? '#6750A4' : 'none'}
-          stroke={active ? '#6750A4' : '#79747E'}
-          strokeWidth="1.5"
-        />
-        <path
-          d="M4 20c0-3.314 3.582-6 8-6s8 2.686 8 6"
-          stroke={active ? '#6750A4' : '#79747E'}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    icon: (active: boolean) => {
+      const c = active ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline)'
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle
+            cx="12" cy="8" r="4"
+            style={{ fill: active ? c : 'none', stroke: c }}
+            strokeWidth="1.5"
+          />
+          <path
+            d="M4 20c0-3.314 3.582-6 8-6s8 2.686 8 6"
+            style={{ stroke: c }}
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      )
+    },
   },
 ]
 
