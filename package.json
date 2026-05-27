@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seed": "tsx scripts/seed-questions.ts"
   },
   "dependencies": {
     "@material/web": "^2.2.0",
@@ -28,7 +29,9 @@
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "firebase-admin": "^13.10.0",
     "globals": "^16.0.0",
+    "tsx": "^4.22.3",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
