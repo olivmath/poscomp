@@ -17,10 +17,12 @@ const AREA_ICONS: Record<Area, string> = {
 
 const SLIDES = ['Geral', 'Calibração', 'Heatmap', 'Revisar', 'Relaxar'] as const
 
-function SparkBar({ pct }: { pct: number }) {
-  const cls = pct >= 80 ? 'spark-bar-fill--high' : pct >= 60 ? 'spark-bar-fill--mid' : 'spark-bar-fill--low'
+function SparkBar({ pct, invert }: { pct: number; invert?: boolean }) {
+  // invert=true: cores invertidas (ex: "necessidade" — 100% = vermelho)
+  const colorPct = invert ? 100 - pct : pct
+  const cls = colorPct >= 80 ? 'spark-bar-fill--high' : colorPct >= 60 ? 'spark-bar-fill--mid' : 'spark-bar-fill--low'
   return (
-    <div className="spark-bar-bg">
+    <div className="spark-bar-bg spark-bar-bg--full">
       <div className={`spark-bar-fill ${cls}`} style={{ width: `${pct}%` }} />
     </div>
   )
@@ -205,7 +207,7 @@ export function Analises() {
           <div className="analises-calibration-cards">
             <div className="analises-cal-card analises-cal-card--certain">
               <div className="analises-cal-icon-pill">
-                <span className="material-symbols-outlined analises-cal-icon">verified</span>
+                <span className="material-symbols-outlined analises-cal-icon">check_circle</span>
               </div>
               <div className="analises-cal-body">
                 <span className="analises-cal-label">Quando digo "Tenho certeza"</span>
@@ -236,43 +238,45 @@ export function Analises() {
         {/* Slide 3 — Heatmap */}
         <div className="analises-slide" data-testid="slide-heatmap">
           <h3 className="analises-section-title">Heatmap confiança × área</h3>
-          <table className="confidence-table">
-            <thead>
-              <tr>
-                <th className="ct-col--area">Área</th>
-                <th className="ct-col--cc">Certeza + Acerto</th>
-                <th className="ct-col--cw">Certeza + Erro</th>
-                <th className="ct-col--total">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {AREAS.map((area) => {
-                const ac = analytics.areaConfidence[area]
-                if (!ac || ac.total === 0) return null
-                return (
-                  <tr key={area}>
-                    <td className="ct-col--area">
-                      <span className="material-symbols-outlined md-icon--sm">{AREA_ICONS[area]}</span>
-                      {area}
-                    </td>
-                    <td className={`ct-col--cc ${ac.certainCorrect > 0 ? 'cell--safe' : ''}`}>
-                      {ac.certainCorrect}
-                    </td>
-                    <td className={`ct-col--cw ${ac.certainWrong > 0 ? 'cell--danger' : ''}`}>
-                      {ac.certainWrong > 0 ? (
-                        <><span className="material-symbols-outlined md-icon--sm md-icon--warning">warning</span>{ac.certainWrong}</>
-                      ) : ac.certainWrong}
-                    </td>
-                    <td className="ct-col--total">{ac.total}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-          <p className="analises-heatmap-hint">
-            <span className="material-symbols-outlined md-icon--sm md-icon--red">error</span>
-            Certeza + Erro = ponto cego — você achava que sabia, mas errou.
-          </p>
+          <div className="analises-heatmap-body">
+            <table className="confidence-table">
+              <thead>
+                <tr>
+                  <th className="ct-col--area">Área</th>
+                  <th className="ct-col--cc">Certeza + Acerto</th>
+                  <th className="ct-col--cw">Certeza + Erro</th>
+                  <th className="ct-col--total">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {AREAS.map((area) => {
+                  const ac = analytics.areaConfidence[area]
+                  if (!ac || ac.total === 0) return null
+                  return (
+                    <tr key={area}>
+                      <td className="ct-col--area">
+                        <span className="material-symbols-outlined md-icon--sm">{AREA_ICONS[area]}</span>
+                        {area}
+                      </td>
+                      <td className={`ct-col--cc ${ac.certainCorrect > 0 ? 'cell--safe' : ''}`}>
+                        {ac.certainCorrect}
+                      </td>
+                      <td className={`ct-col--cw ${ac.certainWrong > 0 ? 'cell--danger' : ''}`}>
+                        {ac.certainWrong > 0 ? (
+                          <><span className="material-symbols-outlined md-icon--sm md-icon--warning">warning</span>{ac.certainWrong}</>
+                        ) : ac.certainWrong}
+                      </td>
+                      <td className="ct-col--total">{ac.total}</td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+            <p className="analises-heatmap-hint">
+              <span className="material-symbols-outlined md-icon--sm md-icon--red">error</span>
+              Certeza + Erro = ponto cego — você achava que sabia, mas errou.
+            </p>
+          </div>
         </div>
 
         {/* Slide 4 — O que revisar */}
@@ -288,12 +292,14 @@ export function Analises() {
                 const needPct = Math.round(((s.total - s.correct) / s.total) * 100)
                 return (
                   <li key={area} className="priority-list-item">
-                    <span className="material-symbols-outlined md-icon--warning">warning</span>
-                    <div className="priority-list-body">
-                      <span className="priority-list-area">{area}</span>
-                      <span className="priority-list-pct">{needPct}% de necessidade</span>
+                    <div className="priority-list-row">
+                      <span className="material-symbols-outlined md-icon--warning">warning</span>
+                      <div className="priority-list-body">
+                        <span className="priority-list-area">{area}</span>
+                        <span className="priority-list-pct">{needPct}% de necessidade</span>
+                      </div>
                     </div>
-                    <SparkBar pct={100 - needPct} />
+                    <SparkBar pct={needPct} invert />
                   </li>
                 )
               })}
@@ -317,11 +323,14 @@ export function Analises() {
                 const s = analytics.byArea[area]
                 return (
                   <li key={area} className="priority-list-item priority-list-item--safe">
-                    <span className="material-symbols-outlined md-icon--green">check_circle</span>
-                    <div className="priority-list-body">
-                      <span className="priority-list-area">{area}</span>
-                      <span className="priority-list-pct">{s?.pct ?? 0}% de acerto</span>
+                    <div className="priority-list-row">
+                      <span className="material-symbols-outlined md-icon--green">check_circle</span>
+                      <div className="priority-list-body">
+                        <span className="priority-list-area">{area}</span>
+                        <span className="priority-list-pct">{s?.pct ?? 0}% de acerto</span>
+                      </div>
                     </div>
+                    <SparkBar pct={s?.pct ?? 0} />
                   </li>
                 )
               })}
