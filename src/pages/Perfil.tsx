@@ -57,6 +57,13 @@ export function Perfil() {
               <span className="perfil-info-value">Google</span>
             </div>
           </div>
+          <div className="perfil-info-row">
+            <span className="material-symbols-outlined perfil-info-icon">info</span>
+            <div className="perfil-info-content">
+              <span className="perfil-info-label">Versão</span>
+              <span className="perfil-info-value">v{__APP_VERSION__}</span>
+            </div>
+          </div>
         </div>
       </div>
 
