@@ -3,7 +3,7 @@ import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import confetti from 'canvas-confetti'
 
 export function Home() {

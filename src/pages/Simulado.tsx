@@ -158,8 +158,6 @@ function FinishedScreen({
   onRetry: () => void
   onHistory: () => void
 }) {
-  const pct = Math.round((score / totalQuestions) * 100)
-
   return (
     <div className="simulado-container" data-testid="simulado-finished">
       <div className="simulado-card">

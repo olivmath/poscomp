@@ -27,6 +27,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # ── 1.5 Lint ────────────────────────────────────────────────────────
+      - name: Lint
+        run: pnpm lint
+
       # ── 2. Build (produção) ─────────────────────────────────────────────
       - name: Build
         run: pnpm build
