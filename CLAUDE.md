@@ -121,7 +121,7 @@ VITE_FIREBASE_APP_ID=
 
 ## Git Signing — OBRIGATÓRIO neste projeto
 
-- **Author/Committer**: `olivmath <olivmath97@gmail.com>` (local git config já setado)
+- **Author/Committer**: `olivmath <olivmath@protonmail.com>` (local git config já setado)
 - **Chave GPG**: `81F73E58BE72B00F` — chave EDDSA `[ultimate]`
 - **Formato**: `openpgp`
 - O worktree pode herdar `user.signingkey` errado de outro projeto — sempre verificar:
