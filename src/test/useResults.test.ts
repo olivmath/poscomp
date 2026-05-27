@@ -17,7 +17,7 @@ vi.mock('firebase/firestore', () => ({
   query: vi.fn(),
 }))
 
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../hooks/useAuth'
 import { getDocs } from 'firebase/firestore'
 
 const mockUser = { uid: 'user-123' }
