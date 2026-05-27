@@ -20,6 +20,40 @@ const TABS = [
     },
   },
   {
+    path: '/simulado',
+    label: 'Simulado',
+    icon: (active: boolean) => {
+      const c = active ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline)'
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M5 3l14 9-14 9V3z"
+            style={{ fill: active ? c : 'none', stroke: c }}
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
+        </svg>
+      )
+    },
+  },
+  {
+    path: '/revisao',
+    label: 'Revisão',
+    hasBadge: true,
+    icon: (active: boolean) => {
+      const c = active ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline)'
+      return (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"
+            style={{ fill: active ? c : 'none', stroke: c }}
+            strokeWidth="1.5"
+          />
+        </svg>
+      )
+    },
+  },
+  {
     path: '/historico',
     label: 'Histórico',
     icon: (active: boolean) => {
@@ -33,32 +67,6 @@ const TABS = [
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-          />
-        </svg>
-      )
-    },
-  },
-  {
-    path: '/analises',
-    label: 'Análises',
-    icon: (active: boolean) => {
-      const c = active ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline)'
-      return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <rect
-            x="4" y="14" width="4" height="6" rx="1"
-            style={{ fill: active ? c : 'none', stroke: c }}
-            strokeWidth="1.5"
-          />
-          <rect
-            x="10" y="9" width="4" height="11" rx="1"
-            style={{ fill: active ? c : 'none', stroke: c }}
-            strokeWidth="1.5"
-          />
-          <rect
-            x="16" y="4" width="4" height="16" rx="1"
-            style={{ fill: active ? c : 'none', stroke: c }}
-            strokeWidth="1.5"
           />
         </svg>
       )
@@ -88,14 +96,9 @@ const TABS = [
   },
 ]
 
-// TODO(SM-2): Add "Revisar" tab pointing to /revisar when the review screen is built.
-// When added, render a badge with `totalPending` from useSrs() on that tab item.
-// Example badge: {totalPending > 0 && <span className="bottom-nav-badge">{totalPending}</span>}
-
 export function BottomNav() {
   const location = useLocation()
   const navigate = useNavigate()
-  // SM-2: track pending SRS cards — badge will appear on "Revisar" tab once that route exists
   const { totalPending } = useSrs()
 
   const isActive = (path: string) =>
@@ -105,8 +108,6 @@ export function BottomNav() {
     <nav className="bottom-nav">
       {TABS.map((tab) => {
         const active = isActive(tab.path)
-        // TODO(SM-2): when /revisar tab is added, show badge: totalPending > 0
-        void totalPending
         return (
           <button
             key={tab.path}
@@ -115,7 +116,14 @@ export function BottomNav() {
             aria-label={tab.label}
             aria-current={active ? 'page' : undefined}
           >
-            <span className="bottom-nav-icon">{tab.icon(active)}</span>
+            <span className="bottom-nav-icon">
+              {tab.icon(active)}
+              {tab.hasBadge && totalPending > 0 && (
+                <span className="bottom-nav-badge">
+                  {totalPending > 99 ? '99+' : totalPending}
+                </span>
+              )}
+            </span>
             <span className="bottom-nav-label">{tab.label}</span>
           </button>
         )
