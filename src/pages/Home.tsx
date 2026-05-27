@@ -1,7 +1,7 @@
 import '@material/web/button/filled-button.js'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import confetti from 'canvas-confetti'
