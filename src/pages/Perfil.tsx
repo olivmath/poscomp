@@ -3,11 +3,13 @@ import { auth } from '../firebase'
 import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { useTheme } from '../hooks/useTheme'
 
 export function Perfil() {
   const { user } = useAuth()
   const navigate = useNavigate()
   const [loggingOut, setLoggingOut] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   async function handleLogout() {
     setLoggingOut(true)
@@ -31,6 +33,19 @@ export function Perfil() {
         )}
         <h1 className="perfil-name">{user?.displayName ?? 'Usuário'}</h1>
         <p className="perfil-email">{user?.email}</p>
+      </div>
+
+      <div className="perfil-section">
+        <h2 className="perfil-section-title">Preferências</h2>
+        <div className="perfil-info-list">
+          <button className="perfil-info-row" style={{ width: '100%', border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left' }} onClick={toggleTheme}>
+            <span className="material-symbols-outlined perfil-info-icon">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
+            <div className="perfil-info-content">
+              <span className="perfil-info-label">Tema</span>
+              <span className="perfil-info-value">{theme === 'dark' ? 'Claro' : 'Escuro'}</span>
+            </div>
+          </button>
+        </div>
       </div>
 
       <div className="perfil-section">
