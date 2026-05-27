@@ -16,7 +16,7 @@ interface UseSrsReturn {
   totalPending: number
   loading: boolean
   upsertFromResult: (result: SimuladoResult) => Promise<void>
-  updateCard: (questionId: string, grade: Grade) => Promise<void>
+  updateCard: (questionId: string, grade: Grade, studied?: boolean) => Promise<void>
 }
 
 export function useSrs(): UseSrsReturn {

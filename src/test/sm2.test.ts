@@ -18,6 +18,8 @@ function makeCard(overrides: Partial<SrsCard> = {}): SrsCard {
     dueDate: { seconds: 0, nanoseconds: 0 } as SrsCard['dueDate'],
     createdAt: { seconds: 0, nanoseconds: 0 } as SrsCard['createdAt'],
     lastConfidence: null,
+    studied: false,
+    simuladoCorrect: true,
     ...overrides,
   }
 }
