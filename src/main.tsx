@@ -9,6 +9,7 @@ import { Home } from './pages/Home'
 import { Historico } from './pages/Historico'
 import { Analises } from './pages/Analises'
 import { Perfil } from './pages/Perfil'
+import { Simulado } from './pages/Simulado'
 import './index.css'
 
 function ProtectedLayout({ children }: { children: React.ReactNode }) {
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/historico" element={<ProtectedLayout><Historico /></ProtectedLayout>} />
           <Route path="/analises" element={<ProtectedLayout><Analises /></ProtectedLayout>} />
           <Route path="/perfil" element={<ProtectedLayout><Perfil /></ProtectedLayout>} />
+          <Route path="/simulado" element={<ProtectedLayout><Simulado /></ProtectedLayout>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>
