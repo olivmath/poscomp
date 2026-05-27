@@ -1,22 +1,25 @@
 /**
  * Seed script — insere 10 questões fake no Firestore
  *
- * Uso:
+ * Uso (Application Default Credentials — mais simples):
+ *   gcloud auth application-default login
+ *   FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed
+ *
+ * Ou com Service Account explícito:
  *   GOOGLE_APPLICATION_CREDENTIALS=path/to/serviceAccount.json \
- *   FIREBASE_PROJECT_ID=seu-projeto \
- *   pnpm seed
+ *   FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed
  */
 
-import { initializeApp, cert } from 'firebase-admin/app'
+import { initializeApp, cert, applicationDefault } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
 
-const projectId = process.env.FIREBASE_PROJECT_ID
-if (!projectId) throw new Error('FIREBASE_PROJECT_ID env var is required')
+const projectId = process.env.FIREBASE_PROJECT_ID ?? 'poscomp-olivmath'
 
-initializeApp({
-  credential: cert(process.env.GOOGLE_APPLICATION_CREDENTIALS as string),
-  projectId,
-})
+const credential = process.env.GOOGLE_APPLICATION_CREDENTIALS
+  ? cert(process.env.GOOGLE_APPLICATION_CREDENTIALS)
+  : applicationDefault()
+
+initializeApp({ credential, projectId })
 
 const db = getFirestore()
 

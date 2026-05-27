@@ -36,7 +36,10 @@ export function useResults(): UseResultsReturn {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!user) return
+    if (!user) {
+      setLoading(false)
+      return
+    }
 
     setLoading(true)
     const q = query(
