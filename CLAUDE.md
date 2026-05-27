@@ -119,4 +119,16 @@ VITE_FIREBASE_APP_ID=
 - Firebase project criado do zero com `olivmath97@gmail.com`
 - Sempre ativar conta antes de usar gcloud: `gcloud config set account olivmath97@gmail.com`
 
+## Git Signing — OBRIGATÓRIO neste projeto
+
+- **Author/Committer**: `olivmath <olivmath97@gmail.com>` (local git config já setado)
+- **Chave GPG**: `81F73E58BE72B00F` — chave EDDSA `[ultimate]`
+- **Formato**: `openpgp`
+- O worktree pode herdar `user.signingkey` errado de outro projeto — sempre verificar:
+  ```bash
+  git config user.signingkey   # deve ser 81F73E58BE72B00F
+  ```
+- Se errado, corrigir com: `git config user.signingkey 81F73E58BE72B00F`
+- Verificar assinatura após commit: `git log -1 --show-signature`
+
 <!-- token-policy: v1.0 -->
