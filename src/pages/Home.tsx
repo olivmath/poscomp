@@ -55,7 +55,7 @@ export function Home() {
         <div className="home-actions">
           <md-filled-button
             onClick={() => navigate('/simulado')}
-            style={{ minWidth: '200px' }}
+            className="btn-primary"
             data-testid="start-simulado-btn"
           >
             Começar Simulado

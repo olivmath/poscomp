@@ -72,6 +72,21 @@
   --md-outlined-button-label-text-color:  #6750A4;
   --md-circular-progress-active-indicator-color: #6750A4;
 
+  /* ── Font tokens — fix Shadow DOM herança ── */
+  --md-filled-button-label-text-font:         'Google Sans', system-ui, sans-serif;
+  --md-filled-button-label-text-size:         15px;
+  --md-filled-button-label-text-weight:       600;
+  --md-filled-button-label-text-line-height:  24px;
+  --md-filled-button-label-text-tracking:     0.1px;
+  --md-filled-button-container-height:        44px;
+
+  --md-outlined-button-label-text-font:       'Google Sans', system-ui, sans-serif;
+  --md-outlined-button-label-text-size:       15px;
+  --md-outlined-button-label-text-weight:     600;
+  --md-outlined-button-label-text-line-height: 24px;
+  --md-outlined-button-label-text-tracking:   0.1px;
+  --md-outlined-button-container-height:      44px;
+
   font-family: 'Google Sans', system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -139,6 +154,14 @@
   --md-outlined-button-outline-color:     #938F99;
   --md-outlined-button-label-text-color:  #D0BCFF;
   --md-circular-progress-active-indicator-color: #D0BCFF;
+
+  /* ── Font tokens — dark mode (herança Shadow DOM) ── */
+  --md-filled-button-label-text-font:         'Google Sans', system-ui, sans-serif;
+  --md-filled-button-label-text-size:         15px;
+  --md-filled-button-label-text-weight:       600;
+  --md-outlined-button-label-text-font:       'Google Sans', system-ui, sans-serif;
+  --md-outlined-button-label-text-size:       15px;
+  --md-outlined-button-label-text-weight:     600;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -646,6 +669,24 @@ body {
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+/* ── Button sizing helpers ── */
+md-filled-button,
+md-outlined-button {
+  /* garante que o label dentro do shadow DOM não quebre linha */
+  --md-filled-button-label-text-line-height: 24px;
+}
+
+md-filled-button.btn-primary,
+md-outlined-button.btn-secondary {
+  min-width: 140px;
+}
+
+md-filled-button.btn-full,
+md-outlined-button.btn-full {
+  width: 100%;
+  display: flex; /* faz o elemento preencher o container */
 }
 
 /* ═══════════════════════════════════════════════════════════
