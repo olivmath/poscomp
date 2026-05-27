@@ -17,9 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
-    outputs:
-      version: ${{ steps.bump_version.outputs.version }}
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,7 +37,6 @@ jobs:
           fi
 
       - name: Bump version
-        id: bump_version
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -73,8 +69,6 @@ jobs:
 
             console.log(pkg.version);
           ")
-
-          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
 
           git add package.json
           git commit -m "chore: bump version to v$NEW_VERSION [skip ci]"
@@ -142,10 +136,7 @@ jobs:
           path: dist
 
   e2e:
-    needs:
-      - lint
-      - build
-
+    needs: version_bump
     runs-on: ubuntu-latest
     timeout-minutes: 15
 

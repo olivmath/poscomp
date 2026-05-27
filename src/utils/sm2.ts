@@ -14,27 +14,23 @@ export function sm2Update(card: SrsCard, grade: Grade): Sm2Result {
 
   if (grade < 3) {
     return {
-  easeFactor: ef,
-  interval: 1,
-  repetitions: 0,
-  dueDate: Timestamp.fromDate(addDays(1)),
-  lastConfidence: card.lastConfidence,
-  studied: card.studied,
-  simuladoCorrect: card.simuladoCorrect,
-}
+      easeFactor: ef,
+      interval: 1,
+      repetitions: 0,
+      dueDate: Timestamp.fromDate(addDays(1)),
+      lastConfidence: card.lastConfidence,
+    }
   }
 
   const interval = calcInterval(card.repetitions, card.interval, ef)
 
   return {
-  easeFactor: ef,
-  interval,
-  repetitions: card.repetitions + 1,
-  dueDate: Timestamp.fromDate(addDays(interval)),
-  lastConfidence: card.lastConfidence,
-  studied: card.studied,
-  simuladoCorrect: card.simuladoCorrect,
-}
+    easeFactor: ef,
+    interval,
+    repetitions: card.repetitions + 1,
+    dueDate: Timestamp.fromDate(addDays(interval)),
+    lastConfidence: card.lastConfidence,
+  }
 }
 
 export function gradeFromResult(correct: boolean, confidence: Confidence): Grade {
