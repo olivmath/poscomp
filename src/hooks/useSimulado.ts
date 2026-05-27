@@ -15,6 +15,8 @@ import type {
   SimuladoState,
   Area,
   SimuladoConfig,
+  Confidence,
+  QuestionStatus,
 } from '../types'
 
 const DEFAULT_CONFIG: SimuladoConfig = {
@@ -38,11 +40,14 @@ interface UseSimuladoReturn {
   result: SimuladoResult | null
   lastResult: SimuladoResult | null
   config: SimuladoConfig
+  questionStatuses: QuestionStatus[]
   // actions
   goToConfig: () => void
   start: (config: SimuladoConfig) => void
   select: (option: Option) => void
-  next: () => void
+  next: (confidence: Confidence) => void
+  skip: () => void
+  goToQuestion: (index: number) => void
   retry: () => void
 }
 
@@ -74,6 +79,16 @@ export function useSimulado(): UseSimuladoReturn {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const answersRef = useRef<AnswerRecord[]>([])
 
+  // ── computed ─────────────────────────────────────────────────────────────
+  const questionStatuses: QuestionStatus[] = questions.map((q) => {
+    const answer = answers.find((a) => a.questionId === q.id)
+    if (!answer) return 'unvisited'
+    if (answer.skipped) return 'skipped'
+    if (answer.confidence === 'unsure') return 'unsure'
+    if (answer.confidence === 'certain') return 'certain'
+    return 'unvisited'
+  })
+
   // ── fetch last result on mount ───────────────────────────────────────────
   useEffect(() => {
     if (!user) return
@@ -102,7 +117,6 @@ export function useSimulado(): UseSimuladoReturn {
       stopTimer()
       if (!user) return
 
-      // build area breakdown
       const breakdown: Partial<Record<Area, { correct: number; total: number }>> = {}
       for (const q of questions) {
         if (!breakdown[q.area]) breakdown[q.area] = { correct: 0, total: 0 }
@@ -149,19 +163,23 @@ export function useSimulado(): UseSimuladoReturn {
   // ── timer ────────────────────────────────────────────────────────────────
   const startTimer = useCallback(
     (startedAt: number, totalSeconds: number) => {
-      // timerRef is captured by closure, but we use the ref value
       timerRef.current = setInterval(() => {
         const elapsed = Math.floor((Date.now() - startedAt) / 1000)
         const left = totalSeconds - elapsed
 
         if (left <= 0) {
           stopTimer()
-          // auto-submit with current answers (pad unanswered with null)
           const current = answersRef.current
           const padded = [...current]
           for (const q of questions) {
             if (!padded.find((a) => a.questionId === q.id)) {
-              padded.push({ questionId: q.id, selected: null, correct: false })
+              padded.push({
+                questionId: q.id,
+                selected: null,
+                correct: false,
+                skipped: false,
+                confidence: null,
+              })
             }
           }
           setSecondsLeft(0)
@@ -184,7 +202,6 @@ export function useSimulado(): UseSimuladoReturn {
       setLoading(true)
       setError(null)
       try {
-        // persist config
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newConfig))
         setConfig(newConfig)
 
@@ -195,7 +212,6 @@ export function useSimulado(): UseSimuladoReturn {
         }
         let all = snap.docs.map((d) => ({ id: d.id, ...d.data() })) as Question[]
 
-        // filter by area
         if (newConfig.areas.length > 0) {
           all = all.filter((q) => newConfig.areas.includes(q.area))
         }
@@ -205,14 +221,11 @@ export function useSimulado(): UseSimuladoReturn {
           return
         }
 
-        // resolve totalQuestions
         let total = newConfig.totalQuestions
         if (total === 0 || total > all.length) {
-          // 'max' mode or more than available
           total = Math.min(all.length, 40)
         }
 
-        // shuffle & pick
         const shuffled = all.sort(() => Math.random() - 0.5).slice(0, total)
 
         setQuestions(shuffled)
@@ -245,12 +258,48 @@ export function useSimulado(): UseSimuladoReturn {
     setSelectedOption(option)
   }, [])
 
-  const next = useCallback(() => {
+  const next = useCallback(
+    (confidence: Confidence) => {
+      const current = questions[currentIndex]
+      const newAnswer: AnswerRecord = {
+        questionId: current.id,
+        selected: selectedOption,
+        correct: selectedOption === current.correctOption,
+        skipped: false,
+        confidence,
+      }
+
+      const updated = [
+        ...answers.filter((a) => a.questionId !== current.id),
+        newAnswer,
+      ]
+      setAnswers(updated)
+      answersRef.current = updated
+
+      const isLast = currentIndex === questions.length - 1
+      if (isLast) {
+        let timeSpent = 0
+        if (config.timerMode === 'per-question') {
+          const totalSeconds = (config.secondsPerQuestion ?? 0) * questions.length
+          timeSpent = totalSeconds - secondsLeft
+        }
+        finish(updated, timeSpent)
+      } else {
+        setCurrentIndex((i) => i + 1)
+        setSelectedOption(null)
+      }
+    },
+    [questions, currentIndex, selectedOption, answers, secondsLeft, finish, config]
+  )
+
+  const skip = useCallback(() => {
     const current = questions[currentIndex]
     const newAnswer: AnswerRecord = {
       questionId: current.id,
-      selected: selectedOption,
-      correct: selectedOption === current.correctOption,
+      selected: null,
+      correct: false,
+      skipped: true,
+      confidence: null,
     }
 
     const updated = [
@@ -272,15 +321,18 @@ export function useSimulado(): UseSimuladoReturn {
       setCurrentIndex((i) => i + 1)
       setSelectedOption(null)
     }
-  }, [
-    questions,
-    currentIndex,
-    selectedOption,
-    answers,
-    secondsLeft,
-    finish,
-    config,
-  ])
+  }, [questions, currentIndex, answers, secondsLeft, finish, config])
+
+  const goToQuestion = useCallback(
+    (index: number) => {
+      if (index < 0 || index >= questions.length) return
+      const target = questions[index]
+      const prevAnswer = answers.find((a) => a.questionId === target.id)
+      setCurrentIndex(index)
+      setSelectedOption(prevAnswer?.selected ?? null)
+    },
+    [questions, answers]
+  )
 
   const retry = useCallback(() => {
     stopTimer()
@@ -310,10 +362,13 @@ export function useSimulado(): UseSimuladoReturn {
     result,
     lastResult,
     config,
+    questionStatuses,
     goToConfig,
     start,
     select,
     next,
+    skip,
+    goToQuestion,
     retry,
   }
 }

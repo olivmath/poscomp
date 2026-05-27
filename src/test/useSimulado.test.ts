@@ -202,4 +202,116 @@ describe('useSimulado', () => {
     expect(result.current.questions).toHaveLength(0)
     expect(result.current.error).toBeNull()
   })
+
+  it('skip() registra skipped=true e avança para próxima questão', async () => {
+    const { result } = renderHook(() => useSimulado())
+    await waitFor(() => expect(result.current.state).toBe('idle'))
+
+    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
+
+    await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
+    await waitFor(() => expect(result.current.state).toBe('running'))
+
+    expect(result.current.currentIndex).toBe(0)
+
+    act(() => { result.current.skip() })
+
+    expect(result.current.currentIndex).toBe(1)
+    expect(result.current.answers).toHaveLength(1)
+    expect(result.current.answers[0].skipped).toBe(true)
+    expect(result.current.answers[0].selected).toBeNull()
+    expect(result.current.answers[0].correct).toBe(false)
+    expect(result.current.answers[0].confidence).toBeNull()
+  })
+
+  it('skip() na última questão finaliza o simulado', async () => {
+    const { result } = renderHook(() => useSimulado())
+    await waitFor(() => expect(result.current.state).toBe('idle'))
+
+    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
+    vi.mocked(addDoc).mockResolvedValue({ id: 'result-id' } as never)
+
+    const config = { ...DEFAULT_CONFIG, timerMode: 'none' as const, totalQuestions: 2 }
+    await act(async () => { result.current.start(config) })
+    await waitFor(() => expect(result.current.state).toBe('running'))
+
+    // Pula as 2 questões
+    await act(async () => { result.current.skip() })
+    await act(async () => { result.current.skip() })
+
+    await waitFor(() => expect(result.current.state).toBe('finished'))
+    expect(result.current.result?.score).toBe(0)
+  })
+
+  it('next(confidence) registra a confiança corretamente', async () => {
+    const { result } = renderHook(() => useSimulado())
+    await waitFor(() => expect(result.current.state).toBe('idle'))
+
+    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
+
+    await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
+    await waitFor(() => expect(result.current.state).toBe('running'))
+
+    // Seleciona opção A (correctOption)
+    act(() => { result.current.select('A') })
+    act(() => { result.current.next('certain') })
+
+    expect(result.current.answers).toHaveLength(1)
+    expect(result.current.answers[0].confidence).toBe('certain')
+    expect(result.current.answers[0].skipped).toBe(false)
+    expect(result.current.answers[0].selected).toBe('A')
+    expect(result.current.answers[0].correct).toBe(true)
+    expect(result.current.currentIndex).toBe(1)
+  })
+
+  it('next("unsure") registra confidence=unsure', async () => {
+    const { result } = renderHook(() => useSimulado())
+    await waitFor(() => expect(result.current.state).toBe('idle'))
+
+    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
+
+    await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
+    await waitFor(() => expect(result.current.state).toBe('running'))
+
+    act(() => { result.current.select('B') })
+    act(() => { result.current.next('unsure') })
+
+    expect(result.current.answers[0].confidence).toBe('unsure')
+    expect(result.current.answers[0].skipped).toBe(false)
+  })
+
+  it('questionStatuses reflete o estado de cada questão', async () => {
+    const { result } = renderHook(() => useSimulado())
+    await waitFor(() => expect(result.current.state).toBe('idle'))
+
+    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
+
+    await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 3 }) })
+    await waitFor(() => expect(result.current.state).toBe('running'))
+
+    // Q0 → não visitada
+    expect(result.current.questionStatuses[0]).toBe('unvisited')
+
+    // Pula Q0
+    act(() => { result.current.skip() })
+    expect(result.current.questionStatuses[0]).toBe('skipped')
+
+    // Responde Q1 com certeza
+    act(() => { result.current.select('A') })
+    act(() => { result.current.next('certain') })
+    expect(result.current.questionStatuses[1]).toBe('certain')
+  })
+
+  it('goToQuestion() navega para o índice correto', async () => {
+    const { result } = renderHook(() => useSimulado())
+    await waitFor(() => expect(result.current.state).toBe('idle'))
+
+    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
+
+    await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
+    await waitFor(() => expect(result.current.state).toBe('running'))
+
+    act(() => { result.current.goToQuestion(3) })
+    expect(result.current.currentIndex).toBe(3)
+  })
 })
