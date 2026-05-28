@@ -1,7 +1,7 @@
 {
   "name": "poscomp",
   "private": true,
-  "version": "3.0.25",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

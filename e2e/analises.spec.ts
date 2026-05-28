@@ -19,12 +19,3 @@ test.describe('Análises — roteamento', () => {
     expect(fatalErrors).toHaveLength(0)
   })
 })
-
-test.describe('Análises — hero compacto', () => {
-  test('analises-stat-row não tem cards em coluna', async ({ page }) => {
-    await page.goto('/analises')
-    // sem auth → redireciona para login; verifica que não há analises-metric-card no DOM
-    const cards = page.locator('.analises-metric-card')
-    await expect(cards).toHaveCount(0)
-  })
-})

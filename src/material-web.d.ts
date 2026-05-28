@@ -20,13 +20,6 @@ declare namespace React {
         value?: number
         max?: number
       }, HTMLElement>
-      'md-filter-chip': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
-        elevated?: boolean
-        selected?: boolean
-        label?: string
-        disabled?: boolean
-      }, HTMLElement>
-      'md-chip-set': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
     }
   }
 }

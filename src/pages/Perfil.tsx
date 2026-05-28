@@ -1,6 +1,6 @@
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useTheme } from '../hooks/useTheme'

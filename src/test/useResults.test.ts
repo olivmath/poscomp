@@ -6,7 +6,7 @@ import { useResults } from '../hooks/useResults'
 
 vi.mock('../firebase', () => ({ db: {} }))
 
-vi.mock('../hooks/useAuth', () => ({
+vi.mock('../contexts/AuthContext', () => ({
   useAuth: vi.fn(),
 }))
 
@@ -17,7 +17,7 @@ vi.mock('firebase/firestore', () => ({
   query: vi.fn(),
 }))
 
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../contexts/AuthContext'
 import { getDocs } from 'firebase/firestore'
 
 const mockUser = { uid: 'user-123' }
@@ -72,9 +72,11 @@ describe('useResults', () => {
         timeSpentSeconds: 300,
         completedAt: { toDate: () => new Date('2024-01-15') },
         areaBreakdown: {
-          Matemática:                    { correct: 4, total: 4 },
-          'Fundamentos da Computação':   { correct: 3, total: 4 },
-          'Tecnologia da Computação':    { correct: 1, total: 2 },
+          Matemática:   { correct: 2, total: 2 },
+          Algoritmos:   { correct: 2, total: 2 },
+          Lógica:       { correct: 1, total: 2 },
+          'Banco de Dados': { correct: 2, total: 2 },
+          Redes:        { correct: 1, total: 2 },
         },
       },
     ]) as never)
