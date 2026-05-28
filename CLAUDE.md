@@ -20,50 +20,21 @@ App de preparação para o POSCOMP. Simulados cronometrados + revisão espaçada
 | Storage | Firebase Storage (when needed) |
 | Styling | Tailwind CSS |
 
-## Package Manager
+## Package Manager & Commands
 
-**SEMPRE usar `pnpm`** — nunca `npm` ou `yarn` neste projeto.
-
-```bash
-pnpm install      # instalar dependências
-pnpm dev          # dev server
-pnpm build        # build produção
-pnpm lint         # lint
-pnpm typecheck    # type check
-```
-
-## Commands
+**SEMPRE usar `pnpm`** — nunca `npm` ou `yarn`.
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Dev server
-pnpm dev
-
-# Build for production
-pnpm build
-
-# Deploy to Firebase Hosting
-firebase deploy
-
-# Deploy only hosting
-firebase deploy --only hosting
-
-# Deploy only functions
-firebase deploy --only functions
-
-# Run tests
-pnpm test
-
-# Run single test file
-pnpm test -- src/path/to/file.test.ts
-
-# Lint
-pnpm lint
-
-# Type check
-pnpm typecheck
+pnpm install                              # dependências
+pnpm dev                                  # dev server
+pnpm build                                # build produção
+pnpm test                                 # testes
+pnpm test -- src/path/to/file.test.ts     # arquivo específico
+pnpm lint                                 # lint
+pnpm typecheck                            # type check
+firebase deploy                           # deploy completo
+firebase deploy --only hosting            # só hosting
+firebase deploy --only functions          # só functions
 ```
 
 ## Pedagogical Model — Processo Simulado + Revisão
@@ -108,13 +79,22 @@ seleciona opção → revela gabarito → vê certo/errado → classifica confia
 src/
 ├── firebase/          # Firebase config e SDK
 │   └── index.ts       # initializeApp, auth, db, storage
+├── contexts/
+│   ├── AuthContext.tsx        # user + loading via onAuthStateChanged
+│   ├── SrsContext.tsx         # SrsProvider (evita double Firestore reads)
+│   └── ImmersiveModeContext.tsx
 ├── hooks/
-│   ├── useAuth.ts     # onAuthStateChanged
+│   ├── useAuth.ts     # lê AuthContext
 │   ├── useSimulado.ts # estado do simulado + timer + finish
 │   ├── useRevisao.ts  # fila SRS priorizada (P1→P2→P3)
 │   ├── useSrs.ts      # CRUD dos SrsCards no Firestore
 │   ├── useResults.ts  # histórico de simulados
 │   └── useTheme.ts
+├── components/
+│   ├── ProtectedRoute.tsx     # redireciona para /login se não autenticado
+│   ├── ProtectedLayout.tsx    # ProtectedRoute + AppLayout
+│   ├── AppLayout.tsx
+│   └── BottomNav.tsx
 ├── pages/
 │   ├── Login.tsx
 │   ├── Home.tsx
@@ -123,10 +103,17 @@ src/
 │   ├── Historico.tsx  # lista de resultados
 │   └── Perfil.tsx
 ├── utils/
-│   └── sm2.ts         # algoritmo SM-2 para espaçamento
+│   ├── sm2.ts         # algoritmo SM-2 para espaçamento
+│   ├── bypass.ts      # isAuthBypassed() — dev/E2E bypass
+│   └── areaIcons.ts
 ├── types/index.ts     # Confidence, SrsCard, SimuladoResult, etc.
-└── main.tsx
+└── main.tsx           # AuthProvider > SrsProvider > ImmersiveModeProvider > Routes
 ```
+
+### Invariantes de contexto
+- `SrsProvider` fica dentro de `AuthProvider` mas fora de `ProtectedRoute` — carrega SRS data assim que o user resolve
+- `useSrs` inicia `loading = true` para evitar flash de "empty" antes dos dados chegarem
+- `useSrsContext` lança se usado fora de `SrsProvider` (guard explícito)
 
 ## Firebase Setup
 

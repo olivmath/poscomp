@@ -78,11 +78,13 @@ export function useRevisao() {
         // But SRS sessions are usually smaller or can be loaded in batches.
         const q = query(collection(db, 'questions'), where(documentId(), 'in', missingIds.slice(0, 30)))
         const snap = await getDocs(q)
-        const newQuestions: Record<string, Question> = { ...questions }
-        snap.forEach(doc => {
-          newQuestions[doc.id] = { id: doc.id, ...doc.data() } as Question
-        })
-        setQuestions(newQuestions)
+        if (!snap.empty) {
+          const newQuestions: Record<string, Question> = { ...questions }
+          snap.forEach(doc => {
+            newQuestions[doc.id] = { id: doc.id, ...doc.data() } as Question
+          })
+          setQuestions(newQuestions)
+        }
       } catch (err) {
         console.error('Error fetching SRS questions:', err)
       } finally {

@@ -35,7 +35,7 @@ declare global {
 export function useSrs(): UseSrsReturn {
   const { user } = useAuth()
   const [pendingCards, setPendingCards] = useState<SrsCard[]>([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const loadPendingCards = useCallback(async (_uid: string): Promise<void> => {
     // Bypass de teste: usa dados injetados via window.__SRS_MOCK__
