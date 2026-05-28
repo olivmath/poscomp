@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, ReactNode } from 'react'
-import { onAuthStateChanged, getRedirectResult, User } from 'firebase/auth'
+import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from '../firebase'
 
 interface AuthContextType {
@@ -46,8 +46,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (bypass) return
-
-    getRedirectResult(auth).catch(console.error)
 
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser)

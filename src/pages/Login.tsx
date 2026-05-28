@@ -1,6 +1,6 @@
 import '@material/web/button/filled-button.js'
 import '@material/web/progress/circular-progress.js'
-import { signInWithRedirect } from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
 import { auth, googleProvider } from '../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -20,7 +20,7 @@ export function Login() {
     setLoading(true)
     setError('')
     try {
-      await signInWithRedirect(auth, googleProvider)
+      await signInWithPopup(auth, googleProvider)
     } catch (err) {
       setError('Falha ao fazer login. Tente novamente.')
       console.error(err)
