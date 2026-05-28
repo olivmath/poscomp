@@ -166,7 +166,6 @@ export function useSimulado(): UseSimuladoReturn {
         completedAt: { seconds: Math.floor(Date.now() / 1000), nanoseconds: 0 } as SimuladoResult['completedAt'],
       }
 
-      // SM-2: persist SRS cards before transitioning to finished
       try {
         await upsertFromResult(fullResult)
       } catch (err) {

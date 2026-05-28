@@ -109,11 +109,6 @@ export function useRevisao() {
       [currentCard.priority]: prev[currentCard.priority] + 1
     }))
 
-    // SM-2 logic:
-    // "Estudei" (studied: true) -> advances algorithm (grade 3 or 5?)
-    // In revisao.md, "Estudei" implies the user reviewed it. 
-    // We'll use grade 3 as a safe default for "reviewed".
-    // "Não estudei" -> pushes to end of queue, grade 1 (reset interval)
     const grade: Grade = studied ? 3 : 1
     await updateCard(currentCard.questionId, grade, studied)
     

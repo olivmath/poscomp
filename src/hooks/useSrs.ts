@@ -8,7 +8,7 @@ import {
 } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuth } from './useAuth'
-import { sm2Update, gradeFromResult } from '../utils/sm2'
+import { sm2Update } from '../utils/sm2'
 import type { SrsCard, Grade, SimuladoResult } from '../types'
 
 interface UseSrsReturn {
@@ -79,16 +79,21 @@ export function useSrs(): UseSrsReturn {
         existingMap.set(d.id, { questionId: d.id, ...d.data() } as SrsCard)
       }
 
+      const cardsToCreate: string[] = []
       const writes = result.answers.map(async (answer) => {
         const existing = existingMap.get(answer.questionId)
         const needsReview = !answer.correct || answer.confidence !== null
         if (needsReview) {
           const confidence = answer.confidence ?? 'unsure'
           if (existing) {
-            const grade = gradeFromResult(answer.correct)
-            const updated = sm2Update({ ...existing, lastConfidence: confidence }, grade)
-            await upsertCard(user.uid, answer.questionId, { ...existing, ...updated })
+            // Simulado apenas atualiza confiança e marca como devido agora — o SM-2 avança na revisão (updateCard)
+            await upsertCard(user.uid, answer.questionId, {
+              ...existing,
+              lastConfidence: confidence,
+              dueDate: Timestamp.fromDate(new Date()),
+            })
           } else {
+            cardsToCreate.push(answer.questionId)
             const card = buildNewCard(answer.questionId, confidence, answer.correct)
             await upsertCard(user.uid, answer.questionId, card)
           }
