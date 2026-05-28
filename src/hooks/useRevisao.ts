@@ -4,6 +4,13 @@ import { db } from '../firebase'
 import { useSrs } from './useSrs'
 import type { SrsCard, Question, Grade } from '../types'
 
+// Global injetado via page.addInitScript nos testes E2E
+declare global {
+  interface Window {
+    __QUESTIONS_MOCK__?: Record<string, Question>
+  }
+}
+
 export type Priority = 'P1' | 'P2' | 'P3'
 
 export interface ExtendedSrsCard extends SrsCard {
@@ -48,7 +55,13 @@ export function useRevisao() {
   useEffect(() => {
     async function fetchQuestions() {
       if (pendingCards.length === 0) return
-      
+
+      // Bypass de teste: usa questions injetadas via window.__QUESTIONS_MOCK__
+      if (import.meta.env.VITE_AUTH_BYPASS === 'true' && window.__QUESTIONS_MOCK__) {
+        setQuestions(window.__QUESTIONS_MOCK__)
+        return
+      }
+
       const missingIds = pendingCards
         .map(c => c.questionId)
         .filter(id => !questions[id])

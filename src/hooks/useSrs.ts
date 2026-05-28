@@ -23,6 +23,13 @@ interface UseSrsReturn {
 ) => Promise<void>
 }
 
+// Globals injetados via page.addInitScript nos testes E2E (somente quando VITE_AUTH_BYPASS=true)
+declare global {
+  interface Window {
+    __SRS_MOCK__?: SrsCard[]
+  }
+}
+
 export function useSrs(): UseSrsReturn {
   const { user } = useAuth()
   const [pendingCards, setPendingCards] = useState<SrsCard[]>([])
@@ -33,10 +40,17 @@ export function useSrs(): UseSrsReturn {
     loadPendingCards(user.uid)
   }, [user])
 
-  async function loadPendingCards(uid: string): Promise<void> {
+  async function loadPendingCards(_uid: string): Promise<void> {
+    // Bypass de teste: usa dados injetados via window.__SRS_MOCK__
+    if (import.meta.env.VITE_AUTH_BYPASS === 'true' && window.__SRS_MOCK__ !== undefined) {
+      const now = Timestamp.now()
+      setPendingCards(window.__SRS_MOCK__.filter((c) => c.dueDate.seconds <= now.seconds))
+      setLoading(false)
+      return
+    }
     setLoading(true)
     try {
-      const snap = await getDocs(collection(db, 'users', uid, 'srs_cards'))
+      const snap = await getDocs(collection(db, 'users', _uid, 'srs_cards'))
       const now = Timestamp.now()
       const cards = snap.docs
         .map((d) => ({ questionId: d.id, ...d.data() }) as SrsCard)
@@ -50,6 +64,7 @@ export function useSrs(): UseSrsReturn {
   const upsertFromResult = useCallback(
     async (result: SimuladoResult): Promise<void> => {
       if (!user) return
+      if (import.meta.env.VITE_AUTH_BYPASS === 'true') return
 
       const cardsSnap = await getDocs(collection(db, 'users', user.uid, 'srs_cards'))
       const existingMap = new Map<string, SrsCard>()
@@ -82,6 +97,11 @@ export function useSrs(): UseSrsReturn {
   const updateCard = useCallback(
     async (questionId: string, grade: Grade, studied?: boolean): Promise<void> => {
       if (!user) return
+      if (import.meta.env.VITE_AUTH_BYPASS === 'true') {
+        // Em testes E2E, apenas avança o estado local sem Firestore
+        setPendingCards(prev => prev.filter(c => c.questionId !== questionId))
+        return
+      }
 
       const cardsSnap = await getDocs(collection(db, 'users', user.uid, 'srs_cards'))
       const docData = cardsSnap.docs.find((d) => d.id === questionId)
