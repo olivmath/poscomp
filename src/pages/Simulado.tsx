@@ -7,6 +7,7 @@ import { QuestionReviewList } from '../components/QuestionReviewList'
 import { useSimulado } from '../hooks/useSimulado'
 import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
 import { AREA_ICONS } from '../utils/areaIcons'
+import { formatDuration } from '../utils/formatDuration'
 import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence, Question, AnswerRecord, QuestionReview } from '../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
@@ -18,13 +19,6 @@ function formatTime(seconds: number): string {
   const s = seconds % 60
   if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
   return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-}
-
-function formatDuration(seconds: number): string {
-  const m = Math.floor(seconds / 60)
-  const s = seconds % 60
-  if (m === 0) return `${s}s`
-  return `${m}min ${s}s`
 }
 
 // ── Exit Confirmation Modal ──────────────────────────────────────────────────

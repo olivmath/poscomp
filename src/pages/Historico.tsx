@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { QuestionReviewList } from '../components/QuestionReviewList'
 import { useResults } from '../hooks/useResults'
 import { AREA_ICONS } from '../utils/areaIcons'
+import { formatDuration } from '../utils/formatDuration'
 import type { Area, SimuladoResult } from '../types'
 
 const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
@@ -17,13 +18,6 @@ function formatDate(result: SimuladoResult): string {
   } catch {
     return '—'
   }
-}
-
-function formatDuration(seconds: number): string {
-  const m = Math.floor(seconds / 60)
-  const s = seconds % 60
-  if (m === 0) return `${s}s`
-  return `${m}min${s > 0 ? ` ${s}s` : ''}`
 }
 
 function ResultCard({ result }: { result: SimuladoResult }) {
