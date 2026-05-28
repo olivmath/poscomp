@@ -64,7 +64,7 @@ export function useSrs(): UseSrsReturn {
   const upsertFromResult = useCallback(
     async (result: SimuladoResult): Promise<void> => {
       if (!user) return
-      if (import.meta.env.VITE_AUTH_BYPASS === 'true') return
+      if (import.meta.env.VITE_AUTH_BYPASS === 'true' && window.__SRS_MOCK__ !== undefined) return
 
       const cardsSnap = await getDocs(collection(db, 'users', user.uid, 'srs_cards'))
       const existingMap = new Map<string, SrsCard>()
@@ -97,8 +97,8 @@ export function useSrs(): UseSrsReturn {
   const updateCard = useCallback(
     async (questionId: string, grade: Grade, studied?: boolean): Promise<void> => {
       if (!user) return
-      if (import.meta.env.VITE_AUTH_BYPASS === 'true') {
-        // Em testes E2E, apenas avança o estado local sem Firestore
+      if (import.meta.env.VITE_AUTH_BYPASS === 'true' && window.__SRS_MOCK__ !== undefined) {
+        // Em testes E2E com mock, apenas avança o estado local sem Firestore
         setPendingCards(prev => prev.filter(c => c.questionId !== questionId))
         return
       }
