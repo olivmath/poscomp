@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react'
 import { collection, getDocs, query, where, documentId } from 'firebase/firestore'
 import { db } from '../firebase'
+import { isAuthBypassed } from '../utils/bypass'
 import { useSrs } from './useSrs'
 import type { SrsCard, Question, Grade } from '../types'
 
@@ -32,11 +33,6 @@ export function useRevisao() {
     P1: number; P2: number; P3: number
   }>({ P1: 0, P2: 0, P3: 0 })
 
-  const isBypass = useMemo(() => {
-    const isDevOrTest = import.meta.env.MODE !== 'production'
-    return import.meta.env.VITE_AUTH_BYPASS === 'true' || 
-           (isDevOrTest && typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true)
-  }, [])
 
   // ── Compute Priority ─────────────────────────────────────────────────────
   const sortedCards = useMemo(() => {
@@ -64,7 +60,7 @@ export function useRevisao() {
       if (pendingCards.length === 0) return
 
       // Bypass de teste: usa questions injetadas via window.__QUESTIONS_MOCK__
-      if (isBypass && window.__QUESTIONS_MOCK__) {
+      if (isAuthBypassed() && window.__QUESTIONS_MOCK__) {
         setQuestions(window.__QUESTIONS_MOCK__)
         return
       }
@@ -94,7 +90,7 @@ export function useRevisao() {
     }
 
     fetchQuestions()
-  }, [pendingCards, questions, isBypass])
+  }, [pendingCards, questions])
 
   // ── Actions ──────────────────────────────────────────────────────────────
   const reveal = useCallback(() => setShowAnswer(true), [])

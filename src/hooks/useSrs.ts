@@ -9,6 +9,7 @@ import {
 import { db } from '../firebase'
 import { useAuth } from './useAuth'
 import { sm2Update } from '../utils/sm2'
+import { isAuthBypassed } from '../utils/bypass'
 import type { SrsCard, Grade, SimuladoResult } from '../types'
 
 interface UseSrsReturn {
@@ -36,15 +37,9 @@ export function useSrs(): UseSrsReturn {
   const [pendingCards, setPendingCards] = useState<SrsCard[]>([])
   const [loading, setLoading] = useState(false)
 
-  const isBypass = useCallback(() => {
-    const isDevOrTest = import.meta.env.MODE !== 'production'
-    return import.meta.env.VITE_AUTH_BYPASS === 'true' || 
-           (isDevOrTest && typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true)
-  }, [])
-
   const loadPendingCards = useCallback(async (_uid: string): Promise<void> => {
     // Bypass de teste: usa dados injetados via window.__SRS_MOCK__
-    if (isBypass() && window.__SRS_MOCK__ !== undefined) {
+    if (isAuthBypassed() && window.__SRS_MOCK__ !== undefined) {
       const now = Timestamp.now()
       setPendingCards(window.__SRS_MOCK__.filter((c) => c.dueDate.seconds <= now.seconds))
       setLoading(false)
@@ -61,7 +56,7 @@ export function useSrs(): UseSrsReturn {
     } finally {
       setLoading(false)
     }
-  }, [isBypass])
+  }, [])
 
   useEffect(() => {
     if (!user) return
@@ -71,7 +66,7 @@ export function useSrs(): UseSrsReturn {
   const upsertFromResult = useCallback(
     async (result: SimuladoResult): Promise<void> => {
       if (!user) return
-      if (isBypass() && window.__SRS_MOCK__ !== undefined) return
+      if (isAuthBypassed() && window.__SRS_MOCK__ !== undefined) return
 
       const cardsSnap = await getDocs(collection(db, 'users', user.uid, 'srs_cards'))
       const existingMap = new Map<string, SrsCard>()
@@ -101,13 +96,13 @@ export function useSrs(): UseSrsReturn {
       await Promise.all(writes)
       await loadPendingCards(user.uid)
     },
-    [user, isBypass, loadPendingCards]
+    [user, loadPendingCards]
   )
 
   const updateCard = useCallback(
     async (questionId: string, grade: Grade, studied?: boolean): Promise<void> => {
       if (!user) return
-      if (isBypass() && window.__SRS_MOCK__ !== undefined) {
+      if (isAuthBypassed() && window.__SRS_MOCK__ !== undefined) {
         // Em testes E2E com mock, apenas avança o estado local sem Firestore
         setPendingCards(prev => prev.filter(c => c.questionId !== questionId))
         return
@@ -123,7 +118,7 @@ export function useSrs(): UseSrsReturn {
       await upsertCard(user.uid, questionId, { ...card, ...updated, studied: finalStudied })
       await loadPendingCards(user.uid)
     },
-    [user, isBypass, loadPendingCards]
+    [user, loadPendingCards]
   )
 
   return {
