@@ -1,7 +1,14 @@
 import { onCall, HttpsError } from 'firebase-functions/v2/https'
+import { logger } from 'firebase-functions'
 import { FieldValue, Timestamp } from 'firebase-admin/firestore'
+import { pipe } from 'fp-ts/function'
+import * as E from 'fp-ts/Either'
+import * as O from 'fp-ts/Option'
+
 import { db } from './index'
+
 import { VALID_OPTIONS, VALID_CONFIDENCES } from './types'
+
 import type {
   Area,
   Option,
@@ -14,79 +21,109 @@ import type {
   AnswerOutput,
 } from './types'
 
+// ─── MAIN ────────────────────────────────────────────────────────
+
 export const finishSimulado = onCall(async (request) => {
-  if (!request.auth) throw new HttpsError('unauthenticated', 'Login required')
-  const uid = request.auth.uid
+  logger.info('finishSimulado started', { uid: request.auth?.uid })
 
-  const input = request.data as FinishSimuladoInput
-  validateInput(input)
+  const uid   = unwrapO(getAuthUid(request), new HttpsError('unauthenticated', 'Login required'))
+  const input = unwrapE(parseInput(request.data), (e) => new HttpsError('invalid-argument', e.message))
 
-  const { answers, timeSpentSeconds } = input
+  const questionsMap = await fetchQuestionsMap(getQuestionIds(input.answers))
 
-  const questionIds = answers.map((a) => a.questionId)
-  const questionsMap = await fetchQuestionsMap(questionIds)
-
-  const answersOutput = buildAnswersOutput(answers, questionsMap)
+  const answersOutput = buildAnswersOutput(input.answers, questionsMap)
   const areaBreakdown = buildAreaBreakdown(answersOutput, questionsMap)
+
   const score = answersOutput.filter((a) => a.correct).length
 
   const resultId = await saveResult(uid, {
     answers: answersOutput,
     areaBreakdown,
     score,
-    totalQuestions: answers.length,
-    timeSpentSeconds,
+    totalQuestions: input.answers.length,
+    timeSpentSeconds: input.timeSpentSeconds,
   })
 
-  await updateSrsCards(uid, answers, questionsMap)
+  await updateSrsCards(uid, input.answers, questionsMap)
+
+  logger.info('finishSimulado finished', {
+    uid,
+    resultId,
+    score,
+  })
 
   return {
     resultId,
     score,
-    totalQuestions: answers.length,
-    timeSpentSeconds,
+    totalQuestions: input.answers.length,
+    timeSpentSeconds: input.timeSpentSeconds,
     areaBreakdown,
     answers: answersOutput,
   } satisfies FinishSimuladoOutput
 })
 
-function validateInput(input: FinishSimuladoInput): void {
-  const { answers, timeSpentSeconds } = input
+///// AUX FUNCTIONS
 
-  if (!Array.isArray(answers) || answers.length === 0) {
-    throw new HttpsError('invalid-argument', 'answers must be a non-empty array')
+function getAuthUid(request: { auth?: { uid: string } }): O.Option<string> {
+  return O.fromNullable(request.auth?.uid)
+}
+
+function parseInput(data: unknown): E.Either<{ message: string }, FinishSimuladoInput> {
+  const input = data as FinishSimuladoInput
+
+  if (!Array.isArray(input.answers) || input.answers.length === 0) {
+    return E.left({ message: 'answers must be a non-empty array' })
   }
 
-  if (typeof timeSpentSeconds !== 'number' || timeSpentSeconds < 0) {
-    throw new HttpsError('invalid-argument', 'timeSpentSeconds must be >= 0')
+  if (typeof input.timeSpentSeconds !== 'number' || input.timeSpentSeconds < 0) {
+    return E.left({ message: 'timeSpentSeconds must be >= 0' })
   }
 
-  for (const answer of answers) {
+  for (const answer of input.answers) {
     if (!VALID_OPTIONS.includes(answer.selected)) {
-      throw new HttpsError('invalid-argument', `Invalid option: ${answer.selected}`)
+      return E.left({ message: `Invalid option: ${answer.selected}` })
     }
+
     if (!VALID_CONFIDENCES.includes(answer.confidence)) {
-      throw new HttpsError('invalid-argument', `Invalid confidence: ${answer.confidence}`)
+      return E.left({ message: `Invalid confidence: ${answer.confidence}` })
     }
+
     if (!Number.isInteger(answer.questionId) || answer.questionId <= 0) {
-      throw new HttpsError('invalid-argument', 'Each answer must have a valid questionId (positive integer)')
+      return E.left({
+        message: 'Each answer must have a valid questionId (positive integer)',
+      })
     }
   }
+
+  return E.right(input)
+}
+
+function getQuestionIds(answers: AnswerInput[]): number[] {
+  return answers.map((a) => a.questionId)
 }
 
 async function fetchQuestionsMap(questionIds: number[]): Promise<Map<number, Question>> {
   const chunks = chunkArray(questionIds, 30)
+
   const map = new Map<number, Question>()
 
   for (const chunk of chunks) {
-    const snapshot = await db.collection('questions').where('__name__', 'in', chunk.map(String)).get()
+    const snapshot = await db
+      .collection('questions')
+      .where('__name__', 'in', chunk.map(String))
+      .get()
+      .catch((e) => {
+        throw new HttpsError('internal', 'Questions fetch failed', e)
+      })
+
     for (const doc of snapshot.docs) {
-      const q = doc.data() as Question
-      map.set(q.id, q)
+      const question = doc.data() as Question
+      map.set(question.id, question)
     }
   }
 
   const missing = questionIds.filter((id) => !map.has(id))
+
   if (missing.length > 0) {
     throw new HttpsError('not-found', `Questions not found: ${missing.join(', ')}`)
   }
@@ -94,21 +131,29 @@ async function fetchQuestionsMap(questionIds: number[]): Promise<Map<number, Que
   return map
 }
 
-function buildAnswersOutput(answers: AnswerInput[], questionsMap: Map<number, Question>): AnswerOutput[] {
+function buildAnswersOutput(
+  answers: AnswerInput[],
+  questionsMap: Map<number, Question>,
+): AnswerOutput[] {
   return answers.map((answer) => {
     const question = questionsMap.get(answer.questionId)!
+
     const correct = answer.selected === question.resposta
+
     const questionOut: AnswerOutput['question'] = {
       enunciado: question.enunciado,
       alternativas: question.alternativas,
       resposta: question.resposta,
-      ...(question.comentario !== undefined ? { comentario: question.comentario } : {}),
+      ...(question.comentario !== undefined
+        ? { comentario: question.comentario }
+        : {}),
     }
+
     return {
       questionId: answer.questionId,
       selected: answer.selected,
-      correct,
       confidence: answer.confidence,
+      correct,
       question: questionOut,
     }
   })
@@ -122,12 +167,23 @@ function buildAreaBreakdown(
 
   for (const answer of answersOutput) {
     const question = questionsMap.get(answer.questionId)!
+
     const area = question.area
 
-    if (!breakdown[area]) breakdown[area] = { correct: 0, total: 0 }
+    if (!breakdown[area]) {
+      breakdown[area] = {
+        correct: 0,
+        total: 0,
+      }
+    }
+
     const entry = breakdown[area]!
+
     entry.total += 1
-    if (answer.correct) entry.correct += 1
+
+    if (answer.correct) {
+      entry.correct += 1
+    }
   }
 
   return breakdown as Record<Area, AreaBreakdown>
@@ -137,10 +193,16 @@ async function saveResult(
   uid: string,
   data: Omit<FinishSimuladoOutput, 'resultId'>,
 ): Promise<string> {
-  const ref = await db.collection(`users/${uid}/results`).add({
-    ...data,
-    completedAt: FieldValue.serverTimestamp(),
-  })
+  const ref = await db
+    .collection(`users/${uid}/results`)
+    .add({
+      ...data,
+      completedAt: FieldValue.serverTimestamp(),
+    })
+    .catch((e) => {
+      throw new HttpsError('internal', 'Result save failed', e)
+    })
+
   return ref.id
 }
 
@@ -150,12 +212,15 @@ async function updateSrsCards(
   questionsMap: Map<number, Question>,
 ): Promise<void> {
   const batch = db.batch()
+
   const now = Timestamp.now()
 
   for (const answer of answers) {
     const question = questionsMap.get(answer.questionId)!
+
     const correct = answer.selected === question.resposta
-    const cardRef = db.doc(`users/${uid}/srs_cards/${answer.questionId}`)
+
+    const cardRef  = db.doc(`users/${uid}/srs_cards/${answer.questionId}`)
     const cardSnap = await cardRef.get()
 
     if (cardSnap.exists) {
@@ -164,31 +229,61 @@ async function updateSrsCards(
         dueDate: now,
         simuladoCorrect: correct,
       })
-    } else {
-      batch.set(cardRef, {
-        questionId: answer.questionId,
-        easeFactor: 2.5,
-        interval: 1,
-        repetitions: 0,
-        dueDate: now,
-        createdAt: now,
-        lastConfidence: answer.confidence,
-        studied: false,
-        simuladoCorrect: correct,
-      })
+
+      continue
     }
+
+    batch.set(cardRef, {
+      questionId: answer.questionId,
+      easeFactor: 2.5,
+      interval: 1,
+      repetitions: 0,
+      dueDate: now,
+      createdAt: now,
+      lastConfidence: answer.confidence,
+      studied: false,
+      simuladoCorrect: correct,
+    })
   }
 
-  await batch.commit()
+  await batch.commit().catch((e) => {
+    throw new HttpsError('internal', 'SRS cards update failed', e)
+  })
 }
 
 function chunkArray<T>(arr: T[], size: number): T[][] {
   const chunks: T[][] = []
+
   for (let i = 0; i < arr.length; i += size) {
     chunks.push(arr.slice(i, i + size))
   }
+
   return chunks
 }
 
-// Re-export types used above for clarity
+///// UNWRAP HELPERS
+
+function unwrapO<T>(opt: O.Option<T>, raise: Error): T {
+  return pipe(
+    opt,
+    O.getOrElseW(() => {
+      throw raise
+    }),
+  )
+}
+
+function unwrapE<E extends { message: string }, T>(
+  either: E.Either<E, T>,
+  toError: (e: E) => Error,
+): T {
+  return pipe(
+    either,
+    E.getOrElseW((e) => {
+      throw toError(e)
+    }),
+  )
+}
+
+///// RE-EXPORTS
+
 export type { Option, Confidence }

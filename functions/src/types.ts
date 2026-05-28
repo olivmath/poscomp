@@ -1,41 +1,84 @@
 import type { Timestamp } from 'firebase-admin/firestore'
 
-export type Area = 'Matemática' | 'Fundamentos da Computação' | 'Tecnologia da Computação'
-export type Option = 'A' | 'B' | 'C' | 'D' | 'E'
-export type Confidence = 'unsure' | 'studying' | 'should_know'
+// ─── DOMAIN CONSTANTS ────────────────────────────────────────────
 
-export const VALID_AREAS: Area[] = [
+export const VALID_AREAS = [
   'Matemática',
   'Fundamentos da Computação',
   'Tecnologia da Computação',
-]
+] as const
 
-export const VALID_OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
-export const VALID_CONFIDENCES: Confidence[] = ['unsure', 'studying', 'should_know']
+export const VALID_OPTIONS = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+] as const
+
+export const VALID_CONFIDENCES = [
+  'unsure',
+  'studying',
+  'should_know',
+] as const
+
+// ─── DOMAIN TYPES ────────────────────────────────────────────────
+
+export type Area       = typeof VALID_AREAS[number]
+export type Option     = typeof VALID_OPTIONS[number]
+export type Confidence = typeof VALID_CONFIDENCES[number]
+
+export type Priority = 'P1' | 'P2' | 'P3'
+
+// ─── BASE ENTITIES ───────────────────────────────────────────────
 
 export interface Question {
   id: number
   ano: number
   area: Area
+
+  enunciado: string
+
+  alternativas: Record<Option, string>
+
+  resposta: Option
+
+  comentario?: string
+}
+
+export interface SrsCard {
+  questionId: number
+
+  easeFactor: number
+  interval: number
+  repetitions: number
+
+  dueDate: Timestamp
+  createdAt: Timestamp
+
+  lastConfidence: Confidence | null
+
+  studied: boolean
+  simuladoCorrect: boolean
+}
+
+// ─── SHARED VIEW MODELS ──────────────────────────────────────────
+
+export interface QuestionPreview {
   enunciado: string
   alternativas: Record<Option, string>
   resposta: Option
   comentario?: string
 }
 
-export interface SrsCard {
-  questionId: number
-  easeFactor: number
-  interval: number
-  repetitions: number
-  dueDate: Timestamp
-  createdAt: Timestamp
-  lastConfidence: Confidence | null
-  studied: boolean
-  simuladoCorrect: boolean
+export interface FullQuestionView extends QuestionPreview {
+  id: number
+  ano: number
+  area: Area
 }
 
-// Input types
+// ─── INPUT TYPES ─────────────────────────────────────────────────
+
 export interface GetSimuladoQuestionsInput {
   areas: Area[]
   total: number
@@ -57,7 +100,8 @@ export interface ReviewCardInput {
   studied: boolean
 }
 
-// Output types
+// ─── OUTPUT TYPES ────────────────────────────────────────────────
+
 export interface AreaBreakdown {
   correct: number
   total: number
@@ -65,48 +109,48 @@ export interface AreaBreakdown {
 
 export interface AnswerOutput {
   questionId: number
+
   selected: Option
   correct: boolean
+
   confidence: Confidence
-  question: {
-    enunciado: string
-    alternativas: Record<Option, string>
-    resposta: Option
-    comentario?: string
-  }
+
+  question: QuestionPreview
 }
 
 export interface FinishSimuladoOutput {
   resultId: string
+
   score: number
   totalQuestions: number
+
   timeSpentSeconds: number
+
   areaBreakdown: Record<Area, AreaBreakdown>
+
   answers: AnswerOutput[]
 }
 
 export interface PendingCardOutput {
   questionId: number
-  priority: 'P1' | 'P2' | 'P3'
+
+  priority: Priority
+
   lastConfidence: Confidence
+
   dueDate: string
+
   repetitions: number
   easeFactor: number
   interval: number
-  question: {
-    id: number
-    ano: number
-    area: Area
-    enunciado: string
-    alternativas: Record<Option, string>
-    resposta: Option
-    comentario?: string
-  }
+
+  question: FullQuestionView
 }
 
 export interface ReviewCardOutput {
   nextDueDays: number
   nextDueDate: string
+
   newInterval: number
   newEaseFactor: number
   newRepetitions: number
