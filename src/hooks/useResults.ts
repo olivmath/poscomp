@@ -36,6 +36,7 @@ interface Analytics {
   canRelax: Area[]
   streak: number
   weeklyFrequency: number // % de dias na semana com atividade
+  activeDaysThisWeek: string[] // YYYY-MM-DD dos dias com atividade nos últimos 7
 }
 
 interface UseResultsReturn {
@@ -153,8 +154,8 @@ export function useResults(): UseResultsReturn {
           d.setDate(d.getDate() - i)
           return d.toISOString().split('T')[0]
         })
-        const daysWithActivity = last7Days.filter(d => dates.includes(d)).length
-        const weeklyFrequency = Math.round((daysWithActivity / 7) * 100)
+        const activeDaysThisWeek = last7Days.filter(d => dates.includes(d))
+        const weeklyFrequency = Math.round((activeDaysThisWeek.length / 7) * 100)
 
         // ── confidence stats ─────────────────────────────────────────────
         const allAnswers = docs.flatMap((r) => r.answers ?? [])
@@ -240,6 +241,7 @@ export function useResults(): UseResultsReturn {
           canRelax,
           streak,
           weeklyFrequency,
+          activeDaysThisWeek,
         })
       })
       .catch(() => {

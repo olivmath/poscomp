@@ -2913,3 +2913,244 @@ md-outlined-button.btn-full {
 
 .status-dot--ok   { background: var(--color-score-high); }
 .status-dot--warn { background: var(--color-score-mid); }
+
+
+/* ═══════════════════════════════════════════════════════════
+   HOME — REFINAMENTOS v3
+   Scoped em .home-header / .home-analises para não vazar
+═══════════════════════════════════════════════════════════ */
+
+/* ── Header: grid de dias da semana ── */
+.home-header {
+  gap: var(--space-sm);
+}
+
+.home-week-grid {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.home-day-sq {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 4px;
+  border-radius: 12px;
+  background: var(--color-surface-elevated);
+  border: 1.5px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.home-day-sq--active {
+  background: var(--md-sys-color-primary);
+}
+
+.home-day-sq--today:not(.home-day-sq--active) {
+  border-color: var(--md-sys-color-primary);
+}
+
+.home-day-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--md-sys-color-on-surface-variant);
+  text-transform: uppercase;
+}
+
+.home-day-sq--active .home-day-label {
+  color: var(--md-sys-color-on-primary);
+}
+
+.home-day-sq--today:not(.home-day-sq--active) .home-day-label {
+  color: var(--md-sys-color-primary);
+}
+
+.home-streak-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface-variant);
+  text-align: right;
+  margin: 0;
+}
+
+/* ── Slides: padding completo ── */
+.home-analises .analises-slide {
+  padding: var(--space-lg) var(--space-lg) var(--space-xl);
+  gap: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Section titles: label style ── */
+.home-analises .analises-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--md-sys-color-outline);
+  margin-bottom: var(--space-xs);
+}
+
+/* ── Area list: sem container, itens soltos ── */
+.home-analises .analises-area-list {
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  gap: var(--space-sm);
+  border-radius: 0;
+}
+
+.dark .home-analises .analises-area-list {
+  box-shadow: none;
+}
+
+/* ── Cada área = card individual ── */
+.home-analises .analises-area-row {
+  background: var(--color-surface-elevated);
+  border-radius: 16px;
+  padding: 12px 14px 12px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-analises .analises-area-header {
+  margin-bottom: 0;
+}
+
+.home-analises .analises-area-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+}
+
+.home-analises .analises-area-stats {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* ── Cores das stats ── */
+.stat--high { color: var(--color-score-high); }
+.stat--mid  { color: var(--md-sys-color-primary); }
+.stat--low  { color: var(--color-score-low); }
+
+/* ── Spark bar: proporcional ao card ── */
+.home-analises .spark-bar-bg {
+  height: 5px;
+  border-radius: 3px;
+}
+
+.home-analises .spark-bar-fill {
+  border-radius: 3px;
+}
+
+/* ── Slide 1 — Geral ── */
+.geral-main-stat {
+  padding: var(--space-xl) 0 var(--space-md);
+  gap: 6px;
+  align-items: center;
+}
+
+.geral-pct {
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -3px;
+  color: var(--md-sys-color-primary);
+}
+
+.geral-detail {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* ── Highlights Forte / Revisar ── */
+.geral-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.geral-highlight-item {
+  background: var(--color-surface-elevated);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.geral-highlight-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--md-sys-color-outline);
+}
+
+.geral-highlight-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.geral-highlight-area {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  flex: 1;
+}
+
+.geral-highlight-pct {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* ── Slide 4 — dual section ── */
+.home-analises .analises-dual-section {
+  gap: var(--space-lg);
+  flex: 1;
+}
+
+.home-analises .analises-section-divider {
+  margin: 0;
+}
+
+/* ── Empty state ── */
+.analises-slide--empty {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+/* ── Slide 5 — Progresso ── */
+.home-analises .progress-chart-wrap {
+  flex: 1;
+  padding-top: var(--space-xs);
+}
+
+.home-analises .progress-chart-footer {
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-divider-subtle);
+}
+
+.progress-latest {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.progress-trend {
+  font-size: 13px;
+  font-weight: 600;
+}

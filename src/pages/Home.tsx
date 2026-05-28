@@ -1,10 +1,14 @@
 import { useRef, useState, useEffect } from 'react'
-import { useAuth } from '../hooks/useAuth'
 import { useResults } from '../hooks/useResults'
 import type { Area } from '../types'
 
 const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
 const SLIDES = ['Geral', 'Desempenho', 'Calibração', 'Análises', 'Progresso'] as const
+const DAY_LABELS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
+
+function pctColorClass(pct: number) {
+  return pct >= 80 ? 'stat--high' : pct >= 60 ? 'stat--mid' : 'stat--low'
+}
 
 function SparkBar({ pct, invert }: { pct: number; invert?: boolean }) {
   const colorPct = invert ? 100 - pct : pct
@@ -16,10 +20,22 @@ function SparkBar({ pct, invert }: { pct: number; invert?: boolean }) {
   )
 }
 
+function smoothBezier(pts: [number, number][]): string {
+  if (pts.length < 2) return pts.length === 1 ? `M ${pts[0][0]},${pts[0][1]}` : ''
+  const parts = [`M ${pts[0][0]},${pts[0][1]}`]
+  for (let i = 1; i < pts.length; i++) {
+    const [x0, y0] = pts[i - 1]
+    const [x1, y1] = pts[i]
+    const cx = (x1 - x0) / 2.8
+    parts.push(`C ${x0 + cx},${y0} ${x1 - cx},${y1} ${x1},${y1}`)
+  }
+  return parts.join(' ')
+}
+
 function ProgressChart({ scores }: { scores: Array<{ score: number; total: number; date: Date }> }) {
   if (scores.length < 2) {
     return (
-      <div className="progress-chart-empty">
+      <div className="prog-empty">
         <p>Realize mais simulados para ver o progresso.</p>
       </div>
     )
@@ -32,79 +48,76 @@ function ProgressChart({ scores }: { scores: Array<{ score: number; total: numbe
   const now = Date.now()
   const sevenDaysAgo = now - 7 * 86400000
   const recent = chronological.filter(s => s.date.getTime() >= sevenDaysAgo)
-  const older = chronological.filter(s => s.date.getTime() < sevenDaysAgo)
-
+  const older  = chronological.filter(s => s.date.getTime() < sevenDaysAgo)
   let tendencia: number | null = null
   if (recent.length > 0 && older.length > 0) {
-    const avgRecent = Math.round(recent.reduce((acc, r) => acc + Math.round((r.score / r.total) * 100), 0) / recent.length)
-    const avgOlder = Math.round(older.reduce((acc, r) => acc + Math.round((r.score / r.total) * 100), 0) / older.length)
-    tendencia = avgRecent - avgOlder
+    const avg = (arr: typeof recent) =>
+      Math.round(arr.reduce((a, r) => a + Math.round((r.score / r.total) * 100), 0) / arr.length)
+    tendencia = avg(recent) - avg(older)
   }
 
-  const W = 280, H = 120
-  const PAD = { top: 10, right: 16, bottom: 24, left: 36 }
+  const W = 300, H = 130
+  const PAD = { top: 28, right: 14, bottom: 22, left: 14 }
   const chartW = W - PAD.left - PAD.right
   const chartH = H - PAD.top - PAD.bottom
 
   const toX = (i: number) => PAD.left + (pcts.length > 1 ? (i / (pcts.length - 1)) * chartW : chartW / 2)
-  const toY = (v: number) => PAD.top + chartH - (v / 100) * chartH
+  const toY = (v: number) => PAD.top + chartH - ((v - 30) / 70) * chartH // escala 30-100
 
-  const points = pcts.map((p, i) => `${toX(i)},${toY(p)}`).join(' ')
-  const gridLines = [40, 60, 80, 100]
+  const pts: [number, number][] = pcts.map((p, i) => [toX(i), toY(Math.max(30, Math.min(100, p)))])
+  const linePath = smoothBezier(pts)
+  const areaPath = pts.length >= 2
+    ? `${linePath} L ${pts[pts.length - 1][0]},${PAD.top + chartH} L ${pts[0][0]},${PAD.top + chartH} Z`
+    : ''
+  const refY = toY(70)
 
   return (
-    <div className="progress-chart-wrap">
-      <svg viewBox={`0 0 ${W} ${H}`} className="progress-chart-svg">
-        {gridLines.map(v => (
-          <g key={v}>
-            <line
-              x1={PAD.left} y1={toY(v)}
-              x2={W - PAD.right} y2={toY(v)}
-              stroke="var(--color-divider-subtle)" strokeWidth="1"
-            />
-            <text
-              x={PAD.left - 4} y={toY(v) + 4}
-              textAnchor="end" fontSize="9"
-              fill="var(--md-sys-color-on-surface-variant)"
-            >
-              {v}%
-            </text>
+    <div className="prog-wrap">
+      <svg viewBox={`0 0 ${W} ${H}`} className="prog-svg">
+        <defs>
+          <linearGradient id="progFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stopColor="var(--md-sys-color-primary)" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="var(--md-sys-color-primary)" stopOpacity="0"    />
+          </linearGradient>
+        </defs>
+
+        {/* linha de referência 70% */}
+        <line x1={PAD.left} y1={refY} x2={W - PAD.right} y2={refY}
+          stroke="var(--color-divider)" strokeWidth="1" strokeDasharray="3 4" />
+        <text x={PAD.left + 2} y={refY - 4} fontSize="8"
+          fill="var(--md-sys-color-outline)">70%</text>
+
+        {/* área preenchida */}
+        <path d={areaPath} fill="url(#progFill)" />
+
+        {/* linha suave */}
+        <path d={linePath} fill="none" stroke="var(--md-sys-color-primary)"
+          strokeWidth="2.5" strokeLinecap="round" />
+
+        {/* pontos + labels */}
+        {pts.map(([x, y], i) => (
+          <g key={i}>
+            <text x={x} y={y - 9} textAnchor="middle" fontSize="9" fontWeight="700"
+              fill="var(--md-sys-color-primary)">{pcts[i]}%</text>
+            <circle cx={x} cy={y} r="5"
+              fill="var(--color-card-bg)" stroke="var(--md-sys-color-primary)" strokeWidth="2.5" />
+            <text x={x} y={H - 4} textAnchor="middle" fontSize="8"
+              fill="var(--md-sys-color-on-surface-variant)">S{i + 1}</text>
           </g>
-        ))}
-        <polyline
-          points={points}
-          fill="none"
-          stroke="var(--md-sys-color-primary)"
-          strokeWidth="2"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        />
-        {pcts.map((p, i) => (
-          <circle
-            key={i} cx={toX(i)} cy={toY(p)} r="4"
-            fill="var(--md-sys-color-primary)"
-            stroke="var(--color-card-bg)" strokeWidth="2"
-          />
-        ))}
-        {pcts.map((_, i) => (
-          <text
-            key={i} x={toX(i)} y={H - 4}
-            textAnchor="middle" fontSize="9"
-            fill="var(--md-sys-color-on-surface-variant)"
-          >
-            S{i + 1}
-          </text>
         ))}
       </svg>
 
-      <div className="progress-chart-footer">
-        <span className="progress-latest">
-          Último simulado: <strong>{latest}%</strong>
-        </span>
+      {/* footer stat */}
+      <div className="prog-footer">
+        <div className="prog-stat">
+          <span className="prog-stat-label">Último simulado</span>
+          <span className="prog-stat-value">{latest}%</span>
+        </div>
         {tendencia !== null && (
-          <span className={`progress-trend ${tendencia >= 0 ? 'trend--up' : 'trend--down'}`}>
-            Tendência: {tendencia >= 0 ? '+' : ''}{tendencia}% nos últimos 7 dias
-          </span>
+          <div className={`prog-trend ${tendencia >= 0 ? 'prog-trend--up' : 'prog-trend--down'}`}>
+            <span className="prog-trend-num">{tendencia >= 0 ? '+' : ''}{tendencia}%</span>
+            <span className="prog-trend-label">últimos 7 dias</span>
+          </div>
         )}
       </div>
     </div>
@@ -112,7 +125,6 @@ function ProgressChart({ scores }: { scores: Array<{ score: number; total: numbe
 }
 
 export function Home() {
-  const { user } = useAuth()
   const { analytics, loading: analyticsLoading } = useResults()
 
   const carouselRef = useRef<HTMLDivElement>(null)
@@ -136,74 +148,99 @@ export function Home() {
     setActiveSlide(idx)
   }
 
-  const firstName = user?.displayName?.split(' ')[0]
-  const freq = analytics?.weeklyFrequency ?? 0
-  const freqClass = freq >= 80 ? 'high' : freq >= 50 ? 'mid' : 'low'
   const totalAnswered = AREAS.reduce((sum, area) => sum + (analytics?.byArea[area]?.total ?? 0), 0)
+
+  // últimos 7 dias em ordem cronológica (mais antigo → hoje)
+  const today = new Date().toISOString().split('T')[0]
+  const last7 = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (6 - i))
+    return d.toISOString().split('T')[0]
+  })
+  const activeDays = analytics?.activeDaysThisWeek ?? []
 
   return (
     <div className="home-container home-container--dashboard">
-      {/* Header: greeting + freq bar inline */}
+
+      {/* ── Header: quadradinhos de dias da semana ── */}
       <header className="home-header">
-        <div className="home-header-row">
-          <h1 className="home-greeting">Olá, {firstName}! 👋</h1>
-          <div className="home-freq-inline">
-            <div className="home-freq-track">
-              <div className={`home-freq-fill ${freqClass}`} style={{ width: `${freq}%` }} />
-            </div>
-            <div className="home-freq-meta">
-              <span>{freq}% da semana</span>
-              <span>🔥 {analytics?.streak ?? 0} dias</span>
-            </div>
-          </div>
+        <div className="home-week-grid">
+          {last7.map(dateStr => {
+            const dow = new Date(dateStr + 'T12:00:00').getDay()
+            const isActive = activeDays.includes(dateStr)
+            const isToday = dateStr === today
+            return (
+              <div
+                key={dateStr}
+                className={[
+                  'home-day-sq',
+                  isActive ? 'home-day-sq--active' : '',
+                  isToday  ? 'home-day-sq--today'  : '',
+                ].join(' ')}
+              >
+                <span className="home-day-label">{DAY_LABELS[dow]}</span>
+              </div>
+            )
+          })}
         </div>
+        <p className="home-streak-label">
+          🔥 {analytics?.streak ?? 0} dias seguidos
+        </p>
       </header>
 
-      {/* Carrossel de Análises */}
+      {/* ── Carrossel de Análises ── */}
       <section className="home-analises">
-        <div className="home-analises-header">
-          <h2 className="home-analises-title">ANÁLISES</h2>
-          <div className="home-analises-dots">
-            {SLIDES.map((_, i) => (
-              <button
-                key={i}
-                className={`analises-dot ${activeSlide === i ? 'analises-dot--active' : ''}`}
-                onClick={() => goToSlide(i)}
-              />
-            ))}
-          </div>
+        <div className="home-analises-dots-row">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              className={`analises-dot ${activeSlide === i ? 'analises-dot--active' : ''}`}
+              onClick={() => goToSlide(i)}
+            />
+          ))}
         </div>
 
         <div className="analises-carousel-wrap">
           <div className="analises-carousel" ref={carouselRef}>
             {!analytics ? (
               <div className="analises-slide analises-slide--empty">
-                {analyticsLoading ? (
-                  <p>Carregando análises...</p>
-                ) : (
-                  <p>Faça seu primeiro simulado para ver suas análises aqui!</p>
-                )}
+                {analyticsLoading
+                  ? <p>Carregando análises...</p>
+                  : <p>Faça seu primeiro simulado para ver suas análises aqui!</p>
+                }
               </div>
             ) : (
               <>
                 {/* Slide 1 — Geral */}
                 <div className="analises-slide">
                   <h3 className="analises-section-title">Geral</h3>
+
                   <div className="geral-main-stat">
                     <span className="geral-pct">{analytics.overallAccuracy}%</span>
                     <span className="geral-detail">acertos · {totalAnswered} questões</span>
                   </div>
+
                   <div className="geral-highlights">
                     {analytics.bestArea && (
                       <div className="geral-highlight-item geral-highlight--forte">
-                        <span className="geral-highlight-label">Forte:</span>
-                        <span className="geral-highlight-area">{analytics.bestArea}</span>
+                        <span className="geral-highlight-label">Forte</span>
+                        <div className="geral-highlight-body">
+                          <span className="geral-highlight-area">{analytics.bestArea}</span>
+                          <span className="geral-highlight-pct stat--high">
+                            {analytics.byArea[analytics.bestArea]?.pct ?? 0}%
+                          </span>
+                        </div>
                       </div>
                     )}
                     {analytics.worstArea && (
                       <div className="geral-highlight-item geral-highlight--fraco">
-                        <span className="geral-highlight-label">Fraco:</span>
-                        <span className="geral-highlight-area">{analytics.worstArea}</span>
+                        <span className="geral-highlight-label">Revisar</span>
+                        <div className="geral-highlight-body">
+                          <span className="geral-highlight-area">{analytics.worstArea}</span>
+                          <span className="geral-highlight-pct stat--low">
+                            {analytics.byArea[analytics.worstArea]?.pct ?? 0}%
+                          </span>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -222,7 +259,7 @@ export function Home() {
                           <div key={area} className="analises-area-row">
                             <div className="analises-area-header">
                               <span className="analises-area-name">{area}</span>
-                              <span className="analises-area-stats">{s.pct}%</span>
+                              <span className={`analises-area-stats ${pctColorClass(s.pct)}`}>{s.pct}%</span>
                             </div>
                             <SparkBar pct={s.pct} />
                           </div>
@@ -236,23 +273,23 @@ export function Home() {
                   <h3 className="analises-section-title">Calibração</h3>
                   <div className="analises-area-list">
                     {[
-                      { label: 'Devia saber e acertei', pct: analytics.confidenceStats.certainAccuracy },
-                      { label: 'Devia saber e errei',   pct: 100 - analytics.confidenceStats.certainAccuracy },
-                      { label: 'Não sei e acertei',        pct: analytics.confidenceStats.unsureAccuracy },
-                      { label: 'Não sei e errei',          pct: 100 - analytics.confidenceStats.unsureAccuracy },
-                    ].map(({ label, pct }) => (
+                      { label: 'Devia saber e acertei', pct: analytics.confidenceStats.certainAccuracy,       invert: false },
+                      { label: 'Devia saber e errei',   pct: 100 - analytics.confidenceStats.certainAccuracy, invert: true  },
+                      { label: 'Não sei e acertei',     pct: analytics.confidenceStats.unsureAccuracy,        invert: false },
+                      { label: 'Não sei e errei',       pct: 100 - analytics.confidenceStats.unsureAccuracy,  invert: true  },
+                    ].map(({ label, pct, invert }) => (
                       <div key={label} className="analises-area-row">
                         <div className="analises-area-header">
                           <span className="analises-area-name">{label}</span>
-                          <span className="analises-area-stats">{pct}%</span>
+                          <span className={`analises-area-stats ${pctColorClass(invert ? 100 - pct : pct)}`}>{pct}%</span>
                         </div>
-                        <SparkBar pct={pct} />
+                        <SparkBar pct={pct} invert={invert} />
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Slide 4 — Análises: Precisa revisar + Estudo completo */}
+                {/* Slide 4 — Análises */}
                 <div className="analises-slide">
                   <div className="analises-dual-section">
                     <div>
@@ -267,7 +304,7 @@ export function Home() {
                               <div key={area} className="analises-area-row">
                                 <div className="analises-area-header">
                                   <span className="analises-area-name">{area}</span>
-                                  <span className="analises-area-stats">{s.pct}%</span>
+                                  <span className={`analises-area-stats ${pctColorClass(s.pct)}`}>{s.pct}%</span>
                                 </div>
                                 <SparkBar pct={s.pct} />
                               </div>
@@ -285,15 +322,18 @@ export function Home() {
                       <h3 className="analises-section-title">Estudo completo</h3>
                       <div className="analises-area-list">
                         {analytics.canRelax.length > 0 ? (
-                          analytics.canRelax.map(area => (
-                            <div key={area} className="analises-area-row">
-                              <div className="analises-area-header">
-                                <span className="analises-area-name">{area}</span>
-                                <span className="analises-area-stats">{analytics.byArea[area]?.pct ?? 0}%</span>
+                          analytics.canRelax.map(area => {
+                            const pct = analytics.byArea[area]?.pct ?? 0
+                            return (
+                              <div key={area} className="analises-area-row">
+                                <div className="analises-area-header">
+                                  <span className="analises-area-name">{area}</span>
+                                  <span className={`analises-area-stats ${pctColorClass(pct)}`}>{pct}%</span>
+                                </div>
+                                <SparkBar pct={pct} />
                               </div>
-                              <SparkBar pct={analytics.byArea[area]?.pct ?? 0} />
-                            </div>
-                          ))
+                            )
+                          })
                         ) : (
                           <p className="analises-empty-msg">Continue praticando!</p>
                         )}
