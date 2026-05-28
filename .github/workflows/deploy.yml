@@ -180,6 +180,32 @@ jobs:
           name: dist
           path: dist
 
+  build_functions:
+    needs: version_bump
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install functions dependencies
+        run: npm install
+        working-directory: functions
+
+      - name: Build functions
+        run: npm run build
+        working-directory: functions
+
+      - name: Upload functions artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: functions-lib
+          path: functions/lib
+
   # e2e:
   #   needs: version_bump
   #   runs-on: ubuntu-latest
@@ -225,19 +251,34 @@ jobs:
       - typecheck
       - test
       - build
+      - build_functions
       # - e2e
 
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download build artifacts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Download hosting artifacts
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist
+
+      - name: Download functions artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: functions-lib
+          path: functions/lib
+
+      - name: Install functions runtime dependencies
+        run: npm install --omit=dev
+        working-directory: functions
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
@@ -246,3 +287,12 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           channelId: live
           projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+
+      - name: Deploy Cloud Functions
+        run: |
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/sa.json
+          npx firebase-tools deploy --only functions \
+            --project ${{ secrets.FIREBASE_PROJECT_ID }} \
+            --non-interactive
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/sa.json
