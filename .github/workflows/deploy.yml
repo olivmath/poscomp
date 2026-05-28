@@ -293,6 +293,7 @@ jobs:
           echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/sa.json
           npx firebase-tools deploy --only functions \
             --project ${{ secrets.FIREBASE_PROJECT_ID }} \
-            --non-interactive
+            --non-interactive \
+            --force
         env:
           GOOGLE_APPLICATION_CREDENTIALS: /tmp/sa.json
