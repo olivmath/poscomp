@@ -703,11 +703,22 @@ md-filter-chip {
   transition: color 0.18s ease;
 }
 
+.config-title {
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  line-height: var(--md-sys-typescale-title-large-line-height);
+  color: var(--md-sys-color-on-surface);
+  text-align: center;
+  margin: 0;
+}
+
 .config-label {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--md-sys-typescale-label-large-size);
+  font-weight: var(--md-sys-typescale-label-large-weight);
+  line-height: var(--md-sys-typescale-label-large-line-height);
   color: var(--md-sys-color-on-surface-variant);
   text-align: center;
+  margin: 0;
 }
 
 .segmented-buttons {
@@ -2629,6 +2640,13 @@ md-outlined-button.btn-full {
   padding: var(--space-lg) var(--space-md) 100px;
   overflow-y: auto;
   min-height: calc(100dvh - 90px);
+}
+
+.home-cta {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
 }
 
 .home-header {

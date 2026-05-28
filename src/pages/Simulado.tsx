@@ -242,7 +242,7 @@ function ConfigScreen({
   return (
     <div className="simulado-container" data-testid="simulado-config">
       <div className="simulado-card">
-        <h2 className="simulado-idle-title">Configurar Simulado</h2>
+        <h2 className="config-title">Configurar Simulado</h2>
 
         <div className="config-section config-section--full">
           <p className="config-label">Temas</p>
