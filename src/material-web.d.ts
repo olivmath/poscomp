@@ -20,6 +20,12 @@ declare namespace React {
         value?: number
         max?: number
       }, HTMLElement>
+      'md-linear-progress': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
+        indeterminate?: boolean
+        value?: number
+        max?: number
+        buffer?: number
+      }, HTMLElement>
     }
   }
 }

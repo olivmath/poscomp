@@ -23,7 +23,7 @@ interface AreaConfidenceStats {
   total: number
 }
 
-interface Analytics {
+export interface Analytics {
   totalSimulados: number
   overallAccuracy: number
   bestArea: Area | null
