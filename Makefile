@@ -4,6 +4,7 @@
         typecheck \
         test test-functions \
         validate \
+        emulators dev-local seed-local \
         deploy-hosting deploy-functions deploy
 
 # ── Install ────────────────────────────────────────────────────────────────────
@@ -40,6 +41,16 @@ test-functions:
 
 # ── Validate (full local pipeline) ────────────────────────────────────────────
 validate: install install-functions lint lint-functions typecheck test build build-functions
+
+# ── Local dev ─────────────────────────────────────────────────────────────────
+emulators: build-functions
+	firebase emulators:start --only auth,functions,firestore
+
+dev-local:
+	VITE_USE_EMULATOR=true pnpm dev
+
+seed-local:
+	FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed
 
 # ── Deploy ────────────────────────────────────────────────────────────────────
 deploy-hosting:
