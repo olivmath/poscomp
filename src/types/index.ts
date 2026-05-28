@@ -1,6 +1,6 @@
 import type { Timestamp } from 'firebase/firestore'
 
-export type Area = 'Matemática' | 'Algoritmos' | 'Lógica' | 'Banco de Dados' | 'Redes'
+export type Area = 'Matemática' | 'Fundamentos da Computação' | 'Tecnologia da Computação'
 export type Difficulty = 'fácil' | 'médio' | 'difícil'
 export type Option = 'A' | 'B' | 'C' | 'D' | 'E'
 export type Confidence = 'unsure' | 'studying' | 'should_know' | null
@@ -8,11 +8,12 @@ export type QuestionStatus = 'unvisited' | 'skipped' | 'unsure' | 'studying' | '
 
 export interface Question {
   id: string
-  text: string
-  options: Record<Option, string>
-  correctOption: Option
+  enunciado: string
+  alternativas: Record<Option, string>
+  resposta: Option | 'ANULADA'
   area: Area
-  difficulty: Difficulty
+  requer_imagem: boolean
+  comentario?: string
 }
 
 export interface AnswerRecord {
