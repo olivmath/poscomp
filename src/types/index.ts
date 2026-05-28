@@ -3,8 +3,8 @@ import type { Timestamp } from 'firebase/firestore'
 export type Area = 'Matemática' | 'Algoritmos' | 'Lógica' | 'Banco de Dados' | 'Redes'
 export type Difficulty = 'fácil' | 'médio' | 'difícil'
 export type Option = 'A' | 'B' | 'C' | 'D' | 'E'
-export type Confidence = 'unsure' | 'certain' | null
-export type QuestionStatus = 'unvisited' | 'skipped' | 'unsure' | 'certain'
+export type Confidence = 'unsure' | 'should_know' | 'certain' | null
+export type QuestionStatus = 'unvisited' | 'skipped' | 'unsure' | 'should_know' | 'certain'
 
 export interface Question {
   id: string

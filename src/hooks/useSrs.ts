@@ -60,7 +60,7 @@ export function useSrs(): UseSrsReturn {
       const writes = result.answers.map(async (answer) => {
         const existing = existingMap.get(answer.questionId)
         const needsReview =
-          !answer.correct || answer.skipped || answer.confidence === 'unsure'
+          !answer.correct || answer.skipped || answer.confidence === 'unsure' || answer.confidence === 'should_know'
 
         if (needsReview) {
           const card = existing ?? buildNewCard(answer.questionId, answer.confidence, answer.correct)

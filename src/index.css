@@ -852,6 +852,28 @@ body {
   background: rgba(21, 101, 192, 0.28);
 }
 
+/* Deveria saber — amber */
+.confidence-btn--should-know {
+  background: #FFF8E1;
+  border-color: #FFD54F;
+  color: #E65100;
+}
+
+.confidence-btn--should-know:not(:disabled):hover {
+  background: #FFECB3;
+  border-color: #FFCA28;
+}
+
+.dark .confidence-btn--should-know {
+  background: rgba(230, 81, 0, 0.18);
+  border-color: rgba(255, 213, 79, 0.4);
+  color: #FFD54F;
+}
+
+.dark .confidence-btn--should-know:not(:disabled):hover {
+  background: rgba(230, 81, 0, 0.28);
+}
+
 /* Tenho certeza — green */
 .confidence-btn--certain {
   background: #E8F5E9;

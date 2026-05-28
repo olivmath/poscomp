@@ -13,6 +13,7 @@ interface AreaStats {
 interface ConfidenceStats {
   certainAccuracy: number
   unsureAccuracy: number
+  shouldKnowAccuracy: number
   skipRate: number
 }
 
@@ -160,8 +161,9 @@ export function useResults(): UseResultsReturn {
         const allAnswers = docs.flatMap((r) => r.answers ?? [])
         const totalAnswersCount = allAnswers.length
 
-        const certainAnswers = allAnswers.filter((a) => a.confidence === 'certain' && !a.skipped)
-        const unsureAnswers  = allAnswers.filter((a) => a.confidence === 'unsure'  && !a.skipped)
+        const certainAnswers    = allAnswers.filter((a) => a.confidence === 'certain'    && !a.skipped)
+        const unsureAnswers     = allAnswers.filter((a) => a.confidence === 'unsure'     && !a.skipped)
+        const shouldKnowAnswers = allAnswers.filter((a) => a.confidence === 'should_know' && !a.skipped)
         const skippedAnswers = allAnswers.filter((a) => a.skipped)
 
         const certainAccuracy = certainAnswers.length > 0
@@ -169,6 +171,9 @@ export function useResults(): UseResultsReturn {
           : 0
         const unsureAccuracy = unsureAnswers.length > 0
           ? Math.round((unsureAnswers.filter((a) => a.correct).length / unsureAnswers.length) * 100)
+          : 0
+        const shouldKnowAccuracy = shouldKnowAnswers.length > 0
+          ? Math.round((shouldKnowAnswers.filter((a) => a.correct).length / shouldKnowAnswers.length) * 100)
           : 0
         const skipRate = totalAnswersCount > 0
           ? Math.round((skippedAnswers.length / totalAnswersCount) * 100)
@@ -242,7 +247,7 @@ export function useResults(): UseResultsReturn {
           worstArea,
           byArea,
           recentScores,
-          confidenceStats: { certainAccuracy, unsureAccuracy, skipRate },
+          confidenceStats: { certainAccuracy, unsureAccuracy, shouldKnowAccuracy, skipRate },
           areaConfidence,
           reviewPriority,
           canRelax,

@@ -296,6 +296,23 @@ describe('useSimulado', () => {
     expect(result.current.answers[0].skipped).toBe(false)
   })
 
+  it('next("should_know") registra confidence=should_know', async () => {
+    const { result } = renderHook(() => useSimulado())
+    await waitFor(() => expect(result.current.state).toBe('idle'))
+
+    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
+
+    await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
+    await waitFor(() => expect(result.current.state).toBe('running'))
+
+    act(() => { result.current.select('B') })
+    act(() => { result.current.next('should_know') })
+
+    expect(result.current.answers[0].confidence).toBe('should_know')
+    expect(result.current.answers[0].skipped).toBe(false)
+    expect(result.current.questionStatuses[0]).toBe('should_know')
+  })
+
   it('questionStatuses reflete o estado de cada questão', async () => {
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))

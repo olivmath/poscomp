@@ -92,6 +92,7 @@ describe('gradeFromResult', () => {
   it('resposta errada → grade 1', () => {
     expect(gradeFromResult(false, 'certain')).toBe(1)
     expect(gradeFromResult(false, 'unsure')).toBe(1)
+    expect(gradeFromResult(false, 'should_know')).toBe(1)
     expect(gradeFromResult(false, null)).toBe(1)
   })
 
@@ -102,11 +103,12 @@ describe('gradeFromResult', () => {
     expect(gradeFromResult(true, 'certain')).toBe(5)
   })
 
-  // GIVEN a correct answer with confidence=unsure or null
+  // GIVEN a correct answer with confidence=unsure, should_know or null
   // WHEN  gradeFromResult is called
   // THEN  returns grade 3 (pass with hesitation)
-  it('correto + unsure/null → grade 3', () => {
+  it('correto + unsure/should_know/null → grade 3', () => {
     expect(gradeFromResult(true, 'unsure')).toBe(3)
+    expect(gradeFromResult(true, 'should_know')).toBe(3)
     expect(gradeFromResult(true, null)).toBe(3)
   })
 })
