@@ -7,7 +7,7 @@ import {
 } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
-import { useSrs } from '../hooks/useSrs'
+import { useSrsContext } from '../contexts/SrsContext'
 import type {
   Question,
   Option,
@@ -54,7 +54,7 @@ interface UseSimuladoReturn {
 
 export function useSimulado(): UseSimuladoReturn {
   const { user } = useAuth()
-  const { upsertFromResult } = useSrs()
+  const { upsertFromResult } = useSrsContext()
 
   const [state, setState] = useState<SimuladoState>('idle')
   const [questions, setQuestions] = useState<Question[]>([])

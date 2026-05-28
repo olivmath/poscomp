@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
+import { SrsProvider } from './contexts/SrsContext'
 import { ImmersiveModeProvider } from './contexts/ImmersiveModeContext'
 import { ProtectedLayout } from './components/ProtectedLayout'
 import { Login } from './pages/Login'
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
+        <SrsProvider>
         <ImmersiveModeProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -27,6 +29,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="*" element={<ProtectedLayout><Navigate to="/" replace /></ProtectedLayout>} />
         </Routes>
         </ImmersiveModeProvider>
+        </SrsProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>,

@@ -3,7 +3,7 @@ import { collection, getDocs, query, where, documentId } from 'firebase/firestor
 import { db } from '../firebase'
 import { isAuthBypassed } from '../utils/bypass'
 import { gradeFromResult } from '../utils/sm2'
-import { useSrs } from './useSrs'
+import { useSrsContext } from '../contexts/SrsContext'
 import type { SrsCard, Question, Grade } from '../types'
 
 // Global injetado via page.addInitScript nos testes E2E
@@ -24,7 +24,7 @@ export interface ExtendedSrsCard extends SrsCard {
 export type RevisaoState = 'loading' | 'empty' | 'session' | 'finished'
 
 export function useRevisao() {
-  const { pendingCards, updateCard, loading: srsLoading } = useSrs()
+  const { pendingCards, updateCard, loading: srsLoading } = useSrsContext()
   const [questions, setQuestions] = useState<Record<string, Question>>({})
   const [questionsLoading, setQuestionsLoading] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
