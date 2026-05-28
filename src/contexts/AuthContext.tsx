@@ -38,12 +38,13 @@ const MOCK_USER: User = {
 } as unknown as User
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const bypass = typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true
+  const bypass = typeof window !== 'undefined' && 
+    (window.__AUTH_BYPASS__ === true || import.meta.env.VITE_AUTH_BYPASS === 'true')
   const [user, setUser] = useState<User | null>(bypass ? MOCK_USER : null)
   const [loading, setLoading] = useState(!bypass)
 
   useEffect(() => {
-    if (window.__AUTH_BYPASS__) return
+    if (bypass) return
 
     getRedirectResult(auth).catch(console.error)
 

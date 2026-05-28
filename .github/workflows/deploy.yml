@@ -181,7 +181,7 @@ jobs:
           path: dist
 
   e2e:
-    needs: build
+    needs: version_bump
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -200,11 +200,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
+      - name: Build (test mode)
+        run: pnpm build --mode test
 
       - name: Install Playwright Chromium
         run: pnpm exec playwright install chromium --with-deps

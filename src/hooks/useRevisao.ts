@@ -7,6 +7,7 @@ import type { SrsCard, Question, Grade } from '../types'
 // Global injetado via page.addInitScript nos testes E2E
 declare global {
   interface Window {
+    __AUTH_BYPASS__?: boolean
     __QUESTIONS_MOCK__?: Record<string, Question>
   }
 }
@@ -30,6 +31,11 @@ export function useRevisao() {
   const [sessionResults, setSessionResults] = useState<{
     P1: number; P2: number; P3: number
   }>({ P1: 0, P2: 0, P3: 0 })
+
+  const isBypass = useMemo(() => {
+    return import.meta.env.VITE_AUTH_BYPASS === 'true' || 
+           (typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true)
+  }, [])
 
   // ── Compute Priority ─────────────────────────────────────────────────────
   const sortedCards = useMemo(() => {
@@ -57,7 +63,7 @@ export function useRevisao() {
       if (pendingCards.length === 0) return
 
       // Bypass de teste: usa questions injetadas via window.__QUESTIONS_MOCK__
-      if (import.meta.env.VITE_AUTH_BYPASS === 'true' && window.__QUESTIONS_MOCK__) {
+      if (isBypass && window.__QUESTIONS_MOCK__) {
         setQuestions(window.__QUESTIONS_MOCK__)
         return
       }
@@ -87,7 +93,7 @@ export function useRevisao() {
     }
 
     fetchQuestions()
-  }, [pendingCards, questions])
+  }, [pendingCards, questions, isBypass])
 
   // ── Actions ──────────────────────────────────────────────────────────────
   const reveal = useCallback(() => setShowAnswer(true), [])
