@@ -41,11 +41,11 @@ const mockUser = { uid: 'user-123' }
 
 const FAKE_QUESTIONS: Record<string, unknown>[] = Array.from({ length: 20 }, (_, i) => ({
   id: `q-${i}`,
-  text: `Questão ${i + 1}`,
-  options: { A: 'Op A', B: 'Op B', C: 'Op C', D: 'Op D', E: 'Op E' },
-  correctOption: 'A',
-  area: i < 10 ? 'Matemática' : 'Algoritmos',
-  difficulty: 'fácil',
+  enunciado: `Questão ${i + 1}`,
+  alternativas: { A: 'Op A', B: 'Op B', C: 'Op C', D: 'Op D', E: 'Op E' },
+  resposta: 'A',
+  area: i < 10 ? 'Matemática' : 'Fundamentos da Computação',
+  requer_imagem: false,
 }))
 
 function makeSnap(docs: Record<string, unknown>[]) {

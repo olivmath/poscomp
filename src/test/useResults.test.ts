@@ -72,11 +72,9 @@ describe('useResults', () => {
         timeSpentSeconds: 300,
         completedAt: { toDate: () => new Date('2024-01-15') },
         areaBreakdown: {
-          Matemática:   { correct: 2, total: 2 },
-          Algoritmos:   { correct: 2, total: 2 },
-          Lógica:       { correct: 1, total: 2 },
-          'Banco de Dados': { correct: 2, total: 2 },
-          Redes:        { correct: 1, total: 2 },
+          Matemática:                    { correct: 4, total: 4 },
+          'Fundamentos da Computação':   { correct: 3, total: 4 },
+          'Tecnologia da Computação':    { correct: 1, total: 2 },
         },
       },
     ]) as never)
