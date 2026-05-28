@@ -17,7 +17,7 @@ export function sm2Update(card: SrsCard, grade: Grade): Sm2Result {
       easeFactor: ef,
       interval: 1,
       repetitions: 0,
-      dueDate: Timestamp.fromDate(addDays(1)),
+      dueDate: Timestamp.fromDate(addDays(0)),
       lastConfidence: card.lastConfidence,
     }
   }

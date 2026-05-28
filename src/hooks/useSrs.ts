@@ -59,7 +59,8 @@ export function useSrs(): UseSrsReturn {
 
       const writes = result.answers.map(async (answer) => {
         const existing = existingMap.get(answer.questionId)
-        if (!answer.correct) {
+        const needsReview = !answer.correct || answer.confidence !== null
+        if (needsReview) {
           const confidence = answer.confidence ?? 'unsure'
           if (existing) {
             const grade = gradeFromResult(answer.correct)

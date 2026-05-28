@@ -156,11 +156,15 @@ export function useSimulado(): UseSimuladoReturn {
         completedAt: { seconds: Math.floor(Date.now() / 1000), nanoseconds: 0 } as SimuladoResult['completedAt'],
       }
 
+      // SM-2: persist SRS cards before transitioning to finished
+      try {
+        await upsertFromResult(fullResult)
+      } catch (err) {
+        console.error('SRS upsert failed:', err)
+      }
       setResult(fullResult)
       setLastResult(fullResult)
       setState('finished')
-      // SM-2: persist SRS cards after simulado finishes
-      upsertFromResult(fullResult).catch(() => {/* silently ignore SRS errors */})
     },
     [user, questions, upsertFromResult]
   )
