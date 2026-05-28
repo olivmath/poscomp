@@ -1,10 +1,9 @@
 import { useState, useCallback, useMemo, useEffect } from 'react'
-import { collection, getDocs, query, where, documentId } from 'firebase/firestore'
-import { db } from '../firebase'
 import { isAuthBypassed } from '../utils/bypass'
-import { gradeFromResult } from '../utils/sm2'
-import { useSrsContext } from '../contexts/SrsContext'
-import type { SrsCard, Question, Grade } from '../types'
+import { useAuth } from './useAuth'
+import { callGetPendingCards, callReviewCard } from './useFunctions'
+import type { PendingCardOutput } from './useFunctions'
+import type { Question } from '../types'
 
 // Global injetado via page.addInitScript nos testes E2E
 declare global {
@@ -15,18 +14,18 @@ declare global {
 }
 
 export type Priority = 'P1' | 'P2' | 'P3'
-
-export interface ExtendedSrsCard extends SrsCard {
-  priority: Priority
-  question?: Question
-}
-
 export type RevisaoState = 'loading' | 'empty' | 'session' | 'finished'
 
+export interface AdaptedCard {
+  questionId: string
+  priority: Priority
+  question: Question
+}
+
 export function useRevisao() {
-  const { pendingCards, updateCard, loading: srsLoading } = useSrsContext()
-  const [questions, setQuestions] = useState<Record<string, Question>>({})
-  const [questionsLoading, setQuestionsLoading] = useState(false)
+  const { user } = useAuth()
+  const [cards, setCards] = useState<PendingCardOutput[]>([])
+  const [loading, setLoading] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [showAnswer, setShowAnswer] = useState(false)
   const [sessionCompleted, setSessionCompleted] = useState(false)
@@ -34,66 +33,35 @@ export function useRevisao() {
     P1: number; P2: number; P3: number
   }>({ P1: 0, P2: 0, P3: 0 })
 
-
-  // ── Compute Priority ─────────────────────────────────────────────────────
-  const sortedCards = useMemo(() => {
-    const cardsWithPriority: ExtendedSrsCard[] = pendingCards.map(card => {
-      let priority: Priority
-      if (card.lastConfidence === 'should_know') priority = 'P1'
-      else if (card.lastConfidence === 'studying') priority = 'P2'
-      else priority = 'P3'
-
-      return { ...card, priority, question: questions[card.questionId] }
-    })
-
-    const priorityOrder: Record<Priority, number> = { P1: 1, P2: 2, P3: 3 }
-    return cardsWithPriority.sort((a, b) => {
-      if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
-        return priorityOrder[a.priority] - priorityOrder[b.priority]
-      }
-      return a.dueDate.seconds - b.dueDate.seconds
-    })
-  }, [pendingCards, questions])
-
-  // ── Fetch Questions ──────────────────────────────────────────────────────
+  // ── Load cards on mount ──────────────────────────────────────────────────
   useEffect(() => {
-    async function fetchQuestions() {
-      if (pendingCards.length === 0) return
+    if (!user) return
 
-      // Bypass de teste: usa questions injetadas via window.__QUESTIONS_MOCK__
-      if (isAuthBypassed() && window.__QUESTIONS_MOCK__) {
-        setQuestions(window.__QUESTIONS_MOCK__)
-        return
-      }
+    // Bypass de teste: simula cards vazios sem chamar o backend
+    if (isAuthBypassed()) {
+      setCards([])
+      setLoading(false)
+      return
+    }
 
-      const missingIds = pendingCards
-        .map(c => c.questionId)
-        .filter(id => !questions[id])
-
-      if (missingIds.length === 0) return
-
-      setQuestionsLoading(true)
+    async function fetchCards() {
+      setLoading(true)
       try {
-        // Firestore 'in' query supports max 30 IDs. For more, we'd need chunks.
-        // But SRS sessions are usually smaller or can be loaded in batches.
-        const q = query(collection(db, 'questions'), where(documentId(), 'in', missingIds.slice(0, 30)))
-        const snap = await getDocs(q)
-        if (!snap.empty) {
-          const newQuestions: Record<string, Question> = { ...questions }
-          snap.forEach(doc => {
-            newQuestions[doc.id] = { id: doc.id, ...doc.data() } as Question
-          })
-          setQuestions(newQuestions)
-        }
+        const { data } = await callGetPendingCards({})
+        setCards(data.cards)
       } catch (err) {
-        console.error('Error fetching SRS questions:', err)
+        console.error('Error fetching pending cards:', err)
+        setCards([])
       } finally {
-        setQuestionsLoading(false)
+        setLoading(false)
       }
     }
 
-    fetchQuestions()
-  }, [pendingCards, questions])
+    fetchCards()
+  }, [user])
+
+  // ── sortedCards: backend already sorts P1→P2→P3, dueDate ASC ────────────
+  const sortedCards = useMemo(() => cards, [cards])
 
   // ── Actions ──────────────────────────────────────────────────────────────
   const reveal = useCallback(() => setShowAnswer(true), [])
@@ -102,15 +70,12 @@ export function useRevisao() {
     const currentCard = sortedCards[currentIndex]
     if (!currentCard) return
 
-    // Update stats for the finish screen
     setSessionResults(prev => ({
       ...prev,
-      [currentCard.priority]: prev[currentCard.priority] + 1
+      [currentCard.priority]: prev[currentCard.priority] + 1,
     }))
 
-    const grade: Grade = gradeFromResult(studied)
-    await updateCard(currentCard.questionId, grade, studied)
-    
+    await callReviewCard({ questionId: currentCard.questionId, studied })
 
     if (currentIndex < sortedCards.length - 1) {
       setCurrentIndex(i => i + 1)
@@ -118,7 +83,7 @@ export function useRevisao() {
     } else {
       setSessionCompleted(true)
     }
-  }, [currentIndex, sortedCards, updateCard])
+  }, [currentIndex, sortedCards])
 
   const reset = useCallback(() => {
     setCurrentIndex(0)
@@ -129,17 +94,19 @@ export function useRevisao() {
 
   // ── Derived State ────────────────────────────────────────────────────────
   const state: RevisaoState = useMemo(() => {
-    if (srsLoading || (pendingCards.length > 0 && questionsLoading && Object.keys(questions).length === 0)) {
-      return 'loading'
-    }
+    if (loading) return 'loading'
     if (sessionCompleted) return 'finished'
-    if (pendingCards.length === 0) return 'empty'
+    if (cards.length === 0) return 'empty'
     return 'session'
-  }, [srsLoading, questionsLoading, pendingCards.length, questions, sessionCompleted])
+  }, [loading, cards.length, sessionCompleted])
+
+  // Adapt PendingCardOutput to the shape Revisao.tsx expects
+  const rawCard = sortedCards[currentIndex]
+  const currentCard: AdaptedCard | undefined = rawCard ? adaptCard(rawCard) : undefined
 
   return {
     state,
-    currentCard: sortedCards[currentIndex],
+    currentCard,
     currentIndex,
     totalCards: sortedCards.length,
     showAnswer,
@@ -147,5 +114,23 @@ export function useRevisao() {
     reveal,
     submit,
     reset,
+  }
+}
+
+///// AUX FUNCTIONS
+
+function adaptCard(card: PendingCardOutput): AdaptedCard {
+  return {
+    questionId: card.questionId,
+    priority: card.priority,
+    question: {
+      id: card.question.id,
+      ano: card.question.ano,
+      area: card.question.area,
+      enunciado: card.question.enunciado,
+      alternativas: card.question.alternativas,
+      resposta: card.question.resposta,
+      comentario: card.question.comentario,
+    },
   }
 }

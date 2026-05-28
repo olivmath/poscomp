@@ -1,13 +1,8 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from 'react'
-import {
-  collection,
-  getDocs,
-  addDoc,
-  serverTimestamp,
-} from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
-import { useSrsContext } from '../contexts/SrsContext'
+import { callGetSimuladoQuestions, callFinishSimulado } from './useFunctions'
 import type {
   Question,
   Option,
@@ -19,6 +14,7 @@ import type {
   Confidence,
   QuestionStatus,
 } from '../types'
+import type { FinishSimuladoOutput } from './useFunctions'
 
 const DEFAULT_CONFIG: SimuladoConfig = {
   areas: [],
@@ -54,7 +50,6 @@ interface UseSimuladoReturn {
 
 export function useSimulado(): UseSimuladoReturn {
   const { user } = useAuth()
-  const { upsertFromResult } = useSrsContext()
 
   const [state, setState] = useState<SimuladoState>('idle')
   const [questions, setQuestions] = useState<Question[]>([])
@@ -122,62 +117,37 @@ export function useSimulado(): UseSimuladoReturn {
       stopTimer()
       if (!user) return
 
-      const breakdown: Partial<Record<Area, { correct: number; total: number }>> = {}
-      for (const q of questions) {
-        if (!breakdown[q.area]) breakdown[q.area] = { correct: 0, total: 0 }
-        breakdown[q.area]!.total += 1
-        const ans = finalAnswers.find((a) => a.questionId === q.id)
-        if (ans?.correct) breakdown[q.area]!.correct += 1
-      }
-
-      const score = finalAnswers.filter((a) => a.correct).length
-      const questionReviews = questions.map((q) => ({
-        id: q.id,
-        ano: q.ano,
-        area: q.area,
-        enunciado: q.enunciado,
-        alternativas: q.alternativas,
-        resposta: q.resposta,
-        comentario: q.comentario,
-      }))
-
-      const resultData = {
-        completedAt: serverTimestamp(),
-        score,
-        totalQuestions: questions.length,
-        timeSpentSeconds: timeSpent,
-        areaBreakdown: breakdown as SimuladoResult['areaBreakdown'],
-        answers: finalAnswers,
-        questionReviews,
-      }
-
-      let savedId = `local-${Date.now()}`
-      try {
-        const ref = await addDoc(
-          collection(db, 'users', user.uid, 'results'),
-          resultData
+      // Filter out skipped/unanswered — backend only accepts answered questions
+      const answeredInputs = finalAnswers
+        .filter((a): a is AnswerRecord & { selected: Option; confidence: NonNullable<Confidence> } =>
+          a.selected !== null && a.confidence !== null
         )
-        savedId = ref.id
-      } catch {
-        // save locally even if Firestore fails
-      }
-
-      const fullResult: SimuladoResult = {
-        id: savedId,
-        ...resultData,
-        completedAt: { seconds: Math.floor(Date.now() / 1000), nanoseconds: 0 } as SimuladoResult['completedAt'],
-      }
+        .map((a) => ({
+          questionId: a.questionId,
+          selected: a.selected,
+          confidence: a.confidence,
+        }))
 
       try {
-        await upsertFromResult(fullResult)
+        const { data } = await callFinishSimulado({
+          answers: answeredInputs,
+          timeSpentSeconds: timeSpent,
+        })
+
+        const fullResult = mapFinishOutput(data, finalAnswers, questions)
+        setResult(fullResult)
+        setLastResult(fullResult)
+        setState('finished')
       } catch (err) {
-        console.error('SRS upsert failed:', err)
+        console.error('finishSimulado failed:', err)
+        // Fallback: still finish locally so user sees the result
+        const fallbackResult = buildFallbackResult(finalAnswers, questions, timeSpent)
+        setResult(fallbackResult)
+        setLastResult(fallbackResult)
+        setState('finished')
       }
-      setResult(fullResult)
-      setLastResult(fullResult)
-      setState('finished')
     },
-    [user, questions, upsertFromResult]
+    [user, questions]
   )
 
   // ── timer ────────────────────────────────────────────────────────────────
@@ -225,27 +195,17 @@ export function useSimulado(): UseSimuladoReturn {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newConfig))
         setConfig(newConfig)
 
-        const snap = await getDocs(collection(db, 'questions'))
-        if (snap.empty) {
+        const { data } = await callGetSimuladoQuestions({
+          areas: newConfig.areas,
+          total: newConfig.totalQuestions === 0 ? 40 : newConfig.totalQuestions,
+        })
+
+        if (!data.questions || data.questions.length === 0) {
           setError('Nenhuma questão encontrada. Execute o seed primeiro.')
           return
         }
-        let all = snap.docs.map((d) => ({ id: d.id, ...d.data() })) as Question[]
-        if (newConfig.areas.length > 0) {
-          all = all.filter((q) => newConfig.areas.includes(q.area))
-        }
 
-        if (all.length === 0) {
-          setError('Nenhuma questão encontrada para as áreas selecionadas.')
-          return
-        }
-
-        let total = newConfig.totalQuestions
-        if (total === 0 || total > all.length) {
-          total = Math.min(all.length, 40)
-        }
-
-        const shuffled = all.sort(() => Math.random() - 0.5).slice(0, total)
+        const shuffled = data.questions
 
         setQuestions(shuffled)
         setCurrentIndex(0)
@@ -389,5 +349,94 @@ export function useSimulado(): UseSimuladoReturn {
     skip,
     goToQuestion,
     retry,
+  }
+}
+
+///// AUX FUNCTIONS
+
+function mapFinishOutput(
+  data: FinishSimuladoOutput,
+  localAnswers: AnswerRecord[],
+  questions: Question[]
+): SimuladoResult {
+  // Merge backend answers with local skipped answers for full coverage
+  const backendAnswerMap = new Map(data.answers.map((a) => [a.questionId, a]))
+
+  const mergedAnswers: AnswerRecord[] = questions.map((q) => {
+    const local = localAnswers.find((a) => a.questionId === q.id)
+    const backend = backendAnswerMap.get(q.id)
+    if (backend) {
+      return {
+        questionId: backend.questionId,
+        selected: backend.selected,
+        correct: backend.correct,
+        skipped: false,
+        confidence: backend.confidence,
+      }
+    }
+    // Skipped or unanswered — local record
+    return local ?? {
+      questionId: q.id,
+      selected: null,
+      correct: false,
+      skipped: true,
+      confidence: null,
+    }
+  })
+
+  const questionReviews = questions.map((q) => ({
+    id: q.id,
+    ano: q.ano,
+    area: q.area,
+    enunciado: q.enunciado,
+    alternativas: q.alternativas,
+    resposta: q.resposta,
+    comentario: q.comentario,
+  }))
+
+  return {
+    id: data.resultId,
+    completedAt: { seconds: Math.floor(Date.now() / 1000), nanoseconds: 0 } as SimuladoResult['completedAt'],
+    score: data.score,
+    totalQuestions: data.totalQuestions,
+    timeSpentSeconds: data.timeSpentSeconds,
+    areaBreakdown: data.areaBreakdown as SimuladoResult['areaBreakdown'],
+    answers: mergedAnswers,
+    questionReviews,
+  }
+}
+
+function buildFallbackResult(
+  finalAnswers: AnswerRecord[],
+  questions: Question[],
+  timeSpent: number
+): SimuladoResult {
+  const breakdown: Partial<Record<Area, { correct: number; total: number }>> = {}
+  for (const q of questions) {
+    if (!breakdown[q.area]) breakdown[q.area] = { correct: 0, total: 0 }
+    breakdown[q.area]!.total += 1
+    const ans = finalAnswers.find((a) => a.questionId === q.id)
+    if (ans?.correct) breakdown[q.area]!.correct += 1
+  }
+
+  const questionReviews = questions.map((q) => ({
+    id: q.id,
+    ano: q.ano,
+    area: q.area,
+    enunciado: q.enunciado,
+    alternativas: q.alternativas,
+    resposta: q.resposta,
+    comentario: q.comentario,
+  }))
+
+  return {
+    id: `local-${Date.now()}`,
+    completedAt: { seconds: Math.floor(Date.now() / 1000), nanoseconds: 0 } as SimuladoResult['completedAt'],
+    score: finalAnswers.filter((a) => a.correct).length,
+    totalQuestions: questions.length,
+    timeSpentSeconds: timeSpent,
+    areaBreakdown: breakdown as SimuladoResult['areaBreakdown'],
+    answers: finalAnswers,
+    questionReviews,
   }
 }

@@ -4,7 +4,7 @@ import '@material/web/progress/circular-progress.js'
 import { useNavigate } from 'react-router-dom'
 import { useRevisao } from '../hooks/useRevisao'
 import { AREA_ICONS } from '../utils/areaIcons'
-import type { Priority } from '../hooks/useRevisao'
+import type { Priority, AdaptedCard } from '../hooks/useRevisao'
 
 const PRIORITY_LABELS: Record<Priority, { label: string; color: string }> = {
   P1: { label: '🔴 Devia saber', color: 'var(--md-sys-color-error)' },
@@ -88,7 +88,8 @@ export function Revisao() {
     )
   }
 
-  const { priority, question } = currentCard
+  const card = currentCard as AdaptedCard
+  const { priority, question } = card
   const pInfo = PRIORITY_LABELS[priority]
 
   return (

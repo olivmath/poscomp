@@ -1,6 +1,8 @@
 import { createContext, useContext, ReactNode } from 'react'
 import { useSrs, type UseSrsReturn } from '../hooks/useSrs'
 
+export type { UseSrsReturn }
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const SrsContext = createContext<UseSrsReturn | undefined>(undefined)
 
