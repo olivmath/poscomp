@@ -38,8 +38,9 @@ const MOCK_USER: User = {
 } as unknown as User
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const isDevOrTest = import.meta.env.MODE !== 'production'
   const bypass = typeof window !== 'undefined' && 
-    (window.__AUTH_BYPASS__ === true || import.meta.env.VITE_AUTH_BYPASS === 'true')
+    ((isDevOrTest && window.__AUTH_BYPASS__ === true) || import.meta.env.VITE_AUTH_BYPASS === 'true')
   const [user, setUser] = useState<User | null>(bypass ? MOCK_USER : null)
   const [loading, setLoading] = useState(!bypass)
 

@@ -37,8 +37,9 @@ export function useSrs(): UseSrsReturn {
   const [loading, setLoading] = useState(false)
 
   const isBypass = useCallback(() => {
+    const isDevOrTest = import.meta.env.MODE !== 'production'
     return import.meta.env.VITE_AUTH_BYPASS === 'true' || 
-           (typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true)
+           (isDevOrTest && typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true)
   }, [])
 
   useEffect(() => {

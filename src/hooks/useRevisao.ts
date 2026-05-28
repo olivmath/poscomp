@@ -33,8 +33,9 @@ export function useRevisao() {
   }>({ P1: 0, P2: 0, P3: 0 })
 
   const isBypass = useMemo(() => {
+    const isDevOrTest = import.meta.env.MODE !== 'production'
     return import.meta.env.VITE_AUTH_BYPASS === 'true' || 
-           (typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true)
+           (isDevOrTest && typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true)
   }, [])
 
   // ── Compute Priority ─────────────────────────────────────────────────────
