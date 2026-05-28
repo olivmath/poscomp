@@ -2259,7 +2259,7 @@
       "B": "Apenas II.",
       "C": "Apenas III.",
       "D": "Apenas I e II.",
-      "E": "I, II e III. 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "I, II e III."
     },
     "resposta": "D",
     "comentario": "Arquivos ordenados facilitam a leitura sequencial ordenada e buscas binárias (log n) para chaves exatas ou intervalos. O hash é mais comum em arquivos não ordenados (heap) para acesso direto e não é a técnica nativa de busca em arquivos ordenados."
