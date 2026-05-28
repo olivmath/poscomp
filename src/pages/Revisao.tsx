@@ -37,7 +37,7 @@ export function Revisao() {
 
   if (state === 'empty') {
     return (
-      <div className="revisao-container">
+      <div className="revisao-container revisao-container--center">
         <div className="revisao-card revisao-card--empty">
           <span className="material-symbols-outlined md-icon--lg">celebration</span>
           <h2 className="revisao-title">Tudo em dia!</h2>
@@ -55,7 +55,7 @@ export function Revisao() {
 
   if (state === 'finished') {
     return (
-      <div className="revisao-container">
+      <div className="revisao-container revisao-container--center">
         <div className="revisao-card revisao-card--finished">
           <span className="material-symbols-outlined md-icon--lg">check_circle</span>
           <h2 className="revisao-title">Sessão concluída!</h2>

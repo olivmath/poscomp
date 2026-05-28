@@ -115,7 +115,7 @@ export function Historico() {
         </p>
         <md-filled-button
           onClick={() => navigate('/simulado')}
-          style={{ marginTop: '8px' }}
+          className="btn-full"
           data-testid="go-simulado-btn"
         >
           Começar Simulado
