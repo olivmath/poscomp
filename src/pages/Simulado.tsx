@@ -9,7 +9,7 @@ import { AREA_ICONS } from '../utils/areaIcons'
 import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence } from '../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
-const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
+const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
 
 function formatTime(seconds: number): string {
   const h = Math.floor(seconds / 3600)
@@ -393,7 +393,7 @@ function RunningScreen({
       <div className="immersive-question-wrap">
         <div className="simulado-question-card">
           <p className="simulado-question-text" data-testid="question-text">
-            {question.text}
+            {question.enunciado}
           </p>
 
           <div className="simulado-options">
@@ -405,7 +405,7 @@ function RunningScreen({
                 data-testid={`option-${opt}`}
               >
                 <span className="simulado-option-letter">{opt}</span>
-                <span className="simulado-option-text">{question.options[opt]}</span>
+                <span className="simulado-option-text">{question.alternativas[opt]}</span>
               </button>
             ))}
           </div>

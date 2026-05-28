@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth'
 import { useResults } from '../hooks/useResults'
 import type { Area } from '../types'
 
-const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
+const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
 const SLIDES = ['Geral', 'Desempenho', 'Calibração', 'Análises', 'Progresso'] as const
 
 function SparkBar({ pct, invert }: { pct: number; invert?: boolean }) {

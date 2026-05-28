@@ -46,7 +46,7 @@ interface UseResultsReturn {
   error: string | null
 }
 
-const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
+const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
 
 export function useResults(): UseResultsReturn {
   const { user } = useAuth()

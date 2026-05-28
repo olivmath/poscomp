@@ -5,7 +5,7 @@ import { useResults } from '../hooks/useResults'
 import { AREA_ICONS } from '../utils/areaIcons'
 import type { Area, SimuladoResult } from '../types'
 
-const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
+const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
 
 function formatDate(result: SimuladoResult): string {
   try {

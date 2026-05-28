@@ -125,14 +125,14 @@ export function Revisao() {
 
         <div className="revisao-question-body">
           <p className="revisao-question-text">
-            {question?.text ?? 'Carregando questão...'}
+            {question?.enunciado ?? 'Carregando questão...'}
           </p>
 
-          {showAnswer && question && (
+          {showAnswer && question && question.resposta !== 'ANULADA' && (
             <div className="revisao-answer-box">
               <div className="revisao-gabarito">
                 <span className="material-symbols-outlined revisao-check-icon">check_circle</span>
-                <strong>Gabarito: ({question.correctOption})</strong> {question.options[question.correctOption]}
+                <strong>Gabarito: ({question.resposta})</strong> {question.alternativas[question.resposta]}
               </div>
             </div>
           )}
