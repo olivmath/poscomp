@@ -43,7 +43,6 @@ export function Perfil() {
         <h2 className="perfil-section-title">Preferências</h2>
         <md-list className="perfil-info-list">
           <md-list-item
-            headline="Tema escuro"
             type="button"
             onClick={toggleTheme}
             className="perfil-info-row"
@@ -51,6 +50,7 @@ export function Perfil() {
             <span slot="start" className="material-symbols-outlined perfil-info-icon">
               {theme === 'dark' ? 'light_mode' : 'dark_mode'}
             </span>
+            <span slot="headline">Tema escuro</span>
             <md-switch
               slot="end"
               selected={theme === 'dark'}
@@ -67,33 +67,25 @@ export function Perfil() {
       <div className="perfil-section">
         <h2 className="perfil-section-title">Conta</h2>
         <md-list className="perfil-info-list">
-          <md-list-item
-            headline="Nome"
-            supporting-text={user?.displayName ?? '—'}
-            className="perfil-info-row"
-          >
+          <md-list-item className="perfil-info-row">
             <span slot="start" className="material-symbols-outlined perfil-info-icon">badge</span>
+            <span slot="headline">Nome</span>
+            <span slot="supporting-text">{user?.displayName ?? '—'}</span>
           </md-list-item>
-          <md-list-item
-            headline="E-mail"
-            supporting-text={user?.email ?? '—'}
-            className="perfil-info-row"
-          >
+          <md-list-item className="perfil-info-row">
             <span slot="start" className="material-symbols-outlined perfil-info-icon">mail</span>
+            <span slot="headline">E-mail</span>
+            <span slot="supporting-text">{user?.email ?? '—'}</span>
           </md-list-item>
-          <md-list-item
-            headline="Autenticação"
-            supporting-text="Google"
-            className="perfil-info-row"
-          >
+          <md-list-item className="perfil-info-row">
             <span slot="start" className="material-symbols-outlined perfil-info-icon">verified_user</span>
+            <span slot="headline">Autenticação</span>
+            <span slot="supporting-text">Google</span>
           </md-list-item>
-          <md-list-item
-            headline="Versão"
-            supporting-text={`v${__APP_VERSION__}`}
-            className="perfil-info-row"
-          >
+          <md-list-item className="perfil-info-row">
             <span slot="start" className="material-symbols-outlined perfil-info-icon">info</span>
+            <span slot="headline">Versão</span>
+            <span slot="supporting-text">{`v${__APP_VERSION__}`}</span>
           </md-list-item>
         </md-list>
       </div>
