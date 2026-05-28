@@ -10,7 +10,7 @@ export interface Question {
   id: string
   enunciado: string
   alternativas: Record<Option, string>
-  resposta: Option | 'ANULADA'
+  resposta: Option
   area: Area
   requer_imagem: boolean
   comentario?: string

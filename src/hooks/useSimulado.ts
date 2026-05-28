@@ -216,8 +216,6 @@ export function useSimulado(): UseSimuladoReturn {
           return
         }
         let all = snap.docs.map((d) => ({ id: d.id, ...d.data() })) as Question[]
-        all = all.filter((q) => q.resposta !== 'ANULADA')
-
         if (newConfig.areas.length > 0) {
           all = all.filter((q) => newConfig.areas.includes(q.area))
         }

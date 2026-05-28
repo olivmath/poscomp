@@ -128,7 +128,7 @@ export function Revisao() {
             {question?.enunciado ?? 'Carregando questão...'}
           </p>
 
-          {showAnswer && question && question.resposta !== 'ANULADA' && (
+          {showAnswer && question && (
             <div className="revisao-answer-box">
               <div className="revisao-gabarito">
                 <span className="material-symbols-outlined revisao-check-icon">check_circle</span>

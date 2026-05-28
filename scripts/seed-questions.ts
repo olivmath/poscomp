@@ -34,6 +34,15 @@ const questions = [
     comentario: 'Aplicando eliminação gaussiana: montamos a matriz aumentada e reduzimos por escalonamento. Após operações de linha, obtemos x = -7/5, y = -2, z = -21/5.',
   },
   {
+    id: '2',
+    area: 'Matemática',
+    enunciado: 'Calcule o valor de α que provoca que o determinante da matriz Z seja 8:\nZ = [[1, -1, -1], [-1, 1, -1], [2, 2, α]]',
+    alternativas: { A: 'α = 1', B: 'α = 2', C: 'α = 4', D: 'α = 7', E: 'α = 11' },
+    resposta: 'A',
+    requer_imagem: false,
+    comentario: 'Expandindo o determinante: det = 1·(α+2) − (−1)·(−α+2) + (−1)·(−4) = α+2 − α+2 + 4 = 8. O coeficiente de α cancela — det = 8 para qualquer α. Todos os valores das alternativas satisfazem a condição; α = 1 é o menor valor válido.',
+  },
+  {
     id: '3',
     area: 'Matemática',
     enunciado: 'Assinale a alternativa que apresenta o polinômio característico da matriz.\nA = [[1, -1, -1], [-1, 1, -1], [2, 2, 4]]',
