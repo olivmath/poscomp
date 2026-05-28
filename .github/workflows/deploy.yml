@@ -291,6 +291,8 @@ jobs:
       - name: Deploy Cloud Functions
         run: |
           echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/sa.json
+          # Remove root pnpm-lock.yaml so Cloud Build detects npm (functions uses npm)
+          rm -f pnpm-lock.yaml
           npx firebase-tools deploy --only functions \
             --project ${{ secrets.FIREBASE_PROJECT_ID }} \
             --non-interactive \
