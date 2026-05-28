@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Minimal React web app with Google authentication powered by Firebase and the full Google stack.
+App de preparação para o POSCOMP. Simulados cronometrados + revisão espaçada (SM-2) com classificação de confiança por questão.
+
+**Objetivo pedagógico**: reduzir progressivamente erros do tipo "devia saber" — não acumular conteúdo novo infinitamente.
 
 ## Stack
 
@@ -64,21 +66,66 @@ pnpm lint
 pnpm typecheck
 ```
 
+## Pedagogical Model — Processo Simulado + Revisão
+
+O app implementa este ciclo:
+
+```
+Simulado → classificar erro por questão → Revisão direcionada → Reteste → Novo Simulado
+```
+
+### Classificação de confiança (durante simulado, após revelar gabarito)
+
+| Label | Tipo | Quando usar |
+|---|---|---|
+| NÃO SEI (`unsure`) | nunca viu ou não lembra nada | "Não faço ideia" |
+| ESTUDANDO (`studying`) | conhecimento parcial ou confuso | "Eu quase lembrava" |
+| DEVIA SABER (`should_know`) | estudou várias vezes, erro inadmissível | "Eu sabia isso" |
+| TENHO CERTEZA (`certain`) | acertou com confiança total | sem revisão necessária |
+
+### Prioridade da revisão
+
+```
+DEVIA SABER  →  ESTUDANDO  →  NÃO SEI
+   (P1)            (P2)          (P3)
+```
+
+Erros "inadmissíveis" têm prioridade máxima — a aprovação depende de consistência, não de conteúdo novo.
+
+### Fluxo por questão no simulado
+
+```
+seleciona opção → revela gabarito → vê certo/errado → classifica confiança → próxima
+```
+
+**Nunca** classificar antes de ver o gabarito — a categoria depende de saber se acertou.
+
+---
+
 ## Architecture
 
 ```
 src/
-├── firebase/          # Firebase config and SDK initialization
-│   └── index.ts       # initializeApp, auth, db, storage exports
-├── hooks/             # Custom React hooks
-│   ├── useAuth.ts     # Firebase auth state (onAuthStateChanged)
-│   └── useFirestore.ts
-├── pages/             # Route-level components
-│   ├── Login.tsx      # Google sign-in entry point
-│   └── Home.tsx       # Post-auth main page
-├── components/        # Reusable UI components
-├── contexts/          # React contexts (AuthContext)
-└── main.tsx           # App entry + Router + AuthProvider
+├── firebase/          # Firebase config e SDK
+│   └── index.ts       # initializeApp, auth, db, storage
+├── hooks/
+│   ├── useAuth.ts     # onAuthStateChanged
+│   ├── useSimulado.ts # estado do simulado + timer + finish
+│   ├── useRevisao.ts  # fila SRS priorizada (P1→P2→P3)
+│   ├── useSrs.ts      # CRUD dos SrsCards no Firestore
+│   ├── useResults.ts  # histórico de simulados
+│   └── useTheme.ts
+├── pages/
+│   ├── Login.tsx
+│   ├── Home.tsx
+│   ├── Simulado.tsx   # idle → config → running → finished
+│   ├── Revisao.tsx    # flashcard com gabarito + classificação
+│   ├── Historico.tsx  # lista de resultados
+│   └── Perfil.tsx
+├── utils/
+│   └── sm2.ts         # algoritmo SM-2 para espaçamento
+├── types/index.ts     # Confidence, SrsCard, SimuladoResult, etc.
+└── main.tsx
 ```
 
 ## Firebase Setup

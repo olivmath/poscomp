@@ -62,10 +62,11 @@ function QuestionMapModal({
   onClose: () => void
 }) {
   const legend = [
-    { status: 'unvisited', label: 'Não visitada', icon: 'radio_button_unchecked' },
-    { status: 'skipped',   label: 'Pulada',        icon: 'skip_next' },
-    { status: 'unsure',    label: 'Não sei',        icon: 'help_outline' },
-    { status: 'certain',   label: 'Certeza',        icon: 'verified' },
+    { status: 'unvisited',   label: 'Não visitada', icon: 'radio_button_unchecked' },
+    { status: 'skipped',     label: 'Pulada',        icon: 'skip_next' },
+    { status: 'unsure',      label: 'Não sei',       icon: 'help_outline' },
+    { status: 'studying',    label: 'Estudando',     icon: 'school' },
+    { status: 'should_know', label: 'Devia saber',   icon: 'warning' },
   ] as const
 
   return (
@@ -366,7 +367,6 @@ function RunningScreen({
 }) {
   const [showExitModal, setShowExitModal] = useState(false)
   const [showMap, setShowMap] = useState(false)
-  const isLast = questionNumber === totalQuestions
   const hasSelection = selectedOption !== null
 
   return (
@@ -420,9 +420,18 @@ function RunningScreen({
             >
               <span className="material-symbols-outlined confidence-btn-icon">help_outline</span>
               <span className="confidence-btn-label">Não sei</span>
-              <span className="material-symbols-outlined confidence-btn-arrow">
-                arrow_forward
-              </span>
+              <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
+            </button>
+
+            <button
+              className="confidence-btn confidence-btn--studying"
+              disabled={!hasSelection}
+              onClick={() => onNext('studying')}
+              data-testid="btn-studying"
+            >
+              <span className="material-symbols-outlined confidence-btn-icon">school</span>
+              <span className="confidence-btn-label">Estudando</span>
+              <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
             </button>
 
             <button
@@ -431,26 +440,9 @@ function RunningScreen({
               onClick={() => onNext('should_know')}
               data-testid="btn-should-know"
             >
-              <span className="material-symbols-outlined confidence-btn-icon">school</span>
-              <span className="confidence-btn-label">Deveria saber</span>
-              <span className="material-symbols-outlined confidence-btn-arrow">
-                arrow_forward
-              </span>
-            </button>
-
-            <button
-              className="confidence-btn confidence-btn--certain"
-              disabled={!hasSelection}
-              onClick={() => onNext('certain')}
-              data-testid="btn-certain"
-            >
-              <span className="material-symbols-outlined confidence-btn-icon">verified</span>
-              <span className="confidence-btn-label">
-                {isLast ? 'Finalizar' : 'Tenho certeza'}
-              </span>
-              <span className="material-symbols-outlined confidence-btn-arrow">
-                {isLast ? 'check_circle' : 'arrow_forward'}
-              </span>
+              <span className="material-symbols-outlined confidence-btn-icon">warning</span>
+              <span className="confidence-btn-label">Devia saber</span>
+              <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
             </button>
           </div>
 
@@ -461,7 +453,7 @@ function RunningScreen({
             data-testid="skip-btn"
           >
             <span className="material-symbols-outlined skip-btn-icon">skip_next</span>
-            {isLast ? 'Pular e finalizar' : 'Pular questão'}
+            Pular questão
           </button>
         </div>
       </div>

@@ -236,8 +236,8 @@ export function Home() {
                   <h3 className="analises-section-title">Calibração</h3>
                   <div className="analises-area-list">
                     {[
-                      { label: 'Tenho certeza e acertei', pct: analytics.confidenceStats.certainAccuracy },
-                      { label: 'Tenho certeza e errei',   pct: 100 - analytics.confidenceStats.certainAccuracy },
+                      { label: 'Devia saber e acertei', pct: analytics.confidenceStats.certainAccuracy },
+                      { label: 'Devia saber e errei',   pct: 100 - analytics.confidenceStats.certainAccuracy },
                       { label: 'Não sei e acertei',        pct: analytics.confidenceStats.unsureAccuracy },
                       { label: 'Não sei e errei',          pct: 100 - analytics.confidenceStats.unsureAccuracy },
                     ].map(({ label, pct }) => (

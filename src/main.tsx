@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { ImmersiveModeProvider } from './contexts/ImmersiveModeContext'
 import { ProtectedLayout } from './components/ProtectedLayout'
@@ -24,6 +24,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/revisao" element={<ProtectedLayout><Revisao /></ProtectedLayout>} />
           <Route path="/perfil" element={<ProtectedLayout><Perfil /></ProtectedLayout>} />
           <Route path="/simulado" element={<ProtectedLayout><Simulado /></ProtectedLayout>} />
+          <Route path="*" element={<ProtectedLayout><Navigate to="/" replace /></ProtectedLayout>} />
         </Routes>
         </ImmersiveModeProvider>
       </AuthProvider>

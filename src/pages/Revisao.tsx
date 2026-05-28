@@ -7,10 +7,9 @@ import { AREA_ICONS } from '../utils/areaIcons'
 import type { Priority } from '../hooks/useRevisao'
 
 const PRIORITY_LABELS: Record<Priority, { label: string; color: string }> = {
-  P1: { label: '🔴 P1', color: 'var(--md-sys-color-error)' },
-  P2: { label: '🟡 P2', color: 'var(--md-sys-color-tertiary)' },
-  P3: { label: '🟠 P3', color: 'var(--md-sys-color-secondary)' },
-  P4: { label: '⚪ P4', color: 'var(--md-sys-color-outline)' },
+  P1: { label: '🔴 Devia saber', color: 'var(--md-sys-color-error)' },
+  P2: { label: '🟡 Estudando',   color: 'var(--md-sys-color-tertiary)' },
+  P3: { label: '⚪ Não sei',     color: 'var(--md-sys-color-outline)' },
 }
 
 export function Revisao() {
@@ -65,23 +64,18 @@ export function Revisao() {
           <div className="revisao-stats">
             <div className="revisao-stat-row">
               <span className="revisao-stat-dot" style={{ backgroundColor: PRIORITY_LABELS.P1.color }} />
-              <span className="revisao-stat-label">P1 · Estudei + errei</span>
+              <span className="revisao-stat-label">Devia saber</span>
               <span className="revisao-stat-value">{sessionResults.P1}</span>
             </div>
             <div className="revisao-stat-row">
               <span className="revisao-stat-dot" style={{ backgroundColor: PRIORITY_LABELS.P2.color }} />
-              <span className="revisao-stat-label">P2 · Não estudei + acertei</span>
+              <span className="revisao-stat-label">Estudando</span>
               <span className="revisao-stat-value">{sessionResults.P2}</span>
             </div>
             <div className="revisao-stat-row">
               <span className="revisao-stat-dot" style={{ backgroundColor: PRIORITY_LABELS.P3.color }} />
-              <span className="revisao-stat-label">P3 · Não estudei + errei</span>
+              <span className="revisao-stat-label">Não sei</span>
               <span className="revisao-stat-value">{sessionResults.P3}</span>
-            </div>
-            <div className="revisao-stat-row">
-              <span className="revisao-stat-dot" style={{ backgroundColor: PRIORITY_LABELS.P4.color }} />
-              <span className="revisao-stat-label">P4 · Estudei + acertei</span>
-              <span className="revisao-stat-value">{sessionResults.P4}</span>
             </div>
           </div>
 

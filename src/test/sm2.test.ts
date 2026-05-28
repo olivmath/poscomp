@@ -90,25 +90,10 @@ describe('gradeFromResult', () => {
   // WHEN  gradeFromResult is called
   // THEN  returns grade 1 (blackout)
   it('resposta errada → grade 1', () => {
-    expect(gradeFromResult(false, 'certain')).toBe(1)
-    expect(gradeFromResult(false, 'unsure')).toBe(1)
-    expect(gradeFromResult(false, 'should_know')).toBe(1)
-    expect(gradeFromResult(false, null)).toBe(1)
+    expect(gradeFromResult(false)).toBe(1)
   })
 
-  // GIVEN a correct answer with confidence=certain
-  // WHEN  gradeFromResult is called
-  // THEN  returns grade 5 (perfect)
-  it('correto + certain → grade 5', () => {
-    expect(gradeFromResult(true, 'certain')).toBe(5)
-  })
-
-  // GIVEN a correct answer with confidence=unsure, should_know or null
-  // WHEN  gradeFromResult is called
-  // THEN  returns grade 3 (pass with hesitation)
-  it('correto + unsure/should_know/null → grade 3', () => {
-    expect(gradeFromResult(true, 'unsure')).toBe(3)
-    expect(gradeFromResult(true, 'should_know')).toBe(3)
-    expect(gradeFromResult(true, null)).toBe(3)
+  it('resposta correta → grade 3', () => {
+    expect(gradeFromResult(true)).toBe(3)
   })
 })

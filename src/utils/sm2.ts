@@ -33,11 +33,8 @@ export function sm2Update(card: SrsCard, grade: Grade): Sm2Result {
   }
 }
 
-export function gradeFromResult(correct: boolean, confidence: Confidence): Grade {
-  if (!correct) return 1
-  if (confidence === 'certain') return 5
-  if (confidence === 'should_know') return 3
-  return 3
+export function gradeFromResult(correct: boolean): Grade {
+  return correct ? 3 : 1
 }
 
 ///// AUX FUNCTIONS

@@ -270,10 +270,10 @@ describe('useSimulado', () => {
 
     // Seleciona opção A (correctOption)
     act(() => { result.current.select('A') })
-    act(() => { result.current.next('certain') })
+    act(() => { result.current.next('unsure') })
 
     expect(result.current.answers).toHaveLength(1)
-    expect(result.current.answers[0].confidence).toBe('certain')
+    expect(result.current.answers[0].confidence).toBe('unsure')
     expect(result.current.answers[0].skipped).toBe(false)
     expect(result.current.answers[0].selected).toBe('A')
     expect(result.current.answers[0].correct).toBe(true)
@@ -329,10 +329,10 @@ describe('useSimulado', () => {
     act(() => { result.current.skip() })
     expect(result.current.questionStatuses[0]).toBe('skipped')
 
-    // Responde Q1 com certeza
+    // Responde Q1 com should_know
     act(() => { result.current.select('A') })
-    act(() => { result.current.next('certain') })
-    expect(result.current.questionStatuses[1]).toBe('certain')
+    act(() => { result.current.next('should_know') })
+    expect(result.current.questionStatuses[1]).toBe('should_know')
   })
 
   it('goToQuestion() navega para o índice correto', async () => {

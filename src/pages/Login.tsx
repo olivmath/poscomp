@@ -1,25 +1,29 @@
 import '@material/web/button/filled-button.js'
 import '@material/web/progress/circular-progress.js'
-import { signInWithPopup } from 'firebase/auth'
+import { signInWithRedirect } from 'firebase/auth'
 import { auth, googleProvider } from '../firebase'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../hooks/useAuth'
 
 export function Login() {
   const navigate = useNavigate()
+  const { user } = useAuth()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (user) navigate('/', { replace: true })
+  }, [user, navigate])
 
   async function handleGoogleSignIn() {
     setLoading(true)
     setError('')
     try {
-      await signInWithPopup(auth, googleProvider)
-      navigate('/')
+      await signInWithRedirect(auth, googleProvider)
     } catch (err) {
       setError('Falha ao fazer login. Tente novamente.')
       console.error(err)
-    } finally {
       setLoading(false)
     }
   }

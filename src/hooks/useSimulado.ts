@@ -87,8 +87,8 @@ export function useSimulado(): UseSimuladoReturn {
     if (!answer) return 'unvisited'
     if (answer.skipped) return 'skipped'
     if (answer.confidence === 'unsure') return 'unsure'
+    if (answer.confidence === 'studying') return 'studying'
     if (answer.confidence === 'should_know') return 'should_know'
-    if (answer.confidence === 'certain') return 'certain'
     return 'unvisited'
   })
 

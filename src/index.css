@@ -874,26 +874,26 @@ body {
   background: rgba(230, 81, 0, 0.28);
 }
 
-/* Tenho certeza — green */
-.confidence-btn--certain {
-  background: #E8F5E9;
-  border-color: #A5D6A7;
-  color: #2E7D32;
+/* Estudando — teal */
+.confidence-btn--studying {
+  background: #E0F7FA;
+  border-color: #80DEEA;
+  color: #00695C;
 }
 
-.confidence-btn--certain:not(:disabled):hover {
-  background: #C8E6C9;
-  border-color: #81C784;
+.confidence-btn--studying:not(:disabled):hover {
+  background: #B2EBF2;
+  border-color: #4DD0E1;
 }
 
-.dark .confidence-btn--certain {
-  background: rgba(46, 125, 50, 0.18);
-  border-color: rgba(129, 199, 132, 0.4);
-  color: #A5D6A7;
+.dark .confidence-btn--studying {
+  background: rgba(0, 105, 92, 0.18);
+  border-color: rgba(128, 222, 234, 0.4);
+  color: #80DEEA;
 }
 
-.dark .confidence-btn--certain:not(:disabled):hover {
-  background: rgba(46, 125, 50, 0.28);
+.dark .confidence-btn--studying:not(:disabled):hover {
+  background: rgba(0, 105, 92, 0.28);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1139,16 +1139,28 @@ body {
   color: #90CAF9;
 }
 
-.question-map-btn--certain {
-  background: #E8F5E9;
-  border-color: #A5D6A7;
-  color: #2E7D32;
+.question-map-btn--studying {
+  background: #E0F7FA;
+  border-color: #80DEEA;
+  color: #00695C;
 }
 
-.dark .question-map-btn--certain {
-  background: rgba(46, 125, 50, 0.18);
-  border-color: rgba(129, 199, 132, 0.4);
-  color: #A5D6A7;
+.dark .question-map-btn--studying {
+  background: rgba(0, 105, 92, 0.18);
+  border-color: rgba(128, 222, 234, 0.4);
+  color: #80DEEA;
+}
+
+.question-map-btn--should_know {
+  background: #FFF8E1;
+  border-color: #FFD54F;
+  color: #E65100;
+}
+
+.dark .question-map-btn--should_know {
+  background: rgba(230, 81, 0, 0.18);
+  border-color: rgba(255, 213, 79, 0.4);
+  color: #FFD54F;
 }
 
 /* Legend */
@@ -1186,10 +1198,11 @@ body {
   line-height: 1;
 }
 
-.map-legend-icon--unvisited { color: var(--md-sys-color-on-surface-variant); }
-.map-legend-icon--skipped   { color: #FFCA28; }
-.map-legend-icon--unsure    { color: #90CAF9; }
-.map-legend-icon--certain   { color: #A5D6A7; }
+.map-legend-icon--unvisited   { color: var(--md-sys-color-on-surface-variant); }
+.map-legend-icon--skipped     { color: #FFCA28; }
+.map-legend-icon--unsure      { color: #90CAF9; }
+.map-legend-icon--studying    { color: #80DEEA; }
+.map-legend-icon--should_know { color: #FFD54F; }
 
 .simulado-question-card {
   background: var(--color-card-bg);

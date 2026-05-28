@@ -4,7 +4,7 @@ import { db } from '../firebase'
 import { useSrs } from './useSrs'
 import type { SrsCard, Question, Grade } from '../types'
 
-export type Priority = 'P1' | 'P2' | 'P3' | 'P4'
+export type Priority = 'P1' | 'P2' | 'P3'
 
 export interface ExtendedSrsCard extends SrsCard {
   priority: Priority
@@ -21,23 +21,21 @@ export function useRevisao() {
   const [showAnswer, setShowAnswer] = useState(false)
   const [sessionCompleted, setSessionCompleted] = useState(false)
   const [sessionResults, setSessionResults] = useState<{
-    P1: number; P2: number; P3: number; P4: number
-  }>({ P1: 0, P2: 0, P3: 0, P4: 0 })
+    P1: number; P2: number; P3: number
+  }>({ P1: 0, P2: 0, P3: 0 })
 
   // ── Compute Priority ─────────────────────────────────────────────────────
   const sortedCards = useMemo(() => {
     const cardsWithPriority: ExtendedSrsCard[] = pendingCards.map(card => {
-      let priority: Priority = 'P4'
-      if (card.studied && !card.simuladoCorrect) priority = 'P1'
-      else if (!card.studied && card.simuladoCorrect) priority = 'P2'
-      else if (!card.studied && !card.simuladoCorrect) priority = 'P3'
-      else priority = 'P4'
+      let priority: Priority
+      if (card.lastConfidence === 'should_know') priority = 'P1'
+      else if (card.lastConfidence === 'studying') priority = 'P2'
+      else priority = 'P3'
 
       return { ...card, priority, question: questions[card.questionId] }
     })
 
-    // Sort by priority group, then by dueDate (SM-2 default)
-    const priorityOrder: Record<Priority, number> = { P1: 1, P2: 2, P3: 3, P4: 4 }
+    const priorityOrder: Record<Priority, number> = { P1: 1, P2: 2, P3: 3 }
     return cardsWithPriority.sort((a, b) => {
       if (priorityOrder[a.priority] !== priorityOrder[b.priority]) {
         return priorityOrder[a.priority] - priorityOrder[b.priority]
@@ -112,7 +110,7 @@ export function useRevisao() {
     setCurrentIndex(0)
     setShowAnswer(false)
     setSessionCompleted(false)
-    setSessionResults({ P1: 0, P2: 0, P3: 0, P4: 0 })
+    setSessionResults({ P1: 0, P2: 0, P3: 0 })
   }, [])
 
   // ── Derived State ────────────────────────────────────────────────────────

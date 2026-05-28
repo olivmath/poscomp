@@ -59,18 +59,12 @@ export function useSrs(): UseSrsReturn {
 
       const writes = result.answers.map(async (answer) => {
         const existing = existingMap.get(answer.questionId)
-        const needsReview =
-          !answer.correct || answer.skipped || answer.confidence === 'unsure' || answer.confidence === 'should_know'
-
-        if (needsReview) {
-          const card = existing ?? buildNewCard(answer.questionId, answer.confidence, answer.correct)
-          const grade = gradeFromResult(answer.correct, answer.confidence)
-          const updated = sm2Update({ ...card, lastConfidence: answer.confidence }, grade)
+        if (!answer.correct) {
+          const confidence = answer.confidence ?? 'unsure'
+          const card = existing ?? buildNewCard(answer.questionId, confidence, answer.correct)
+          const grade = gradeFromResult(answer.correct)
+          const updated = sm2Update({ ...card, lastConfidence: confidence }, grade)
           await upsertCard(user.uid, answer.questionId, { ...card, ...updated })
-        } else if (existing && answer.correct && answer.confidence === 'certain') {
-          // Advance SRS for well-known card
-          const updated = sm2Update({ ...existing, lastConfidence: 'certain' }, 5)
-          await upsertCard(user.uid, answer.questionId, { ...existing, ...updated })
         }
       })
 
