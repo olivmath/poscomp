@@ -1,6 +1,4 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from 'react'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
 import { callGetSimuladoQuestions, callFinishSimulado } from './useFunctions'
 import type {
@@ -89,21 +87,6 @@ export function useSimulado(): UseSimuladoReturn {
     })
   , [questions, answers])
 
-  // ── fetch last result on mount ───────────────────────────────────────────
-  useEffect(() => {
-    if (!user) return
-    getDocs(collection(db, 'users', user.uid, 'results'))
-      .then((snap) => {
-        const docs = snap.docs.map((d) => ({ id: d.id, ...d.data() })) as SimuladoResult[]
-        if (docs.length === 0) return
-        docs.sort((a, b) =>
-          (b.completedAt?.seconds ?? 0) - (a.completedAt?.seconds ?? 0)
-        )
-        setLastResult(docs[0])
-      })
-      .catch(() => {/* silently ignore */})
-  }, [user])
-
   // ── helpers ──────────────────────────────────────────────────────────────
   function stopTimer() {
     if (timerRef.current) {
@@ -128,11 +111,13 @@ export function useSimulado(): UseSimuladoReturn {
           confidence: a.confidence,
         }))
 
+      console.log('[CF] finishSimulado →', answeredInputs.length, 'respostas')
       try {
         const { data } = await callFinishSimulado({
           answers: answeredInputs,
           timeSpentSeconds: timeSpent,
         })
+        console.log('[CF] finishSimulado ←', { score: data.score, total: data.totalQuestions, resultId: data.resultId })
 
         const fullResult = mapFinishOutput(data, finalAnswers, questions)
         setResult(fullResult)
@@ -195,10 +180,12 @@ export function useSimulado(): UseSimuladoReturn {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newConfig))
         setConfig(newConfig)
 
+        console.log('[CF] getSimuladoQuestions →', { areas: newConfig.areas, total: newConfig.totalQuestions })
         const { data } = await callGetSimuladoQuestions({
           areas: newConfig.areas,
           total: newConfig.totalQuestions === 0 ? 40 : newConfig.totalQuestions,
         })
+        console.log('[CF] getSimuladoQuestions ←', data.questions.length, 'questões')
 
         if (!data.questions || data.questions.length === 0) {
           setError('Nenhuma questão encontrada. Execute o seed primeiro.')

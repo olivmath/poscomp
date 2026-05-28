@@ -32,7 +32,9 @@ export function useSrs(): UseSrsReturn {
     }
     setLoading(true)
     try {
+      console.log('[CF] getPendingCards (badge) →')
       const { data } = await callGetPendingCards({})
+      console.log('[CF] getPendingCards (badge) ←', data.cards.length, 'pendentes')
       setTotalPending(data.cards.length)
     } catch {
       // silently ignore — badge shows 0

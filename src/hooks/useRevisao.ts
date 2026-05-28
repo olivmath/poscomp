@@ -47,10 +47,12 @@ export function useRevisao() {
     async function fetchCards() {
       setLoading(true)
       try {
+        console.log('[CF] getPendingCards (revisao) →')
         const { data } = await callGetPendingCards({})
+        console.log('[CF] getPendingCards (revisao) ←', data.cards.length, 'cards', data.cards.map(c => c.priority))
         setCards(data.cards)
       } catch (err) {
-        console.error('Error fetching pending cards:', err)
+        console.error('[CF] getPendingCards (revisao) erro:', err)
         setCards([])
       } finally {
         setLoading(false)
@@ -75,7 +77,9 @@ export function useRevisao() {
       [currentCard.priority]: prev[currentCard.priority] + 1,
     }))
 
-    await callReviewCard({ questionId: currentCard.questionId, studied })
+    console.log('[CF] reviewCard →', { questionId: currentCard.questionId, studied })
+    const { data: reviewData } = await callReviewCard({ questionId: currentCard.questionId, studied })
+    console.log('[CF] reviewCard ←', { nextDueDays: reviewData.nextDueDays, newInterval: reviewData.newInterval })
 
     if (currentIndex < sortedCards.length - 1) {
       setCurrentIndex(i => i + 1)
