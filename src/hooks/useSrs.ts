@@ -61,10 +61,14 @@ export function useSrs(): UseSrsReturn {
         const existing = existingMap.get(answer.questionId)
         if (!answer.correct) {
           const confidence = answer.confidence ?? 'unsure'
-          const card = existing ?? buildNewCard(answer.questionId, confidence, answer.correct)
-          const grade = gradeFromResult(answer.correct)
-          const updated = sm2Update({ ...card, lastConfidence: confidence }, grade)
-          await upsertCard(user.uid, answer.questionId, { ...card, ...updated })
+          if (existing) {
+            const grade = gradeFromResult(answer.correct)
+            const updated = sm2Update({ ...existing, lastConfidence: confidence }, grade)
+            await upsertCard(user.uid, answer.questionId, { ...existing, ...updated })
+          } else {
+            const card = buildNewCard(answer.questionId, confidence, answer.correct)
+            await upsertCard(user.uid, answer.questionId, card)
+          }
         }
       })
 
