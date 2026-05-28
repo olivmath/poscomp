@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSimulado } from '../hooks/useSimulado'
 import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
 import { AREA_ICONS } from '../utils/areaIcons'
-import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence } from '../types'
+import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence, Question } from '../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
 const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
@@ -351,7 +351,7 @@ function RunningScreen({
   onGoToQuestion,
   onQuit,
 }: {
-  question: { text: string; options: Record<Option, string> }
+  question: Question
   questionNumber: number
   totalQuestions: number
   selectedOption: Option | null
