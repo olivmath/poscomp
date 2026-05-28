@@ -11,7 +11,7 @@ vi.mock('firebase/firestore', () => ({
 
 function makeCard(overrides: Partial<SrsCard> = {}): SrsCard {
   return {
-    questionId: 'q-1',
+    questionId: 1,
     easeFactor: 2.5,
     interval: 1,
     repetitions: 0,

@@ -27,7 +27,7 @@ const mockUser = { uid: 'user-test' }
 
 function makeCard(overrides: Partial<SrsCard> = {}): SrsCard {
   return {
-    questionId: 'q-1',
+    questionId: 1,
     easeFactor: 2.5,
     interval: 1,
     repetitions: 0,
@@ -65,7 +65,7 @@ describe('useSrs — totalPending via callGetPendingCards', () => {
   // WHEN  useSrs mounts
   // THEN  totalPending = 3
   it('totalPending reflete quantidade de cards retornados pelo backend', async () => {
-    const cards = [makeCard({ questionId: 'q-1' }), makeCard({ questionId: 'q-2' }), makeCard({ questionId: 'q-3' })]
+    const cards = [makeCard({ questionId: 1 }), makeCard({ questionId: 2 }), makeCard({ questionId: 3 })]
     // PendingCardOutput shape (simplified for test)
     mockCallGetPendingCards.mockResolvedValue({
       data: {

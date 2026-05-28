@@ -26,7 +26,7 @@ interface QuestionReviewListProps {
 }
 
 export function QuestionReviewList({ answers, questions }: QuestionReviewListProps) {
-  const [openQuestionId, setOpenQuestionId] = useState<string | null>(null)
+  const [openQuestionId, setOpenQuestionId] = useState<number | null>(null)
 
   const answerByQuestion = useMemo(
     () => new Map(answers.map((answer) => [answer.questionId, answer])),
