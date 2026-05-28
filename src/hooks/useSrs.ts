@@ -12,7 +12,7 @@ import { sm2Update } from '../utils/sm2'
 import { isAuthBypassed } from '../utils/bypass'
 import type { SrsCard, Grade, SimuladoResult } from '../types'
 
-interface UseSrsReturn {
+export interface UseSrsReturn {
   pendingCards: SrsCard[]
   totalPending: number
   loading: boolean
