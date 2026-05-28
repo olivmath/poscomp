@@ -34,6 +34,16 @@ vi.mock('../hooks/useSrs', () => ({
   })),
 }))
 
+vi.mock('../contexts/SrsContext', () => ({
+  useSrsContext: vi.fn(() => ({
+    pendingCards: [],
+    totalPending: 0,
+    loading: false,
+    upsertFromResult: vi.fn().mockResolvedValue(undefined),
+    updateCard: vi.fn().mockResolvedValue(undefined),
+  })),
+}))
+
 import { useAuth } from '../hooks/useAuth'
 import { getDocs, addDoc } from 'firebase/firestore'
 
