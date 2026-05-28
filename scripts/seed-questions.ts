@@ -10,6 +10,7 @@
  *   FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed
  */
 
+import { writeFileSync } from 'fs'
 import { initializeApp, cert, applicationDefault } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
 
@@ -476,7 +477,9 @@ async function seed() {
   }
 
   await batch.commit()
+  writeFileSync('scripts/data/questions.json', JSON.stringify(questions, null, 2))
   console.log(`✅ ${questions.length} questões inseridas no Firestore (projeto: ${projectId})`)
+  console.log(`📄 Dump salvo em scripts/data/questions.json`)
 }
 
 seed().catch((err) => {
