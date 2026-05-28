@@ -1,4 +1,5 @@
 import '@material/web/button/filled-button.js'
+import '@material/web/progress/circular-progress.js'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useResults } from '../hooks/useResults'
@@ -27,8 +28,8 @@ function formatDuration(seconds: number): string {
 function ResultCard({ result }: { result: SimuladoResult }) {
   const [expanded, setExpanded] = useState(false)
   const pct = Math.round((result.score / result.totalQuestions) * 100)
-  const scoreColor = pct >= 80 ? '#386A20' : pct >= 60 ? '#7B5800' : '#8C1D18'
-  const scoreBg = pct >= 80 ? '#DCEDC8' : pct >= 60 ? '#FFF3CD' : '#FDECEA'
+  const scoreColor = pct >= 80 ? '#1B6D1B' : pct >= 60 ? '#7A5900' : '#BA1A1A'
+  const scoreBg = pct >= 80 ? '#E8F5E9' : pct >= 60 ? '#FFF8E1' : '#FFDAD6'
 
   return (
     <div
@@ -44,7 +45,9 @@ function ResultCard({ result }: { result: SimuladoResult }) {
           {result.score}/{result.totalQuestions}
         </span>
         <span className="hist-time">{formatDuration(result.timeSpentSeconds)}</span>
-        <span className="hist-chevron">{expanded ? '▲' : '▼'}</span>
+        <span className="material-symbols-outlined md-icon--sm md-icon--muted">
+          {expanded ? 'expand_less' : 'expand_more'}
+        </span>
       </div>
 
       {expanded && result.areaBreakdown && (
@@ -59,7 +62,11 @@ function ResultCard({ result }: { result: SimuladoResult }) {
                   <tr key={area}>
                     <td className="hbd-area">{area}</td>
                     <td className="hbd-score">{b.correct}/{b.total}</td>
-                    <td className="hbd-icon"><span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>{ok ? 'check_circle' : 'warning'}</span></td>
+                    <td className="hbd-icon">
+                      <span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>
+                        {ok ? 'check_circle' : 'warning'}
+                      </span>
+                    </td>
                   </tr>
                 )
               })}
@@ -79,7 +86,7 @@ export function Historico() {
     return (
       <div className="page-placeholder">
         <div className="spinner" />
-        <p>Carregando histórico...</p>
+        <p>Carregando historico...</p>
       </div>
     )
   }
@@ -97,7 +104,7 @@ export function Historico() {
     return (
       <div className="page-placeholder" data-testid="historico-empty">
         <span className="material-symbols-outlined md-icon--lg md-icon--muted">history</span>
-        <h2 className="page-placeholder-title">Histórico</h2>
+        <h2 className="page-placeholder-title">Historico</h2>
         <p className="page-placeholder-subtitle">
           Nenhum simulado realizado ainda. Comece agora!
         </p>
@@ -106,7 +113,7 @@ export function Historico() {
           style={{ marginTop: '8px' }}
           data-testid="go-simulado-btn"
         >
-          Começar Simulado
+          Comecar Simulado
         </md-filled-button>
       </div>
     )
@@ -114,7 +121,7 @@ export function Historico() {
 
   return (
     <div className="hist-page" data-testid="historico-list">
-      <h2 className="hist-title">Histórico</h2>
+      <h2 className="hist-title">Historico</h2>
       <p className="hist-subtitle">{results.length} simulado{results.length !== 1 ? 's' : ''} realizados</p>
       <div className="hist-list">
         {results.map((r) => (

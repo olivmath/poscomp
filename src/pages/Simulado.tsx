@@ -37,29 +37,31 @@ function IdleScreen({
   return (
     <div className="simulado-container" data-testid="simulado-idle">
       <div className="simulado-card">
+        <span className="material-symbols-outlined md-icon--lg md-icon--primary">quiz</span>
         <h1 className="simulado-idle-title">Simulado POSCOMP</h1>
         <div className="simulado-info-chips">
-          <span className="simulado-chip">10 questões</span>
+          <span className="simulado-chip">10 questoes</span>
           <span className="simulado-chip">20 minutos</span>
-          <span className="simulado-chip">Múltipla escolha A–E</span>
+          <span className="simulado-chip">Multipla escolha A-E</span>
         </div>
 
         {lastScore !== null && lastTime !== null && (
           <p className="simulado-last-result" data-testid="last-result">
-            Último: <strong>{lastScore}/10</strong> · {formatDuration(lastTime)}
+            Ultimo: <strong>{lastScore}/10</strong> &middot; {formatDuration(lastTime)}
           </p>
         )}
 
         {error && <p className="simulado-error" role="alert">{error}</p>}
 
-        <md-filled-button
-          onClick={onStart}
-          disabled={loading}
-          style={{ marginTop: '8px', minWidth: '200px' }}
-          data-testid="start-btn"
-        >
-          {loading ? 'Carregando...' : 'Começar'}
-        </md-filled-button>
+        <div className="home-actions">
+          <md-filled-button
+            onClick={onStart}
+            disabled={loading}
+            data-testid="start-btn"
+          >
+            {loading ? 'Carregando...' : 'Comecar'}
+          </md-filled-button>
+        </div>
       </div>
     </div>
   )
@@ -88,7 +90,6 @@ function RunningScreen({
 
   return (
     <div className="simulado-running" data-testid="simulado-running">
-      {/* Header */}
       <div className="simulado-header">
         <span className="simulado-progress" data-testid="question-progress">
           {questionNumber} / {totalQuestions}
@@ -101,7 +102,6 @@ function RunningScreen({
         </span>
       </div>
 
-      {/* Progress bar */}
       <div className="simulado-progress-bar">
         <div
           className="simulado-progress-fill"
@@ -109,7 +109,6 @@ function RunningScreen({
         />
       </div>
 
-      {/* Question */}
       <div className="simulado-question-card">
         <p className="simulado-question-text" data-testid="question-text">
           {question.text}
@@ -129,14 +128,16 @@ function RunningScreen({
           ))}
         </div>
 
-        <md-filled-button
-          onClick={onNext}
-          disabled={selectedOption === null}
-          style={{ width: '100%', marginTop: '16px' }}
-          data-testid="next-btn"
-        >
-          {isLast ? 'Finalizar' : 'Próxima'}
-        </md-filled-button>
+        <div className="home-actions" style={{ marginTop: '16px' }}>
+          <md-filled-button
+            onClick={onNext}
+            disabled={selectedOption === null}
+            style={{ width: '100%' } as React.CSSProperties}
+            data-testid="next-btn"
+          >
+            {isLast ? 'Finalizar' : 'Proxima'}
+          </md-filled-button>
+        </div>
       </div>
     </div>
   )
@@ -166,7 +167,6 @@ function FinishedScreen({
         </div>
         <p className="simulado-time-spent">{formatDuration(timeSpent)}</p>
 
-        {/* Breakdown */}
         <div className="simulado-breakdown">
           <table className="simulado-breakdown-table" data-testid="breakdown-table">
             <tbody>
@@ -176,7 +176,11 @@ function FinishedScreen({
                   <tr key={area}>
                     <td className="bd-area">{area}</td>
                     <td className="bd-score">{data.correct}/{data.total}</td>
-                    <td className="bd-icon"><span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>{ok ? 'check_circle' : 'warning'}</span></td>
+                    <td className="bd-icon">
+                      <span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>
+                        {ok ? 'check_circle' : 'warning'}
+                      </span>
+                    </td>
                   </tr>
                 )
               })}
@@ -189,7 +193,7 @@ function FinishedScreen({
             Refazer
           </md-outlined-button>
           <md-filled-button onClick={onHistory} data-testid="history-btn">
-            Ver Histórico
+            Ver Historico
           </md-filled-button>
         </div>
       </div>

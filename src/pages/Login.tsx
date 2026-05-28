@@ -29,7 +29,7 @@ export function Login() {
       <div className="login-card">
         <div className="login-logo">
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-            <rect width="56" height="56" rx="16" fill="#6750A4"/>
+            <rect width="56" height="56" rx="16" fill="#006C6C"/>
             <text x="50%" y="54%" dominantBaseline="middle" textAnchor="middle"
               fontSize="28" fontWeight="700" fill="white">P</text>
           </svg>

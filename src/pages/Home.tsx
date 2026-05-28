@@ -1,4 +1,5 @@
 import '@material/web/button/filled-button.js'
+import '@material/web/progress/circular-progress.js'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAuth } from '../contexts/AuthContext'
@@ -11,11 +12,9 @@ export function Home() {
   const navigate = useNavigate()
   const confettiFired = useRef(false)
 
-  // Salvar perfil no Firestore + confete no login
   useEffect(() => {
     if (!user) return
 
-    // Salvar perfil
     setDoc(doc(db, 'users', user.uid), {
       uid: user.uid,
       displayName: user.displayName,
@@ -24,41 +23,45 @@ export function Home() {
       lastLogin: serverTimestamp(),
     }, { merge: true })
 
-    // Confete apenas uma vez
     if (!confettiFired.current) {
       confettiFired.current = true
       confetti({
         particleCount: 150,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#6750A4', '#D0BCFF', '#E8DEF8', '#21005D', '#FFFFFF'],
+        colors: ['#006C6C', '#4FDADA', '#B2DFDB', '#002020', '#FFFFFF'],
       })
     }
   }, [user])
 
+  const firstName = user?.displayName?.split(' ')[0] ?? ''
+
   return (
     <div className="home-container">
       <div className="home-card">
-        {user?.photoURL && (
+        {user?.photoURL ? (
           <img
             src={user.photoURL}
             alt={user.displayName ?? 'Avatar'}
             className="home-avatar"
           />
+        ) : (
+          <div className="perfil-avatar-placeholder" style={{ width: 80, height: 80 }}>
+            <span className="material-symbols-outlined md-icon--md">person</span>
+          </div>
         )}
 
         <h1 className="home-greeting">
-          Olá, {user?.displayName?.split(' ')[0]}!
+          Ola, {firstName}!
         </h1>
         <p className="home-email">{user?.email}</p>
 
         <div className="home-actions">
           <md-filled-button
             onClick={() => navigate('/simulado')}
-            style={{ minWidth: '200px' }}
             data-testid="start-simulado-btn"
           >
-            Começar Simulado
+            Comecar Simulado
           </md-filled-button>
         </div>
       </div>
