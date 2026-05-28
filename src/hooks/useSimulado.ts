@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, useMemo } from 'react'
 import {
   collection,
   getDocs,
@@ -82,15 +82,17 @@ export function useSimulado(): UseSimuladoReturn {
   const answersRef = useRef<AnswerRecord[]>([])
 
   // ── computed ─────────────────────────────────────────────────────────────
-  const questionStatuses: QuestionStatus[] = questions.map((q) => {
-    const answer = answers.find((a) => a.questionId === q.id)
-    if (!answer) return 'unvisited'
-    if (answer.skipped) return 'skipped'
-    if (answer.confidence === 'unsure') return 'unsure'
-    if (answer.confidence === 'studying') return 'studying'
-    if (answer.confidence === 'should_know') return 'should_know'
-    return 'unvisited'
-  })
+  const questionStatuses: QuestionStatus[] = useMemo(() =>
+    questions.map((q) => {
+      const answer = answers.find((a) => a.questionId === q.id)
+      if (!answer) return 'unvisited'
+      if (answer.skipped) return 'skipped'
+      if (answer.confidence === 'unsure') return 'unsure'
+      if (answer.confidence === 'studying') return 'studying'
+      if (answer.confidence === 'should_know') return 'should_know'
+      return 'unvisited'
+    })
+  , [questions, answers])
 
   // ── fetch last result on mount ───────────────────────────────────────────
   useEffect(() => {

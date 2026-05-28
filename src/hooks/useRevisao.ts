@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react'
 import { collection, getDocs, query, where, documentId } from 'firebase/firestore'
 import { db } from '../firebase'
 import { isAuthBypassed } from '../utils/bypass'
+import { gradeFromResult } from '../utils/sm2'
 import { useSrs } from './useSrs'
 import type { SrsCard, Question, Grade } from '../types'
 
@@ -105,7 +106,7 @@ export function useRevisao() {
       [currentCard.priority]: prev[currentCard.priority] + 1
     }))
 
-    const grade: Grade = studied ? 3 : 1
+    const grade: Grade = gradeFromResult(studied)
     await updateCard(currentCard.questionId, grade, studied)
     
 
