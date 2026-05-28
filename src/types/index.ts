@@ -23,15 +23,7 @@ export interface AnswerRecord {
   confidence: Confidence
 }
 
-export interface QuestionReview {
-  id: string
-  ano: number
-  area: Area
-  enunciado: string
-  alternativas: Record<Option, string>
-  resposta: Option
-  comentario?: string
-}
+export type QuestionReview = Question
 
 export interface AreaBreakdown {
   correct: number
