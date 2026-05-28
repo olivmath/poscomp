@@ -426,6 +426,19 @@ function RunningScreen({
             </button>
 
             <button
+              className="confidence-btn confidence-btn--should-know"
+              disabled={!hasSelection}
+              onClick={() => onNext('should_know')}
+              data-testid="btn-should-know"
+            >
+              <span className="material-symbols-outlined confidence-btn-icon">school</span>
+              <span className="confidence-btn-label">Deveria saber</span>
+              <span className="material-symbols-outlined confidence-btn-arrow">
+                arrow_forward
+              </span>
+            </button>
+
+            <button
               className="confidence-btn confidence-btn--certain"
               disabled={!hasSelection}
               onClick={() => onNext('certain')}
