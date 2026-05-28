@@ -5,7 +5,7 @@ import type { SimuladoConfig } from '../types'
 
 // ── Firebase mocks ────────────────────────────────────────────────────────────
 
-vi.mock('../firebase', () => ({ db: {} }))
+vi.mock('../firebase', () => ({ db: {}, functions: {} }))
 
 vi.mock('../hooks/useAuth', () => ({
   useAuth: vi.fn(),
@@ -14,9 +14,6 @@ vi.mock('../hooks/useAuth', () => ({
 vi.mock('firebase/firestore', () => ({
   collection: vi.fn(),
   getDocs: vi.fn(),
-  addDoc: vi.fn(),
-  setDoc: vi.fn(),
-  doc: vi.fn(),
   serverTimestamp: vi.fn(() => ({ seconds: 0, nanoseconds: 0 })),
   Timestamp: {
     fromDate: (d: Date) => ({ seconds: Math.floor(d.getTime() / 1000), nanoseconds: 0 }),
@@ -24,32 +21,22 @@ vi.mock('firebase/firestore', () => ({
   },
 }))
 
-vi.mock('../hooks/useSrs', () => ({
-  useSrs: vi.fn(() => ({
-    pendingCards: [],
-    totalPending: 0,
-    loading: false,
-    upsertFromResult: vi.fn().mockResolvedValue(undefined),
-    updateCard: vi.fn().mockResolvedValue(undefined),
-  })),
-}))
+const mockCallGetSimuladoQuestions = vi.fn()
+const mockCallFinishSimulado = vi.fn()
 
-vi.mock('../contexts/SrsContext', () => ({
-  useSrsContext: vi.fn(() => ({
-    pendingCards: [],
-    totalPending: 0,
-    loading: false,
-    upsertFromResult: vi.fn().mockResolvedValue(undefined),
-    updateCard: vi.fn().mockResolvedValue(undefined),
-  })),
+vi.mock('../hooks/useFunctions', () => ({
+  callGetSimuladoQuestions: (...args: unknown[]) => mockCallGetSimuladoQuestions(...args),
+  callFinishSimulado: (...args: unknown[]) => mockCallFinishSimulado(...args),
+  callGetPendingCards: vi.fn().mockResolvedValue({ data: { cards: [] } }),
+  callReviewCard: vi.fn().mockResolvedValue({ data: {} }),
 }))
 
 import { useAuth } from '../hooks/useAuth'
-import { getDocs, addDoc } from 'firebase/firestore'
+import { getDocs } from 'firebase/firestore'
 
 const mockUser = { uid: 'user-123' }
 
-const FAKE_QUESTIONS: Record<string, unknown>[] = Array.from({ length: 20 }, (_, i) => ({
+const FAKE_QUESTIONS = Array.from({ length: 20 }, (_, i) => ({
   id: `q-${i}`,
   enunciado: `Questão ${i + 1}`,
   alternativas: { A: 'Op A', B: 'Op B', C: 'Op C', D: 'Op D', E: 'Op E' },
@@ -70,6 +57,30 @@ function makeSnap(docs: Record<string, unknown>[]) {
   }
 }
 
+function makeFinishOutput(questions: typeof FAKE_QUESTIONS, score = 0) {
+  return {
+    data: {
+      resultId: 'result-id',
+      score,
+      totalQuestions: questions.length,
+      timeSpentSeconds: 0,
+      areaBreakdown: {},
+      answers: questions.map((q) => ({
+        questionId: q.id,
+        selected: 'A' as const,
+        correct: true,
+        confidence: 'should_know' as const,
+        question: {
+          enunciado: q.enunciado,
+          alternativas: q.alternativas,
+          resposta: q.resposta,
+          comentario: q.comentario,
+        },
+      })),
+    },
+  }
+}
+
 const DEFAULT_CONFIG: SimuladoConfig = {
   areas: [],
   totalQuestions: 10,
@@ -85,6 +96,8 @@ describe('useSimulado', () => {
     vi.mocked(useAuth).mockReturnValue({ user: mockUser as never, loading: false })
     // getDocs chamado no mount (lastResult) → vazio por padrão
     vi.mocked(getDocs).mockResolvedValue(makeSnap([]) as never)
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: FAKE_QUESTIONS } })
+    mockCallFinishSimulado.mockResolvedValue(makeFinishOutput(FAKE_QUESTIONS.slice(0, 10)))
     localStorage.clear()
   })
 
@@ -111,12 +124,11 @@ describe('useSimulado', () => {
     expect(result.current.state).toBe('config')
   })
 
-  it('start() com coleção questions vazia → erro "Nenhuma questão encontrada"', async () => {
+  it('start() com function retornando lista vazia → erro "Nenhuma questão encontrada"', async () => {
+    mockCallGetSimuladoQuestions.mockResolvedValueOnce({ data: { questions: [] } })
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    // segunda chamada de getDocs (dentro de start()) → vazia
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap([]) as never)
 
     await act(async () => {
       result.current.start(DEFAULT_CONFIG)
@@ -128,11 +140,11 @@ describe('useSimulado', () => {
     expect(result.current.state).toBe('idle')
   })
 
-  it('start() com erro do Firestore → erro de conexão', async () => {
+  it('start() com erro da function → erro de conexão', async () => {
+    mockCallGetSimuladoQuestions.mockRejectedValueOnce(new Error('functions/internal'))
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockRejectedValueOnce(new Error('permission-denied'))
 
     await act(async () => {
       result.current.start(DEFAULT_CONFIG)
@@ -148,58 +160,20 @@ describe('useSimulado', () => {
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
 
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
-
     await act(async () => {
       result.current.start(DEFAULT_CONFIG)
     })
 
     await waitFor(() => expect(result.current.state).toBe('running'))
 
-    expect(result.current.questions).toHaveLength(10)
+    expect(result.current.questions).toHaveLength(20) // backend controls count
     expect(result.current.currentIndex).toBe(0)
     expect(result.current.error).toBeNull()
-  })
-
-  it('start() com filtro por área → retorna apenas questões da área', async () => {
-    const { result } = renderHook(() => useSimulado())
-    await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
-
-    const config: SimuladoConfig = { ...DEFAULT_CONFIG, areas: ['Matemática'] }
-
-    await act(async () => {
-      result.current.start(config)
-    })
-
-    await waitFor(() => expect(result.current.state).toBe('running'))
-
-    expect(result.current.questions.every(q => q.area === 'Matemática')).toBe(true)
-  })
-
-  it('start() com totalQuestions = 5 → retorna 5 questões', async () => {
-    const { result } = renderHook(() => useSimulado())
-    await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
-
-    const config: SimuladoConfig = { ...DEFAULT_CONFIG, totalQuestions: 5 }
-
-    await act(async () => {
-      result.current.start(config)
-    })
-
-    await waitFor(() => expect(result.current.state).toBe('running'))
-
-    expect(result.current.questions).toHaveLength(5)
   })
 
   it('start() com timerMode = none → secondsLeft deve ser 0', async () => {
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
 
     const config: SimuladoConfig = { ...DEFAULT_CONFIG, timerMode: 'none' }
 
@@ -216,9 +190,6 @@ describe('useSimulado', () => {
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
 
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
-    vi.mocked(addDoc).mockResolvedValue({ id: 'result-id' } as never)
-
     // Inicia simulado
     await act(async () => { result.current.start(DEFAULT_CONFIG) })
     await waitFor(() => expect(result.current.state).toBe('running'))
@@ -232,10 +203,10 @@ describe('useSimulado', () => {
   })
 
   it('skip() registra skipped=true e avança para próxima questão', async () => {
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: FAKE_QUESTIONS.slice(0, 5) } })
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
 
     await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
     await waitFor(() => expect(result.current.state).toBe('running'))
@@ -253,11 +224,12 @@ describe('useSimulado', () => {
   })
 
   it('skip() na última questão finaliza o simulado', async () => {
+    const twoQuestions = FAKE_QUESTIONS.slice(0, 2)
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: twoQuestions } })
+    mockCallFinishSimulado.mockResolvedValue(makeFinishOutput(twoQuestions, 0))
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
-    vi.mocked(addDoc).mockResolvedValue({ id: 'result-id' } as never)
 
     const config = { ...DEFAULT_CONFIG, timerMode: 'none' as const, totalQuestions: 2 }
     await act(async () => { result.current.start(config) })
@@ -268,15 +240,17 @@ describe('useSimulado', () => {
     await act(async () => { result.current.skip() })
 
     await waitFor(() => expect(result.current.state).toBe('finished'))
+    // score from backend mock = 0
     expect(result.current.result?.score).toBe(0)
   })
 
-  it('resultado final salva snapshot das questões com comentário', async () => {
+  it('resultado final contém snapshot das questões com comentário', async () => {
+    const oneQuestion = FAKE_QUESTIONS.slice(0, 1)
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: oneQuestion } })
+    mockCallFinishSimulado.mockResolvedValue(makeFinishOutput(oneQuestion, 1))
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
-    vi.mocked(addDoc).mockResolvedValue({ id: 'result-id' } as never)
 
     await act(async () => { result.current.start({ ...DEFAULT_CONFIG, timerMode: 'none', totalQuestions: 1 }) })
     await waitFor(() => expect(result.current.state).toBe('running'))
@@ -291,25 +265,17 @@ describe('useSimulado', () => {
       comentario: expect.stringContaining('Comentário da questão'),
       resposta: 'A',
     })
-    expect(vi.mocked(addDoc).mock.calls[0]?.[1]).toEqual(
-      expect.objectContaining({
-        questionReviews: expect.arrayContaining([
-          expect.objectContaining({ comentario: expect.stringContaining('Comentário da questão') }),
-        ]),
-      })
-    )
   })
 
   it('next(confidence) registra a confiança corretamente', async () => {
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: FAKE_QUESTIONS.slice(0, 5) } })
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
 
     await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
     await waitFor(() => expect(result.current.state).toBe('running'))
 
-    // Seleciona opção A (correctOption)
     act(() => { result.current.select('A') })
     act(() => { result.current.next('unsure') })
 
@@ -322,10 +288,10 @@ describe('useSimulado', () => {
   })
 
   it('next("unsure") registra confidence=unsure', async () => {
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: FAKE_QUESTIONS.slice(0, 5) } })
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
 
     await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
     await waitFor(() => expect(result.current.state).toBe('running'))
@@ -338,10 +304,10 @@ describe('useSimulado', () => {
   })
 
   it('next("should_know") registra confidence=should_know', async () => {
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: FAKE_QUESTIONS.slice(0, 5) } })
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
 
     await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
     await waitFor(() => expect(result.current.state).toBe('running'))
@@ -355,10 +321,10 @@ describe('useSimulado', () => {
   })
 
   it('questionStatuses reflete o estado de cada questão', async () => {
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: FAKE_QUESTIONS.slice(0, 3) } })
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
 
     await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 3 }) })
     await waitFor(() => expect(result.current.state).toBe('running'))
@@ -377,10 +343,10 @@ describe('useSimulado', () => {
   })
 
   it('goToQuestion() navega para o índice correto', async () => {
+    mockCallGetSimuladoQuestions.mockResolvedValue({ data: { questions: FAKE_QUESTIONS.slice(0, 5) } })
+
     const { result } = renderHook(() => useSimulado())
     await waitFor(() => expect(result.current.state).toBe('idle'))
-
-    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
 
     await act(async () => { result.current.start({ ...DEFAULT_CONFIG, totalQuestions: 5 }) })
     await waitFor(() => expect(result.current.state).toBe('running'))
