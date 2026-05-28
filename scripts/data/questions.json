@@ -1884,7 +1884,7 @@
       "B": "a = -1 e b = 5",
       "C": "a = 5 e b = -3",
       "D": "a = 3 e b = -9",
-      "E": "a = -6 e b = 1 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "a = -6 e b = 1"
     },
     "resposta": "A",
     "comentario": "Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK)."
@@ -1959,7 +1959,7 @@
       "B": "~p→q",
       "C": "p→~q",
       "D": "~q->~p",
-      "E": "q→p 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "q→p"
     },
     "resposta": "D",
     "comentario": "Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p."
@@ -2004,7 +2004,7 @@
       "B": "1,68",
       "C": "2,11",
       "D": "2,87",
-      "E": "3,21 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "3,21"
     },
     "resposta": "B",
     "comentario": "Média ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68."
@@ -2064,7 +2064,7 @@
       "B": "A complexidade é O(n log m) se m for uma constante , e O(m log n) se n for uma constante.",
       "C": "A complexidade é O(n + m) se n e m forem do mesmo tamanho .",
       "D": "A complexidade é O(1) em todos os casos.",
-      "E": "A complexidade é O(nm) em todos os casos. 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "A complexidade é O(nm) em todos os casos."
     },
     "resposta": "E",
     "comentario": "O trecho contém dois loops aninhados, onde o interno executa m vezes para cada uma das n iterações do externo. O número total de operações é proporcional ao produto n * m, logo a complexidade é O(nm)."
@@ -2124,7 +2124,7 @@
       "B": "100, -101",
       "C": "153, -103",
       "D": "129, 103",
-      "E": "1, -1 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "1, -1"
     },
     "resposta": "C",
     "comentario": "Sem sinal: 128 + 16 + 8 + 1 = 153. Em complemento de 2: O bit mais significativo é 1 (negativo). Invertendo os bits (01100110) e somando 1 (01100111) obtemos 103. Logo, o valor é -103."
@@ -2184,7 +2184,7 @@
       "A": "2 2 -1 2 4 -1 8 -1 0 8 0 0",
       "B": "2 4 -1 2 2 -1 2 0 -1 2 0 -1",
       "D": "2 4 -1 2 4 -1 8 0 -1 8 0 -1",
-      "E": "2 4 -1 2 4 -1 8 0 0 8 0 0 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "2 4 -1 2 4 -1 8 0 0 8 0 0"
     },
     "resposta": "E",
     "comentario": "Primeiro printf: a=2, b=4, c=-1 e os ponteiros apontam para eles. Saída: 2 4 -1 2 4 -1. Operações: a = 2*4=8; b = -1+1=0; ++c = 0. Segundo printf: a=8, b=0, c=0 e ponteiros refletem os novos valores. Saída: 8 0 0 8 0 0."
@@ -2199,7 +2199,7 @@
       "B": "2 – 3 – 4 – 5 – 1.",
       "C": "3 – 4 – 5 – 1 – 2.",
       "D": "4 – 5 – 3 – 2 – 1.",
-      "E": "5 – 4 – 3 – 1 – 2. 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "5 – 4 – 3 – 1 – 2."
     },
     "resposta": "E",
     "comentario": "CLIPS é Declarativo (5); Smalltalk é OO (4); CLU é focado em TADs (3); C é Procedural (1); LISP é Funcional (2). A sequência correta é 5-4-3-1-2."
@@ -2319,7 +2319,7 @@
       "B": "Semáforos são adequados para cenários de espera de curta duração para entrar na região crítica.",
       "C": "Semáforos e spin locks são adequados, respectivamente, para cenários de baixa contenção e espera de longa duração para entrar na região crítica.",
       "D": "Spin locks e semáforos são adequados para ce nários de muita contenção e espera de curta duração para entrar na região crítica.",
-      "E": "Semáforos e spin locks são adequados, respectivamente, para cenários de muita contenção e espera de curta duração para entrar na região crítica. 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "Semáforos e spin locks são adequados, respectivamente, para cenários de muita contenção e espera de curta duração para entrar na região crítica."
     },
     "resposta": "E",
     "comentario": "Semáforos colocam o processo em espera (sleep), sendo melhores para longa espera. Spin locks usam espera ocupada (busy waiting), sendo eficientes apenas para esperas curtíssimas onde o custo da troca de contexto seria superior ao tempo de giro."
@@ -2394,7 +2394,7 @@
       "B": "Percurso .",
       "C": "Caminho .",
       "D": "Ciclo.",
-      "E": "Corda . 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "Corda ."
     },
     "resposta": "B",
     "comentario": "Em teoria dos grafos, um percurso (ou trail) é uma sequência de arestas adjacentes onde as arestas são distintas. Se os vértices também forem distintos, temos um caminho."
@@ -2454,7 +2454,7 @@
       "B": "Apenas I e III.",
       "C": "Apenas II e III.",
       "D": "Apenas II e IV.",
-      "E": "Apenas III e IV. 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "Apenas III e IV."
     },
     "resposta": "A",
     "comentario": "As técnicas Wait-Die e Wound-Wait são os protocolos clássicos de prevenção de deadlock baseados em carimbos de tempo (timestamps) para decidir qual transação deve esperar, ser abortada ou 'ferir' outra."
@@ -2484,7 +2484,7 @@
       "B": "T1 T1 T3.",
       "C": "T2 T3.",
       "D": "T3 T2 T3.",
-      "E": "T3 T3 T3. 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "T3 T3 T3."
     },
     "resposta": "E",
     "comentario": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3."
@@ -2529,7 +2529,7 @@
       "B": "Árvores BSP ( Binary Space Partitioning ).",
       "C": "Hemicubos.",
       "D": "Volumes de delimitação ( bounding volumes ).",
-      "E": "Z-buffer . 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "Z-buffer ."
     },
     "resposta": "C",
     "comentario": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas."
@@ -2574,7 +2574,7 @@
       "B": "Apenas II.",
       "C": "Apenas III.",
       "D": "Apenas I e II.",
-      "E": "I, II e III. 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "I, II e III."
     },
     "resposta": "B",
     "comentario": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho."
@@ -2619,7 +2619,7 @@
       "B": "F – V – F.",
       "C": "V – F – V.",
       "D": "V – V – V.",
-      "E": "V – V – F. 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "V – V – F."
     },
     "resposta": "C",
     "comentario": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores."
@@ -2694,7 +2694,7 @@
       "B": "aninhada",
       "C": "coordenadora",
       "D": "em duas fases",
-      "E": "hierárquica 761_POSCOMP_NS_DM Execução: Fundatec EXAME POSCOMP 2023 15/9/2023 13:07:48"
+      "E": "hierárquica"
     },
     "resposta": "A",
     "comentario": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas)."
