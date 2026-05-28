@@ -139,6 +139,17 @@ VITE_FIREBASE_APP_ID=
     - **Error**: `logger.error("Error in <FunctionName>", { uid, error: error.message, stack: error.stack })`
     - **Events**: `logger.info("Event description", { ...details })`
 
+## UI/UX Standards — OBRIGATÓRIO
+
+Todo trabalho visual (componente, página, ajuste de estilo) deve seguir estas regras sem exceção:
+
+- **Material 3 MCP**: consultar `mcp__material3__get_design_tokens`, `get_component_code` e `get_accessibility_guidelines` antes de implementar qualquer UI
+- **Mobile-first**: otimizar para telas pequenas primeiro; desktop é aprimoramento
+- **Tokens sempre**: usar `--md-sys-*` definidos em `src/index.css` — zero valores hardcoded (px, cores, pesos)
+- **Acessibilidade máxima**: `aria-label` em todos os controles interativos, touch targets ≥ 48px, contraste WCAG AA
+- **1× de leitura**: hierarquia tipográfica clara — `title-large` (título) → `label-large` (rótulo de seção) → `body` (conteúdo)
+- **Consistência**: seguir os padrões de classe CSS já existentes no projeto (`simulado-card`, `config-section`, `home-container--dashboard`, etc.)
+
 ## Workflow Rules — OBRIGATÓRIO
 
 - **Sem planos**: implemente diretamente, sem criar documentos de plano ou pedir aprovação prévia
