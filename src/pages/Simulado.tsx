@@ -3,10 +3,11 @@ import '@material/web/button/outlined-button.js'
 import '@material/web/progress/circular-progress.js'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { QuestionReviewList } from '../components/QuestionReviewList'
 import { useSimulado } from '../hooks/useSimulado'
 import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
 import { AREA_ICONS } from '../utils/areaIcons'
-import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence, Question } from '../types'
+import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence, Question, AnswerRecord, QuestionReview } from '../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
 const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
@@ -484,6 +485,8 @@ function FinishedScreen({
   totalQuestions,
   timeSpent,
   areaBreakdown,
+  answers,
+  questionReviews,
   onRetry,
   onHistory,
 }: {
@@ -491,6 +494,8 @@ function FinishedScreen({
   totalQuestions: number
   timeSpent: number
   areaBreakdown: Record<string, { correct: number; total: number }>
+  answers: AnswerRecord[]
+  questionReviews?: QuestionReview[]
   onRetry: () => void
   onHistory: () => void
 }) {
@@ -526,6 +531,8 @@ function FinishedScreen({
             </tbody>
           </table>
         </div>
+
+        <QuestionReviewList answers={answers} questions={questionReviews} />
 
         <div className="simulado-actions">
           <md-outlined-button onClick={onRetry} className="btn-secondary" data-testid="retry-btn">
@@ -622,6 +629,8 @@ export function Simulado() {
         totalQuestions={result.totalQuestions}
         timeSpent={result.timeSpentSeconds}
         areaBreakdown={result.areaBreakdown}
+        answers={result.answers}
+        questionReviews={result.questionReviews}
         onRetry={retry}
         onHistory={() => navigate('/historico')}
       />

@@ -44,7 +44,9 @@ const FAKE_QUESTIONS: Record<string, unknown>[] = Array.from({ length: 20 }, (_,
   enunciado: `Questão ${i + 1}`,
   alternativas: { A: 'Op A', B: 'Op B', C: 'Op C', D: 'Op D', E: 'Op E' },
   resposta: 'A',
+  ano: 2024,
   area: i < 10 ? 'Matemática' : 'Fundamentos da Computação',
+  comentario: `Comentário da questão ${i + 1}`,
   requer_imagem: false,
 }))
 
@@ -257,6 +259,35 @@ describe('useSimulado', () => {
 
     await waitFor(() => expect(result.current.state).toBe('finished'))
     expect(result.current.result?.score).toBe(0)
+  })
+
+  it('resultado final salva snapshot das questões com comentário', async () => {
+    const { result } = renderHook(() => useSimulado())
+    await waitFor(() => expect(result.current.state).toBe('idle'))
+
+    vi.mocked(getDocs).mockResolvedValueOnce(makeSnap(FAKE_QUESTIONS) as never)
+    vi.mocked(addDoc).mockResolvedValue({ id: 'result-id' } as never)
+
+    await act(async () => { result.current.start({ ...DEFAULT_CONFIG, timerMode: 'none', totalQuestions: 1 }) })
+    await waitFor(() => expect(result.current.state).toBe('running'))
+
+    act(() => { result.current.select('A') })
+    await act(async () => { result.current.next('should_know') })
+
+    await waitFor(() => expect(result.current.state).toBe('finished'))
+    expect(result.current.result?.questionReviews).toHaveLength(1)
+    expect(result.current.result?.questionReviews?.[0]).toMatchObject({
+      enunciado: expect.stringContaining('Questão'),
+      comentario: expect.stringContaining('Comentário da questão'),
+      resposta: 'A',
+    })
+    expect(vi.mocked(addDoc).mock.calls[0]?.[1]).toEqual(
+      expect.objectContaining({
+        questionReviews: expect.arrayContaining([
+          expect.objectContaining({ comentario: expect.stringContaining('Comentário da questão') }),
+        ]),
+      })
+    )
   })
 
   it('next(confidence) registra a confiança corretamente', async () => {

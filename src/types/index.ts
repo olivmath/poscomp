@@ -24,6 +24,16 @@ export interface AnswerRecord {
   confidence: Confidence
 }
 
+export interface QuestionReview {
+  id: string
+  ano: number
+  area: Area
+  enunciado: string
+  alternativas: Record<Option, string>
+  resposta: Option
+  comentario?: string
+}
+
 export interface AreaBreakdown {
   correct: number
   total: number
@@ -44,6 +54,7 @@ export interface SimuladoResult {
   timeSpentSeconds: number
   areaBreakdown: Record<Area, AreaBreakdown>
   answers: AnswerRecord[]
+  questionReviews?: QuestionReview[]
 }
 
 export type SimuladoState = 'idle' | 'config' | 'running' | 'finished'

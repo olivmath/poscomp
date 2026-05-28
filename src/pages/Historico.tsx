@@ -1,6 +1,7 @@
 import '@material/web/button/filled-button.js'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { QuestionReviewList } from '../components/QuestionReviewList'
 import { useResults } from '../hooks/useResults'
 import { AREA_ICONS } from '../utils/areaIcons'
 import type { Area, SimuladoResult } from '../types'
@@ -49,35 +50,39 @@ function ResultCard({ result }: { result: SimuladoResult }) {
         </span>
       </div>
 
-      {expanded && result.areaBreakdown && (
-        <div className="hist-breakdown" data-testid="breakdown">
-          <table className="hist-breakdown-table">
-            <tbody>
-              {AREAS.map((area) => {
-                const b = result.areaBreakdown[area]
-                if (!b) return null
-                const ok = b.correct === b.total
-                return (
-                  <tr key={area}>
-                    <td className="hbd-area">
-                      <span className="material-symbols-outlined">{AREA_ICONS[area]}</span>
-                      {area}
-                    </td>
-                    <td className="hbd-score">{b.correct}/{b.total}</td>
-                    <td className="hbd-icon">
-                      <span 
-                        className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}
-                        role="img"
-                        aria-label={ok ? 'Aprovado' : 'Requer atenção'}
-                      >
-                        {ok ? 'check_circle' : 'warning'}
-                      </span>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+      {expanded && (
+        <div className="hist-breakdown" data-testid="breakdown" onClick={(event) => event.stopPropagation()}>
+          {result.areaBreakdown && (
+            <table className="hist-breakdown-table">
+              <tbody>
+                {AREAS.map((area) => {
+                  const b = result.areaBreakdown[area]
+                  if (!b) return null
+                  const ok = b.correct === b.total
+                  return (
+                    <tr key={area}>
+                      <td className="hbd-area">
+                        <span className="material-symbols-outlined">{AREA_ICONS[area]}</span>
+                        {area}
+                      </td>
+                      <td className="hbd-score">{b.correct}/{b.total}</td>
+                      <td className="hbd-icon">
+                        <span
+                          className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}
+                          role="img"
+                          aria-label={ok ? 'Aprovado' : 'Requer atenção'}
+                        >
+                          {ok ? 'check_circle' : 'warning'}
+                        </span>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          )}
+
+          <QuestionReviewList answers={result.answers ?? []} questions={result.questionReviews} />
         </div>
       )}
     </div>
