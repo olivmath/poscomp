@@ -79,7 +79,6 @@ export function useSrs(): UseSrsReturn {
         existingMap.set(d.id, { questionId: d.id, ...d.data() } as SrsCard)
       }
 
-      const cardsToCreate: string[] = []
       const writes = result.answers.map(async (answer) => {
         const existing = existingMap.get(answer.questionId)
         const needsReview = !answer.correct || answer.confidence !== null
@@ -93,7 +92,6 @@ export function useSrs(): UseSrsReturn {
               dueDate: Timestamp.fromDate(new Date()),
             })
           } else {
-            cardsToCreate.push(answer.questionId)
             const card = buildNewCard(answer.questionId, confidence, answer.correct)
             await upsertCard(user.uid, answer.questionId, card)
           }

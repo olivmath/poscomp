@@ -13,7 +13,6 @@ interface AreaStats {
 interface ConfidenceStats {
   certainAccuracy: number
   unsureAccuracy: number
-  shouldKnowAccuracy: number
   skipRate: number
 }
 
@@ -171,7 +170,6 @@ export function useResults(): UseResultsReturn {
         const unsureAccuracy = unsureAnswers.length > 0
           ? Math.round((unsureAnswers.filter((a) => a.correct).length / unsureAnswers.length) * 100)
           : 0
-        const shouldKnowAccuracy = certainAccuracy
         const skipRate = totalAnswersCount > 0
           ? Math.round((skippedAnswers.length / totalAnswersCount) * 100)
           : 0
@@ -180,14 +178,6 @@ export function useResults(): UseResultsReturn {
         const areaConfidence: Partial<Record<Area, AreaConfidenceStats>> = {}
         for (const area of AREAS) {
           areaConfidence[area] = { certainCorrect: 0, certainWrong: 0, unsureCorrect: 0, total: 0 }
-        }
-
-        for (const r of docs) {
-          for (const answer of r.answers ?? []) {
-            if (answer.skipped) continue
-            // find the area for this answer via question data is not available here —
-            // we use areaBreakdown per result instead; skip per-answer area mapping
-          }
         }
 
         // ── area confidence from areaBreakdown + answers cross-reference ─
@@ -244,7 +234,7 @@ export function useResults(): UseResultsReturn {
           worstArea,
           byArea,
           recentScores,
-          confidenceStats: { certainAccuracy, unsureAccuracy, shouldKnowAccuracy, skipRate },
+          confidenceStats: { certainAccuracy, unsureAccuracy, skipRate },
           areaConfidence,
           reviewPriority,
           canRelax,

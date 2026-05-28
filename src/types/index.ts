@@ -1,7 +1,6 @@
 import type { Timestamp } from 'firebase/firestore'
 
 export type Area = 'Matemática' | 'Fundamentos da Computação' | 'Tecnologia da Computação'
-export type Difficulty = 'fácil' | 'médio' | 'difícil'
 export type Option = 'A' | 'B' | 'C' | 'D' | 'E'
 export type Confidence = 'unsure' | 'studying' | 'should_know' | null
 export type QuestionStatus = 'unvisited' | 'skipped' | 'unsure' | 'studying' | 'should_know'
