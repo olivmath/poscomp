@@ -129,6 +129,15 @@ export function useSimulado(): UseSimuladoReturn {
       }
 
       const score = finalAnswers.filter((a) => a.correct).length
+      const questionReviews = questions.map((q) => ({
+        id: q.id,
+        ano: q.ano,
+        area: q.area,
+        enunciado: q.enunciado,
+        alternativas: q.alternativas,
+        resposta: q.resposta,
+        comentario: q.comentario,
+      }))
 
       const resultData = {
         completedAt: serverTimestamp(),
@@ -137,6 +146,7 @@ export function useSimulado(): UseSimuladoReturn {
         timeSpentSeconds: timeSpent,
         areaBreakdown: breakdown as SimuladoResult['areaBreakdown'],
         answers: finalAnswers,
+        questionReviews,
       }
 
       let savedId = `local-${Date.now()}`
