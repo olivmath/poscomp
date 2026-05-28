@@ -9,8 +9,8 @@ export const reviewCard = onCall(async (request) => {
 
   const { questionId, studied } = request.data as ReviewCardInput
 
-  if (!questionId || typeof questionId !== 'string') {
-    throw new HttpsError('invalid-argument', 'questionId is required')
+  if (!Number.isInteger(questionId) || questionId <= 0) {
+    throw new HttpsError('invalid-argument', 'questionId must be a positive integer')
   }
 
   const cardRef = db.doc(`users/${uid}/srs_cards/${questionId}`)

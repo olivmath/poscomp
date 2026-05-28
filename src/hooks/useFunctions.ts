@@ -10,7 +10,7 @@ export interface GetSimuladoQuestionsInput {
 }
 
 export interface AnswerInput {
-  questionId: string
+  questionId: number
   selected: Option
   confidence: NonNullable<Confidence>
 }
@@ -21,14 +21,14 @@ export interface FinishSimuladoInput {
 }
 
 export interface ReviewCardInput {
-  questionId: string
+  questionId: number
   studied: boolean
 }
 
 // ── Output types (mirror functions/src/types.ts) ──────────────────────────────
 
 export interface AnswerOutput {
-  questionId: string
+  questionId: number
   selected: Option
   correct: boolean
   confidence: NonNullable<Confidence>
@@ -55,7 +55,7 @@ export interface FinishSimuladoOutput {
 }
 
 export interface PendingCardOutput {
-  questionId: string
+  questionId: number
   priority: 'P1' | 'P2' | 'P3'
   lastConfidence: NonNullable<Confidence>
   dueDate: string

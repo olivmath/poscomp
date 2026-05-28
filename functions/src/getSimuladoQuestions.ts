@@ -27,7 +27,7 @@ async function fetchQuestions(areas: Area[]): Promise<Question[]> {
 
   if (snapshot.empty) throw new HttpsError('not-found', 'No questions found for the given areas')
 
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Question))
+  return snapshot.docs.map((doc) => doc.data() as Question)
 }
 
 function validateInput(areas: Area[], total: number): void {

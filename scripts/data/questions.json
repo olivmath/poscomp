@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "area": "Matemática",
     "enunciado": "Resolva o sistema abaixo utilizando o método de Gauss.\n2x – 2y + z = –3\nx + 3y – 2z = 1\n3x – y – z = 2",
     "alternativas": {
@@ -15,7 +15,7 @@
     "ano": 2024
   },
   {
-    "id": "2",
+    "id": 2,
     "area": "Matemática",
     "enunciado": "Calcule o valor de α que provoca que o determinante da matriz Z seja 8:\nZ = [[1, -1, -1], [-1, 1, -1], [2, 2, α]]",
     "alternativas": {
@@ -30,7 +30,7 @@
     "ano": 2024
   },
   {
-    "id": "3",
+    "id": 3,
     "area": "Matemática",
     "enunciado": "Assinale a alternativa que apresenta o polinômio característico da matriz.\nA = [[1, -1, -1], [-1, 1, -1], [2, 2, 4]]",
     "alternativas": {
@@ -45,7 +45,7 @@
     "ano": 2024
   },
   {
-    "id": "4",
+    "id": 4,
     "area": "Matemática",
     "enunciado": "Quantas formas existem de permutar os elementos do conjunto {1,2,3,4} de maneira que o número 1 não esteja na primeira posição e o número 2 não esteja na segunda posição?",
     "alternativas": {
@@ -60,7 +60,7 @@
     "ano": 2024
   },
   {
-    "id": "5",
+    "id": 5,
     "area": "Matemática",
     "enunciado": "Qual é o número máximo de arestas que um grafo não direcionado G com 7 vértices pode ter sem formar um ciclo?",
     "alternativas": {
@@ -75,7 +75,7 @@
     "ano": 2024
   },
   {
-    "id": "6",
+    "id": 6,
     "area": "Matemática",
     "enunciado": "Uma startup tem 7 jogos de ação e 5 jogos de esportes. Quantas opções de pacote com 4 jogos possuem pelo menos 2 jogos de esportes?",
     "alternativas": {
@@ -90,7 +90,7 @@
     "ano": 2024
   },
   {
-    "id": "7",
+    "id": 7,
     "area": "Matemática",
     "enunciado": "Calcule o limite em infinito da função f(x) = √(x² + 1) − x.",
     "alternativas": {
@@ -105,7 +105,7 @@
     "ano": 2024
   },
   {
-    "id": "8",
+    "id": 8,
     "area": "Matemática",
     "enunciado": "Assinale a alternativa que apresenta o intervalo em que a função g(x) = √(4 − x²) / (3x − 1) é contínua.",
     "alternativas": {
@@ -120,7 +120,7 @@
     "ano": 2024
   },
   {
-    "id": "9",
+    "id": 9,
     "area": "Matemática",
     "enunciado": "Calcule a integral definida ∫₁ᵉ (ln x / x) dx.",
     "alternativas": {
@@ -135,7 +135,7 @@
     "ano": 2024
   },
   {
-    "id": "10",
+    "id": 10,
     "area": "Matemática",
     "enunciado": "O ponto médio do segmento de extremos A(5, -1) e B(4, -2) é:",
     "alternativas": {
@@ -150,7 +150,7 @@
     "ano": 2024
   },
   {
-    "id": "11",
+    "id": 11,
     "area": "Matemática",
     "enunciado": "Calcule os dois valores de k em que a distância do ponto P(2, k) até a reta r: x – y + 3 = 0 é √2.",
     "alternativas": {
@@ -165,7 +165,7 @@
     "ano": 2024
   },
   {
-    "id": "12",
+    "id": 12,
     "area": "Matemática",
     "enunciado": "Determine o ponto de intersecção das retas:\nr: x = 2 – 4t, y = –2 + t\ns: x = 3 + 8t, y = –1 – 2t",
     "alternativas": {
@@ -180,7 +180,7 @@
     "ano": 2024
   },
   {
-    "id": "13",
+    "id": 13,
     "area": "Matemática",
     "enunciado": "A expressão lógica ~p → ~q é equivalente a:",
     "alternativas": {
@@ -195,7 +195,7 @@
     "ano": 2024
   },
   {
-    "id": "14",
+    "id": 14,
     "area": "Matemática",
     "enunciado": "Dadas duas proposições lógicas q e p, a proposição ~(p ∨ q) é verdadeira se, e somente se, for falsa a proposição:",
     "alternativas": {
@@ -210,7 +210,7 @@
     "ano": 2024
   },
   {
-    "id": "15",
+    "id": 15,
     "area": "Matemática",
     "enunciado": "Considere as premissas:\n1: Se Ana Paula joga vôlei OU Joaquim joga videogame, então Victória vai à praia.\n2: Hoje, Victória NÃO foi à praia.\n3: Se hoje é sábado, então Ana Paula joga vôlei E Caio treina boxe.\nO que se pode concluir?",
     "alternativas": {
@@ -225,7 +225,7 @@
     "ano": 2024
   },
   {
-    "id": "19",
+    "id": 19,
     "area": "Matemática",
     "enunciado": "Com base na lista de tempos (80 valores) de execução de um software, a percentagem de tempo em que o processo de cálculo é inferior a 65 segundos é:",
     "alternativas": {
@@ -240,7 +240,7 @@
     "ano": 2024
   },
   {
-    "id": "20",
+    "id": 20,
     "area": "Matemática",
     "enunciado": "O tempo médio aproximado que o software leva para realizar os cálculos é:",
     "alternativas": {
@@ -255,7 +255,7 @@
     "ano": 2024
   },
   {
-    "id": "21",
+    "id": 21,
     "area": "Fundamentos da Computação",
     "enunciado": "Sobre busca sequencial em arquivo com chave única, sendo f(n) o número de registros consultados, é correto afirmar que:",
     "alternativas": {
@@ -270,7 +270,7 @@
     "ano": 2024
   },
   {
-    "id": "22",
+    "id": 22,
     "area": "Fundamentos da Computação",
     "enunciado": "Qual é o objetivo da análise assintótica de algoritmos?",
     "alternativas": {
@@ -285,7 +285,7 @@
     "ano": 2024
   },
   {
-    "id": "23",
+    "id": 23,
     "area": "Fundamentos da Computação",
     "enunciado": "Qual é a complexidade de tempo da busca em uma tabela hash, considerando a complexidade média e do pior caso, respectivamente?",
     "alternativas": {
@@ -300,7 +300,7 @@
     "ano": 2024
   },
   {
-    "id": "24",
+    "id": 24,
     "area": "Fundamentos da Computação",
     "enunciado": "Em uma estrutura de dados lista ______, cada elemento armazena dados e um ponteiro para o próximo elemento, mantém a estrutura linear e possui campo-chave para ordenação.",
     "alternativas": {
@@ -315,7 +315,7 @@
     "ano": 2024
   },
   {
-    "id": "25",
+    "id": 25,
     "area": "Fundamentos da Computação",
     "enunciado": "Sobre as instruções de repetição de uma linguagem de programação, assinale a alternativa correta.",
     "alternativas": {
@@ -330,7 +330,7 @@
     "ano": 2024
   },
   {
-    "id": "26",
+    "id": 26,
     "area": "Fundamentos da Computação",
     "enunciado": "No caminhamento ______ de uma árvore T, a raiz de T é visitada em primeiro lugar, e então as subárvores enraizadas nos seus filhos são percorridas recursivamente.",
     "alternativas": {
@@ -345,7 +345,7 @@
     "ano": 2024
   },
   {
-    "id": "29",
+    "id": 29,
     "area": "Fundamentos da Computação",
     "enunciado": "Qual dos seguintes métodos permite a transferência de dados entre um dispositivo de E/S e a memória principal sem o intermédio da CPU?",
     "alternativas": {
@@ -360,7 +360,7 @@
     "ano": 2024
   },
   {
-    "id": "33",
+    "id": 33,
     "area": "Fundamentos da Computação",
     "enunciado": "Analise o código C:\nint main() {\n  int valor1 = 12;\n  int *valor2;\n  int cont = 0;\n  valor2 = &valor1;\n  do {\n    valor1 >>= 1;\n    cont++;\n  } while (*valor2 > 0);\n  printf(\"%d\", cont);\n}\nA saída do programa é:",
     "alternativas": {
@@ -375,7 +375,7 @@
     "ano": 2024
   },
   {
-    "id": "36",
+    "id": 36,
     "area": "Fundamentos da Computação",
     "enunciado": "Qual das seguintes linguagens pode ser gerada por uma gramática regular?",
     "alternativas": {
@@ -390,7 +390,7 @@
     "ano": 2024
   },
   {
-    "id": "38",
+    "id": 38,
     "area": "Fundamentos da Computação",
     "enunciado": "O ______, de ______, demonstra limitações dos sistemas formais. Já o ______, de ______, pergunta se um programa irá parar ou entrar em loop infinito.",
     "alternativas": {
@@ -405,7 +405,7 @@
     "ano": 2024
   },
   {
-    "id": "39",
+    "id": 39,
     "area": "Fundamentos da Computação",
     "enunciado": "Sobre a estrutura de armazenamento e recuperação de informações em memória secundária, assinale a alternativa correta.",
     "alternativas": {
@@ -420,7 +420,7 @@
     "ano": 2024
   },
   {
-    "id": "40",
+    "id": 40,
     "area": "Fundamentos da Computação",
     "enunciado": "Considerando a compressão de dados, assinale a alternativa correta.",
     "alternativas": {
@@ -435,7 +435,7 @@
     "ano": 2024
   },
   {
-    "id": "45",
+    "id": 45,
     "area": "Fundamentos da Computação",
     "enunciado": "Sobre os tipos de dados básicos, assinale a alternativa correta.",
     "alternativas": {
@@ -450,7 +450,7 @@
     "ano": 2024
   },
   {
-    "id": "47",
+    "id": 47,
     "area": "Fundamentos da Computação",
     "enunciado": "Para um programa que solicita salário, mostra erro se negativo/zero, e aplica 10% de imposto se > 1000 ou 5% caso contrário, qual instrução deve ser utilizada?",
     "alternativas": {
@@ -465,7 +465,7 @@
     "ano": 2024
   },
   {
-    "id": "48",
+    "id": 48,
     "area": "Fundamentos da Computação",
     "enunciado": "Um mapa de cidade modelado como grafo com arestas não dirigidas (ruas de dois sentidos) e arestas dirigidas (ruas de um sentido) é um:",
     "alternativas": {
@@ -480,7 +480,7 @@
     "ano": 2024
   },
   {
-    "id": "49",
+    "id": 49,
     "area": "Fundamentos da Computação",
     "enunciado": "Duas arestas não dirigidas com os mesmos pontos finais, ou duas arestas dirigidas com a mesma origem e destino, são chamadas de:",
     "alternativas": {
@@ -495,7 +495,7 @@
     "ano": 2024
   },
   {
-    "id": "50",
+    "id": 50,
     "area": "Fundamentos da Computação",
     "enunciado": "Um ______ é um caminho em que os vértices de início e fim são os mesmos.",
     "alternativas": {
@@ -510,7 +510,7 @@
     "ano": 2024
   },
   {
-    "id": "51",
+    "id": 51,
     "area": "Tecnologia da Computação",
     "enunciado": "Dada a tabela ITEM(Id, Nome, Fk) com tuplas (1,'Item 1',NULL),(2,'Item 2',1),(3,'Item 3',1),(4,'Item 4',3), a consulta SELECT FILHO.Id, FILHO.Nome, PAI.Id, PAI.Nome FROM ITEM AS FILHO RIGHT OUTER JOIN ITEM AS PAI ON FILHO.Fk = PAI.Id retorna quantas tuplas?",
     "alternativas": {
@@ -525,7 +525,7 @@
     "ano": 2024
   },
   {
-    "id": "52",
+    "id": 52,
     "area": "Tecnologia da Computação",
     "enunciado": "Entre as estratégias de tratamento de deadlock, aquela que é um protocolo de detecção (em vez de prevenção) é denominada:",
     "alternativas": {
@@ -540,7 +540,7 @@
     "ano": 2024
   },
   {
-    "id": "54",
+    "id": 54,
     "area": "Tecnologia da Computação",
     "enunciado": "No contexto de construção de compiladores, um Esquema de Tradução é:",
     "alternativas": {
@@ -555,7 +555,7 @@
     "ano": 2024
   },
   {
-    "id": "58",
+    "id": 58,
     "area": "Tecnologia da Computação",
     "enunciado": "Segundo Pressman e Maxim, os resultados de ter um software de alta qualidade são os seguintes, EXCETO:",
     "alternativas": {
@@ -570,7 +570,7 @@
     "ano": 2024
   },
   {
-    "id": "59",
+    "id": 59,
     "area": "Tecnologia da Computação",
     "enunciado": "Segundo Sommerville, 'É o processo de entender e definir quais serviços são exigidos do sistema e identificar as restrições na operação e no desenvolvimento do sistema'. Isso se refere a qual atividade fundamental?",
     "alternativas": {
@@ -585,7 +585,7 @@
     "ano": 2024
   },
   {
-    "id": "60",
+    "id": 60,
     "area": "Tecnologia da Computação",
     "enunciado": "Sobre gerenciamento de configuração de software (GCS), quais assertivas estão corretas?\nI. Elementos que constituem todas as informações geradas durante o processo de software são coletivamente a configuração de software.\nII. À medida que o trabalho progride, forma-se uma hierarquia de itens de configuração.\nIII. O GCS consiste em atividades para administrar mudanças ao longo de todo o ciclo de vida.",
     "alternativas": {
@@ -600,7 +600,7 @@
     "ano": 2024
   },
   {
-    "id": "61",
+    "id": 61,
     "area": "Tecnologia da Computação",
     "enunciado": "Em um Algoritmo Genético, o operador de crossover é responsável por:",
     "alternativas": {
@@ -615,7 +615,7 @@
     "ano": 2024
   },
   {
-    "id": "62",
+    "id": 62,
     "area": "Tecnologia da Computação",
     "enunciado": "Em relação aos Sistemas Especialistas, qual alternativa melhor descreve o papel do motor de inferência?",
     "alternativas": {
@@ -630,7 +630,7 @@
     "ano": 2024
   },
   {
-    "id": "63",
+    "id": 63,
     "area": "Tecnologia da Computação",
     "enunciado": "Na digitalização de imagens, o processo envolve duas etapas: a ______, que realiza a discretização das coordenadas no domínio espacial, e a ______, que realiza a discretização dos valores de amplitude dos pixels.",
     "alternativas": {
@@ -645,7 +645,7 @@
     "ano": 2024
   },
   {
-    "id": "65",
+    "id": 65,
     "area": "Tecnologia da Computação",
     "enunciado": "Um roteador recebe um pacote com IP de destino 11.1.2.5. Em qual rota ele encaminhará o pacote?\nTabela: 13.0.0.0/8, 13.1.0.0/16, 11.1.0.0/16, 13.1.2.0/24, 11.1.2.0/24",
     "alternativas": {
@@ -660,7 +660,7 @@
     "ano": 2024
   },
   {
-    "id": "66",
+    "id": 66,
     "area": "Tecnologia da Computação",
     "enunciado": "Assinale a alternativa correta sobre o protocolo IP.",
     "alternativas": {
@@ -675,7 +675,7 @@
     "ano": 2024
   },
   {
-    "id": "67",
+    "id": 67,
     "area": "Tecnologia da Computação",
     "enunciado": "Qual protocolo da camada de transporte o DNS utiliza para consultas regulares?",
     "alternativas": {
@@ -690,7 +690,7 @@
     "ano": 2024
   },
   {
-    "id": "68",
+    "id": 68,
     "area": "Tecnologia da Computação",
     "enunciado": "Os programas dos clientes não devem conhecer a distribuição de arquivos. Um único conjunto de operações é fornecido para acesso a arquivos locais e remotos. Qual é o requisito de transparência descrito?",
     "alternativas": {
@@ -705,7 +705,7 @@
     "ano": 2024
   },
   {
-    "id": "69",
+    "id": 69,
     "area": "Tecnologia da Computação",
     "enunciado": "Uma falha ______ ocorre quando um servidor para abruptamente, estava funcionando corretamente até parar, e nada mais se ouve dele.",
     "alternativas": {
@@ -720,7 +720,7 @@
     "ano": 2024
   },
   {
-    "id": "70",
+    "id": 70,
     "area": "Tecnologia da Computação",
     "enunciado": "O algoritmo de exclusão mútua ______ requer apenas três mensagens para entrar e sair de uma região crítica: uma requisição, uma permissão para entrar e uma liberação para sair.",
     "alternativas": {

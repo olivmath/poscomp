@@ -6,7 +6,7 @@ export type Confidence = 'unsure' | 'studying' | 'should_know' | null
 export type QuestionStatus = 'unvisited' | 'skipped' | 'unsure' | 'studying' | 'should_know'
 
 export interface Question {
-  id: string
+  id: number
   ano: number
   area: Area
   enunciado: string
@@ -16,7 +16,7 @@ export interface Question {
 }
 
 export interface AnswerRecord {
-  questionId: string
+  questionId: number
   selected: Option | null
   correct: boolean
   skipped: boolean
@@ -51,7 +51,7 @@ export interface SimuladoResult {
 export type SimuladoState = 'idle' | 'config' | 'running' | 'finished'
 
 export interface SrsCard {
-  questionId: string
+  questionId: number
   easeFactor: number      // inicia em 2.5
   interval: number        // dias até próxima revisão
   repetitions: number     // nº de revisões bem-sucedidas consecutivas

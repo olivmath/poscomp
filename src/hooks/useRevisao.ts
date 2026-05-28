@@ -8,7 +8,7 @@ export type Priority = 'P1' | 'P2' | 'P3'
 export type RevisaoState = 'loading' | 'empty' | 'session' | 'finished'
 
 export interface AdaptedCard {
-  questionId: string
+  questionId: number
   priority: Priority
   question: Question
 }

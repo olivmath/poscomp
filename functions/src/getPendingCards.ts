@@ -28,21 +28,22 @@ async function fetchDueCards(uid: string): Promise<SrsCard[]> {
   return snapshot.docs.map((doc) => doc.data() as SrsCard)
 }
 
-async function fetchQuestionsMap(questionIds: string[]): Promise<Map<string, Question>> {
+async function fetchQuestionsMap(questionIds: number[]): Promise<Map<number, Question>> {
   const chunks = chunkArray(questionIds, 30)
-  const map = new Map<string, Question>()
+  const map = new Map<number, Question>()
 
   for (const chunk of chunks) {
-    const snapshot = await db.collection('questions').where('__name__', 'in', chunk).get()
+    const snapshot = await db.collection('questions').where('__name__', 'in', chunk.map(String)).get()
     for (const doc of snapshot.docs) {
-      map.set(doc.id, { id: doc.id, ...doc.data() } as Question)
+      const q = doc.data() as Question
+      map.set(q.id, q)
     }
   }
 
   return map
 }
 
-function buildOutput(cards: SrsCard[], questionsMap: Map<string, Question>): PendingCardOutput[] {
+function buildOutput(cards: SrsCard[], questionsMap: Map<number, Question>): PendingCardOutput[] {
   const withPriority = cards
     .filter((c) => c.lastConfidence !== null)
     .map((card) => ({

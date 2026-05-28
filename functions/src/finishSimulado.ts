@@ -68,20 +68,21 @@ function validateInput(input: FinishSimuladoInput): void {
     if (!VALID_CONFIDENCES.includes(answer.confidence)) {
       throw new HttpsError('invalid-argument', `Invalid confidence: ${answer.confidence}`)
     }
-    if (!answer.questionId || typeof answer.questionId !== 'string') {
-      throw new HttpsError('invalid-argument', 'Each answer must have a questionId')
+    if (!Number.isInteger(answer.questionId) || answer.questionId <= 0) {
+      throw new HttpsError('invalid-argument', 'Each answer must have a valid questionId (positive integer)')
     }
   }
 }
 
-async function fetchQuestionsMap(questionIds: string[]): Promise<Map<string, Question>> {
+async function fetchQuestionsMap(questionIds: number[]): Promise<Map<number, Question>> {
   const chunks = chunkArray(questionIds, 30)
-  const map = new Map<string, Question>()
+  const map = new Map<number, Question>()
 
   for (const chunk of chunks) {
-    const snapshot = await db.collection('questions').where('__name__', 'in', chunk).get()
+    const snapshot = await db.collection('questions').where('__name__', 'in', chunk.map(String)).get()
     for (const doc of snapshot.docs) {
-      map.set(doc.id, { id: doc.id, ...doc.data() } as Question)
+      const q = doc.data() as Question
+      map.set(q.id, q)
     }
   }
 
@@ -93,7 +94,7 @@ async function fetchQuestionsMap(questionIds: string[]): Promise<Map<string, Que
   return map
 }
 
-function buildAnswersOutput(answers: AnswerInput[], questionsMap: Map<string, Question>): AnswerOutput[] {
+function buildAnswersOutput(answers: AnswerInput[], questionsMap: Map<number, Question>): AnswerOutput[] {
   return answers.map((answer) => {
     const question = questionsMap.get(answer.questionId)!
     const correct = answer.selected === question.resposta
@@ -115,7 +116,7 @@ function buildAnswersOutput(answers: AnswerInput[], questionsMap: Map<string, Qu
 
 function buildAreaBreakdown(
   answersOutput: AnswerOutput[],
-  questionsMap: Map<string, Question>,
+  questionsMap: Map<number, Question>,
 ): Record<Area, AreaBreakdown> {
   const breakdown: Partial<Record<Area, AreaBreakdown>> = {}
 
@@ -146,7 +147,7 @@ async function saveResult(
 async function updateSrsCards(
   uid: string,
   answers: AnswerInput[],
-  questionsMap: Map<string, Question>,
+  questionsMap: Map<number, Question>,
 ): Promise<void> {
   const batch = db.batch()
   const now = Timestamp.now()

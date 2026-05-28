@@ -14,7 +14,7 @@ export const VALID_OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
 export const VALID_CONFIDENCES: Confidence[] = ['unsure', 'studying', 'should_know']
 
 export interface Question {
-  id: string
+  id: number
   ano: number
   area: Area
   enunciado: string
@@ -24,7 +24,7 @@ export interface Question {
 }
 
 export interface SrsCard {
-  questionId: string
+  questionId: number
   easeFactor: number
   interval: number
   repetitions: number
@@ -42,7 +42,7 @@ export interface GetSimuladoQuestionsInput {
 }
 
 export interface AnswerInput {
-  questionId: string
+  questionId: number
   selected: Option
   confidence: Confidence
 }
@@ -53,7 +53,7 @@ export interface FinishSimuladoInput {
 }
 
 export interface ReviewCardInput {
-  questionId: string
+  questionId: number
   studied: boolean
 }
 
@@ -64,7 +64,7 @@ export interface AreaBreakdown {
 }
 
 export interface AnswerOutput {
-  questionId: string
+  questionId: number
   selected: Option
   correct: boolean
   confidence: Confidence
@@ -86,7 +86,7 @@ export interface FinishSimuladoOutput {
 }
 
 export interface PendingCardOutput {
-  questionId: string
+  questionId: number
   priority: 'P1' | 'P2' | 'P3'
   lastConfidence: Confidence
   dueDate: string
@@ -94,7 +94,7 @@ export interface PendingCardOutput {
   easeFactor: number
   interval: number
   question: {
-    id: string
+    id: number
     ano: number
     area: Area
     enunciado: string
