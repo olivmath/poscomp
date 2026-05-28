@@ -1,12 +1,17 @@
 import '@material/web/button/filled-button.js'
 import '@material/web/button/outlined-button.js'
+import '@material/web/button/text-button.js'
 import '@material/web/progress/circular-progress.js'
+import '@material/web/chips/chip-set.js'
+import '@material/web/chips/filter-chip.js'
+import '@material/web/labs/segmentedbuttonset/outlined-segmented-button-set.js'
+import '@material/web/labs/segmentedbutton/outlined-segmented-button.js'
+import '@material/web/dialog/dialog.js'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { QuestionReviewList } from '../components/QuestionReviewList'
 import { useSimulado } from '../hooks/useSimulado'
 import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
-import { AREA_ICONS } from '../utils/areaIcons'
 import { formatDuration } from '../utils/formatDuration'
 import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence, Question, AnswerRecord, QuestionReview } from '../types'
 
@@ -24,23 +29,14 @@ function formatTime(seconds: number): string {
 // ── Exit Confirmation Modal ──────────────────────────────────────────────────
 function ExitModal({ onConfirm, onCancel }: { onConfirm: () => void; onCancel: () => void }) {
   return (
-    <div className="immersive-modal-overlay" onClick={onCancel}>
-      <div className="immersive-exit-modal" onClick={(e) => e.stopPropagation()}>
-        <span className="material-symbols-outlined md-icon--lg md-icon--warning">
-          warning
-        </span>
-        <h3 className="exit-modal-title">Sair do simulado?</h3>
-        <p className="exit-modal-body">Seu progresso será perdido. Esta ação não pode ser desfeita.</p>
-        <div className="exit-modal-actions">
-          <button className="exit-modal-btn exit-modal-btn--cancel" onClick={onCancel}>
-            Continuar
-          </button>
-          <button className="exit-modal-btn exit-modal-btn--confirm" onClick={onConfirm}>
-            Sair
-          </button>
-        </div>
+    <md-dialog open onClick={(e) => e.stopPropagation()}>
+      <div slot="headline">Sair do simulado?</div>
+      <div slot="content">Seu progresso será perdido. Esta ação não pode ser desfeita.</div>
+      <div slot="actions">
+        <md-text-button onClick={onCancel}>Continuar</md-text-button>
+        <md-filled-button onClick={onConfirm}>Sair</md-filled-button>
       </div>
-    </div>
+    </md-dialog>
   )
 }
 
@@ -65,15 +61,16 @@ function QuestionMapModal({
   ] as const
 
   return (
-    <div className="immersive-modal-overlay" onClick={onClose}>
-      <div className="question-map-sheet" onClick={(e) => e.stopPropagation()}>
+    <md-dialog open className="question-map-dialog">
+      <div slot="headline">
         <div className="question-map-header">
           <span className="question-map-title">Mapa de questões</span>
           <button className="question-map-close" onClick={onClose} aria-label="Fechar mapa">
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
-
+      </div>
+      <div slot="content">
         <div className="question-map-grid" data-testid="question-map-grid">
           {statuses.map((status, i) => (
             <button
@@ -97,7 +94,10 @@ function QuestionMapModal({
           ))}
         </div>
       </div>
-    </div>
+      <div slot="actions">
+        <md-text-button onClick={onClose}>Fechar</md-text-button>
+      </div>
+    </md-dialog>
   )
 }
 
@@ -184,7 +184,7 @@ function IdleScreen({
 
         {error && <p className="simulado-error" role="alert">{error}</p>}
 
-        <div className="simulado-actions" style={{ marginTop: '16px' }}>
+        <div className="simulado-actions simulado-actions--mt-md">
           <md-outlined-button
             onClick={onConfig}
             disabled={loading}
@@ -244,75 +244,67 @@ function ConfigScreen({
       <div className="simulado-card">
         <h2 className="simulado-idle-title">Configurar Simulado</h2>
 
-        <div className="config-section" style={{ width: '100%' }}>
+        <div className="config-section config-section--full">
           <p className="config-label">Temas</p>
-          <div className="area-chips" style={{ marginTop: '8px' }}>
-            <button
-              className={`area-chip${areas.length === 0 ? ' area-chip--active' : ''}`}
+          <md-chip-set className="area-chips area-chips--mt">
+            <md-filter-chip
+              label="Todas"
+              selected={areas.length === 0}
               onClick={() => setAreas([])}
               data-testid="chip-all"
-            >
-              <span className="material-symbols-outlined area-chip-icon">select_all</span>
-              Todas
-            </button>
+            />
             {AREAS.map(area => (
-              <button
+              <md-filter-chip
                 key={area}
-                className={`area-chip${areas.includes(area) ? ' area-chip--active' : ''}`}
+                label={area}
+                selected={areas.includes(area)}
                 onClick={() => toggleArea(area)}
                 data-testid={`chip-${area}`}
-              >
-                <span className="material-symbols-outlined area-chip-icon">{AREA_ICONS[area]}</span>
-                {area}
-              </button>
+              />
             ))}
-          </div>
+          </md-chip-set>
         </div>
 
-        <div className="config-section" style={{ width: '100%', marginTop: '8px' }}>
+        <div className="config-section config-section--full config-section--mt">
           <p className="config-label">Nº de questões</p>
-          <div className="segmented-buttons" style={{ marginTop: '8px' }}>
+          <md-outlined-segmented-button-set className="segmented-buttons--mt config-segmented">
             {[5, 10, 20, 0].map(val => (
-              <button
+              <md-outlined-segmented-button
                 key={val}
-                className={`segmented-btn ${totalQuestions === val ? 'active' : ''}`}
+                label={val === 0 ? 'Máximo' : String(val)}
+                selected={totalQuestions === val}
                 onClick={() => setTotalQuestions(val)}
                 data-testid={`q-${val === 0 ? 'max' : val}`}
-              >
-                {val === 0 ? 'Máximo' : val}
-              </button>
+              />
             ))}
-          </div>
+          </md-outlined-segmented-button-set>
         </div>
 
-        <div className="config-section" style={{ width: '100%', marginTop: '8px' }}>
+        <div className="config-section config-section--full config-section--mt">
           <p className="config-label">Tempo por questão</p>
-          <div className="segmented-buttons" style={{ marginTop: '8px' }}>
-            <button
-              className={`segmented-btn ${timerMode === 'none' ? 'active' : ''}`}
+          <md-outlined-segmented-button-set className="segmented-buttons--mt config-segmented">
+            <md-outlined-segmented-button
+              label="Sem limite"
+              selected={timerMode === 'none'}
               onClick={() => setTimerMode('none')}
               data-testid="t-none"
-            >
-              Sem limite
-            </button>
-            <button
-              className={`segmented-btn ${timerMode === 'per-question' && secondsPerQuestion === 60 ? 'active' : ''}`}
+            />
+            <md-outlined-segmented-button
+              label="1 min"
+              selected={timerMode === 'per-question' && secondsPerQuestion === 60}
               onClick={() => { setTimerMode('per-question'); setSecondsPerQuestion(60) }}
               data-testid="t-1min"
-            >
-              1 min
-            </button>
-            <button
-              className={`segmented-btn ${timerMode === 'per-question' && secondsPerQuestion === 120 ? 'active' : ''}`}
+            />
+            <md-outlined-segmented-button
+              label="2 min"
+              selected={timerMode === 'per-question' && secondsPerQuestion === 120}
               onClick={() => { setTimerMode('per-question'); setSecondsPerQuestion(120) }}
               data-testid="t-2min"
-            >
-              2 min
-            </button>
-          </div>
+            />
+          </md-outlined-segmented-button-set>
         </div>
 
-        <div className="simulado-actions" style={{ marginTop: '24px' }}>
+        <div className="simulado-actions simulado-actions--mt-lg">
           <md-outlined-button onClick={onBack} disabled={loading} className="btn-secondary">
             Voltar
           </md-outlined-button>

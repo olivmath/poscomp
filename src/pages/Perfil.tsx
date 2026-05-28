@@ -1,3 +1,7 @@
+import '@material/web/list/list.js'
+import '@material/web/list/list-item.js'
+import '@material/web/switch/switch.js'
+import '@material/web/button/filled-tonal-button.js'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
@@ -37,60 +41,72 @@ export function Perfil() {
 
       <div className="perfil-section">
         <h2 className="perfil-section-title">Preferências</h2>
-        <div className="perfil-info-list">
-          <button className="perfil-info-row" style={{ width: '100%', border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left' }} onClick={toggleTheme}>
-            <span className="material-symbols-outlined perfil-info-icon">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
-            <div className="perfil-info-content">
-              <span className="perfil-info-label">Tema</span>
-              <span className="perfil-info-value">{theme === 'dark' ? 'Claro' : 'Escuro'}</span>
-            </div>
-          </button>
-        </div>
+        <md-list className="perfil-info-list">
+          <md-list-item
+            headline="Tema escuro"
+            type="button"
+            onClick={toggleTheme}
+            className="perfil-info-row"
+          >
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">
+              {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+            </span>
+            <md-switch
+              slot="end"
+              selected={theme === 'dark'}
+              onClick={(e: React.MouseEvent) => {
+                e.stopPropagation()
+                toggleTheme()
+              }}
+              aria-label="Alternar tema escuro"
+            />
+          </md-list-item>
+        </md-list>
       </div>
 
       <div className="perfil-section">
         <h2 className="perfil-section-title">Conta</h2>
-        <div className="perfil-info-list">
-          <div className="perfil-info-row">
-            <span className="material-symbols-outlined perfil-info-icon">badge</span>
-            <div className="perfil-info-content">
-              <span className="perfil-info-label">Nome</span>
-              <span className="perfil-info-value">{user?.displayName ?? '—'}</span>
-            </div>
-          </div>
-          <div className="perfil-info-row">
-            <span className="material-symbols-outlined perfil-info-icon">mail</span>
-            <div className="perfil-info-content">
-              <span className="perfil-info-label">E-mail</span>
-              <span className="perfil-info-value">{user?.email ?? '—'}</span>
-            </div>
-          </div>
-          <div className="perfil-info-row">
-            <span className="material-symbols-outlined perfil-info-icon">verified_user</span>
-            <div className="perfil-info-content">
-              <span className="perfil-info-label">Autenticação</span>
-              <span className="perfil-info-value">Google</span>
-            </div>
-          </div>
-          <div className="perfil-info-row">
-            <span className="material-symbols-outlined perfil-info-icon">info</span>
-            <div className="perfil-info-content">
-              <span className="perfil-info-label">Versão</span>
-              <span className="perfil-info-value">v{__APP_VERSION__}</span>
-            </div>
-          </div>
-        </div>
+        <md-list className="perfil-info-list">
+          <md-list-item
+            headline="Nome"
+            supporting-text={user?.displayName ?? '—'}
+            className="perfil-info-row"
+          >
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">badge</span>
+          </md-list-item>
+          <md-list-item
+            headline="E-mail"
+            supporting-text={user?.email ?? '—'}
+            className="perfil-info-row"
+          >
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">mail</span>
+          </md-list-item>
+          <md-list-item
+            headline="Autenticação"
+            supporting-text="Google"
+            className="perfil-info-row"
+          >
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">verified_user</span>
+          </md-list-item>
+          <md-list-item
+            headline="Versão"
+            supporting-text={`v${__APP_VERSION__}`}
+            className="perfil-info-row"
+          >
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">info</span>
+          </md-list-item>
+        </md-list>
       </div>
 
       <div className="perfil-actions">
-        <button
-          className={`perfil-logout-btn ${loggingOut ? 'perfil-logout-btn--loading' : ''}`}
+        <md-filled-tonal-button
           onClick={handleLogout}
           disabled={loggingOut}
+          className="perfil-logout-md-btn"
         >
-          <span className="material-symbols-outlined perfil-logout-icon">logout</span>
+          <span slot="icon" className="material-symbols-outlined">logout</span>
           {loggingOut ? 'Saindo...' : 'Sair da conta'}
-        </button>
+        </md-filled-tonal-button>
       </div>
     </div>
   )

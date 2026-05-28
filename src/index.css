@@ -5,14 +5,67 @@
    TOKENS — Light (default)
 ═══════════════════════════════════════════════════════════ */
 :root {
-  /* MD3 system colors */
-  --md-sys-color-primary:             #6750A4;
-  --md-sys-color-on-primary:          #FFFFFF;
-  --md-sys-color-surface:             #FFFBFE;
-  --md-sys-color-surface-variant:     #E7E0EC;
-  --md-sys-color-on-surface:          #1C1B1F;
-  --md-sys-color-on-surface-variant:  #49454F;
-  --md-sys-color-outline:             #79747E;
+  /* MD3 system colors — light */
+  --md-sys-color-primary:                    #6750A4;
+  --md-sys-color-on-primary:                 #FFFFFF;
+  --md-sys-color-primary-container:          #EADDFF;
+  --md-sys-color-on-primary-container:       #21005D;
+  --md-sys-color-secondary:                  #625B71;
+  --md-sys-color-on-secondary:               #FFFFFF;
+  --md-sys-color-secondary-container:        #E8DEF8;
+  --md-sys-color-on-secondary-container:     #1D192B;
+  --md-sys-color-tertiary:                   #7D5260;
+  --md-sys-color-on-tertiary:                #FFFFFF;
+  --md-sys-color-tertiary-container:         #FFD8E4;
+  --md-sys-color-on-tertiary-container:      #31111D;
+  --md-sys-color-error:                      #B3261E;
+  --md-sys-color-on-error:                   #FFFFFF;
+  --md-sys-color-error-container:            #F9DEDC;
+  --md-sys-color-on-error-container:         #410E0B;
+  --md-sys-color-background:                 #FFFBFE;
+  --md-sys-color-on-background:              #1C1B1F;
+  --md-sys-color-surface:                    #FFFBFE;
+  --md-sys-color-on-surface:                 #1C1B1F;
+  --md-sys-color-surface-variant:            #E7E0EC;
+  --md-sys-color-on-surface-variant:         #49454F;
+  --md-sys-color-surface-container-lowest:   #FFFFFF;
+  --md-sys-color-surface-container-low:      #F7F2FA;
+  --md-sys-color-surface-container:          #F3EEF8;
+  --md-sys-color-surface-container-high:     #ECE6F0;
+  --md-sys-color-surface-container-highest:  #E6E0E9;
+  --md-sys-color-inverse-surface:            #313033;
+  --md-sys-color-inverse-on-surface:         #F4EFF4;
+  --md-sys-color-inverse-primary:            #D0BCFF;
+  --md-sys-color-outline:                    #79747E;
+  --md-sys-color-outline-variant:            #CAC4D0;
+  --md-sys-color-scrim:                      #000000;
+  --md-sys-color-shadow:                     #000000;
+
+  /* MD3 type scale */
+  --md-sys-typescale-headline-large-size:    32px;
+  --md-sys-typescale-headline-large-weight:  400;
+  --md-sys-typescale-headline-large-line-height: 40px;
+  --md-sys-typescale-headline-medium-size:   28px;
+  --md-sys-typescale-headline-medium-weight: 400;
+  --md-sys-typescale-headline-medium-line-height: 36px;
+  --md-sys-typescale-title-large-size:       22px;
+  --md-sys-typescale-title-large-weight:     700;
+  --md-sys-typescale-title-large-line-height: 28px;
+  --md-sys-typescale-title-medium-size:      16px;
+  --md-sys-typescale-title-medium-weight:    600;
+  --md-sys-typescale-title-medium-line-height: 24px;
+  --md-sys-typescale-body-large-size:        16px;
+  --md-sys-typescale-body-large-weight:      400;
+  --md-sys-typescale-body-large-line-height: 24px;
+  --md-sys-typescale-body-medium-size:       14px;
+  --md-sys-typescale-body-medium-weight:     400;
+  --md-sys-typescale-body-medium-line-height: 20px;
+  --md-sys-typescale-label-large-size:       14px;
+  --md-sys-typescale-label-large-weight:     600;
+  --md-sys-typescale-label-large-line-height: 20px;
+  --md-sys-typescale-label-medium-size:      12px;
+  --md-sys-typescale-label-medium-weight:    500;
+  --md-sys-typescale-label-medium-line-height: 16px;
 
   /* Spacing */
   --space-xs:  4px;
@@ -22,14 +75,14 @@
   --space-xl:  32px;
   --space-xxl: 48px;
 
-  /* Semantic surface tokens */
-  --color-card-bg:             #FFFFFF;
-  --color-surface-elevated:    #F4EFF4;
-  --color-chip-bg:             #E8DEF8;
-  --color-chip-text:           #6750A4;
+  /* Semantic surface tokens — mapped to MD3 */
+  --color-card-bg:             var(--md-sys-color-surface-container-high);
+  --color-surface-elevated:    var(--md-sys-color-surface-container);
+  --color-chip-bg:             var(--md-sys-color-secondary-container);
+  --color-chip-text:           var(--md-sys-color-on-secondary-container);
   --color-page-gradient:       linear-gradient(135deg, #F3EFF4 0%, #EAE2F8 100%);
-  --color-divider:             #E7E0EC;
-  --color-divider-subtle:      #F4EFF4;
+  --color-divider:             var(--md-sys-color-outline-variant);
+  --color-divider-subtle:      var(--md-sys-color-surface-container-low);
 
   /* Navigation */
   --color-nav-bg:              rgba(255, 251, 254, 0.88);
@@ -57,10 +110,10 @@
   --color-score-low:           #8C1D18;
   --color-score-low-bg:        #FDECEA;
 
-  /* Misc */
-  --color-spinner-track:       #E7E0EC;
-  --color-spinner-active:      #6750A4;
-  --color-error:               #B3261E;
+  /* Misc — mapped to MD3 */
+  --color-spinner-track:       var(--md-sys-color-surface-variant);
+  --color-spinner-active:      var(--md-sys-color-primary);
+  --color-error:               var(--md-sys-color-error);
   --color-card-shadow:         0 2px 20px rgba(103, 80, 164, 0.12);
   --color-card-shadow-hover:   0 4px 16px rgba(103, 80, 164, 0.14);
 
@@ -97,23 +150,50 @@
    TOKENS — Dark
 ═══════════════════════════════════════════════════════════ */
 .dark {
-  /* MD3 system colors */
-  --md-sys-color-primary:             #D0BCFF;
-  --md-sys-color-on-primary:          #381E72;
-  --md-sys-color-surface:             #1C1B1F;
-  --md-sys-color-surface-variant:     #49454F;
-  --md-sys-color-on-surface:          #E6E1E5;
-  --md-sys-color-on-surface-variant:  #CAC4D0;
-  --md-sys-color-outline:             #938F99;
+  /* MD3 system colors — dark */
+  --md-sys-color-primary:                    #D0BCFF;
+  --md-sys-color-on-primary:                 #381E72;
+  --md-sys-color-primary-container:          #4F378B;
+  --md-sys-color-on-primary-container:       #EADDFF;
+  --md-sys-color-secondary:                  #CCC2DC;
+  --md-sys-color-on-secondary:               #332D41;
+  --md-sys-color-secondary-container:        #4A4458;
+  --md-sys-color-on-secondary-container:     #E8DEF8;
+  --md-sys-color-tertiary:                   #EFB8C8;
+  --md-sys-color-on-tertiary:                #492532;
+  --md-sys-color-tertiary-container:         #633B48;
+  --md-sys-color-on-tertiary-container:      #FFD8E4;
+  --md-sys-color-error:                      #F2B8B5;
+  --md-sys-color-on-error:                   #601410;
+  --md-sys-color-error-container:            #8C1D18;
+  --md-sys-color-on-error-container:         #F9DEDC;
+  --md-sys-color-background:                 #1C1B1F;
+  --md-sys-color-on-background:              #E6E1E5;
+  --md-sys-color-surface:                    #1C1B1F;
+  --md-sys-color-on-surface:                 #E6E1E5;
+  --md-sys-color-surface-variant:            #49454F;
+  --md-sys-color-on-surface-variant:         #CAC4D0;
+  --md-sys-color-surface-container-lowest:   #0F0E13;
+  --md-sys-color-surface-container-low:      #1D1B20;
+  --md-sys-color-surface-container:          #211F26;
+  --md-sys-color-surface-container-high:     #2B2930;
+  --md-sys-color-surface-container-highest:  #36343B;
+  --md-sys-color-inverse-surface:            #E6E1E5;
+  --md-sys-color-inverse-on-surface:         #313033;
+  --md-sys-color-inverse-primary:            #6750A4;
+  --md-sys-color-outline:                    #938F99;
+  --md-sys-color-outline-variant:            #49454F;
+  --md-sys-color-scrim:                      #000000;
+  --md-sys-color-shadow:                     #000000;
 
-  /* Semantic surface tokens */
-  --color-card-bg:             #2B2930;
-  --color-surface-elevated:    #302D38;
-  --color-chip-bg:             #4A4458;
-  --color-chip-text:           #D0BCFF;
+  /* Semantic surface tokens — mapped to MD3 dark */
+  --color-card-bg:             var(--md-sys-color-surface-container-high);
+  --color-surface-elevated:    var(--md-sys-color-surface-container);
+  --color-chip-bg:             var(--md-sys-color-secondary-container);
+  --color-chip-text:           var(--md-sys-color-on-secondary-container);
   --color-page-gradient:       linear-gradient(135deg, #1C1B1F 0%, #221E2C 100%);
-  --color-divider:             #49454F;
-  --color-divider-subtle:      #302D38;
+  --color-divider:             var(--md-sys-color-outline-variant);
+  --color-divider-subtle:      var(--md-sys-color-surface-container-low);
 
   /* Navigation */
   --color-nav-bg:              rgba(28, 27, 31, 0.88);
@@ -141,10 +221,10 @@
   --color-score-low:           #F2B8B5;
   --color-score-low-bg:        rgba(242, 184, 181, 0.15);
 
-  /* Misc */
-  --color-spinner-track:       #49454F;
-  --color-spinner-active:      #D0BCFF;
-  --color-error:               #F2B8B5;
+  /* Misc — mapped to MD3 dark */
+  --color-spinner-track:       var(--md-sys-color-surface-variant);
+  --color-spinner-active:      var(--md-sys-color-primary);
+  --color-error:               var(--md-sys-color-error);
   --color-card-shadow:         0 2px 20px rgba(0, 0, 0, 0.35);
   --color-card-shadow-hover:   0 4px 16px rgba(0, 0, 0, 0.45);
 
@@ -174,6 +254,50 @@ body {
   color: var(--md-sys-color-on-surface);
   min-height: 100vh;
   transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TYPE SCALE — MD3 utility classes
+═══════════════════════════════════════════════════════════ */
+.type-headline-large {
+  font-size: var(--md-sys-typescale-headline-large-size);
+  font-weight: var(--md-sys-typescale-headline-large-weight);
+  line-height: var(--md-sys-typescale-headline-large-line-height);
+}
+.type-headline-medium {
+  font-size: var(--md-sys-typescale-headline-medium-size);
+  font-weight: var(--md-sys-typescale-headline-medium-weight);
+  line-height: var(--md-sys-typescale-headline-medium-line-height);
+}
+.type-title-large {
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  line-height: var(--md-sys-typescale-title-large-line-height);
+}
+.type-title-medium {
+  font-size: var(--md-sys-typescale-title-medium-size);
+  font-weight: var(--md-sys-typescale-title-medium-weight);
+  line-height: var(--md-sys-typescale-title-medium-line-height);
+}
+.type-body-large {
+  font-size: var(--md-sys-typescale-body-large-size);
+  font-weight: var(--md-sys-typescale-body-large-weight);
+  line-height: var(--md-sys-typescale-body-large-line-height);
+}
+.type-body-medium {
+  font-size: var(--md-sys-typescale-body-medium-size);
+  font-weight: var(--md-sys-typescale-body-medium-weight);
+  line-height: var(--md-sys-typescale-body-medium-line-height);
+}
+.type-label-large {
+  font-size: var(--md-sys-typescale-label-large-size);
+  font-weight: var(--md-sys-typescale-label-large-weight);
+  line-height: var(--md-sys-typescale-label-large-line-height);
+}
+.type-label-medium {
+  font-size: var(--md-sys-typescale-label-medium-size);
+  font-weight: var(--md-sys-typescale-label-medium-weight);
+  line-height: var(--md-sys-typescale-label-medium-line-height);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -208,8 +332,9 @@ body {
 }
 
 .login-title {
-  font-size: 36px;
+  font-size: var(--md-sys-typescale-headline-large-size);
   font-weight: 800;
+  line-height: var(--md-sys-typescale-headline-large-line-height);
   color: var(--md-sys-color-primary);
   letter-spacing: -1px;
   animation: fadeIn 0.4s ease 0.2s both;
@@ -304,28 +429,42 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   BOTTOM NAV
+   BOTTOM NAV — md-navigation-bar
 ═══════════════════════════════════════════════════════════ */
-.bottom-nav {
+.bottom-nav-bar {
   position: fixed;
-  bottom: var(--space-md);
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 480px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background: var(--color-nav-bg);
-  backdrop-filter: blur(20px) saturate(1.6);
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
-  border: 1px solid var(--color-nav-border);
-  border-radius: 28px;
-  padding: var(--space-sm) var(--space-xs);
-  box-shadow: var(--color-nav-shadow);
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+  --md-navigation-bar-container-color: var(--color-nav-bg);
+  --md-navigation-bar-active-indicator-color: var(--color-nav-active-pill);
+  --md-navigation-tab-active-label-text-color: var(--color-nav-label-active);
+  --md-navigation-tab-inactive-label-text-color: var(--color-nav-label);
+  --md-navigation-tab-active-icon-color: var(--color-nav-label-active);
+  --md-navigation-tab-inactive-icon-color: var(--color-nav-label);
 }
 
+/* badge inside md-navigation-tab */
+.bottom-nav-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: var(--md-sys-color-error);
+  color: var(--md-sys-color-on-error);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  z-index: 1;
+}
+
+/* Keep legacy bottom-nav-item for backwards compat (fallback) */
 .bottom-nav-item {
   display: flex;
   flex-direction: column;
@@ -498,6 +637,26 @@ body {
   gap: var(--space-xs);
 }
 
+/* ── Spacing utilities ── */
+.config-section--full    { width: 100%; }
+.config-section--mt      { margin-top: var(--space-sm); }
+.area-chips--mt          { margin-top: var(--space-sm); }
+.segmented-buttons--mt   { margin-top: var(--space-sm); }
+.simulado-actions--mt-md { margin-top: var(--space-md); }
+.simulado-actions--mt-lg { margin-top: var(--space-lg); }
+
+/* md-outlined-segmented-button-set — width fix */
+.config-segmented {
+  width: 100%;
+}
+
+/* md-filter-chip tokens */
+md-filter-chip {
+  --md-filter-chip-selected-container-color: var(--md-sys-color-primary);
+  --md-filter-chip-selected-label-text-color: var(--md-sys-color-on-primary);
+  --md-filter-chip-selected-leading-icon-color: var(--md-sys-color-on-primary);
+}
+
 /* ── Area chips customizados (substitui md-filter-chip) ── */
 .area-chips {
   display: flex;
@@ -612,8 +771,9 @@ body {
 .simulado-idle-icon { font-size: 52px; }
 
 .simulado-idle-title {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  line-height: var(--md-sys-typescale-title-large-line-height);
   color: var(--md-sys-color-on-surface);
   text-align: center;
 }
@@ -1583,6 +1743,19 @@ body {
   line-height: 1.45;
 }
 
+/* ── md-dialog tokens ── */
+md-dialog {
+  --md-dialog-container-color: var(--color-card-bg);
+  --md-dialog-headline-color: var(--md-sys-color-on-surface);
+  --md-dialog-supporting-text-color: var(--md-sys-color-on-surface-variant);
+  --md-dialog-container-shape: 24px;
+}
+
+.question-map-dialog {
+  --md-dialog-container-min-width: min(90vw, 480px);
+  --md-dialog-container-max-height: 80vh;
+}
+
 /* ── Button sizing helpers ── */
 md-filled-button,
 md-outlined-button {
@@ -1618,8 +1791,9 @@ md-outlined-button.btn-full {
 }
 
 .hist-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--md-sys-typescale-headline-medium-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  line-height: var(--md-sys-typescale-headline-medium-line-height);
   color: var(--md-sys-color-on-surface);
   margin-bottom: var(--space-xs);
 }
@@ -2312,8 +2486,9 @@ md-outlined-button.btn-full {
 }
 
 .perfil-name {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  line-height: var(--md-sys-typescale-title-large-line-height);
   color: var(--md-sys-color-on-surface);
   text-align: center;
 }
@@ -2383,6 +2558,18 @@ md-outlined-button.btn-full {
 
 .perfil-actions {
   margin-top: var(--space-sm);
+}
+
+.perfil-logout-md-btn {
+  width: 100%;
+  --md-filled-tonal-button-container-color: var(--md-sys-color-error-container);
+  --md-filled-tonal-button-label-text-color: var(--md-sys-color-on-error-container);
+  --md-filled-tonal-button-with-leading-icon-leading-icon-color: var(--md-sys-color-on-error-container);
+}
+
+/* md-list inside perfil */
+.perfil-info-list md-list-item {
+  --md-list-item-supporting-text-color: var(--md-sys-color-on-surface-variant);
 }
 
 .perfil-logout-btn {
@@ -2867,8 +3054,9 @@ md-outlined-button.btn-full {
 }
 
 .revisao-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--md-sys-typescale-headline-medium-size);
+  font-weight: var(--md-sys-typescale-title-large-weight);
+  line-height: var(--md-sys-typescale-headline-medium-line-height);
   margin-top: var(--space-sm);
 }
 
