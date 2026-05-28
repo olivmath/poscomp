@@ -178,6 +178,14 @@ VITE_FIREBASE_APP_ID=
 - Se errado, corrigir com: `git config user.signingkey 84768563AAC6281C`
 - Verificar assinatura após commit: `git log -1 --show-signature`
 
+## Logging Standards
+
+- **Firebase Cloud Functions**: Use `firebase-functions/logger` for all server-side logging.
+- **Pattern**:
+    - **Entry**: `logger.info("Function <FunctionName> started", { uid, ...data })`
+    - **Error**: `logger.error("Error in <FunctionName>", { uid, error: error.message, stack: error.stack })`
+    - **Events**: `logger.info("Event description", { ...details })`
+
 ## Workflow Rules — OBRIGATÓRIO
 
 - **Sem planos**: implemente diretamente, sem criar documentos de plano ou pedir aprovação prévia
