@@ -17,22 +17,10 @@ export async function mockAuthUser(page: Page, {
   srsCards?: SrsCardData[]
   questions?: QuestionData[]
 } = {}) {
-  // Inject auth + Firestore bypass — runs before any app JS
-  await page.addInitScript(({ srsCardsData, questionsData }) => {
+  // Inject auth bypass flag — runs before any app JS
+  await page.addInitScript(() => {
     window.__AUTH_BYPASS__ = true
-
-    if (srsCardsData !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ;(window as any).__SRS_MOCK__ = srsCardsData
-    }
-
-    if (questionsData !== undefined) {
-      const map: Record<string, unknown> = {}
-      for (const q of questionsData) map[q.id] = q
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ;(window as any).__QUESTIONS_MOCK__ = map
-    }
-  }, { srsCardsData: srsCards, questionsData: questions })
+  })
 
   // Prevent Firebase SDK from attempting real token refresh
   await page.route('**/securetoken.googleapis.com/**', (route) =>
@@ -60,6 +48,57 @@ export async function mockAuthUser(page: Page, {
       }),
     })
   )
+
+  // Intercept Cloud Function: getPendingCards
+  await page.route('**/getPendingCards', (route) => {
+    const now = Math.floor(Date.now() / 1000)
+    const pending = (srsCards ?? []).filter(c => c.dueDate.seconds <= now)
+    const qMap = Object.fromEntries((questions ?? []).map(q => [q.id, q]))
+
+    const cards = pending.map(c => ({
+      questionId: c.questionId,
+      priority: confidenceToP(c.lastConfidence),
+      lastConfidence: c.lastConfidence ?? 'unsure',
+      dueDate: new Date(c.dueDate.seconds * 1000).toISOString(),
+      repetitions: c.repetitions,
+      easeFactor: c.easeFactor,
+      interval: c.interval,
+      question: qMap[c.questionId] ?? {
+        id: c.questionId, ano: 0, area: '', enunciado: '',
+        alternativas: {}, resposta: 'A',
+      },
+    }))
+
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ result: { cards } }),
+    })
+  })
+
+  // Intercept Cloud Function: reviewCard
+  await page.route('**/reviewCard', (route) => {
+    const nextDueDate = new Date(Date.now() + 86400 * 1000).toISOString()
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        result: {
+          nextDueDays: 1,
+          nextDueDate,
+          newInterval: 1,
+          newEaseFactor: 2.5,
+          newRepetitions: 0,
+        },
+      }),
+    })
+  })
+}
+
+function confidenceToP(conf: string | null): 'P1' | 'P2' | 'P3' {
+  if (conf === 'should_know') return 'P1'
+  if (conf === 'studying') return 'P2'
+  return 'P3'
 }
 
 // ── Types ────────────────────────────────────────────────────────────────────

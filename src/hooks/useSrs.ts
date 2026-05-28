@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useAuth } from './useAuth'
 import { callGetPendingCards } from './useFunctions'
-import { isAuthBypassed } from '../utils/bypass'
 import type { SrsCard } from '../types'
 
 export interface UseSrsReturn {
@@ -10,26 +9,12 @@ export interface UseSrsReturn {
   loading: boolean
 }
 
-// Globals injetados via page.addInitScript nos testes E2E
-declare global {
-  interface Window {
-    __AUTH_BYPASS__?: boolean
-    __SRS_MOCK__?: SrsCard[]
-  }
-}
-
 export function useSrs(): UseSrsReturn {
   const { user } = useAuth()
   const [totalPending, setTotalPending] = useState(0)
   const [loading, setLoading] = useState(true)
 
   const loadPendingCards = useCallback(async (): Promise<void> => {
-    // Bypass de teste: usa dados injetados via window.__SRS_MOCK__
-    if (isAuthBypassed() && window.__SRS_MOCK__ !== undefined) {
-      setTotalPending(window.__SRS_MOCK__.length)
-      setLoading(false)
-      return
-    }
     setLoading(true)
     try {
       console.log('[CF] getPendingCards (badge) →')

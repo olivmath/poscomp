@@ -1,17 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react'
-import { isAuthBypassed } from '../utils/bypass'
 import { useAuth } from './useAuth'
 import { callGetPendingCards, callReviewCard } from './useFunctions'
 import type { PendingCardOutput } from './useFunctions'
-import type { Question } from '../types'
-
-// Global injetado via page.addInitScript nos testes E2E
-declare global {
-  interface Window {
-    __AUTH_BYPASS__?: boolean
-    __QUESTIONS_MOCK__?: Record<string, Question>
-  }
-}
 
 export type Priority = 'P1' | 'P2' | 'P3'
 export type RevisaoState = 'loading' | 'empty' | 'session' | 'finished'
@@ -36,49 +26,6 @@ export function useRevisao() {
   // ── Load cards on mount ──────────────────────────────────────────────────
   useEffect(() => {
     if (!user) return
-
-    // Bypass de teste: lê __SRS_MOCK__ + __QUESTIONS_MOCK__ injetados pelo helper E2E
-    if (isAuthBypassed()) {
-      const srsRaw = (window as Record<string, unknown>).__SRS_MOCK__ as Array<{
-        questionId: string
-        easeFactor: number
-        interval: number
-        repetitions: number
-        dueDate: { seconds: number; nanoseconds: number }
-        lastConfidence: string | null
-        studied: boolean
-        simuladoCorrect: boolean
-      }> | undefined
-
-      const questionsMap = (window as Record<string, unknown>).__QUESTIONS_MOCK__ as
-        Record<string, import('../types').Question> | undefined
-
-      const now = Math.floor(Date.now() / 1000)
-
-      const mockCards: import('./useFunctions').PendingCardOutput[] = (srsRaw ?? [])
-        .filter(c => c.dueDate.seconds <= now)
-        .map(c => ({
-          questionId: c.questionId,
-          priority: 'P1' as const,
-          lastConfidence: (c.lastConfidence ?? 'should_know') as import('../types').Confidence,
-          dueDate: new Date(c.dueDate.seconds * 1000).toISOString(),
-          repetitions: c.repetitions,
-          easeFactor: c.easeFactor,
-          interval: c.interval,
-          question: (questionsMap ?? {})[c.questionId] ?? {
-            id: c.questionId,
-            ano: 0,
-            area: '',
-            enunciado: '',
-            alternativas: {},
-            resposta: 'A',
-          },
-        }))
-
-      setCards(mockCards)
-      setLoading(false)
-      return
-    }
 
     async function fetchCards() {
       setLoading(true)
