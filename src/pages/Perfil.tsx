@@ -1,8 +1,6 @@
-import '@material/web/button/filled-button.js'
-import '@material/web/button/filled-tonal-button.js'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
@@ -33,21 +31,15 @@ export function Perfil() {
             <span className="material-symbols-outlined md-icon--lg">person</span>
           </div>
         )}
-        <h1 className="perfil-name">{user?.displayName ?? 'Usuario'}</h1>
+        <h1 className="perfil-name">{user?.displayName ?? 'Usuário'}</h1>
         <p className="perfil-email">{user?.email}</p>
       </div>
 
       <div className="perfil-section">
-        <h2 className="perfil-section-title">Preferencias</h2>
+        <h2 className="perfil-section-title">Preferências</h2>
         <div className="perfil-info-list">
-          <button
-            className="perfil-info-row"
-            style={{ width: '100%', border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit' }}
-            onClick={toggleTheme}
-          >
-            <span className="material-symbols-outlined perfil-info-icon">
-              {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-            </span>
+          <button className="perfil-info-row" style={{ width: '100%', border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left' }} onClick={toggleTheme}>
+            <span className="material-symbols-outlined perfil-info-icon">{theme === 'dark' ? 'light_mode' : 'dark_mode'}</span>
             <div className="perfil-info-content">
               <span className="perfil-info-label">Tema</span>
               <span className="perfil-info-value">{theme === 'dark' ? 'Claro' : 'Escuro'}</span>
@@ -76,14 +68,14 @@ export function Perfil() {
           <div className="perfil-info-row">
             <span className="material-symbols-outlined perfil-info-icon">verified_user</span>
             <div className="perfil-info-content">
-              <span className="perfil-info-label">Autenticacao</span>
+              <span className="perfil-info-label">Autenticação</span>
               <span className="perfil-info-value">Google</span>
             </div>
           </div>
           <div className="perfil-info-row">
             <span className="material-symbols-outlined perfil-info-icon">info</span>
             <div className="perfil-info-content">
-              <span className="perfil-info-label">Versao</span>
+              <span className="perfil-info-label">Versão</span>
               <span className="perfil-info-value">v{__APP_VERSION__}</span>
             </div>
           </div>
@@ -92,7 +84,7 @@ export function Perfil() {
 
       <div className="perfil-actions">
         <button
-          className="perfil-logout-btn"
+          className={`perfil-logout-btn ${loggingOut ? 'perfil-logout-btn--loading' : ''}`}
           onClick={handleLogout}
           disabled={loggingOut}
         >

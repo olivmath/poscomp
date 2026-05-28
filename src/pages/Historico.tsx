@@ -1,11 +1,12 @@
 import '@material/web/button/filled-button.js'
-import '@material/web/progress/circular-progress.js'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { QuestionReviewList } from '../components/QuestionReviewList'
 import { useResults } from '../hooks/useResults'
+import { AREA_ICONS } from '../utils/areaIcons'
 import type { Area, SimuladoResult } from '../types'
 
-const AREAS: Area[] = ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes']
+const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
 
 function formatDate(result: SimuladoResult): string {
   try {
@@ -28,8 +29,7 @@ function formatDuration(seconds: number): string {
 function ResultCard({ result }: { result: SimuladoResult }) {
   const [expanded, setExpanded] = useState(false)
   const pct = Math.round((result.score / result.totalQuestions) * 100)
-  const scoreColor = pct >= 80 ? '#1B6D1B' : pct >= 60 ? '#7A5900' : '#BA1A1A'
-  const scoreBg = pct >= 80 ? '#E8F5E9' : pct >= 60 ? '#FFF8E1' : '#FFDAD6'
+  const scoreClass = pct >= 80 ? 'hist-score--high' : pct >= 60 ? 'hist-score--mid' : 'hist-score--low'
 
   return (
     <div
@@ -41,37 +41,48 @@ function ResultCard({ result }: { result: SimuladoResult }) {
     >
       <div className="hist-card-row">
         <span className="hist-date">{formatDate(result)}</span>
-        <span className="hist-score" style={{ color: scoreColor, background: scoreBg }}>
+        <span className={`hist-score ${scoreClass}`}>
           {result.score}/{result.totalQuestions}
         </span>
         <span className="hist-time">{formatDuration(result.timeSpentSeconds)}</span>
-        <span className="material-symbols-outlined md-icon--sm md-icon--muted">
+        <span className="hist-chevron material-symbols-outlined">
           {expanded ? 'expand_less' : 'expand_more'}
         </span>
       </div>
 
-      {expanded && result.areaBreakdown && (
-        <div className="hist-breakdown" data-testid="breakdown">
-          <table className="hist-breakdown-table">
-            <tbody>
-              {AREAS.map((area) => {
-                const b = result.areaBreakdown[area]
-                if (!b) return null
-                const ok = b.correct === b.total
-                return (
-                  <tr key={area}>
-                    <td className="hbd-area">{area}</td>
-                    <td className="hbd-score">{b.correct}/{b.total}</td>
-                    <td className="hbd-icon">
-                      <span className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}>
-                        {ok ? 'check_circle' : 'warning'}
-                      </span>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+      {expanded && (
+        <div className="hist-breakdown" data-testid="breakdown" onClick={(event) => event.stopPropagation()}>
+          {result.areaBreakdown && (
+            <table className="hist-breakdown-table">
+              <tbody>
+                {AREAS.map((area) => {
+                  const b = result.areaBreakdown[area]
+                  if (!b) return null
+                  const ok = b.correct === b.total
+                  return (
+                    <tr key={area}>
+                      <td className="hbd-area">
+                        <span className="material-symbols-outlined">{AREA_ICONS[area]}</span>
+                        {area}
+                      </td>
+                      <td className="hbd-score">{b.correct}/{b.total}</td>
+                      <td className="hbd-icon">
+                        <span
+                          className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}
+                          role="img"
+                          aria-label={ok ? 'Aprovado' : 'Requer atenção'}
+                        >
+                          {ok ? 'check_circle' : 'warning'}
+                        </span>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          )}
+
+          <QuestionReviewList answers={result.answers ?? []} questions={result.questionReviews} />
         </div>
       )}
     </div>
@@ -86,7 +97,7 @@ export function Historico() {
     return (
       <div className="page-placeholder">
         <div className="spinner" />
-        <p>Carregando historico...</p>
+        <p>Carregando histórico...</p>
       </div>
     )
   }
@@ -104,7 +115,7 @@ export function Historico() {
     return (
       <div className="page-placeholder" data-testid="historico-empty">
         <span className="material-symbols-outlined md-icon--lg md-icon--muted">history</span>
-        <h2 className="page-placeholder-title">Historico</h2>
+        <h2 className="page-placeholder-title">Histórico</h2>
         <p className="page-placeholder-subtitle">
           Nenhum simulado realizado ainda. Comece agora!
         </p>
@@ -113,7 +124,7 @@ export function Historico() {
           style={{ marginTop: '8px' }}
           data-testid="go-simulado-btn"
         >
-          Comecar Simulado
+          Começar Simulado
         </md-filled-button>
       </div>
     )
@@ -121,7 +132,7 @@ export function Historico() {
 
   return (
     <div className="hist-page" data-testid="historico-list">
-      <h2 className="hist-title">Historico</h2>
+      <h2 className="hist-title">Histórico</h2>
       <p className="hist-subtitle">{results.length} simulado{results.length !== 1 ? 's' : ''} realizados</p>
       <div className="hist-list">
         {results.map((r) => (

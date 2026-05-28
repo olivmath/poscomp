@@ -1,0 +1,57 @@
+import { Timestamp } from 'firebase/firestore'
+import type { SrsCard, Grade, Confidence } from '../types'
+
+export interface Sm2Result {
+  easeFactor: number
+  interval: number
+  repetitions: number
+  dueDate: Timestamp
+  lastConfidence: Confidence
+}
+
+export function sm2Update(card: SrsCard, grade: Grade): Sm2Result {
+  const ef = calcEaseFactor(card.easeFactor, grade)
+
+  if (grade < 3) {
+    return {
+      easeFactor: ef,
+      interval: 1,
+      repetitions: 0,
+      dueDate: Timestamp.fromDate(addDays(0)),
+      lastConfidence: card.lastConfidence,
+    }
+  }
+
+  const interval = calcInterval(card.repetitions, card.interval, ef)
+
+  return {
+    easeFactor: ef,
+    interval,
+    repetitions: card.repetitions + 1,
+    dueDate: Timestamp.fromDate(addDays(interval)),
+    lastConfidence: card.lastConfidence,
+  }
+}
+
+export function gradeFromResult(correct: boolean): Grade {
+  return correct ? 3 : 1
+}
+
+///// AUX FUNCTIONS
+
+function calcEaseFactor(current: number, grade: Grade): number {
+  const next = current + 0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02)
+  return Math.max(1.3, next)
+}
+
+function calcInterval(repetitions: number, prevInterval: number, ef: number): number {
+  if (repetitions === 0) return 1
+  if (repetitions === 1) return 6
+  return Math.round(prevInterval * ef)
+}
+
+function addDays(days: number): Date {
+  const d = new Date()
+  d.setDate(d.getDate() + days)
+  return d
+}

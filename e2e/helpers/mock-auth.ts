@@ -1,82 +1,280 @@
 import type { Page } from '@playwright/test'
 
+const PROJECT_ID = 'poscomp-test'
+const TEST_UID = 'test-uid-123'
+
 /**
- * Injeta um mock do Firebase Auth no browser para simular usuário autenticado.
- * Deve ser chamado antes de navegar para qualquer rota protegida.
+ * Injects auth bypass flag into the page before Firebase SDK initializes.
+ * Sets window.__AUTH_BYPASS__ = true, which AuthContext reads to skip
+ * onAuthStateChanged and return a mock user directly.
+ *
+ * Must be called BEFORE page.goto() so addInitScript runs before app code.
  */
-export async function mockAuthUser(page: Page) {
-  // Intercepta as chamadas de rede do Firebase Identity Toolkit
-  await page.route('**/identitytoolkit.googleapis.com/**', (route) => {
+export async function mockAuthUser(page: Page, {
+  srsCards,
+  questions,
+}: {
+  srsCards?: SrsCardData[]
+  questions?: QuestionData[]
+} = {}) {
+  // Inject auth + Firestore bypass — runs before any app JS
+  await page.addInitScript(({ srsCardsData, questionsData }) => {
+    window.__AUTH_BYPASS__ = true
+
+    if (srsCardsData !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(window as any).__SRS_MOCK__ = srsCardsData
+    }
+
+    if (questionsData !== undefined) {
+      const map: Record<string, unknown> = {}
+      for (const q of questionsData) map[q.id] = q
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(window as any).__QUESTIONS_MOCK__ = map
+    }
+  }, { srsCardsData: srsCards, questionsData: questions })
+
+  // Prevent Firebase SDK from attempting real token refresh
+  await page.route('**/securetoken.googleapis.com/**', (route) =>
     route.fulfill({
       status: 200,
       contentType: 'application/json',
       body: JSON.stringify({
-        users: [{ localId: 'test-uid-123', email: 'test@poscomp.dev', displayName: 'Test User' }],
+        access_token: 'fake-access-token',
+        expires_in: '3600',
+        token_type: 'Bearer',
+        refresh_token: 'fake-refresh-token',
+        id_token: 'fake-id-token',
+        user_id: TEST_UID,
       }),
     })
-  })
+  )
 
-  // Injeta o estado de auth no IndexedDB que o Firebase SDK usa
-  await page.addInitScript(() => {
-    // Mock do onAuthStateChanged via localStorage sentinel
-    window.__FIREBASE_AUTH_MOCK__ = {
-      uid: 'test-uid-123',
-      email: 'test@poscomp.dev',
-      displayName: 'Test User',
-      photoURL: null,
-    }
-  })
+  // Prevent identity toolkit calls (getIdToken, etc.)
+  await page.route('**/identitytoolkit.googleapis.com/**', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        users: [{ localId: TEST_UID, email: 'test@poscomp.dev', displayName: 'Test User' }],
+      }),
+    })
+  )
 }
+
+// ── Types ────────────────────────────────────────────────────────────────────
+
+export interface SrsCardData {
+  questionId: string
+  easeFactor: number
+  interval: number
+  repetitions: number
+  dueDate: { seconds: number; nanoseconds: number }
+  createdAt: { seconds: number; nanoseconds: number }
+  lastConfidence: string | null
+  studied: boolean
+  simuladoCorrect: boolean
+}
+
+export interface QuestionData {
+  id: string
+  ano: number
+  area: string
+  enunciado: string
+  alternativas: Record<string, string>
+  resposta: string
+  comentario?: string
+}
+
+// ── Firestore mock ───────────────────────────────────────────────────────────
 
 /**
- * Intercepta chamadas do Firestore e retorna dados mock.
+ * Intercepts Firestore REST API calls and returns mock data.
+ *
+ * Handles:
+ * - runQuery (POST) for getDocs() → returns matching collection data
+ * - PATCH for setDoc/upsertCard → returns 200
+ * - :commit (POST) for batch writes → returns 200
  */
-export async function mockFirestore(page: Page, {
-  questions = defaultQuestions,
-  results = [],
-}: {
-  questions?: unknown[]
-  results?: unknown[]
-} = {}) {
+export async function mockFirestore(
+  page: Page,
+  {
+    srsCards = [],
+    questions = [],
+    results = [],
+  }: {
+    srsCards?: SrsCardData[]
+    questions?: QuestionData[]
+    results?: unknown[]
+  } = {}
+) {
   await page.route('**/firestore.googleapis.com/**', (route, request) => {
     const url = request.url()
+    const method = request.method()
 
-    if (url.includes('/questions')) {
+    // Write operations — just acknowledge
+    if (method === 'PATCH' || (method === 'POST' && url.includes(':commit'))) {
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ documents: questions.map(toFirestoreDoc) }),
+        body: JSON.stringify({}),
       })
       return
     }
 
-    if (url.includes('/results')) {
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ documents: results.map(toFirestoreDoc) }),
-      })
-      return
+    // runQuery — identify collection from structuredQuery in body
+    if (method === 'POST' && url.includes(':runQuery')) {
+      try {
+        const body = JSON.parse(request.postData() ?? '{}')
+        const from: Array<{ collectionId: string }> =
+          body?.structuredQuery?.from ?? []
+        const collectionId = from[0]?.collectionId ?? ''
+
+        if (collectionId === 'srs_cards') {
+          const docs = srsCards.map((c) => {
+            const { questionId, ...data } = c
+            return toFirestoreDoc(`users/${TEST_UID}/srs_cards`, questionId, data as Record<string, unknown>)
+          })
+          route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: docs.length > 0
+              ? docs.map((d) => JSON.stringify(d)).join('\n')
+              : JSON.stringify([{}]),
+          })
+          return
+        }
+
+        if (collectionId === 'questions') {
+          // Honor __name__ IN filter if present (fetch by ID)
+          const where = body?.structuredQuery?.where
+          const requestedIds = extractInIds(where)
+
+          const filtered = requestedIds.length > 0
+            ? questions.filter((q) => requestedIds.includes(q.id))
+            : questions
+
+          const docs = filtered.map((q) => {
+            const { id, ...data } = q
+            return toFirestoreDoc('questions', id, data as Record<string, unknown>)
+          })
+          route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: docs.length > 0
+              ? docs.map((d) => JSON.stringify(d)).join('\n')
+              : JSON.stringify([{}]),
+          })
+          return
+        }
+
+        if (collectionId === 'results') {
+          const docs = (results as Record<string, unknown>[]).map((r, i) =>
+            toFirestoreDoc(`users/${TEST_UID}/results`, `result-${i}`, r)
+          )
+          route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: docs.length > 0
+              ? docs.map((d) => JSON.stringify(d)).join('\n')
+              : JSON.stringify([{}]),
+          })
+          return
+        }
+      } catch {
+        // Fall through to continue
+      }
     }
 
-    route.continue()
+    // Fallback — empty result
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify([{}]),
+    })
   })
 }
 
-function toFirestoreDoc(data: unknown) {
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function toFirestoreValue(v: unknown): object {
+  if (typeof v === 'string') return { stringValue: v }
+  if (typeof v === 'number')
+    return Number.isInteger(v) ? { integerValue: String(v) } : { doubleValue: v }
+  if (typeof v === 'boolean') return { booleanValue: v }
+  if (v === null || v === undefined) return { nullValue: 'NULL_VALUE' }
+  if (v instanceof Date) return { timestampValue: v.toISOString() }
+  if (
+    typeof v === 'object' &&
+    'seconds' in (v as object) &&
+    'nanoseconds' in (v as object)
+  ) {
+    const ts = v as { seconds: number; nanoseconds: number }
+    return { timestampValue: new Date(ts.seconds * 1000).toISOString() }
+  }
+  if (Array.isArray(v))
+    return { arrayValue: { values: v.map(toFirestoreValue) } }
+  if (typeof v === 'object') {
+    return {
+      mapValue: {
+        fields: Object.fromEntries(
+          Object.entries(v as Record<string, unknown>).map(([k, val]) => [
+            k,
+            toFirestoreValue(val),
+          ])
+        ),
+      },
+    }
+  }
+  return { nullValue: 'NULL_VALUE' }
+}
+
+function toFirestoreDoc(
+  col: string,
+  id: string,
+  data: Record<string, unknown>
+) {
   return {
-    name: 'projects/poscomp/databases/(default)/documents/test/doc',
-    fields: data,
-    createTime: new Date().toISOString(),
-    updateTime: new Date().toISOString(),
+    document: {
+      name: `projects/${PROJECT_ID}/databases/(default)/documents/${col}/${id}`,
+      fields: Object.fromEntries(
+        Object.entries(data).map(([k, v]) => [k, toFirestoreValue(v)])
+      ),
+      createTime: '2024-01-01T00:00:00Z',
+      updateTime: new Date().toISOString(),
+    },
+    readTime: new Date().toISOString(),
   }
 }
 
-export const defaultQuestions = Array.from({ length: 10 }, (_, i) => ({
-  id: `q-${i + 1}`,
-  text: `Questão ${i + 1}: Qual é a resposta correta?`,
-  options: { A: 'Opção A', B: 'Opção B', C: 'Opção C', D: 'Opção D', E: 'Opção E' },
-  correctOption: 'A',
-  area: ['Matemática', 'Algoritmos', 'Lógica', 'Banco de Dados', 'Redes'][i % 5],
-  difficulty: 'fácil',
-}))
+/**
+ * Extracts IDs from a Firestore structuredQuery `__name__ IN [...]` filter.
+ */
+function extractInIds(where: unknown): string[] {
+  if (!where || typeof where !== 'object') return []
+  const w = where as Record<string, unknown>
+
+  // fieldFilter on __name__
+  if ('fieldFilter' in w) {
+    const ff = w.fieldFilter as Record<string, unknown>
+    const field = (ff.field as Record<string, unknown>)?.fieldPath
+    if (field === '__name__' && ff.op === 'IN') {
+      const values = (ff.value as Record<string, unknown>)?.arrayValue as
+        | { values?: Array<{ referenceValue?: string }> }
+        | undefined
+      return (
+        values?.values
+          ?.map((v) => v.referenceValue?.split('/').pop() ?? '')
+          .filter(Boolean) ?? []
+      )
+    }
+  }
+
+  // compositeFilter — recurse
+  if ('compositeFilter' in w) {
+    const cf = w.compositeFilter as { filters?: unknown[] }
+    return (cf.filters ?? []).flatMap((f) => extractInIds(f))
+  }
+
+  return []
+}
