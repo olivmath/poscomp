@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react'
 import { useAuth } from './useAuth'
 import { callGetPendingCards, callReviewCard } from './useFunctions'
 import type { PendingCardOutput } from './useFunctions'
+import type { Question } from '../types'
 
 export type Priority = 'P1' | 'P2' | 'P3'
 export type RevisaoState = 'loading' | 'empty' | 'session' | 'finished'
