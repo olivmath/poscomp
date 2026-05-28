@@ -11,7 +11,8 @@
       "E": "(-1/5, -1, -1/5)"
     },
     "resposta": "D",
-    "comentario": "Aplicando eliminação gaussiana: montamos a matriz aumentada e reduzimos por escalonamento. Após operações de linha, obtemos x = -7/5, y = -2, z = -21/5."
+    "comentario": "Aplicando eliminação gaussiana: montamos a matriz aumentada e reduzimos por escalonamento. Após operações de linha, obtemos x = -7/5, y = -2, z = -21/5.",
+    "ano": 2024
   },
   {
     "id": "2",
@@ -25,7 +26,8 @@
       "E": "α = 11"
     },
     "resposta": "A",
-    "comentario": "Expandindo o determinante: det = 1·(α+2) − (−1)·(−α+2) + (−1)·(−4) = α+2 − α+2 + 4 = 8. O coeficiente de α cancela — det = 8 para qualquer α. Todos os valores das alternativas satisfazem a condição; α = 1 é o menor valor válido."
+    "comentario": "Expandindo o determinante: det = 1·(α+2) − (−1)·(−α+2) + (−1)·(−4) = α+2 − α+2 + 4 = 8. O coeficiente de α cancela — det = 8 para qualquer α. Todos os valores das alternativas satisfazem a condição; α = 1 é o menor valor válido.",
+    "ano": 2024
   },
   {
     "id": "3",
@@ -39,7 +41,8 @@
       "E": "– (λ – 2)³"
     },
     "resposta": "E",
-    "comentario": "O polinômio característico é det(A – λI) = 0. Calculando e fatorando, obtém-se –(λ – 2)³, indicando λ = 2 como autovalor de multiplicidade algébrica 3."
+    "comentario": "O polinômio característico é det(A – λI) = 0. Calculando e fatorando, obtém-se –(λ – 2)³, indicando λ = 2 como autovalor de multiplicidade algébrica 3.",
+    "ano": 2024
   },
   {
     "id": "4",
@@ -53,7 +56,8 @@
       "E": "14"
     },
     "resposta": "E",
-    "comentario": "Usando inclusão-exclusão: Total = 4! = 24. |A∪B| = 6+6–2 = 10. Válidas = 24 – 10 = 14."
+    "comentario": "Usando inclusão-exclusão: Total = 4! = 24. |A∪B| = 6+6–2 = 10. Válidas = 24 – 10 = 14.",
+    "ano": 2024
   },
   {
     "id": "5",
@@ -67,7 +71,8 @@
       "E": "21"
     },
     "resposta": "A",
-    "comentario": "Um grafo acíclico com n vértices é uma árvore/floresta com no máximo n–1 = 6 arestas."
+    "comentario": "Um grafo acíclico com n vértices é uma árvore/floresta com no máximo n–1 = 6 arestas.",
+    "ano": 2024
   },
   {
     "id": "6",
@@ -81,7 +86,8 @@
       "E": "495"
     },
     "resposta": "D",
-    "comentario": "C(5,2)×C(7,2) + C(5,3)×C(7,1) + C(5,4)×C(7,0) = 210 + 70 + 5 = 285."
+    "comentario": "C(5,2)×C(7,2) + C(5,3)×C(7,1) + C(5,4)×C(7,0) = 210 + 70 + 5 = 285.",
+    "ano": 2024
   },
   {
     "id": "7",
@@ -95,7 +101,8 @@
       "E": "∞"
     },
     "resposta": "C",
-    "comentario": "Multiplicando pelo conjugado: 1/(√(x²+1) + x) → 0 quando x→∞."
+    "comentario": "Multiplicando pelo conjugado: 1/(√(x²+1) + x) → 0 quando x→∞.",
+    "ano": 2024
   },
   {
     "id": "8",
@@ -109,7 +116,8 @@
       "E": "[-∞, 0) U (0, ∞)"
     },
     "resposta": "C",
-    "comentario": "Domínio: 4–x² ≥ 0 → x ∈ [–2,2]; 3x–1 ≠ 0 → x ≠ 1/3. Logo [–2, 1/3) ∪ (1/3, 2]."
+    "comentario": "Domínio: 4–x² ≥ 0 → x ∈ [–2,2]; 3x–1 ≠ 0 → x ≠ 1/3. Logo [–2, 1/3) ∪ (1/3, 2].",
+    "ano": 2024
   },
   {
     "id": "9",
@@ -123,7 +131,8 @@
       "E": "0"
     },
     "resposta": "D",
-    "comentario": "Substituição u = ln x: ∫₀¹ u du = [u²/2]₀¹ = 1/2."
+    "comentario": "Substituição u = ln x: ∫₀¹ u du = [u²/2]₀¹ = 1/2.",
+    "ano": 2024
   },
   {
     "id": "10",
@@ -137,7 +146,8 @@
       "E": "(1/2, 2)"
     },
     "resposta": "B",
-    "comentario": "M = ((5+4)/2, (−1−2)/2) = (9/2, −3/2)."
+    "comentario": "M = ((5+4)/2, (−1−2)/2) = (9/2, −3/2).",
+    "ano": 2024
   },
   {
     "id": "11",
@@ -151,7 +161,8 @@
       "E": "k = 5 e k = 7"
     },
     "resposta": "A",
-    "comentario": "d = |5–k|/√2 = √2 → |5–k| = 2 → k = 3 ou k = 7."
+    "comentario": "d = |5–k|/√2 = √2 → |5–k| = 2 → k = 3 ou k = 7.",
+    "ano": 2024
   },
   {
     "id": "12",
@@ -165,7 +176,8 @@
       "E": "As retas são paralelas e não possuem ponto de intersecção."
     },
     "resposta": "E",
-    "comentario": "Vetores diretores (−4,1) e (8,−2) são proporcionais → retas paralelas. Pontos distintos → sem intersecção."
+    "comentario": "Vetores diretores (−4,1) e (8,−2) são proporcionais → retas paralelas. Pontos distintos → sem intersecção.",
+    "ano": 2024
   },
   {
     "id": "13",
@@ -179,7 +191,8 @@
       "E": "p → q"
     },
     "resposta": "D",
-    "comentario": "~p → ~q é a contrapositiva de q → p, portanto equivalente a q → p."
+    "comentario": "~p → ~q é a contrapositiva de q → p, portanto equivalente a q → p.",
+    "ano": 2024
   },
   {
     "id": "14",
@@ -193,7 +206,8 @@
       "E": "~q"
     },
     "resposta": "C",
-    "comentario": "~(p∨q) V ↔ p=F e q=F. Nesse cenário ~p→q = V→F = F."
+    "comentario": "~(p∨q) V ↔ p=F e q=F. Nesse cenário ~p→q = V→F = F.",
+    "ano": 2024
   },
   {
     "id": "15",
@@ -207,7 +221,8 @@
       "E": "Hoje não é sábado e Ana Paula jogou vôlei."
     },
     "resposta": "B",
-    "comentario": "Por modus tollens com P1: ~Ana Paula ∧ ~Joaquim. Por modus tollens com P3: ~sábado. Conclusão: hoje não é sábado e Joaquim não jogou."
+    "comentario": "Por modus tollens com P1: ~Ana Paula ∧ ~Joaquim. Por modus tollens com P3: ~sábado. Conclusão: hoje não é sábado e Joaquim não jogou.",
+    "ano": 2024
   },
   {
     "id": "19",
@@ -221,7 +236,8 @@
       "E": "40,0%"
     },
     "resposta": "C",
-    "comentario": "26 valores < 65 em 80 observações → 26/80 = 32,5%."
+    "comentario": "26 valores < 65 em 80 observações → 26/80 = 32,5%.",
+    "ano": 2024
   },
   {
     "id": "20",
@@ -235,7 +251,8 @@
       "E": "69"
     },
     "resposta": "C",
-    "comentario": "Soma dos 80 valores ≈ 5360 → média = 5360/80 = 67."
+    "comentario": "Soma dos 80 valores ≈ 5360 → média = 5360/80 = 67.",
+    "ano": 2024
   },
   {
     "id": "21",
@@ -249,7 +266,8 @@
       "E": "O pior caso é f(n) = 1"
     },
     "resposta": "A",
-    "comentario": "Na busca sequencial: melhor = 1, pior = n, médio = (n+1)/2 (distribuição uniforme)."
+    "comentario": "Na busca sequencial: melhor = 1, pior = n, médio = (n+1)/2 (distribuição uniforme).",
+    "ano": 2024
   },
   {
     "id": "22",
@@ -263,7 +281,8 @@
       "E": "Analisar o comportamento à medida que o tamanho da entrada aumenta indefinidamente."
     },
     "resposta": "E",
-    "comentario": "A análise assintótica foca no comportamento quando o tamanho da entrada tende ao infinito (notações O, Ω, Θ)."
+    "comentario": "A análise assintótica foca no comportamento quando o tamanho da entrada tende ao infinito (notações O, Ω, Θ).",
+    "ano": 2024
   },
   {
     "id": "23",
@@ -277,7 +296,8 @@
       "E": "O(n) e O(2^n)"
     },
     "resposta": "B",
-    "comentario": "Hash bem dimensionada: O(1) médio. Com muitas colisões (pior caso): O(n)."
+    "comentario": "Hash bem dimensionada: O(1) médio. Com muitas colisões (pior caso): O(n).",
+    "ano": 2024
   },
   {
     "id": "24",
@@ -291,7 +311,8 @@
       "E": "simplesmente encadeada ordenada"
     },
     "resposta": "E",
-    "comentario": "Um ponteiro (próximo) → simplesmente encadeada. Campo-chave para ordenação → ordenada."
+    "comentario": "Um ponteiro (próximo) → simplesmente encadeada. Campo-chave para ordenação → ordenada.",
+    "ano": 2024
   },
   {
     "id": "25",
@@ -305,7 +326,8 @@
       "E": "Na instrução for, a condição é testada depois da instrução."
     },
     "resposta": "B",
-    "comentario": "do...while garante ao menos uma execução. while e for testam antes — corpo pode não executar."
+    "comentario": "do...while garante ao menos uma execução. while e for testam antes — corpo pode não executar.",
+    "ano": 2024
   },
   {
     "id": "26",
@@ -319,7 +341,8 @@
       "E": "pós-fixado"
     },
     "resposta": "D",
-    "comentario": "Pré-fixado (pré-ordem): raiz → filhos. Simétrico: esq → raiz → dir. Pós-fixado: filhos → raiz."
+    "comentario": "Pré-fixado (pré-ordem): raiz → filhos. Simétrico: esq → raiz → dir. Pós-fixado: filhos → raiz.",
+    "ano": 2024
   },
   {
     "id": "29",
@@ -333,7 +356,8 @@
       "E": "E/S programada"
     },
     "resposta": "D",
-    "comentario": "DMA permite transferência direta dispositivo↔RAM sem envolver a CPU em cada byte."
+    "comentario": "DMA permite transferência direta dispositivo↔RAM sem envolver a CPU em cada byte.",
+    "ano": 2024
   },
   {
     "id": "33",
@@ -347,7 +371,8 @@
       "E": "6"
     },
     "resposta": "C",
-    "comentario": "12→6→3→1→0: 4 iterações. Saída: 4."
+    "comentario": "12→6→3→1→0: 4 iterações. Saída: 4.",
+    "ano": 2024
   },
   {
     "id": "36",
@@ -361,7 +386,8 @@
       "E": "{w | diferentes nº de a' e b'}"
     },
     "resposta": "C",
-    "comentario": "Contagens mod 3 e paridade são rastreáveis com estados finitos. As demais requerem comparação ilimitada."
+    "comentario": "Contagens mod 3 e paridade são rastreáveis com estados finitos. As demais requerem comparação ilimitada.",
+    "ano": 2024
   },
   {
     "id": "38",
@@ -375,7 +401,8 @@
       "E": "Teorema da Incompletude – Church – Problema da Parada – Turing"
     },
     "resposta": "B",
-    "comentario": "Incompletude = Gödel (1931). Problema da Parada = Turing (1936)."
+    "comentario": "Incompletude = Gödel (1931). Problema da Parada = Turing (1936).",
+    "ano": 2024
   },
   {
     "id": "39",
@@ -389,7 +416,8 @@
       "E": "Na memória secundária, os dados são armazenados exclusivamente em formato não hierárquico."
     },
     "resposta": "C",
-    "comentario": "O SO organiza memória secundária em blocos (clusters) para otimizar a transferência entre disco e RAM."
+    "comentario": "O SO organiza memória secundária em blocos (clusters) para otimizar a transferência entre disco e RAM.",
+    "ano": 2024
   },
   {
     "id": "40",
@@ -403,7 +431,8 @@
       "E": "A compressão de dados sempre resulta em perda de qualidade."
     },
     "resposta": "A",
-    "comentario": "Princípio da codificação de entropia: símbolos mais frequentes → códigos mais curtos (Huffman, Shannon-Fano)."
+    "comentario": "Princípio da codificação de entropia: símbolos mais frequentes → códigos mais curtos (Huffman, Shannon-Fano).",
+    "ano": 2024
   },
   {
     "id": "45",
@@ -417,7 +446,8 @@
       "E": "O conjunto de operações para o tipo caractere inclui soma, subtração, multiplicação, divisão inteira e resto."
     },
     "resposta": "A",
-    "comentario": "Inteiros = ℤ: positivos e negativos sem parte fracionária."
+    "comentario": "Inteiros = ℤ: positivos e negativos sem parte fracionária.",
+    "ano": 2024
   },
   {
     "id": "47",
@@ -431,7 +461,8 @@
       "E": "Atribuição simples"
     },
     "resposta": "D",
-    "comentario": "Decisões aninhadas (if/else if/else) → condicional encadeada. Não há repetição."
+    "comentario": "Decisões aninhadas (if/else if/else) → condicional encadeada. Não há repetição.",
+    "ano": 2024
   },
   {
     "id": "48",
@@ -445,7 +476,8 @@
       "E": "Grafo simétrico"
     },
     "resposta": "C",
-    "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas simultaneamente."
+    "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas simultaneamente.",
+    "ano": 2024
   },
   {
     "id": "49",
@@ -459,7 +491,8 @@
       "E": "Finais"
     },
     "resposta": "A",
-    "comentario": "Arestas paralelas (múltiplas): conectam os mesmos vértices. Laços: conectam vértice a si mesmo."
+    "comentario": "Arestas paralelas (múltiplas): conectam os mesmos vértices. Laços: conectam vértice a si mesmo.",
+    "ano": 2024
   },
   {
     "id": "50",
@@ -473,7 +506,8 @@
       "E": "k-cubo"
     },
     "resposta": "B",
-    "comentario": "Ciclo (circuito): caminho fechado onde vértice inicial = vértice final."
+    "comentario": "Ciclo (circuito): caminho fechado onde vértice inicial = vértice final.",
+    "ano": 2024
   },
   {
     "id": "51",
@@ -487,7 +521,8 @@
       "E": "6"
     },
     "resposta": "D",
-    "comentario": "RIGHT JOIN retorna todos os PAIs. Item1 aparece 2x (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 sem filhos → NULL. Total: 5 tuplas."
+    "comentario": "RIGHT JOIN retorna todos os PAIs. Item1 aparece 2x (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 sem filhos → NULL. Total: 5 tuplas.",
+    "ano": 2024
   },
   {
     "id": "52",
@@ -501,7 +536,8 @@
       "E": "Ferir ou esperar"
     },
     "resposta": "B",
-    "comentario": "Grafo de espera detecta deadlock via ciclos. As demais são protocolos de prevenção."
+    "comentario": "Grafo de espera detecta deadlock via ciclos. As demais são protocolos de prevenção.",
+    "ano": 2024
   },
   {
     "id": "54",
@@ -515,7 +551,8 @@
       "E": "Gramática livre de contexto na qual fragmentos de programas são inseridos nos lados direitos das regras de produção."
     },
     "resposta": "E",
-    "comentario": "Esquema de Tradução: GLC com ações semânticas embutidas nos lados direitos, executadas durante a análise."
+    "comentario": "Esquema de Tradução: GLC com ações semânticas embutidas nos lados direitos, executadas durante a análise.",
+    "ano": 2024
   },
   {
     "id": "58",
@@ -529,7 +566,8 @@
       "E": "Obter menor exigência de manutenção, menos correções de erros e menos suporte ao cliente."
     },
     "resposta": "A",
-    "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade."
+    "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade.",
+    "ano": 2024
   },
   {
     "id": "59",
@@ -543,7 +581,8 @@
       "E": "Projeto de software"
     },
     "resposta": "D",
-    "comentario": "Especificação de software (Engenharia de Requisitos): entender e documentar os serviços exigidos e restrições."
+    "comentario": "Especificação de software (Engenharia de Requisitos): entender e documentar os serviços exigidos e restrições.",
+    "ano": 2024
   },
   {
     "id": "60",
@@ -557,7 +596,8 @@
       "E": "Apenas as assertivas II e III estão corretas."
     },
     "resposta": "A",
-    "comentario": "Todas as três assertivas estão alinhadas com Pressman e Maxim sobre GCS."
+    "comentario": "Todas as três assertivas estão alinhadas com Pressman e Maxim sobre GCS.",
+    "ano": 2024
   },
   {
     "id": "61",
@@ -571,7 +611,8 @@
       "E": "Combinar partes dos cromossomos de dois pais para criar descendentes."
     },
     "resposta": "E",
-    "comentario": "Crossover = recombinação de cromossomos de dois pais. Mutação = C. Seleção = D. Elitismo = B."
+    "comentario": "Crossover = recombinação de cromossomos de dois pais. Mutação = C. Seleção = D. Elitismo = B.",
+    "ano": 2024
   },
   {
     "id": "62",
@@ -585,7 +626,8 @@
       "E": "O motor de inferência serve exclusivamente para manutenção e atualização automática da base de dados."
     },
     "resposta": "C",
-    "comentario": "Motor de inferência: aplica regras da base de conhecimento sobre fatos (forward/backward chaining)."
+    "comentario": "Motor de inferência: aplica regras da base de conhecimento sobre fatos (forward/backward chaining).",
+    "ano": 2024
   },
   {
     "id": "63",
@@ -599,7 +641,8 @@
       "E": "codificação – modulação"
     },
     "resposta": "D",
-    "comentario": "Amostragem: discretiza coordenadas (x,y). Quantização: discretiza amplitude (intensidade)."
+    "comentario": "Amostragem: discretiza coordenadas (x,y). Quantização: discretiza amplitude (intensidade).",
+    "ano": 2024
   },
   {
     "id": "65",
@@ -613,7 +656,8 @@
       "E": "11.1.2.0/24"
     },
     "resposta": "E",
-    "comentario": "Longest prefix match: 11.1.2.5 corresponde a 11.1.0.0/16 e 11.1.2.0/24. /24 é mais específico."
+    "comentario": "Longest prefix match: 11.1.2.5 corresponde a 11.1.0.0/16 e 11.1.2.0/24. /24 é mais específico.",
+    "ano": 2024
   },
   {
     "id": "66",
@@ -627,7 +671,8 @@
       "E": "O datagrama IP identifica o destinatário através dos campos porta de destino e número IP de destino."
     },
     "resposta": "D",
-    "comentario": "IP é best-effort sem conexão. Fragmentação pode gerar duplicatas entregues. Porta pertence à camada de transporte."
+    "comentario": "IP é best-effort sem conexão. Fragmentação pode gerar duplicatas entregues. Porta pertence à camada de transporte.",
+    "ano": 2024
   },
   {
     "id": "67",
@@ -641,7 +686,8 @@
       "E": "UDP"
     },
     "resposta": "E",
-    "comentario": "DNS usa UDP porta 53 para consultas rápidas. TCP apenas para transferências de zona ou respostas > 512 bytes."
+    "comentario": "DNS usa UDP porta 53 para consultas rápidas. TCP apenas para transferências de zona ou respostas > 512 bytes.",
+    "ano": 2024
   },
   {
     "id": "68",
@@ -655,7 +701,8 @@
       "E": "Mudança de escala"
     },
     "resposta": "B",
-    "comentario": "Transparência de acesso: mesma interface para arquivos locais e remotos."
+    "comentario": "Transparência de acesso: mesma interface para arquivos locais e remotos.",
+    "ano": 2024
   },
   {
     "id": "69",
@@ -669,7 +716,8 @@
       "E": "por queda"
     },
     "resposta": "E",
-    "comentario": "Falha por queda (crash): componente para abruptamente após operar corretamente."
+    "comentario": "Falha por queda (crash): componente para abruptamente após operar corretamente.",
+    "ano": 2024
   },
   {
     "id": "70",
@@ -683,7 +731,8 @@
       "E": "relógios vetoriais"
     },
     "resposta": "A",
-    "comentario": "Centralizado: coordenador único gerencia acesso → exatamente 3 mensagens (req, grant, release)."
+    "comentario": "Centralizado: coordenador único gerencia acesso → exatamente 3 mensagens (req, grant, release).",
+    "ano": 2024
   },
   {
     "id": 1,
