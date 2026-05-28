@@ -8,11 +8,11 @@ export type QuestionStatus = 'unvisited' | 'skipped' | 'unsure' | 'studying' | '
 
 export interface Question {
   id: string
+  ano: number
+  area: Area
   enunciado: string
   alternativas: Record<Option, string>
   resposta: Option
-  area: Area
-  requer_imagem: boolean
   comentario?: string
 }
 
