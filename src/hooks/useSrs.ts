@@ -42,12 +42,7 @@ export function useSrs(): UseSrsReturn {
            (isDevOrTest && typeof window !== 'undefined' && window.__AUTH_BYPASS__ === true)
   }, [])
 
-  useEffect(() => {
-    if (!user) return
-    loadPendingCards(user.uid)
-  }, [user])
-
-  async function loadPendingCards(_uid: string): Promise<void> {
+  const loadPendingCards = useCallback(async (_uid: string): Promise<void> => {
     // Bypass de teste: usa dados injetados via window.__SRS_MOCK__
     if (isBypass() && window.__SRS_MOCK__ !== undefined) {
       const now = Timestamp.now()
@@ -66,7 +61,12 @@ export function useSrs(): UseSrsReturn {
     } finally {
       setLoading(false)
     }
-  }
+  }, [isBypass])
+
+  useEffect(() => {
+    if (!user) return
+    loadPendingCards(user.uid)
+  }, [user, loadPendingCards])
 
   const upsertFromResult = useCallback(
     async (result: SimuladoResult): Promise<void> => {
@@ -98,7 +98,7 @@ export function useSrs(): UseSrsReturn {
       await Promise.all(writes)
       await loadPendingCards(user.uid)
     },
-    [user, isBypass]
+    [user, isBypass, loadPendingCards]
   )
 
   const updateCard = useCallback(
@@ -120,7 +120,7 @@ export function useSrs(): UseSrsReturn {
       await upsertCard(user.uid, questionId, { ...card, ...updated, studied: finalStudied })
       await loadPendingCards(user.uid)
     },
-    [user, isBypass]
+    [user, isBypass, loadPendingCards]
   )
 
   return {

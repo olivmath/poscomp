@@ -54,7 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false)
     })
     return unsubscribe
-  }, [])
+  }, [bypass])
 
   return (
     <AuthContext.Provider value={{ user, loading }}>
