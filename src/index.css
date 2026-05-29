@@ -2643,7 +2643,7 @@ md-outlined-button.btn-full {
 }
 
 .perfil-danger-zone__icon {
-  font-size: 18px;
+  font-size: var(--icon-size-md);
   color: var(--md-sys-color-error);
   flex-shrink: 0;
 }
@@ -2671,7 +2671,7 @@ md-outlined-button.btn-full {
   width: 100%;
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--shape-lg);
-  border: 1.5px solid var(--md-sys-color-error);
+  border: var(--border-width-medium) solid var(--md-sys-color-error);
   background: transparent;
   color: var(--md-sys-color-error);
   font-family: inherit;
@@ -2683,7 +2683,12 @@ md-outlined-button.btn-full {
 }
 
 .perfil-danger-zone__btn .material-symbols-outlined {
-  font-size: 20px;
+  font-size: var(--icon-size-md);
+}
+
+.perfil-danger-zone__btn:active {
+  transform: scale(0.98);
+  background: rgba(179, 38, 30, 0.14);
 }
 
 .perfil-danger-zone__btn:hover {
@@ -2692,11 +2697,6 @@ md-outlined-button.btn-full {
 
 .dark .perfil-danger-zone__btn:hover {
   background: rgba(242, 184, 181, 0.1);
-}
-
-.perfil-danger-zone__btn:active {
-  transform: scale(0.98);
-  background: rgba(179, 38, 30, 0.14);
 }
 
 .perfil-delete-confirm-btn {
@@ -2791,35 +2791,33 @@ md-outlined-button.btn-full {
 
 .home-page__cta {
   position: sticky;
-  bottom: var(--layout-nav-clearance);
+  bottom: var(--space-none);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--space-sm);
-  width: 100%;
-  padding: var(--space-md) var(--space-md) var(--space-lg);
-  background: linear-gradient(to top, var(--md-sys-color-background) 70%, transparent);
+  padding: var(--space-md) var(--space-none) var(--space-lg);
+  background: linear-gradient(to top, var(--md-sys-color-background) 80%, transparent);
   margin-top: var(--space-sm);
+  z-index: var(--z-sticky);
 }
 
 .home-page__cta md-filled-button {
-  width: 100%;
+  flex: 1;
   --md-filled-button-container-height: 52px;
+  /* Garante que o texto longo não quebre o layout */
+  --md-filled-button-label-text-size: 14px;
 }
 
-.home-page__cta md-outlined-button {
-  width: 100%;
-  --md-outlined-button-container-height: 52px;
+.home-page__cta md-filled-button.btn-tonal {
+  --md-filled-button-container-color: var(--md-sys-color-secondary-container);
+  --md-filled-button-label-text-color: var(--md-sys-color-on-secondary-container);
 }
+
 
 .dark .home-page__cta {
   background: linear-gradient(to top, var(--md-sys-color-background) 70%, transparent);
 }
 
-.dark .home-page__cta md-outlined-button {
-  --md-outlined-button-outline-color: #D0BCFF;
-  --md-outlined-button-label-text-color: #D0BCFF;
-  --md-outlined-button-outline-width: 1.5px;
-}
 
 .home-header {
   width: 100%;

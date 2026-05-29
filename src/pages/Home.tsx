@@ -1,5 +1,4 @@
 import '@material/web/button/filled-button.js'
-import '@material/web/button/outlined-button.js'
 
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -105,12 +104,12 @@ export function Home() {
       {error && <p className="simulado-error" role="alert">{error}</p>}
 
       <footer className="home-page__cta">
+        <md-filled-button onClick={goToConfig} disabled={loading || undefined} className="btn-tonal">
+          Simulado customizado
+        </md-filled-button>
         <md-filled-button onClick={() => start(config)} disabled={loading || undefined}>
           {loading ? 'Carregando...' : 'Começar Simulado'}
         </md-filled-button>
-        <md-outlined-button onClick={goToConfig} disabled={loading || undefined}>
-          Simulado customizado
-        </md-outlined-button>
       </footer>
     </main>
   )
