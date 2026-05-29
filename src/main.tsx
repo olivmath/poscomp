@@ -12,6 +12,7 @@ import { Revisao } from './pages/Revisao'
 import { Perfil } from './pages/Perfil'
 import { HistoricoDetalhe } from './pages/HistoricoDetalhe'
 import './index.css'
+import 'katex/dist/katex.min.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

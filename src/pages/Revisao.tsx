@@ -4,6 +4,7 @@ import '@material/web/progress/circular-progress.js'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRevisao } from '../hooks/useRevisao'
+import MarkdownAnswer from '../components/MarkdownAnswer'
 import type { Priority, AdaptedCard } from '../hooks/useRevisao'
 
 const PRIORITY_LABELS: Record<Priority, { label: string; color: string }> = {
@@ -142,10 +143,17 @@ export function Revisao() {
           <div className="revisao-face revisao-face--back">
             <div className="revisao-answer-body">
               <span className="material-symbols-outlined revisao-answer-icon">check_circle</span>
-              <p className="revisao-gabarito">
-                <strong>({question?.resposta})</strong>{' '}
-                {question && question.alternativas[question.resposta]}
-              </p>
+              {question?.card?.resposta ? (
+                <div className="revisao-gabarito-markdown">
+                  <strong>({question?.resposta})</strong>{' '}
+                  <MarkdownAnswer md={question.card.resposta} />
+                </div>
+              ) : (
+                <p className="revisao-gabarito">
+                  <strong>({question?.resposta})</strong>{' '}
+                  {question && question.alternativas[question.resposta]}
+                </p>
+              )}
             </div>
 
             <div className="revisao-result-btns" onClick={e => e.stopPropagation()}>

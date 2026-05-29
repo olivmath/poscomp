@@ -13,6 +13,11 @@ export interface Question {
   alternativas: Record<Option, string>
   resposta: Option
   comentario?: string
+  card?: {
+    pergunta: string
+    resposta: string // Markdown (supports LaTeX)
+    solucao_md?: string
+  }
 }
 
 export interface AnswerRecord {
@@ -34,6 +39,11 @@ export type QuestionReview = {
   alternativas: Record<Option, string>
   resposta: Option
   comentario?: string
+  card?: {
+    pergunta: string
+    resposta: string
+    solucao_md?: string
+  }
 }
 
 export interface AreaBreakdown {
