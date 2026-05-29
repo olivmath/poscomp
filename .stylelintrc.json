@@ -1,11 +1,24 @@
 {
   "rules": {
+    "color-no-invalid-hex": true,
+
+    "unit-disallowed-list": ["pt", "pc", "cm", "mm", "in", "ex", "ch"],
+
+    "declaration-block-no-duplicate-properties": [
+      true,
+      { "ignore": ["consecutive-duplicates-with-different-syntaxes"] }
+    ],
+
     "declaration-property-value-disallowed-list": [
       {
-        "font-size": ["/^[0-9]+(px|rem|em)$/"]
+        "font-size": ["/^[0-9]+(px|rem|em)$/"],
+        "gap": ["/^[0-9]+(px|rem|em)$/"],
+        "color": ["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"],
+        "background-color": ["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"],
+        "border-color": ["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"]
       },
       {
-        "message": "Use design system tokens (var(--md-sys-typescale-*) or var(--icon-size-*)) instead of raw values"
+        "message": "Use design system tokens (var(--md-sys-*), var(--color-*), var(--icon-size-*), var(--space-*)) instead of raw values"
       }
     ]
   },
