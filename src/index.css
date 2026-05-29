@@ -575,16 +575,95 @@ body {
   cursor: pointer;
 }
 
-/* ── WeekHeader: linear-progress row ── */
-.home-freq-row {
+/* ── WeekHeader (week-card) ── */
+.week-card {
+  background: var(--color-card-bg);
+  border-radius: var(--shape-2xl);
+  padding: var(--space-lg);
   display: flex;
   flex-direction: column;
+  gap: var(--space-md);
+  box-shadow: var(--shadow-subtle);
+}
+
+.week-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.week-card__eyebrow {
+  font-size: var(--md-sys-typescale-label-small-size);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--md-sys-color-outline);
+}
+
+.week-card__streak {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.week-card__streak-icon {
+  font-size: 18px;
+  color: var(--color-score-mid);
+  font-variation-settings: 'FILL' 1;
+}
+
+.week-card__streak-count {
+  font-size: var(--md-sys-typescale-label-large-size);
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+  line-height: 1;
+}
+
+.week-card__streak-unit {
+  font-size: var(--md-sys-typescale-label-medium-size);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.week-card__days {
+  display: flex;
   gap: var(--space-xs-sm);
 }
 
-.home-freq-progress {
-  width: 100%;
-  border-radius: var(--shape-xs);
+/* ── Day indicators ── */
+.week-day {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm-md) var(--space-xs);
+  border-radius: var(--shape-lg);
+  background: var(--color-surface-elevated);
+  border: var(--border-subtle);
+  transition: background var(--duration-base) ease, border-color var(--duration-base) ease;
+}
+
+.week-day--active {
+  background: var(--md-sys-color-primary);
+}
+
+.week-day--today:not(.week-day--active) {
+  border-color: var(--md-sys-color-primary);
+}
+
+.week-day__label {
+  font-size: var(--md-sys-typescale-label-small-size);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--md-sys-color-on-surface-variant);
+  text-transform: uppercase;
+}
+
+.week-day--active .week-day__label {
+  color: var(--md-sys-color-on-primary);
+}
+
+.week-day--today:not(.week-day--active) .week-day__label {
+  color: var(--md-sys-color-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -2512,34 +2591,31 @@ md-outlined-button.btn-full {
 }
 
 .spark-bar-bg {
-  height: 8px;
+  height: 6px;
   background: var(--color-spark-bg);
-  border-radius: var(--shape-sm-xs);
+  border-radius: var(--shape-full);
   overflow: hidden;
 }
 
-/* variante full-width — para uso dentro de priority-list-item coluna */
 .spark-bar-bg--full {
   width: 100%;
 }
 
 .spark-bar-fill {
   height: 100%;
-  border-radius: var(--shape-sm-xs);
-  transition: width var(--duration-content) ease;
+  background: var(--md-sys-color-primary);
+  border-radius: var(--shape-full);
+  transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Spark bar color variants */
-.spark-bar-fill--high { background: var(--color-score-high); }
-.spark-bar-fill--mid  { background: var(--color-score-mid);  }
-.spark-bar-fill--low  { background: var(--color-score-low);  }
+.spark-bar-fill--error { background: var(--md-sys-color-error); }
 
 /* ═══════════════════════════════════════════════════════════
    ANÁLISES — CAROUSEL
 ═══════════════════════════════════════════════════════════ */
-.analises-carousel {
+.analytics-carousel {
   flex: 1;
-  min-height: 0; /* permite flex item encolher abaixo do conteúdo */
+  min-height: 0;
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
@@ -2550,7 +2626,7 @@ md-outlined-button.btn-full {
   width: 100%;
 }
 
-.analises-carousel::-webkit-scrollbar { display: none; }
+.analytics-carousel::-webkit-scrollbar { display: none; }
 
 .analises-slide {
   flex: 0 0 100%;
@@ -2568,30 +2644,6 @@ md-outlined-button.btn-full {
 }
 
 .analises-slide::-webkit-scrollbar { display: none; }
-
-/* Dots */
-.analises-dots {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0 var(--space-md);
-}
-
-.analises-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: var(--shape-circle);
-  background: var(--color-spark-bg);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background var(--duration-base) ease, transform var(--duration-base) ease;
-}
-
-.analises-dot--active {
-  background: var(--md-sys-color-primary);
-  transform: scale(1.3);
-}
 
 /* Calibration cards */
 .analises-calibration-sub {
@@ -3085,21 +3137,39 @@ md-outlined-button.btn-full {
    DASHBOARD & REVISÃO (SRS)
 ═══════════════════════════════════════════════════════════ */
 
-/* Home / Dashboard Header */
-.home-container--dashboard {
+/* Home / Dashboard — layout arquitetado */
+.home-page {
+  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--space-lg);
-  padding: var(--space-lg) var(--space-md) var(--layout-page-bottom);
+  gap: var(--space-xl);
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md) calc(var(--layout-page-bottom) + var(--space-lg));
   overflow-y: auto;
   min-height: calc(100dvh - 90px);
 }
 
-.home-cta {
-  width: 100%;
-  max-width: 600px;
+.home-page__hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.home-page__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  flex: 1;
+  min-height: 0;
+}
+
+.home-page__cta {
+  position: sticky;
+  bottom: var(--space-lg);
   display: flex;
   justify-content: center;
+  margin-top: var(--space-sm);
 }
 
 .home-header {
@@ -3196,10 +3266,8 @@ md-outlined-button.btn-full {
   opacity: 0.9;
 }
 
-/* Home Analises */
-.home-analises {
-  width: 100%;
-  max-width: 600px;
+/* Analytics Panel */
+.analytics-panel {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
@@ -3207,25 +3275,36 @@ md-outlined-button.btn-full {
   min-height: 0;
 }
 
-.home-analises-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.home-analises-title {
-  font-size: var(--md-sys-typescale-body-xsmall-size);
-  font-weight: 700;
-  color: var(--md-sys-color-outline);
-  letter-spacing: 0.8px;
-}
-
-.home-analises-dots {
+.analytics-panel__tabs {
   display: flex;
   gap: var(--space-xs-sm);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: var(--space-2xs) 0;
 }
 
-.analises-carousel-wrap {
+.analytics-panel__tabs::-webkit-scrollbar { display: none; }
+
+.analytics-tab {
+  flex-shrink: 0;
+  padding: var(--space-xs) var(--space-md-sm);
+  border-radius: var(--shape-full);
+  border: none;
+  background: var(--color-surface-elevated);
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: var(--md-sys-typescale-label-medium-size);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background var(--duration-base) ease, color var(--duration-base) ease;
+}
+
+.analytics-tab--active {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.analytics-panel__body {
   width: 100%;
   overflow: hidden;
   border-radius: var(--shape-2xl);
@@ -3236,7 +3315,8 @@ md-outlined-button.btn-full {
   background: var(--color-card-bg);
   box-shadow: var(--shadow-carousel);
 }
-.dark .analises-carousel-wrap {
+
+.dark .analytics-panel__body {
   box-shadow: var(--shadow-carousel-dark);
 }
 
@@ -3315,39 +3395,70 @@ md-outlined-button.btn-full {
   margin: 0 var(--space-sm);
 }
 
-/* Home — Slide Progresso */
-.progress-chart-wrap {
+/* Slide Progresso — ProgressChart */
+.prog-wrap {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
 
-.progress-chart-svg {
+.prog-svg {
   width: 100%;
-  height: 120px;
+  height: 140px;
 }
 
-.progress-chart-footer {
+.prog-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-divider-subtle);
+}
+
+.prog-stat {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 2px;
 }
 
-.progress-latest {
-  font-size: var(--md-sys-typescale-body-xsmall-size);
-  color: var(--md-sys-color-on-surface-variant);
+.prog-stat-label {
+  font-size: var(--md-sys-typescale-label-small-size);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--md-sys-color-outline);
 }
 
-.progress-trend {
-  font-size: var(--md-sys-typescale-body-xsmall-size);
-  font-weight: 600;
+.prog-stat-value {
+  font-size: var(--md-sys-typescale-title-large-size);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--md-sys-color-on-surface);
 }
 
-.trend--up  { color: var(--color-score-high); }
-.trend--down { color: var(--color-score-low); }
+.prog-trend {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
 
-.progress-chart-empty {
+.prog-trend-num {
+  font-size: var(--md-sys-typescale-title-medium-size);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.prog-trend-label {
+  font-size: var(--md-sys-typescale-label-small-size);
+  color: var(--md-sys-color-outline);
+}
+
+.prog-trend--up   .prog-trend-num { color: var(--color-score-high); }
+.prog-trend--down .prog-trend-num { color: var(--color-score-low); }
+
+.prog-empty {
   flex: 1;
   display: flex;
   align-items: center;
@@ -3605,75 +3716,21 @@ md-outlined-button.btn-full {
 
 
 /* ═══════════════════════════════════════════════════════════
-   HOME — REFINAMENTOS v3
-   Scoped em .home-header / .home-analises para não vazar
+   ANALYTICS PANEL — SCOPED OVERRIDES
+   Garante consistência visual dentro do painel de análise
 ═══════════════════════════════════════════════════════════ */
 
-/* ── Header: grid de dias da semana ── */
-.home-header {
-  gap: var(--space-sm);
-}
-
-.home-week-grid {
-  display: flex;
-  gap: var(--space-xs-sm);
-  justify-content: space-between;
-}
-
-.home-day-sq {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-sm-md) var(--space-xs);
-  border-radius: var(--shape-lg);
-  background: var(--color-surface-elevated);
-  border: var(--border-subtle);
-  transition: background var(--duration-base) ease, border-color var(--duration-base) ease;
-}
-
-.home-day-sq--active {
-  background: var(--md-sys-color-primary);
-}
-
-.home-day-sq--today:not(.home-day-sq--active) {
-  border-color: var(--md-sys-color-primary);
-}
-
-.home-day-label {
-  font-size: var(--md-sys-typescale-label-small-size);
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  color: var(--md-sys-color-on-surface-variant);
-  text-transform: uppercase;
-}
-
-.home-day-sq--active .home-day-label {
-  color: var(--md-sys-color-on-primary);
-}
-
-.home-day-sq--today:not(.home-day-sq--active) .home-day-label {
-  color: var(--md-sys-color-primary);
-}
-
-.home-streak-label {
-  font-size: var(--md-sys-typescale-label-medium-size);
-  font-weight: 600;
-  color: var(--md-sys-color-on-surface-variant);
-  text-align: right;
-  margin: 0;
-}
-
-/* ── Slides: padding completo ── */
-.home-analises .analises-slide {
+/* ── Slides: altura mínima + padding consistente ── */
+.analytics-panel .analises-slide {
+  min-height: 320px;
   padding: var(--space-lg) var(--space-lg) var(--space-xl);
   gap: var(--space-md);
   display: flex;
   flex-direction: column;
 }
 
-/* ── Section titles: label style ── */
-.home-analises .analises-section-title {
+/* ── Section titles ── */
+.analytics-panel .analises-section-title {
   font-size: var(--md-sys-typescale-label-small-size);
   font-weight: 700;
   letter-spacing: 1px;
@@ -3682,8 +3739,8 @@ md-outlined-button.btn-full {
   margin-bottom: var(--space-xs);
 }
 
-/* ── Area list: sem container, itens soltos ── */
-.home-analises .analises-area-list {
+/* ── Area list ── */
+.analytics-panel .analises-area-list {
   background: none;
   box-shadow: none;
   padding: 0;
@@ -3691,12 +3748,12 @@ md-outlined-button.btn-full {
   border-radius: 0;
 }
 
-.dark .home-analises .analises-area-list {
+.dark .analytics-panel .analises-area-list {
   box-shadow: none;
 }
 
 /* ── Cada área = card individual ── */
-.home-analises .analises-area-row {
+.analytics-panel .analises-area-row {
   background: var(--color-surface-elevated);
   border-radius: var(--shape-xl);
   padding: var(--space-md-sm) var(--space-14) var(--space-md-sm);
@@ -3705,17 +3762,17 @@ md-outlined-button.btn-full {
   flex-direction: column;
 }
 
-.home-analises .analises-area-header {
+.analytics-panel .analises-area-header {
   margin-bottom: 0;
 }
 
-.home-analises .analises-area-name {
+.analytics-panel .analises-area-name {
   font-size: var(--md-sys-typescale-body-medium-size);
   font-weight: 500;
   color: var(--md-sys-color-on-surface);
 }
 
-.home-analises .analises-area-stats {
+.analytics-panel .analises-area-stats {
   font-size: var(--md-sys-typescale-title-medium-size);
   font-weight: 800;
   letter-spacing: -0.5px;
@@ -3725,16 +3782,6 @@ md-outlined-button.btn-full {
 .stat--high { color: var(--color-score-high); }
 .stat--mid  { color: var(--md-sys-color-primary); }
 .stat--low  { color: var(--color-score-low); }
-
-/* ── Spark bar: proporcional ao card ── */
-.home-analises .spark-bar-bg {
-  height: 5px;
-  border-radius: var(--shape-xs);
-}
-
-.home-analises .spark-bar-fill {
-  border-radius: var(--shape-xs);
-}
 
 /* ── Slide 1 — Geral ── */
 .geral-main-stat {
@@ -3806,12 +3853,12 @@ md-outlined-button.btn-full {
 }
 
 /* ── Slide 4 — dual section ── */
-.home-analises .analises-dual-section {
+.analytics-panel .analises-dual-section {
   gap: var(--space-lg);
   flex: 1;
 }
 
-.home-analises .analises-section-divider {
+.analytics-panel .analises-section-divider {
   margin: 0;
 }
 
@@ -3819,30 +3866,22 @@ md-outlined-button.btn-full {
 .analises-slide--empty {
   align-items: center;
   justify-content: center;
+  gap: var(--space-md);
   text-align: center;
+  padding: var(--space-xxl) var(--space-lg);
+}
+
+.analytics-empty__icon {
+  font-size: 48px;
+  color: var(--md-sys-color-outline);
+  font-variation-settings: 'FILL' 0, 'wght' 300;
+}
+
+.analytics-empty__text {
   font-size: var(--md-sys-typescale-body-medium-size);
   color: var(--md-sys-color-on-surface-variant);
-  padding: var(--space-xl) var(--space-lg);
+  margin: 0;
+  max-width: 240px;
+  line-height: 1.5;
 }
 
-/* ── Slide 5 — Progresso ── */
-.home-analises .progress-chart-wrap {
-  flex: 1;
-  padding-top: var(--space-xs);
-}
-
-.home-analises .progress-chart-footer {
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--color-divider-subtle);
-}
-
-.progress-latest {
-  font-size: var(--md-sys-typescale-body-medium-size);
-  font-weight: 500;
-  color: var(--md-sys-color-on-surface-variant);
-}
-
-.progress-trend {
-  font-size: var(--md-sys-typescale-body-xsmall-size);
-  font-weight: 600;
-}

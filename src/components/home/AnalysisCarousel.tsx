@@ -36,28 +36,34 @@ export function AnalysisCarousel({ analytics, loading }: AnalysisCarouselProps) 
   }
 
   return (
-    <section className="home-analises">
-      <div className="home-analises-dots-row" role="tablist" aria-label="Slides de análise">
+    <section className="analytics-panel">
+      <div className="analytics-panel__tabs" role="tablist" aria-label="Slides de análise">
         {SLIDES.map((label, i) => (
           <button
             key={i}
             role="tab"
             aria-selected={activeSlide === i}
-            aria-label={label}
-            className={`analises-dot ${activeSlide === i ? 'analises-dot--active' : ''}`}
+            className={`analytics-tab ${activeSlide === i ? 'analytics-tab--active' : ''}`}
             onClick={() => goToSlide(i)}
-          />
+          >
+            {label}
+          </button>
         ))}
       </div>
 
-      <div className="analises-carousel-wrap">
-        <div className="analises-carousel" ref={carouselRef} aria-live="polite">
+      <div className="analytics-panel__body">
+        <div className="analytics-carousel" ref={carouselRef} aria-live="polite">
           {!analytics ? (
             <div className="analises-slide analises-slide--empty">
-              {loading
-                ? <p>Carregando análises...</p>
-                : <p>Faça seu primeiro simulado para ver suas análises aqui!</p>
-              }
+              <span className="material-symbols-outlined analytics-empty__icon" aria-hidden="true">
+                {loading ? 'hourglass_empty' : 'bar_chart'}
+              </span>
+              <p className="analytics-empty__text">
+                {loading
+                  ? 'Carregando análises…'
+                  : 'Faça seu primeiro simulado para ver suas análises aqui!'
+                }
+              </p>
             </div>
           ) : (
             <>

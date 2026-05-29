@@ -17,17 +17,17 @@ export function ProgressChart({ scores }: ProgressChartProps) {
     )
   }
 
-  const { chronological, pcts, latest, tendencia } = buildChartData(scores)
+  const { pcts, latest, tendencia } = buildChartData(scores)
   const { linePath, areaPath, pts, refY, W, H, PAD } = buildSvgPaths(pcts)
 
-  void chronological // used only to build pcts
+  const lastIdx = pts.length - 1
 
   return (
     <div className="prog-wrap">
       <svg viewBox={`0 0 ${W} ${H}`} className="prog-svg">
         <defs>
           <linearGradient id="progFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stopColor="var(--md-sys-color-primary)" stopOpacity="0.18" />
+            <stop offset="0%"   stopColor="var(--md-sys-color-primary)" stopOpacity="0.10" />
             <stop offset="100%" stopColor="var(--md-sys-color-primary)" stopOpacity="0"    />
           </linearGradient>
         </defs>
@@ -36,22 +36,18 @@ export function ProgressChart({ scores }: ProgressChartProps) {
           x1={PAD.left} y1={refY} x2={W - PAD.right} y2={refY}
           stroke="var(--color-divider)" strokeWidth="1" strokeDasharray="3 4"
         />
-        <text x={PAD.left + 2} y={refY - 4} fontSize="8" fill="var(--md-sys-color-outline)">
-          70%
-        </text>
 
         <path d={areaPath} fill="url(#progFill)" />
-        <path d={linePath} fill="none" stroke="var(--md-sys-color-primary)" strokeWidth="2.5" strokeLinecap="round" />
+        <path d={linePath} fill="none" stroke="var(--md-sys-color-primary)" strokeWidth="1.5" strokeLinecap="round" />
 
         {pts.map(([x, y], i) => (
           <g key={i}>
-            <text x={x} y={y - 9} textAnchor="middle" fontSize="9" fontWeight="700" fill="var(--md-sys-color-primary)">
-              {pcts[i]}%
-            </text>
-            <circle cx={x} cy={y} r="5" fill="var(--color-card-bg)" stroke="var(--md-sys-color-primary)" strokeWidth="2.5" />
-            <text x={x} y={H - 4} textAnchor="middle" fontSize="8" fill="var(--md-sys-color-on-surface-variant)">
-              S{i + 1}
-            </text>
+            {i === lastIdx && (
+              <text x={x} y={y - 7} textAnchor="middle" fontSize="9" fontWeight="700" fill="var(--md-sys-color-primary)">
+                {pcts[i]}%
+              </text>
+            )}
+            <circle cx={x} cy={y} r={i === lastIdx ? 4 : 3} fill="var(--color-card-bg)" stroke="var(--md-sys-color-primary)" strokeWidth={i === lastIdx ? 2 : 1.5} />
           </g>
         ))}
       </svg>
@@ -90,7 +86,7 @@ function buildChartData(scores: ScoreEntry[]) {
     tendencia = avg(recent) - avg(older)
   }
 
-  return { chronological, pcts, latest, tendencia }
+  return { pcts, latest, tendencia }
 }
 
 function smoothBezier(pts: [number, number][]): string {
@@ -106,8 +102,8 @@ function smoothBezier(pts: [number, number][]): string {
 }
 
 function buildSvgPaths(pcts: number[]) {
-  const W = 300, H = 130
-  const PAD = { top: 28, right: 14, bottom: 22, left: 14 }
+  const W = 300, H = 140
+  const PAD = { top: 20, right: 14, bottom: 16, left: 14 }
   const chartW = W - PAD.left - PAD.right
   const chartH = H - PAD.top - PAD.bottom
 

@@ -12,14 +12,20 @@ export function Home() {
   const streak = analytics?.streak ?? 0
 
   return (
-    <div className="home-container home-container--dashboard">
-      <WeekHeader activeDays={activeDays} streak={streak} />
-      <AnalysisCarousel analytics={analytics} loading={analyticsLoading} />
-      <div className="home-cta">
+    <main className="home-page">
+      <section className="home-page__hero">
+        <WeekHeader activeDays={activeDays} streak={streak} />
+      </section>
+
+      <section className="home-page__content">
+        <AnalysisCarousel analytics={analytics} loading={analyticsLoading} />
+      </section>
+
+      <footer className="home-page__cta">
         <md-filled-button onClick={() => navigate('/simulado')}>
           Iniciar Simulado
         </md-filled-button>
-      </div>
-    </div>
+      </footer>
+    </main>
   )
 }

@@ -10,12 +10,27 @@ interface WeekHeaderProps {
 export function WeekHeader({ activeDays, streak }: WeekHeaderProps) {
   const today = new Date().toISOString().split('T')[0]
   const last7 = buildLast7Days()
-  const activeDaysCount = last7.filter(d => activeDays.includes(d)).length
-  const freqPct = activeDaysCount / 7
 
   return (
-    <header className="home-header">
-      <div className="home-week-grid">
+    <header className="week-card">
+      <div className="week-card__top">
+        <span className="week-card__eyebrow">Frequência semanal</span>
+
+        <div className="week-card__streak">
+          <span
+            className="material-symbols-outlined week-card__streak-icon"
+            aria-hidden="true"
+          >
+            local_fire_department
+          </span>
+          <span className="week-card__streak-count">{streak}</span>
+          <span className="week-card__streak-unit">
+            {streak === 1 ? 'dia seguido' : 'dias seguidos'}
+          </span>
+        </div>
+      </div>
+
+      <div className="week-card__days" aria-label="Atividade dos últimos 7 dias">
         {last7.map(dateStr => {
           const dow = new Date(dateStr + 'T12:00:00').getDay()
           const isActive = activeDays.includes(dateStr)
@@ -24,34 +39,16 @@ export function WeekHeader({ activeDays, streak }: WeekHeaderProps) {
             <div
               key={dateStr}
               className={[
-                'home-day-sq',
-                isActive ? 'home-day-sq--active' : '',
-                isToday  ? 'home-day-sq--today'  : '',
+                'week-day',
+                isActive ? 'week-day--active' : '',
+                isToday  ? 'week-day--today'  : '',
               ].filter(Boolean).join(' ')}
               aria-label={`${DAY_LABELS[dow]}${isActive ? ' — ativo' : ''}${isToday ? ' — hoje' : ''}`}
             >
-              <span className="home-day-label">{DAY_LABELS[dow]}</span>
+              <span className="week-day__label">{DAY_LABELS[dow]}</span>
             </div>
           )
         })}
-      </div>
-
-      <div className="home-freq-row">
-        <md-linear-progress
-          value={freqPct}
-          className="home-freq-progress"
-          aria-label={`Frequência semanal: ${activeDaysCount} de 7 dias`}
-          style={{
-            '--md-linear-progress-track-color': 'var(--color-spark-bg)',
-            '--md-linear-progress-active-indicator-color': freqProgressColor(freqPct),
-            '--md-linear-progress-track-height': '6px',
-            '--md-linear-progress-active-indicator-height': '6px',
-            '--md-linear-progress-track-shape': '3px',
-          } as React.CSSProperties}
-        />
-        <p className="home-streak-label">
-          🔥 {streak} {streak === 1 ? 'dia' : 'dias'} seguidos
-        </p>
       </div>
     </header>
   )
@@ -65,10 +62,4 @@ function buildLast7Days(): string[] {
     d.setDate(d.getDate() - (6 - i))
     return d.toISOString().split('T')[0]
   })
-}
-
-function freqProgressColor(pct: number): string {
-  if (pct >= 0.8) return 'var(--color-score-high)'
-  if (pct >= 0.5) return 'var(--color-score-mid)'
-  return 'var(--color-score-low)'
 }
