@@ -12,7 +12,11 @@
       "E": "~q"
     },
     "resposta": "C",
-    "comentario": "~(p∨q) verdadeiro ↔ p=F e q=F. Nesse caso ~p=V, q=F → ~p→q = V→F = F. A proposição falsa é ~p→q."
+    "comentario": "~(p∨q) verdadeiro ↔ p=F e q=F. Nesse caso ~p=V, q=F → ~p→q = V→F = F. A proposição falsa é ~p→q.",
+    "card": {
+      "pergunta": "Qual é o valor de $A proposição lógica ~(p ∨ q) é verdadeira se, e somente se,...$?",
+      "resposta": "**Resposta.** ~(p∨q) verdadeiro ↔ p=F e q=F.\n\n**Resolução.**\n\n~(p∨q) verdadeiro ↔ p=F e q=F. Nesse caso ~p=V, q=F → ~p→q = V→F = F. A proposição falsa é ~p→q.\n\n**Resultado final:** ~p → q\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 15,
@@ -27,7 +31,11 @@
       "E": "Hoje não é sábado e Ana Paula jogou vôlei."
     },
     "resposta": "B",
-    "comentario": "Por modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame. Como ~Ana Paula provado, modus tollens com P3 dá ~hoje é sábado. Conclusão: hoje não é sábado E Joaquim não jogou videogame."
+    "comentario": "Por modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame. Como ~Ana Paula provado, modus tollens com P3 dá ~hoje é sábado. Conclusão: hoje não é sábado E Joaquim não jogou videogame.",
+    "card": {
+      "pergunta": "Qual é o valor de $Considere as premissas: (1) Se Ana Paula joga vôlei OU Joaquim joga...$?",
+      "resposta": "**Resposta.** Por modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame.\n\n**Resolução.**\n\nPor modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame. Como ~Ana Paula provado, modus tollens com P3 dá ~hoje é sábado. Conclusão: hoje não é sábado E Joaquim não jogou videogame.\n\n**Resultado final:** Hoje não é sábado e Joaquim não jogou videogame.\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 16,
@@ -42,7 +50,11 @@
       "E": "A + B"
     },
     "resposta": "D",
-    "comentario": "Aplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D."
+    "comentario": "Aplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D.",
+    "card": {
+      "pergunta": "Qual é o valor de Utilizando as leis de Morgan, qual expressão em soma de produtos representa...?",
+      "resposta": "**Resposta.** Aplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D.\n\n**Resolução.**\n\nAplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D.\n\n**Resultado final:** $AC̄ + B̄D$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 19,
@@ -57,7 +69,11 @@
       "E": "40,0%"
     },
     "resposta": "C",
-    "comentario": "Contando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores. 26/80 = 32,5%."
+    "comentario": "Contando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores. 26/80 = 32,5%.",
+    "card": {
+      "pergunta": "Qual é o valor de $Com base na lista de 80 tempos de execução fornecida, a percentagem...$?",
+      "resposta": "**Resposta.** Contando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores.\n\n**Resolução.**\n\nContando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores. 26/80 = 32,5%.\n\n**Resultado final:** $32,5%$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 20,
@@ -72,7 +88,11 @@
       "E": "69"
     },
     "resposta": "C",
-    "comentario": "Somando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67."
+    "comentario": "Somando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67.",
+    "card": {
+      "pergunta": "Qual é o valor de O tempo médio aproximado que o software leva para realizar os cálculos...?",
+      "resposta": "**Resposta.** Somando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67.\n\n**Resolução.**\n\nSomando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67.\n\n**Resultado final:** $67$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 17,
@@ -87,7 +107,11 @@
       "E": "Utiliza uma matriz geradora de 7 colunas e 3 linhas."
     },
     "resposta": "C",
-    "comentario": "O código de Hamming (7,4) tem distância mínima d=3. Com d=3: detecta até d-1=2 erros e corrige até ⌊(d-1)/2⌋=1 erro de bit."
+    "comentario": "O código de Hamming (7,4) tem distância mínima d=3. Com d=3: detecta até d-1=2 erros e corrige até ⌊(d-1)/2⌋=1 erro de bit.",
+    "card": {
+      "pergunta": "Qual é o valor de $Qual das alternativas representa corretamente uma propriedade do código de Hamming (7,4)?$?",
+      "resposta": "**Resposta.** O código de Hamming (7,4) tem distância mínima d=3.\n\n**Resolução.**\n\nO código de Hamming (7,4) tem distância mínima d=3. Com d=3: detecta até d-1=2 erros e corrige até ⌊(d-1)/2⌋=1 erro de bit.\n\n**Resultado final:** $Detecta até 2 erros e corrige até 1 erro.$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 18,
@@ -102,7 +126,11 @@
       "E": "{-2, -1, 0, 1, 2, 3}"
     },
     "resposta": "A",
-    "comentario": "A = {-2,-1,0,1,2,3}. B = {0,2,4,6}. A∩B = elementos em ambos = {0, 2}."
+    "comentario": "A = {-2,-1,0,1,2,3}. B = {0,2,4,6}. A∩B = elementos em ambos = {0, 2}.",
+    "card": {
+      "pergunta": "Qual é o valor de $Sejam A = {x ∈ Z | -2 ≤ x ≤ 3}...$?",
+      "resposta": "**Resposta.** A = {-2,-1,0,1,2,3}.\n\n**Resolução.**\n\nA = {-2,-1,0,1,2,3}. B = {0,2,4,6}. A∩B = elementos em ambos = {0, 2}.\n\n**Resultado final:** ${0, 2}$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 1,
@@ -117,7 +145,11 @@
       "E": "(-1, -1, -1)"
     },
     "resposta": "A",
-    "comentario": "Podemos verificar a alternativa A substituindo os valores (0, -1, 2) nas equações: 1) -3(0) + (-1) + 2 = 1 (OK); 2) 0 - 2(-1) + 2 = 4 (OK); 3) -0 + (-1) - 3(2) = -7 (OK). Pelo método de Gauss, a matriz aumentada escalonada resultaria nestes mesmos valores."
+    "comentario": "Podemos verificar a alternativa A substituindo os valores (0, -1, 2) nas equações: 1) -3(0) + (-1) + 2 = 1 (OK); 2) 0 - 2(-1) + 2 = 4 (OK); 3) -0 + (-1) - 3(2) = -7 (OK). Pelo método de Gauss, a matriz aumentada escalonada resultaria nestes mesmos valores.",
+    "card": {
+      "pergunta": "Qual é o valor de Utilize o método de Eliminação de Gauss para resolver o sistema a...?",
+      "resposta": "**Resposta.** Podemos verificar a alternativa A substituindo os valores (0, -1, 2) nas equações: 1) -3(0) + (-1) + 2 = 1 (OK); 2) 0 - 2(-1) + 2 = 4 (OK); 3) -0 + (-1) - 3(2) = -7 (OK).\n\n**Resolução.**\n\nPodemos verificar a alternativa A substituindo os valores (0, -1, 2) nas equações: 1) -3(0) + (-1) + 2 = 1 (OK); 2) 0 - 2(-1) + 2 = 4 (OK); 3) -0 + (-1) - 3(2) = -7 (OK). Pelo método de Gauss, a matriz aumentada escalonada resultaria nestes mesmos valores.\n\n**Resultado final:** $(0, -1, 2)$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 2,
@@ -132,7 +164,11 @@
       "E": "x = 7"
     },
     "resposta": "D",
-    "comentario": "O vetor (1, x, 5) deve ser uma combinação linear de (1, 2, 3) e (1, 1, 1). Logo: a(1, 2, 3) + b(1, 1, 1) = (1, x, 5). Pelas componentes: 1) a + b = 1; 3) 3a + b = 5. Subtraindo a primeira da terceira: 2a = 4 -> a = 2. Substituindo na primeira: 2 + b = 1 -> b = -1. Para a componente x: 2a + b = 2(2) + (-1) = 3."
+    "comentario": "O vetor (1, x, 5) deve ser uma combinação linear de (1, 2, 3) e (1, 1, 1). Logo: a(1, 2, 3) + b(1, 1, 1) = (1, x, 5). Pelas componentes: 1) a + b = 1; 3) 3a + b = 5. Subtraindo a primeira da terceira: 2a = 4 -> a = 2. Substituindo na primeira: 2 + b = 1 -> b = -1. Para a componente x: 2a + b = 2(2) + (-1) = 3.",
+    "card": {
+      "pergunta": "Qual é o valor de $Determine o valor de x para que o vetor (1, x, 5)...$?",
+      "resposta": "**Resposta.** O vetor (1, x, 5) deve ser uma combinação linear de (1, 2, 3) e (1, 1, 1).\n\n**Resolução.**\n\nO vetor (1, x, 5) deve ser uma combinação linear de (1, 2, 3) e (1, 1, 1). Logo: a(1, 2, 3) + b(1, 1, 1) = (1, x, 5). Pelas componentes: 1) a + b = 1; 3) 3a + b = 5. Subtraindo a primeira da terceira: 2a = 4 -> a = 2. Substituindo na primeira: 2 + b = 1 -> b = -1. Para a componente x: 2a + b = 2(2) + (-1) = 3.\n\n**Resultado final:** $x = 3$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 3,
@@ -147,7 +183,11 @@
       "E": "(1 − x)³"
     },
     "resposta": "E",
-    "comentario": "O polinômio característico é dado por det(J - λI). Para J = [[2, -2, 1], [1, -1, 1], [1, -2, 2]], o determinante de [[2-λ, -2, 1], [1, -1-λ, 1], [1, -2, 2-λ]] resulta em (1-λ)³. Os autovalores são todos iguais a 1."
+    "comentario": "O polinômio característico é dado por det(J - λI). Para J = [[2, -2, 1], [1, -1, 1], [1, -2, 2]], o determinante de [[2-λ, -2, 1], [1, -1-λ, 1], [1, -2, 2-λ]] resulta em (1-λ)³. Os autovalores são todos iguais a 1.",
+    "card": {
+      "pergunta": "Qual é o valor de $Determine o polinômio característico de J: J= (2−21 1−11 1−22)$?",
+      "resposta": "**Resposta.** O polinômio característico é dado por det(J - λI).\n\n**Resolução.**\n\nO polinômio característico é dado por det(J - λI). Para J = [[2, -2, 1], [1, -1, 1], [1, -2, 2]], o determinante de [[2-λ, -2, 1], [1, -1-λ, 1], [1, -2, 2-λ]] resulta em (1-λ)³. Os autovalores são todos iguais a 1.\n\n**Resultado final:** $(1 − x)³$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 4,
@@ -162,7 +202,11 @@
       "E": "72"
     },
     "resposta": "D",
-    "comentario": "O problema pede o número de combinações de 8 números tomados 6 a cada vez. C(8, 6) = C(8, 2) = (8 * 7) / (2 * 1) = 28."
+    "comentario": "O problema pede o número de combinações de 8 números tomados 6 a cada vez. C(8, 6) = C(8, 2) = (8 * 7) / (2 * 1) = 28.",
+    "card": {
+      "pergunta": "Qual é o valor de $Nos jogos da Mega -Sena, são sorteados a cada concurso 6 números...$?",
+      "resposta": "**Resposta.** O problema pede o número de combinações de 8 números tomados 6 a cada vez.\n\n**Resolução.**\n\nO problema pede o número de combinações de 8 números tomados 6 a cada vez. C(8, 6) = C(8, 2) = (8 * 7) / (2 * 1) = 28.\n\n**Resultado final:** $28$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 5,
@@ -177,7 +221,11 @@
       "E": "5040"
     },
     "resposta": "A",
-    "comentario": "Se considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126."
+    "comentario": "Se considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126.",
+    "card": {
+      "pergunta": "Qual é o valor de $Recentemente , com a pandemia de C ovid-19, houve grande interesse em...$?",
+      "resposta": "**Resposta.** Se considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126.\n\n**Resolução.**\n\nSe considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126.\n\n**Resultado final:** $126$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 7,
@@ -192,7 +240,11 @@
       "E": "100"
     },
     "resposta": "C",
-    "comentario": "Considerando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2."
+    "comentario": "Considerando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2.",
+    "card": {
+      "pergunta": "Como calcular $o lim 𝑥→10−3𝑙𝑜𝑔(10∙𝑥)$?",
+      "resposta": "**Resposta.** Considerando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2.\n\n**Resolução.**\n\nConsiderando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2.\n\n**Resultado final:** $-2$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 8,
@@ -207,7 +259,11 @@
       "E": "𝐼1=(−∞,−1); 𝐼2=(−1,1); 𝐼3=(1,∞)"
     },
     "resposta": "A",
-    "comentario": "A derivada f'(x) = [25x² + 20x] / [2√(x+1)]. Os pontos críticos (onde f'(x)=0) são x=0 e x=-4/5. O domínio é x > -1. Os intervalos de crescimento/decrescimento são definidos por estes pontos: (-1, -4/5), (-4/5, 0) e (0, ∞)."
+    "comentario": "A derivada f'(x) = [25x² + 20x] / [2√(x+1)]. Os pontos críticos (onde f'(x)=0) são x=0 e x=-4/5. O domínio é x > -1. Os intervalos de crescimento/decrescimento são definidos por estes pontos: (-1, -4/5), (-4/5, 0) e (0, ∞).",
+    "card": {
+      "pergunta": "Como calcular $os intervalos da função 𝑓(𝑥)=5𝑥²√𝑥+1$?",
+      "resposta": "**Resposta.** A derivada f'(x) = [25x² + 20x] / [2√(x+1)].\n\n**Resolução.**\n\nA derivada f'(x) = [25x² + 20x] / [2√(x+1)]. Os pontos críticos (onde f'(x)=0) são x=0 e x=-4/5. O domínio é x > -1. Os intervalos de crescimento/decrescimento são definidos por estes pontos: (-1, -4/5), (-4/5, 0) e (0, ∞).\n\n**Resultado final:** $𝐼1=(−1,−4 5); 𝐼2=(−4 5,0); 𝐼3=(0,∞)$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 9,
@@ -222,7 +278,11 @@
       "E": "∇𝑓(0,𝜋)=(0 0)"
     },
     "resposta": "D",
-    "comentario": "Derivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y). No ponto (0,π): -sen(π) + cos(π) = 0 - 1 = -1. ∂f/∂y = e⁻ˣcos(x+y). No ponto (0,π): cos(π) = -1. Logo, ∇f(0,π) = (-1, -1)."
+    "comentario": "Derivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y). No ponto (0,π): -sen(π) + cos(π) = 0 - 1 = -1. ∂f/∂y = e⁻ˣcos(x+y). No ponto (0,π): cos(π) = -1. Logo, ∇f(0,π) = (-1, -1).",
+    "card": {
+      "pergunta": "Como calcular $o vetor gradiente da função 𝑓(𝑥,𝑦)= 𝑒−𝑥𝑠𝑒𝑛(𝑥+𝑦) no ponto 𝑃 (0,𝜋)$?",
+      "resposta": "**Resposta.** Derivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y).\n\n**Resolução.**\n\nDerivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y). No ponto (0,π): -sen(π) + cos(π) = 0 - 1 = -1. ∂f/∂y = e⁻ˣcos(x+y). No ponto (0,π): cos(π) = -1. Logo, ∇f(0,π) = (-1, -1).\n\n**Resultado final:** $∇𝑓(0,𝜋)=(−1 −1)$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 10,
@@ -237,7 +297,11 @@
       "E": "a = -6 e b = 1"
     },
     "resposta": "A",
-    "comentario": "Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK)."
+    "comentario": "Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK).",
+    "card": {
+      "pergunta": "Como calcular $a e b tal que u = av + bw$?",
+      "resposta": "**Resposta.** Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2.\n\n**Resolução.**\n\nTemos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK).\n\n**Resultado final:** $a = 2 e b = -7$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 11,
@@ -252,7 +316,11 @@
       "E": "(5, 1, 5)"
     },
     "resposta": "D",
-    "comentario": "O vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3). n1 x n2 = (2*3 - 1*(-1), 1*2 - 1*3, 1*(-1) - 2*2) = (7, -1, -5)."
+    "comentario": "O vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3). n1 x n2 = (2*3 - 1*(-1), 1*2 - 1*3, 1*(-1) - 2*2) = (7, -1, -5).",
+    "card": {
+      "pergunta": "Qual é o valor de $Calcule o vetor diretor da interseção dos seguintes planos: x + 2y...$?",
+      "resposta": "**Resposta.** O vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3).\n\n**Resolução.**\n\nO vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3). n1 x n2 = (2*3 - 1*(-1), 1*2 - 1*3, 1*(-1) - 2*2) = (7, -1, -5).\n\n**Resultado final:** $(7, -1, -5)$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 12,
@@ -267,7 +335,11 @@
       "E": "18,5"
     },
     "resposta": "C",
-    "comentario": "A fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²). d = |6(3) - 2(1) + 11| / √(6² + (-2)²) = |18 - 2 + 11| / √40 = 27 / √40 ≈ 27 / 6,32 ≈ 4,27. O valor aproximado é 4,3."
+    "comentario": "A fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²). d = |6(3) - 2(1) + 11| / √(6² + (-2)²) = |18 - 2 + 11| / √40 = 27 / √40 ≈ 27 / 6,32 ≈ 4,27. O valor aproximado é 4,3.",
+    "card": {
+      "pergunta": "Como calcular $a distância aproximada entre o ponto J(3, 1) e a reta s : 6x – 2y + 11 = 0$?",
+      "resposta": "**Resposta.** A fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²).\n\n**Resolução.**\n\nA fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²). d = |6(3) - 2(1) + 11| / √(6² + (-2)²) = |18 - 2 + 11| / √40 = 27 / √40 ≈ 27 / 6,32 ≈ 4,27. O valor aproximado é 4,3.\n\n**Resultado final:** $4,3$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 13,
@@ -282,7 +354,11 @@
       "E": "Existe nenhuma universidade em que os cursos possuam, no máximo, 100 alunos."
     },
     "resposta": "A",
-    "comentario": "Negar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100. Ou seja: \"Em todas as universidades existe pelo menos um curso com menos de 100 alunos (no máximo 99)\"."
+    "comentario": "Negar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100. Ou seja: \"Em todas as universidades existe pelo menos um curso com menos de 100 alunos (no máximo 99)\".",
+    "card": {
+      "pergunta": "Qual é o valor de Analise a seguinte proposição: \"Existe pelo menos uma universidade em que todos...?",
+      "resposta": "**Resposta.** Negar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100.\n\n**Resolução.**\n\nNegar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100. Ou seja: \"Em todas as universidades existe pelo menos um curso com menos de 100 alunos (no máximo 99)\".\n\n**Resultado final:** $Em todas as universidades existe pelo menos um curso que possui, no máximo, 99 alunos.$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 14,
@@ -297,7 +373,11 @@
       "E": "(~p)→(p ou q)"
     },
     "resposta": "A",
-    "comentario": "A tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso."
+    "comentario": "A tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso.",
+    "card": {
+      "pergunta": "Qual é o valor de $Sendo p e q proposições simples , considere a proposição composta E(p,q)...$?",
+      "resposta": "**Resposta.** A tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso.\n\n**Resolução.**\n\nA tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso.\n\n**Resultado final:** $P–>q$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 15,
@@ -312,7 +392,11 @@
       "E": "q→p"
     },
     "resposta": "D",
-    "comentario": "Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p."
+    "comentario": "Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p.",
+    "card": {
+      "pergunta": "Qual é o valor de A expressão lógica p →q é equivalente a:?",
+      "resposta": "**Resposta.** Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p.\n\n**Resolução.**\n\nPela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p.\n\n**Resultado final:** $~q->~p$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 16,
@@ -327,7 +411,11 @@
       "E": "𝑥𝑦̅̅̅+𝑥̅𝑦"
     },
     "resposta": "D",
-    "comentario": "Simplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z."
+    "comentario": "Simplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z.",
+    "card": {
+      "pergunta": "Qual é o valor de Utilizando as leis de Morgan, obtenha uma expressão em forma de somas...?",
+      "resposta": "**Resposta.** Simplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z.\n\n**Resolução.**\n\nSimplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z.\n\n**Resultado final:** $𝑦̅+𝑧$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 18,
@@ -342,7 +430,11 @@
       "E": "A ≠ B"
     },
     "resposta": "A",
-    "comentario": "A alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B."
+    "comentario": "A alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B.",
+    "card": {
+      "pergunta": "Qual é o valor de $Usando os conjuntos de dados A = {1, 4, 2, 6, 8,...$?",
+      "resposta": "**Resposta.** A alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B.\n\n**Resolução.**\n\nA alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B.\n\n**Resultado final:** A ⊆ B\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 19,
@@ -357,7 +449,11 @@
       "E": "3,21"
     },
     "resposta": "B",
-    "comentario": "Média ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68."
+    "comentario": "Média ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68.",
+    "card": {
+      "pergunta": "Qual é o valor de $Com base na Tabela 1, calcule a média da seguinte amostra de...$?",
+      "resposta": "**Resposta.** Média ponderada: Σ(Xi * ni) / Σni.\n\n**Resolução.**\n\nMédia ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68.\n\n**Resultado final:** $1,68$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 20,
@@ -372,6 +468,10 @@
       "E": "100,0% FUNDAMENTOS DA COMPUTAÇÃO"
     },
     "resposta": "B",
-    "comentario": "P(pelo menos uma) = 1 - P(nenhuma). P(nenhuma defeituosa) = (0,95)¹⁰ ≈ 0,5987. Logo, P(pelo menos uma) = 1 - 0,5987 = 0,4013, aproximadamente 40,0%."
+    "comentario": "P(pelo menos uma) = 1 - P(nenhuma). P(nenhuma defeituosa) = (0,95)¹⁰ ≈ 0,5987. Logo, P(pelo menos uma) = 1 - 0,5987 = 0,4013, aproximadamente 40,0%.",
+    "card": {
+      "pergunta": "Como calcular a probabilidade pedida na questão?",
+      "resposta": "**Resposta.** P(pelo menos uma) = 1 - P(nenhuma).\n\n**Resolução.**\n\nP(pelo menos uma) = 1 - P(nenhuma). P(nenhuma defeituosa) = (0,95)¹⁰ ≈ 0,5987. Logo, P(pelo menos uma) = 1 - 0,5987 = 0,4013, aproximadamente 40,0%.\n\n**Resultado final:** $40,0%$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   }
 ]
