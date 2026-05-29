@@ -9,7 +9,7 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../hooks/useTheme'
 import { callDeleteAllData } from '../hooks/useFunctions'
 
@@ -20,6 +20,15 @@ export function Perfil() {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const { theme, toggleTheme } = useTheme()
+  const deleteDialogRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = deleteDialogRef.current
+    if (!el) return
+    const handler = () => setShowDeleteDialog(false)
+    el.addEventListener('cancel', handler)
+    return () => el.removeEventListener('cancel', handler)
+  }, [showDeleteDialog])
 
   async function handleLogout() {
     setLoggingOut(true)
@@ -129,7 +138,7 @@ export function Perfil() {
 
 
       {showDeleteDialog && (
-        <md-dialog open onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+        <md-dialog ref={deleteDialogRef} open onClick={(e: React.MouseEvent) => e.stopPropagation()}>
           <div slot="headline">Apagar todos os dados?</div>
           <div slot="content">
             Todo o histórico de simulados e cartões de revisão serão apagados permanentemente. Esta ação não pode ser desfeita.
