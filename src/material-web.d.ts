@@ -68,6 +68,12 @@ declare namespace React {
         selected?: boolean
         disabled?: boolean
       }, HTMLElement>
+      'md-outlined-text-field': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
+        label?: string
+        value?: string
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onInput?: (e: any) => void
+      }, HTMLElement>
     }
   }
 }

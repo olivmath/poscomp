@@ -23,6 +23,7 @@ export function ReportIssueModal({
         <md-outlined-text-field
           label="Comentário (opcional)"
           value={comment}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onInput={(e: any) => setComment(e.target.value)}
         />
       </div>

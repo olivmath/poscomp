@@ -1,5 +1,5 @@
 import '@material/web/button/filled-button.js'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ImmersiveBar } from './ImmersiveBar'
 import { ExitModal } from './ExitModal'
 import { QuestionMapModal } from './QuestionMapModal'
