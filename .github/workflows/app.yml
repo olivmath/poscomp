@@ -12,6 +12,7 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'eslint.config.*'
+      - '.stylelintrc.json'
       - 'playwright.config.*'
       - '.github/workflows/app.yml'
   pull_request:
@@ -25,6 +26,7 @@ on:
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'eslint.config.*'
+      - '.stylelintrc.json'
       - 'playwright.config.*'
       - '.github/workflows/app.yml'
 

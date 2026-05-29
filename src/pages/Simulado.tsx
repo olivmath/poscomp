@@ -76,7 +76,7 @@ function QuestionMapModal({
           {statuses.map((status, i) => (
             <button
               key={i}
-              className={`question-map-btn question-map-btn--${status} ${i === currentIndex ? 'question-map-btn--current' : ''}`}
+              className={`question-map-btn question-map-btn--${status.replace(/_/g, '-')} ${i === currentIndex ? 'question-map-btn--current' : ''}`}
               onClick={() => { onGo(i); onClose() }}
               aria-label={`Questão ${i + 1} — ${status}`}
               data-testid={`map-q-${i + 1}`}
@@ -89,7 +89,7 @@ function QuestionMapModal({
         <div className="question-map-legend">
           {legend.map(({ status, label, icon }) => (
             <span key={status} className="map-legend-item">
-              <span className={`material-symbols-outlined map-legend-icon map-legend-icon--${status}`}>{icon}</span>
+              <span className={`material-symbols-outlined map-legend-icon map-legend-icon--${status.replace(/_/g, '-')}`}>{icon}</span>
               {label}
             </span>
           ))}
