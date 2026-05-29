@@ -1,0 +1,452 @@
+[
+  {
+    "id": 1,
+    "area": "Matemática",
+    "enunciado": "Resolva o sistema abaixo utilizando o método de Gauss.\n2x – 2y + z = –3\nx + 3y – 2z = 1\n3x – y – z = 2",
+    "alternativas": {
+      "A": "(1/5, -1, 2/5)",
+      "B": "(0, -1, 0)",
+      "C": "(2/5, 0, 2/5)",
+      "D": "(-7/5, -2, -21/5)",
+      "E": "(-1/5, -1, -1/5)"
+    },
+    "resposta": "D",
+    "comentario": "Aplicando eliminação gaussiana: montamos a matriz aumentada e reduzimos por escalonamento. Após operações de linha, obtemos x = -7/5, y = -2, z = -21/5.",
+    "ano": 2024
+  },
+  {
+    "id": 2,
+    "area": "Matemática",
+    "enunciado": "Calcule o valor de α que provoca que o determinante da matriz Z seja 8:\nZ = [[1, -1, -1], [-1, 1, -1], [2, 2, α]]",
+    "alternativas": {
+      "A": "α = 1",
+      "B": "α = 2",
+      "C": "α = 4",
+      "D": "α = 7",
+      "E": "α = 11"
+    },
+    "resposta": "A",
+    "comentario": "Expandindo o determinante: det = 1·(α+2) − (−1)·(−α+2) + (−1)·(−4) = α+2 − α+2 + 4 = 8. O coeficiente de α cancela — det = 8 para qualquer α. Todos os valores das alternativas satisfazem a condição; α = 1 é o menor valor válido.",
+    "ano": 2024
+  },
+  {
+    "id": 3,
+    "area": "Matemática",
+    "enunciado": "Assinale a alternativa que apresenta o polinômio característico da matriz.\nA = [[1, -1, -1], [-1, 1, -1], [2, 2, 4]]",
+    "alternativas": {
+      "A": "(λ – 2)",
+      "B": "(λ – 2)²",
+      "C": "(λ + 2)",
+      "D": "(λ - 4)",
+      "E": "– (λ – 2)³"
+    },
+    "resposta": "E",
+    "comentario": "O polinômio característico é det(A – λI) = 0. Calculando e fatorando, obtém-se –(λ – 2)³, indicando λ = 2 como autovalor de multiplicidade algébrica 3.",
+    "ano": 2024
+  },
+  {
+    "id": 4,
+    "area": "Matemática",
+    "enunciado": "Quantas formas existem de permutar os elementos do conjunto {1,2,3,4} de maneira que o número 1 não esteja na primeira posição e o número 2 não esteja na segunda posição?",
+    "alternativas": {
+      "A": "6",
+      "B": "8",
+      "C": "10",
+      "D": "12",
+      "E": "14"
+    },
+    "resposta": "E",
+    "comentario": "Usando inclusão-exclusão: Total = 4! = 24. |A∪B| = 6+6–2 = 10. Válidas = 24 – 10 = 14.",
+    "ano": 2024
+  },
+  {
+    "id": 5,
+    "area": "Matemática",
+    "enunciado": "Qual é o número máximo de arestas que um grafo não direcionado G com 7 vértices pode ter sem formar um ciclo?",
+    "alternativas": {
+      "A": "6",
+      "B": "7",
+      "C": "10",
+      "D": "11",
+      "E": "21"
+    },
+    "resposta": "A",
+    "comentario": "Um grafo acíclico com n vértices é uma árvore/floresta com no máximo n–1 = 6 arestas.",
+    "ano": 2024
+  },
+  {
+    "id": 6,
+    "area": "Matemática",
+    "enunciado": "Uma startup tem 7 jogos de ação e 5 jogos de esportes. Quantas opções de pacote com 4 jogos possuem pelo menos 2 jogos de esportes?",
+    "alternativas": {
+      "A": "70",
+      "B": "120",
+      "C": "210",
+      "D": "285",
+      "E": "495"
+    },
+    "resposta": "D",
+    "comentario": "C(5,2)×C(7,2) + C(5,3)×C(7,1) + C(5,4)×C(7,0) = 210 + 70 + 5 = 285.",
+    "ano": 2024
+  },
+  {
+    "id": 7,
+    "area": "Matemática",
+    "enunciado": "Calcule o limite em infinito da função f(x) = √(x² + 1) − x.",
+    "alternativas": {
+      "A": "-∞",
+      "B": "-1",
+      "C": "0",
+      "D": "1",
+      "E": "∞"
+    },
+    "resposta": "C",
+    "comentario": "Multiplicando pelo conjugado: 1/(√(x²+1) + x) → 0 quando x→∞.",
+    "ano": 2024
+  },
+  {
+    "id": 8,
+    "area": "Matemática",
+    "enunciado": "Assinale a alternativa que apresenta o intervalo em que a função g(x) = √(4 − x²) / (3x − 1) é contínua.",
+    "alternativas": {
+      "A": "[-4, 1) U (1, 4]",
+      "B": "[-2, 3) U (3, 2)",
+      "C": "[-2, 1/3) U (1/3, 2]",
+      "D": "[-∞, 2) U (2, ∞)",
+      "E": "[-∞, 0) U (0, ∞)"
+    },
+    "resposta": "C",
+    "comentario": "Domínio: 4–x² ≥ 0 → x ∈ [–2,2]; 3x–1 ≠ 0 → x ≠ 1/3. Logo [–2, 1/3) ∪ (1/3, 2].",
+    "ano": 2024
+  },
+  {
+    "id": 9,
+    "area": "Matemática",
+    "enunciado": "Calcule a integral definida ∫₁ᵉ (ln x / x) dx.",
+    "alternativas": {
+      "A": "e",
+      "B": "2",
+      "C": "1",
+      "D": "1/2",
+      "E": "0"
+    },
+    "resposta": "D",
+    "comentario": "Substituição u = ln x: ∫₀¹ u du = [u²/2]₀¹ = 1/2.",
+    "ano": 2024
+  },
+  {
+    "id": 10,
+    "area": "Matemática",
+    "enunciado": "O ponto médio do segmento de extremos A(5, -1) e B(4, -2) é:",
+    "alternativas": {
+      "A": "(1/2, 1/2)",
+      "B": "(9/2, -3/2)",
+      "C": "(3/2, 3/2)",
+      "D": "(1, 1/2)",
+      "E": "(1/2, 2)"
+    },
+    "resposta": "B",
+    "comentario": "M = ((5+4)/2, (−1−2)/2) = (9/2, −3/2).",
+    "ano": 2024
+  },
+  {
+    "id": 11,
+    "area": "Matemática",
+    "enunciado": "Calcule os dois valores de k em que a distância do ponto P(2, k) até a reta r: x – y + 3 = 0 é √2.",
+    "alternativas": {
+      "A": "k = 3 e k = 7",
+      "B": "k = -1 e k = 2",
+      "C": "k = 3 e k = 5",
+      "D": "k = 2 e k = 3",
+      "E": "k = 5 e k = 7"
+    },
+    "resposta": "A",
+    "comentario": "d = |5–k|/√2 = √2 → |5–k| = 2 → k = 3 ou k = 7.",
+    "ano": 2024
+  },
+  {
+    "id": 12,
+    "area": "Matemática",
+    "enunciado": "Determine o ponto de intersecção das retas:\nr: x = 2 – 4t, y = –2 + t\ns: x = 3 + 8t, y = –1 – 2t",
+    "alternativas": {
+      "A": "(-3, 1)",
+      "B": "(1, 2)",
+      "C": "(-5, 0)",
+      "D": "(1, 1)",
+      "E": "As retas são paralelas e não possuem ponto de intersecção."
+    },
+    "resposta": "E",
+    "comentario": "Vetores diretores (−4,1) e (8,−2) são proporcionais → retas paralelas. Pontos distintos → sem intersecção.",
+    "ano": 2024
+  },
+  {
+    "id": 13,
+    "area": "Matemática",
+    "enunciado": "A expressão lógica ~p → ~q é equivalente a:",
+    "alternativas": {
+      "A": "~q ∧ ~p",
+      "B": "~q → p",
+      "C": "q → ~p",
+      "D": "q → p",
+      "E": "p → q"
+    },
+    "resposta": "D",
+    "comentario": "~p → ~q é a contrapositiva de q → p, portanto equivalente a q → p.",
+    "ano": 2024
+  },
+  {
+    "id": 14,
+    "area": "Matemática",
+    "enunciado": "Dadas duas proposições lógicas q e p, a proposição ~(p ∨ q) é verdadeira se, e somente se, for falsa a proposição:",
+    "alternativas": {
+      "A": "p e q",
+      "B": "~p",
+      "C": "~p → q",
+      "D": "~p → ~q",
+      "E": "~q"
+    },
+    "resposta": "C",
+    "comentario": "~(p∨q) V ↔ p=F e q=F. Nesse cenário ~p→q = V→F = F.",
+    "ano": 2024
+  },
+  {
+    "id": 15,
+    "area": "Matemática",
+    "enunciado": "Considere as premissas:\n1: Se Ana Paula joga vôlei OU Joaquim joga videogame, então Victória vai à praia.\n2: Hoje, Victória NÃO foi à praia.\n3: Se hoje é sábado, então Ana Paula joga vôlei E Caio treina boxe.\nO que se pode concluir?",
+    "alternativas": {
+      "A": "Hoje é sábado e Ana Paula jogou vôlei.",
+      "B": "Hoje não é sábado e Joaquim não jogou videogame.",
+      "C": "Ana Paula jogou vôlei ou Joaquim jogou videogame.",
+      "D": "Hoje é sábado e Joaquim jogou videogame.",
+      "E": "Hoje não é sábado e Ana Paula jogou vôlei."
+    },
+    "resposta": "B",
+    "comentario": "Por modus tollens com P1: ~Ana Paula ∧ ~Joaquim. Por modus tollens com P3: ~sábado. Conclusão: hoje não é sábado e Joaquim não jogou.",
+    "ano": 2024
+  },
+  {
+    "id": 19,
+    "area": "Matemática",
+    "enunciado": "Com base na lista de tempos (80 valores) de execução de um software, a percentagem de tempo em que o processo de cálculo é inferior a 65 segundos é:",
+    "alternativas": {
+      "A": "28,8%",
+      "B": "30,0%",
+      "C": "32,5%",
+      "D": "36,3%",
+      "E": "40,0%"
+    },
+    "resposta": "C",
+    "comentario": "26 valores < 65 em 80 observações → 26/80 = 32,5%.",
+    "ano": 2024
+  },
+  {
+    "id": 20,
+    "area": "Matemática",
+    "enunciado": "O tempo médio aproximado que o software leva para realizar os cálculos é:",
+    "alternativas": {
+      "A": "65",
+      "B": "66",
+      "C": "67",
+      "D": "68",
+      "E": "69"
+    },
+    "resposta": "C",
+    "comentario": "Soma dos 80 valores ≈ 5360 → média = 5360/80 = 67.",
+    "ano": 2024
+  },
+  {
+    "id": 1,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Resolva o sistema abaixo utilizando o método de Gauss.\n2x – 2y + z = –3\nx + 3y – 2z = 1\n3x – y – z = 2",
+    "alternativas": {
+      "A": "(1/5, -1, 2/5)",
+      "B": "(0, -1, 0)",
+      "C": "(2/5, 0, 2/5)",
+      "D": "(-7/5, -2, -21/5)",
+      "E": "(-1/5, -1, -1/5)"
+    },
+    "resposta": "D",
+    "comentario": "Montando a matriz aumentada e aplicando eliminação gaussiana: após escalonamento obtém-se x = -7/5, y = -2, z = -21/5. Verificação na eq. 1: 2(-7/5) – 2(-2) + (-21/5) = -14/5 + 4 – 21/5 = -35/5 + 4 = -7 + 4 = -3 ✓."
+  },
+  {
+    "id": 2,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Calcule o valor de α que provoca que o determinante da matriz Z seja 8:\nZ = [[1, -1, -1], [-1, 1, -1], [2, 2, α]]",
+    "alternativas": {
+      "A": "α = 1",
+      "B": "α = 2",
+      "C": "α = 4",
+      "D": "α = 7",
+      "E": "α = 11"
+    },
+    "resposta": "ANULADA",
+    "comentario": "Questão anulada oficialmente. Ao expandir o determinante, o coeficiente de α resulta em 0 (det = 2·2 + 2·(1+1) + α·0 = ...), tornando impossível satisfazer det = 8 para qualquer α."
+  },
+  {
+    "id": 3,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Assinale a alternativa que apresenta o polinômio característico da matriz A = [[1,-1,-1],[-1,1,-1],[2,2,4]].",
+    "alternativas": {
+      "A": "(λ – 2)",
+      "B": "(λ – 2)²",
+      "C": "(λ + 2)",
+      "D": "(λ - 4)",
+      "E": "– (λ – 2)³"
+    },
+    "resposta": "E",
+    "comentario": "Calculando det(A – λI) e fatorando, obtém-se –(λ – 2)³, indicando que λ = 2 é autovalor de multiplicidade algébrica 3. O sinal negativo decorre da convenção det(A – λI)."
+  },
+  {
+    "id": 4,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Quantas formas existem de permutar os elementos do conjunto {1,2,3,4} de maneira que o número 1 não esteja na primeira posição e o número 2 não esteja na segunda posição?",
+    "alternativas": {
+      "A": "6",
+      "B": "8",
+      "C": "10",
+      "D": "12",
+      "E": "14"
+    },
+    "resposta": "E",
+    "comentario": "Inclusão-exclusão: Total = 4! = 24. |A| = 3! = 6, |B| = 3! = 6, |A∩B| = 2! = 2. Inválidas = 6+6–2 = 10. Válidas = 24–10 = 14."
+  },
+  {
+    "id": 5,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Qual é o número máximo de arestas que um grafo não direcionado G com 7 vértices pode ter sem formar um ciclo?",
+    "alternativas": {
+      "A": "6",
+      "B": "7",
+      "C": "10",
+      "D": "11",
+      "E": "21"
+    },
+    "resposta": "A",
+    "comentario": "Um grafo acíclico (floresta) com n vértices tem no máximo n–1 = 6 arestas. Uma árvore com 7 vértices tem exatamente 6 arestas."
+  },
+  {
+    "id": 6,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Uma startup tem 7 jogos de ação e 5 de esportes. Pacote de 4 jogos. Quantas opções com pelo menos 2 jogos de esportes?",
+    "alternativas": {
+      "A": "70",
+      "B": "120",
+      "C": "210",
+      "D": "285",
+      "E": "495"
+    },
+    "resposta": "D",
+    "comentario": "2 esportes + 2 ação: C(5,2)×C(7,2) = 10×21 = 210. 3 esportes + 1 ação: C(5,3)×C(7,1) = 10×7 = 70. 4 esportes + 0 ação: C(5,4)×C(7,0) = 5. Total = 285."
+  },
+  {
+    "id": 7,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Calcule o limite em infinito da função f(x) = √(x² + 1) − x.",
+    "alternativas": {
+      "A": "-∞",
+      "B": "-1",
+      "C": "0",
+      "D": "1",
+      "E": "∞"
+    },
+    "resposta": "C",
+    "comentario": "Multiplicando pelo conjugado: resultado = 1/(√(x²+1) + x). Quando x→∞, denominador→∞, portanto limite = 0."
+  },
+  {
+    "id": 8,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Assinale o intervalo em que g(x) = √(4 − x²) / (3x − 1) é contínua.",
+    "alternativas": {
+      "A": "[-4, 1) U (1, 4]",
+      "B": "[-2, 3) U (3, 2)",
+      "C": "[-2, 1/3) U (1/3, 2]",
+      "D": "[-∞, 2) U (2, ∞)",
+      "E": "[-∞, 0) U (0, ∞)"
+    },
+    "resposta": "C",
+    "comentario": "Radicando ≥ 0: –2 ≤ x ≤ 2. Denominador ≠ 0: x ≠ 1/3. Domínio = [–2, 1/3) ∪ (1/3, 2]."
+  },
+  {
+    "id": 9,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Calcule a integral definida ∫₁ᵉ (ln x / x) dx.",
+    "alternativas": {
+      "A": "e",
+      "B": "2",
+      "C": "1",
+      "D": "1/2",
+      "E": "0"
+    },
+    "resposta": "D",
+    "comentario": "Substituição u = ln x, du = dx/x. Limites: 0 a 1. Integral = [u²/2]₀¹ = 1/2."
+  },
+  {
+    "id": 10,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "O ponto médio do segmento de extremos A(5, -1) e B(4, -2) é:",
+    "alternativas": {
+      "A": "(1/2, 1/2)",
+      "B": "(9/2, -3/2)",
+      "C": "(3/2, 3/2)",
+      "D": "(1, 1/2)",
+      "E": "(1/2, 2)"
+    },
+    "resposta": "B",
+    "comentario": "M = ((5+4)/2, (-1-2)/2) = (9/2, -3/2)."
+  },
+  {
+    "id": 11,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Calcule os dois valores de k em que a distância do ponto P(2, k) até a reta r: x – y + 3 = 0 é √2.",
+    "alternativas": {
+      "A": "k = 3 e k = 7",
+      "B": "k = -1 e k = 2",
+      "C": "k = 3 e k = 5",
+      "D": "k = 2 e k = 3",
+      "E": "k = 5 e k = 7"
+    },
+    "resposta": "A",
+    "comentario": "d = |2 – k + 3| / √2 = √2 → |5 – k| = 2 → k = 3 ou k = 7."
+  },
+  {
+    "id": 12,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Determine o ponto de intersecção das retas r: x=2–4t, y=–2+t e s: x=3+8t, y=–1–2t.",
+    "alternativas": {
+      "A": "(-3, 1)",
+      "B": "(1, 2)",
+      "C": "(-5, 0)",
+      "D": "(1, 1)",
+      "E": "As retas são paralelas e não possuem ponto de intersecção."
+    },
+    "resposta": "E",
+    "comentario": "Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção."
+  },
+  {
+    "id": 13,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "A expressão lógica ~p → ~q é equivalente a:",
+    "alternativas": {
+      "A": "~q ∧ ~p",
+      "B": "~q → p",
+      "C": "q → ~p",
+      "D": "q → p",
+      "E": "p → q"
+    },
+    "resposta": "D",
+    "comentario": "~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente."
+  }
+]

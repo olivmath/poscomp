@@ -1,0 +1,227 @@
+[
+  {
+    "id": 51,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Dada a tabela ITEM(Id, Nome, Fk) com tuplas (1,'Item 1',NULL),(2,'Item 2',1),(3,'Item 3',1),(4,'Item 4',3), a consulta SELECT FILHO.Id, FILHO.Nome, PAI.Id, PAI.Nome FROM ITEM AS FILHO RIGHT OUTER JOIN ITEM AS PAI ON FILHO.Fk = PAI.Id retorna quantas tuplas?",
+    "alternativas": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5",
+      "E": "6"
+    },
+    "resposta": "D",
+    "comentario": "RIGHT JOIN retorna todos os PAIs. Item1 aparece 2x (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 sem filhos → NULL. Total: 5 tuplas.",
+    "ano": 2024
+  },
+  {
+    "id": 52,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Entre as estratégias de tratamento de deadlock, aquela que é um protocolo de detecção (em vez de prevenção) é denominada:",
+    "alternativas": {
+      "A": "Espera cautelosa",
+      "B": "Grafo de espera",
+      "C": "Sem espera",
+      "D": "Esperar ou morrer",
+      "E": "Ferir ou esperar"
+    },
+    "resposta": "B",
+    "comentario": "Grafo de espera detecta deadlock via ciclos. As demais são protocolos de prevenção.",
+    "ano": 2024
+  },
+  {
+    "id": 54,
+    "area": "Tecnologia da Computação",
+    "enunciado": "No contexto de construção de compiladores, um Esquema de Tradução é:",
+    "alternativas": {
+      "A": "Grafo que relaciona atributos entre regras de produção diferentes de uma GLC.",
+      "B": "Sequência de ações que descreve informalmente o funcionamento de todas as etapas.",
+      "C": "Técnica de recuperação de erros com estruturas semanticamente equivalentes.",
+      "D": "Forma de análise semântica que considera o tipo das variáveis.",
+      "E": "Gramática livre de contexto na qual fragmentos de programas são inseridos nos lados direitos das regras de produção."
+    },
+    "resposta": "E",
+    "comentario": "Esquema de Tradução: GLC com ações semânticas embutidas nos lados direitos, executadas durante a análise.",
+    "ano": 2024
+  },
+  {
+    "id": 58,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Segundo Pressman e Maxim, os resultados de ter um software de alta qualidade são os seguintes, EXCETO:",
+    "alternativas": {
+      "A": "Aumentar a complexidade dos processos de negócios.",
+      "B": "Gerar maior receita pelo produto de software.",
+      "C": "Obter maior rentabilidade, quando uma aplicação suporta um processo de negócio.",
+      "D": "Obter maior disponibilidade de informações cruciais para o negócio.",
+      "E": "Obter menor exigência de manutenção, menos correções de erros e menos suporte ao cliente."
+    },
+    "resposta": "A",
+    "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade.",
+    "ano": 2024
+  },
+  {
+    "id": 59,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Segundo Sommerville, 'É o processo de entender e definir quais serviços são exigidos do sistema e identificar as restrições na operação e no desenvolvimento do sistema'. Isso se refere a qual atividade fundamental?",
+    "alternativas": {
+      "A": "Desenvolvimento de software",
+      "B": "Validação de software",
+      "C": "Evolução de software",
+      "D": "Especificação de software",
+      "E": "Projeto de software"
+    },
+    "resposta": "D",
+    "comentario": "Especificação de software (Engenharia de Requisitos): entender e documentar os serviços exigidos e restrições.",
+    "ano": 2024
+  },
+  {
+    "id": 60,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Sobre gerenciamento de configuração de software (GCS), quais assertivas estão corretas?\nI. Elementos que constituem todas as informações geradas durante o processo de software são coletivamente a configuração de software.\nII. À medida que o trabalho progride, forma-se uma hierarquia de itens de configuração.\nIII. O GCS consiste em atividades para administrar mudanças ao longo de todo o ciclo de vida.",
+    "alternativas": {
+      "A": "Todas as assertivas estão corretas.",
+      "B": "Todas as assertivas estão incorretas.",
+      "C": "Apenas as assertivas I e II estão corretas.",
+      "D": "Apenas as assertivas I e III estão corretas.",
+      "E": "Apenas as assertivas II e III estão corretas."
+    },
+    "resposta": "A",
+    "comentario": "Todas as três assertivas estão alinhadas com Pressman e Maxim sobre GCS.",
+    "ano": 2024
+  },
+  {
+    "id": 61,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Em um Algoritmo Genético, o operador de crossover é responsável por:",
+    "alternativas": {
+      "A": "Avaliar a aptidão de cada indivíduo na população.",
+      "B": "Manter os melhores indivíduos de uma geração para a próxima.",
+      "C": "Modificar aleatoriamente os genes de um indivíduo para explorar novas soluções.",
+      "D": "Selecionar os indivíduos que participarão do processo de reprodução.",
+      "E": "Combinar partes dos cromossomos de dois pais para criar descendentes."
+    },
+    "resposta": "E",
+    "comentario": "Crossover = recombinação de cromossomos de dois pais. Mutação = C. Seleção = D. Elitismo = B.",
+    "ano": 2024
+  },
+  {
+    "id": 62,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Em relação aos Sistemas Especialistas, qual alternativa melhor descreve o papel do motor de inferência?",
+    "alternativas": {
+      "A": "O motor de inferência atua principalmente na otimização de algoritmos de aprendizado de máquina.",
+      "B": "O motor de inferência é responsável por gerenciar a interface de usuário do sistema.",
+      "C": "O motor de inferência utiliza as regras definidas na base de conhecimento para derivar conclusões a partir de fatos específicos, simulando o raciocínio humano especializado.",
+      "D": "O motor de inferência substitui a necessidade de uma base de conhecimento, operando com base em dados brutos.",
+      "E": "O motor de inferência serve exclusivamente para manutenção e atualização automática da base de dados."
+    },
+    "resposta": "C",
+    "comentario": "Motor de inferência: aplica regras da base de conhecimento sobre fatos (forward/backward chaining).",
+    "ano": 2024
+  },
+  {
+    "id": 63,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Na digitalização de imagens, o processo envolve duas etapas: a ______, que realiza a discretização das coordenadas no domínio espacial, e a ______, que realiza a discretização dos valores de amplitude dos pixels.",
+    "alternativas": {
+      "A": "interpolação – ampliação",
+      "B": "modulação – codificação",
+      "C": "quantização – amostragem",
+      "D": "amostragem – quantização",
+      "E": "codificação – modulação"
+    },
+    "resposta": "D",
+    "comentario": "Amostragem: discretiza coordenadas (x,y). Quantização: discretiza amplitude (intensidade).",
+    "ano": 2024
+  },
+  {
+    "id": 65,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Um roteador recebe um pacote com IP de destino 11.1.2.5. Em qual rota ele encaminhará o pacote?\nTabela: 13.0.0.0/8, 13.1.0.0/16, 11.1.0.0/16, 13.1.2.0/24, 11.1.2.0/24",
+    "alternativas": {
+      "A": "13.0.0.0/8",
+      "B": "13.1.0.0/16",
+      "C": "11.1.0.0/16",
+      "D": "13.1.2.0/24",
+      "E": "11.1.2.0/24"
+    },
+    "resposta": "E",
+    "comentario": "Longest prefix match: 11.1.2.5 corresponde a 11.1.0.0/16 e 11.1.2.0/24. /24 é mais específico.",
+    "ano": 2024
+  },
+  {
+    "id": 66,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Assinale a alternativa correta sobre o protocolo IP.",
+    "alternativas": {
+      "A": "O protocolo IP é baseado em datagramas e orientado à conexão.",
+      "B": "O protocolo IP funciona segundo melhor esforço possível garantindo a entrega de mensagens.",
+      "C": "O protocolo IP é conhecido como a cola da Internet porque permite que outros protocolos sejam usados no seu lugar.",
+      "D": "Várias cópias de um pacote IP podem ser entregues.",
+      "E": "O datagrama IP identifica o destinatário através dos campos porta de destino e número IP de destino."
+    },
+    "resposta": "D",
+    "comentario": "IP é best-effort sem conexão. Fragmentação pode gerar duplicatas entregues. Porta pertence à camada de transporte.",
+    "ano": 2024
+  },
+  {
+    "id": 67,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Qual protocolo da camada de transporte o DNS utiliza para consultas regulares?",
+    "alternativas": {
+      "A": "TCP",
+      "B": "TCP/IP",
+      "C": "HTTP",
+      "D": "CoAP",
+      "E": "UDP"
+    },
+    "resposta": "E",
+    "comentario": "DNS usa UDP porta 53 para consultas rápidas. TCP apenas para transferências de zona ou respostas > 512 bytes.",
+    "ano": 2024
+  },
+  {
+    "id": 68,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Os programas dos clientes não devem conhecer a distribuição de arquivos. Um único conjunto de operações é fornecido para acesso a arquivos locais e remotos. Qual é o requisito de transparência descrito?",
+    "alternativas": {
+      "A": "Localização",
+      "B": "Acesso",
+      "C": "Mobilidade",
+      "D": "Desempenho",
+      "E": "Mudança de escala"
+    },
+    "resposta": "B",
+    "comentario": "Transparência de acesso: mesma interface para arquivos locais e remotos.",
+    "ano": 2024
+  },
+  {
+    "id": 69,
+    "area": "Tecnologia da Computação",
+    "enunciado": "Uma falha ______ ocorre quando um servidor para abruptamente, estava funcionando corretamente até parar, e nada mais se ouve dele.",
+    "alternativas": {
+      "A": "por omissão",
+      "B": "de temporização",
+      "C": "de resposta",
+      "D": "arbitrária",
+      "E": "por queda"
+    },
+    "resposta": "E",
+    "comentario": "Falha por queda (crash): componente para abruptamente após operar corretamente.",
+    "ano": 2024
+  },
+  {
+    "id": 70,
+    "area": "Tecnologia da Computação",
+    "enunciado": "O algoritmo de exclusão mútua ______ requer apenas três mensagens para entrar e sair de uma região crítica: uma requisição, uma permissão para entrar e uma liberação para sair.",
+    "alternativas": {
+      "A": "centralizado",
+      "B": "descentralizado",
+      "C": "distribuído",
+      "D": "token-ring",
+      "E": "relógios vetoriais"
+    },
+    "resposta": "A",
+    "comentario": "Centralizado: coordenador único gerencia acesso → exatamente 3 mensagens (req, grant, release).",
+    "ano": 2024
+  }
+]
