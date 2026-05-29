@@ -1,7 +1,6 @@
 import '@material/web/list/list.js'
 import '@material/web/list/list-item.js'
 import '@material/web/switch/switch.js'
-import '@material/web/button/filled-tonal-button.js'
 import '@material/web/button/filled-button.js'
 import '@material/web/button/text-button.js'
 import '@material/web/dialog/dialog.js'
@@ -74,6 +73,15 @@ export function Perfil() {
             <span slot="headline">Versão</span>
             <span slot="supporting-text">{`v${__APP_VERSION__}`}</span>
           </md-list-item>
+
+          <md-list-item
+            type="button"
+            onClick={handleLogout}
+            className="perfil-info-row perfil-logout-row"
+          >
+            <span slot="start" className="material-symbols-outlined perfil-info-icon perfil-logout-icon-list">logout</span>
+            <span slot="headline">{loggingOut ? 'Saindo...' : 'Sair da conta'}</span>
+          </md-list-item>
         </md-list>
       </div>
             <div className="perfil-section">
@@ -102,24 +110,23 @@ export function Perfil() {
       </div>
 
 
-      <div className="perfil-actions">
-        <md-filled-tonal-button
-          onClick={handleLogout}
-          disabled={loggingOut}
-          className="perfil-logout-md-btn"
-        >
-          <md-icon slot="icon">logout</md-icon>
-          {loggingOut ? 'Saindo...' : 'Sair da conta'}
-        </md-filled-tonal-button>
-
-        <md-filled-tonal-button
+      <div className="perfil-danger-zone">
+        <div className="perfil-danger-zone__header">
+          <span className="material-symbols-outlined perfil-danger-zone__icon">warning</span>
+          <span className="perfil-danger-zone__title">Cuidado</span>
+        </div>
+        <p className="perfil-danger-zone__desc">
+          Remove permanentemente todo o histórico de simulados e cartões de revisão. Esta ação não pode ser desfeita.
+        </p>
+        <button
+          className="perfil-danger-zone__btn"
           onClick={() => setShowDeleteDialog(true)}
-          className="perfil-delete-md-btn"
         >
-          <md-icon slot="icon">delete_forever</md-icon>
+          <span className="material-symbols-outlined">delete_forever</span>
           Apagar todos os dados
-        </md-filled-tonal-button>
+        </button>
       </div>
+
 
       {showDeleteDialog && (
         <md-dialog open onClick={(e: React.MouseEvent) => e.stopPropagation()}>
