@@ -39,6 +39,7 @@
     "jsdom": "^29.1.1",
     "stylelint": "^17.12.0",
     "stylelint-config-standard": "^40.0.0",
+    "stylelint-no-unused-selectors": "^1.0.40",
     "tsx": "^4.22.3",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",

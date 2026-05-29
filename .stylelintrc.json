@@ -1,4 +1,5 @@
 {
+  "plugins": ["stylelint-no-unused-selectors"],
   "rules": {
     "color-no-invalid-hex": true,
 
@@ -22,26 +23,34 @@
 
     "selector-max-compound-selectors": [3, { "severity": "warning" }],
 
+    "plugin/no-unused-selectors": [true, {
+      "sourceFiles": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.html"],
+      "severity": "warning"
+    }],
+
     "declaration-property-value-disallowed-list": [
       {
-        "font-size":       ["/^[0-9]+(px|rem|em)$/"],
-        "gap":             ["/[0-9]+(px|rem|em)/"],
-        "padding":         ["/[0-9]+(px|rem|em)/"],
-        "padding-top":     ["/[0-9]+(px|rem|em)/"],
-        "padding-right":   ["/[0-9]+(px|rem|em)/"],
-        "padding-bottom":  ["/[0-9]+(px|rem|em)/"],
-        "padding-left":    ["/[0-9]+(px|rem|em)/"],
-        "margin":          ["/[0-9]+(px|rem|em)/"],
-        "margin-top":      ["/[0-9]+(px|rem|em)/"],
-        "margin-right":    ["/[0-9]+(px|rem|em)/"],
-        "margin-bottom":   ["/[0-9]+(px|rem|em)/"],
-        "margin-left":     ["/[0-9]+(px|rem|em)/"],
-        "color":           ["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"],
-        "background-color":["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"],
-        "border-color":    ["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"]
+        "font-size":        ["/^[0-9]+(px|rem|em)$/"],
+        "gap":              ["/[0-9]+(px|rem|em)/"],
+        "padding":          ["/[0-9]+(px|rem|em)/"],
+        "padding-top":      ["/[0-9]+(px|rem|em)/"],
+        "padding-right":    ["/[0-9]+(px|rem|em)/"],
+        "padding-bottom":   ["/[0-9]+(px|rem|em)/"],
+        "padding-left":     ["/[0-9]+(px|rem|em)/"],
+        "margin":           ["/[0-9]+(px|rem|em)/"],
+        "margin-top":       ["/[0-9]+(px|rem|em)/"],
+        "margin-right":     ["/[0-9]+(px|rem|em)/"],
+        "margin-bottom":    ["/[0-9]+(px|rem|em)/"],
+        "margin-left":      ["/[0-9]+(px|rem|em)/"],
+        "border-radius":    ["/[0-9]+(px|rem|em)/", "/^[0-9]+%$/"],
+        "z-index":          ["/^[0-9]+$/"],
+        "box-shadow":       ["/rgba?\\(/"],
+        "color":            ["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"],
+        "background-color": ["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"],
+        "border-color":     ["/^#[0-9a-fA-F]{3,8}$/", "/^rgba?\\(/"]
       },
       {
-        "message": "Use design system tokens (var(--md-sys-*), var(--color-*), var(--icon-size-*), var(--space-*), var(--layout-*)) instead of raw values"
+        "message": "Use design system tokens (var(--md-sys-*), var(--color-*), var(--icon-size-*), var(--space-*), var(--layout-*), var(--shape-*), var(--z-*), var(--shadow-*), var(--duration-*), var(--easing-*), var(--border-*)) instead of raw values"
       }
     ]
   },
