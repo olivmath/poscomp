@@ -12,7 +12,11 @@
     },
     "resposta": "D",
     "comentario": "Aplicando eliminação gaussiana: montamos a matriz aumentada e reduzimos por escalonamento. Após operações de linha, obtemos x = -7/5, y = -2, z = -21/5.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Resolva o sistema abaixo utilizando o método de Gauss. 2x – 2y...$?",
+      "resposta": "**Resposta.** Aplicando eliminação gaussiana: montamos a matriz aumentada e reduzimos por escalonamento.\n\n**Resolução.**\n\nAplicando eliminação gaussiana: montamos a matriz aumentada e reduzimos por escalonamento. Após operações de linha, obtemos x = -7/5, y = -2, z = -21/5.\n\n**Resultado final:** $(-7/5, -2, -21/5)$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 2,
@@ -27,7 +31,11 @@
     },
     "resposta": "A",
     "comentario": "Expandindo o determinante: det = 1·(α+2) − (−1)·(−α+2) + (−1)·(−4) = α+2 − α+2 + 4 = 8. O coeficiente de α cancela — det = 8 para qualquer α. Todos os valores das alternativas satisfazem a condição; α = 1 é o menor valor válido.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de Calcule o valor de α que provoca que o determinante da matriz...?",
+      "resposta": "**Resposta.** Expandindo o determinante: det = 1·(α+2) − (−1)·(−α+2) + (−1)·(−4) = α+2 − α+2 + 4 = 8.\n\n**Resolução.**\n\nExpandindo o determinante: det = 1·(α+2) − (−1)·(−α+2) + (−1)·(−4) = α+2 − α+2 + 4 = 8. O coeficiente de α cancela — det = 8 para qualquer α. Todos os valores das alternativas satisfazem a condição; α = 1 é o menor valor válido.\n\n**Resultado final:** $α = 1$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 3,
@@ -42,7 +50,11 @@
     },
     "resposta": "E",
     "comentario": "O polinômio característico é det(A – λI) = 0. Calculando e fatorando, obtém-se –(λ – 2)³, indicando λ = 2 como autovalor de multiplicidade algébrica 3.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Assinale a alternativa que apresenta o polinômio característico da matriz. A =...$?",
+      "resposta": "**Resposta.** O polinômio característico é det(A – λI) = 0.\n\n**Resolução.**\n\nO polinômio característico é det(A – λI) = 0. Calculando e fatorando, obtém-se –(λ – 2)³, indicando λ = 2 como autovalor de multiplicidade algébrica 3.\n\n**Resultado final:** $– (λ – 2)³$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 4,
@@ -57,7 +69,11 @@
     },
     "resposta": "E",
     "comentario": "Usando inclusão-exclusão: Total = 4! = 24. |A∪B| = 6+6–2 = 10. Válidas = 24 – 10 = 14.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Quantas formas existem de permutar os elementos do conjunto {1,2,3,4} de maneira...$?",
+      "resposta": "**Resposta.** Usando inclusão-exclusão: Total = 4!.\n\n**Resolução.**\n\nUsando inclusão-exclusão: Total = 4! = 24. |A∪B| = 6+6–2 = 10. Válidas = 24 – 10 = 14.\n\n**Resultado final:** $14$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 5,
@@ -72,7 +88,11 @@
     },
     "resposta": "A",
     "comentario": "Um grafo acíclico com n vértices é uma árvore/floresta com no máximo n–1 = 6 arestas.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de Qual é o número máximo de arestas que um grafo não direcionado...?",
+      "resposta": "**Resposta.** Um grafo acíclico com n vértices é uma árvore/floresta com no máximo n–1 = 6 arestas.\n\n**Resolução.**\n\nUm grafo acíclico com n vértices é uma árvore/floresta com no máximo n–1 = 6 arestas.\n\n**Resultado final:** $6$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 6,
@@ -87,7 +107,11 @@
     },
     "resposta": "D",
     "comentario": "C(5,2)×C(7,2) + C(5,3)×C(7,1) + C(5,4)×C(7,0) = 210 + 70 + 5 = 285.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Uma startup tem 7 jogos de ação e 5 jogos de esportes....$?",
+      "resposta": "**Resposta.** C(5,2)×C(7,2) + C(5,3)×C(7,1) + C(5,4)×C(7,0) = 210 + 70 + 5 = 285.\n\n**Resolução.**\n\nC(5,2)×C(7,2) + C(5,3)×C(7,1) + C(5,4)×C(7,0) = 210 + 70 + 5 = 285.\n\n**Resultado final:** $285$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 7,
@@ -102,7 +126,11 @@
     },
     "resposta": "C",
     "comentario": "Multiplicando pelo conjugado: 1/(√(x²+1) + x) → 0 quando x→∞.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Como calcular $o limite em infinito da função f(x) = √(x² + 1) − x$?",
+      "resposta": "**Resposta.** Multiplicando pelo conjugado: 1/(√(x²+1) + x) → 0 quando x→∞.\n\n**Resolução.**\n\nMultiplicando pelo conjugado: 1/(√(x²+1) + x) → 0 quando x→∞.\n\n**Resultado final:** $0$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 8,
@@ -117,7 +145,11 @@
     },
     "resposta": "C",
     "comentario": "Domínio: 4–x² ≥ 0 → x ∈ [–2,2]; 3x–1 ≠ 0 → x ≠ 1/3. Logo [–2, 1/3) ∪ (1/3, 2].",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Assinale a alternativa que apresenta o intervalo em que a função g(x)...$?",
+      "resposta": "**Resposta.** Domínio: 4–x² ≥ 0 → x ∈ [–2,2]; 3x–1 ≠ 0 → x ≠ 1/3.\n\n**Resolução.**\n\nDomínio: 4–x² ≥ 0 → x ∈ [–2,2]; 3x–1 ≠ 0 → x ≠ 1/3. Logo [–2, 1/3) ∪ (1/3, 2].\n\n**Resultado final:** $[-2, 1/3) U (1/3, 2]$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 9,
@@ -132,7 +164,11 @@
     },
     "resposta": "D",
     "comentario": "Substituição u = ln x: ∫₀¹ u du = [u²/2]₀¹ = 1/2.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Como calcular $a integral definida ∫₁ᵉ (ln x / x) dx$?",
+      "resposta": "**Resposta.** Substituição u = ln x: ∫₀¹ u du = [u²/2]₀¹ = 1/2.\n\n**Resolução.**\n\nSubstituição u = ln x: ∫₀¹ u du = [u²/2]₀¹ = 1/2.\n\n**Resultado final:** $1/2$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 10,
@@ -147,7 +183,11 @@
     },
     "resposta": "B",
     "comentario": "M = ((5+4)/2, (−1−2)/2) = (9/2, −3/2).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $O ponto médio do segmento de extremos A(5, -1) e B(4, -2)...$?",
+      "resposta": "**Resposta.** M = ((5+4)/2, (−1−2)/2) = (9/2, −3/2).\n\n**Resolução.**\n\nM = ((5+4)/2, (−1−2)/2) = (9/2, −3/2).\n\n**Resultado final:** $(9/2, -3/2)$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 11,
@@ -162,7 +202,11 @@
     },
     "resposta": "A",
     "comentario": "d = |5–k|/√2 = √2 → |5–k| = 2 → k = 3 ou k = 7.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Como calcular $os dois valores de k em que a distância do ponto P(2, k) até a reta r: x – y + 3 = 0 é √2$?",
+      "resposta": "**Resposta.** d = |5–k|/√2 = √2 → |5–k| = 2 → k = 3 ou k = 7.\n\n**Resolução.**\n\nd = |5–k|/√2 = √2 → |5–k| = 2 → k = 3 ou k = 7.\n\n**Resultado final:** $k = 3 e k = 7$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 12,
@@ -177,7 +221,11 @@
     },
     "resposta": "E",
     "comentario": "Vetores diretores (−4,1) e (8,−2) são proporcionais → retas paralelas. Pontos distintos → sem intersecção.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Determine o ponto de intersecção das retas: r: x = 2 –...$?",
+      "resposta": "**Resposta.** Vetores diretores (−4,1) e (8,−2) são proporcionais → retas paralelas.\n\n**Resolução.**\n\nVetores diretores (−4,1) e (8,−2) são proporcionais → retas paralelas. Pontos distintos → sem intersecção.\n\n**Resultado final:** As retas são paralelas e não possuem ponto de intersecção.\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 13,
@@ -192,7 +240,11 @@
     },
     "resposta": "D",
     "comentario": "~p → ~q é a contrapositiva de q → p, portanto equivalente a q → p.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de A expressão lógica ~p → ~q é equivalente a:?",
+      "resposta": "**Resposta.** ~p → ~q é a contrapositiva de q → p, portanto equivalente a q → p.\n\n**Resolução.**\n\n~p → ~q é a contrapositiva de q → p, portanto equivalente a q → p.\n\n**Resultado final:** q → p\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 14,
@@ -207,7 +259,11 @@
     },
     "resposta": "C",
     "comentario": "~(p∨q) V ↔ p=F e q=F. Nesse cenário ~p→q = V→F = F.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Dadas duas proposições lógicas q e p, a proposição ~(p ∨ q)...$?",
+      "resposta": "**Resposta.** ~(p∨q) V ↔ p=F e q=F.\n\n**Resolução.**\n\n~(p∨q) V ↔ p=F e q=F. Nesse cenário ~p→q = V→F = F.\n\n**Resultado final:** ~p → q\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 15,
@@ -222,7 +278,11 @@
     },
     "resposta": "B",
     "comentario": "Por modus tollens com P1: ~Ana Paula ∧ ~Joaquim. Por modus tollens com P3: ~sábado. Conclusão: hoje não é sábado e Joaquim não jogou.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Considere as premissas: 1: Se Ana Paula joga vôlei OU Joaquim joga...$?",
+      "resposta": "**Resposta.** Por modus tollens com P1: ~Ana Paula ∧ ~Joaquim.\n\n**Resolução.**\n\nPor modus tollens com P1: ~Ana Paula ∧ ~Joaquim. Por modus tollens com P3: ~sábado. Conclusão: hoje não é sábado e Joaquim não jogou.\n\n**Resultado final:** Hoje não é sábado e Joaquim não jogou videogame.\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 19,
@@ -237,7 +297,11 @@
     },
     "resposta": "C",
     "comentario": "26 valores < 65 em 80 observações → 26/80 = 32,5%.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de $Com base na lista de tempos (80 valores) de execução de um...$?",
+      "resposta": "**Resposta.** 26 valores < 65 em 80 observações → 26/80 = 32,5%.\n\n**Resolução.**\n\n26 valores < 65 em 80 observações → 26/80 = 32,5%.\n\n**Resultado final:** $32,5%$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 20,
@@ -252,7 +316,11 @@
     },
     "resposta": "C",
     "comentario": "Soma dos 80 valores ≈ 5360 → média = 5360/80 = 67.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o valor de O tempo médio aproximado que o software leva para realizar os cálculos...?",
+      "resposta": "**Resposta.** Soma dos 80 valores ≈ 5360 → média = 5360/80 = 67.\n\n**Resolução.**\n\nSoma dos 80 valores ≈ 5360 → média = 5360/80 = 67.\n\n**Resultado final:** $67$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 1,
@@ -267,7 +335,11 @@
       "E": "(-1/5, -1, -1/5)"
     },
     "resposta": "D",
-    "comentario": "Montando a matriz aumentada e aplicando eliminação gaussiana: após escalonamento obtém-se x = -7/5, y = -2, z = -21/5. Verificação na eq. 1: 2(-7/5) – 2(-2) + (-21/5) = -14/5 + 4 – 21/5 = -35/5 + 4 = -7 + 4 = -3 ✓."
+    "comentario": "Montando a matriz aumentada e aplicando eliminação gaussiana: após escalonamento obtém-se x = -7/5, y = -2, z = -21/5. Verificação na eq. 1: 2(-7/5) – 2(-2) + (-21/5) = -14/5 + 4 – 21/5 = -35/5 + 4 = -7 + 4 = -3 ✓.",
+    "card": {
+      "pergunta": "Qual é o valor de $Resolva o sistema abaixo utilizando o método de Gauss. 2x – 2y...$?",
+      "resposta": "**Resposta.** Montando a matriz aumentada e aplicando eliminação gaussiana: após escalonamento obtém-se x = -7/5, y = -2, z = -21/5.\n\n**Resolução.**\n\nMontando a matriz aumentada e aplicando eliminação gaussiana: após escalonamento obtém-se x = -7/5, y = -2, z = -21/5. Verificação na eq. 1: 2(-7/5) – 2(-2) + (-21/5) = -14/5 + 4 – 21/5 = -35/5 + 4 = -7 + 4 = -3 ✓.\n\n**Resultado final:** $(-7/5, -2, -21/5)$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 2,
@@ -297,7 +369,11 @@
       "E": "– (λ – 2)³"
     },
     "resposta": "E",
-    "comentario": "Calculando det(A – λI) e fatorando, obtém-se –(λ – 2)³, indicando que λ = 2 é autovalor de multiplicidade algébrica 3. O sinal negativo decorre da convenção det(A – λI)."
+    "comentario": "Calculando det(A – λI) e fatorando, obtém-se –(λ – 2)³, indicando que λ = 2 é autovalor de multiplicidade algébrica 3. O sinal negativo decorre da convenção det(A – λI).",
+    "card": {
+      "pergunta": "Qual é o valor de $Assinale a alternativa que apresenta o polinômio característico da matriz A =...$?",
+      "resposta": "**Resposta.** Calculando det(A – λI) e fatorando, obtém-se –(λ – 2)³, indicando que λ = 2 é autovalor de multiplicidade algébrica 3.\n\n**Resolução.**\n\nCalculando det(A – λI) e fatorando, obtém-se –(λ – 2)³, indicando que λ = 2 é autovalor de multiplicidade algébrica 3. O sinal negativo decorre da convenção det(A – λI).\n\n**Resultado final:** $– (λ – 2)³$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 4,
@@ -312,7 +388,11 @@
       "E": "14"
     },
     "resposta": "E",
-    "comentario": "Inclusão-exclusão: Total = 4! = 24. |A| = 3! = 6, |B| = 3! = 6, |A∩B| = 2! = 2. Inválidas = 6+6–2 = 10. Válidas = 24–10 = 14."
+    "comentario": "Inclusão-exclusão: Total = 4! = 24. |A| = 3! = 6, |B| = 3! = 6, |A∩B| = 2! = 2. Inválidas = 6+6–2 = 10. Válidas = 24–10 = 14.",
+    "card": {
+      "pergunta": "Qual é o valor de $Quantas formas existem de permutar os elementos do conjunto {1,2,3,4} de maneira...$?",
+      "resposta": "**Resposta.** Inclusão-exclusão: Total = 4!.\n\n**Resolução.**\n\nInclusão-exclusão: Total = 4! = 24. |A| = 3! = 6, |B| = 3! = 6, |A∩B| = 2! = 2. Inválidas = 6+6–2 = 10. Válidas = 24–10 = 14.\n\n**Resultado final:** $14$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 5,
@@ -327,7 +407,11 @@
       "E": "21"
     },
     "resposta": "A",
-    "comentario": "Um grafo acíclico (floresta) com n vértices tem no máximo n–1 = 6 arestas. Uma árvore com 7 vértices tem exatamente 6 arestas."
+    "comentario": "Um grafo acíclico (floresta) com n vértices tem no máximo n–1 = 6 arestas. Uma árvore com 7 vértices tem exatamente 6 arestas.",
+    "card": {
+      "pergunta": "Qual é o valor de Qual é o número máximo de arestas que um grafo não direcionado...?",
+      "resposta": "**Resposta.** Um grafo acíclico (floresta) com n vértices tem no máximo n–1 = 6 arestas.\n\n**Resolução.**\n\nUm grafo acíclico (floresta) com n vértices tem no máximo n–1 = 6 arestas. Uma árvore com 7 vértices tem exatamente 6 arestas.\n\n**Resultado final:** $6$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 6,
@@ -342,7 +426,11 @@
       "E": "495"
     },
     "resposta": "D",
-    "comentario": "2 esportes + 2 ação: C(5,2)×C(7,2) = 10×21 = 210. 3 esportes + 1 ação: C(5,3)×C(7,1) = 10×7 = 70. 4 esportes + 0 ação: C(5,4)×C(7,0) = 5. Total = 285."
+    "comentario": "2 esportes + 2 ação: C(5,2)×C(7,2) = 10×21 = 210. 3 esportes + 1 ação: C(5,3)×C(7,1) = 10×7 = 70. 4 esportes + 0 ação: C(5,4)×C(7,0) = 5. Total = 285.",
+    "card": {
+      "pergunta": "Qual é o valor de $Uma startup tem 7 jogos de ação e 5 de esportes. Pacote...$?",
+      "resposta": "**Resposta.** 2 esportes + 2 ação: C(5,2)×C(7,2) = 10×21 = 210.\n\n**Resolução.**\n\n2 esportes + 2 ação: C(5,2)×C(7,2) = 10×21 = 210. 3 esportes + 1 ação: C(5,3)×C(7,1) = 10×7 = 70. 4 esportes + 0 ação: C(5,4)×C(7,0) = 5. Total = 285.\n\n**Resultado final:** $285$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 7,
@@ -357,7 +445,11 @@
       "E": "∞"
     },
     "resposta": "C",
-    "comentario": "Multiplicando pelo conjugado: resultado = 1/(√(x²+1) + x). Quando x→∞, denominador→∞, portanto limite = 0."
+    "comentario": "Multiplicando pelo conjugado: resultado = 1/(√(x²+1) + x). Quando x→∞, denominador→∞, portanto limite = 0.",
+    "card": {
+      "pergunta": "Como calcular $o limite em infinito da função f(x) = √(x² + 1) − x$?",
+      "resposta": "**Resposta.** Multiplicando pelo conjugado: resultado = 1/(√(x²+1) + x).\n\n**Resolução.**\n\nMultiplicando pelo conjugado: resultado = 1/(√(x²+1) + x). Quando x→∞, denominador→∞, portanto limite = 0.\n\n**Resultado final:** $0$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 8,
@@ -372,7 +464,11 @@
       "E": "[-∞, 0) U (0, ∞)"
     },
     "resposta": "C",
-    "comentario": "Radicando ≥ 0: –2 ≤ x ≤ 2. Denominador ≠ 0: x ≠ 1/3. Domínio = [–2, 1/3) ∪ (1/3, 2]."
+    "comentario": "Radicando ≥ 0: –2 ≤ x ≤ 2. Denominador ≠ 0: x ≠ 1/3. Domínio = [–2, 1/3) ∪ (1/3, 2].",
+    "card": {
+      "pergunta": "Qual é o valor de $Assinale o intervalo em que g(x) = √(4 − x²) / (3x...$?",
+      "resposta": "**Resposta.** Radicando ≥ 0: –2 ≤ x ≤ 2.\n\n**Resolução.**\n\nRadicando ≥ 0: –2 ≤ x ≤ 2. Denominador ≠ 0: x ≠ 1/3. Domínio = [–2, 1/3) ∪ (1/3, 2].\n\n**Resultado final:** $[-2, 1/3) U (1/3, 2]$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 9,
@@ -387,7 +483,11 @@
       "E": "0"
     },
     "resposta": "D",
-    "comentario": "Substituição u = ln x, du = dx/x. Limites: 0 a 1. Integral = [u²/2]₀¹ = 1/2."
+    "comentario": "Substituição u = ln x, du = dx/x. Limites: 0 a 1. Integral = [u²/2]₀¹ = 1/2.",
+    "card": {
+      "pergunta": "Como calcular $a integral definida ∫₁ᵉ (ln x / x) dx$?",
+      "resposta": "**Resposta.** Substituição u = ln x, du = dx/x.\n\n**Resolução.**\n\nSubstituição u = ln x, du = dx/x. Limites: 0 a 1. Integral = [u²/2]₀¹ = 1/2.\n\n**Resultado final:** $1/2$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 10,
@@ -402,7 +502,11 @@
       "E": "(1/2, 2)"
     },
     "resposta": "B",
-    "comentario": "M = ((5+4)/2, (-1-2)/2) = (9/2, -3/2)."
+    "comentario": "M = ((5+4)/2, (-1-2)/2) = (9/2, -3/2).",
+    "card": {
+      "pergunta": "Qual é o valor de $O ponto médio do segmento de extremos A(5, -1) e B(4, -2)...$?",
+      "resposta": "**Resposta.** M = ((5+4)/2, (-1-2)/2) = (9/2, -3/2).\n\n**Resolução.**\n\nM = ((5+4)/2, (-1-2)/2) = (9/2, -3/2).\n\n**Resultado final:** $(9/2, -3/2)$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 11,
@@ -417,7 +521,11 @@
       "E": "k = 5 e k = 7"
     },
     "resposta": "A",
-    "comentario": "d = |2 – k + 3| / √2 = √2 → |5 – k| = 2 → k = 3 ou k = 7."
+    "comentario": "d = |2 – k + 3| / √2 = √2 → |5 – k| = 2 → k = 3 ou k = 7.",
+    "card": {
+      "pergunta": "Como calcular $os dois valores de k em que a distância do ponto P(2, k) até a reta r: x – y + 3 = 0 é √2$?",
+      "resposta": "**Resposta.** d = |2 – k + 3| / √2 = √2 → |5 – k| = 2 → k = 3 ou k = 7.\n\n**Resolução.**\n\nd = |2 – k + 3| / √2 = √2 → |5 – k| = 2 → k = 3 ou k = 7.\n\n**Resultado final:** $k = 3 e k = 7$\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 12,
@@ -432,7 +540,11 @@
       "E": "As retas são paralelas e não possuem ponto de intersecção."
     },
     "resposta": "E",
-    "comentario": "Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção."
+    "comentario": "Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção.",
+    "card": {
+      "pergunta": "Como calcular $o ponto de intersecção das retas r: x=2–4t, y=–2+t e s: x=3+8t, y=–1–2t$?",
+      "resposta": "**Resposta.** Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos.\n\n**Resolução.**\n\nVetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção.\n\n**Resultado final:** As retas são paralelas e não possuem ponto de intersecção.\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   },
   {
     "id": 13,
@@ -447,6 +559,10 @@
       "E": "p → q"
     },
     "resposta": "D",
-    "comentario": "~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente."
+    "comentario": "~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente.",
+    "card": {
+      "pergunta": "Qual é o valor de A expressão lógica ~p → ~q é equivalente a:?",
+      "resposta": "**Resposta.** ~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente.\n\n**Resolução.**\n\n~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente.\n\n**Resultado final:** q → p\n\n**Confusões comuns.** erros comuns: confundir ordem de operações, esquecer fatores de normalização ou aplicar fórmulas incorretas."
+    }
   }
 ]
