@@ -3083,7 +3083,8 @@ md-outlined-button.btn-full {
 .revisao-running {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  height: 100dvh;
+  overflow: hidden;
   animation: slideUp var(--duration-slow) ease;
 }
 
@@ -3150,10 +3151,14 @@ md-outlined-button.btn-full {
 /* ── Área do card (mesma estrutura do immersive-question-wrap) ── */
 .revisao-card-wrap {
   flex: 1;
-  padding: calc(var(--icon-size-3xl) + var(--shape-xs) + var(--space-lg)) var(--space-md) calc(var(--layout-nav-clearance) + var(--space-xl));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--icon-size-3xl) + var(--shape-xs) + var(--space-md)) var(--space-md) calc(var(--layout-nav-clearance) + var(--space-md));
   max-width: 600px;
   margin: 0 auto;
   width: 100%;
+  overflow: hidden;
   perspective: 1200px;
 }
 
@@ -3182,7 +3187,9 @@ md-outlined-button.btn-full {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-  min-height: 360px;
+  min-height: 280px;
+  max-height: calc(100dvh - var(--icon-size-3xl) - var(--layout-nav-clearance) - var(--space-md) * 4);
+  overflow: hidden;
 }
 
 .dark .revisao-face {
@@ -3201,6 +3208,9 @@ md-outlined-button.btn-full {
   color: var(--md-sys-color-on-surface);
   font-weight: var(--md-sys-typescale-title-small-weight);
   flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 0;
 }
 
 .revisao-flip-hint {
@@ -3228,6 +3238,9 @@ md-outlined-button.btn-full {
   justify-content: center;
   gap: var(--space-md);
   text-align: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  min-height: 0;
 }
 
 .revisao-answer-icon {
