@@ -38,8 +38,28 @@ export function Perfil() {
         <h1 className="perfil-name">{user?.displayName ?? 'Usuário'}</h1>
         <p className="perfil-email">{user?.email}</p>
       </div>
-
       <div className="perfil-section">
+        <h2 className="perfil-section-title">Conta</h2>
+        <md-list className="perfil-info-list">
+          <md-list-item className="perfil-info-row">
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">badge</span>
+            <span slot="headline">Nome</span>
+            <span slot="supporting-text">{user?.displayName ?? '—'}</span>
+          </md-list-item>
+          <md-list-item className="perfil-info-row">
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">mail</span>
+            <span slot="headline">E-mail</span>
+            <span slot="supporting-text">{user?.email ?? '—'}</span>
+          </md-list-item>
+
+          <md-list-item className="perfil-info-row">
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">info</span>
+            <span slot="headline">Versão</span>
+            <span slot="supporting-text">{`v${__APP_VERSION__}`}</span>
+          </md-list-item>
+        </md-list>
+      </div>
+            <div className="perfil-section">
         <h2 className="perfil-section-title">Preferências</h2>
         <md-list className="perfil-info-list">
           <md-list-item
@@ -64,31 +84,6 @@ export function Perfil() {
         </md-list>
       </div>
 
-      <div className="perfil-section">
-        <h2 className="perfil-section-title">Conta</h2>
-        <md-list className="perfil-info-list">
-          <md-list-item className="perfil-info-row">
-            <span slot="start" className="material-symbols-outlined perfil-info-icon">badge</span>
-            <span slot="headline">Nome</span>
-            <span slot="supporting-text">{user?.displayName ?? '—'}</span>
-          </md-list-item>
-          <md-list-item className="perfil-info-row">
-            <span slot="start" className="material-symbols-outlined perfil-info-icon">mail</span>
-            <span slot="headline">E-mail</span>
-            <span slot="supporting-text">{user?.email ?? '—'}</span>
-          </md-list-item>
-          <md-list-item className="perfil-info-row">
-            <span slot="start" className="material-symbols-outlined perfil-info-icon">verified_user</span>
-            <span slot="headline">Autenticação</span>
-            <span slot="supporting-text">Google</span>
-          </md-list-item>
-          <md-list-item className="perfil-info-row">
-            <span slot="start" className="material-symbols-outlined perfil-info-icon">info</span>
-            <span slot="headline">Versão</span>
-            <span slot="supporting-text">{`v${__APP_VERSION__}`}</span>
-          </md-list-item>
-        </md-list>
-      </div>
 
       <div className="perfil-actions">
         <md-filled-tonal-button

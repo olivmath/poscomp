@@ -619,6 +619,11 @@ body {
   --md-navigation-tab-active-icon-color: var(--color-nav-label-active);
   --md-navigation-tab-inactive-icon-color: var(--color-nav-label);
   --md-navigation-tab-label-text-font: 'Google Sans', system-ui, sans-serif;
+  --md-navigation-tab-label-text-size: var(--md-sys-typescale-label-small-size);
+  --md-navigation-tab-label-text-weight: 500;
+  --md-navigation-tab-active-indicator-width: 64px;
+  --md-navigation-tab-active-indicator-height: 32px;
+  --md-navigation-tab-active-indicator-shape: 16px;
 }
 
 /* badge inside md-navigation-tab */
@@ -3017,6 +3022,26 @@ md-outlined-button.btn-full {
   --md-filled-tonal-button-container-color: var(--md-sys-color-error-container);
   --md-filled-tonal-button-label-text-color: var(--md-sys-color-on-error-container);
   --md-filled-tonal-button-with-leading-icon-leading-icon-color: var(--md-sys-color-on-error-container);
+  --md-filled-tonal-button-label-text-font: 'Google Sans', system-ui, sans-serif;
+  --md-filled-tonal-button-label-text-size: var(--md-sys-typescale-label-large-size);
+  --md-filled-tonal-button-label-text-weight: 600;
+}
+
+.perfil-logout-md-btn [slot="icon"] {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: var(--icon-size-base);
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
 /* md-list inside perfil */
