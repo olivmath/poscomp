@@ -618,6 +618,7 @@ body {
   --md-navigation-tab-inactive-label-text-color: var(--color-nav-label);
   --md-navigation-tab-active-icon-color: var(--color-nav-label-active);
   --md-navigation-tab-inactive-icon-color: var(--color-nav-label);
+  --md-navigation-tab-label-text-font: 'Google Sans', system-ui, sans-serif;
 }
 
 /* badge inside md-navigation-tab */
@@ -827,6 +828,7 @@ body {
 
 /* md-filter-chip tokens */
 md-filter-chip {
+  --md-filter-chip-label-text-font: 'Google Sans', system-ui, sans-serif;
   --md-filter-chip-selected-container-color: var(--md-sys-color-primary);
   --md-filter-chip-selected-label-text-color: var(--md-sys-color-on-primary);
   --md-filter-chip-selected-leading-icon-color: var(--md-sys-color-on-primary);

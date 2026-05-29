@@ -41,7 +41,7 @@ export function LoginCard({ loading, error, onSignIn, children }: LoginCardProps
             <p className="login-loading-text">Autenticando...</p>
           </div>
         ) : (
-          <md-filled-button onClick={onSignIn} className="btn-wide" aria-label="Entrar com Google">
+          <md-filled-button onClick={onSignIn} className="btn-full" aria-label="Entrar com Google">
             <GoogleIcon />
             Entrar com Google
           </md-filled-button>

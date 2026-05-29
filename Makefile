@@ -1,4 +1,7 @@
-.PHONY: install install-functions \
+.DEFAULT_GOAL := help
+
+.PHONY: help \
+        install install-functions \
         build build-functions \
         lint lint-functions \
         typecheck \
@@ -6,6 +9,27 @@
         validate \
         emulators dev-local seed-local \
         deploy-hosting deploy-functions deploy
+
+# ── Help ──────────────────────────────────────────────────────────────────────
+help:
+	@echo ""
+	@echo "  install              pnpm install --frozen-lockfile"
+	@echo "  install-functions    npm install em functions/"
+	@echo "  build                pnpm build"
+	@echo "  build-functions      npm run build em functions/"
+	@echo "  lint                 pnpm lint"
+	@echo "  lint-functions       npm run lint em functions/"
+	@echo "  typecheck            pnpm typecheck"
+	@echo "  test                 pnpm test"
+	@echo "  test-functions       npm test em functions/"
+	@echo "  validate             pipeline completo (lint+typecheck+test+build)"
+	@echo "  emulators            Firebase emulators (auth, functions, firestore)"
+	@echo "  dev-local            dev server com emulators"
+	@echo "  seed-local           seed dados no emulator Firestore"
+	@echo "  deploy-hosting       firebase deploy --only hosting"
+	@echo "  deploy-functions     build + firebase deploy --only functions"
+	@echo "  deploy               validate + deploy completo"
+	@echo ""
 
 # ── Install ────────────────────────────────────────────────────────────────────
 install:

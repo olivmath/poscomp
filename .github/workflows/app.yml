@@ -13,6 +13,7 @@ on:
       - 'pnpm-lock.yaml'
       - 'eslint.config.*'
       - '.stylelintrc.json'
+      - 'stylelint-plugins/**'
       - 'playwright.config.*'
       - '.github/workflows/app.yml'
   pull_request:
@@ -27,6 +28,7 @@ on:
       - 'pnpm-lock.yaml'
       - 'eslint.config.*'
       - '.stylelintrc.json'
+      - 'stylelint-plugins/**'
       - 'playwright.config.*'
       - '.github/workflows/app.yml'
 

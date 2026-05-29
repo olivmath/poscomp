@@ -1,5 +1,8 @@
 {
-  "plugins": ["stylelint-no-unused-selectors"],
+  "plugins": [
+    "stylelint-no-unused-selectors",
+    "./stylelint-plugins/md-shadow-dom-fonts.js"
+  ],
   "rules": {
     "color-no-invalid-hex": true,
 
@@ -27,6 +30,8 @@
       "sourceFiles": ["src/**/*.tsx", "src/**/*.ts", "src/**/*.html"],
       "severity": "warning"
     }],
+
+    "plugin/md-shadow-dom-fonts": true,
 
     "declaration-property-value-disallowed-list": [
       {
