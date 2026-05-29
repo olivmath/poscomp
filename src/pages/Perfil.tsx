@@ -2,6 +2,7 @@ import '@material/web/list/list.js'
 import '@material/web/list/list-item.js'
 import '@material/web/switch/switch.js'
 import '@material/web/button/filled-tonal-button.js'
+import '@material/web/icon/icon.js'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
@@ -91,7 +92,7 @@ export function Perfil() {
           disabled={loggingOut}
           className="perfil-logout-md-btn"
         >
-          <span slot="icon" className="material-symbols-outlined">logout</span>
+          <md-icon slot="icon">logout</md-icon>
           {loggingOut ? 'Saindo...' : 'Sair da conta'}
         </md-filled-tonal-button>
       </div>
