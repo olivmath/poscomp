@@ -145,10 +145,13 @@
   /* Confidence dark-mode variants */
   --color-confidence-unsure-bg-dark:       rgba(21, 101, 192, 0.18);
   --color-confidence-unsure-border-dark:   rgba(100, 181, 246, 0.4);
+  --color-confidence-unsure-text-dark:     #90CAF9;
   --color-confidence-studying-bg-dark:     rgba(0, 105, 92, 0.18);
   --color-confidence-studying-border-dark: rgba(128, 222, 234, 0.4);
+  --color-confidence-studying-text-dark:   #80DEEA;
   --color-confidence-should-bg-dark:       rgba(230, 81, 0, 0.18);
   --color-confidence-should-border-dark:   rgba(255, 213, 79, 0.4);
+  --color-confidence-should-text-dark:     #FFD54F;
   --color-confidence-skipped-bg-dark:         rgba(255, 202, 40, 0.15);
   --color-confidence-skipped-border-dark:     rgba(255, 202, 40, 0.4);
 
@@ -372,8 +375,8 @@
 
   /* Material Web component tokens */
   --md-filled-button-container-color:     #D0BCFF;
-  --md-filled-button-label-text-color:    #381E72;
-  --md-outlined-button-outline-color:     #938F99;
+  --md-filled-button-label-text-color:    #21005D;
+  --md-outlined-button-outline-color:     #CAC4D0;
   --md-outlined-button-label-text-color:  #D0BCFF;
   --md-circular-progress-active-indicator-color: #D0BCFF;
 
@@ -1383,7 +1386,7 @@ md-filter-chip {
 .dark .confidence-btn--unsure {
   background: var(--color-confidence-unsure-bg-dark);
   border-color: var(--color-confidence-unsure-border-dark);
-  color: var(--color-confidence-unsure-border);
+  color: var(--color-confidence-unsure-text-dark);
 }
 
 .confidence-btn--unsure:not(:disabled):hover {
@@ -1405,7 +1408,7 @@ md-filter-chip {
 .dark .confidence-btn--studying {
   background: var(--color-confidence-studying-bg-dark);
   border-color: var(--color-confidence-studying-border-dark);
-  color: var(--color-confidence-studying-border);
+  color: var(--color-confidence-studying-text-dark);
 }
 
 .confidence-btn--studying:not(:disabled):hover {
@@ -1427,7 +1430,7 @@ md-filter-chip {
 .dark .confidence-btn--should-know {
   background: var(--color-confidence-should-bg-dark);
   border-color: var(--color-confidence-should-border-dark);
-  color: var(--color-confidence-should-border);
+  color: var(--color-confidence-should-text-dark);
 }
 
 .confidence-btn--should-know:not(:disabled):hover {
@@ -2717,12 +2720,34 @@ md-outlined-button.btn-full {
 
 .home-page__cta {
   position: sticky;
-  bottom: var(--space-lg);
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md) var(--space-md) var(--space-lg);
+  background: linear-gradient(to top, var(--md-sys-color-background) 70%, transparent);
   margin-top: var(--space-sm);
+}
+
+.home-page__cta md-filled-button {
+  width: 100%;
+  --md-filled-button-container-height: 52px;
+}
+
+.home-page__cta md-outlined-button {
+  width: 100%;
+  --md-outlined-button-container-height: 48px;
+}
+
+.dark .home-page__cta {
+  background: linear-gradient(to top, var(--md-sys-color-background) 70%, transparent);
+}
+
+.dark .home-page__cta md-outlined-button {
+  --md-outlined-button-outline-color: #D0BCFF;
+  --md-outlined-button-label-text-color: #D0BCFF;
+  --md-outlined-button-outline-width: 1.5px;
 }
 
 .home-header {
