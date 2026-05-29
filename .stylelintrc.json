@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "declaration-property-value-disallowed-list": [
+      {
+        "font-size": ["/^[0-9]+(px|rem|em)$/"]
+      },
+      {
+        "message": "Use design system tokens (var(--md-sys-typescale-*) or var(--icon-size-*)) instead of raw values"
+      }
+    ]
+  },
+  "ignoreFiles": ["dist/**", "node_modules/**"]
+}
