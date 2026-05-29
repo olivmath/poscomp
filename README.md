@@ -1,4 +1,4 @@
-# POSCOMP Study App
+# POSCOMP Study App 
 
 App de treino para o POSCOMP (exame nacional de computação) baseado na metodologia de provas reais como simulado, inspirado na abordagem da professora e auditora **Karine Waldrich**.
 
