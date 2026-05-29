@@ -2,11 +2,9 @@ import { useRef, useState, useEffect } from 'react'
 import type { Analytics } from '../../hooks/useResults'
 import { SlideGeral } from './slides/SlideGeral'
 import { SlideDesempenho } from './slides/SlideDesempenho'
-import { SlideCalibration } from './slides/SlideCalibration'
-import { SlideAnalises } from './slides/SlideAnalises'
 import { SlideProgresso } from './slides/SlideProgresso'
 
-const SLIDES = ['Geral', 'Desempenho', 'Calibração', 'Análises', 'Progresso'] as const
+const SLIDES = ['Geral', 'Desempenho', 'Progresso'] as const
 
 interface AnalysisCarouselProps {
   analytics: Analytics | null
@@ -69,8 +67,6 @@ export function AnalysisCarousel({ analytics, loading }: AnalysisCarouselProps) 
             <>
               <SlideGeral analytics={analytics} />
               <SlideDesempenho analytics={analytics} />
-              <SlideCalibration analytics={analytics} />
-              <SlideAnalises analytics={analytics} />
               <SlideProgresso analytics={analytics} />
             </>
           )}

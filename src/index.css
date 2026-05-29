@@ -103,8 +103,7 @@
   --md-sys-typescale-display-small-weight:        800;
   --md-sys-typescale-display-small-line-height:   60px;
 
-  /* Spacing — base scale */
-  --space-px:  1px;
+  /* Spacing — 4pt grid (4 · 8 · 16 · 24 · 32 · 48) */
   --space-xs:  4px;
   --space-sm:  8px;
   --space-md:  16px;
@@ -160,18 +159,17 @@
   --color-card-border-hover:      rgba(103, 80, 164, 0.15);
   --color-card-border-hover-dark: rgba(208, 188, 255, 0.15);
 
-  /* Shadow tokens — elevation levels */
-  --shadow-subtle-bar:    0 1px 8px rgba(103, 80, 164, 0.1);
-  --shadow-subtle:        0 1px 8px rgba(103, 80, 164, 0.08);
-  --shadow-subtle-dark:   0 1px 8px rgba(0, 0, 0, 0.25);
-  --shadow-hover:         var(--shadow-hover);
-  --shadow-hover-dark:    var(--shadow-hover-dark);
-  --shadow-banner:        var(--shadow-banner);
-  --shadow-banner-hover:  var(--shadow-banner-hover);
-  --shadow-carousel:      var(--shadow-carousel);
-  --shadow-carousel-dark: var(--shadow-carousel-dark);
-  --shadow-modal:         var(--shadow-modal);
-  --shadow-sheet:         var(--shadow-sheet);
+  /* Shadow tokens — 3 níveis */
+  --shadow-sm: 0 1px 8px rgba(103, 80, 164, 0.08);
+  --shadow-md: 0 2px 20px rgba(103, 80, 164, 0.12);
+  --shadow-lg: 0 4px 24px rgba(103, 80, 164, 0.18);
+
+  --shadow-sm-dark: 0 1px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md-dark: 0 2px 20px rgba(0, 0, 0, 0.35);
+
+  /* compat aliases — migrar progressivamente */
+  --shadow-subtle:      var(--shadow-sm);
+  --shadow-subtle-dark: var(--shadow-sm-dark);
 
   /* Border tokens */
   --border-outline:       2px solid transparent;
@@ -180,8 +178,7 @@
   --border-avatar:        3px solid var(--md-sys-color-surface-variant);
   --border-avatar-primary: 2px solid var(--md-sys-color-primary);
 
-  /* Border radius — MD3 shape scale + extensions */
-  --shape-2xs:    2px;
+  /* Border radius — valores canônicos (não alterar sem migrar usagens) */
   --shape-xs:     3px;
   --shape-sm-xs:  4px;
   --shape-sm:     6px;
@@ -214,15 +211,11 @@
 
   /* Transitions — easings */
   --easing-standard: ease;
-  --easing-spring:   var(--easing-spring);
 
-  /* Spacing — micro scale */
-  --space-2xs:   2px;
-  --space-3xs:   3px;
+  /* Spacing — intermediários de alta frequência (não remover) */
   --space-xs-sm: 6px;
   --space-sm-md: 10px;
   --space-md-sm: 12px;
-  --space-14:    14px;
 
   /* Navigation */
   --color-nav-bg:              rgba(255, 251, 254, 0.88);
@@ -729,7 +722,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3xs);
+  gap: 3px;
   flex: 1;
   background: none;
   border: none;
@@ -1094,7 +1087,7 @@ md-filter-chip {
   backdrop-filter: blur(20px) saturate(1.6);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
   border-bottom: 1px solid var(--color-nav-border);
-  box-shadow: var(--shadow-subtle-bar);
+  box-shadow: var(--shadow-subtle);
   z-index: var(--z-bar-top);
 }
 
@@ -1218,7 +1211,7 @@ md-filter-chip {
 
 .immersive-question-wrap {
   flex: 1;
-  padding: calc(var(--icon-size-3xl) + var(--space-3xs) + var(--space-lg)) var(--space-md) var(--space-xl);
+  padding: calc(var(--icon-size-3xl) + 3px + var(--space-lg)) var(--space-md) var(--space-xl);
   max-width: 600px;
   margin: 0 auto;
   width: 100%;
@@ -1262,7 +1255,7 @@ md-filter-chip {
 .simulado-progress-bar {
   height: 4px;
   background: var(--color-divider);
-  border-radius: var(--shape-2xs);
+  border-radius: 2px;
   margin-bottom: var(--space-md);
   overflow: hidden;
 }
@@ -1270,7 +1263,7 @@ md-filter-chip {
 .simulado-progress-fill {
   height: 100%;
   background: var(--md-sys-color-primary);
-  border-radius: var(--shape-2xs);
+  border-radius: 2px;
   transition: width var(--duration-slow) ease;
 }
 
@@ -1826,7 +1819,7 @@ md-filter-chip {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2xs);
+  gap: 2px;
 }
 
 .relatorio-gauge-pct {
@@ -1929,7 +1922,7 @@ md-filter-chip {
 .relatorio-highlight-icon {
   font-size: var(--icon-size-xs);
   flex-shrink: 0;
-  margin-top: var(--space-px);
+  margin-top: 1px;
   font-variation-settings: 'FILL' 1;
 }
 
@@ -2139,7 +2132,7 @@ md-filter-chip {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3xs);
+  gap: 3px;
 }
 
 .question-review-area,
@@ -2351,7 +2344,7 @@ md-outlined-button.btn-full {
   font-weight: 700;
   font-size: var(--md-sys-typescale-body-medium-size);
   border-radius: var(--shape-xl-2);
-  padding: var(--space-3xs) var(--space-sm-md);
+  padding: 3px var(--space-sm-md);
 }
 
 /* Score badge variants */
@@ -2477,7 +2470,7 @@ md-outlined-button.btn-full {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2xs);
+  gap: 2px;
   background: var(--color-card-bg);
   border-radius: var(--shape-lg);
   padding: var(--space-sm) var(--space-xs);
@@ -2702,7 +2695,7 @@ md-outlined-button.btn-full {
 .analises-cal-body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs);
+  gap: 2px;
 }
 
 .analises-cal-label {
@@ -2842,7 +2835,7 @@ md-outlined-button.btn-full {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--space-px);
+  gap: 1px;
 }
 
 .priority-list-area {
@@ -3280,7 +3273,7 @@ md-outlined-button.btn-full {
   gap: var(--space-xs-sm);
   overflow-x: auto;
   scrollbar-width: none;
-  padding: var(--space-2xs) 0;
+  padding: 2px 0;
 }
 
 .analytics-panel__tabs::-webkit-scrollbar { display: none; }
@@ -3756,7 +3749,7 @@ md-outlined-button.btn-full {
 .analytics-panel .analises-area-row {
   background: var(--color-surface-elevated);
   border-radius: var(--shape-xl);
-  padding: var(--space-md-sm) var(--space-14) var(--space-md-sm);
+  padding: var(--space-md-sm) 14px var(--space-md-sm);
   gap: var(--space-sm);
   display: flex;
   flex-direction: column;
@@ -3815,7 +3808,7 @@ md-outlined-button.btn-full {
 .geral-highlight-item {
   background: var(--color-surface-elevated);
   border-radius: var(--shape-xl);
-  padding: var(--space-md-sm) var(--space-14);
+  padding: var(--space-md-sm) 14px;
   display: flex;
   flex-direction: column;
   gap: var(--space-xs-sm);
