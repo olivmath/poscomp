@@ -12,7 +12,11 @@
       "E": "I, II e III."
     },
     "resposta": "D",
-    "comentario": "Arquivos ordenados facilitam a leitura sequencial ordenada e buscas binárias (log n) para chaves exatas ou intervalos. O hash é mais comum em arquivos não ordenados (heap) para acesso direto e não é a técnica nativa de busca em arquivos ordenados."
+    "comentario": "Arquivos ordenados facilitam a leitura sequencial ordenada e buscas binárias (log n) para chaves exatas ou intervalos. O hash é mais comum em arquivos não ordenados (heap) para acesso direto e não é a técnica nativa de busca em arquivos ordenados.",
+    "card": {
+      "pergunta": "O que caracteriza Apenas I e II?",
+      "resposta": "Arquivos ordenados facilitam a leitura sequencial ordenada e buscas binárias (log n) para chaves exatas ou intervalos. O hash é mais comum em arquivos não ordenados (heap) para acesso direto e não é a técnica nativa de busca em arquivos ordenados.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 40,
@@ -27,7 +31,11 @@
       "E": "Nome dos diferentes campos lógicos representados nos registros dos arquivos (ex.: id, nome, data de nascimento, nome da mãe, RG, etc.)."
     },
     "resposta": "E",
-    "comentario": "A estrutura interna (campos lógicos) de um arquivo é responsabilidade da aplicação ou do SGBD. O sistema operacional trata o arquivo geralmente como um stream de bytes ou blocos, desconhecendo sua semântica interna."
+    "comentario": "A estrutura interna (campos lógicos) de um arquivo é responsabilidade da aplicação ou do SGBD. O sistema operacional trata o arquivo geralmente como um stream de bytes ou blocos, desconhecendo sua semântica interna.",
+    "card": {
+      "pergunta": "O que caracteriza Nome dos diferentes campos lógicos representados nos registros?",
+      "resposta": "A estrutura interna (campos lógicos) de um arquivo é responsabilidade da aplicação ou do SGBD. O sistema operacional trata o arquivo geralmente como um stream de bytes ou blocos, desconhecendo sua semântica interna.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 41,
@@ -42,7 +50,11 @@
       "E": "V – F – V."
     },
     "resposta": "E",
-    "comentario": "Tries são excelentes para prefixos e palavras exatas. Elas não são nativamente adequadas para sufixos (como 'inho') a menos que as palavras sejam invertidas antes da inserção."
+    "comentario": "Tries são excelentes para prefixos e palavras exatas. Elas não são nativamente adequadas para sufixos (como 'inho') a menos que as palavras sejam invertidas antes da inserção.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "Tries são excelentes para prefixos e palavras exatas. Elas não são nativamente adequadas para sufixos (como 'inho') a menos que as palavras sejam invertidas antes da inserção.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 42,
@@ -57,7 +69,11 @@
       "E": "Pilha (ex. : STACK)."
     },
     "resposta": "D",
-    "comentario": "O segmento de código (TEXT) é geralmente somente-leitura e já existe de forma idêntica no arquivo executável em disco. Portanto, o SO pode simplesmente descartar a página da RAM sem escrevê-la de volta."
+    "comentario": "O segmento de código (TEXT) é geralmente somente-leitura e já existe de forma idêntica no arquivo executável em disco. Portanto, o SO pode simplesmente descartar a página da RAM sem escrevê-la de volta.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "O segmento de código (TEXT) é geralmente somente-leitura e já existe de forma idêntica no arquivo executável em disco. Portanto, o SO pode simplesmente descartar a página da RAM sem escrevê-la de volta.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 43,
@@ -72,7 +88,11 @@
       "E": "Semáforos e spin locks são adequados, respectivamente, para cenários de muita contenção e espera de curta duração para entrar na região crítica."
     },
     "resposta": "E",
-    "comentario": "Semáforos colocam o processo em espera (sleep), sendo melhores para longa espera. Spin locks usam espera ocupada (busy waiting), sendo eficientes apenas para esperas curtíssimas onde o custo da troca de contexto seria superior ao tempo de giro."
+    "comentario": "Semáforos colocam o processo em espera (sleep), sendo melhores para longa espera. Spin locks usam espera ocupada (busy waiting), sendo eficientes apenas para esperas curtíssimas onde o custo da troca de contexto seria superior ao tempo de giro.",
+    "card": {
+      "pergunta": "O que caracteriza Semáforos e spin locks são adequados respectivamente para?",
+      "resposta": "Semáforos colocam o processo em espera (sleep), sendo melhores para longa espera. Spin locks usam espera ocupada (busy waiting), sendo eficientes apenas para esperas curtíssimas onde o custo da troca de contexto seria superior ao tempo de giro.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 44,
@@ -87,7 +107,11 @@
       "E": "Endereço da variável w no working set do processo."
     },
     "resposta": "B",
-    "comentario": "Em linguagens de alto nível rodando em sistemas modernos, endereços de memória são sempre virtuais. O hardware (MMU) traduz esse endereço virtual para um endereço físico no momento do acesso."
+    "comentario": "Em linguagens de alto nível rodando em sistemas modernos, endereços de memória são sempre virtuais. O hardware (MMU) traduz esse endereço virtual para um endereço físico no momento do acesso.",
+    "card": {
+      "pergunta": "O que caracteriza Endereço virtual associado ao endereço físico onde se?",
+      "resposta": "Em linguagens de alto nível rodando em sistemas modernos, endereços de memória são sempre virtuais. O hardware (MMU) traduz esse endereço virtual para um endereço físico no momento do acesso.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 45,
@@ -102,7 +126,11 @@
       "E": "Caracter."
     },
     "resposta": "C",
-    "comentario": "O tipo enumeração (enum) permite associar nomes legíveis a valores inteiros constantes, facilitando a organização e legibilidade do código."
+    "comentario": "O tipo enumeração (enum) permite associar nomes legíveis a valores inteiros constantes, facilitando a organização e legibilidade do código.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "O tipo enumeração (enum) permite associar nomes legíveis a valores inteiros constantes, facilitando a organização e legibilidade do código. Enumeração.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 46,
@@ -117,7 +145,11 @@
       "E": "Do processo de ordenação real, cujo algoritmo não é especificado."
     },
     "resposta": "E",
-    "comentario": "A chamada de um subprograma é uma abstração de processo: o usuário sabe *o que* está sendo feito (ordenar), mas os detalhes de *como* (o algoritmo específico) estão ocultos."
+    "comentario": "A chamada de um subprograma é uma abstração de processo: o usuário sabe *o que* está sendo feito (ordenar), mas os detalhes de *como* (o algoritmo específico) estão ocultos.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "A chamada de um subprograma é uma abstração de processo: o usuário sabe *o que* está sendo feito (ordenar), mas os detalhes de *como* (o algoritmo específico) estão ocultos. Do processo de ordenação real, cujo algoritmo não é especificado.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 47,
@@ -132,7 +164,11 @@
       "E": "Associatividade ."
     },
     "resposta": "B",
-    "comentario": "Sobrecarga de operadores (operator overloading) ocorre quando um mesmo símbolo ou nome de função possui múltiplos significados dependendo dos tipos dos operandos fornecidos."
+    "comentario": "Sobrecarga de operadores (operator overloading) ocorre quando um mesmo símbolo ou nome de função possui múltiplos significados dependendo dos tipos dos operandos fornecidos.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "Sobrecarga de operadores (operator overloading) ocorre quando um mesmo símbolo ou nome de função possui múltiplos significados dependendo dos tipos dos operandos fornecidos. Sobrecarga de operadores.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 48,
@@ -147,7 +183,11 @@
       "E": "Corda ."
     },
     "resposta": "B",
-    "comentario": "Em teoria dos grafos, um percurso (ou trail) é uma sequência de arestas adjacentes onde as arestas são distintas. Se os vértices também forem distintos, temos um caminho."
+    "comentario": "Em teoria dos grafos, um percurso (ou trail) é uma sequência de arestas adjacentes onde as arestas são distintas. Se os vértices também forem distintos, temos um caminho.",
+    "card": {
+      "pergunta": "O que caracteriza Percurso?",
+      "resposta": "Em teoria dos grafos, um percurso (ou trail) é uma sequência de arestas adjacentes onde as arestas são distintas. Se os vértices também forem distintos, temos um caminho.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 49,
@@ -162,7 +202,11 @@
       "E": "Diz-se que um grafo é orientado quando possui uma função de peso ou valor sobre as ligações entre os vértices."
     },
     "resposta": "A",
-    "comentario": "Grafos não orientados podem ser representados como grafos orientados onde cada aresta {u,v} é substituída por dois arcos direcionados (u,v) e (v,u)."
+    "comentario": "Grafos não orientados podem ser representados como grafos orientados onde cada aresta {u,v} é substituída por dois arcos direcionados (u,v) e (v,u).",
+    "card": {
+      "pergunta": "O que caracteriza A todo grafo não orientado G pode ser?",
+      "resposta": "Grafos não orientados podem ser representados como grafos orientados onde cada aresta {u,v} é substituída por dois arcos direcionados (u,v) e (v,u). A todo grafo não orientado G pode ser associado um grafo orientado G’ no qual cada aresta de G corresponderá, biunivocamente, a um par de arcos de sentidos opostos em G’.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 50,
@@ -177,6 +221,10 @@
       "E": "Planar maximal. TECNOLOGIA DE COMPUTAÇÃO"
     },
     "resposta": "B",
-    "comentario": "Um conjunto independente de um grafo é um conjunto de vértices onde não existem arestas ligando qualquer par de vértices desse subconjunto."
+    "comentario": "Um conjunto independente de um grafo é um conjunto de vértices onde não existem arestas ligando qualquer par de vértices desse subconjunto.",
+    "card": {
+      "pergunta": "O que caracteriza Independente?",
+      "resposta": "Um conjunto independente de um grafo é um conjunto de vértices onde não existem arestas ligando qualquer par de vértices desse subconjunto. Independente.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   }
 ]
