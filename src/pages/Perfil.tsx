@@ -2,6 +2,9 @@ import '@material/web/list/list.js'
 import '@material/web/list/list-item.js'
 import '@material/web/switch/switch.js'
 import '@material/web/button/filled-tonal-button.js'
+import '@material/web/button/filled-button.js'
+import '@material/web/button/text-button.js'
+import '@material/web/dialog/dialog.js'
 import '@material/web/icon/icon.js'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
@@ -9,17 +12,30 @@ import { useAuth } from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
+import { callDeleteAllData } from '../hooks/useFunctions'
 
 export function Perfil() {
   const { user } = useAuth()
   const navigate = useNavigate()
   const [loggingOut, setLoggingOut] = useState(false)
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+  const [deleting, setDeleting] = useState(false)
   const { theme, toggleTheme } = useTheme()
 
   async function handleLogout() {
     setLoggingOut(true)
     await signOut(auth)
     navigate('/login')
+  }
+
+  async function handleDeleteAllData() {
+    setDeleting(true)
+    try {
+      await callDeleteAllData({})
+      setShowDeleteDialog(false)
+    } finally {
+      setDeleting(false)
+    }
   }
 
   return (
@@ -95,7 +111,32 @@ export function Perfil() {
           <md-icon slot="icon">logout</md-icon>
           {loggingOut ? 'Saindo...' : 'Sair da conta'}
         </md-filled-tonal-button>
+
+        <md-filled-tonal-button
+          onClick={() => setShowDeleteDialog(true)}
+          className="perfil-delete-md-btn"
+        >
+          <md-icon slot="icon">delete_forever</md-icon>
+          Apagar todos os dados
+        </md-filled-tonal-button>
       </div>
+
+      {showDeleteDialog && (
+        <md-dialog open onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+          <div slot="headline">Apagar todos os dados?</div>
+          <div slot="content">
+            Todo o histórico de simulados e cartões de revisão serão apagados permanentemente. Esta ação não pode ser desfeita.
+          </div>
+          <div slot="actions">
+            <md-text-button onClick={() => setShowDeleteDialog(false)} disabled={deleting}>
+              Cancelar
+            </md-text-button>
+            <md-filled-button onClick={handleDeleteAllData} disabled={deleting} className="perfil-delete-confirm-btn">
+              {deleting ? 'Apagando...' : 'Apagar tudo'}
+            </md-filled-button>
+          </div>
+        </md-dialog>
+      )}
     </div>
   )
 }

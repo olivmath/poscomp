@@ -2618,6 +2618,26 @@ md-outlined-button.btn-full {
   --md-filled-tonal-button-with-leading-icon-leading-space: 24px;
 }
 
+.perfil-delete-md-btn {
+  width: 100%;
+  margin-top: var(--space-sm);
+  --md-filled-tonal-button-container-color: var(--md-sys-color-error-container);
+  --md-filled-tonal-button-label-text-color: var(--md-sys-color-on-error-container);
+  --md-filled-tonal-button-with-leading-icon-leading-icon-color: var(--md-sys-color-on-error-container);
+  --md-filled-tonal-button-label-text-font: 'Google Sans', system-ui, sans-serif;
+  --md-filled-tonal-button-label-text-size: var(--md-sys-typescale-label-large-size);
+  --md-filled-tonal-button-label-text-weight: 600;
+  --md-filled-tonal-button-icon-size: 24px;
+  --md-filled-tonal-button-container-height: 48px;
+  --md-filled-tonal-button-with-leading-icon-leading-space: 24px;
+  opacity: 0.7;
+}
+
+.perfil-delete-confirm-btn {
+  --md-filled-button-container-color: var(--md-sys-color-error);
+  --md-filled-button-label-text-color: var(--md-sys-color-on-error);
+}
+
 /* md-list inside perfil */
 .perfil-info-list md-list-item {
   --md-list-item-label-text-font: 'Google Sans', system-ui, sans-serif;

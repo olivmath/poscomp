@@ -94,3 +94,8 @@ export const callReviewCard = httpsCallable<
   ReviewCardInput,
   ReviewCardOutput
 >(functions, 'reviewCard')
+
+export const callDeleteAllData = httpsCallable<
+  Record<string, never>,
+  { deleted: boolean }
+>(functions, 'deleteAllData')
