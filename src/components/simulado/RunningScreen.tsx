@@ -1,8 +1,9 @@
 import '@material/web/button/filled-button.js'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ImmersiveBar } from './ImmersiveBar'
 import { ExitModal } from './ExitModal'
 import { QuestionMapModal } from './QuestionMapModal'
+import { ReportIssueModal } from './ReportIssueModal'
 import type { Option, QuestionStatus, Confidence, Question } from '../../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
@@ -31,14 +32,20 @@ export function RunningScreen({
   questionStatuses: QuestionStatus[]
   currentIndex: number
   onSelect: (opt: Option) => void
-  onNext: (confidence: Confidence) => void
+  onNext: (confidence: Confidence, issue?: { comment?: string }) => void
   onSkip: () => void
   onGoToQuestion: (index: number) => void
   onQuit: () => void
 }) {
   const [showExitModal, setShowExitModal] = useState(false)
   const [showMap, setShowMap] = useState(false)
+  const [showIssueModal, setShowIssueModal] = useState(false)
+  const [issueComment, setIssueComment] = useState<string | undefined>()
   const hasSelection = selectedOption !== null
+
+  useEffect(() => {
+    setIssueComment(undefined)
+  }, [currentIndex])
 
   return (
     <div className="simulado-running-immersive" data-testid="simulado-running">
@@ -74,22 +81,27 @@ export function RunningScreen({
           </div>
 
           <div className="confidence-buttons">
-            <button className="confidence-btn confidence-btn--unsure" disabled={!hasSelection} onClick={() => onNext('unsure')} data-testid="btn-unsure">
+            <button className="confidence-btn confidence-btn--unsure" disabled={!hasSelection} onClick={() => onNext('unsure', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-unsure">
               <span className="material-symbols-outlined confidence-btn-icon">help_outline</span>
               <span className="confidence-btn-label">Não sei</span>
               <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
             </button>
-            <button className="confidence-btn confidence-btn--studying" disabled={!hasSelection} onClick={() => onNext('studying')} data-testid="btn-studying">
+            <button className="confidence-btn confidence-btn--studying" disabled={!hasSelection} onClick={() => onNext('studying', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-studying">
               <span className="material-symbols-outlined confidence-btn-icon">school</span>
               <span className="confidence-btn-label">Estudando</span>
               <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
             </button>
-            <button className="confidence-btn confidence-btn--should-know" disabled={!hasSelection} onClick={() => onNext('should_know')} data-testid="btn-should-know">
+            <button className="confidence-btn confidence-btn--should-know" disabled={!hasSelection} onClick={() => onNext('should_know', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-should-know">
               <span className="material-symbols-outlined confidence-btn-icon">warning</span>
               <span className="confidence-btn-label">Devia saber</span>
               <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
             </button>
           </div>
+
+          <button className="flag-btn" onClick={() => setShowIssueModal(true)} data-testid="flag-btn">
+            <span className="material-symbols-outlined">flag</span>
+            {issueComment ? 'Problema relatado' : 'Relatar problema'}
+          </button>
 
           <button className="skip-btn" onClick={onSkip} data-testid="skip-btn">
             <span className="material-symbols-outlined skip-btn-icon">skip_next</span>
@@ -100,6 +112,16 @@ export function RunningScreen({
 
       {showExitModal && <ExitModal onConfirm={onQuit} onCancel={() => setShowExitModal(false)} />}
       {showMap && <QuestionMapModal statuses={questionStatuses} currentIndex={currentIndex} onGo={onGoToQuestion} onClose={() => setShowMap(false)} />}
+      {showIssueModal && (
+        <ReportIssueModal
+          initialComment={issueComment}
+          onConfirm={(comment) => {
+            setIssueComment(comment)
+            setShowIssueModal(false)
+          }}
+          onCancel={() => setShowIssueModal(false)}
+        />
+      )}
     </div>
   )
 }

@@ -93,6 +93,9 @@ export interface AnswerInput {
   questionId: number
   selected: Option
   confidence: Confidence
+  issue?: {
+    comment?: string
+  }
 }
 
 export interface FinishSimuladoInput {
@@ -121,6 +124,9 @@ export interface AnswerOutput {
   confidence: Confidence
 
   question: QuestionPreview
+  issue?: {
+    comment?: string
+  }
 }
 
 export interface FinishSimuladoOutput {

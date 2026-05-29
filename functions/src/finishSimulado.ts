@@ -44,6 +44,13 @@ export const finishSimulado = onCall(async (request) => {
     timeSpentSeconds: input.timeSpentSeconds,
   })
 
+  // Save flagged questions
+  for (const answer of answersOutput) {
+    if (answer.issue) {
+      await saveFlaggedQuestion(uid, resultId, answer)
+    }
+  }
+
   await updateSrsCards(uid, input.answers, questionsMap)
 
   logger.info('finishSimulado finished', {
@@ -66,6 +73,18 @@ export const finishSimulado = onCall(async (request) => {
 
 function getAuthUid(request: { auth?: { uid: string } }): O.Option<string> {
   return O.fromNullable(request.auth?.uid)
+}
+
+async function saveFlaggedQuestion(uid: string, resultId: string, answer: AnswerOutput) {
+  if (!answer.issue) return
+  await db.collection('flagged_questions').add({
+    uid,
+    resultId,
+    questionId: answer.questionId,
+    comment: answer.issue.comment,
+    resolved: false,
+    createdAt: FieldValue.serverTimestamp(),
+  })
 }
 
 function parseInput(data: unknown): E.Either<{ message: string }, FinishSimuladoInput> {
@@ -157,6 +176,7 @@ function buildAnswersOutput(
       confidence: answer.confidence,
       correct,
       question: questionOut,
+      ...(answer.issue ? { issue: answer.issue } : {}),
     }
   })
 }

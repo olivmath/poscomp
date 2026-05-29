@@ -76,6 +76,14 @@ dev-local:
 seed-local:
 	FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed
 
+# ── Admin (Flagged Questions) ─────────────────────────────────────────────────
+get-flagged:
+	firebase functions:call getFlaggedQuestions --data '{}'
+
+resolve-flagged:
+	@read -p "Enter flag ID to resolve: " id; \
+	firebase functions:call resolveFlaggedQuestion --data "{\"id\": \"$$id\"}"
+
 # ── Deploy ────────────────────────────────────────────────────────────────────
 deploy-hosting:
 	firebase deploy --only hosting
