@@ -33,7 +33,7 @@ async function seed() {
 
   for (const file of files) {
     const filePath = join(dataDir, file)
-    const questions: Record<string, any>[] = JSON.parse(readFileSync(filePath, 'utf-8'))
+    const questions: Record<string, unknown>[] = JSON.parse(readFileSync(filePath, 'utf-8'))
     
     const batch = db.batch()
     for (const q of questions) {
