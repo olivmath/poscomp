@@ -94,10 +94,13 @@ export interface FinishSimuladoInput {
   answers: AnswerInput[]
   timeSpentSeconds: number
 }
-
-export interface ReviewCardInput {
+export interface AnswerInput {
   questionId: number
-  studied: boolean
+  selected: Option
+  confidence: Confidence
+  issue?: {
+    comment?: string
+  }
 }
 
 // ─── OUTPUT TYPES ────────────────────────────────────────────────
@@ -116,6 +119,9 @@ export interface AnswerOutput {
   confidence: Confidence
 
   question: QuestionPreview
+  issue?: {
+    comment?: string
+  }
 }
 
 export interface FinishSimuladoOutput {

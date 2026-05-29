@@ -21,6 +21,9 @@ export interface AnswerRecord {
   correct: boolean
   skipped: boolean
   confidence: Confidence
+  issue?: {
+    comment?: string
+  }
 }
 
 export type QuestionReview = {

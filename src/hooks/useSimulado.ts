@@ -40,7 +40,7 @@ interface UseSimuladoReturn {
   goToConfig: () => void
   start: (config: SimuladoConfig) => void
   select: (option: Option) => void
-  next: (confidence: Confidence) => void
+  next: (confidence: Confidence, issue?: { comment?: string }) => void
   skip: () => void
   goToQuestion: (index: number) => void
   retry: () => void
@@ -109,6 +109,7 @@ export function useSimulado(): UseSimuladoReturn {
           questionId: a.questionId,
           selected: a.selected,
           confidence: a.confidence,
+          ...(a.issue ? { issue: a.issue } : {}),
         }))
 
       console.log('[CF] finishSimulado →', answeredInputs.length, 'respostas')
@@ -225,7 +226,7 @@ export function useSimulado(): UseSimuladoReturn {
   }, [])
 
   const next = useCallback(
-    (confidence: Confidence) => {
+    (confidence: Confidence, issue?: { comment?: string }) => {
       const current = questions[currentIndex]
       const newAnswer: AnswerRecord = {
         questionId: current.id,
@@ -233,6 +234,7 @@ export function useSimulado(): UseSimuladoReturn {
         correct: selectedOption === current.resposta,
         skipped: false,
         confidence,
+        ...(issue ? { issue } : {}),
       }
 
       const updated = [
