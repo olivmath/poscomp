@@ -2791,7 +2791,7 @@ md-outlined-button.btn-full {
 
 .home-page__cta {
   position: sticky;
-  bottom: 0;
+  bottom: var(--layout-nav-clearance);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
