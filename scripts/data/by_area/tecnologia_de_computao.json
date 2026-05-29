@@ -12,7 +12,11 @@
       "E": "6"
     },
     "resposta": "D",
-    "comentario": "RIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas."
+    "comentario": "RIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas.",
+    "card": {
+      "pergunta": "O que caracteriza 5?",
+      "resposta": "RIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 52,
@@ -27,7 +31,11 @@
       "E": "Ferir ou esperar"
     },
     "resposta": "B",
-    "comentario": "O grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori."
+    "comentario": "O grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori.",
+    "card": {
+      "pergunta": "Como protocolos de prevenção evitam deadlocks em sistemas de bancos de dados?",
+      "resposta": "O grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori.\n\nNão deve ser confundido com detecção/recuperação de deadlocks ou estratégias sem timestamps (no-wait, timeouts)."
+    }
   },
   {
     "id": 53,
@@ -42,7 +50,11 @@
       "E": "I, II, III e IV."
     },
     "resposta": "B",
-    "comentario": "Na árvore B, todos os nós (internos e folha) podem ter ponteiros de dados. Na árvore B+, apenas os nós folha têm ponteiros de dados; os nós internos têm apenas ponteiros de árvore. Portanto: I (B interno), II (B folha) e IV (B+ folha)."
+    "comentario": "Na árvore B, todos os nós (internos e folha) podem ter ponteiros de dados. Na árvore B+, apenas os nós folha têm ponteiros de dados; os nós internos têm apenas ponteiros de árvore. Portanto: I (B interno), II (B folha) e IV (B+ folha).",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "Na árvore B, todos os nós (internos e folha) podem ter ponteiros de dados. Na árvore B+, apenas os nós folha têm ponteiros de dados; os nós internos têm apenas ponteiros de árvore. Portanto: I (B interno), II (B folha) e IV (B+ folha).\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 54,
@@ -57,7 +69,11 @@
       "E": "Gramática livre de contexto na qual fragmentos de programas (ações) são inseridos nos lados direitos das regras de produção."
     },
     "resposta": "E",
-    "comentario": "Esquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática."
+    "comentario": "Esquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática.",
+    "card": {
+      "pergunta": "O que caracteriza Gramática livre de contexto na qual fragmentos de?",
+      "resposta": "Esquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática. Gramática livre de contexto na qual fragmentos de programas (ações) são inseridos nos lados direitos das regras de produção.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 55,
@@ -72,7 +88,11 @@
       "E": "I, II, III e IV."
     },
     "resposta": "D",
-    "comentario": "I, II e III estão corretas. IV está errada: autômatos finitos são usados na análise léxica, não na definição de representações intermediárias."
+    "comentario": "I, II e III estão corretas. IV está errada: autômatos finitos são usados na análise léxica, não na definição de representações intermediárias.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "I, II e III estão corretas. IV está errada: autômatos finitos são usados na análise léxica, não na definição de representações intermediárias.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 57,
@@ -87,7 +107,11 @@
       "E": "Apenas II e III."
     },
     "resposta": "B",
-    "comentario": "Todas estão incorretas. I: Ray Tracing é custoso e não adequado para tempo real (usualmente). II: Z-Buffer armazena o pixel MAIS PRÓXIMO (não distante); Ray Tracing é o estado da arte para cenas cinematográficas, não Z-Buffer. III: Phong é modelo de iluminação LOCAL (não global); iluminação global (como ray tracing) considera luz indireta."
+    "comentario": "Todas estão incorretas. I: Ray Tracing é custoso e não adequado para tempo real (usualmente). II: Z-Buffer armazena o pixel MAIS PRÓXIMO (não distante); Ray Tracing é o estado da arte para cenas cinematográficas, não Z-Buffer. III: Phong é modelo de iluminação LOCAL (não global); iluminação global (como ray tracing) considera luz indireta.",
+    "card": {
+      "pergunta": "O que caracteriza Todas incorretas?",
+      "resposta": "Todas estão incorretas. I: Ray Tracing é custoso e não adequado para tempo real (usualmente). II: Z-Buffer armazena o pixel MAIS PRÓXIMO (não distante); Ray Tracing é o estado da arte para cenas cinematográficas, não Z-Buffer. III: Phong é modelo de iluminação LOCAL (não global); iluminação global (como ray tracing) considera luz indireta.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 58,
@@ -102,7 +126,11 @@
       "E": "Obter menor exigência de manutenção, menos correções de erros e menos suporte ao cliente."
     },
     "resposta": "A",
-    "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade."
+    "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade.",
+    "card": {
+      "pergunta": "O que caracteriza Aumentar a complexidade dos processos de negócios?",
+      "resposta": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 59,
@@ -117,7 +145,11 @@
       "E": "Projeto de software"
     },
     "resposta": "D",
-    "comentario": "Definir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega."
+    "comentario": "Definir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega.",
+    "card": {
+      "pergunta": "O que caracteriza Especificação de software?",
+      "resposta": "Definir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 60,
@@ -132,7 +164,11 @@
       "E": "Apenas II e III."
     },
     "resposta": "A",
-    "comentario": "Todas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida."
+    "comentario": "Todas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida.",
+    "card": {
+      "pergunta": "O que caracteriza Todas corretas?",
+      "resposta": "Todas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 61,
@@ -147,7 +183,11 @@
       "E": "Combinar partes dos cromossomos de dois pais para criar descendentes."
     },
     "resposta": "E",
-    "comentario": "Crossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção."
+    "comentario": "Crossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção.",
+    "card": {
+      "pergunta": "O que caracteriza Combinar partes dos cromossomos de dois pais para?",
+      "resposta": "Crossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 62,
@@ -162,7 +202,11 @@
       "E": "Manutenção e atualização automática da base de dados."
     },
     "resposta": "C",
-    "comentario": "O motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista."
+    "comentario": "O motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista.",
+    "card": {
+      "pergunta": "O que caracteriza Utilizar as regras da base de conhecimento para?",
+      "resposta": "O motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista. Utilizar as regras da base de conhecimento para derivar conclusões a partir de fatos, simulando o raciocínio humano especializado.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 63,
@@ -177,7 +221,11 @@
       "E": "codificação – modulação"
     },
     "resposta": "D",
-    "comentario": "Amostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits."
+    "comentario": "Amostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits.",
+    "card": {
+      "pergunta": "O que caracteriza amostragem quantização?",
+      "resposta": "Amostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 64,
@@ -192,7 +240,11 @@
       "E": "I, II, III e IV."
     },
     "resposta": "B",
-    "comentario": "I: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios)."
+    "comentario": "I: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios).",
+    "card": {
+      "pergunta": "O que caracteriza Apenas I e III?",
+      "resposta": "I: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 65,
@@ -207,7 +259,11 @@
       "E": "11.1.2.0/24"
     },
     "resposta": "E",
-    "comentario": "Prefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24."
+    "comentario": "Prefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "Prefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 66,
@@ -222,7 +278,11 @@
       "E": "O datagrama IP identifica o destinatário através dos campos porta de destino e número IP de destino."
     },
     "resposta": "D",
-    "comentario": "IP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte."
+    "comentario": "IP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "IP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 67,
@@ -237,7 +297,11 @@
       "E": "UDP"
     },
     "resposta": "E",
-    "comentario": "DNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes."
+    "comentario": "DNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes.",
+    "card": {
+      "pergunta": "O que caracteriza UDP?",
+      "resposta": "DNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 68,
@@ -252,7 +316,11 @@
       "E": "Mudança de escala"
     },
     "resposta": "B",
-    "comentario": "Transparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física."
+    "comentario": "Transparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física.",
+    "card": {
+      "pergunta": "O que caracteriza Acesso?",
+      "resposta": "Transparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 69,
@@ -267,7 +335,11 @@
       "E": "por queda"
     },
     "resposta": "E",
-    "comentario": "Falha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível)."
+    "comentario": "Falha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível).",
+    "card": {
+      "pergunta": "O que caracteriza por queda?",
+      "resposta": "Falha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 70,
@@ -282,7 +354,11 @@
       "E": "relógios vetoriais"
     },
     "resposta": "A",
-    "comentario": "No algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens."
+    "comentario": "No algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens.",
+    "card": {
+      "pergunta": "O que caracteriza centralizado?",
+      "resposta": "No algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 56,
@@ -297,6 +373,10 @@
       "E": "Algoritmo de Bresenham, Algoritmo de Cohen-Sutherland e Geração de Mipmaps."
     },
     "resposta": "A",
-    "comentario": "Z-Buffer: remove superfícies ocultas guardando profundidade por pixel. Gouraud: tonalização por interpolação de cores nos vértices. Phong: tonalização por interpolação de normais. Os demais grupos misturam algoritmos de outras etapas (rasterização, recorte, modelagem)."
+    "comentario": "Z-Buffer: remove superfícies ocultas guardando profundidade por pixel. Gouraud: tonalização por interpolação de cores nos vértices. Phong: tonalização por interpolação de normais. Os demais grupos misturam algoritmos de outras etapas (rasterização, recorte, modelagem).",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "Z-Buffer: remove superfícies ocultas guardando profundidade por pixel. Gouraud: tonalização por interpolação de cores nos vértices. Phong: tonalização por interpolação de normais. Os demais grupos misturam algoritmos de outras etapas (rasterização, recorte, modelagem).\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   }
 ]
