@@ -6,7 +6,6 @@ import { useSrs } from '../hooks/useSrs'
 
 const TABS = [
   { path: '/',          label: 'Home',      icon: 'home'          },
-  { path: '/simulado',  label: 'Simulado',  icon: 'play_circle'   },
   { path: '/revisao',   label: 'Revisão',   icon: 'article',      hasBadge: true },
   { path: '/historico', label: 'Histórico', icon: 'history'       },
   { path: '/perfil',    label: 'Perfil',    icon: 'person'        },
