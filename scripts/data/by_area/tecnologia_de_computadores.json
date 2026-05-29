@@ -12,7 +12,11 @@
       "E": "Coordenador, coordenador e participantes."
     },
     "resposta": "D",
-    "comentario": "No 2PC: 1) O Coordenador envia 'prepare'. 2) Os Participantes respondem 'ready' ou 'cannot'. 3) O Coordenador decide e envia a ordem final de 'commit' ou 'rollback'."
+    "comentario": "No 2PC: 1) O Coordenador envia 'prepare'. 2) Os Participantes respondem 'ready' ou 'cannot'. 3) O Coordenador decide e envia a ordem final de 'commit' ou 'rollback'.",
+    "card": {
+      "pergunta": "No protocolo two‑phase commit (2PC), quem coordena o commit e quem sinaliza se está pronto para confirmar?",
+      "resposta": "O coordenador inicia a fase de preparação (envia 'prepare') e, após receber respostas 'ready' dos participantes, decide e envia 'commit' ou 'rollback'. Os participantes respondem 'ready' ou 'cannot' indicando se podem executar o commit.\\n\\nNão deve ser confundido com protocolos sem um coordenador central (onde não há um agente decisor), com modelos em que participantes decidem autonomamente sem votação, ou com transações locais que não envolvem uma fase de votação."
+    }
   },
   {
     "id": 52,
@@ -27,7 +31,11 @@
       "E": "Apenas III e IV."
     },
     "resposta": "A",
-    "comentario": "As técnicas Wait-Die e Wound-Wait são os protocolos clássicos de prevenção de deadlock baseados em carimbos de tempo (timestamps) para decidir qual transação deve esperar, ser abortada ou 'ferir' outra."
+    "comentario": "As técnicas Wait-Die e Wound-Wait são os protocolos clássicos de prevenção de deadlock baseados em carimbos de tempo (timestamps) para decidir qual transação deve esperar, ser abortada ou 'ferir' outra.",
+    "card": {
+      "pergunta": "Quais técnicas de prevenção de deadlock usam timestamps para decidir qual transação deve esperar ou ser abortada?",
+      "resposta": "Wait‑Die e Wound‑Wait são protocolos de prevenção baseados em timestamps. No Wait‑Die, uma transação mais antiga (timestamp menor) pode esperar por uma mais jovem; se a transação solicitante for mais jovem, ela é abortada. No Wound‑Wait, a transação mais antiga força a abortagem da mais jovem (''wounds''); se a solicitante for mais jovem, ela espera. Ambos usam a ordem por timestamp para evitar ciclos de espera.\n\nNão deve ser confundido com estratégias sem timestamp como 'no-wait' ou 'cautious-waiting', nem com métodos de detecção e recuperação de deadlock (detecção via grafo de espera ou timeouts)."
+    }
   },
   {
     "id": 53,
@@ -42,7 +50,11 @@
       "E": "Apenas III e IV."
     },
     "resposta": "B",
-    "comentario": "Existe uma hierarquia: BCNF é mais restritiva que 3NF, que é mais restritiva que 2NF. Logo, se está na BCNF, obrigatoriamente está na 3NF e na 2NF."
+    "comentario": "Existe uma hierarquia: BCNF é mais restritiva que 3NF, que é mais restritiva que 2NF. Logo, se está na BCNF, obrigatoriamente está na 3NF e na 2NF.",
+    "card": {
+      "pergunta": "Qual é a relação típica de implicação entre BCNF, 3NF e 2NF?",
+      "resposta": "Existe uma hierarquia: BCNF é mais restritiva que 3NF, que é mais restritiva que 2NF. Logo, se está na BCNF, obrigatoriamente está na 3NF e na 2NF.\n\nNão deve ser confundido com diferença entre 3NF e BCNF e a presença de dependências funcionais que causam redundância."
+    }
   },
   {
     "id": 54,
@@ -57,7 +69,11 @@
       "E": "T3 T3 T3."
     },
     "resposta": "E",
-    "comentario": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3."
+    "comentario": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3.",
+    "card": {
+      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3.\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+    }
   },
   {
     "id": 55,
@@ -72,7 +88,11 @@
       "E": "Apenas as assertivas III, IV e V estão correta s."
     },
     "resposta": "A",
-    "comentario": "I está correta (Bottom-up vai das folhas à raiz). V está correta (significado de L, L/R). II está incorreta (Top-down vai da raiz às folhas). IV está incorreta (LR não tem conflito empilhar/empilhar)."
+    "comentario": "I está correta (Bottom-up vai das folhas à raiz). V está correta (significado de L, L/R). II está incorreta (Top-down vai da raiz às folhas). IV está incorreta (LR não tem conflito empilhar/empilhar).",
+    "card": {
+      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "I está correta (Bottom-up vai das folhas à raiz). V está correta (significado de L, L/R). II está incorreta (Top-down vai da raiz às folhas). IV está incorreta (LR não tem conflito empilhar/empilhar).\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+    }
   },
   {
     "id": 56,
@@ -87,7 +107,11 @@
       "E": "Apenas I, III e IV estão corretas."
     },
     "resposta": "B",
-    "comentario": "Ray Tracing funciona atirando raios da câmera (I) e calculando reflexões e refrações via raios secundários (IV). O Z-buffer é típico de rasterização, não de ray tracing puro."
+    "comentario": "Ray Tracing funciona atirando raios da câmera (I) e calculando reflexões e refrações via raios secundários (IV). O Z-buffer é típico de rasterização, não de ray tracing puro.",
+    "card": {
+      "pergunta": "O que caracteriza Apenas I e IV estão corretas?",
+      "resposta": "Ray Tracing funciona atirando raios da câmera (I) e calculando reflexões e refrações via raios secundários (IV). O Z-buffer é típico de rasterização, não de ray tracing puro.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 57,
@@ -102,7 +126,11 @@
       "E": "Z-buffer ."
     },
     "resposta": "C",
-    "comentario": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas."
+    "comentario": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas.",
+    "card": {
+      "pergunta": "O que caracteriza Hemicubos?",
+      "resposta": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas. Hemicubos.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 58,
@@ -117,7 +145,11 @@
       "E": "I, II e III."
     },
     "resposta": "D",
-    "comentario": "As assertivas I (aspecto cultural/psicológico) e II (custo de manutenção de repositórios) são barreiras reais ao reúso. A III está incorreta pois o reúso visa justamente reduzir custos e complexidade a longo prazo."
+    "comentario": "As assertivas I (aspecto cultural/psicológico) e II (custo de manutenção de repositórios) são barreiras reais ao reúso. A III está incorreta pois o reúso visa justamente reduzir custos e complexidade a longo prazo.",
+    "card": {
+      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "As assertivas I (aspecto cultural/psicológico) e II (custo de manutenção de repositórios) são barreiras reais ao reúso. A III está incorreta pois o reúso visa justamente reduzir custos e complexidade a longo prazo.\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+    }
   },
   {
     "id": 59,
@@ -132,7 +164,11 @@
       "E": "Fornecer treinamento adequado a todos os revisores."
     },
     "resposta": "B",
-    "comentario": "Uma RTF deve ter tempo limitado e focar na identificação de defeitos, não na sua correção imediata. Estender indefinidamente a reunião para discutir soluções foge ao propósito de controle de qualidade e gestão de tempo."
+    "comentario": "Uma RTF deve ter tempo limitado e focar na identificação de defeitos, não na sua correção imediata. Estender indefinidamente a reunião para discutir soluções foge ao propósito de controle de qualidade e gestão de tempo.",
+    "card": {
+      "pergunta": "O que caracteriza Definir uma agenda de revisão inicial reuniões com?",
+      "resposta": "Uma RTF deve ter tempo limitado e focar na identificação de defeitos, não na sua correção imediata. Estender indefinidamente a reunião para discutir soluções foge ao propósito de controle de qualidade e gestão de tempo.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 60,
@@ -147,7 +183,11 @@
       "E": "I, II e III."
     },
     "resposta": "B",
-    "comentario": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho."
+    "comentario": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho.",
+    "card": {
+      "pergunta": "O que caracteriza Apenas II?",
+      "resposta": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 61,
@@ -162,7 +202,11 @@
       "E": "A lógica fuzzy é uma abordagem que se baseia apenas em valores fracionados."
     },
     "resposta": "B",
-    "comentario": "A lógica fuzzy (ou nebulosa) permite graus de verdade entre 0 e 1, sendo ideal para modelar conceitos subjetivos ou imprecisos (como 'quente', 'frio', 'perto')."
+    "comentario": "A lógica fuzzy (ou nebulosa) permite graus de verdade entre 0 e 1, sendo ideal para modelar conceitos subjetivos ou imprecisos (como 'quente', 'frio', 'perto').",
+    "card": {
+      "pergunta": "O que caracteriza A lógica fuzzy é uma extensão da lógica?",
+      "resposta": "A lógica fuzzy (ou nebulosa) permite graus de verdade entre 0 e 1, sendo ideal para modelar conceitos subjetivos ou imprecisos (como 'quente', 'frio', 'perto'). A lógica fuzzy é uma extensão da lógica clássica que permite representar e raciocinar com informações imprecisas ou vagas.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 62,
@@ -177,7 +221,11 @@
       "E": "As árvores de decisão podem ser usadas em conjunto com outras técnicas de inteligência artificial para melhorar o desempenho e a precisão dos sistemas. Por exemplo, podem ser combinadas com algoritmos de apr endizado ensemble , como o random forest , para criar modelos mais robustos e acurados."
     },
     "resposta": "B",
-    "comentario": "Árvores de decisão são estruturas de dados não lineares (árvores), e não lineares. Elas mapeiam observações sobre um item para conclusões sobre seu valor alvo."
+    "comentario": "Árvores de decisão são estruturas de dados não lineares (árvores), e não lineares. Elas mapeiam observações sobre um item para conclusões sobre seu valor alvo.",
+    "card": {
+      "pergunta": "O que caracteriza As árvores de decisão são estruturas de dados?",
+      "resposta": "Árvores de decisão são estruturas de dados não lineares (árvores), e não lineares. Elas mapeiam observações sobre um item para conclusões sobre seu valor alvo.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 63,
@@ -192,7 +240,11 @@
       "E": "V – V – F."
     },
     "resposta": "C",
-    "comentario": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores."
+    "comentario": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores.",
+    "card": {
+      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores.\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+    }
   },
   {
     "id": 64,
@@ -207,7 +259,11 @@
       "E": "Rede neural recorrente"
     },
     "resposta": "D",
-    "comentario": "O Perceptron é a unidade básica e o modelo mais simples de rede neural, capaz de resolver apenas problemas que podem ser divididos por uma linha reta (linearmente separáveis)."
+    "comentario": "O Perceptron é a unidade básica e o modelo mais simples de rede neural, capaz de resolver apenas problemas que podem ser divididos por uma linha reta (linearmente separáveis).",
+    "card": {
+      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "O Perceptron é a unidade básica e o modelo mais simples de rede neural, capaz de resolver apenas problemas que podem ser divididos por uma linha reta (linearmente separáveis).\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+    }
   },
   {
     "id": 65,
@@ -222,7 +278,11 @@
       "E": "256"
     },
     "resposta": "A",
-    "comentario": "A máscara 255.255.255.128 deixa 7 bits para hosts (2⁷ = 128 endereços). Subtraindo o endereço da rede e o de broadcast, restam 126 endereços utilizáveis para computadores."
+    "comentario": "A máscara 255.255.255.128 deixa 7 bits para hosts (2⁷ = 128 endereços). Subtraindo o endereço da rede e o de broadcast, restam 126 endereços utilizáveis para computadores.",
+    "card": {
+      "pergunta": "O que caracteriza 126?",
+      "resposta": "A máscara 255.255.255.128 deixa 7 bits para hosts (2⁷ = 128 endereços). Subtraindo o endereço da rede e o de broadcast, restam 126 endereços utilizáveis para computadores.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 66,
@@ -237,7 +297,11 @@
       "E": "Switch."
     },
     "resposta": "E",
-    "comentario": "O Switch opera na camada 2 (enlace) e utiliza endereços MAC para encaminhar quadros especificamente para a porta de destino, ao contrário do Hub que faz broadcast para todas as portas."
+    "comentario": "O Switch opera na camada 2 (enlace) e utiliza endereços MAC para encaminhar quadros especificamente para a porta de destino, ao contrário do Hub que faz broadcast para todas as portas.",
+    "card": {
+      "pergunta": "O que caracteriza Switch?",
+      "resposta": "O Switch opera na camada 2 (enlace) e utiliza endereços MAC para encaminhar quadros especificamente para a porta de destino, ao contrário do Hub que faz broadcast para todas as portas. Switch.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 67,
@@ -252,7 +316,11 @@
       "E": "d/c + b/c"
     },
     "resposta": "A",
-    "comentario": "O tempo de duração de um bit é 1/b. A distância que o sinal percorre nesse tempo (largura do bit) é Velocidade * Tempo = c * (1/b) = c/b."
+    "comentario": "O tempo de duração de um bit é 1/b. A distância que o sinal percorre nesse tempo (largura do bit) é Velocidade * Tempo = c * (1/b) = c/b.",
+    "card": {
+      "pergunta": "O que caracteriza cb?",
+      "resposta": "O tempo de duração de um bit é 1/b. A distância que o sinal percorre nesse tempo (largura do bit) é Velocidade * Tempo = c * (1/b) = c/b.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 68,
@@ -267,7 +335,11 @@
       "E": "hierárquica"
     },
     "resposta": "A",
-    "comentario": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas)."
+    "comentario": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas).",
+    "card": {
+      "pergunta": "O que caracteriza plana?",
+      "resposta": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas).\n\nNão deve ser confundido com diferenças entre bloqueio pessimista/otimista e políticas de serialização."
+    }
   },
   {
     "id": 69,
@@ -282,7 +354,11 @@
       "E": "Um sistema de invocação síncrono volátil tenta, indefinidamente, realizar a invocação até obter o êxito ou falha, ou até que o aplicativo cancele a invocação."
     },
     "resposta": "B",
-    "comentario": "Chamadas assíncronas são não-bloqueantes: o emissor continua sua execução imediatamente após o sistema operacional aceitar o pedido de envio, sem esperar pela resposta do receptor."
+    "comentario": "Chamadas assíncronas são não-bloqueantes: o emissor continua sua execução imediatamente após o sistema operacional aceitar o pedido de envio, sem esperar pela resposta do receptor.",
+    "card": {
+      "pergunta": "O que caracteriza Uma invocação assíncrona é aquela que é feita?",
+      "resposta": "Chamadas assíncronas são não-bloqueantes: o emissor continua sua execução imediatamente após o sistema operacional aceitar o pedido de envio, sem esperar pela resposta do receptor. Uma invocação assíncrona é aquela que é feita com o auxílio de uma chamada não bloqueante, a qual retorna assim que a mensagem de requisição da invocação tenha sido criada e esteja pronta para o envio.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+    }
   },
   {
     "id": 70,
@@ -297,6 +373,10 @@
       "E": "A comunicação assíncrona é um serviço por meio do qual uma mensagem é enviada para um grupo e, então, entregue a todos os membros do grupo."
     },
     "resposta": "C",
-    "comentario": "A comunicação em grupo via multicast permite enviar dados para múltiplos destinatários de uma só vez, sendo um pilar da comunicação indireta e sistemas de eventos/mensageria."
+    "comentario": "A comunicação em grupo via multicast permite enviar dados para múltiplos destinatários de uma só vez, sendo um pilar da comunicação indireta e sistemas de eventos/mensageria.",
+    "card": {
+      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "A comunicação em grupo via multicast permite enviar dados para múltiplos destinatários de uma só vez, sendo um pilar da comunicação indireta e sistemas de eventos/mensageria. Na comunicação em grupo , implementa comunicação por multicast , na qual uma mensag em é enviada para todos os membros do grupo por meio de uma única operação.\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+    }
   }
 ]
