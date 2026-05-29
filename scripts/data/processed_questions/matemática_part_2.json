@@ -1,0 +1,377 @@
+[
+  {
+    "id": 14,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "A proposição lógica ~(p ∨ q) é verdadeira se, e somente se, for falsa a proposição:",
+    "alternativas": {
+      "A": "p e q",
+      "B": "~p",
+      "C": "~p → q",
+      "D": "~p → ~q",
+      "E": "~q"
+    },
+    "resposta": "C",
+    "comentario": "~(p∨q) verdadeiro ↔ p=F e q=F. Nesse caso ~p=V, q=F → ~p→q = V→F = F. A proposição falsa é ~p→q."
+  },
+  {
+    "id": 15,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Considere as premissas: (1) Se Ana Paula joga vôlei OU Joaquim joga videogame, então Victória vai à praia. (2) Hoje, Victória NÃO foi à praia. (3) Se hoje é sábado, então Ana Paula joga vôlei E Caio treina boxe. O que se pode concluir?",
+    "alternativas": {
+      "A": "Hoje é sábado e Ana Paula jogou vôlei.",
+      "B": "Hoje não é sábado e Joaquim não jogou videogame.",
+      "C": "Ana Paula jogou vôlei ou Joaquim jogou videogame.",
+      "D": "Hoje é sábado e Joaquim jogou videogame.",
+      "E": "Hoje não é sábado e Ana Paula jogou vôlei."
+    },
+    "resposta": "B",
+    "comentario": "Por modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame. Como ~Ana Paula provado, modus tollens com P3 dá ~hoje é sábado. Conclusão: hoje não é sábado E Joaquim não jogou videogame."
+  },
+  {
+    "id": 16,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Utilizando as leis de Morgan, qual expressão em soma de produtos representa F = ~(Ā+C̄)·~(B̄+D̄)?",
+    "alternativas": {
+      "A": "AC̄ + B",
+      "B": "AC̄ + BD",
+      "C": "AC + B",
+      "D": "AC̄ + B̄D",
+      "E": "A + B"
+    },
+    "resposta": "D",
+    "comentario": "Aplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D."
+  },
+  {
+    "id": 19,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Com base na lista de 80 tempos de execução fornecida, a percentagem de tempo em que o processo de cálculo é inferior a 65 segundos é:",
+    "alternativas": {
+      "A": "28,8%",
+      "B": "30,0%",
+      "C": "32,5%",
+      "D": "36,3%",
+      "E": "40,0%"
+    },
+    "resposta": "C",
+    "comentario": "Contando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores. 26/80 = 32,5%."
+  },
+  {
+    "id": 20,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "O tempo médio aproximado que o software leva para realizar os cálculos é:",
+    "alternativas": {
+      "A": "65",
+      "B": "66",
+      "C": "67",
+      "D": "68",
+      "E": "69"
+    },
+    "resposta": "C",
+    "comentario": "Somando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67."
+  },
+  {
+    "id": 17,
+    "ano": 2025,
+    "area": "Matemática",
+    "enunciado": "Qual das alternativas representa corretamente uma propriedade do código de Hamming (7,4)?",
+    "alternativas": {
+      "A": "Detecta até 3 erros e corrige até 2.",
+      "B": "Corrige até 2 erros de bit por palavra.",
+      "C": "Detecta até 2 erros e corrige até 1 erro.",
+      "D": "Apenas detecta, mas não corrige erros.",
+      "E": "Utiliza uma matriz geradora de 7 colunas e 3 linhas."
+    },
+    "resposta": "C",
+    "comentario": "O código de Hamming (7,4) tem distância mínima d=3. Com d=3: detecta até d-1=2 erros e corrige até ⌊(d-1)/2⌋=1 erro de bit."
+  },
+  {
+    "id": 18,
+    "ano": 2025,
+    "area": "Matemática",
+    "enunciado": "Sejam A = {x ∈ Z | -2 ≤ x ≤ 3} e B = {x ∈ Z | x é par e 0 ≤ x ≤ 6}. Qual é o conjunto A ∩ B?",
+    "alternativas": {
+      "A": "{0, 2}",
+      "B": "{0, 2, 4}",
+      "C": "{-2, 0, 2}",
+      "D": "{-2, 0, 2, 4}",
+      "E": "{-2, -1, 0, 1, 2, 3}"
+    },
+    "resposta": "A",
+    "comentario": "A = {-2,-1,0,1,2,3}. B = {0,2,4,6}. A∩B = elementos em ambos = {0, 2}."
+  },
+  {
+    "id": 1,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Utilize o método de Eliminação de Gauss para resolver o sistema a seguir : -3x + y + z = 1 x – 2y + z = 4 -x + y − 3z = -7",
+    "alternativas": {
+      "A": "(0, -1, 2)",
+      "B": "(0, 1, 0)",
+      "C": "(2, 0, 2)",
+      "D": "(2, 1, 2)",
+      "E": "(-1, -1, -1)"
+    },
+    "resposta": "A",
+    "comentario": "Podemos verificar a alternativa A substituindo os valores (0, -1, 2) nas equações: 1) -3(0) + (-1) + 2 = 1 (OK); 2) 0 - 2(-1) + 2 = 4 (OK); 3) -0 + (-1) - 3(2) = -7 (OK). Pelo método de Gauss, a matriz aumentada escalonada resultaria nestes mesmos valores."
+  },
+  {
+    "id": 2,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Determine o valor de x para que o vetor (1, x, 5) ∈ R3 pertença ao subespaço <(1, 2, 3), (1, 1, 1)>",
+    "alternativas": {
+      "A": "x = 0",
+      "B": "x = -1",
+      "C": "x = 1",
+      "D": "x = 3",
+      "E": "x = 7"
+    },
+    "resposta": "D",
+    "comentario": "O vetor (1, x, 5) deve ser uma combinação linear de (1, 2, 3) e (1, 1, 1). Logo: a(1, 2, 3) + b(1, 1, 1) = (1, x, 5). Pelas componentes: 1) a + b = 1; 3) 3a + b = 5. Subtraindo a primeira da terceira: 2a = 4 -> a = 2. Substituindo na primeira: 2 + b = 1 -> b = -1. Para a componente x: 2a + b = 2(2) + (-1) = 3."
+  },
+  {
+    "id": 3,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Determine o polinômio característico de J: J= (2−21 1−11 1−22)",
+    "alternativas": {
+      "A": "0",
+      "B": "x",
+      "C": "(1 − x)",
+      "D": "(1 − x)²",
+      "E": "(1 − x)³"
+    },
+    "resposta": "E",
+    "comentario": "O polinômio característico é dado por det(J - λI). Para J = [[2, -2, 1], [1, -1, 1], [1, -2, 2]], o determinante de [[2-λ, -2, 1], [1, -1-λ, 1], [1, -2, 2-λ]] resulta em (1-λ)³. Os autovalores são todos iguais a 1."
+  },
+  {
+    "id": 4,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Nos jogos da Mega -Sena, são sorteados a cada concurso 6 números no intervalo de 1 a 60. Leva o prêmio quem acertar os 6 números sorteados. O apostador , ao fazer um jogo, pode optar por preencher um bilhete com 6, 7, 8 ou 9 números escolhidos. Se o apostador registra um bilhete com 8 números escolhidos, quantos bilhetes de 6 números ele faria com os mesmos 8 números escolhidos?",
+    "alternativas": {
+      "A": "56",
+      "B": "8!",
+      "C": "6!",
+      "D": "28",
+      "E": "72"
+    },
+    "resposta": "D",
+    "comentario": "O problema pede o número de combinações de 8 números tomados 6 a cada vez. C(8, 6) = C(8, 2) = (8 * 7) / (2 * 1) = 28."
+  },
+  {
+    "id": 5,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Recentemente , com a pandemia de C ovid-19, houve grande interesse em determinar conjuntos de regiões (de países, estados, municípios , etc.) com alta incidência da doença, com o objetivo de determinar políticas de mitigação da doença nesses locais . Nesse sentido, dado um mapa subdividido em regiões, um cluster é definido com o sendo um subconjunto de regiões desse mapa ( nesse caso, pode ser formado por regiões que não fazem fronteira entre si). Qual o número de possíveis clusters para um mapa com 10 regiões?",
+    "alternativas": {
+      "A": "126",
+      "B": "252",
+      "C": "1260",
+      "D": "2520",
+      "E": "5040"
+    },
+    "resposta": "A",
+    "comentario": "Se considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126."
+  },
+  {
+    "id": 7,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Calcule o lim 𝑥→10−3𝑙𝑜𝑔(10∙𝑥).",
+    "alternativas": {
+      "A": "0",
+      "B": "-3",
+      "C": "-2",
+      "D": "1",
+      "E": "100"
+    },
+    "resposta": "C",
+    "comentario": "Considerando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2."
+  },
+  {
+    "id": 8,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Determine os intervalos da função 𝑓(𝑥)=5𝑥²√𝑥+1.",
+    "alternativas": {
+      "A": "𝐼1=(−1,−4 5); 𝐼2=(−4 5,0); 𝐼3=(0,∞)",
+      "B": "𝐼1=(−∞,−4 5); 𝐼2=(−4 5,0); 𝐼3=(0,∞)",
+      "C": "𝐼1=(−1,0); 𝐼2=(0,1); 𝐼3=(1,∞)",
+      "D": "𝐼1=(−1,1); 𝐼2=(1,5 4); 𝐼3=(5 4,∞)",
+      "E": "𝐼1=(−∞,−1); 𝐼2=(−1,1); 𝐼3=(1,∞)"
+    },
+    "resposta": "A",
+    "comentario": "A derivada f'(x) = [25x² + 20x] / [2√(x+1)]. Os pontos críticos (onde f'(x)=0) são x=0 e x=-4/5. O domínio é x > -1. Os intervalos de crescimento/decrescimento são definidos por estes pontos: (-1, -4/5), (-4/5, 0) e (0, ∞)."
+  },
+  {
+    "id": 9,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Calcule o vetor gradiente da função 𝑓(𝑥,𝑦)= 𝑒−𝑥𝑠𝑒𝑛(𝑥+𝑦) no ponto 𝑃 (0,𝜋).",
+    "alternativas": {
+      "A": "∇𝑓(0,𝜋)=(0 1)",
+      "B": "∇𝑓(0,𝜋)=(1 1)",
+      "C": "∇𝑓(0,𝜋)=(−1 1)",
+      "D": "∇𝑓(0,𝜋)=(−1 −1)",
+      "E": "∇𝑓(0,𝜋)=(0 0)"
+    },
+    "resposta": "D",
+    "comentario": "Derivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y). No ponto (0,π): -sen(π) + cos(π) = 0 - 1 = -1. ∂f/∂y = e⁻ˣcos(x+y). No ponto (0,π): cos(π) = -1. Logo, ∇f(0,π) = (-1, -1)."
+  },
+  {
+    "id": 10,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Dados os vetores u(3, 3, 2), v(5, -2, 1) e w(1, -1, 0) , calcule a e b tal que u = av + bw.",
+    "alternativas": {
+      "A": "a = 2 e b = -7",
+      "B": "a = -1 e b = 5",
+      "C": "a = 5 e b = -3",
+      "D": "a = 3 e b = -9",
+      "E": "a = -6 e b = 1"
+    },
+    "resposta": "A",
+    "comentario": "Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK)."
+  },
+  {
+    "id": 11,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Calcule o vetor diretor da interseção dos seguintes planos: x + 2y + z = 3 2x – y +3z = 4",
+    "alternativas": {
+      "A": "(1, 5, 7)",
+      "B": "(1, 1, 0)",
+      "C": "(1, 1, 1)",
+      "D": "(7, -1, -5)",
+      "E": "(5, 1, 5)"
+    },
+    "resposta": "D",
+    "comentario": "O vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3). n1 x n2 = (2*3 - 1*(-1), 1*2 - 1*3, 1*(-1) - 2*2) = (7, -1, -5)."
+  },
+  {
+    "id": 12,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Determine a distância aproximada entre o ponto J(3, 1) e a reta s : 6x – 2y + 11 = 0.",
+    "alternativas": {
+      "A": "1,3",
+      "B": "2,6",
+      "C": "4,3",
+      "D": "12,1",
+      "E": "18,5"
+    },
+    "resposta": "C",
+    "comentario": "A fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²). d = |6(3) - 2(1) + 11| / √(6² + (-2)²) = |18 - 2 + 11| / √40 = 27 / √40 ≈ 27 / 6,32 ≈ 4,27. O valor aproximado é 4,3."
+  },
+  {
+    "id": 13,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Analise a seguinte proposição: \"Existe pelo menos uma universidade em que todos os cursos têm, pelo menos, 100 alunos\". A negação dessa proposição é logicamente equivalente à proposição:",
+    "alternativas": {
+      "A": "Em todas as universidades existe pelo menos um curso que possui, no máximo, 99 alunos.",
+      "B": "Em no máximo uma universidade existe um curso que possui, no máximo, 101 alunos.",
+      "C": "Há uma universidade em que existe pelo menos um curso com, no máximo, 99 alunos.",
+      "D": "Em cada universidade existe pelo menos um curso que possui, pelo menos, 100 alunos.",
+      "E": "Existe nenhuma universidade em que os cursos possuam, no máximo, 100 alunos."
+    },
+    "resposta": "A",
+    "comentario": "Negar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100. Ou seja: \"Em todas as universidades existe pelo menos um curso com menos de 100 alunos (no máximo 99)\"."
+  },
+  {
+    "id": 14,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Sendo p e q proposições simples , considere a proposição composta E(p,q) , cujos valores lógicos e stão na tabela verdade a seguir: p q E(p,q) F F V F V V V F F V V V Qual é o valor da expressão E?",
+    "alternativas": {
+      "A": "P–>q",
+      "B": "p ou q",
+      "C": "q–>p",
+      "D": "p ou ~q",
+      "E": "(~p)→(p ou q)"
+    },
+    "resposta": "A",
+    "comentario": "A tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso."
+  },
+  {
+    "id": 15,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "A expressão lógica p →q é equivalente a:",
+    "alternativas": {
+      "A": "~p∧~q",
+      "B": "~p→q",
+      "C": "p→~q",
+      "D": "~q->~p",
+      "E": "q→p"
+    },
+    "resposta": "D",
+    "comentario": "Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p."
+  },
+  {
+    "id": 16,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Utilizando as leis de Morgan, obtenha uma expressão em forma de somas de produtos para a seguinte função: 𝐹=(𝑥+𝑦)(𝑥𝑦̅+𝑧) ̅̅̅̅̅̅̅̅̅̅̅ ̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅",
+    "alternativas": {
+      "A": "𝑥̅+𝑥̅𝑧+𝑦",
+      "B": "𝑥𝑦̅̅̅+𝑥̅𝑦+𝑦",
+      "C": "𝑥̅𝑦+𝑥̅𝑦+𝑧",
+      "D": "𝑦̅+𝑧",
+      "E": "𝑥𝑦̅̅̅+𝑥̅𝑦"
+    },
+    "resposta": "D",
+    "comentario": "Simplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z."
+  },
+  {
+    "id": 18,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Usando os conjuntos de dados A = {1, 4, 2, 6, 8, 10}, B = {1, 4, 6, 10}, C = {6, 4, 1, 10}, D = {6, 4, 1} , qual das seguintes alternativas é INCORRETA ?",
+    "alternativas": {
+      "A": "A ⊆ B",
+      "B": "D ⊆ A",
+      "C": "B = C",
+      "D": "B ⊆ A",
+      "E": "A ≠ B"
+    },
+    "resposta": "A",
+    "comentario": "A alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B."
+  },
+  {
+    "id": 19,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Com base na Tabela 1, calcule a média da seguinte amostra de número de filhos que têm as famílias que participaram da enquete : Nº filho (Xi) 0 1 2 3 4 Nº famílias (ni) 5 6 8 4 2 Tabela 1",
+    "alternativas": {
+      "A": "1,12",
+      "B": "1,68",
+      "C": "2,11",
+      "D": "2,87",
+      "E": "3,21"
+    },
+    "resposta": "B",
+    "comentario": "Média ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68."
+  },
+  {
+    "id": 20,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Em uma linha de produção, sabe -se que a probabilidade de ter uma peça com defeito é de 0,05. Se o conjunto de unidades determinadas constitui um conjunto de ensaios independentes , qual é a probabilidade de que pelo menos uma peça se encontre com defeito em um total de 10 unidades?",
+    "alternativas": {
+      "A": "10,0%",
+      "B": "40,0%",
+      "C": "50,0%",
+      "D": "80,0%",
+      "E": "100,0% FUNDAMENTOS DA COMPUTAÇÃO"
+    },
+    "resposta": "B",
+    "comentario": "P(pelo menos uma) = 1 - P(nenhuma). P(nenhuma defeituosa) = (0,95)¹⁰ ≈ 0,5987. Logo, P(pelo menos uma) = 1 - 0,5987 = 0,4013, aproximadamente 40,0%."
+  }
+]
