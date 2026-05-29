@@ -2808,7 +2808,7 @@ md-outlined-button.btn-full {
 
 .home-page__cta md-outlined-button {
   width: 100%;
-  --md-outlined-button-container-height: 48px;
+  --md-outlined-button-container-height: 52px;
 }
 
 .dark .home-page__cta {
