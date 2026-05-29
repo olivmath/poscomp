@@ -1,13 +1,8 @@
 import '@material/web/button/filled-button.js'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { QuestionReviewList } from '../components/QuestionReviewList'
 import { useResults } from '../hooks/useResults'
-import { AREA_ICONS } from '../utils/areaIcons'
 import { formatDuration } from '../utils/formatDuration'
-import type { Area, SimuladoResult } from '../types'
-
-const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
+import type { SimuladoResult } from '../types'
 
 function formatDate(result: SimuladoResult): string {
   try {
@@ -20,17 +15,18 @@ function formatDate(result: SimuladoResult): string {
   }
 }
 
-function ResultCard({ result }: { result: SimuladoResult }) {
-  const [expanded, setExpanded] = useState(false)
+function ResultCard({ result, onClick }: { result: SimuladoResult; onClick: () => void }) {
   const pct = Math.round((result.score / result.totalQuestions) * 100)
   const scoreClass = pct >= 80 ? 'hist-score--high' : pct >= 60 ? 'hist-score--mid' : 'hist-score--low'
 
   return (
     <div
       className="hist-card"
-      onClick={() => setExpanded((e) => !e)}
+      onClick={onClick}
       role="button"
-      aria-expanded={expanded}
+      tabIndex={0}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClick() }}
+      aria-label={`Simulado de ${formatDate(result)}: ${result.score} de ${result.totalQuestions} acertos`}
       data-testid="result-card"
     >
       <div className="hist-card-row">
@@ -39,46 +35,10 @@ function ResultCard({ result }: { result: SimuladoResult }) {
           {result.score}/{result.totalQuestions}
         </span>
         <span className="hist-time">{formatDuration(result.timeSpentSeconds)}</span>
-        <span className="hist-chevron material-symbols-outlined">
-          {expanded ? 'expand_less' : 'expand_more'}
+        <span className="hist-chevron material-symbols-outlined" aria-hidden="true">
+          chevron_right
         </span>
       </div>
-
-      {expanded && (
-        <div className="hist-breakdown" data-testid="breakdown" onClick={(event) => event.stopPropagation()}>
-          {result.areaBreakdown && (
-            <table className="hist-breakdown-table">
-              <tbody>
-                {AREAS.map((area) => {
-                  const b = result.areaBreakdown[area]
-                  if (!b) return null
-                  const ok = b.correct === b.total
-                  return (
-                    <tr key={area}>
-                      <td className="hbd-area">
-                        <span className="material-symbols-outlined">{AREA_ICONS[area]}</span>
-                        {area}
-                      </td>
-                      <td className="hbd-score">{b.correct}/{b.total}</td>
-                      <td className="hbd-icon">
-                        <span
-                          className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}
-                          role="img"
-                          aria-label={ok ? 'Aprovado' : 'Requer atenção'}
-                        >
-                          {ok ? 'check_circle' : 'warning'}
-                        </span>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          )}
-
-          <QuestionReviewList answers={result.answers ?? []} questions={result.questionReviews} />
-        </div>
-      )}
     </div>
   )
 }
@@ -130,7 +90,7 @@ export function Historico() {
       <p className="hist-subtitle">{results.length} simulado{results.length !== 1 ? 's' : ''} realizados</p>
       <div className="hist-list">
         {results.map((r) => (
-          <ResultCard key={r.id} result={r} />
+          <ResultCard key={r.id} result={r} onClick={() => navigate(`/historico/${r.id}`)} />
         ))}
       </div>
     </div>

@@ -11,6 +11,7 @@ import { Historico } from './pages/Historico'
 import { Revisao } from './pages/Revisao'
 import { Perfil } from './pages/Perfil'
 import { Simulado } from './pages/Simulado'
+import { HistoricoDetalhe } from './pages/HistoricoDetalhe'
 import './index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<ProtectedLayout><Home /></ProtectedLayout>} />
           <Route path="/historico" element={<ProtectedLayout><Historico /></ProtectedLayout>} />
+          <Route path="/historico/:id" element={<ProtectedLayout><HistoricoDetalhe /></ProtectedLayout>} />
           <Route path="/revisao" element={<ProtectedLayout><Revisao /></ProtectedLayout>} />
           <Route path="/perfil" element={<ProtectedLayout><Perfil /></ProtectedLayout>} />
           <Route path="/simulado" element={<ProtectedLayout><Simulado /></ProtectedLayout>} />

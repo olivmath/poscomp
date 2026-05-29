@@ -1,6 +1,7 @@
 import '@material/web/button/filled-button.js'
 import '@material/web/button/outlined-button.js'
 import '@material/web/button/text-button.js'
+
 import '@material/web/progress/circular-progress.js'
 import '@material/web/chips/chip-set.js'
 import '@material/web/chips/filter-chip.js'
@@ -9,11 +10,11 @@ import '@material/web/labs/segmentedbutton/outlined-segmented-button.js'
 import '@material/web/dialog/dialog.js'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { QuestionReviewList } from '../components/QuestionReviewList'
+import { RelatorioFinal } from '../components/RelatorioFinal'
 import { useSimulado } from '../hooks/useSimulado'
 import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
 import { formatDuration } from '../utils/formatDuration'
-import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence, Question, AnswerRecord, QuestionReview } from '../types'
+import type { Option, Area, SimuladoConfig, QuestionStatus, Confidence, Question } from '../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
 const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
@@ -465,74 +466,6 @@ function RunningScreen({
   )
 }
 
-// ── Finished Screen ──────────────────────────────────────────────────────────
-function FinishedScreen({
-  score,
-  totalQuestions,
-  timeSpent,
-  areaBreakdown,
-  answers,
-  questionReviews,
-  onRetry,
-  onHistory,
-}: {
-  score: number
-  totalQuestions: number
-  timeSpent: number
-  areaBreakdown: Record<string, { correct: number; total: number }>
-  answers: AnswerRecord[]
-  questionReviews?: QuestionReview[]
-  onRetry: () => void
-  onHistory: () => void
-}) {
-  return (
-    <div className="simulado-container" data-testid="simulado-finished">
-      <div className="simulado-card">
-        <div className="simulado-score" data-testid="final-score">
-          {score} <span className="simulado-score-total">/ {totalQuestions}</span>
-        </div>
-        {timeSpent > 0 && <p className="simulado-time-spent">{formatDuration(timeSpent)}</p>}
-
-        <div className="simulado-breakdown">
-          <table className="simulado-breakdown-table" data-testid="breakdown-table">
-            <tbody>
-              {Object.entries(areaBreakdown).map(([area, data]) => {
-                const ok = data.correct === data.total
-                return (
-                  <tr key={area}>
-                    <td className="bd-area">{area}</td>
-                    <td className="bd-score">{data.correct}/{data.total}</td>
-                    <td className="bd-icon">
-                      <span
-                        className={`material-symbols-outlined md-icon--sm md-icon--filled ${ok ? 'md-icon--green' : 'md-icon--warning'}`}
-                        role="img"
-                        aria-label={ok ? 'Aprovado' : 'Requer atenção'}
-                      >
-                        {ok ? 'check_circle' : 'warning'}
-                      </span>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-
-        <QuestionReviewList answers={answers} questions={questionReviews} />
-
-        <div className="simulado-actions">
-          <md-outlined-button onClick={onRetry} className="btn-secondary" data-testid="retry-btn">
-            Refazer
-          </md-outlined-button>
-          <md-filled-button onClick={onHistory} className="btn-primary" data-testid="history-btn">
-            Ver Histórico
-          </md-filled-button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 // ── Main Component ───────────────────────────────────────────────────────────
 export function Simulado() {
   const navigate = useNavigate()
@@ -610,13 +543,8 @@ export function Simulado() {
 
   if (state === 'finished' && result) {
     return (
-      <FinishedScreen
-        score={result.score}
-        totalQuestions={result.totalQuestions}
-        timeSpent={result.timeSpentSeconds}
-        areaBreakdown={result.areaBreakdown}
-        answers={result.answers}
-        questionReviews={result.questionReviews}
+      <RelatorioFinal
+        result={result}
         onRetry={retry}
         onHistory={() => navigate('/historico')}
       />

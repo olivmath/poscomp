@@ -1511,7 +1511,237 @@ md-filter-chip {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SIMULADO — Finished
+   RELATÓRIO FINAL — RelatorioFinal component
+═══════════════════════════════════════════════════════════ */
+.relatorio-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-md) calc(var(--space-xxl) + 16px);
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Section wrapper */
+.relatorio-section {
+  background: var(--md-sys-color-surface-container-low);
+  border-radius: 20px;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.relatorio-section--hero {
+  align-items: center;
+  background: var(--md-sys-color-surface-container);
+}
+
+.relatorio-section-title {
+  font-size: var(--md-sys-typescale-title-medium-size);
+  font-weight: var(--md-sys-typescale-title-medium-weight);
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+}
+
+/* ── Gauge ── */
+.relatorio-gauge-wrap {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.relatorio-gauge-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.relatorio-gauge-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.relatorio-gauge-pct {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.relatorio-gauge-fraction {
+  font-size: 13px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* ── Hero metadata ── */
+.relatorio-time {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+.relatorio-time-icon {
+  font-size: 18px;
+  font-variation-settings: 'FILL' 0;
+}
+
+.relatorio-tagline {
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0;
+  text-align: center;
+}
+
+/* ── Confidence bars ── */
+.relatorio-conf-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.relatorio-conf-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 28px;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.relatorio-conf-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+  white-space: nowrap;
+}
+
+.relatorio-conf-icon {
+  font-size: 16px;
+  font-variation-settings: 'FILL' 0;
+}
+
+.relatorio-conf-bar-wrap {
+  height: 8px;
+  background: var(--md-sys-color-surface-container-highest);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.relatorio-conf-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  min-width: 4px;
+  transition: width 0.5s ease;
+}
+
+.relatorio-conf-count {
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  min-width: 20px;
+}
+
+/* ── Highlight callout ── */
+.relatorio-highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  font-size: 13px;
+  color: var(--color-score-low);
+  background: var(--color-score-low-bg);
+  border-radius: 12px;
+  padding: var(--space-sm) var(--space-md);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.relatorio-highlight-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-variation-settings: 'FILL' 1;
+}
+
+/* ── Area rows ── */
+.relatorio-area-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.relatorio-area-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.relatorio-area-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.relatorio-area-name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+}
+
+.relatorio-area-icon {
+  font-size: 16px;
+  font-variation-settings: 'FILL' 0;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.relatorio-area-score {
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.relatorio-area-track {
+  height: 10px;
+  background: var(--md-sys-color-surface-container-highest);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.relatorio-area-fill {
+  height: 100%;
+  border-radius: 5px;
+  min-width: 6px;
+  transition: width 0.5s ease;
+}
+
+/* ── Actions ── */
+.relatorio-actions {
+  display: flex;
+  gap: var(--space-sm);
+  width: 100%;
+  padding-bottom: var(--space-sm);
+}
+
+.relatorio-actions md-outlined-button,
+.relatorio-actions md-filled-button {
+  flex: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SIMULADO — Finished (legacy, kept for compatibility)
 ═══════════════════════════════════════════════════════════ */
 .simulado-score {
   font-size: 56px;
