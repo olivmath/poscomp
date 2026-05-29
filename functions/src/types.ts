@@ -88,19 +88,19 @@ export interface AnswerInput {
   questionId: number
   selected: Option
   confidence: Confidence
+  issue?: {
+    comment?: string
+  }
 }
 
 export interface FinishSimuladoInput {
   answers: AnswerInput[]
   timeSpentSeconds: number
 }
-export interface AnswerInput {
+
+export interface ReviewCardInput {
   questionId: number
-  selected: Option
-  confidence: Confidence
-  issue?: {
-    comment?: string
-  }
+  studied: boolean
 }
 
 // ─── OUTPUT TYPES ────────────────────────────────────────────────
