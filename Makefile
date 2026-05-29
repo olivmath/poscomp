@@ -78,11 +78,11 @@ seed-local:
 
 # ── Admin (Flagged Questions) ─────────────────────────────────────────────────
 get-flagged:
-	firebase functions:call getFlaggedQuestions --data '{}'
+	npx tsx scripts/get-flagged.ts
 
 resolve-flagged:
 	@read -p "Enter flag ID to resolve: " id; \
-	firebase functions:call resolveFlaggedQuestion --data "{\"id\": \"$$id\"}"
+	npx tsx scripts/resolve-flagged.ts "$$id"
 
 # ── Deploy ────────────────────────────────────────────────────────────────────
 deploy-hosting:
