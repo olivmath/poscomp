@@ -10,7 +10,7 @@
  *   FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed
  */
 
-import { readFileSync } from 'fs'
+import { readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 import { initializeApp, cert, applicationDefault } from 'firebase-admin/app'
 import { getFirestore } from 'firebase-admin/firestore'
@@ -25,20 +25,27 @@ initializeApp({ credential, projectId })
 
 const db = getFirestore()
 
-const questionsPath = join(import.meta.dirname, 'data', 'questions.json')
-const questions: Record<string, unknown>[] = JSON.parse(readFileSync(questionsPath, 'utf-8'))
-
-
 async function seed() {
-  const batch = db.batch()
+  const dataDir = join(import.meta.dirname, 'data', 'processed_questions')
+  const files = readdirSync(dataDir).filter(file => file.endsWith('.json'))
+  
+  let totalCount = 0
 
-  for (const q of questions) {
-    const ref = db.collection('questions').doc(String(q.id))
-    batch.set(ref, q)
+  for (const file of files) {
+    const filePath = join(dataDir, file)
+    const questions: Record<string, any>[] = JSON.parse(readFileSync(filePath, 'utf-8'))
+    
+    const batch = db.batch()
+    for (const q of questions) {
+      const ref = db.collection('questions').doc(String(q.id))
+      batch.set(ref, q, { merge: true })
+    }
+    await batch.commit()
+    totalCount += questions.length
+    console.log(`✅ Processado ${file}: ${questions.length} questões.`)
   }
 
-  await batch.commit()
-  console.log(`✅ ${questions.length} questões inseridas no Firestore (projeto: ${projectId})`)
+  console.log(`🚀 Total de ${totalCount} questões sincronizadas no Firestore (projeto: ${projectId})`)
 }
 
 seed().catch((err) => {

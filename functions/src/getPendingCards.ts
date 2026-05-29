@@ -132,6 +132,9 @@ function buildOutput(
         ...(question.comentario !== undefined
           ? { comentario: question.comentario }
           : {}),
+        ...(question.card !== undefined
+          ? { card: question.card }
+          : {}),
       }
 
       return {

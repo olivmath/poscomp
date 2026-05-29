@@ -139,7 +139,15 @@ VITE_FIREBASE_APP_ID=
     - **Error**: `logger.error("Error in <FunctionName>", { uid, error: error.message, stack: error.stack })`
     - **Events**: `logger.info("Event description", { ...details })`
 
-## UI/UX Standards — OBRIGATÓRIO
+## Fluxo de Dados SRS (Revisão Espaçada)
+
+1. **Simulado (Origem)**: Ao finalizar o simulado (`finishSimulado.ts`), o sistema gera/atualiza registros na coleção `users/{uid}/srs_cards`.
+2. **Revisão (Consumo)**: O front-end chama `getPendingCards`, que:
+    - Busca `srs_cards` pendentes (data de revisão ≤ agora).
+    - Busca as `Question` correspondentes na coleção global `questions` (que contém o campo `card` com `pergunta` e `resposta`).
+    - Retorna ao front-end os dados do card + conteúdo da questão formatado.
+3. **Ajuste (Feedback)**: Após o usuário estudar o flashcard (pergunta/resposta), o front-end chama `reviewCard.ts`, que atualiza os parâmetros do algoritmo SM-2 e a próxima data de revisão no Firestore.
+
 
 Todo trabalho visual (componente, página, ajuste de estilo) deve seguir estas regras sem exceção:
 

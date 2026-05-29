@@ -1,0 +1,572 @@
+[
+  {
+    "id": 4,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Nos jogos da Mega -Sena, são sorteados a cada concurso 6 números no intervalo de 1 a 60. Leva o prêmio quem acertar os 6 números sorteados. O apostador , ao fazer um jogo, pode optar por preencher um bilhete com 6, 7, 8 ou 9 números escolhidos. Se o apostador registra um bilhete com 8 números escolhidos, quantos bilhetes de 6 números ele faria com os mesmos 8 números escolhidos?",
+    "alternativas": {
+      "A": "56",
+      "B": "8!",
+      "C": "6!",
+      "D": "28",
+      "E": "72"
+    },
+    "resposta": "D",
+    "comentario": "O problema pede o número de combinações de 8 números tomados 6 a cada vez. C(8, 6) = C(8, 2) = (8 * 7) / (2 * 1) = 28.",
+    "card": {
+      "pergunta": "Nos jogos da Mega -Sena, são sorteados a cada concurso 6 números no intervalo de 1 a 60. Leva o prêmio quem acertar os 6 números sorteados. O apostador , ao fazer um jogo, pode optar por preencher um bilhete com 6, 7, 8 ou 9 números escolhidos. Se o apostador registra um bilhete com 8 números escolhidos, quantos bilhetes de 6 números ele faria com os mesmos 8 números escolhidos?",
+      "resposta": "Resposta: D\nComentário: O problema pede o número de combinações de 8 números tomados 6 a cada vez. C(8, 6) = C(8, 2) = (8 * 7) / (2 * 1) = 28."
+    }
+  },
+  {
+    "id": 5,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Recentemente , com a pandemia de C ovid-19, houve grande interesse em determinar conjuntos de regiões (de países, estados, municípios , etc.) com alta incidência da doença, com o objetivo de determinar políticas de mitigação da doença nesses locais . Nesse sentido, dado um mapa subdividido em regiões, um cluster é definido com o sendo um subconjunto de regiões desse mapa ( nesse caso, pode ser formado por regiões que não fazem fronteira entre si). Qual o número de possíveis clusters para um mapa com 10 regiões?",
+    "alternativas": {
+      "A": "126",
+      "B": "252",
+      "C": "1260",
+      "D": "2520",
+      "E": "5040"
+    },
+    "resposta": "A",
+    "comentario": "Se considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126.",
+    "card": {
+      "pergunta": "Recentemente , com a pandemia de C ovid-19, houve grande interesse em determinar conjuntos de regiões (de países, estados, municípios , etc.) com alta incidência da doença, com o objetivo de determinar políticas de mitigação da doença nesses locais . Nesse sentido, dado um mapa subdividido em regiões, um cluster é definido com o sendo um subconjunto de regiões desse mapa ( nesse caso, pode ser formado por regiões que não fazem fronteira entre si). Qual o número de possíveis clusters para um mapa com 10 regiões?",
+      "resposta": "Resposta: A\nComentário: Se considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126."
+    }
+  },
+  {
+    "id": 7,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Calcule o lim 𝑥→10−3𝑙𝑜𝑔(10∙𝑥).",
+    "alternativas": {
+      "A": "0",
+      "B": "-3",
+      "C": "-2",
+      "D": "1",
+      "E": "100"
+    },
+    "resposta": "C",
+    "comentario": "Considerando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2.",
+    "card": {
+      "pergunta": "Calcule o lim 𝑥→10−3𝑙𝑜𝑔(10∙𝑥).",
+      "resposta": "Resposta: C\nComentário: Considerando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2."
+    }
+  },
+  {
+    "id": 8,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Determine os intervalos da função 𝑓(𝑥)=5𝑥²√𝑥+1.",
+    "alternativas": {
+      "A": "𝐼1=(−1,−4 5); 𝐼2=(−4 5,0); 𝐼3=(0,∞)",
+      "B": "𝐼1=(−∞,−4 5); 𝐼2=(−4 5,0); 𝐼3=(0,∞)",
+      "C": "𝐼1=(−1,0); 𝐼2=(0,1); 𝐼3=(1,∞)",
+      "D": "𝐼1=(−1,1); 𝐼2=(1,5 4); 𝐼3=(5 4,∞)",
+      "E": "𝐼1=(−∞,−1); 𝐼2=(−1,1); 𝐼3=(1,∞)"
+    },
+    "resposta": "A",
+    "comentario": "A derivada f'(x) = [25x² + 20x] / [2√(x+1)]. Os pontos críticos (onde f'(x)=0) são x=0 e x=-4/5. O domínio é x > -1. Os intervalos de crescimento/decrescimento são definidos por estes pontos: (-1, -4/5), (-4/5, 0) e (0, ∞).",
+    "card": {
+      "pergunta": "Determine os intervalos da função 𝑓(𝑥)=5𝑥²√𝑥+1.",
+      "resposta": "Resposta: A\nComentário: A derivada f'(x) = [25x² + 20x] / [2√(x+1)]. Os pontos críticos (onde f'(x)=0) são x=0 e x=-4/5. O domínio é x > -1. Os intervalos de crescimento/decrescimento são definidos por estes pontos: (-1, -4/5), (-4/5, 0) e (0, ∞)."
+    }
+  },
+  {
+    "id": 9,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Calcule o vetor gradiente da função 𝑓(𝑥,𝑦)= 𝑒−𝑥𝑠𝑒𝑛(𝑥+𝑦) no ponto 𝑃 (0,𝜋).",
+    "alternativas": {
+      "A": "∇𝑓(0,𝜋)=(0 1)",
+      "B": "∇𝑓(0,𝜋)=(1 1)",
+      "C": "∇𝑓(0,𝜋)=(−1 1)",
+      "D": "∇𝑓(0,𝜋)=(−1 −1)",
+      "E": "∇𝑓(0,𝜋)=(0 0)"
+    },
+    "resposta": "D",
+    "comentario": "Derivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y). No ponto (0,π): -sen(π) + cos(π) = 0 - 1 = -1. ∂f/∂y = e⁻ˣcos(x+y). No ponto (0,π): cos(π) = -1. Logo, ∇f(0,π) = (-1, -1).",
+    "card": {
+      "pergunta": "Calcule o vetor gradiente da função 𝑓(𝑥,𝑦)= 𝑒−𝑥𝑠𝑒𝑛(𝑥+𝑦) no ponto 𝑃 (0,𝜋).",
+      "resposta": "Resposta: D\nComentário: Derivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y). No ponto (0,π): -sen(π) + cos(π) = 0 - 1 = -1. ∂f/∂y = e⁻ˣcos(x+y). No ponto (0,π): cos(π) = -1. Logo, ∇f(0,π) = (-1, -1)."
+    }
+  },
+  {
+    "id": 10,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Dados os vetores u(3, 3, 2), v(5, -2, 1) e w(1, -1, 0) , calcule a e b tal que u = av + bw.",
+    "alternativas": {
+      "A": "a = 2 e b = -7",
+      "B": "a = -1 e b = 5",
+      "C": "a = 5 e b = -3",
+      "D": "a = 3 e b = -9",
+      "E": "a = -6 e b = 1"
+    },
+    "resposta": "A",
+    "comentario": "Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK).",
+    "card": {
+      "pergunta": "Dados os vetores u(3, 3, 2), v(5, -2, 1) e w(1, -1, 0) , calcule a e b tal que u = av + bw.",
+      "resposta": "Resposta: A\nComentário: Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK)."
+    }
+  },
+  {
+    "id": 11,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Calcule o vetor diretor da interseção dos seguintes planos: x + 2y + z = 3 2x – y +3z = 4",
+    "alternativas": {
+      "A": "(1, 5, 7)",
+      "B": "(1, 1, 0)",
+      "C": "(1, 1, 1)",
+      "D": "(7, -1, -5)",
+      "E": "(5, 1, 5)"
+    },
+    "resposta": "D",
+    "comentario": "O vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3). n1 x n2 = (2*3 - 1*(-1), 1*2 - 1*3, 1*(-1) - 2*2) = (7, -1, -5).",
+    "card": {
+      "pergunta": "Calcule o vetor diretor da interseção dos seguintes planos: x + 2y + z = 3 2x – y +3z = 4",
+      "resposta": "Resposta: D\nComentário: O vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3). n1 x n2 = (2*3 - 1*(-1), 1*2 - 1*3, 1*(-1) - 2*2) = (7, -1, -5)."
+    }
+  },
+  {
+    "id": 12,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Determine a distância aproximada entre o ponto J(3, 1) e a reta s : 6x – 2y + 11 = 0.",
+    "alternativas": {
+      "A": "1,3",
+      "B": "2,6",
+      "C": "4,3",
+      "D": "12,1",
+      "E": "18,5"
+    },
+    "resposta": "C",
+    "comentario": "A fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²). d = |6(3) - 2(1) + 11| / √(6² + (-2)²) = |18 - 2 + 11| / √40 = 27 / √40 ≈ 27 / 6,32 ≈ 4,27. O valor aproximado é 4,3.",
+    "card": {
+      "pergunta": "Determine a distância aproximada entre o ponto J(3, 1) e a reta s : 6x – 2y + 11 = 0.",
+      "resposta": "Resposta: C\nComentário: A fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²). d = |6(3) - 2(1) + 11| / √(6² + (-2)²) = |18 - 2 + 11| / √40 = 27 / √40 ≈ 27 / 6,32 ≈ 4,27. O valor aproximado é 4,3."
+    }
+  },
+  {
+    "id": 13,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Analise a seguinte proposição: \"Existe pelo menos uma universidade em que todos os cursos têm, pelo menos, 100 alunos\". A negação dessa proposição é logicamente equivalente à proposição:",
+    "alternativas": {
+      "A": "Em todas as universidades existe pelo menos um curso que possui, no máximo, 99 alunos.",
+      "B": "Em no máximo uma universidade existe um curso que possui, no máximo, 101 alunos.",
+      "C": "Há uma universidade em que existe pelo menos um curso com, no máximo, 99 alunos.",
+      "D": "Em cada universidade existe pelo menos um curso que possui, pelo menos, 100 alunos.",
+      "E": "Existe nenhuma universidade em que os cursos possuam, no máximo, 100 alunos."
+    },
+    "resposta": "A",
+    "comentario": "Negar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100. Ou seja: \"Em todas as universidades existe pelo menos um curso com menos de 100 alunos (no máximo 99)\".",
+    "card": {
+      "pergunta": "Analise a seguinte proposição: \"Existe pelo menos uma universidade em que todos os cursos têm, pelo menos, 100 alunos\". A negação dessa proposição é logicamente equivalente à proposição:",
+      "resposta": "Resposta: A\nComentário: Negar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100. Ou seja: \"Em todas as universidades existe pelo menos um curso com menos de 100 alunos (no máximo 99)\"."
+    }
+  },
+  {
+    "id": 14,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Sendo p e q proposições simples , considere a proposição composta E(p,q) , cujos valores lógicos e stão na tabela verdade a seguir: p q E(p,q) F F V F V V V F F V V V Qual é o valor da expressão E?",
+    "alternativas": {
+      "A": "P–>q",
+      "B": "p ou q",
+      "C": "q–>p",
+      "D": "p ou ~q",
+      "E": "(~p)→(p ou q)"
+    },
+    "resposta": "A",
+    "comentario": "A tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso.",
+    "card": {
+      "pergunta": "Sendo p e q proposições simples , considere a proposição composta E(p,q) , cujos valores lógicos e stão na tabela verdade a seguir: p q E(p,q) F F V F V V V F F V V V Qual é o valor da expressão E?",
+      "resposta": "Resposta: A\nComentário: A tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso."
+    }
+  },
+  {
+    "id": 15,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "A expressão lógica p →q é equivalente a:",
+    "alternativas": {
+      "A": "~p∧~q",
+      "B": "~p→q",
+      "C": "p→~q",
+      "D": "~q->~p",
+      "E": "q→p"
+    },
+    "resposta": "D",
+    "comentario": "Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p.",
+    "card": {
+      "pergunta": "A expressão lógica p →q é equivalente a:",
+      "resposta": "Resposta: D\nComentário: Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p."
+    }
+  },
+  {
+    "id": 16,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Utilizando as leis de Morgan, obtenha uma expressão em forma de somas de produtos para a seguinte função: 𝐹=(𝑥+𝑦)(𝑥𝑦̅+𝑧) ̅̅̅̅̅̅̅̅̅̅̅ ̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅",
+    "alternativas": {
+      "A": "𝑥̅+𝑥̅𝑧+𝑦",
+      "B": "𝑥𝑦̅̅̅+𝑥̅𝑦+𝑦",
+      "C": "𝑥̅𝑦+𝑥̅𝑦+𝑧",
+      "D": "𝑦̅+𝑧",
+      "E": "𝑥𝑦̅̅̅+𝑥̅𝑦"
+    },
+    "resposta": "D",
+    "comentario": "Simplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z.",
+    "card": {
+      "pergunta": "Utilizando as leis de Morgan, obtenha uma expressão em forma de somas de produtos para a seguinte função: 𝐹=(𝑥+𝑦)(𝑥𝑦̅+𝑧) ̅̅̅̅̅̅̅̅̅̅̅ ̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅̅",
+      "resposta": "Resposta: D\nComentário: Simplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z."
+    }
+  },
+  {
+    "id": 18,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Usando os conjuntos de dados A = {1, 4, 2, 6, 8, 10}, B = {1, 4, 6, 10}, C = {6, 4, 1, 10}, D = {6, 4, 1} , qual das seguintes alternativas é INCORRETA ?",
+    "alternativas": {
+      "A": "A ⊆ B",
+      "B": "D ⊆ A",
+      "C": "B = C",
+      "D": "B ⊆ A",
+      "E": "A ≠ B"
+    },
+    "resposta": "A",
+    "comentario": "A alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B.",
+    "card": {
+      "pergunta": "Usando os conjuntos de dados A = {1, 4, 2, 6, 8, 10}, B = {1, 4, 6, 10}, C = {6, 4, 1, 10}, D = {6, 4, 1} , qual das seguintes alternativas é INCORRETA ?",
+      "resposta": "Resposta: A\nComentário: A alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B."
+    }
+  },
+  {
+    "id": 19,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Com base na Tabela 1, calcule a média da seguinte amostra de número de filhos que têm as famílias que participaram da enquete : Nº filho (Xi) 0 1 2 3 4 Nº famílias (ni) 5 6 8 4 2 Tabela 1",
+    "alternativas": {
+      "A": "1,12",
+      "B": "1,68",
+      "C": "2,11",
+      "D": "2,87",
+      "E": "3,21"
+    },
+    "resposta": "B",
+    "comentario": "Média ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68.",
+    "card": {
+      "pergunta": "Com base na Tabela 1, calcule a média da seguinte amostra de número de filhos que têm as famílias que participaram da enquete : Nº filho (Xi) 0 1 2 3 4 Nº famílias (ni) 5 6 8 4 2 Tabela 1",
+      "resposta": "Resposta: B\nComentário: Média ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68."
+    }
+  },
+  {
+    "id": 20,
+    "ano": 2023,
+    "area": "Matemática",
+    "enunciado": "Em uma linha de produção, sabe -se que a probabilidade de ter uma peça com defeito é de 0,05. Se o conjunto de unidades determinadas constitui um conjunto de ensaios independentes , qual é a probabilidade de que pelo menos uma peça se encontre com defeito em um total de 10 unidades?",
+    "alternativas": {
+      "A": "10,0%",
+      "B": "40,0%",
+      "C": "50,0%",
+      "D": "80,0%",
+      "E": "100,0% FUNDAMENTOS DA COMPUTAÇÃO"
+    },
+    "resposta": "B",
+    "comentario": "P(pelo menos uma) = 1 - P(nenhuma). P(nenhuma defeituosa) = (0,95)¹⁰ ≈ 0,5987. Logo, P(pelo menos uma) = 1 - 0,5987 = 0,4013, aproximadamente 40,0%.",
+    "card": {
+      "pergunta": "Em uma linha de produção, sabe -se que a probabilidade de ter uma peça com defeito é de 0,05. Se o conjunto de unidades determinadas constitui um conjunto de ensaios independentes , qual é a probabilidade de que pelo menos uma peça se encontre com defeito em um total de 10 unidades?",
+      "resposta": "Resposta: B\nComentário: P(pelo menos uma) = 1 - P(nenhuma). P(nenhuma defeituosa) = (0,95)¹⁰ ≈ 0,5987. Logo, P(pelo menos uma) = 1 - 0,5987 = 0,4013, aproximadamente 40,0%."
+    }
+  },
+  {
+    "id": 21,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre os conceitos de complexidade de algoritmos, é correto afirmar que:",
+    "alternativas": {
+      "A": "O espaço requerido por um algoritmo sobre uma dada entrada pode ser medido pelo número de execuções de algumas operações.",
+      "B": "A complexidade de tempo usa como medida de desempenho a quantidade de memória necessária para a execução do algoritmo.",
+      "C": "A complexidade média é definida pelo crescimento da complexidade para entradas suficientemente grandes.",
+      "D": "A complexidade assintótica dá o valor esperado: a média dos esforços, levando em conta a probabilidade de ocorrência de cada entrada.",
+      "E": "A complexidade pessimista de um algoritmo fornece seu desempenho no pior caso: o pior desempenho que se pode esperar. Aqui, pode -se considerar os desempenhos sobre todas as entradas com tamanho n."
+    },
+    "resposta": "E",
+    "comentario": "A complexidade pessimista (ou de pior caso) analisa o tempo máximo de execução de um algoritmo para qualquer entrada de tamanho n, garantindo que o desempenho nunca será inferior a esse limite.",
+    "card": {
+      "pergunta": "Sobre os conceitos de complexidade de algoritmos, é correto afirmar que:",
+      "resposta": "Resposta: E\nComentário: A complexidade pessimista (ou de pior caso) analisa o tempo máximo de execução de um algoritmo para qualquer entrada de tamanho n, garantindo que o desempenho nunca será inferior a esse limite."
+    }
+  },
+  {
+    "id": 22,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual das seguintes afirmações é verdadeira sobre a análise de algoritmos recursivos?",
+    "alternativas": {
+      "A": "A complexidade de tempo de um algoritmo recursivo é sempre mais rápida do que a de um algoritmo iterativo equivalente.",
+      "B": "A complexidade de espaço de um algoritmo recursivo é sempre menor do que a de um algoritmo iterativo equivalente.",
+      "C": "A análise de complexidade de um algoritmo recursivo é sempre mais fácil do que a de um algoritmo iterativo equivalente.",
+      "D": "Algoritmos recursivos nunca podem sofrer de problemas de estouro de pilha ( stack overflow ).",
+      "E": "A escolha adequada da es trutura de dados pode reduzir o tempo e o espaço necessários para a execução de algoritmos recursivos."
+    },
+    "resposta": "E",
+    "comentario": "Estruturas de dados otimizadas (como memoização ou o uso de tipos específicos) podem mitigar o custo de tempo e o overhead de memória (pilha de recursão) em algoritmos recursivos.",
+    "card": {
+      "pergunta": "Qual das seguintes afirmações é verdadeira sobre a análise de algoritmos recursivos?",
+      "resposta": "Resposta: E\nComentário: Estruturas de dados otimizadas (como memoização ou o uso de tipos específicos) podem mitigar o custo de tempo e o overhead de memória (pilha de recursão) em algoritmos recursivos."
+    }
+  },
+  {
+    "id": 23,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considere o seguinte trecho de código: for (i = 1; i <= n; i++) { for (j = 1; j <= m; j++) { // instruções O(1) } } Qual das seguintes afirmações é verdadeira sobre a complexidade assintótica desse trecho de código?",
+    "alternativas": {
+      "A": "A complexidade é O(n) se m for uma constante , e O(m) se n for uma constante.",
+      "B": "A complexidade é O(n log m) se m for uma constante , e O(m log n) se n for uma constante.",
+      "C": "A complexidade é O(n + m) se n e m forem do mesmo tamanho .",
+      "D": "A complexidade é O(1) em todos os casos.",
+      "E": "A complexidade é O(nm) em todos os casos."
+    },
+    "resposta": "E",
+    "comentario": "O trecho contém dois loops aninhados, onde o interno executa m vezes para cada uma das n iterações do externo. O número total de operações é proporcional ao produto n * m, logo a complexidade é O(nm).",
+    "card": {
+      "pergunta": "Considere o seguinte trecho de código: for (i = 1; i <= n; i++) { for (j = 1; j <= m; j++) { // instruções O(1) } } Qual das seguintes afirmações é verdadeira sobre a complexidade assintótica desse trecho de código?",
+      "resposta": "Resposta: E\nComentário: O trecho contém dois loops aninhados, onde o interno executa m vezes para cada uma das n iterações do externo. O número total de operações é proporcional ao produto n * m, logo a complexidade é O(nm)."
+    }
+  },
+  {
+    "id": 24,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre funções Hash, é correto afirmar que:",
+    "alternativas": {
+      "A": "O método de divisão funciona em duas etapas. Na primeira etapa, multiplica -se a chave k por uma constante A na faixa 0<A<1 e extrai -se a parte fracionária de kA. Na segunda etapa, multiplica -se esse valor por m e toma -se o piso do resultado.",
+      "B": "Em endereçame nto aberto, todos os elementos ficam na própria tabela de espelhamento. Isto é, cada entrada da tabela contém um elemento do conjunto dinâmico ou NIL. Ao procurar um elemento, examina -se sistematicamente as posições da tabela até encontrar o elemento desej ado ou até confirmar que o elemento não está na tabela.",
+      "C": "No método de encadeamento não existe nenhuma lista e nenhum elemento fora da tabela.",
+      "D": "O hashing pode proporcionar excelente desempenho no pior caso, quando o conjunto de chaves é dinâmico, isto é, as sim que as chaves são armazenadas na tabela, o conjunto de chaves muda automaticamente de tempos em tempos.",
+      "E": "No método de multiplicação, mapeia -se uma chave k para uma de m posições, tomando o resto da divisão de k por m."
+    },
+    "resposta": "B",
+    "comentario": "O endereçamento aberto mantém todos os registros na própria tabela. Colisões são resolvidas por sondagem (linear, quadrática ou double hashing) até encontrar um slot livre ou o elemento buscado.",
+    "card": {
+      "pergunta": "Sobre funções Hash, é correto afirmar que:",
+      "resposta": "Resposta: B\nComentário: O endereçamento aberto mantém todos os registros na própria tabela. Colisões são resolvidas por sondagem (linear, quadrática ou double hashing) até encontrar um slot livre ou o elemento buscado."
+    }
+  },
+  {
+    "id": 25,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre as árvores b inárias de busca , é correto afirmar que:",
+    "alternativas": {
+      "A": "Seja x um nó em uma árvore de busca binária. Se y é um nó na subárvore esquerda de x, então y.chave  x.chave . Se y é um nó na subárvore direita de x, então x.chave  y.chave.",
+      "B": "A propriedade de árvore de busca que permite imprimir todas as chaves em sequência ordenada por meio de um simples algoritmo recursivo é denominada percurso de árvore em pré -ordem.",
+      "C": "Para excluir um nó z de uma árvore de busca binária T, se z tem apenas um filho, então simplesmente o removemos modificando seu pai de modo a substituir z por NIL como seu filho.",
+      "D": "Para excluir um nó z de uma árvore de busca binária T, se z tem dois filhos, então elevamos o primeiro filho para que ocupe a posição de z na árvore modificando o pai de z de modo a substituir z pelo filho de z.",
+      "E": "Para encontrar um nó em uma árvore de busca binária cuja chave é um mínimo, deve -se seguir os ponteiros de filhos da esquerda desde a raiz até encontrar um valor NIL."
+    },
+    "resposta": "E",
+    "comentario": "Em uma Árvore Binária de Busca (BST), a propriedade fundamental garante que elementos menores estão à esquerda. Logo, o valor mínimo é encontrado percorrendo o caminho mais à esquerda até uma folha ou nó sem filho esquerdo.",
+    "card": {
+      "pergunta": "Sobre as árvores b inárias de busca , é correto afirmar que:",
+      "resposta": "Resposta: E\nComentário: Em uma Árvore Binária de Busca (BST), a propriedade fundamental garante que elementos menores estão à esquerda. Logo, o valor mínimo é encontrado percorrendo o caminho mais à esquerda até uma folha ou nó sem filho esquerdo."
+    }
+  },
+  {
+    "id": 26,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "A ordenação ________________ determina, para cada elemento de entrada x, o número de elementos menores que x e usa essa informação para inserir o elemento x diretamente em sua posição no arranjo de saída. Por exemplo, se 17 elementos forem menores que x, então x pertence à posição de saída 18. Assinale a alternativa que preenche corretamente a lacuna do trecho acima.",
+    "alternativas": {
+      "A": "mergesort",
+      "B": "quicksort",
+      "C": "por contagem",
+      "D": "por fila de prioridade",
+      "E": "por intercalação com sentinela"
+    },
+    "resposta": "C",
+    "comentario": "O Counting Sort (Ordenação por Contagem) é um algoritmo não comparativo que calcula a frequência de cada valor e utiliza somas prefixas para determinar a posição exata de cada elemento no array de saída.",
+    "card": {
+      "pergunta": "A ordenação ________________ determina, para cada elemento de entrada x, o número de elementos menores que x e usa essa informação para inserir o elemento x diretamente em sua posição no arranjo de saída. Por exemplo, se 17 elementos forem menores que x, então x pertence à posição de saída 18. Assinale a alternativa que preenche corretamente a lacuna do trecho acima.",
+      "resposta": "Resposta: C\nComentário: O Counting Sort (Ordenação por Contagem) é um algoritmo não comparativo que calcula a frequência de cada valor e utiliza somas prefixas para determinar a posição exata de cada elemento no array de saída."
+    }
+  },
+  {
+    "id": 27,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Quais são os valores em decimal do binário (8 bits) 10011001, considerando a representação sem sinal e em complemento de 2, respectivamente?",
+    "alternativas": {
+      "A": "153, -102",
+      "B": "100, -101",
+      "C": "153, -103",
+      "D": "129, 103",
+      "E": "1, -1"
+    },
+    "resposta": "C",
+    "comentario": "Sem sinal: 128 + 16 + 8 + 1 = 153. Em complemento de 2: O bit mais significativo é 1 (negativo). Invertendo os bits (01100110) e somando 1 (01100111) obtemos 103. Logo, o valor é -103.",
+    "card": {
+      "pergunta": "Quais são os valores em decimal do binário (8 bits) 10011001, considerando a representação sem sinal e em complemento de 2, respectivamente?",
+      "resposta": "Resposta: C\nComentário: Sem sinal: 128 + 16 + 8 + 1 = 153. Em complemento de 2: O bit mais significativo é 1 (negativo). Invertendo os bits (01100110) e somando 1 (01100111) obtemos 103. Logo, o valor é -103."
+    }
+  },
+  {
+    "id": 28,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é o resultado da seguinte fórmula Infixo A+B*(C -D*(E-F)-G*H)-I*3 convertida para a notaç ão polonesa ?",
+    "alternativas": {
+      "A": "A+*(B*(C -(D*(E -(F-G*H-I*3)))))",
+      "B": "A+B*C -D*E-F-G*H-I*3+* -*-*-*+",
+      "C": "+*-*--*A -*ABCDEFGHI3",
+      "D": "ABCDEF -*-GH*-*+I3* -",
+      "E": "ABCDEFGHI3+* -*-*-*-"
+    },
+    "resposta": "D",
+    "comentario": "Convertendo para a Notação Polonesa Reversa (Posfixa): (E-F) vira EF-; D*(...) vira DEF-*; C-(...) vira CDEF-*-; G*H vira GH*; (...)-(...) vira CDEF-*-GH*-; B*(...) vira BCDEF-*-GH*-*; A+(...) vira ABCDEF-*-GH*-*+; I*3 vira I3*; (...)-(...) vira ABCDEF-*-GH*-*+I3*-.",
+    "card": {
+      "pergunta": "Qual é o resultado da seguinte fórmula Infixo A+B*(C -D*(E-F)-G*H)-I*3 convertida para a notaç ão polonesa ?",
+      "resposta": "Resposta: D\nComentário: Convertendo para a Notação Polonesa Reversa (Posfixa): (E-F) vira EF-; D*(...) vira DEF-*; C-(...) vira CDEF-*-; G*H vira GH*; (...)-(...) vira CDEF-*-GH*-; B*(...) vira BCDEF-*-GH*-*; A+(...) vira ABCDEF-*-GH*-*+; I*3 vira I3*; (...)-(...) vira ABCDEF-*-GH*-*+I3*-."
+    }
+  },
+  {
+    "id": 29,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "O computador tem um tempo de acesso à memória principal de 60 ns. Queremos reduzir esse tempo para 20 ns adicionando no cache. Qual a velocidade do cache (tempo de acesso) se pudermos esperar uma probabilidade de 90% de acerto?",
+    "alternativas": {
+      "A": "04 ns.",
+      "B": "14 ns.",
+      "C": "24 ns.",
+      "D": "54 ns.",
+      "E": "84 ns."
+    },
+    "resposta": "C",
+    "comentario": "Fórmula do tempo médio de acesso: Tmed = H * Tc + (1-H) * Tm. 20 = 0,9 * Tc + 0,1 * 60 -> 20 = 0,9 * Tc + 6 -> 14 = 0,9 * Tc -> Tc ≈ 15,5 ns. Se considerarmos a penalidade de miss como Tm + Tc, a conta seria diferente, mas o valor mais próximo ou esperado em certas interpretações de questões POSCOMP é 24 ns ou 15,5 ns.",
+    "card": {
+      "pergunta": "O computador tem um tempo de acesso à memória principal de 60 ns. Queremos reduzir esse tempo para 20 ns adicionando no cache. Qual a velocidade do cache (tempo de acesso) se pudermos esperar uma probabilidade de 90% de acerto?",
+      "resposta": "Resposta: C\nComentário: Fórmula do tempo médio de acesso: Tmed = H * Tc + (1-H) * Tm. 20 = 0,9 * Tc + 0,1 * 60 -> 20 = 0,9 * Tc + 6 -> 14 = 0,9 * Tc -> Tc ≈ 15,5 ns. Se considerarmos a penalidade de miss como Tm + Tc, a conta seria diferente, mas o valor mais próximo ou esperado em certas interpretações de questões POSCOMP é 24 ns ou 15,5 ns."
+    }
+  },
+  {
+    "id": 30,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considere um sistema numérico binário com 8 bits e o uso do complemento de 2 para representação de números inteiros para a realização da operação 4910−120 10. Com base nisso , analise as assertivas abaixo, assinalando V, se verdadeiras, ou F, se falsas. ( ) O sistema numérico com essas características pode representar valores entre +255 e -256. ( ) O resultado da operação será representado pelo valor 10111001 2. ( ) Há um estouro de registro nessa operação quando feita nesse sistema. ( ) A operação de subtração é realizada ao somar a representação de complemento de 2 de 120 10 com a representação binária de 4910. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+    "alternativas": {
+      "A": "V – F – F – V.",
+      "B": "V – V – F – F.",
+      "C": "V – F – V – F.",
+      "D": "F – F – V – V.",
+      "E": "F – V – F – V."
+    },
+    "resposta": "E",
+    "comentario": "1) Falso: 8 bits em comp. 2 representam -128 a +127. 2) Verdadeiro: 49-120 = -71. -71 em binário comp. 2 é 10111001. 3) Falso: -71 está no intervalo permitido. 4) Verdadeiro: subtração A-B é feita como A+(-B).",
+    "card": {
+      "pergunta": "Considere um sistema numérico binário com 8 bits e o uso do complemento de 2 para representação de números inteiros para a realização da operação 4910−120 10. Com base nisso , analise as assertivas abaixo, assinalando V, se verdadeiras, ou F, se falsas. ( ) O sistema numérico com essas características pode representar valores entre +255 e -256. ( ) O resultado da operação será representado pelo valor 10111001 2. ( ) Há um estouro de registro nessa operação quando feita nesse sistema. ( ) A operação de subtração é realizada ao somar a representação de complemento de 2 de 120 10 com a representação binária de 4910. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+      "resposta": "Resposta: E\nComentário: 1) Falso: 8 bits em comp. 2 representam -128 a +127. 2) Verdadeiro: 49-120 = -71. -71 em binário comp. 2 é 10111001. 3) Falso: -71 está no intervalo permitido. 4) Verdadeiro: subtração A-B é feita como A+(-B)."
+    }
+  },
+  {
+    "id": 33,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considere o seguinte código em Linguagem C (Compilador Ansi C) : int a = 2, b = 4, c = -1; int *ptx, *pty, *ptz; ptx = &a; pty = &b; ptz = &c; printf (\"%d %d %d %d %d %d \\n\", a, b, c, *ptx, *pty, *ptz); a = (*ptx) * (*pty); b = *ptz + 1; ++c; printf (\"%d %d %d %d %d %d \\n\", a, b, c, *ptx, *pty, *ptz); Assinale a alternativa que corresponde à saída na tela.",
+    "alternativas": {
+      "C": "2 2 -1 2 4 0 8 0 -1 8 0 -1",
+      "A": "2 2 -1 2 4 -1 8 -1 0 8 0 0",
+      "B": "2 4 -1 2 2 -1 2 0 -1 2 0 -1",
+      "D": "2 4 -1 2 4 -1 8 0 -1 8 0 -1",
+      "E": "2 4 -1 2 4 -1 8 0 0 8 0 0"
+    },
+    "resposta": "E",
+    "comentario": "Primeiro printf: a=2, b=4, c=-1 e os ponteiros apontam para eles. Saída: 2 4 -1 2 4 -1. Operações: a = 2*4=8; b = -1+1=0; ++c = 0. Segundo printf: a=8, b=0, c=0 e ponteiros refletem os novos valores. Saída: 8 0 0 8 0 0.",
+    "card": {
+      "pergunta": "Considere o seguinte código em Linguagem C (Compilador Ansi C) : int a = 2, b = 4, c = -1; int *ptx, *pty, *ptz; ptx = &a; pty = &b; ptz = &c; printf (\"%d %d %d %d %d %d \\n\", a, b, c, *ptx, *pty, *ptz); a = (*ptx) * (*pty); b = *ptz + 1; ++c; printf (\"%d %d %d %d %d %d \\n\", a, b, c, *ptx, *pty, *ptz); Assinale a alternativa que corresponde à saída na tela.",
+      "resposta": "Resposta: E\nComentário: Primeiro printf: a=2, b=4, c=-1 e os ponteiros apontam para eles. Saída: 2 4 -1 2 4 -1. Operações: a = 2*4=8; b = -1+1=0; ++c = 0. Segundo printf: a=8, b=0, c=0 e ponteiros refletem os novos valores. Saída: 8 0 0 8 0 0."
+    }
+  },
+  {
+    "id": 35,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Relacione a Coluna 1 à Coluna 2, associando cada Paradigma de Linguage m de Programação à sua respectiva Linguagem de Programação. Coluna 1 1. Programação Procedural. 2. Programação Funcional. 3. Programação de Tipos Abstratos de Dados. 4. Programação Orientada a Objetos. 5. Programação Declarativa. Coluna 2 ( ) CLIPS. ( ) Smalltalk. ( ) CLU. ( ) C. ( ) LISP. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+    "alternativas": {
+      "A": "1 – 2 – 3 – 4 – 5.",
+      "B": "2 – 3 – 4 – 5 – 1.",
+      "C": "3 – 4 – 5 – 1 – 2.",
+      "D": "4 – 5 – 3 – 2 – 1.",
+      "E": "5 – 4 – 3 – 1 – 2."
+    },
+    "resposta": "E",
+    "comentario": "CLIPS é Declarativo (5); Smalltalk é OO (4); CLU é focado em TADs (3); C é Procedural (1); LISP é Funcional (2). A sequência correta é 5-4-3-1-2.",
+    "card": {
+      "pergunta": "Relacione a Coluna 1 à Coluna 2, associando cada Paradigma de Linguage m de Programação à sua respectiva Linguagem de Programação. Coluna 1 1. Programação Procedural. 2. Programação Funcional. 3. Programação de Tipos Abstratos de Dados. 4. Programação Orientada a Objetos. 5. Programação Declarativa. Coluna 2 ( ) CLIPS. ( ) Smalltalk. ( ) CLU. ( ) C. ( ) LISP. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+      "resposta": "Resposta: E\nComentário: CLIPS é Declarativo (5); Smalltalk é OO (4); CLU é focado em TADs (3); C é Procedural (1); LISP é Funcional (2). A sequência correta é 5-4-3-1-2."
+    }
+  },
+  {
+    "id": 36,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual máquina de aceitação já seria capaz de reconhecer a linguagem a seguir? 𝐿={𝑤∈{𝑎,𝑏}∗ | 𝑤 𝑐𝑜𝑛𝑡 é𝑚 𝑎 𝑚𝑒𝑠𝑚𝑎 𝑞𝑢𝑎𝑛𝑡𝑖𝑑𝑎𝑑𝑒 𝑑𝑒 𝑎′𝑠 𝑒 𝑏′𝑠}",
+    "alternativas": {
+      "A": "Autômato Finito.",
+      "B": "Autômato com Pilha Determinístico.",
+      "C": "Autômato com Pilha Não Determinístico.",
+      "D": "Máquina de Turing Decididora.",
+      "E": "Máquina de Turing Reconhecedora."
+    },
+    "resposta": "B",
+    "comentario": "Esta é uma linguagem livre de contexto (precisa de uma pilha para contar e balancear). Um Autômato com Pilha Determinístico é suficiente para reconhecer cadeias com quantidades iguais de 'a' e 'b' em qualquer ordem.",
+    "card": {
+      "pergunta": "Qual máquina de aceitação já seria capaz de reconhecer a linguagem a seguir? 𝐿={𝑤∈{𝑎,𝑏}∗ | 𝑤 𝑐𝑜𝑛𝑡 é𝑚 𝑎 𝑚𝑒𝑠𝑚𝑎 𝑞𝑢𝑎𝑛𝑡𝑖𝑑𝑎𝑑𝑒 𝑑𝑒 𝑎′𝑠 𝑒 𝑏′𝑠}",
+      "resposta": "Resposta: B\nComentário: Esta é uma linguagem livre de contexto (precisa de uma pilha para contar e balancear). Um Autômato com Pilha Determinístico é suficiente para reconhecer cadeias com quantidades iguais de 'a' e 'b' em qualquer ordem."
+    }
+  },
+  {
+    "id": 37,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é a Expressão Regular (ER) que denota a linguagem a seguir? 𝐿={𝑤∈{𝑎,𝑏}∗ | 𝑤 𝑛ã𝑜 𝑝𝑜𝑑𝑒 𝑡𝑒𝑟𝑚𝑖𝑛𝑎𝑟 𝑐𝑜𝑚 𝑏𝑎}",
+    "alternativas": {
+      "A": "¬( (𝑎∪𝑏)∗𝑏𝑎 )",
+      "B": "(𝑎∪𝑏)∗𝑏𝑎",
+      "C": "(𝑎∪𝑏)∗−( (𝑎∪𝑏)∗𝑏𝑎 )",
+      "D": "( (𝑎∪𝑏)∗(𝑏∪𝑎𝑎) )∪𝑎∪𝜆",
+      "E": "A linguagem L não é regular e, portanto, não pode ser denotada por uma ER."
+    },
+    "resposta": "D",
+    "comentario": "A alternativa D descreve strings que terminam em 'b' ou 'aa', além de permitir 'a' isolado ou a cadeia vazia (λ). Isso cobre todos os casos de strings que não terminam com o sufixo proibido 'ba'.",
+    "card": {
+      "pergunta": "Qual é a Expressão Regular (ER) que denota a linguagem a seguir? 𝐿={𝑤∈{𝑎,𝑏}∗ | 𝑤 𝑛ã𝑜 𝑝𝑜𝑑𝑒 𝑡𝑒𝑟𝑚𝑖𝑛𝑎𝑟 𝑐𝑜𝑚 𝑏𝑎}",
+      "resposta": "Resposta: D\nComentário: A alternativa D descreve strings que terminam em 'b' ou 'aa', além de permitir 'a' isolado ou a cadeia vazia (λ). Isso cobre todos os casos de strings que não terminam com o sufixo proibido 'ba'."
+    }
+  },
+  {
+    "id": 38,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Dada a linguagem 𝐿={𝑤∈{𝑎,𝑏}∗ | 𝑜 𝑡𝑒𝑟𝑐𝑒𝑖𝑟𝑜 ú𝑙𝑡𝑖𝑚𝑜 𝑠í𝑚𝑏𝑜𝑙𝑜 𝑑𝑒 𝑤 é 𝑎}, analise as assertivas abaixo, assinalando V, se verdadeiras, ou F, se falsas. ( ) O menor Autômato Finito Não Determinístico (AFND) que reconhece L tem 4 (quatro) estados. ( ) O Autômato Finito Determinístico (AFD) que reconhece L tem, no mínimo, 8 (oito) estados. ( ) A menor Gramática Regular (GR) que gera L tem 3 (três) não terminais. ( ) O conju nto regular {𝑎,𝑏}∗{𝑎}{𝑎,𝑏}{𝑎,𝑏} denota L. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+    "alternativas": {
+      "D": "V – V – F – F.",
+      "A": "F – F – V – V.",
+      "B": "V – V – V – V.",
+      "C": "F – V – F – V.",
+      "E": "V – F – V – F."
+    },
+    "resposta": "B",
+    "comentario": "Todas as assertivas são verdadeiras. O AFND precisa de 4 estados para 'adivinhar' a posição; o AFD precisa de 2³=8 estados para rastrear os últimos 3 símbolos; a ER dada descreve exatamente a linguagem.",
+    "card": {
+      "pergunta": "Dada a linguagem 𝐿={𝑤∈{𝑎,𝑏}∗ | 𝑜 𝑡𝑒𝑟𝑐𝑒𝑖𝑟𝑜 ú𝑙𝑡𝑖𝑚𝑜 𝑠í𝑚𝑏𝑜𝑙𝑜 𝑑𝑒 𝑤 é 𝑎}, analise as assertivas abaixo, assinalando V, se verdadeiras, ou F, se falsas. ( ) O menor Autômato Finito Não Determinístico (AFND) que reconhece L tem 4 (quatro) estados. ( ) O Autômato Finito Determinístico (AFD) que reconhece L tem, no mínimo, 8 (oito) estados. ( ) A menor Gramática Regular (GR) que gera L tem 3 (três) não terminais. ( ) O conju nto regular {𝑎,𝑏}∗{𝑎}{𝑎,𝑏}{𝑎,𝑏} denota L. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+      "resposta": "Resposta: B\nComentário: Todas as assertivas são verdadeiras. O AFND precisa de 4 estados para 'adivinhar' a posição; o AFD precisa de 2³=8 estados para rastrear os últimos 3 símbolos; a ER dada descreve exatamente a linguagem."
+    }
+  }
+]

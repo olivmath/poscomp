@@ -44,6 +44,11 @@ export interface Question {
   resposta: Option
 
   comentario?: string
+  
+  card?: {
+    pergunta: string
+    resposta: string
+  }
 }
 
 export interface SrsCard {
