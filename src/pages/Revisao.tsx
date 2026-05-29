@@ -1,9 +1,9 @@
 import '@material/web/button/filled-button.js'
 import '@material/web/button/outlined-button.js'
 import '@material/web/progress/circular-progress.js'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRevisao } from '../hooks/useRevisao'
-import { AREA_ICONS } from '../utils/areaIcons'
 import type { Priority, AdaptedCard } from '../hooks/useRevisao'
 
 const PRIORITY_LABELS: Record<Priority, { label: string; color: string }> = {
@@ -25,6 +25,16 @@ export function Revisao() {
     submit,
     reset,
   } = useRevisao()
+
+  const [feedback, setFeedback] = useState<'idle' | 'correct' | 'wrong'>('idle')
+
+  const handleSubmit = (acertou: boolean) => {
+    setFeedback(acertou ? 'correct' : 'wrong')
+    setTimeout(() => {
+      setFeedback('idle')
+      submit(acertou)
+    }, 500)
+  }
 
   if (state === 'loading') {
     return (
@@ -60,7 +70,7 @@ export function Revisao() {
           <span className="material-symbols-outlined md-icon--lg">check_circle</span>
           <h2 className="revisao-title">Sessão concluída!</h2>
           <p className="revisao-text">{totalCards} cards revisados</p>
-          
+
           <div className="revisao-stats">
             <div className="revisao-stat-row">
               <span className="revisao-stat-dot" style={{ backgroundColor: PRIORITY_LABELS.P1.color }} />
@@ -89,82 +99,70 @@ export function Revisao() {
   }
 
   const card = currentCard as AdaptedCard
-  const { priority, question } = card
-  const pInfo = PRIORITY_LABELS[priority]
+  const { question } = card
 
   return (
-    <div className="revisao-container">
-      {/* Header / Progress */}
-      <div className="revisao-header">
-        <button className="revisao-back-btn" onClick={() => navigate('/')}>
+    <div className="revisao-running">
+      {/* Top bar — idêntico ao ImmersiveBar */}
+      <div className="revisao-top-bar">
+        <button className="revisao-top-back" onClick={() => navigate('/')}>
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
-        <span className="revisao-progress-text">
-          {currentIndex + 1} / {totalCards}
-        </span>
-        <div className="revisao-progress-bar">
-          <div 
-            className="revisao-progress-fill" 
-            style={{ width: `${((currentIndex + 1) / totalCards) * 100}%` }} 
-          />
-        </div>
+        <span className="revisao-top-counter">{currentIndex + 1} / {totalCards}</span>
       </div>
 
-      {/* Flashcard */}
-      <div className="revisao-flashcard">
-        <div className="revisao-card-priority">
-          <span className="revisao-priority-tag" style={{ color: pInfo.color }}>
-            {pInfo.label}
-          </span>
-          <span className="revisao-area-tag">
-            <span className="material-symbols-outlined revisao-area-icon">
-              {question ? AREA_ICONS[question.area] : 'help'}
-            </span>
-            {question?.area ?? '...'}
-          </span>
-        </div>
+      {/* Barra de progresso */}
+      <div className="revisao-progress-strip">
+        <div
+          className="revisao-progress-fill"
+          style={{ width: `${((currentIndex + 1) / totalCards) * 100}%` }}
+        />
+      </div>
 
-        <div className="revisao-question-body">
-          <p className="revisao-question-text">
-            {question?.enunciado ?? 'Carregando questão...'}
-          </p>
-
-          {showAnswer && question && (
-            <div className="revisao-answer-box">
-              <div className="revisao-gabarito">
-                <span className="material-symbols-outlined revisao-check-icon">check_circle</span>
-                <strong>Gabarito: ({question.resposta})</strong> {question.alternativas[question.resposta]}
-              </div>
+      {/* Área do card */}
+      <div className="revisao-card-wrap">
+        <div
+          className={`revisao-flipcard${showAnswer ? ' flipped' : ''}${feedback !== 'idle' ? ` feedback-${feedback}` : ''}`}
+          onClick={!showAnswer && question ? () => reveal() : undefined}
+        >
+          {/* Frente — pergunta */}
+          <div className="revisao-face revisao-face--front">
+            <p className="revisao-question-text">
+              {question?.enunciado ?? 'Carregando questão...'}
+            </p>
+            <div className="revisao-flip-hint">
+              <span className="material-symbols-outlined">touch_app</span>
+              Toque para ver a resposta
             </div>
-          )}
-        </div>
+          </div>
 
-        {/* Action Buttons */}
-        <div className="revisao-footer">
-          {!showAnswer ? (
-            <md-filled-button 
-              className="revisao-reveal-btn" 
-              onClick={reveal}
-              disabled={!question}
-            >
-              Revelar gabarito
-            </md-filled-button>
-          ) : (
-            <div className="revisao-studying-actions">
-              <md-outlined-button 
-                className="revisao-btn--no" 
-                onClick={() => submit(false)}
-              >
-                Não estudei
-              </md-outlined-button>
-              <md-filled-button 
-                className="revisao-btn--yes" 
-                onClick={() => submit(true)}
-              >
-                Estudei
-              </md-filled-button>
+          {/* Verso — resposta */}
+          <div className="revisao-face revisao-face--back">
+            <div className="revisao-answer-body">
+              <span className="material-symbols-outlined revisao-answer-icon">check_circle</span>
+              <p className="revisao-gabarito">
+                <strong>({question?.resposta})</strong>{' '}
+                {question && question.alternativas[question.resposta]}
+              </p>
             </div>
-          )}
+
+            <div className="revisao-result-btns" onClick={e => e.stopPropagation()}>
+              <button
+                className="revisao-result-btn revisao-result-btn--wrong"
+                onClick={() => handleSubmit(false)}
+              >
+                <span className="material-symbols-outlined">close</span>
+                Errei
+              </button>
+              <button
+                className="revisao-result-btn revisao-result-btn--correct"
+                onClick={() => handleSubmit(true)}
+              >
+                <span className="material-symbols-outlined">check</span>
+                Acertei
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

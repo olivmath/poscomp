@@ -87,12 +87,9 @@ export function Home() {
 
   // idle — dashboard
   return (
-    <main className="home-page">
-      <section className="home-page__hero">
+    <main className="page-shell">
+      <section className="section-stack">
         <WeekHeader activeDays={activeDays} streak={streak} />
-      </section>
-
-      <section className="home-page__content">
         <AnalysisCarousel analytics={analytics} loading={analyticsLoading} />
       </section>
 
