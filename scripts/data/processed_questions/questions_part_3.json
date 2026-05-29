@@ -1,0 +1,572 @@
+[
+  {
+    "id": 12,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Determine o ponto de intersecção das retas r: x=2–4t, y=–2+t e s: x=3+8t, y=–1–2t.",
+    "alternativas": {
+      "A": "(-3, 1)",
+      "B": "(1, 2)",
+      "C": "(-5, 0)",
+      "D": "(1, 1)",
+      "E": "As retas são paralelas e não possuem ponto de intersecção."
+    },
+    "resposta": "E",
+    "comentario": "Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção.",
+    "card": {
+      "pergunta": "Determine o ponto de intersecção das retas r: x=2–4t, y=–2+t e s: x=3+8t, y=–1–2t.",
+      "resposta": "Resposta: E\nComentário: Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção."
+    }
+  },
+  {
+    "id": 13,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "A expressão lógica ~p → ~q é equivalente a:",
+    "alternativas": {
+      "A": "~q ∧ ~p",
+      "B": "~q → p",
+      "C": "q → ~p",
+      "D": "q → p",
+      "E": "p → q"
+    },
+    "resposta": "D",
+    "comentario": "~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente.",
+    "card": {
+      "pergunta": "A expressão lógica ~p → ~q é equivalente a:",
+      "resposta": "Resposta: D\nComentário: ~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente."
+    }
+  },
+  {
+    "id": 14,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "A proposição lógica ~(p ∨ q) é verdadeira se, e somente se, for falsa a proposição:",
+    "alternativas": {
+      "A": "p e q",
+      "B": "~p",
+      "C": "~p → q",
+      "D": "~p → ~q",
+      "E": "~q"
+    },
+    "resposta": "C",
+    "comentario": "~(p∨q) verdadeiro ↔ p=F e q=F. Nesse caso ~p=V, q=F → ~p→q = V→F = F. A proposição falsa é ~p→q.",
+    "card": {
+      "pergunta": "A proposição lógica ~(p ∨ q) é verdadeira se, e somente se, for falsa a proposição:",
+      "resposta": "Resposta: C\nComentário: ~(p∨q) verdadeiro ↔ p=F e q=F. Nesse caso ~p=V, q=F → ~p→q = V→F = F. A proposição falsa é ~p→q."
+    }
+  },
+  {
+    "id": 15,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Considere as premissas: (1) Se Ana Paula joga vôlei OU Joaquim joga videogame, então Victória vai à praia. (2) Hoje, Victória NÃO foi à praia. (3) Se hoje é sábado, então Ana Paula joga vôlei E Caio treina boxe. O que se pode concluir?",
+    "alternativas": {
+      "A": "Hoje é sábado e Ana Paula jogou vôlei.",
+      "B": "Hoje não é sábado e Joaquim não jogou videogame.",
+      "C": "Ana Paula jogou vôlei ou Joaquim jogou videogame.",
+      "D": "Hoje é sábado e Joaquim jogou videogame.",
+      "E": "Hoje não é sábado e Ana Paula jogou vôlei."
+    },
+    "resposta": "B",
+    "comentario": "Por modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame. Como ~Ana Paula provado, modus tollens com P3 dá ~hoje é sábado. Conclusão: hoje não é sábado E Joaquim não jogou videogame.",
+    "card": {
+      "pergunta": "Considere as premissas: (1) Se Ana Paula joga vôlei OU Joaquim joga videogame, então Victória vai à praia. (2) Hoje, Victória NÃO foi à praia. (3) Se hoje é sábado, então Ana Paula joga vôlei E Caio treina boxe. O que se pode concluir?",
+      "resposta": "Resposta: B\nComentário: Por modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame. Como ~Ana Paula provado, modus tollens com P3 dá ~hoje é sábado. Conclusão: hoje não é sábado E Joaquim não jogou videogame."
+    }
+  },
+  {
+    "id": 16,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Utilizando as leis de Morgan, qual expressão em soma de produtos representa F = ~(Ā+C̄)·~(B̄+D̄)?",
+    "alternativas": {
+      "A": "AC̄ + B",
+      "B": "AC̄ + BD",
+      "C": "AC + B",
+      "D": "AC̄ + B̄D",
+      "E": "A + B"
+    },
+    "resposta": "D",
+    "comentario": "Aplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D.",
+    "card": {
+      "pergunta": "Utilizando as leis de Morgan, qual expressão em soma de produtos representa F = ~(Ā+C̄)·~(B̄+D̄)?",
+      "resposta": "Resposta: D\nComentário: Aplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D."
+    }
+  },
+  {
+    "id": 19,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Com base na lista de 80 tempos de execução fornecida, a percentagem de tempo em que o processo de cálculo é inferior a 65 segundos é:",
+    "alternativas": {
+      "A": "28,8%",
+      "B": "30,0%",
+      "C": "32,5%",
+      "D": "36,3%",
+      "E": "40,0%"
+    },
+    "resposta": "C",
+    "comentario": "Contando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores. 26/80 = 32,5%.",
+    "card": {
+      "pergunta": "Com base na lista de 80 tempos de execução fornecida, a percentagem de tempo em que o processo de cálculo é inferior a 65 segundos é:",
+      "resposta": "Resposta: C\nComentário: Contando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores. 26/80 = 32,5%."
+    }
+  },
+  {
+    "id": 20,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "O tempo médio aproximado que o software leva para realizar os cálculos é:",
+    "alternativas": {
+      "A": "65",
+      "B": "66",
+      "C": "67",
+      "D": "68",
+      "E": "69"
+    },
+    "resposta": "C",
+    "comentario": "Somando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67.",
+    "card": {
+      "pergunta": "O tempo médio aproximado que o software leva para realizar os cálculos é:",
+      "resposta": "Resposta: C\nComentário: Somando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67."
+    }
+  },
+  {
+    "id": 21,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre busca sequencial em arquivo com chave única, sendo f(n) o número de registros consultados, é correto afirmar que:",
+    "alternativas": {
+      "A": "O caso médio é f(n) = (n + 1)/2",
+      "B": "O melhor caso é f(n) = n – 1",
+      "C": "O caso ótimo é f(n) = 3n/2 – 3/2",
+      "D": "O caso recorrente é f(n) = 2(n – 1)",
+      "E": "O pior caso é f(n) = 1"
+    },
+    "resposta": "A",
+    "comentario": "Busca sequencial: melhor caso = 1 (primeiro elemento), pior caso = n (último/ausente), caso médio = (1+2+...+n)/n = (n+1)/2.",
+    "card": {
+      "pergunta": "Sobre busca sequencial em arquivo com chave única, sendo f(n) o número de registros consultados, é correto afirmar que:",
+      "resposta": "Resposta: A\nComentário: Busca sequencial: melhor caso = 1 (primeiro elemento), pior caso = n (último/ausente), caso médio = (1+2+...+n)/n = (n+1)/2."
+    }
+  },
+  {
+    "id": 22,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é o objetivo da análise assintótica de algoritmos?",
+    "alternativas": {
+      "A": "Analisar conjuntamente o pior caso e o caso médio.",
+      "B": "Analisar o desempenho para entradas muito pequenas.",
+      "C": "Determinar o desempenho para todas as possíveis entradas.",
+      "D": "Analisar o desempenho para entradas médias.",
+      "E": "Analisar o comportamento do algoritmo à medida que o tamanho da entrada aumenta indefinidamente."
+    },
+    "resposta": "E",
+    "comentario": "A análise assintótica descreve a taxa de crescimento do algoritmo quando n→∞, usando notações O, Ω, Θ.",
+    "card": {
+      "pergunta": "Qual é o objetivo da análise assintótica de algoritmos?",
+      "resposta": "Resposta: E\nComentário: A análise assintótica descreve a taxa de crescimento do algoritmo quando n→∞, usando notações O, Ω, Θ."
+    }
+  },
+  {
+    "id": 23,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é a complexidade de tempo da busca em tabela hash (média e pior caso, respectivamente)?",
+    "alternativas": {
+      "A": "O(1) e O(1)",
+      "B": "O(1) e O(n)",
+      "C": "O(log n) e O(log n)",
+      "D": "O(log n) e O(n)",
+      "E": "O(n) e O(2^n)"
+    },
+    "resposta": "B",
+    "comentario": "Hash bem dimensionada: busca O(1) em média. Com muitas colisões (pior caso), degenera para O(n) (lista encadeada no bucket).",
+    "card": {
+      "pergunta": "Qual é a complexidade de tempo da busca em tabela hash (média e pior caso, respectivamente)?",
+      "resposta": "Resposta: B\nComentário: Hash bem dimensionada: busca O(1) em média. Com muitas colisões (pior caso), degenera para O(n) (lista encadeada no bucket)."
+    }
+  },
+  {
+    "id": 24,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Em uma estrutura de dados lista ______, cada elemento armazena dados e um ponteiro para o próximo, mantém a estrutura linear e possui campo-chave para ordenação.",
+    "alternativas": {
+      "A": "duplamente encadeada ordenada",
+      "B": "circular não ordenada",
+      "C": "de prioridades",
+      "D": "duplamente encadeada não ordenada",
+      "E": "simplesmente encadeada ordenada"
+    },
+    "resposta": "E",
+    "comentario": "Um ponteiro para o próximo → simplesmente encadeada. Campo-chave que mantém ordenação → ordenada.",
+    "card": {
+      "pergunta": "Em uma estrutura de dados lista ______, cada elemento armazena dados e um ponteiro para o próximo, mantém a estrutura linear e possui campo-chave para ordenação.",
+      "resposta": "Resposta: E\nComentário: Um ponteiro para o próximo → simplesmente encadeada. Campo-chave que mantém ordenação → ordenada."
+    }
+  },
+  {
+    "id": 25,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre as instruções de repetição, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "No while, a instrução é executada uma ou mais vezes e a condição é testada depois.",
+      "B": "O corpo do do...while é executado pelo menos uma vez, enquanto nos laços while e for o corpo pode nunca ser executado.",
+      "C": "A instrução if adapta-se a situações em que o número de iterações é conhecido a priori.",
+      "D": "A instrução break passa o laço para a próxima iteração.",
+      "E": "No for, a condição é testada depois da instrução."
+    },
+    "resposta": "B",
+    "comentario": "do...while executa o corpo antes do teste (ao menos 1 vez). while e for testam antes: se falso de início, nunca executam. break encerra o laço (não itera); continue é quem pula para a próxima iteração.",
+    "card": {
+      "pergunta": "Sobre as instruções de repetição, assinale a alternativa correta.",
+      "resposta": "Resposta: B\nComentário: do...while executa o corpo antes do teste (ao menos 1 vez). while e for testam antes: se falso de início, nunca executam. break encerra o laço (não itera); continue é quem pula para a próxima iteração."
+    }
+  },
+  {
+    "id": 26,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "No caminhamento ______ de uma árvore T, a raiz é visitada em primeiro lugar, e então as subárvores são percorridas recursivamente.",
+    "alternativas": {
+      "A": "simétrico",
+      "B": "em largura",
+      "C": "central",
+      "D": "pré-fixado",
+      "E": "pós-fixado"
+    },
+    "resposta": "D",
+    "comentario": "Pré-fixado (pré-ordem): visita raiz primeiro, depois recursivamente as subárvores. Pós-fixado visita raiz por último. Simétrico/central visita raiz entre os filhos.",
+    "card": {
+      "pergunta": "No caminhamento ______ de uma árvore T, a raiz é visitada em primeiro lugar, e então as subárvores são percorridas recursivamente.",
+      "resposta": "Resposta: D\nComentário: Pré-fixado (pré-ordem): visita raiz primeiro, depois recursivamente as subárvores. Pós-fixado visita raiz por último. Simétrico/central visita raiz entre os filhos."
+    }
+  },
+  {
+    "id": 27,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considerando memória cache com mapeamento por conjunto associativo contendo 64 linhas divididas em 16 conjuntos, e memória principal com 4K blocos de 128 palavras cada, quantos bits são necessários para endereçar uma palavra e quais os tamanhos dos campos tag, s, d e w?",
+    "alternativas": {
+      "A": "Endereço total de 19 bits, com tag = 8 bits, s = 12 bits, d = 4 bits e w = 7 bits.",
+      "B": "Endereço total de 19 bits, com tag = 12 bits, s = 7 bits, d = 4 bits e w = 12 bits.",
+      "C": "Endereço total de 23 bits, com tag = 7 bits, s = 4 bits, d = 7 bits e w = 12 bits.",
+      "D": "Endereço total de 19 bits, com tag = 8 bits, s = 12 bits, d = 7 bits e w = 4 bits.",
+      "E": "Endereço total de 21 bits, com tag = 4 bits, s = 5 bits, d = 7 bits e w = 9 bits."
+    },
+    "resposta": "A",
+    "comentario": "w = log2(128) = 7 bits (offset na palavra). 16 conjuntos → s = log2(16) = 4 bits. 4K = 4096 blocos → endereço de bloco = log2(4096) = 12 bits. tag = 12 – 4 = 8 bits. Total = tag + s + w = 8 + 4 + 7 = 19 bits. d = log2(64/16) = log2(4) = não se aplica diretamente; o gabarito indica d como campo de deslocamento diferente de w na formulação da questão.",
+    "card": {
+      "pergunta": "Considerando memória cache com mapeamento por conjunto associativo contendo 64 linhas divididas em 16 conjuntos, e memória principal com 4K blocos de 128 palavras cada, quantos bits são necessários para endereçar uma palavra e quais os tamanhos dos campos tag, s, d e w?",
+      "resposta": "Resposta: A\nComentário: w = log2(128) = 7 bits (offset na palavra). 16 conjuntos → s = log2(16) = 4 bits. 4K = 4096 blocos → endereço de bloco = log2(4096) = 12 bits. tag = 12 – 4 = 8 bits. Total = tag + s + w = 8 + 4 + 7 = 19 bits. d = log2(64/16) = log2(4) = não se aplica diretamente; o gabarito indica d como campo de deslocamento diferente de w na formulação da questão."
+    }
+  },
+  {
+    "id": 28,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre ponte norte e ponte sul em placa-mãe, analise as assertivas:\nI. Ponte norte: comunicação com dispositivos de baixa velocidade; ponte sul: conecta RAM e vídeo.\nII. Ponte sul: conecta processador à RAM e vídeo; ponte norte: lida com armazenamento e periféricos.\nIII. Ponte norte: interface com componentes de alta velocidade (RAM e vídeo); ponte sul: gerencia dispositivos de E/S de menor velocidade.\nIV. Ponte norte e sul são substituíveis e usadas indistintamente.\nQuais estão corretas?",
+    "alternativas": {
+      "A": "Apenas I.",
+      "B": "Apenas II.",
+      "C": "Apenas III.",
+      "D": "Apenas I e II.",
+      "E": "Apenas III e IV."
+    },
+    "resposta": "C",
+    "comentario": "Apenas III está correta: a ponte norte (northbridge) gerencia a comunicação de alta velocidade entre CPU, RAM e GPU. A ponte sul (southbridge) gerencia dispositivos de E/S mais lentos (USB, SATA, PCI). I e II invertem os papéis. IV está errada pois não são intercambiáveis.",
+    "card": {
+      "pergunta": "Sobre ponte norte e ponte sul em placa-mãe, analise as assertivas:\nI. Ponte norte: comunicação com dispositivos de baixa velocidade; ponte sul: conecta RAM e vídeo.\nII. Ponte sul: conecta processador à RAM e vídeo; ponte norte: lida com armazenamento e periféricos.\nIII. Ponte norte: interface com componentes de alta velocidade (RAM e vídeo); ponte sul: gerencia dispositivos de E/S de menor velocidade.\nIV. Ponte norte e sul são substituíveis e usadas indistintamente.\nQuais estão corretas?",
+      "resposta": "Resposta: C\nComentário: Apenas III está correta: a ponte norte (northbridge) gerencia a comunicação de alta velocidade entre CPU, RAM e GPU. A ponte sul (southbridge) gerencia dispositivos de E/S mais lentos (USB, SATA, PCI). I e II invertem os papéis. IV está errada pois não são intercambiáveis."
+    }
+  },
+  {
+    "id": 29,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual método permite a transferência de dados entre dispositivo de E/S e memória principal sem o intermédio da CPU?",
+    "alternativas": {
+      "A": "Polling",
+      "B": "Interrupções",
+      "C": "E/S mapeada em memória",
+      "D": "Direct Memory Access (DMA)",
+      "E": "E/S programada"
+    },
+    "resposta": "D",
+    "comentario": "DMA transfere dados diretamente entre dispositivo e RAM sem envolver a CPU em cada transferência. Polling e E/S programada requerem CPU monitorando. Interrupções ainda passam pela CPU.",
+    "card": {
+      "pergunta": "Qual método permite a transferência de dados entre dispositivo de E/S e memória principal sem o intermédio da CPU?",
+      "resposta": "Resposta: D\nComentário: DMA transfere dados diretamente entre dispositivo e RAM sem envolver a CPU em cada transferência. Polling e E/S programada requerem CPU monitorando. Interrupções ainda passam pela CPU."
+    }
+  },
+  {
+    "id": 33,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Analise o código C:\nint valor1 = 12; int *valor2; int cont = 0;\nvalor2 = &valor1;\ndo { valor1 >>= 1; cont++; } while (*valor2 > 0);\nprintf(\"%d\", cont);\nA saída é:",
+    "alternativas": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5",
+      "E": "6"
+    },
+    "resposta": "C",
+    "comentario": "valor2 aponta para valor1. Iterações: 12→6 (cont=1), 6→3 (cont=2), 3→1 (cont=3), 1→0 (cont=4). *valor2 = 0, condição falsa, encerra. Saída: 4.",
+    "card": {
+      "pergunta": "Analise o código C:\nint valor1 = 12; int *valor2; int cont = 0;\nvalor2 = &valor1;\ndo { valor1 >>= 1; cont++; } while (*valor2 > 0);\nprintf(\"%d\", cont);\nA saída é:",
+      "resposta": "Resposta: C\nComentário: valor2 aponta para valor1. Iterações: 12→6 (cont=1), 6→3 (cont=2), 3→1 (cont=3), 1→0 (cont=4). *valor2 = 0, condição falsa, encerra. Saída: 4."
+    }
+  },
+  {
+    "id": 34,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "f_rec conta caracteres de 'Ola mundo!' (10 chars). resultado = var / 2 (divisão inteira), impresso com %f. A saída correta é:",
+    "alternativas": {
+      "A": "A saída é o número de caracteres dividido por 2, mostrado como ponto flutuante.",
+      "B": "A saída é o número de caracteres dividido por 2, mostrado como inteiro.",
+      "C": "Erro: f_rec não aceita char array.",
+      "D": "Erro: var inteiro em operação com double.",
+      "E": "Erro: printf usa especificador errado."
+    },
+    "resposta": "A",
+    "comentario": "f_rec retorna 10. resultado = 10/2 = 5 (divisão inteira antes de atribuir ao double). printf(\"%f\") imprime 5.000000. A saída é correta como ponto flutuante (valor 5.0).",
+    "card": {
+      "pergunta": "f_rec conta caracteres de 'Ola mundo!' (10 chars). resultado = var / 2 (divisão inteira), impresso com %f. A saída correta é:",
+      "resposta": "Resposta: A\nComentário: f_rec retorna 10. resultado = 10/2 = 5 (divisão inteira antes de atribuir ao double). printf(\"%f\") imprime 5.000000. A saída é correta como ponto flutuante (valor 5.0)."
+    }
+  },
+  {
+    "id": 36,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual das linguagens pode ser gerada por uma gramática regular?",
+    "alternativas": {
+      "A": "{w ∈ {a,b}* | #a(w) > #b(w)}",
+      "B": "{w ∈ {a,b}* | #a(w) = 2·#b(w)}",
+      "C": "{w ∈ {a,b}* | #a(w) divisível por 3 e #b(w) ímpar}",
+      "D": "{w ∈ {a,b}* | #a(w) = #b(w)}",
+      "E": "{w ∈ {a,b}* | #a(w) ≠ #b(w)}"
+    },
+    "resposta": "C",
+    "comentario": "'Número de a's divisível por 3' é rastreável com 3 estados (mod 3). 'Número de b's ímpar' com 2 estados (paridade). Produto = AFD com 6 estados → linguagem regular. As demais exigem comparação ilimitada entre contagens (não regular).",
+    "card": {
+      "pergunta": "Qual das linguagens pode ser gerada por uma gramática regular?",
+      "resposta": "Resposta: C\nComentário: 'Número de a's divisível por 3' é rastreável com 3 estados (mod 3). 'Número de b's ímpar' com 2 estados (paridade). Produto = AFD com 6 estados → linguagem regular. As demais exigem comparação ilimitada entre contagens (não regular)."
+    }
+  },
+  {
+    "id": 37,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre linguagens formais e computabilidade, quais assertivas estão corretas?\nI. AFN pode ter ε-transições, AFD não pode.\nII. MTs são sempre determinísticas.\nIII. Autômato com pilha aceita linguagens regulares.\nIV. Problemas NP-completos são subconjunto de NP.",
+    "alternativas": {
+      "A": "Apenas I",
+      "B": "Apenas IV",
+      "C": "Apenas I e II",
+      "D": "Apenas II e III",
+      "E": "Apenas III e IV"
+    },
+    "resposta": "E",
+    "comentario": "Gabarito oficial: E. IV é verdadeira (NP-completo ⊆ NP). III é considerada verdadeira no contexto da questão (autômato com pilha aceita inclusive linguagens regulares, que são subconjunto das LLC). I é imprecisa (AFD também não tem ε-transições por definição). II é falsa (existem MT não determinísticas).",
+    "card": {
+      "pergunta": "Sobre linguagens formais e computabilidade, quais assertivas estão corretas?\nI. AFN pode ter ε-transições, AFD não pode.\nII. MTs são sempre determinísticas.\nIII. Autômato com pilha aceita linguagens regulares.\nIV. Problemas NP-completos são subconjunto de NP.",
+      "resposta": "Resposta: E\nComentário: Gabarito oficial: E. IV é verdadeira (NP-completo ⊆ NP). III é considerada verdadeira no contexto da questão (autômato com pilha aceita inclusive linguagens regulares, que são subconjunto das LLC). I é imprecisa (AFD também não tem ε-transições por definição). II é falsa (existem MT não determinísticas)."
+    }
+  },
+  {
+    "id": 38,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "O ______, de ______, demonstra limitações dos sistemas formais. Já o ______, de ______, pergunta se um programa irá parar ou entrar em loop infinito.",
+    "alternativas": {
+      "A": "Teorema da Incompletude – Alan Turing – Problema da Parada – Kurt Gödel",
+      "B": "Teorema da Incompletude – Kurt Gödel – Problema da Parada – Alan Turing",
+      "C": "Problema da Parada – Alan Turing – Teorema da Incompletude – Kurt Gödel",
+      "D": "Problema da Parada – Kurt Gödel – Teorema da Incompletude – Alonzo Church",
+      "E": "Teorema da Incompletude – Alonzo Church – Problema da Parada – Alan Turing"
+    },
+    "resposta": "B",
+    "comentario": "Teorema da Incompletude: Kurt Gödel (1931). Problema da Parada (Halting Problem): Alan Turing (1936).",
+    "card": {
+      "pergunta": "O ______, de ______, demonstra limitações dos sistemas formais. Já o ______, de ______, pergunta se um programa irá parar ou entrar em loop infinito.",
+      "resposta": "Resposta: B\nComentário: Teorema da Incompletude: Kurt Gödel (1931). Problema da Parada (Halting Problem): Alan Turing (1936)."
+    }
+  },
+  {
+    "id": 39,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre armazenamento e recuperação em memória secundária, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Um arquivo é um conjunto de dados de diferentes tipos, e cada item individual é chamado de byte.",
+      "B": "Um programa não pode ser considerado um arquivo.",
+      "C": "Na memória secundária, o SO armazena informações em grupos chamados blocos, para aumentar a eficiência na transferência de dados.",
+      "D": "A estrutura de armazenamento em memória secundária utiliza páginas e segmentos, não arquivos e registros.",
+      "E": "Na memória secundária, os dados são armazenados exclusivamente em formato não hierárquico."
+    },
+    "resposta": "C",
+    "comentario": "O SO organiza disco em blocos (clusters) para otimizar a transferência entre disco e RAM. B errada (programas são arquivos executáveis). D errada (usa arquivos e registros). E errada (sistemas de arquivos são hierárquicos).",
+    "card": {
+      "pergunta": "Sobre armazenamento e recuperação em memória secundária, assinale a alternativa correta.",
+      "resposta": "Resposta: C\nComentário: O SO organiza disco em blocos (clusters) para otimizar a transferência entre disco e RAM. B errada (programas são arquivos executáveis). D errada (usa arquivos e registros). E errada (sistemas de arquivos são hierárquicos)."
+    }
+  },
+  {
+    "id": 40,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considerando a compressão de dados, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "A compressão pode ser alcançada atribuindo descrições curtas aos resultados mais frequentes e descrições mais longas aos menos frequentes.",
+      "B": "A compressão pode ser alcançada atribuindo descrições de comprimento uniforme a todos os resultados.",
+      "C": "A desigualdade de Kraft afirma que os comprimentos dos códigos não precisam seguir qualquer padrão específico.",
+      "D": "A codificação de Huffman minimiza o tamanho da mensagem codificada, porém com perda de informação.",
+      "E": "A compressão de dados sempre resulta em perda de qualidade."
+    },
+    "resposta": "A",
+    "comentario": "Princípio da codificação de entropia (Huffman): símbolos mais frequentes recebem códigos mais curtos. Huffman é sem perda. Comprimento uniforme não comprime. Desigualdade de Kraft limita códigos prefix-free.",
+    "card": {
+      "pergunta": "Considerando a compressão de dados, assinale a alternativa correta.",
+      "resposta": "Resposta: A\nComentário: Princípio da codificação de entropia (Huffman): símbolos mais frequentes recebem códigos mais curtos. Huffman é sem perda. Comprimento uniforme não comprime. Desigualdade de Kraft limita códigos prefix-free."
+    }
+  },
+  {
+    "id": 41,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre esquemas de classificação em sistemas de gestão de registros, qual assertiva está correta?\nI. O esquema apenas determina a identidade em sistemas em papel.\nII. Esquemas de classificação são irrelevantes para conformidade regulatória.\nIII. O esquema determina a identidade e lugar de cada arquivo, em sistemas em papel, eletrônicos e híbridos.\nIV. A classificação é realizada apenas na criação, nunca revisada.\nV. Todos os sistemas utilizam exclusivamente métodos manuais.",
+    "alternativas": {
+      "A": "Todas corretas.",
+      "B": "Todas incorretas.",
+      "C": "Apenas III.",
+      "D": "Apenas V.",
+      "E": "Apenas II e IV."
+    },
+    "resposta": "C",
+    "comentario": "Apenas III está correta: esquemas de classificação determinam identidade e localização em sistemas físicos, eletrônicos e híbridos. As demais são falsas.",
+    "card": {
+      "pergunta": "Sobre esquemas de classificação em sistemas de gestão de registros, qual assertiva está correta?\nI. O esquema apenas determina a identidade em sistemas em papel.\nII. Esquemas de classificação são irrelevantes para conformidade regulatória.\nIII. O esquema determina a identidade e lugar de cada arquivo, em sistemas em papel, eletrônicos e híbridos.\nIV. A classificação é realizada apenas na criação, nunca revisada.\nV. Todos os sistemas utilizam exclusivamente métodos manuais.",
+      "resposta": "Resposta: C\nComentário: Apenas III está correta: esquemas de classificação determinam identidade e localização em sistemas físicos, eletrônicos e híbridos. As demais são falsas."
+    }
+  },
+  {
+    "id": 43,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Analise o programa C com 10 threads que incrementam a variável global lbm (sem sincronização). Qual o resultado mais correto?",
+    "alternativas": {
+      "A": "lbm = 1",
+      "B": "lbm = 9",
+      "C": "lbm ≤ 10",
+      "D": "lbm = 10",
+      "E": "lbm ≥ 10"
+    },
+    "resposta": "C",
+    "comentario": "Sem sincronização, múltiplas threads podem ler o mesmo valor de lbm antes de incrementar (race condition), causando perdas de atualização. O valor final pode ser qualquer valor de 1 a 10, portanto lbm ≤ 10.",
+    "card": {
+      "pergunta": "Analise o programa C com 10 threads que incrementam a variável global lbm (sem sincronização). Qual o resultado mais correto?",
+      "resposta": "Resposta: C\nComentário: Sem sincronização, múltiplas threads podem ler o mesmo valor de lbm antes de incrementar (race condition), causando perdas de atualização. O valor final pode ser qualquer valor de 1 a 10, portanto lbm ≤ 10."
+    }
+  },
+  {
+    "id": 44,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "98% dos arquivos têm tamanho entre 1.000 e 2.030 bytes (mediana 1.515 bytes). Qual configuração do novo disco resulta no menor desperdício e menor probabilidade de fragmentação?",
+    "alternativas": {
+      "A": "Tamanho de bloco = 1.024 bytes e alocação encadeada.",
+      "B": "Tamanho de bloco = 1.024 bytes e alocação contígua.",
+      "C": "Tamanho de bloco = 1.024 bytes e alocação indexada.",
+      "D": "Tamanho de bloco = 2.048 bytes e alocação encadeada.",
+      "E": "Tamanho de bloco = 2.048 bytes e alocação contígua."
+    },
+    "resposta": "D",
+    "comentario": "Bloco de 2.048 bytes: a maioria dos arquivos (1.000–2.030 bytes) cabe em 1 ou 2 blocos, minimizando fragmentação externa. Alocação encadeada evita necessidade de blocos contíguos no disco, reduzindo fragmentação. Bloco de 1.024 exigiria 2 blocos para quase todos os arquivos com overhead de ponteiros maior.",
+    "card": {
+      "pergunta": "98% dos arquivos têm tamanho entre 1.000 e 2.030 bytes (mediana 1.515 bytes). Qual configuração do novo disco resulta no menor desperdício e menor probabilidade de fragmentação?",
+      "resposta": "Resposta: D\nComentário: Bloco de 2.048 bytes: a maioria dos arquivos (1.000–2.030 bytes) cabe em 1 ou 2 blocos, minimizando fragmentação externa. Alocação encadeada evita necessidade de blocos contíguos no disco, reduzindo fragmentação. Bloco de 1.024 exigiria 2 blocos para quase todos os arquivos com overhead de ponteiros maior."
+    }
+  },
+  {
+    "id": 45,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre os tipos de dados básicos, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "As variáveis do tipo inteiro armazenam valores sem parte fracionária, positivos e negativos.",
+      "B": "O tipo caractere permite armazenar strings em uma variável do tipo caractere.",
+      "C": "Por padrão, variável do tipo inteiro admite somente valores positivos.",
+      "D": "As variáveis do tipo vetor armazenam valores numéricos com parte fracionária.",
+      "E": "O conjunto de operações para o tipo caractere inclui soma, subtração, multiplicação, divisão e resto."
+    },
+    "resposta": "A",
+    "comentario": "Inteiros representam ℤ: sem parte fracionária, positivos e negativos. B errada (char armazena 1 caractere). C errada (inteiros signed incluem negativos). D errada (vetores são arrays). E errada (char tem operações limitadas).",
+    "card": {
+      "pergunta": "Sobre os tipos de dados básicos, assinale a alternativa correta.",
+      "resposta": "Resposta: A\nComentário: Inteiros representam ℤ: sem parte fracionária, positivos e negativos. B errada (char armazena 1 caractere). C errada (inteiros signed incluem negativos). D errada (vetores são arrays). E errada (char tem operações limitadas)."
+    }
+  },
+  {
+    "id": 46,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre estruturas em linguagens de programação, analise:\nI. Uma estrutura é um conjunto de variáveis agrupadas sob um único nome.\nII. A declaração de uma estrutura corresponde unicamente à definição de um novo tipo, não à declaração de variáveis.\nIII. Uma estrutura pode conter variáveis simples, vetores, ponteiros ou outras estruturas.\nIV. As estruturas permitem agrupar diversos componentes em uma única variável com tipos distintos.\nQuais estão corretas?",
+    "alternativas": {
+      "A": "Apenas I e II.",
+      "B": "Apenas III e IV.",
+      "C": "Apenas I, II e III.",
+      "D": "Apenas II, III e IV.",
+      "E": "I, II, III e IV."
+    },
+    "resposta": "E",
+    "comentario": "Todas estão corretas. I: definição de struct. II: declarar struct não cria variável (em C, precisa instanciar). III: struct pode conter qualquer tipo, incluindo outras structs. IV: struct agrupa componentes heterogêneos.",
+    "card": {
+      "pergunta": "Sobre estruturas em linguagens de programação, analise:\nI. Uma estrutura é um conjunto de variáveis agrupadas sob um único nome.\nII. A declaração de uma estrutura corresponde unicamente à definição de um novo tipo, não à declaração de variáveis.\nIII. Uma estrutura pode conter variáveis simples, vetores, ponteiros ou outras estruturas.\nIV. As estruturas permitem agrupar diversos componentes em uma única variável com tipos distintos.\nQuais estão corretas?",
+      "resposta": "Resposta: E\nComentário: Todas estão corretas. I: definição de struct. II: declarar struct não cria variável (em C, precisa instanciar). III: struct pode conter qualquer tipo, incluindo outras structs. IV: struct agrupa componentes heterogêneos."
+    }
+  },
+  {
+    "id": 47,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Para um programa que verifica se salário é negativo/zero (erro), aplica 10% se > 1000 ou 5% caso contrário, qual instrução usar?",
+    "alternativas": {
+      "A": "Laço encadeado",
+      "B": "Atribuição composta",
+      "C": "Laço infinito",
+      "D": "Condicional encadeada",
+      "E": "Atribuição simples"
+    },
+    "resposta": "D",
+    "comentario": "O problema requer decisões aninhadas (if / else if / else): verifica ≤0 (erro), depois verifica >1000 (10%) ou não (5%). Isso é uma condicional encadeada.",
+    "card": {
+      "pergunta": "Para um programa que verifica se salário é negativo/zero (erro), aplica 10% se > 1000 ou 5% caso contrário, qual instrução usar?",
+      "resposta": "Resposta: D\nComentário: O problema requer decisões aninhadas (if / else if / else): verifica ≤0 (erro), depois verifica >1000 (10%) ou não (5%). Isso é uma condicional encadeada."
+    }
+  },
+  {
+    "id": 48,
+    "ano": 2024,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Um mapa de cidade com arestas não dirigidas (ruas de dois sentidos) e arestas dirigidas (ruas de um sentido) é um:",
+    "alternativas": {
+      "A": "Dígrafo",
+      "B": "Grafo completo",
+      "C": "Grafo misto",
+      "D": "Bígrafo",
+      "E": "Grafo simétrico"
+    },
+    "resposta": "C",
+    "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas. Dígrafo tem apenas arestas dirigidas.",
+    "card": {
+      "pergunta": "Um mapa de cidade com arestas não dirigidas (ruas de dois sentidos) e arestas dirigidas (ruas de um sentido) é um:",
+      "resposta": "Resposta: C\nComentário: Grafo misto: contém arestas dirigidas e não dirigidas. Dígrafo tem apenas arestas dirigidas."
+    }
+  }
+]
