@@ -55,8 +55,9 @@ export function Revisao() {
             Nenhuma questão para revisar hoje. Volte amanhã ou faça um novo simulado.
           </p>
           <div className="revisao-actions">
-            <md-outlined-button onClick={() => navigate('/')}>Início</md-outlined-button>
-            <md-filled-button onClick={() => navigate('/simulado')}>Fazer Simulado</md-filled-button>
+            <md-filled-button onClick={() => { reset(); navigate('/', { state: { action: 'openSimuladoConfig' } }) }}>
+              Fazer Simulado
+            </md-filled-button>
           </div>
         </div>
       </div>
@@ -90,8 +91,9 @@ export function Revisao() {
           </div>
 
           <div className="revisao-actions">
-            <md-outlined-button onClick={() => { reset(); navigate('/') }}>Início</md-outlined-button>
-            <md-filled-button onClick={() => { reset(); navigate('/simulado') }}>Fazer Simulado</md-filled-button>
+            <md-filled-button onClick={() => { reset(); navigate('/', { state: { action: 'openSimuladoConfig' } }) }}>
+              Fazer Simulado
+            </md-filled-button>
           </div>
         </div>
       </div>

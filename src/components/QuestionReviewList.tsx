@@ -64,10 +64,12 @@ export function QuestionReviewList({ answers, questions }: QuestionReviewListPro
                 <span className="question-review-number">{index + 1}</span>
                 <span className="question-review-summary">
                   <span className="question-review-area">
-                    <span className="material-symbols-outlined question-review-area-icon">
-                      {AREA_ICONS[question.area]}
-                    </span>
-                    {question.area}
+                    {question.area && (
+                      <span className="material-symbols-outlined question-review-area-icon">
+                        {AREA_ICONS[question.area]}
+                      </span>
+                    )}
+                    {question.area ?? 'Questão'}
                   </span>
                   <span className="question-review-answer">
                     Sua resposta: {getAnswerLabel(answer)} · Gabarito: {question.resposta}

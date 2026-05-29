@@ -25,7 +25,34 @@ export function HistoricoDetalhe() {
           setError('Resultado não encontrado.')
           return
         }
-        setResult({ id: snap.id, ...snap.data() } as SimuladoResult)
+        const raw = snap.data() as Record<string, unknown>
+        const rawAnswers = (raw.answers ?? []) as Array<Record<string, unknown>>
+
+        const answers = rawAnswers.map(a => ({
+          questionId: a.questionId as number,
+          selected: (a.selected as string | null) ?? null,
+          correct: (a.correct as boolean) ?? false,
+          skipped: (a.skipped as boolean) ?? !a.selected,
+          confidence: (a.confidence as string | null) ?? null,
+        })) as SimuladoResult['answers']
+
+        const questionReviews = (raw.questionReviews as SimuladoResult['questionReviews']) ??
+          rawAnswers
+            .filter(a => a.question != null)
+            .map(a => {
+              const q = a.question as Record<string, unknown>
+              return {
+                id: a.questionId as number,
+                ano: (q.ano as number) ?? 0,
+                area: q.area,
+                enunciado: q.enunciado as string,
+                alternativas: q.alternativas as Record<string, string>,
+                resposta: q.resposta as string,
+                comentario: q.comentario as string | undefined,
+              }
+            }) as SimuladoResult['questionReviews']
+
+        setResult({ id: snap.id, ...raw, answers, questionReviews } as SimuladoResult)
       })
       .catch(() => setError('Erro ao carregar resultado. Verifique sua conexão.'))
       .finally(() => setLoading(false))
@@ -56,7 +83,6 @@ export function HistoricoDetalhe() {
     <RelatorioFinal
       result={result}
       onBack={() => navigate('/historico')}
-      onRetry={() => navigate('/simulado')}
     />
   )
 }

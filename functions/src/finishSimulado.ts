@@ -141,6 +141,8 @@ function buildAnswersOutput(
     const correct = answer.selected === question.resposta
 
     const questionOut: AnswerOutput['question'] = {
+      id: question.id,
+      area: question.area,
       enunciado: question.enunciado,
       alternativas: question.alternativas,
       resposta: question.resposta,

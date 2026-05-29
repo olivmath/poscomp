@@ -1247,22 +1247,24 @@ md-filter-chip {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--color-divider);
+  background: rgba(255, 255, 255, 0.06);
   z-index: var(--z-bar);
 }
 
 .immersive-progress-fill {
   height: 100%;
-  background: var(--md-sys-color-primary);
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 999px;
   transition: width var(--duration-slower) ease;
 }
 
 .immersive-question-wrap {
   flex: 1;
-  padding: calc(var(--icon-size-3xl) + 3px + var(--space-lg)) var(--space-md) var(--space-xl);
-  max-width: 600px;
-  margin: 0 auto;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(52px + 3px + clamp(16px, 4vw, 32px)) clamp(16px, 4vw, 32px) clamp(16px, 4vw, 32px);
+  overflow-y: auto;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1368,7 +1370,7 @@ md-filter-chip {
   flex-shrink: 0;
 }
 
-/* Não sei — blue tint */
+/* Não sei — azul */
 .confidence-btn--unsure {
   background: var(--color-confidence-unsure-bg);
   border-color: var(--color-confidence-unsure-border);
@@ -1390,29 +1392,7 @@ md-filter-chip {
   background: var(--color-confidence-unsure-hover-dark);
 }
 
-/* Deveria saber — amber */
-.confidence-btn--should-know {
-  background: var(--color-confidence-should-bg);
-  border-color: var(--color-confidence-should-border);
-  color: var(--color-confidence-should-text);
-}
-
-.dark .confidence-btn--should-know {
-  background: var(--color-confidence-should-bg-dark);
-  border-color: var(--color-confidence-should-border-dark);
-  color: var(--color-confidence-should-border);
-}
-
-.confidence-btn--should-know:not(:disabled):hover {
-  background: var(--color-confidence-should-bg);
-  border-color: var(--color-confidence-skipped-border);
-}
-
-.dark .confidence-btn--should-know:not(:disabled):hover {
-  background: var(--color-confidence-should-hover-dark);
-}
-
-/* Estudando — teal */
+/* Estudando — âmbar */
 .confidence-btn--studying {
   background: var(--color-confidence-studying-bg);
   border-color: var(--color-confidence-studying-border);
@@ -1432,6 +1412,28 @@ md-filter-chip {
 
 .dark .confidence-btn--studying:not(:disabled):hover {
   background: var(--color-confidence-studying-hover-dark);
+}
+
+/* Devia saber — vermelho */
+.confidence-btn--should-know {
+  background: var(--color-confidence-should-bg);
+  border-color: var(--color-confidence-should-border);
+  color: var(--color-confidence-should-text);
+}
+
+.dark .confidence-btn--should-know {
+  background: var(--color-confidence-should-bg-dark);
+  border-color: var(--color-confidence-should-border-dark);
+  color: var(--color-confidence-should-border);
+}
+
+.confidence-btn--should-know:not(:disabled):hover {
+  background: var(--color-confidence-should-bg);
+  border-color: var(--color-confidence-skipped-border);
+}
+
+.dark .confidence-btn--should-know:not(:disabled):hover {
+  background: var(--color-confidence-should-hover-dark);
 }
 
 /* ═══════════════════════════════════════════════════════════

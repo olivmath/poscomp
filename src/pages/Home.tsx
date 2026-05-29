@@ -2,7 +2,7 @@ import '@material/web/button/filled-button.js'
 import '@material/web/button/outlined-button.js'
 
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useResults } from '../hooks/useResults'
 import { useSimulado } from '../hooks/useSimulado'
 import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
@@ -14,6 +14,7 @@ import { RunningScreen } from '../components/simulado/RunningScreen'
 
 export function Home() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { analytics, loading: analyticsLoading } = useResults()
   const { setImmersive } = useImmersiveMode()
   const {
@@ -38,6 +39,14 @@ export function Home() {
 
   const activeDays = analytics?.activeDaysThisWeek ?? []
   const streak = analytics?.streak ?? 0
+
+  useEffect(() => {
+    if (location.state?.action === 'openSimuladoConfig') {
+      goToConfig()
+      // Limpa o state para não reabrir se atualizar a página
+      navigate('/', { replace: true, state: {} })
+    }
+  }, [location.state, goToConfig, navigate])
 
   useEffect(() => {
     setImmersive(state === 'running')
@@ -79,7 +88,7 @@ export function Home() {
     return (
       <RelatorioFinal
         result={result}
-        onRetry={retry}
+        onReview={() => navigate('/revisao')}
         onHistory={() => navigate('/historico')}
       />
     )

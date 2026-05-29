@@ -65,6 +65,8 @@ export interface SrsCard {
 // ─── SHARED VIEW MODELS ──────────────────────────────────────────
 
 export interface QuestionPreview {
+  id: number
+  area: Area
   enunciado: string
   alternativas: Record<Option, string>
   resposta: Option
@@ -72,9 +74,7 @@ export interface QuestionPreview {
 }
 
 export interface FullQuestionView extends QuestionPreview {
-  id: number
   ano: number
-  area: Area
 }
 
 // ─── INPUT TYPES ─────────────────────────────────────────────────

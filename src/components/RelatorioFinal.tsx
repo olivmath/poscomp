@@ -116,12 +116,12 @@ function AreaRow({ area, correct, total }: AreaRowProps) {
 
 export interface RelatorioFinalProps {
   result: SimuladoResult
-  onRetry?: () => void
   onHistory?: () => void
+  onReview?: () => void
   onBack?: () => void
 }
 
-export function RelatorioFinal({ result, onRetry, onHistory, onBack }: RelatorioFinalProps) {
+export function RelatorioFinal({ result, onHistory, onReview, onBack }: RelatorioFinalProps) {
   const pct = Math.round((result.score / result.totalQuestions) * 100)
 
   const confidenceCounts = useMemo(() => {
@@ -228,14 +228,14 @@ export function RelatorioFinal({ result, onRetry, onHistory, onBack }: Relatorio
             Voltar
           </md-outlined-button>
         )}
-        {onRetry && (
-          <md-outlined-button onClick={onRetry} className="btn-secondary" data-testid="retry-btn">
-            Refazer
+        {onHistory && (
+          <md-outlined-button onClick={onHistory} className="btn-secondary" data-testid="history-btn">
+            Histórico
           </md-outlined-button>
         )}
-        {onHistory && (
-          <md-filled-button onClick={onHistory} className="btn-primary" data-testid="history-btn">
-            Ver Histórico
+        {onReview && result.score < result.totalQuestions && (
+          <md-filled-button onClick={onReview} className="btn-primary" data-testid="review-btn">
+            Revisar
           </md-filled-button>
         )}
       </div>
