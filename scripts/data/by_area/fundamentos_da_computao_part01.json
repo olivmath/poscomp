@@ -12,7 +12,11 @@
     },
     "resposta": "A",
     "comentario": "Na busca sequencial: melhor = 1, pior = n, médio = (n+1)/2 (distribuição uniforme).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza O caso médio é fn n 12?",
+      "resposta": "Na busca sequencial: melhor = 1, pior = n, médio = (n+1)/2 (distribuição uniforme). O caso médio é f(n) = (n + 1)/2.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 22,
@@ -27,7 +31,11 @@
     },
     "resposta": "E",
     "comentario": "A análise assintótica foca no comportamento quando o tamanho da entrada tende ao infinito (notações O, Ω, Θ).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza Analisar o comportamento à medida que o tamanho?",
+      "resposta": "A análise assintótica foca no comportamento quando o tamanho da entrada tende ao infinito (notações O, Ω, Θ). Analisar o comportamento à medida que o tamanho da entrada aumenta indefinidamente.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 23,
@@ -42,7 +50,11 @@
     },
     "resposta": "B",
     "comentario": "Hash bem dimensionada: O(1) médio. Com muitas colisões (pior caso): O(n).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza O1 e On?",
+      "resposta": "Hash bem dimensionada: O(1) médio. Com muitas colisões (pior caso): O(n).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 24,
@@ -57,7 +69,11 @@
     },
     "resposta": "E",
     "comentario": "Um ponteiro (próximo) → simplesmente encadeada. Campo-chave para ordenação → ordenada.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza simplesmente encadeada ordenada?",
+      "resposta": "Um ponteiro (próximo) → simplesmente encadeada. Campo-chave para ordenação → ordenada.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 25,
@@ -72,7 +88,11 @@
     },
     "resposta": "B",
     "comentario": "do...while garante ao menos uma execução. while e for testam antes — corpo pode não executar.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza O corpo do dowhile é executado pelo menos?",
+      "resposta": "do...while garante ao menos uma execução. while e for testam antes — corpo pode não executar.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 26,
@@ -87,7 +107,11 @@
     },
     "resposta": "D",
     "comentario": "Pré-fixado (pré-ordem): raiz → filhos. Simétrico: esq → raiz → dir. Pós-fixado: filhos → raiz.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza pré-fixado?",
+      "resposta": "Pré-fixado (pré-ordem): raiz → filhos. Simétrico: esq → raiz → dir. Pós-fixado: filhos → raiz.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 29,
@@ -102,7 +126,11 @@
     },
     "resposta": "D",
     "comentario": "DMA permite transferência direta dispositivo↔RAM sem envolver a CPU em cada byte.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "DMA permite transferência direta dispositivo↔RAM sem envolver a CPU em cada byte. Direct Memory Access (DMA).\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 33,
@@ -117,7 +145,11 @@
     },
     "resposta": "C",
     "comentario": "12→6→3→1→0: 4 iterações. Saída: 4.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza 4?",
+      "resposta": "12→6→3→1→0: 4 iterações. Saída: 4.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 36,
@@ -132,7 +164,11 @@
     },
     "resposta": "C",
     "comentario": "Contagens mod 3 e paridade são rastreáveis com estados finitos. As demais requerem comparação ilimitada.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza w nº de a divisível por 3 e?",
+      "resposta": "Contagens mod 3 e paridade são rastreáveis com estados finitos. As demais requerem comparação ilimitada.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 38,
@@ -147,7 +183,11 @@
     },
     "resposta": "B",
     "comentario": "Incompletude = Gödel (1931). Problema da Parada = Turing (1936).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza Teorema da Incompletude Kurt Gödel Problema da Parada?",
+      "resposta": "Incompletude = Gödel (1931). Problema da Parada = Turing (1936).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 39,
@@ -162,7 +202,11 @@
     },
     "resposta": "C",
     "comentario": "O SO organiza memória secundária em blocos (clusters) para otimizar a transferência entre disco e RAM.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza Na memória secundária o SO armazena informações em?",
+      "resposta": "O SO organiza memória secundária em blocos (clusters) para otimizar a transferência entre disco e RAM. Na memória secundária, o SO armazena informações em grupos chamados blocos para aumentar a eficiência.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 40,
@@ -177,7 +221,11 @@
     },
     "resposta": "A",
     "comentario": "Princípio da codificação de entropia: símbolos mais frequentes → códigos mais curtos (Huffman, Shannon-Fano).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza A compressão pode ser alcançada atribuindo descrições curtas?",
+      "resposta": "Princípio da codificação de entropia: símbolos mais frequentes → códigos mais curtos (Huffman, Shannon-Fano). A compressão pode ser alcançada atribuindo descrições curtas aos resultados mais frequentes e longas aos menos frequentes.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 45,
@@ -192,7 +240,11 @@
     },
     "resposta": "A",
     "comentario": "Inteiros = ℤ: positivos e negativos sem parte fracionária.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "Inteiros = ℤ: positivos e negativos sem parte fracionária. As variáveis do tipo inteiro são utilizadas para armazenar valores que pertencem ao conjunto de números naturais positivos e negativos.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 47,
@@ -207,7 +259,11 @@
     },
     "resposta": "D",
     "comentario": "Decisões aninhadas (if/else if/else) → condicional encadeada. Não há repetição.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza Condicional encadeada?",
+      "resposta": "Decisões aninhadas (if/else if/else) → condicional encadeada. Não há repetição.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 48,
@@ -222,7 +278,11 @@
     },
     "resposta": "C",
     "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas simultaneamente.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza Grafo misto?",
+      "resposta": "Grafo misto: contém arestas dirigidas e não dirigidas simultaneamente.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 49,
@@ -237,7 +297,11 @@
     },
     "resposta": "A",
     "comentario": "Arestas paralelas (múltiplas): conectam os mesmos vértices. Laços: conectam vértice a si mesmo.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "Arestas paralelas (múltiplas): conectam os mesmos vértices. Laços: conectam vértice a si mesmo.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 50,
@@ -252,7 +316,11 @@
     },
     "resposta": "B",
     "comentario": "Ciclo (circuito): caminho fechado onde vértice inicial = vértice final.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "O que caracteriza ciclo?",
+      "resposta": "Ciclo (circuito): caminho fechado onde vértice inicial = vértice final. ciclo.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 21,
@@ -267,7 +335,11 @@
       "E": "O pior caso é f(n) = 1"
     },
     "resposta": "A",
-    "comentario": "Busca sequencial: melhor caso = 1 (primeiro elemento), pior caso = n (último/ausente), caso médio = (1+2+...+n)/n = (n+1)/2."
+    "comentario": "Busca sequencial: melhor caso = 1 (primeiro elemento), pior caso = n (último/ausente), caso médio = (1+2+...+n)/n = (n+1)/2.",
+    "card": {
+      "pergunta": "O que caracteriza O caso médio é fn n 12?",
+      "resposta": "Busca sequencial: melhor caso = 1 (primeiro elemento), pior caso = n (último/ausente), caso médio = (1+2+...+n)/n = (n+1)/2. O caso médio é f(n) = (n + 1)/2.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 22,
@@ -282,7 +354,11 @@
       "E": "Analisar o comportamento do algoritmo à medida que o tamanho da entrada aumenta indefinidamente."
     },
     "resposta": "E",
-    "comentario": "A análise assintótica descreve a taxa de crescimento do algoritmo quando n→∞, usando notações O, Ω, Θ."
+    "comentario": "A análise assintótica descreve a taxa de crescimento do algoritmo quando n→∞, usando notações O, Ω, Θ.",
+    "card": {
+      "pergunta": "O que caracteriza Analisar o comportamento do algoritmo à medida que?",
+      "resposta": "A análise assintótica descreve a taxa de crescimento do algoritmo quando n→∞, usando notações O, Ω, Θ. Analisar o comportamento do algoritmo à medida que o tamanho da entrada aumenta indefinidamente.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 23,
@@ -297,7 +373,11 @@
       "E": "O(n) e O(2^n)"
     },
     "resposta": "B",
-    "comentario": "Hash bem dimensionada: busca O(1) em média. Com muitas colisões (pior caso), degenera para O(n) (lista encadeada no bucket)."
+    "comentario": "Hash bem dimensionada: busca O(1) em média. Com muitas colisões (pior caso), degenera para O(n) (lista encadeada no bucket).",
+    "card": {
+      "pergunta": "O que caracteriza O1 e On?",
+      "resposta": "Hash bem dimensionada: busca O(1) em média. Com muitas colisões (pior caso), degenera para O(n) (lista encadeada no bucket).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 24,
@@ -312,7 +392,11 @@
       "E": "simplesmente encadeada ordenada"
     },
     "resposta": "E",
-    "comentario": "Um ponteiro para o próximo → simplesmente encadeada. Campo-chave que mantém ordenação → ordenada."
+    "comentario": "Um ponteiro para o próximo → simplesmente encadeada. Campo-chave que mantém ordenação → ordenada.",
+    "card": {
+      "pergunta": "O que caracteriza simplesmente encadeada ordenada?",
+      "resposta": "Um ponteiro para o próximo → simplesmente encadeada. Campo-chave que mantém ordenação → ordenada.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 25,
@@ -327,7 +411,11 @@
       "E": "No for, a condição é testada depois da instrução."
     },
     "resposta": "B",
-    "comentario": "do...while executa o corpo antes do teste (ao menos 1 vez). while e for testam antes: se falso de início, nunca executam. break encerra o laço (não itera); continue é quem pula para a próxima iteração."
+    "comentario": "do...while executa o corpo antes do teste (ao menos 1 vez). while e for testam antes: se falso de início, nunca executam. break encerra o laço (não itera); continue é quem pula para a próxima iteração.",
+    "card": {
+      "pergunta": "O que caracteriza O corpo do dowhile é executado pelo menos?",
+      "resposta": "do...while executa o corpo antes do teste (ao menos 1 vez). while e for testam antes: se falso de início, nunca executam. break encerra o laço (não itera); continue é quem pula para a próxima iteração.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 26,
@@ -342,7 +430,11 @@
       "E": "pós-fixado"
     },
     "resposta": "D",
-    "comentario": "Pré-fixado (pré-ordem): visita raiz primeiro, depois recursivamente as subárvores. Pós-fixado visita raiz por último. Simétrico/central visita raiz entre os filhos."
+    "comentario": "Pré-fixado (pré-ordem): visita raiz primeiro, depois recursivamente as subárvores. Pós-fixado visita raiz por último. Simétrico/central visita raiz entre os filhos.",
+    "card": {
+      "pergunta": "O que caracteriza pré-fixado?",
+      "resposta": "Pré-fixado (pré-ordem): visita raiz primeiro, depois recursivamente as subárvores. Pós-fixado visita raiz por último. Simétrico/central visita raiz entre os filhos.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 27,
@@ -357,7 +449,11 @@
       "E": "Endereço total de 21 bits, com tag = 4 bits, s = 5 bits, d = 7 bits e w = 9 bits."
     },
     "resposta": "A",
-    "comentario": "w = log2(128) = 7 bits (offset na palavra). 16 conjuntos → s = log2(16) = 4 bits. 4K = 4096 blocos → endereço de bloco = log2(4096) = 12 bits. tag = 12 – 4 = 8 bits. Total = tag + s + w = 8 + 4 + 7 = 19 bits. d = log2(64/16) = log2(4) = não se aplica diretamente; o gabarito indica d como campo de deslocamento diferente de w na formulação da questão."
+    "comentario": "w = log2(128) = 7 bits (offset na palavra). 16 conjuntos → s = log2(16) = 4 bits. 4K = 4096 blocos → endereço de bloco = log2(4096) = 12 bits. tag = 12 – 4 = 8 bits. Total = tag + s + w = 8 + 4 + 7 = 19 bits. d = log2(64/16) = log2(4) = não se aplica diretamente; o gabarito indica d como campo de deslocamento diferente de w na formulação da questão.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "w = log2(128) = 7 bits (offset na palavra). 16 conjuntos → s = log2(16) = 4 bits. 4K = 4096 blocos → endereço de bloco = log2(4096) = 12 bits. tag = 12 – 4 = 8 bits. Total = tag + s + w = 8 + 4 + 7 = 19 bits. d = log2(64/16) = log2(4) = não se aplica diretamente; o gabarito indica d como campo de deslocamento diferente de w na formulação da questão.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 28,
@@ -372,7 +468,11 @@
       "E": "Apenas III e IV."
     },
     "resposta": "C",
-    "comentario": "Apenas III está correta: a ponte norte (northbridge) gerencia a comunicação de alta velocidade entre CPU, RAM e GPU. A ponte sul (southbridge) gerencia dispositivos de E/S mais lentos (USB, SATA, PCI). I e II invertem os papéis. IV está errada pois não são intercambiáveis."
+    "comentario": "Apenas III está correta: a ponte norte (northbridge) gerencia a comunicação de alta velocidade entre CPU, RAM e GPU. A ponte sul (southbridge) gerencia dispositivos de E/S mais lentos (USB, SATA, PCI). I e II invertem os papéis. IV está errada pois não são intercambiáveis.",
+    "card": {
+      "pergunta": "O que caracteriza Apenas III?",
+      "resposta": "Apenas III está correta: a ponte norte (northbridge) gerencia a comunicação de alta velocidade entre CPU, RAM e GPU. A ponte sul (southbridge) gerencia dispositivos de E/S mais lentos (USB, SATA, PCI). I e II invertem os papéis. IV está errada pois não são intercambiáveis.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 29,
@@ -387,7 +487,11 @@
       "E": "E/S programada"
     },
     "resposta": "D",
-    "comentario": "DMA transfere dados diretamente entre dispositivo e RAM sem envolver a CPU em cada transferência. Polling e E/S programada requerem CPU monitorando. Interrupções ainda passam pela CPU."
+    "comentario": "DMA transfere dados diretamente entre dispositivo e RAM sem envolver a CPU em cada transferência. Polling e E/S programada requerem CPU monitorando. Interrupções ainda passam pela CPU.",
+    "card": {
+      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
+      "resposta": "DMA transfere dados diretamente entre dispositivo e RAM sem envolver a CPU em cada transferência. Polling e E/S programada requerem CPU monitorando. Interrupções ainda passam pela CPU.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+    }
   },
   {
     "id": 33,
@@ -402,7 +506,11 @@
       "E": "6"
     },
     "resposta": "C",
-    "comentario": "valor2 aponta para valor1. Iterações: 12→6 (cont=1), 6→3 (cont=2), 3→1 (cont=3), 1→0 (cont=4). *valor2 = 0, condição falsa, encerra. Saída: 4."
+    "comentario": "valor2 aponta para valor1. Iterações: 12→6 (cont=1), 6→3 (cont=2), 3→1 (cont=3), 1→0 (cont=4). *valor2 = 0, condição falsa, encerra. Saída: 4.",
+    "card": {
+      "pergunta": "O que caracteriza 4?",
+      "resposta": "valor2 aponta para valor1. Iterações: 12→6 (cont=1), 6→3 (cont=2), 3→1 (cont=3), 1→0 (cont=4). *valor2 = 0, condição falsa, encerra. Saída: 4.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 34,
@@ -417,7 +525,11 @@
       "E": "Erro: printf usa especificador errado."
     },
     "resposta": "A",
-    "comentario": "f_rec retorna 10. resultado = 10/2 = 5 (divisão inteira antes de atribuir ao double). printf(\"%f\") imprime 5.000000. A saída é correta como ponto flutuante (valor 5.0)."
+    "comentario": "f_rec retorna 10. resultado = 10/2 = 5 (divisão inteira antes de atribuir ao double). printf(\"%f\") imprime 5.000000. A saída é correta como ponto flutuante (valor 5.0).",
+    "card": {
+      "pergunta": "O que caracteriza A saída é o número de caracteres dividido?",
+      "resposta": "f_rec retorna 10. resultado = 10/2 = 5 (divisão inteira antes de atribuir ao double). printf(\"%f\") imprime 5.000000. A saída é correta como ponto flutuante (valor 5.0).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 36,
@@ -432,7 +544,11 @@
       "E": "{w ∈ {a,b}* | #a(w) ≠ #b(w)}"
     },
     "resposta": "C",
-    "comentario": "'Número de a's divisível por 3' é rastreável com 3 estados (mod 3). 'Número de b's ímpar' com 2 estados (paridade). Produto = AFD com 6 estados → linguagem regular. As demais exigem comparação ilimitada entre contagens (não regular)."
+    "comentario": "'Número de a's divisível por 3' é rastreável com 3 estados (mod 3). 'Número de b's ímpar' com 2 estados (paridade). Produto = AFD com 6 estados → linguagem regular. As demais exigem comparação ilimitada entre contagens (não regular).",
+    "card": {
+      "pergunta": "O que caracteriza w ab aw divisível por 3 e bw?",
+      "resposta": "'Número de a's divisível por 3' é rastreável com 3 estados (mod 3). 'Número de b's ímpar' com 2 estados (paridade). Produto = AFD com 6 estados → linguagem regular. As demais exigem comparação ilimitada entre contagens (não regular).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   },
   {
     "id": 37,
@@ -447,6 +563,10 @@
       "E": "Apenas III e IV"
     },
     "resposta": "E",
-    "comentario": "Gabarito oficial: E. IV é verdadeira (NP-completo ⊆ NP). III é considerada verdadeira no contexto da questão (autômato com pilha aceita inclusive linguagens regulares, que são subconjunto das LLC). I é imprecisa (AFD também não tem ε-transições por definição). II é falsa (existem MT não determinísticas)."
+    "comentario": "Gabarito oficial: E. IV é verdadeira (NP-completo ⊆ NP). III é considerada verdadeira no contexto da questão (autômato com pilha aceita inclusive linguagens regulares, que são subconjunto das LLC). I é imprecisa (AFD também não tem ε-transições por definição). II é falsa (existem MT não determinísticas).",
+    "card": {
+      "pergunta": "O que caracteriza Apenas III e IV?",
+      "resposta": "Gabarito oficial: E. IV é verdadeira (NP-completo ⊆ NP). III é considerada verdadeira no contexto da questão (autômato com pilha aceita inclusive linguagens regulares, que são subconjunto das LLC). I é imprecisa (AFD também não tem ε-transições por definição). II é falsa (existem MT não determinísticas).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+    }
   }
 ]
