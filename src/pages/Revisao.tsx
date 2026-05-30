@@ -127,7 +127,7 @@ export function Revisao() {
       </div>
 
       {/* Área do card */}
-      <div className="revisao-card-wrap">
+      <div className="revisao-card-wrap" aria-live="polite" aria-atomic="false">
         <div
           className={`revisao-flipcard${showAnswer ? ' flipped' : ''}${feedback !== 'idle' ? ` feedback-${feedback}` : ''}`}
           onClick={question ? () => showAnswer ? hide() : reveal() : undefined}

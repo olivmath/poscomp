@@ -30,7 +30,11 @@ export function WeekHeader({ activeDays, streak }: WeekHeaderProps) {
         </div>
       </div>
 
-      <div className="week-card__days" aria-label="Atividade dos últimos 7 dias">
+      <div
+        className="week-card__days"
+        role="group"
+        aria-label="Atividade dos últimos 7 dias"
+      >
         {last7.map(dateStr => {
           const dow = new Date(dateStr + 'T12:00:00').getDay()
           const isActive = activeDays.includes(dateStr)
@@ -43,9 +47,10 @@ export function WeekHeader({ activeDays, streak }: WeekHeaderProps) {
                 isActive ? 'week-day--active' : '',
                 isToday  ? 'week-day--today'  : '',
               ].filter(Boolean).join(' ')}
-              aria-label={`${DAY_LABELS[dow]}${isActive ? ' — ativo' : ''}${isToday ? ' — hoje' : ''}`}
+              role="img"
+              aria-label={`${DAY_LABELS[dow]}${isToday ? ' — hoje' : ''}${isActive ? ' — ativo' : ' — inativo'}`}
             >
-              <span className="week-day__label">{DAY_LABELS[dow]}</span>
+              <span className="week-day__label" aria-hidden="true">{DAY_LABELS[dow]}</span>
             </div>
           )
         })}
