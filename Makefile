@@ -26,6 +26,10 @@ help:
 	@echo "  emulators            Firebase emulators (auth, functions, firestore)"
 	@echo "  dev-local            dev server com emulators"
 	@echo "  seed-local           seed dados no emulator Firestore"
+	@echo "  local-get-flagged    View flagged questions (local)"
+	@echo "  local-resolve-flagged Resolve a flagged question (local)"
+	@echo "  dev-get-flagged      View flagged questions (dev)"
+	@echo "  dev-resolve-flagged  Resolve a flagged question (dev)"
 	@echo "  deploy-hosting       firebase deploy --only hosting"
 	@echo "  deploy-functions     build + firebase deploy --only functions"
 	@echo "  deploy               validate + deploy completo"
@@ -91,15 +95,6 @@ local-resolve-flagged: resolve-flagged
 # ── Dev Admin ─────────────────────────────────────────────────────────────────
 dev-get-flagged: get-flagged
 dev-resolve-flagged: resolve-flagged
-
-# ── Helper ────────────────────────────────────────────────────────────────────
-helper:
-	@echo "Available commands:"
-	@echo "  make local-get-flagged     - View flagged questions (local)"
-	@echo "  make local-resolve-flagged - Resolve a flagged question (local)"
-	@echo "  make dev-get-flagged       - View flagged questions (dev)"
-	@echo "  make dev-resolve-flagged   - Resolve a flagged question (dev)"
-	@echo "  (and others documented in help)"
 
 # ── Deploy ────────────────────────────────────────────────────────────────────
 deploy-hosting:
