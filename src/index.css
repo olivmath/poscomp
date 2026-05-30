@@ -1494,9 +1494,6 @@ md-filter-chip {
   margin-top: var(--space-sm);
 }
 
-.flag-btn .material-symbols-outlined {
-  font-size: var(--icon-size-sm);
-}
 
 .flag-btn:hover {
   background: var(--color-surface-elevated);
@@ -1534,7 +1531,7 @@ md-filter-chip {
   background: rgba(0, 0, 0, 0.52);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  z-index: 9000;
+  z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1611,7 +1608,7 @@ md-filter-chip {
 
 .modal-btn {
   flex: 1;
-  padding: 10px var(--space-md);
+  padding: var(--space-xs) var(--space-md);
   border-radius: var(--shape-lg);
   font-family: inherit;
   font-size: var(--md-sys-typescale-label-large-size);
@@ -3726,15 +3723,15 @@ md-outlined-button.btn-full {
   background: var(--md-sys-color-surface-container);
   border-radius: var(--shape-md);
   padding: var(--space-md);
-  border-left: 4px solid;
-  animation: slideUp 0.3s ease-out;
+  border-left: var(--border-md) solid;
+  animation: slideUp var(--duration-base) ease-out;
   pointer-events: auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-sm);
 }
 
 .snackbar-icon {
   flex-shrink: 0;
-  font-size: 20px;
+  font-size: var(--icon-size-md);
 }
 
 .snackbar-message {
