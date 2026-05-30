@@ -4,6 +4,7 @@ import { ImmersiveBar } from './ImmersiveBar'
 import { ExitModal } from './ExitModal'
 import { QuestionMapModal } from './QuestionMapModal'
 import { ReportIssueModal } from './ReportIssueModal'
+import LoadingModal from '../LoadingModal'
 import type { Option, QuestionStatus, Confidence, Question } from '../../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
@@ -17,6 +18,7 @@ export function RunningScreen({
   timerMode,
   questionStatuses,
   currentIndex,
+  loadingFinish,
   onSelect,
   onNext,
   onSkip,
@@ -31,6 +33,7 @@ export function RunningScreen({
   timerMode: 'none' | 'per-question'
   questionStatuses: QuestionStatus[]
   currentIndex: number
+  loadingFinish: boolean
   onSelect: (opt: Option) => void
   onNext: (confidence: Confidence, issue?: { comment?: string }) => void
   onSkip: () => void
@@ -126,6 +129,7 @@ export function RunningScreen({
           onCancel={() => setShowIssueModal(false)}
         />
       )}
+      <LoadingModal open={loadingFinish} label="Calculando resultado…" />
     </div>
   )
 }
