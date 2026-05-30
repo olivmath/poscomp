@@ -3241,6 +3241,14 @@ md-outlined-button.btn-full {
   min-height: 0;
 }
 
+/* Quando há markdown o conteúdo alinha à esquerda e rola desde o topo */
+.revisao-answer-body--markdown {
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  padding-top: var(--space-sm);
+}
+
 .revisao-answer-icon {
   color: var(--color-score-high);
   font-size: var(--icon-size-xl);
@@ -3252,6 +3260,81 @@ md-outlined-button.btn-full {
   line-height: 1.5;
   color: var(--md-sys-color-on-surface);
   max-width: 480px;
+}
+
+/* Gabarito com Markdown + LaTeX */
+.revisao-gabarito-markdown {
+  text-align: left;
+  max-width: 520px;
+  width: 100%;
+  font-size: var(--md-sys-typescale-body-small-size);
+  line-height: 1.65;
+  color: var(--md-sys-color-on-surface);
+}
+
+.revisao-gabarito-markdown strong {
+  font-size: var(--md-sys-typescale-body-medium-size);
+  color: var(--md-sys-color-primary);
+}
+
+.revisao-gabarito-markdown h2 {
+  font-size: var(--md-sys-typescale-title-small-size);
+  font-weight: var(--md-sys-typescale-title-small-weight);
+  color: var(--md-sys-color-on-surface-variant);
+  margin: var(--space-sm) 0 var(--space-xs);
+  border-bottom: 1px solid var(--color-divider);
+  padding-bottom: var(--space-xs);
+}
+
+.revisao-gabarito-markdown p {
+  margin: var(--space-xs) 0;
+}
+
+.revisao-gabarito-markdown ul,
+.revisao-gabarito-markdown ol {
+  padding-left: var(--space-md);
+  margin: var(--space-xs) 0;
+}
+
+.revisao-gabarito-markdown li {
+  margin: var(--space-2xs) 0;
+}
+
+/* Blocos de equação LaTeX ($$...$$) */
+.revisao-gabarito-markdown .katex-display {
+  margin: var(--space-sm) 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-xs) 0;
+}
+
+/* Equações inline ($...$) */
+.revisao-gabarito-markdown .katex {
+  font-size: 1.05em;
+}
+
+/* Código inline */
+.revisao-gabarito-markdown code {
+  font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+  font-size: 0.88em;
+  background: var(--md-sys-color-surface-container-highest);
+  padding: var(--space-3xs) var(--space-xs);
+  border-radius: var(--shape-sm-xs);
+}
+
+/* Bloco de código */
+.revisao-gabarito-markdown pre {
+  background: var(--md-sys-color-surface-container);
+  border-radius: var(--shape-md);
+  padding: var(--space-sm);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.revisao-gabarito-markdown pre code {
+  background: transparent;
+  padding: 0;
+  font-size: var(--md-sys-typescale-body-small-size);
 }
 
 /* Botões Errei / Acertei */

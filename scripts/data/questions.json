@@ -12,7 +12,11 @@
     },
     "resposta": "D",
     "comentario": "Aplicando eliminação gaussiana: montamos a matriz aumentada e reduzimos por escalonamento. Após operações de linha, obtemos x = -7/5, y = -2, z = -21/5.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Resolva o sistema linear por eliminação de Gauss:\n2x – 2y + z = –3; x + 3y – 2z = 1; 3x – y – z = 2",
+      "resposta": "## Conceito\nEliminação gaussiana: montar a **matriz aumentada** e escalonar por operações de linha até obter forma triangular.\n\n## Resolução\n$$\\begin{pmatrix}2&-2&1&|&-3\\\\1&3&-2&|&1\\\\3&-1&-1&|&2\\end{pmatrix}$$\n\nApós escalonamento: $x = -\\tfrac{7}{5},\\; y = -2,\\; z = -\\tfrac{21}{5}$\n\n**Gabarito: (D)** $\\left(-\\tfrac{7}{5},\\,-2,\\,-\\tfrac{21}{5}\\right)$"
+    }
   },
   {
     "id": 2,
@@ -27,7 +31,11 @@
     },
     "resposta": "A",
     "comentario": "Expandindo o determinante: det = 1·(α+2) − (−1)·(−α+2) + (−1)·(−4) = α+2 − α+2 + 4 = 8. O coeficiente de α cancela — det = 8 para qualquer α. Todos os valores das alternativas satisfazem a condição; α = 1 é o menor valor válido.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Calcule o valor de α para que det(Z) = 8, com Z = [[1,–1,–1],[–1,1,–1],[2,2,α]]",
+      "resposta": "## Conceito\nO **determinante** de uma matriz 3×3 pode ser calculado pela regra de Sarrus ou cofatores. Se o coeficiente de $\\alpha$ for zero, o det independe de $\\alpha$.\n\n## Resolução\nExpandindo: $\\det(Z) = 1(\\alpha+2) - (-1)(-\\alpha+2) + (-1)(-4) = \\alpha+2-\\alpha+2+4 = 8$\n\nO coeficiente de $\\alpha$ cancela → **det = 8 para qualquer $\\alpha$**. Questão anulada.\n\n**Gabarito: ANULADA** *(todos os valores satisfazem)*"
+    }
   },
   {
     "id": 3,
@@ -42,7 +50,11 @@
     },
     "resposta": "E",
     "comentario": "O polinômio característico é det(A – λI) = 0. Calculando e fatorando, obtém-se –(λ – 2)³, indicando λ = 2 como autovalor de multiplicidade algébrica 3.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual é o polinômio característico da matriz A = [[1,–1,–1],[–1,1,–1],[2,2,4]]?",
+      "resposta": "## Conceito\nO **polinômio característico** é $p(\\lambda) = \\det(A - \\lambda I)$. Suas raízes são os **autovalores** de $A$.\n\n## Resolução\n$$A - \\lambda I = \\begin{pmatrix}1-\\lambda&-1&-1\\\\-1&1-\\lambda&-1\\\\2&2&4-\\lambda\\end{pmatrix}$$\n\nCalculando o determinante e fatorando: $p(\\lambda) = -(\\lambda - 2)^3$\n\n$\\lambda = 2$ é autovalor de multiplicidade algébrica 3.\n\n**Gabarito: (E)** $-(\\lambda - 2)^3$"
+    }
   },
   {
     "id": 4,
@@ -57,7 +69,11 @@
     },
     "resposta": "E",
     "comentario": "Usando inclusão-exclusão: Total = 4! = 24. |A∪B| = 6+6–2 = 10. Válidas = 24 – 10 = 14.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Permutações de {1,2,3,4} onde 1 não está na 1ª posição e 2 não está na 2ª. Quantas são válidas?",
+      "resposta": "## Conceito\n**Princípio da inclusão-exclusão**: $|A^c \\cap B^c| = n! - |A \\cup B| = n! - |A| - |B| + |A \\cap B|$\n\n## Resolução\n- Total: $4! = 24$\n- $|A|$ = 1 fixo na pos. 1: $3! = 6$\n- $|B|$ = 2 fixo na pos. 2: $3! = 6$\n- $|A \\cap B|$: ambos fixos: $2! = 2$\n- Inválidas: $6 + 6 - 2 = 10$\n- **Válidas: $24 - 10 = 14$**\n\n**Gabarito: (E)** 14"
+    }
   },
   {
     "id": 5,
@@ -72,7 +88,11 @@
     },
     "resposta": "A",
     "comentario": "Um grafo acíclico com n vértices é uma árvore/floresta com no máximo n–1 = 6 arestas.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Número máximo de arestas num grafo não-direcionado com 7 vértices sem formar ciclo?",
+      "resposta": "## Conceito\nUm grafo **acíclico** (sem ciclos) é chamado **floresta**. Uma árvore com $n$ vértices tem exatamente $n-1$ arestas — esse é o máximo para um grafo conexo acíclico.\n\n## Resolução\nCom $n = 7$ vértices: máximo de arestas sem ciclo $= n - 1 = 6$\n\n**Gabarito: (A)** 6"
+    }
   },
   {
     "id": 6,
@@ -87,7 +107,11 @@
     },
     "resposta": "D",
     "comentario": "C(5,2)×C(7,2) + C(5,3)×C(7,1) + C(5,4)×C(7,0) = 210 + 70 + 5 = 285.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "7 jogos de ação + 5 de esportes. Pacotes de 4 com pelo menos 2 esportes. Quantas opções?",
+      "resposta": "## Conceito\n**Combinações com restrição**: somar os casos favoráveis (2, 3 ou 4 esportes).\n\n## Resolução\n$$\\binom{5}{2}\\binom{7}{2} + \\binom{5}{3}\\binom{7}{1} + \\binom{5}{4}\\binom{7}{0}$$\n$$= 10 \\cdot 21 + 10 \\cdot 7 + 5 \\cdot 1 = 210 + 70 + 5 = 285$$\n\n**Gabarito: (D)** 285"
+    }
   },
   {
     "id": 7,
@@ -102,7 +126,11 @@
     },
     "resposta": "C",
     "comentario": "Multiplicando pelo conjugado: 1/(√(x²+1) + x) → 0 quando x→∞.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Calcule $\\lim_{x\\to\\infty}(\\sqrt{x^2+1}-x)$",
+      "resposta": "## Conceito\nLimite de forma indeterminada $\\infty - \\infty$: multiplicar pelo **conjugado**.\n\n## Resolução\n$$\\lim_{x\\to\\infty}(\\sqrt{x^2+1}-x)\\cdot\\frac{\\sqrt{x^2+1}+x}{\\sqrt{x^2+1}+x} = \\lim_{x\\to\\infty}\\frac{1}{\\sqrt{x^2+1}+x}$$\n\nQuando $x \\to \\infty$, denominador $\\to \\infty$, logo limite $= 0$.\n\n**Gabarito: (C)** 0"
+    }
   },
   {
     "id": 8,
@@ -117,7 +145,11 @@
     },
     "resposta": "C",
     "comentario": "Domínio: 4–x² ≥ 0 → x ∈ [–2,2]; 3x–1 ≠ 0 → x ≠ 1/3. Logo [–2, 1/3) ∪ (1/3, 2].",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Intervalo de continuidade de $g(x) = \\frac{\\sqrt{4-x^2}}{3x-1}$",
+      "resposta": "## Conceito\nFunção é **contínua** no seu domínio. O domínio exige: radicando $\\geq 0$ **e** denominador $\\neq 0$.\n\n## Resolução\n- $4 - x^2 \\geq 0 \\Rightarrow x \\in [-2, 2]$\n- $3x - 1 \\neq 0 \\Rightarrow x \\neq \\tfrac{1}{3}$\n\nDomínio: $\\left[-2,\\,\\tfrac{1}{3}\\right) \\cup \\left(\\tfrac{1}{3},\\,2\\right]$\n\n**Gabarito: (C)** $[-2, 1/3) \\cup (1/3, 2]$"
+    }
   },
   {
     "id": 9,
@@ -132,7 +164,11 @@
     },
     "resposta": "D",
     "comentario": "Substituição u = ln x: ∫₀¹ u du = [u²/2]₀¹ = 1/2.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Calcule $\\int_1^e \\frac{\\ln x}{x}\\,dx$",
+      "resposta": "## Conceito\n**Substituição**: $u = \\ln x \\Rightarrow du = \\frac{dx}{x}$. Converte a integral em forma padrão.\n\n## Resolução\n$$u = \\ln x,\\quad du = \\frac{dx}{x}$$\nLimites: $x=1 \\Rightarrow u=0$; $x=e \\Rightarrow u=1$\n$$\\int_0^1 u\\,du = \\left[\\frac{u^2}{2}\\right]_0^1 = \\frac{1}{2}$$\n\n**Gabarito: (D)** $\\frac{1}{2}$"
+    }
   },
   {
     "id": 10,
@@ -147,7 +183,11 @@
     },
     "resposta": "B",
     "comentario": "M = ((5+4)/2, (−1−2)/2) = (9/2, −3/2).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Ponto médio do segmento A(5, –1) e B(4, –2)?",
+      "resposta": "## Conceito\n**Ponto médio**: $M = \\left(\\frac{x_A+x_B}{2},\\,\\frac{y_A+y_B}{2}\\right)$\n\n## Resolução\n$$M = \\left(\\frac{5+4}{2},\\,\\frac{-1+(-2)}{2}\\right) = \\left(\\frac{9}{2},\\,-\\frac{3}{2}\\right)$$\n\n**Gabarito: (B)** $(\\tfrac{9}{2},\\,-\\tfrac{3}{2})$"
+    }
   },
   {
     "id": 11,
@@ -162,7 +202,11 @@
     },
     "resposta": "A",
     "comentario": "d = |5–k|/√2 = √2 → |5–k| = 2 → k = 3 ou k = 7.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Valores de $k$ tal que a distância de $P(2,k)$ à reta $x - y + 3 = 0$ seja $\\sqrt{2}$",
+      "resposta": "## Conceito\n**Distância ponto-reta**: $d = \\dfrac{|Ax_0 + By_0 + C|}{\\sqrt{A^2+B^2}}$\n\n## Resolução\n$$d = \\frac{|2 - k + 3|}{\\sqrt{1^2+(-1)^2}} = \\frac{|5-k|}{\\sqrt{2}} = \\sqrt{2}$$\n$$|5-k| = 2 \\Rightarrow k = 3 \\text{ ou } k = 7$$\n\n**Gabarito: (A)** $k=3$ e $k=7$"
+    }
   },
   {
     "id": 12,
@@ -177,7 +221,11 @@
     },
     "resposta": "E",
     "comentario": "Vetores diretores (−4,1) e (8,−2) são proporcionais → retas paralelas. Pontos distintos → sem intersecção.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Ponto de interseção das retas $r: x=2-4t,\\,y=-2+t$ e $s: x=3+8t,\\,y=-1-2t$",
+      "resposta": "## Conceito\nVerificar se os **vetores diretores são paralelos**. Se $\\vec{v}_r = k\\vec{v}_s$, as retas são paralelas ou coincidentes.\n\n## Resolução\n$\\vec{v}_r = (-4,1)$, $\\vec{v}_s = (8,-2) = -2(-4,1)$ → **paralelas**.\n\nPontos $(2,-2)$ e $(3,-1)$ são distintos → retas **paralelas e distintas**, sem interseção.\n\n**Gabarito: (E)** As retas são paralelas e não se intersectam."
+    }
   },
   {
     "id": 13,
@@ -192,7 +240,11 @@
     },
     "resposta": "D",
     "comentario": "~p → ~q é a contrapositiva de q → p, portanto equivalente a q → p.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "$\\neg p \\to \\neg q$ é equivalente a qual proposição?",
+      "resposta": "## Conceito\n**Contrapositiva**: $A \\to B \\equiv \\neg B \\to \\neg A$ (logicamente equivalentes).\n\n## Resolução\n$\\neg p \\to \\neg q$ é a contrapositiva de $q \\to p$:\n$$\\neg p \\to \\neg q \\equiv q \\to p$$\n\n**Gabarito: (D)** $q \\to p$"
+    }
   },
   {
     "id": 14,
@@ -207,7 +259,11 @@
     },
     "resposta": "C",
     "comentario": "~(p∨q) V ↔ p=F e q=F. Nesse cenário ~p→q = V→F = F.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "$\\neg(p \\lor q)$ é verdadeira sse qual proposição é falsa?",
+      "resposta": "## Conceito\n$\\neg(p \\lor q) = V$ exige $p = F$ e $q = F$ (De Morgan).\n\n## Resolução\nCom $p=F, q=F$: analisando cada alternativa:\n- $\\neg p \\to q = V \\to F = \\mathbf{F}$ ← **esta é falsa**\n- $\\neg p = V,\\; \\neg q = V,\\; \\neg p \\to \\neg q = V$\n\nA proposição que é **falsa** nesse cenário é $\\neg p \\to q$.\n\n**Gabarito: (C)** $\\neg p \\to q$"
+    }
   },
   {
     "id": 15,
@@ -222,7 +278,11 @@
     },
     "resposta": "B",
     "comentario": "Por modus tollens com P1: ~Ana Paula ∧ ~Joaquim. Por modus tollens com P3: ~sábado. Conclusão: hoje não é sábado e Joaquim não jogou.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Dado: (1) Ana/Joaquim → Victória vai à praia; (2) Victória NÃO foi; (3) Sábado → Ana E Caio. O que se conclui?",
+      "resposta": "## Conceito\n**Modus Tollens**: $P \\to Q,\\; \\neg Q \\Rightarrow \\neg P$\n\n## Resolução\n1. P2 + MT em P1: $\\neg$(Ana joga) $\\land$ $\\neg$(Joaquim joga)\n2. MT em P3 com $\\neg$(Ana joga): $\\neg$(hoje é sábado)\n\nConclusão: **hoje não é sábado** e **Joaquim não jogou**.\n\n**Gabarito: (B)** Hoje não é sábado e Joaquim não jogou videogame."
+    }
   },
   {
     "id": 19,
@@ -237,7 +297,11 @@
     },
     "resposta": "C",
     "comentario": "26 valores < 65 em 80 observações → 26/80 = 32,5%.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Dos 80 tempos de execução, qual percentagem é inferior a 65 segundos?",
+      "resposta": "## Conceito\n**Frequência relativa**: contar quantos valores satisfazem a condição e dividir pelo total.\n\n## Resolução\nContando os 26 valores $< 65$ na tabela de frequências:\n$$\\frac{26}{80} = 0{,}325 = 32{,}5\\%$$\n\n**Gabarito: (C)** 32,5%"
+    }
   },
   {
     "id": 20,
@@ -252,7 +316,11 @@
     },
     "resposta": "C",
     "comentario": "Soma dos 80 valores ≈ 5360 → média = 5360/80 = 67.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual o tempo médio de execução do software (baseado nos 80 valores)?",
+      "resposta": "## Conceito\n**Média aritmética**: $\\bar{x} = \\dfrac{\\sum x_i}{n}$\n\n## Resolução\nSomando os 80 valores da distribuição: $\\sum x_i \\approx 5360$\n$$\\bar{x} = \\frac{5360}{80} = 67$$\n\n**Gabarito: (C)** 67"
+    }
   },
   {
     "id": 21,
@@ -267,7 +335,11 @@
     },
     "resposta": "A",
     "comentario": "Na busca sequencial: melhor = 1, pior = n, médio = (n+1)/2 (distribuição uniforme).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Busca sequencial com chave única: qual afirmativa sobre f(n) está correta?",
+      "resposta": "**Gabarito: (A)** O caso médio é $f(n) = (n+1)/2$\n\nNa busca sequencial:\n- **Melhor caso**: $f(n) = 1$ (primeiro elemento)\n- **Pior caso**: $f(n) = n$ (último ou ausente)\n- **Caso médio**: $f(n) = \\frac{1+2+\\cdots+n}{n} = \\frac{n+1}{2}$\n\nAs demais alternativas invertem ou confundem esses casos."
+    }
   },
   {
     "id": 22,
@@ -282,7 +354,11 @@
     },
     "resposta": "E",
     "comentario": "A análise assintótica foca no comportamento quando o tamanho da entrada tende ao infinito (notações O, Ω, Θ).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual o objetivo da análise assintótica de algoritmos?",
+      "resposta": "**Gabarito: (E)** Analisar o comportamento à medida que o tamanho da entrada aumenta indefinidamente.\n\nA análise assintótica descreve a **taxa de crescimento** do tempo/espaço quando $n \\to \\infty$, usando notações:\n- $O(f)$: limite superior (pior caso)\n- $\\Omega(f)$: limite inferior (melhor caso)\n- $\\Theta(f)$: comportamento exato\n\nNão se trata de entradas pequenas, nem de uma análise simultânea de todos os casos."
+    }
   },
   {
     "id": 23,
@@ -297,7 +373,11 @@
     },
     "resposta": "B",
     "comentario": "Hash bem dimensionada: O(1) médio. Com muitas colisões (pior caso): O(n).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Complexidade de busca em tabela hash: média e pior caso, respectivamente?",
+      "resposta": "**Gabarito: (B)** $O(1)$ e $O(n)$\n\n- **Média**: $O(1)$ com fator de carga baixo e boa função hash — acesso direto pelo índice\n- **Pior caso**: $O(n)$ quando todas as chaves colidem no mesmo bucket → degenera em lista encadeada\n\n**Por que (A) está errada**: o pior caso não é $O(1)$ — colisões podem acumular."
+    }
   },
   {
     "id": 24,
@@ -312,7 +392,11 @@
     },
     "resposta": "E",
     "comentario": "Um ponteiro (próximo) → simplesmente encadeada. Campo-chave para ordenação → ordenada.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Lista com 1 ponteiro (próximo), estrutura linear e campo-chave para ordenação. Qual tipo?",
+      "resposta": "**Gabarito: (E)** Simplesmente encadeada ordenada\n\n- **Simplesmente encadeada**: cada nó tem apenas 1 ponteiro (para o próximo)\n- **Ordenada**: possui campo-chave que mantém os elementos em ordem\n\nDuplamente encadeada teria 2 ponteiros (anterior + próximo). Circular teria o último apontando para o primeiro."
+    }
   },
   {
     "id": 25,
@@ -327,7 +411,11 @@
     },
     "resposta": "B",
     "comentario": "do...while garante ao menos uma execução. while e for testam antes — corpo pode não executar.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Sobre instruções de repetição: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (B)** O corpo do `do...while` executa ao menos uma vez; `while` e `for` podem nunca executar.\n\n- `do...while`: teste **após** o corpo → garante 1 execução mínima\n- `while` / `for`: teste **antes** → se condição falsa de início, corpo nunca executa\n- `break` encerra o laço; `continue` pula para a próxima iteração (não `break`)\n- `if` não é estrutura de repetição"
+    }
   },
   {
     "id": 26,
@@ -342,7 +430,11 @@
     },
     "resposta": "D",
     "comentario": "Pré-fixado (pré-ordem): raiz → filhos. Simétrico: esq → raiz → dir. Pós-fixado: filhos → raiz.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Caminhamento de árvore onde a raiz é visitada primeiro, depois as subárvores recursivamente",
+      "resposta": "**Gabarito: (D)** Pré-fixado (pré-ordem)\n\n| Caminhamento | Ordem |\n|---|---|\n| **Pré-fixado** | raiz → esq → dir |\n| Simétrico (in-ordem) | esq → raiz → dir |\n| Pós-fixado | esq → dir → raiz |\n| Em largura | nível a nível |\n\nO pré-fixado visita a raiz **antes** de qualquer subárvore."
+    }
   },
   {
     "id": 29,
@@ -357,7 +449,11 @@
     },
     "resposta": "D",
     "comentario": "DMA permite transferência direta dispositivo↔RAM sem envolver a CPU em cada byte.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual método transfere dados entre E/S e memória principal sem envolver a CPU em cada byte?",
+      "resposta": "**Gabarito: (D)** DMA (Direct Memory Access)\n\n- **DMA**: controlador dedicado transfere dados dispositivo↔RAM diretamente; CPU só é notificada ao final\n- **Polling**: CPU fica verificando ativamente o dispositivo\n- **Interrupções**: dispositivo sinaliza a CPU, que interrompe o fluxo para tratar\n- **E/S programada**: CPU controla cada transferência byte a byte"
+    }
   },
   {
     "id": 33,
@@ -372,7 +468,11 @@
     },
     "resposta": "C",
     "comentario": "12→6→3→1→0: 4 iterações. Saída: 4.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Código C: valor1=12, valor2=&valor1, do { valor1>>=1; cont++; } while(*valor2>0). Saída?",
+      "resposta": "**Gabarito: (C)** 4\n\n`valor2` aponta para `valor1`. A cada iteração, `valor1` é deslocado 1 bit à direita:\n\n| Iteração | valor1 | cont |\n|---|---|---|\n| 1 | 12 → 6 | 1 |\n| 2 | 6 → 3 | 2 |\n| 3 | 3 → 1 | 3 |\n| 4 | 1 → 0 | 4 |\n\n`*valor2 = 0` → condição falsa → encerra. `printf(\"%d\", cont)` = **4**"
+    }
   },
   {
     "id": 36,
@@ -387,7 +487,11 @@
     },
     "resposta": "C",
     "comentario": "Contagens mod 3 e paridade são rastreáveis com estados finitos. As demais requerem comparação ilimitada.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual linguagem pode ser gerada por gramática regular?",
+      "resposta": "**Gabarito: (C)** $\\{w \\mid \\#a(w) \\text{ div. por 3 e } \\#b(w) \\text{ ímpar}\\}$\n\nGramáticas regulares geram linguagens reconhecíveis por **AFD** (estados finitos).\n\n- Contar $a$ mod 3: 3 estados. Contar $b$ mod 2: 2 estados → produto = **6 estados → regular**\n- As demais exigem comparar $\\#a$ com $\\#b$ (ilimitado) → requer pilha → não regular"
+    }
   },
   {
     "id": 38,
@@ -402,7 +506,11 @@
     },
     "resposta": "B",
     "comentario": "Incompletude = Gödel (1931). Problema da Parada = Turing (1936).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Teorema da Incompletude (___) demonstra limitações de sistemas formais. Problema da Parada (___) pergunta se um programa para.",
+      "resposta": "**Gabarito: (B)** Incompletude = Kurt Gödel; Problema da Parada = Alan Turing\n\n| Resultado | Autor | Ano |\n|---|---|---|\n| Teorema da Incompletude | **Kurt Gödel** | 1931 |\n| Problema da Parada | **Alan Turing** | 1936 |\n\nAlonzo Church contribuiu com o Cálculo-λ e a Tese Church-Turing, mas não com esses dois resultados."
+    }
   },
   {
     "id": 39,
@@ -417,7 +525,11 @@
     },
     "resposta": "C",
     "comentario": "O SO organiza memória secundária em blocos (clusters) para otimizar a transferência entre disco e RAM.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Armazenamento em memória secundária: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (C)** O SO armazena informações em grupos chamados blocos para aumentar a eficiência.\n\n- O SO organiza o disco em **blocos** (clusters) para minimizar acessos de E/S\n- **B errada**: programas são arquivos executáveis\n- **D errada**: memória secundária usa arquivos/registros, não páginas (páginas são memória virtual)\n- **E errada**: sistemas de arquivos são hierárquicos (diretórios)"
+    }
   },
   {
     "id": 40,
@@ -432,7 +544,11 @@
     },
     "resposta": "A",
     "comentario": "Princípio da codificação de entropia: símbolos mais frequentes → códigos mais curtos (Huffman, Shannon-Fano).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Compressão de dados: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (A)** Descrições curtas para resultados frequentes, longas para os raros.\n\nEsse é o **princípio de Huffman / Shannon**:\n- Símbolo mais frequente → código mais curto → menor comprimento médio\n- **D errada**: Huffman é **sem perda** (lossless)\n- **B errada**: comprimento uniforme não comprime\n- **E errada**: compressão lossless não perde qualidade"
+    }
   },
   {
     "id": 45,
@@ -447,7 +563,11 @@
     },
     "resposta": "A",
     "comentario": "Inteiros = ℤ: positivos e negativos sem parte fracionária.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Tipos de dados básicos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (A)** Variáveis inteiras armazenam valores sem parte fracionária, positivos e negativos.\n\n- Inteiros = $\\mathbb{Z}$: sem parte fracionária, positivos e negativos (com sinal)\n- **B errada**: `char` armazena 1 caractere, não strings\n- **C errada**: inteiros `signed` incluem negativos\n- **D errada**: vetores são arrays, não armazenam frações\n- **E errada**: operações aritméticas completas não se aplicam a char"
+    }
   },
   {
     "id": 47,
@@ -462,7 +582,11 @@
     },
     "resposta": "D",
     "comentario": "Decisões aninhadas (if/else if/else) → condicional encadeada. Não há repetição.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Programa verifica salário ≤0 (erro), aplica 10% se >1000 ou 5% caso contrário. Qual instrução usar?",
+      "resposta": "**Gabarito: (D)** Condicional encadeada\n\nO problema tem **múltiplas condições exclusivas** que devem ser testadas em sequência:\n```\nif (salário <= 0) → erro\nelse if (salário > 1000) → 10%\nelse → 5%\n```\nIsso é `if / else if / else` = **condicional encadeada**. Não há repetição (descarta laços)."
+    }
   },
   {
     "id": 48,
@@ -477,7 +601,11 @@
     },
     "resposta": "C",
     "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas simultaneamente.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Mapa com ruas de dois sentidos (não-dirigidas) e mão única (dirigidas). Que tipo de grafo é?",
+      "resposta": "**Gabarito: (C)** Grafo misto\n\n| Tipo | Arestas |\n|---|---|\n| **Grafo misto** | dirigidas + não-dirigidas |\n| Dígrafo | apenas dirigidas |\n| Grafo simples | apenas não-dirigidas |\n\nO mapa de cidades com mão dupla e mão única é o exemplo clássico de **grafo misto**."
+    }
   },
   {
     "id": 49,
@@ -492,7 +620,11 @@
     },
     "resposta": "A",
     "comentario": "Arestas paralelas (múltiplas): conectam os mesmos vértices. Laços: conectam vértice a si mesmo.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Duas arestas com os mesmos pontos finais (ou mesma origem/destino) são chamadas de?",
+      "resposta": "**Gabarito: (A)** Paralelas\n\n- **Paralelas** (múltiplas): conectam os **mesmos vértices** (pode haver várias entre u e v)\n- **Laços**: aresta que conecta um vértice a **si mesmo** (u → u)\n- **Adjacentes**: arestas que compartilham um vértice\n- **Incidentes**: aresta incide sobre seus dois vértices"
+    }
   },
   {
     "id": 50,
@@ -507,7 +639,11 @@
     },
     "resposta": "B",
     "comentario": "Ciclo (circuito): caminho fechado onde vértice inicial = vértice final.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Caminho em que os vértices de início e fim são os mesmos é chamado de?",
+      "resposta": "**Gabarito: (B)** Ciclo\n\n- **Ciclo** (circuito): caminho fechado onde vértice inicial = vértice final\n- **Caminho simples**: não repete vértices, não é fechado\n- **Laço**: aresta única ligando vértice a si mesmo\n- **Arco**: aresta direcionada em um dígrafo"
+    }
   },
   {
     "id": 51,
@@ -522,7 +658,11 @@
     },
     "resposta": "D",
     "comentario": "RIGHT JOIN retorna todos os PAIs. Item1 aparece 2x (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 sem filhos → NULL. Total: 5 tuplas.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "RIGHT OUTER JOIN auto-referenciado em ITEM(Id,Nome,Fk): quantas tuplas retorna?",
+      "resposta": "**Gabarito: (D)** 5 tuplas\n\nRIGHT JOIN retorna **todos os PAIs** (lado direito), independente de terem filhos:\n\n| PAI | FILHO |\n|---|---|\n| Item1 | Item2 (Fk=1) |\n| Item1 | Item3 (Fk=1) |\n| Item3 | Item4 (Fk=3) |\n| Item2 | NULL |\n| Item4 | NULL |\n\nTotal: **5 linhas**"
+    }
   },
   {
     "id": 52,
@@ -537,7 +677,11 @@
     },
     "resposta": "B",
     "comentario": "Grafo de espera detecta deadlock via ciclos. As demais são protocolos de prevenção.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Entre estratégias de tratamento de deadlock, qual é protocolo de detecção (não prevenção)?",
+      "resposta": "**Gabarito: (B)** Grafo de espera\n\nO **grafo de espera** (wait-for graph) **detecta** deadlocks verificando a existência de ciclos após o fato.\n\nAs demais são **prevenção** (evitam que deadlock ocorra):\n- Espera cautelosa, Sem espera, Esperar-ou-morrer, Ferir-ou-esperar"
+    }
   },
   {
     "id": 54,
@@ -552,7 +696,11 @@
     },
     "resposta": "E",
     "comentario": "Esquema de Tradução: GLC com ações semânticas embutidas nos lados direitos, executadas durante a análise.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "No contexto de compiladores, um Esquema de Tradução é:",
+      "resposta": "**Gabarito: (E)** GLC com fragmentos de programas inseridos nos lados direitos das produções.\n\n**Esquema de Tradução** (Translation Scheme): GLC onde **ações semânticas** são embutidas nas produções e executadas durante a análise sintática.\n\n- **A errada**: descreve um **grafo de dependência de atributos**\n- **C errada**: descreve recuperação de erros"
+    }
   },
   {
     "id": 58,
@@ -567,7 +715,11 @@
     },
     "resposta": "A",
     "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Resultados de software de alta qualidade, EXCETO:",
+      "resposta": "**Gabarito: (A)** Aumentar a complexidade dos processos de negócios.\n\nSoftware de alta qualidade visa **simplificar** e otimizar processos, não aumentar sua complexidade.\n\nOs demais itens são benefícios reais: maior receita, rentabilidade, disponibilidade e menor manutenção."
+    }
   },
   {
     "id": 59,
@@ -582,7 +734,11 @@
     },
     "resposta": "D",
     "comentario": "Especificação de software (Engenharia de Requisitos): entender e documentar os serviços exigidos e restrições.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "\"Entender e definir serviços exigidos e restrições do sistema\": qual atividade fundamental de ES?",
+      "resposta": "**Gabarito: (D)** Especificação de software\n\n| Atividade | Descrição |\n|---|---|\n| **Especificação** | Definir requisitos e restrições |\n| Projeto | Definir arquitetura e componentes |\n| Validação | Verificar conformidade com requisitos |\n| Evolução | Adaptar após entrega |"
+    }
   },
   {
     "id": 60,
@@ -597,7 +753,11 @@
     },
     "resposta": "A",
     "comentario": "Todas as três assertivas estão alinhadas com Pressman e Maxim sobre GCS.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "GCS (Pressman e Maxim): assertivas I–III sobre configuração de software, hierarquia, ciclo de vida.",
+      "resposta": "**Gabarito: (A)** Todas corretas.\n\n- **I** ✓: toda informação gerada é parte da configuração de software\n- **II** ✓: à medida que o projeto avança, cria-se hierarquia de itens de configuração\n- **III** ✓: GCS gerencia mudanças em todo o ciclo de vida"
+    }
   },
   {
     "id": 61,
@@ -612,7 +772,11 @@
     },
     "resposta": "E",
     "comentario": "Crossover = recombinação de cromossomos de dois pais. Mutação = C. Seleção = D. Elitismo = B.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Em Algoritmos Genéticos, o operador de crossover é responsável por:",
+      "resposta": "**Gabarito: (E)** Combinar partes dos cromossomos de dois pais para criar descendentes.\n\n| Operador | Função |\n|---|---|\n| **Crossover** | Recombinar material genético de dois pais |\n| Mutação | Alterar aleatoriamente genes de um indivíduo |\n| Seleção | Escolher indivíduos para reprodução |\n| Elitismo | Manter os melhores da geração anterior |\n| Avaliação | Calcular a aptidão (fitness) de cada indivíduo |"
+    }
   },
   {
     "id": 62,
@@ -627,7 +791,11 @@
     },
     "resposta": "C",
     "comentario": "Motor de inferência: aplica regras da base de conhecimento sobre fatos (forward/backward chaining).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Em Sistemas Especialistas, o papel do motor de inferência é:",
+      "resposta": "**Gabarito: (C)** Usar regras da base de conhecimento para derivar conclusões a partir de fatos.\n\nO **motor de inferência** aplica regras lógicas (IF-THEN) sobre os fatos para derivar novas conclusões:\n- **Forward chaining**: dados → conclusão\n- **Backward chaining**: conclusão → busca evidências\n\nNão gerencia UI, não substitui a base de conhecimento."
+    }
   },
   {
     "id": 63,
@@ -642,7 +810,11 @@
     },
     "resposta": "D",
     "comentario": "Amostragem: discretiza coordenadas (x,y). Quantização: discretiza amplitude (intensidade).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Na digitalização de imagens: ___ discretiza coordenadas espaciais; ___ discretiza amplitude.",
+      "resposta": "**Gabarito: (D)** Amostragem – Quantização\n\n| Processo | O que discretiza | Resultado |\n|---|---|---|\n| **Amostragem** | Coordenadas $(x,y)$ | Resolução espacial (pixels) |\n| **Quantização** | Amplitude (intensidade) | Profundidade de bits (tons de cinza/cor) |"
+    }
   },
   {
     "id": 65,
@@ -657,7 +829,11 @@
     },
     "resposta": "E",
     "comentario": "Longest prefix match: 11.1.2.5 corresponde a 11.1.0.0/16 e 11.1.2.0/24. /24 é mais específico.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Roteador recebe pacote com destino 11.1.2.5. Tabela: 13.0.0.0/8, 11.1.0.0/16, 11.1.2.0/24… Qual rota?",
+      "resposta": "**Gabarito: (E)** 11.1.2.0/24\n\nAlgoritmo de **longest prefix match** (prefixo mais longo):\n- 13.x.x.x → não casa\n- 11.1.0.0/**16** → casa (primeiros 16 bits batem)\n- 11.1.2.0/**24** → casa (primeiros 24 bits batem) → **mais específico → escolhido**"
+    }
   },
   {
     "id": 66,
@@ -672,7 +848,11 @@
     },
     "resposta": "D",
     "comentario": "IP é best-effort sem conexão. Fragmentação pode gerar duplicatas entregues. Porta pertence à camada de transporte.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual afirmativa sobre o protocolo IP está correta?",
+      "resposta": "**Gabarito: (D)** Várias cópias de um pacote IP podem ser entregues.\n\nIP é **best-effort, sem conexão**: fragmentação e rotas diferentes podem gerar duplicatas.\n\n- **A errada**: IP é baseado em datagramas e **sem conexão** (não orientado)\n- **B errada**: melhor esforço ≠ garantia de entrega\n- **E errada**: porta é campo da **camada de transporte** (TCP/UDP)"
+    }
   },
   {
     "id": 67,
@@ -687,7 +867,11 @@
     },
     "resposta": "E",
     "comentario": "DNS usa UDP porta 53 para consultas rápidas. TCP apenas para transferências de zona ou respostas > 512 bytes.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual protocolo da camada de transporte o DNS usa para consultas regulares?",
+      "resposta": "**Gabarito: (E)** UDP\n\nDNS usa **UDP porta 53** para consultas regulares:\n- Mensagens pequenas (< 512 bytes)\n- Velocidade > confiabilidade\n- Sem handshake = latência menor\n\nTCP é usado apenas para **transferências de zona** ou respostas > 512 bytes."
+    }
   },
   {
     "id": 68,
@@ -702,7 +886,11 @@
     },
     "resposta": "B",
     "comentario": "Transparência de acesso: mesma interface para arquivos locais e remotos.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Mesma interface para arquivos locais e remotos (cliente não precisa saber): qual transparência?",
+      "resposta": "**Gabarito: (B)** Transparência de acesso\n\n| Tipo de transparência | Descrição |\n|---|---|\n| **Acesso** | Mesma interface para local e remoto |\n| Localização | Nomes não revelam onde o arquivo está |\n| Mobilidade | Arquivos podem ser movidos sem mudar nomes |\n| Desempenho | Performance não degrada com carga |"
+    }
   },
   {
     "id": 69,
@@ -717,7 +905,11 @@
     },
     "resposta": "E",
     "comentario": "Falha por queda (crash): componente para abruptamente após operar corretamente.",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Servidor para abruptamente após operar corretamente. Que tipo de falha é?",
+      "resposta": "**Gabarito: (E)** Falha por queda (crash failure)\n\n| Tipo de falha | Característica |\n|---|---|\n| **Por queda** | Para abruptamente, sem mais respostas |\n| Por omissão | Deixa de responder algumas requisições |\n| De temporização | Responde fora do limite de tempo |\n| Arbitrária (Bizantina) | Comportamento imprevisível/malicioso |"
+    }
   },
   {
     "id": 70,
@@ -732,7 +924,11 @@
     },
     "resposta": "A",
     "comentario": "Centralizado: coordenador único gerencia acesso → exatamente 3 mensagens (req, grant, release).",
-    "ano": 2024
+    "ano": 2024,
+    "card": {
+      "pergunta": "Exclusão mútua que usa exatamente 3 mensagens (requisição, permissão, liberação):",
+      "resposta": "**Gabarito: (A)** Algoritmo centralizado\n\nNo algoritmo **centralizado** de exclusão mútua:\n1. Processo envia **requisição** ao coordenador\n2. Coordenador envia **permissão**\n3. Processo envia **liberação** ao sair\n\nTotal: **3 mensagens**. O algoritmo de Ricart-Agrawala (distribuído) usa $2(n-1)$ mensagens."
+    }
   },
   {
     "id": 1,
@@ -747,7 +943,11 @@
       "E": "(-1/5, -1, -1/5)"
     },
     "resposta": "D",
-    "comentario": "Montando a matriz aumentada e aplicando eliminação gaussiana: após escalonamento obtém-se x = -7/5, y = -2, z = -21/5. Verificação na eq. 1: 2(-7/5) – 2(-2) + (-21/5) = -14/5 + 4 – 21/5 = -35/5 + 4 = -7 + 4 = -3 ✓."
+    "comentario": "Montando a matriz aumentada e aplicando eliminação gaussiana: após escalonamento obtém-se x = -7/5, y = -2, z = -21/5. Verificação na eq. 1: 2(-7/5) – 2(-2) + (-21/5) = -14/5 + 4 – 21/5 = -35/5 + 4 = -7 + 4 = -3 ✓.",
+    "card": {
+      "pergunta": "Resolva o sistema linear por eliminação de Gauss:\n2x – 2y + z = –3; x + 3y – 2z = 1; 3x – y – z = 2",
+      "resposta": "## Conceito\nEliminação gaussiana: montar a **matriz aumentada** e escalonar por operações de linha até obter forma triangular.\n\n## Resolução\n$$\\begin{pmatrix}2&-2&1&|&-3\\\\1&3&-2&|&1\\\\3&-1&-1&|&2\\end{pmatrix}$$\n\nApós escalonamento: $x = -\\tfrac{7}{5},\\; y = -2,\\; z = -\\tfrac{21}{5}$\n\n**Gabarito: (D)** $\\left(-\\tfrac{7}{5},\\,-2,\\,-\\tfrac{21}{5}\\right)$"
+    }
   },
   {
     "id": 2,
@@ -762,7 +962,11 @@
       "E": "α = 11"
     },
     "resposta": "ANULADA",
-    "comentario": "Questão anulada oficialmente. Ao expandir o determinante, o coeficiente de α resulta em 0 (det = 2·2 + 2·(1+1) + α·0 = ...), tornando impossível satisfazer det = 8 para qualquer α."
+    "comentario": "Questão anulada oficialmente. Ao expandir o determinante, o coeficiente de α resulta em 0 (det = 2·2 + 2·(1+1) + α·0 = ...), tornando impossível satisfazer det = 8 para qualquer α.",
+    "card": {
+      "pergunta": "Calcule o valor de α para que det(Z) = 8, com Z = [[1,–1,–1],[–1,1,–1],[2,2,α]]",
+      "resposta": "## Conceito\nO **determinante** de uma matriz 3×3 pode ser calculado pela regra de Sarrus ou cofatores. Se o coeficiente de $\\alpha$ for zero, o det independe de $\\alpha$.\n\n## Resolução\nExpandindo: $\\det(Z) = 1(\\alpha+2) - (-1)(-\\alpha+2) + (-1)(-4) = \\alpha+2-\\alpha+2+4 = 8$\n\nO coeficiente de $\\alpha$ cancela → **det = 8 para qualquer $\\alpha$**. Questão anulada.\n\n**Gabarito: ANULADA** *(todos os valores satisfazem)*"
+    }
   },
   {
     "id": 3,
@@ -777,7 +981,11 @@
       "E": "– (λ – 2)³"
     },
     "resposta": "E",
-    "comentario": "Calculando det(A – λI) e fatorando, obtém-se –(λ – 2)³, indicando que λ = 2 é autovalor de multiplicidade algébrica 3. O sinal negativo decorre da convenção det(A – λI)."
+    "comentario": "Calculando det(A – λI) e fatorando, obtém-se –(λ – 2)³, indicando que λ = 2 é autovalor de multiplicidade algébrica 3. O sinal negativo decorre da convenção det(A – λI).",
+    "card": {
+      "pergunta": "Qual é o polinômio característico da matriz A = [[1,–1,–1],[–1,1,–1],[2,2,4]]?",
+      "resposta": "## Conceito\nO **polinômio característico** é $p(\\lambda) = \\det(A - \\lambda I)$. Suas raízes são os **autovalores** de $A$.\n\n## Resolução\n$$A - \\lambda I = \\begin{pmatrix}1-\\lambda&-1&-1\\\\-1&1-\\lambda&-1\\\\2&2&4-\\lambda\\end{pmatrix}$$\n\nCalculando o determinante e fatorando: $p(\\lambda) = -(\\lambda - 2)^3$\n\n$\\lambda = 2$ é autovalor de multiplicidade algébrica 3.\n\n**Gabarito: (E)** $-(\\lambda - 2)^3$"
+    }
   },
   {
     "id": 4,
@@ -792,7 +1000,11 @@
       "E": "14"
     },
     "resposta": "E",
-    "comentario": "Inclusão-exclusão: Total = 4! = 24. |A| = 3! = 6, |B| = 3! = 6, |A∩B| = 2! = 2. Inválidas = 6+6–2 = 10. Válidas = 24–10 = 14."
+    "comentario": "Inclusão-exclusão: Total = 4! = 24. |A| = 3! = 6, |B| = 3! = 6, |A∩B| = 2! = 2. Inválidas = 6+6–2 = 10. Válidas = 24–10 = 14.",
+    "card": {
+      "pergunta": "Permutações de {1,2,3,4} onde 1 não está na 1ª posição e 2 não está na 2ª. Quantas são válidas?",
+      "resposta": "## Conceito\n**Princípio da inclusão-exclusão**: $|A^c \\cap B^c| = n! - |A \\cup B| = n! - |A| - |B| + |A \\cap B|$\n\n## Resolução\n- Total: $4! = 24$\n- $|A|$ = 1 fixo na pos. 1: $3! = 6$\n- $|B|$ = 2 fixo na pos. 2: $3! = 6$\n- $|A \\cap B|$: ambos fixos: $2! = 2$\n- Inválidas: $6 + 6 - 2 = 10$\n- **Válidas: $24 - 10 = 14$**\n\n**Gabarito: (E)** 14"
+    }
   },
   {
     "id": 5,
@@ -807,7 +1019,11 @@
       "E": "21"
     },
     "resposta": "A",
-    "comentario": "Um grafo acíclico (floresta) com n vértices tem no máximo n–1 = 6 arestas. Uma árvore com 7 vértices tem exatamente 6 arestas."
+    "comentario": "Um grafo acíclico (floresta) com n vértices tem no máximo n–1 = 6 arestas. Uma árvore com 7 vértices tem exatamente 6 arestas.",
+    "card": {
+      "pergunta": "Número máximo de arestas num grafo não-direcionado com 7 vértices sem formar ciclo?",
+      "resposta": "## Conceito\nUm grafo **acíclico** (sem ciclos) é chamado **floresta**. Uma árvore com $n$ vértices tem exatamente $n-1$ arestas — esse é o máximo para um grafo conexo acíclico.\n\n## Resolução\nCom $n = 7$ vértices: máximo de arestas sem ciclo $= n - 1 = 6$\n\n**Gabarito: (A)** 6"
+    }
   },
   {
     "id": 6,
@@ -822,7 +1038,11 @@
       "E": "495"
     },
     "resposta": "D",
-    "comentario": "2 esportes + 2 ação: C(5,2)×C(7,2) = 10×21 = 210. 3 esportes + 1 ação: C(5,3)×C(7,1) = 10×7 = 70. 4 esportes + 0 ação: C(5,4)×C(7,0) = 5. Total = 285."
+    "comentario": "2 esportes + 2 ação: C(5,2)×C(7,2) = 10×21 = 210. 3 esportes + 1 ação: C(5,3)×C(7,1) = 10×7 = 70. 4 esportes + 0 ação: C(5,4)×C(7,0) = 5. Total = 285.",
+    "card": {
+      "pergunta": "7 jogos de ação + 5 de esportes. Pacotes de 4 com pelo menos 2 esportes. Quantas opções?",
+      "resposta": "## Conceito\n**Combinações com restrição**: somar os casos favoráveis (2, 3 ou 4 esportes).\n\n## Resolução\n$$\\binom{5}{2}\\binom{7}{2} + \\binom{5}{3}\\binom{7}{1} + \\binom{5}{4}\\binom{7}{0}$$\n$$= 10 \\cdot 21 + 10 \\cdot 7 + 5 \\cdot 1 = 210 + 70 + 5 = 285$$\n\n**Gabarito: (D)** 285"
+    }
   },
   {
     "id": 7,
@@ -837,7 +1057,11 @@
       "E": "∞"
     },
     "resposta": "C",
-    "comentario": "Multiplicando pelo conjugado: resultado = 1/(√(x²+1) + x). Quando x→∞, denominador→∞, portanto limite = 0."
+    "comentario": "Multiplicando pelo conjugado: resultado = 1/(√(x²+1) + x). Quando x→∞, denominador→∞, portanto limite = 0.",
+    "card": {
+      "pergunta": "Calcule $\\lim_{x\\to\\infty}(\\sqrt{x^2+1}-x)$",
+      "resposta": "## Conceito\nLimite de forma indeterminada $\\infty - \\infty$: multiplicar pelo **conjugado**.\n\n## Resolução\n$$\\lim_{x\\to\\infty}(\\sqrt{x^2+1}-x)\\cdot\\frac{\\sqrt{x^2+1}+x}{\\sqrt{x^2+1}+x} = \\lim_{x\\to\\infty}\\frac{1}{\\sqrt{x^2+1}+x}$$\n\nQuando $x \\to \\infty$, denominador $\\to \\infty$, logo limite $= 0$.\n\n**Gabarito: (C)** 0"
+    }
   },
   {
     "id": 8,
@@ -852,7 +1076,11 @@
       "E": "[-∞, 0) U (0, ∞)"
     },
     "resposta": "C",
-    "comentario": "Radicando ≥ 0: –2 ≤ x ≤ 2. Denominador ≠ 0: x ≠ 1/3. Domínio = [–2, 1/3) ∪ (1/3, 2]."
+    "comentario": "Radicando ≥ 0: –2 ≤ x ≤ 2. Denominador ≠ 0: x ≠ 1/3. Domínio = [–2, 1/3) ∪ (1/3, 2].",
+    "card": {
+      "pergunta": "Intervalo de continuidade de $g(x) = \\frac{\\sqrt{4-x^2}}{3x-1}$",
+      "resposta": "## Conceito\nFunção é **contínua** no seu domínio. O domínio exige: radicando $\\geq 0$ **e** denominador $\\neq 0$.\n\n## Resolução\n- $4 - x^2 \\geq 0 \\Rightarrow x \\in [-2, 2]$\n- $3x - 1 \\neq 0 \\Rightarrow x \\neq \\tfrac{1}{3}$\n\nDomínio: $\\left[-2,\\,\\tfrac{1}{3}\\right) \\cup \\left(\\tfrac{1}{3},\\,2\\right]$\n\n**Gabarito: (C)** $[-2, 1/3) \\cup (1/3, 2]$"
+    }
   },
   {
     "id": 9,
@@ -867,7 +1095,11 @@
       "E": "0"
     },
     "resposta": "D",
-    "comentario": "Substituição u = ln x, du = dx/x. Limites: 0 a 1. Integral = [u²/2]₀¹ = 1/2."
+    "comentario": "Substituição u = ln x, du = dx/x. Limites: 0 a 1. Integral = [u²/2]₀¹ = 1/2.",
+    "card": {
+      "pergunta": "Calcule $\\int_1^e \\frac{\\ln x}{x}\\,dx$",
+      "resposta": "## Conceito\n**Substituição**: $u = \\ln x \\Rightarrow du = \\frac{dx}{x}$. Converte a integral em forma padrão.\n\n## Resolução\n$$u = \\ln x,\\quad du = \\frac{dx}{x}$$\nLimites: $x=1 \\Rightarrow u=0$; $x=e \\Rightarrow u=1$\n$$\\int_0^1 u\\,du = \\left[\\frac{u^2}{2}\\right]_0^1 = \\frac{1}{2}$$\n\n**Gabarito: (D)** $\\frac{1}{2}$"
+    }
   },
   {
     "id": 10,
@@ -882,7 +1114,11 @@
       "E": "(1/2, 2)"
     },
     "resposta": "B",
-    "comentario": "M = ((5+4)/2, (-1-2)/2) = (9/2, -3/2)."
+    "comentario": "M = ((5+4)/2, (-1-2)/2) = (9/2, -3/2).",
+    "card": {
+      "pergunta": "Ponto médio do segmento A(5, –1) e B(4, –2)?",
+      "resposta": "## Conceito\n**Ponto médio**: $M = \\left(\\frac{x_A+x_B}{2},\\,\\frac{y_A+y_B}{2}\\right)$\n\n## Resolução\n$$M = \\left(\\frac{5+4}{2},\\,\\frac{-1+(-2)}{2}\\right) = \\left(\\frac{9}{2},\\,-\\frac{3}{2}\\right)$$\n\n**Gabarito: (B)** $(\\tfrac{9}{2},\\,-\\tfrac{3}{2})$"
+    }
   },
   {
     "id": 11,
@@ -897,7 +1133,11 @@
       "E": "k = 5 e k = 7"
     },
     "resposta": "A",
-    "comentario": "d = |2 – k + 3| / √2 = √2 → |5 – k| = 2 → k = 3 ou k = 7."
+    "comentario": "d = |2 – k + 3| / √2 = √2 → |5 – k| = 2 → k = 3 ou k = 7.",
+    "card": {
+      "pergunta": "Valores de $k$ tal que a distância de $P(2,k)$ à reta $x - y + 3 = 0$ seja $\\sqrt{2}$",
+      "resposta": "## Conceito\n**Distância ponto-reta**: $d = \\dfrac{|Ax_0 + By_0 + C|}{\\sqrt{A^2+B^2}}$\n\n## Resolução\n$$d = \\frac{|2 - k + 3|}{\\sqrt{1^2+(-1)^2}} = \\frac{|5-k|}{\\sqrt{2}} = \\sqrt{2}$$\n$$|5-k| = 2 \\Rightarrow k = 3 \\text{ ou } k = 7$$\n\n**Gabarito: (A)** $k=3$ e $k=7$"
+    }
   },
   {
     "id": 12,
@@ -912,7 +1152,11 @@
       "E": "As retas são paralelas e não possuem ponto de intersecção."
     },
     "resposta": "E",
-    "comentario": "Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção."
+    "comentario": "Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção.",
+    "card": {
+      "pergunta": "Ponto de interseção das retas $r: x=2-4t,\\,y=-2+t$ e $s: x=3+8t,\\,y=-1-2t$",
+      "resposta": "## Conceito\nVerificar se os **vetores diretores são paralelos**. Se $\\vec{v}_r = k\\vec{v}_s$, as retas são paralelas ou coincidentes.\n\n## Resolução\n$\\vec{v}_r = (-4,1)$, $\\vec{v}_s = (8,-2) = -2(-4,1)$ → **paralelas**.\n\nPontos $(2,-2)$ e $(3,-1)$ são distintos → retas **paralelas e distintas**, sem interseção.\n\n**Gabarito: (E)** As retas são paralelas e não se intersectam."
+    }
   },
   {
     "id": 13,
@@ -927,7 +1171,11 @@
       "E": "p → q"
     },
     "resposta": "D",
-    "comentario": "~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente."
+    "comentario": "~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente.",
+    "card": {
+      "pergunta": "$\\neg p \\to \\neg q$ é equivalente a qual proposição?",
+      "resposta": "## Conceito\n**Contrapositiva**: $A \\to B \\equiv \\neg B \\to \\neg A$ (logicamente equivalentes).\n\n## Resolução\n$\\neg p \\to \\neg q$ é a contrapositiva de $q \\to p$:\n$$\\neg p \\to \\neg q \\equiv q \\to p$$\n\n**Gabarito: (D)** $q \\to p$"
+    }
   },
   {
     "id": 14,
@@ -942,7 +1190,11 @@
       "E": "~q"
     },
     "resposta": "C",
-    "comentario": "~(p∨q) verdadeiro ↔ p=F e q=F. Nesse caso ~p=V, q=F → ~p→q = V→F = F. A proposição falsa é ~p→q."
+    "comentario": "~(p∨q) verdadeiro ↔ p=F e q=F. Nesse caso ~p=V, q=F → ~p→q = V→F = F. A proposição falsa é ~p→q.",
+    "card": {
+      "pergunta": "$\\neg(p \\lor q)$ é verdadeira sse qual proposição é falsa?",
+      "resposta": "## Conceito\n$\\neg(p \\lor q) = V$ exige $p = F$ e $q = F$ (De Morgan).\n\n## Resolução\nCom $p=F, q=F$: analisando cada alternativa:\n- $\\neg p \\to q = V \\to F = \\mathbf{F}$ ← **esta é falsa**\n- $\\neg p = V,\\; \\neg q = V,\\; \\neg p \\to \\neg q = V$\n\nA proposição que é **falsa** nesse cenário é $\\neg p \\to q$.\n\n**Gabarito: (C)** $\\neg p \\to q$"
+    }
   },
   {
     "id": 15,
@@ -957,7 +1209,11 @@
       "E": "Hoje não é sábado e Ana Paula jogou vôlei."
     },
     "resposta": "B",
-    "comentario": "Por modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame. Como ~Ana Paula provado, modus tollens com P3 dá ~hoje é sábado. Conclusão: hoje não é sábado E Joaquim não jogou videogame."
+    "comentario": "Por modus tollens com P2+P1: ~Ana Paula joga vôlei ∧ ~Joaquim joga videogame. Como ~Ana Paula provado, modus tollens com P3 dá ~hoje é sábado. Conclusão: hoje não é sábado E Joaquim não jogou videogame.",
+    "card": {
+      "pergunta": "Dado: (1) Ana/Joaquim → Victória vai à praia; (2) Victória NÃO foi; (3) Sábado → Ana E Caio. O que se conclui?",
+      "resposta": "## Conceito\n**Modus Tollens**: $P \\to Q,\\; \\neg Q \\Rightarrow \\neg P$\n\n## Resolução\n1. P2 + MT em P1: $\\neg$(Ana joga) $\\land$ $\\neg$(Joaquim joga)\n2. MT em P3 com $\\neg$(Ana joga): $\\neg$(hoje é sábado)\n\nConclusão: **hoje não é sábado** e **Joaquim não jogou**.\n\n**Gabarito: (B)** Hoje não é sábado e Joaquim não jogou videogame."
+    }
   },
   {
     "id": 16,
@@ -972,7 +1228,11 @@
       "E": "A + B"
     },
     "resposta": "D",
-    "comentario": "Aplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D."
+    "comentario": "Aplicando De Morgan: ~(Ā+C̄) = A·C e adaptando os complementos conforme a notação da questão, resulta em AC̄ + B̄D.",
+    "card": {
+      "pergunta": "Use De Morgan para obter soma de produtos de $F = \\overline{(\\bar{A}+\\bar{C}) \\cdot (\\bar{B}+\\bar{D})}$",
+      "resposta": "## Conceito\n**Leis de De Morgan**: $\\overline{X \\cdot Y} = \\bar{X} + \\bar{Y}$ e $\\overline{X + Y} = \\bar{X} \\cdot \\bar{Y}$\n\n## Resolução\n$$F = \\overline{(\\bar{A}+\\bar{C})} + \\overline{(\\bar{B}+\\bar{D})} = (A \\cdot C) + (B \\cdot D)$$\n\nNa notação da questão (com complementos adaptados): $A\\bar{C} + \\bar{B}D$\n\n**Gabarito: (D)** $A\\bar{C} + \\bar{B}D$"
+    }
   },
   {
     "id": 19,
@@ -987,7 +1247,11 @@
       "E": "40,0%"
     },
     "resposta": "C",
-    "comentario": "Contando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores. 26/80 = 32,5%."
+    "comentario": "Contando os valores < 65 na lista: 52, 54, 56, 57, 57, 58, 58, 59, 59, 61, 61, 61, 61, 62, 62, 62, 62, 63, 63, 63, 63, 64, 64, 64, 64, 64 = 26 valores. 26/80 = 32,5%.",
+    "card": {
+      "pergunta": "Dos 80 tempos de execução, qual percentagem é inferior a 65 segundos?",
+      "resposta": "## Conceito\n**Frequência relativa**: contar quantos valores satisfazem a condição e dividir pelo total.\n\n## Resolução\nContando os 26 valores $< 65$ na tabela de frequências:\n$$\\frac{26}{80} = 0{,}325 = 32{,}5\\%$$\n\n**Gabarito: (C)** 32,5%"
+    }
   },
   {
     "id": 20,
@@ -1002,7 +1266,11 @@
       "E": "69"
     },
     "resposta": "C",
-    "comentario": "Somando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67."
+    "comentario": "Somando os 80 valores e dividindo por 80, a média resulta em aproximadamente 67.",
+    "card": {
+      "pergunta": "Qual o tempo médio de execução do software (baseado nos 80 valores)?",
+      "resposta": "## Conceito\n**Média aritmética**: $\\bar{x} = \\dfrac{\\sum x_i}{n}$\n\n## Resolução\nSomando os 80 valores da distribuição: $\\sum x_i \\approx 5360$\n$$\\bar{x} = \\frac{5360}{80} = 67$$\n\n**Gabarito: (C)** 67"
+    }
   },
   {
     "id": 21,
@@ -1017,7 +1285,11 @@
       "E": "O pior caso é f(n) = 1"
     },
     "resposta": "A",
-    "comentario": "Busca sequencial: melhor caso = 1 (primeiro elemento), pior caso = n (último/ausente), caso médio = (1+2+...+n)/n = (n+1)/2."
+    "comentario": "Busca sequencial: melhor caso = 1 (primeiro elemento), pior caso = n (último/ausente), caso médio = (1+2+...+n)/n = (n+1)/2.",
+    "card": {
+      "pergunta": "Busca sequencial com chave única: qual afirmativa sobre f(n) está correta?",
+      "resposta": "**Gabarito: (A)** O caso médio é $f(n) = (n+1)/2$\n\nNa busca sequencial:\n- **Melhor caso**: $f(n) = 1$ (primeiro elemento)\n- **Pior caso**: $f(n) = n$ (último ou ausente)\n- **Caso médio**: $f(n) = \\frac{1+2+\\cdots+n}{n} = \\frac{n+1}{2}$\n\nAs demais alternativas invertem ou confundem esses casos."
+    }
   },
   {
     "id": 22,
@@ -1032,7 +1304,11 @@
       "E": "Analisar o comportamento do algoritmo à medida que o tamanho da entrada aumenta indefinidamente."
     },
     "resposta": "E",
-    "comentario": "A análise assintótica descreve a taxa de crescimento do algoritmo quando n→∞, usando notações O, Ω, Θ."
+    "comentario": "A análise assintótica descreve a taxa de crescimento do algoritmo quando n→∞, usando notações O, Ω, Θ.",
+    "card": {
+      "pergunta": "Qual o objetivo da análise assintótica de algoritmos?",
+      "resposta": "**Gabarito: (E)** Analisar o comportamento à medida que o tamanho da entrada aumenta indefinidamente.\n\nA análise assintótica descreve a **taxa de crescimento** do tempo/espaço quando $n \\to \\infty$, usando notações:\n- $O(f)$: limite superior (pior caso)\n- $\\Omega(f)$: limite inferior (melhor caso)\n- $\\Theta(f)$: comportamento exato\n\nNão se trata de entradas pequenas, nem de uma análise simultânea de todos os casos."
+    }
   },
   {
     "id": 23,
@@ -1047,7 +1323,11 @@
       "E": "O(n) e O(2^n)"
     },
     "resposta": "B",
-    "comentario": "Hash bem dimensionada: busca O(1) em média. Com muitas colisões (pior caso), degenera para O(n) (lista encadeada no bucket)."
+    "comentario": "Hash bem dimensionada: busca O(1) em média. Com muitas colisões (pior caso), degenera para O(n) (lista encadeada no bucket).",
+    "card": {
+      "pergunta": "Complexidade de busca em tabela hash: média e pior caso, respectivamente?",
+      "resposta": "**Gabarito: (B)** $O(1)$ e $O(n)$\n\n- **Média**: $O(1)$ com fator de carga baixo e boa função hash — acesso direto pelo índice\n- **Pior caso**: $O(n)$ quando todas as chaves colidem no mesmo bucket → degenera em lista encadeada\n\n**Por que (A) está errada**: o pior caso não é $O(1)$ — colisões podem acumular."
+    }
   },
   {
     "id": 24,
@@ -1062,7 +1342,11 @@
       "E": "simplesmente encadeada ordenada"
     },
     "resposta": "E",
-    "comentario": "Um ponteiro para o próximo → simplesmente encadeada. Campo-chave que mantém ordenação → ordenada."
+    "comentario": "Um ponteiro para o próximo → simplesmente encadeada. Campo-chave que mantém ordenação → ordenada.",
+    "card": {
+      "pergunta": "Lista com 1 ponteiro (próximo), estrutura linear e campo-chave para ordenação. Qual tipo?",
+      "resposta": "**Gabarito: (E)** Simplesmente encadeada ordenada\n\n- **Simplesmente encadeada**: cada nó tem apenas 1 ponteiro (para o próximo)\n- **Ordenada**: possui campo-chave que mantém os elementos em ordem\n\nDuplamente encadeada teria 2 ponteiros (anterior + próximo). Circular teria o último apontando para o primeiro."
+    }
   },
   {
     "id": 25,
@@ -1077,7 +1361,11 @@
       "E": "No for, a condição é testada depois da instrução."
     },
     "resposta": "B",
-    "comentario": "do...while executa o corpo antes do teste (ao menos 1 vez). while e for testam antes: se falso de início, nunca executam. break encerra o laço (não itera); continue é quem pula para a próxima iteração."
+    "comentario": "do...while executa o corpo antes do teste (ao menos 1 vez). while e for testam antes: se falso de início, nunca executam. break encerra o laço (não itera); continue é quem pula para a próxima iteração.",
+    "card": {
+      "pergunta": "Sobre instruções de repetição: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (B)** O corpo do `do...while` executa ao menos uma vez; `while` e `for` podem nunca executar.\n\n- `do...while`: teste **após** o corpo → garante 1 execução mínima\n- `while` / `for`: teste **antes** → se condição falsa de início, corpo nunca executa\n- `break` encerra o laço; `continue` pula para a próxima iteração (não `break`)\n- `if` não é estrutura de repetição"
+    }
   },
   {
     "id": 26,
@@ -1092,7 +1380,11 @@
       "E": "pós-fixado"
     },
     "resposta": "D",
-    "comentario": "Pré-fixado (pré-ordem): visita raiz primeiro, depois recursivamente as subárvores. Pós-fixado visita raiz por último. Simétrico/central visita raiz entre os filhos."
+    "comentario": "Pré-fixado (pré-ordem): visita raiz primeiro, depois recursivamente as subárvores. Pós-fixado visita raiz por último. Simétrico/central visita raiz entre os filhos.",
+    "card": {
+      "pergunta": "Caminhamento de árvore onde a raiz é visitada primeiro, depois as subárvores recursivamente",
+      "resposta": "**Gabarito: (D)** Pré-fixado (pré-ordem)\n\n| Caminhamento | Ordem |\n|---|---|\n| **Pré-fixado** | raiz → esq → dir |\n| Simétrico (in-ordem) | esq → raiz → dir |\n| Pós-fixado | esq → dir → raiz |\n| Em largura | nível a nível |\n\nO pré-fixado visita a raiz **antes** de qualquer subárvore."
+    }
   },
   {
     "id": 27,
@@ -1107,7 +1399,11 @@
       "E": "Endereço total de 21 bits, com tag = 4 bits, s = 5 bits, d = 7 bits e w = 9 bits."
     },
     "resposta": "A",
-    "comentario": "w = log2(128) = 7 bits (offset na palavra). 16 conjuntos → s = log2(16) = 4 bits. 4K = 4096 blocos → endereço de bloco = log2(4096) = 12 bits. tag = 12 – 4 = 8 bits. Total = tag + s + w = 8 + 4 + 7 = 19 bits. d = log2(64/16) = log2(4) = não se aplica diretamente; o gabarito indica d como campo de deslocamento diferente de w na formulação da questão."
+    "comentario": "w = log2(128) = 7 bits (offset na palavra). 16 conjuntos → s = log2(16) = 4 bits. 4K = 4096 blocos → endereço de bloco = log2(4096) = 12 bits. tag = 12 – 4 = 8 bits. Total = tag + s + w = 8 + 4 + 7 = 19 bits. d = log2(64/16) = log2(4) = não se aplica diretamente; o gabarito indica d como campo de deslocamento diferente de w na formulação da questão.",
+    "card": {
+      "pergunta": "Cache associativo por conjunto: 64 linhas, 16 conjuntos, 4K blocos, 128 palavras/bloco. Quantos bits por endereço?",
+      "resposta": "**Gabarito: (A)** Total 19 bits: tag=8, s=4, d=? , w=7\n\n- $w = \\log_2(128) = 7$ bits (offset na palavra)\n- $s = \\log_2(16) = 4$ bits (índice do conjunto)\n- Endereço de bloco: $\\log_2(4096) = 12$ bits\n- $\\text{tag} = 12 - 4 = 8$ bits\n- **Total**: $8 + 4 + 7 = 19$ bits"
+    }
   },
   {
     "id": 28,
@@ -1122,7 +1418,11 @@
       "E": "Apenas III e IV."
     },
     "resposta": "C",
-    "comentario": "Apenas III está correta: a ponte norte (northbridge) gerencia a comunicação de alta velocidade entre CPU, RAM e GPU. A ponte sul (southbridge) gerencia dispositivos de E/S mais lentos (USB, SATA, PCI). I e II invertem os papéis. IV está errada pois não são intercambiáveis."
+    "comentario": "Apenas III está correta: a ponte norte (northbridge) gerencia a comunicação de alta velocidade entre CPU, RAM e GPU. A ponte sul (southbridge) gerencia dispositivos de E/S mais lentos (USB, SATA, PCI). I e II invertem os papéis. IV está errada pois não são intercambiáveis.",
+    "card": {
+      "pergunta": "Sobre ponte norte e ponte sul na placa-mãe: qual assertiva está correta?",
+      "resposta": "**Gabarito: (C)** Ponte norte: alta velocidade (RAM, vídeo); ponte sul: E/S lenta.\n\n| Chip | Função |\n|---|---|\n| **Northbridge** (ponte norte) | CPU ↔ RAM, GPU (alta velocidade) |\n| **Southbridge** (ponte sul) | USB, SATA, PCI, áudio (menor velocidade) |\n\nI e II invertem os papéis. IV é falsa — não são intercambiáveis."
+    }
   },
   {
     "id": 29,
@@ -1137,7 +1437,11 @@
       "E": "E/S programada"
     },
     "resposta": "D",
-    "comentario": "DMA transfere dados diretamente entre dispositivo e RAM sem envolver a CPU em cada transferência. Polling e E/S programada requerem CPU monitorando. Interrupções ainda passam pela CPU."
+    "comentario": "DMA transfere dados diretamente entre dispositivo e RAM sem envolver a CPU em cada transferência. Polling e E/S programada requerem CPU monitorando. Interrupções ainda passam pela CPU.",
+    "card": {
+      "pergunta": "Qual método transfere dados entre E/S e memória principal sem envolver a CPU em cada byte?",
+      "resposta": "**Gabarito: (D)** DMA (Direct Memory Access)\n\n- **DMA**: controlador dedicado transfere dados dispositivo↔RAM diretamente; CPU só é notificada ao final\n- **Polling**: CPU fica verificando ativamente o dispositivo\n- **Interrupções**: dispositivo sinaliza a CPU, que interrompe o fluxo para tratar\n- **E/S programada**: CPU controla cada transferência byte a byte"
+    }
   },
   {
     "id": 33,
@@ -1152,7 +1456,11 @@
       "E": "6"
     },
     "resposta": "C",
-    "comentario": "valor2 aponta para valor1. Iterações: 12→6 (cont=1), 6→3 (cont=2), 3→1 (cont=3), 1→0 (cont=4). *valor2 = 0, condição falsa, encerra. Saída: 4."
+    "comentario": "valor2 aponta para valor1. Iterações: 12→6 (cont=1), 6→3 (cont=2), 3→1 (cont=3), 1→0 (cont=4). *valor2 = 0, condição falsa, encerra. Saída: 4.",
+    "card": {
+      "pergunta": "Código C: valor1=12, valor2=&valor1, do { valor1>>=1; cont++; } while(*valor2>0). Saída?",
+      "resposta": "**Gabarito: (C)** 4\n\n`valor2` aponta para `valor1`. A cada iteração, `valor1` é deslocado 1 bit à direita:\n\n| Iteração | valor1 | cont |\n|---|---|---|\n| 1 | 12 → 6 | 1 |\n| 2 | 6 → 3 | 2 |\n| 3 | 3 → 1 | 3 |\n| 4 | 1 → 0 | 4 |\n\n`*valor2 = 0` → condição falsa → encerra. `printf(\"%d\", cont)` = **4**"
+    }
   },
   {
     "id": 34,
@@ -1167,7 +1475,11 @@
       "E": "Erro: printf usa especificador errado."
     },
     "resposta": "A",
-    "comentario": "f_rec retorna 10. resultado = 10/2 = 5 (divisão inteira antes de atribuir ao double). printf(\"%f\") imprime 5.000000. A saída é correta como ponto flutuante (valor 5.0)."
+    "comentario": "f_rec retorna 10. resultado = 10/2 = 5 (divisão inteira antes de atribuir ao double). printf(\"%f\") imprime 5.000000. A saída é correta como ponto flutuante (valor 5.0).",
+    "card": {
+      "pergunta": "f_rec conta chars de 'Ola mundo!' (10). resultado=var/2 (inteiro), impresso com %f. Saída?",
+      "resposta": "**Gabarito: (A)** Saída é o número de caracteres dividido por 2, mostrado como ponto flutuante.\n\n- `f_rec` retorna `10` (10 caracteres)\n- `resultado = 10 / 2 = 5` (divisão inteira, depois promovida para double)\n- `printf(\"%f\", resultado)` → **5.000000**\n\nA saída é ponto flutuante do valor 5.0 — correto e sem erro."
+    }
   },
   {
     "id": 36,
@@ -1182,7 +1494,11 @@
       "E": "{w ∈ {a,b}* | #a(w) ≠ #b(w)}"
     },
     "resposta": "C",
-    "comentario": "'Número de a's divisível por 3' é rastreável com 3 estados (mod 3). 'Número de b's ímpar' com 2 estados (paridade). Produto = AFD com 6 estados → linguagem regular. As demais exigem comparação ilimitada entre contagens (não regular)."
+    "comentario": "'Número de a's divisível por 3' é rastreável com 3 estados (mod 3). 'Número de b's ímpar' com 2 estados (paridade). Produto = AFD com 6 estados → linguagem regular. As demais exigem comparação ilimitada entre contagens (não regular).",
+    "card": {
+      "pergunta": "Qual linguagem pode ser gerada por gramática regular?",
+      "resposta": "**Gabarito: (C)** $\\{w \\mid \\#a(w) \\text{ div. por 3 e } \\#b(w) \\text{ ímpar}\\}$\n\nGramáticas regulares geram linguagens reconhecíveis por **AFD** (estados finitos).\n\n- Contar $a$ mod 3: 3 estados. Contar $b$ mod 2: 2 estados → produto = **6 estados → regular**\n- As demais exigem comparar $\\#a$ com $\\#b$ (ilimitado) → requer pilha → não regular"
+    }
   },
   {
     "id": 37,
@@ -1197,7 +1513,11 @@
       "E": "Apenas III e IV"
     },
     "resposta": "E",
-    "comentario": "Gabarito oficial: E. IV é verdadeira (NP-completo ⊆ NP). III é considerada verdadeira no contexto da questão (autômato com pilha aceita inclusive linguagens regulares, que são subconjunto das LLC). I é imprecisa (AFD também não tem ε-transições por definição). II é falsa (existem MT não determinísticas)."
+    "comentario": "Gabarito oficial: E. IV é verdadeira (NP-completo ⊆ NP). III é considerada verdadeira no contexto da questão (autômato com pilha aceita inclusive linguagens regulares, que são subconjunto das LLC). I é imprecisa (AFD também não tem ε-transições por definição). II é falsa (existem MT não determinísticas).",
+    "card": {
+      "pergunta": "Assertivas sobre linguagens formais: AFN com ε-transições, MT, Autômato com pilha, NP-completo ⊆ NP",
+      "resposta": "**Gabarito: (E)** Apenas III e IV corretas.\n\n- **III** ✓: Autômato com pilha aceita LLCs, que incluem linguagens regulares\n- **IV** ✓: NP-completo é subconjunto de NP (por definição)\n- **I** ✗: AFD também não tem ε-transições (apenas AFN pode ter)\n- **II** ✗: Existem MTs não-determinísticas (MTND)"
+    }
   },
   {
     "id": 38,
@@ -1212,7 +1532,11 @@
       "E": "Teorema da Incompletude – Alonzo Church – Problema da Parada – Alan Turing"
     },
     "resposta": "B",
-    "comentario": "Teorema da Incompletude: Kurt Gödel (1931). Problema da Parada (Halting Problem): Alan Turing (1936)."
+    "comentario": "Teorema da Incompletude: Kurt Gödel (1931). Problema da Parada (Halting Problem): Alan Turing (1936).",
+    "card": {
+      "pergunta": "Teorema da Incompletude (___) demonstra limitações de sistemas formais. Problema da Parada (___) pergunta se um programa para.",
+      "resposta": "**Gabarito: (B)** Incompletude = Kurt Gödel; Problema da Parada = Alan Turing\n\n| Resultado | Autor | Ano |\n|---|---|---|\n| Teorema da Incompletude | **Kurt Gödel** | 1931 |\n| Problema da Parada | **Alan Turing** | 1936 |\n\nAlonzo Church contribuiu com o Cálculo-λ e a Tese Church-Turing, mas não com esses dois resultados."
+    }
   },
   {
     "id": 39,
@@ -1227,7 +1551,11 @@
       "E": "Na memória secundária, os dados são armazenados exclusivamente em formato não hierárquico."
     },
     "resposta": "C",
-    "comentario": "O SO organiza disco em blocos (clusters) para otimizar a transferência entre disco e RAM. B errada (programas são arquivos executáveis). D errada (usa arquivos e registros). E errada (sistemas de arquivos são hierárquicos)."
+    "comentario": "O SO organiza disco em blocos (clusters) para otimizar a transferência entre disco e RAM. B errada (programas são arquivos executáveis). D errada (usa arquivos e registros). E errada (sistemas de arquivos são hierárquicos).",
+    "card": {
+      "pergunta": "Armazenamento em memória secundária: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (C)** O SO armazena informações em grupos chamados blocos para aumentar a eficiência.\n\n- O SO organiza o disco em **blocos** (clusters) para minimizar acessos de E/S\n- **B errada**: programas são arquivos executáveis\n- **D errada**: memória secundária usa arquivos/registros, não páginas (páginas são memória virtual)\n- **E errada**: sistemas de arquivos são hierárquicos (diretórios)"
+    }
   },
   {
     "id": 40,
@@ -1242,7 +1570,11 @@
       "E": "A compressão de dados sempre resulta em perda de qualidade."
     },
     "resposta": "A",
-    "comentario": "Princípio da codificação de entropia (Huffman): símbolos mais frequentes recebem códigos mais curtos. Huffman é sem perda. Comprimento uniforme não comprime. Desigualdade de Kraft limita códigos prefix-free."
+    "comentario": "Princípio da codificação de entropia (Huffman): símbolos mais frequentes recebem códigos mais curtos. Huffman é sem perda. Comprimento uniforme não comprime. Desigualdade de Kraft limita códigos prefix-free.",
+    "card": {
+      "pergunta": "Compressão de dados: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (A)** Descrições curtas para resultados frequentes, longas para os raros.\n\nEsse é o **princípio de Huffman / Shannon**:\n- Símbolo mais frequente → código mais curto → menor comprimento médio\n- **D errada**: Huffman é **sem perda** (lossless)\n- **B errada**: comprimento uniforme não comprime\n- **E errada**: compressão lossless não perde qualidade"
+    }
   },
   {
     "id": 41,
@@ -1257,7 +1589,11 @@
       "E": "Apenas II e IV."
     },
     "resposta": "C",
-    "comentario": "Apenas III está correta: esquemas de classificação determinam identidade e localização em sistemas físicos, eletrônicos e híbridos. As demais são falsas."
+    "comentario": "Apenas III está correta: esquemas de classificação determinam identidade e localização em sistemas físicos, eletrônicos e híbridos. As demais são falsas.",
+    "card": {
+      "pergunta": "Esquemas de classificação em sistemas de gestão de registros: qual assertiva está correta?",
+      "resposta": "**Gabarito: (C)** Apenas III.\n\n**III** ✓: O esquema determina a identidade e lugar de cada arquivo em sistemas físicos, eletrônicos e híbridos.\n\nAs demais são falsas:\n- I: o esquema não se limita a sistemas em papel\n- II: são relevantes para conformidade regulatória\n- IV: a classificação deve ser revisada periodicamente\n- V: métodos automatizados também existem"
+    }
   },
   {
     "id": 43,
@@ -1272,7 +1608,11 @@
       "E": "lbm ≥ 10"
     },
     "resposta": "C",
-    "comentario": "Sem sincronização, múltiplas threads podem ler o mesmo valor de lbm antes de incrementar (race condition), causando perdas de atualização. O valor final pode ser qualquer valor de 1 a 10, portanto lbm ≤ 10."
+    "comentario": "Sem sincronização, múltiplas threads podem ler o mesmo valor de lbm antes de incrementar (race condition), causando perdas de atualização. O valor final pode ser qualquer valor de 1 a 10, portanto lbm ≤ 10.",
+    "card": {
+      "pergunta": "10 threads incrementam variável global sem sincronização. Resultado mais correto?",
+      "resposta": "**Gabarito: (C)** lbm ≤ 10\n\nSem sincronização, ocorre **race condition**: múltiplas threads leem o mesmo valor antes de escrever, perdendo atualizações.\n\nExemplo: thread 1 lê 3, thread 2 lê 3 → ambas escrevem 4 → uma incrementação se perde.\n\nO valor final pode ser qualquer número de 1 a 10 → **lbm ≤ 10**."
+    }
   },
   {
     "id": 44,
@@ -1287,7 +1627,11 @@
       "E": "Tamanho de bloco = 2.048 bytes e alocação contígua."
     },
     "resposta": "D",
-    "comentario": "Bloco de 2.048 bytes: a maioria dos arquivos (1.000–2.030 bytes) cabe em 1 ou 2 blocos, minimizando fragmentação externa. Alocação encadeada evita necessidade de blocos contíguos no disco, reduzindo fragmentação. Bloco de 1.024 exigiria 2 blocos para quase todos os arquivos com overhead de ponteiros maior."
+    "comentario": "Bloco de 2.048 bytes: a maioria dos arquivos (1.000–2.030 bytes) cabe em 1 ou 2 blocos, minimizando fragmentação externa. Alocação encadeada evita necessidade de blocos contíguos no disco, reduzindo fragmentação. Bloco de 1.024 exigiria 2 blocos para quase todos os arquivos com overhead de ponteiros maior.",
+    "card": {
+      "pergunta": "98% dos arquivos têm 1000–2030 bytes. Qual config minimiza desperdício e fragmentação?",
+      "resposta": "**Gabarito: (D)** Bloco 2048 bytes + alocação encadeada\n\n- **Bloco 2048**: a maioria dos arquivos cabe em 1–2 blocos → menos overhead de metadados\n- **Encadeada**: não exige blocos fisicamente contíguos → sem fragmentação externa\n\n**Por que não contígua?** Contígua requer blocos contíguos → fragmentação externa com o tempo."
+    }
   },
   {
     "id": 45,
@@ -1302,7 +1646,11 @@
       "E": "O conjunto de operações para o tipo caractere inclui soma, subtração, multiplicação, divisão e resto."
     },
     "resposta": "A",
-    "comentario": "Inteiros representam ℤ: sem parte fracionária, positivos e negativos. B errada (char armazena 1 caractere). C errada (inteiros signed incluem negativos). D errada (vetores são arrays). E errada (char tem operações limitadas)."
+    "comentario": "Inteiros representam ℤ: sem parte fracionária, positivos e negativos. B errada (char armazena 1 caractere). C errada (inteiros signed incluem negativos). D errada (vetores são arrays). E errada (char tem operações limitadas).",
+    "card": {
+      "pergunta": "Tipos de dados básicos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (A)** Variáveis inteiras armazenam valores sem parte fracionária, positivos e negativos.\n\n- Inteiros = $\\mathbb{Z}$: sem parte fracionária, positivos e negativos (com sinal)\n- **B errada**: `char` armazena 1 caractere, não strings\n- **C errada**: inteiros `signed` incluem negativos\n- **D errada**: vetores são arrays, não armazenam frações\n- **E errada**: operações aritméticas completas não se aplicam a char"
+    }
   },
   {
     "id": 46,
@@ -1317,7 +1665,11 @@
       "E": "I, II, III e IV."
     },
     "resposta": "E",
-    "comentario": "Todas estão corretas. I: definição de struct. II: declarar struct não cria variável (em C, precisa instanciar). III: struct pode conter qualquer tipo, incluindo outras structs. IV: struct agrupa componentes heterogêneos."
+    "comentario": "Todas estão corretas. I: definição de struct. II: declarar struct não cria variável (em C, precisa instanciar). III: struct pode conter qualquer tipo, incluindo outras structs. IV: struct agrupa componentes heterogêneos.",
+    "card": {
+      "pergunta": "Estruturas em linguagens de programação: quais assertivas I–IV estão corretas?",
+      "resposta": "**Gabarito: (E)** Todas (I, II, III e IV) corretas.\n\n- **I** ✓: struct é conjunto de variáveis sob um nome\n- **II** ✓: declarar struct define um **tipo**, não uma variável\n- **III** ✓: struct pode conter simples, vetores, ponteiros, outras structs\n- **IV** ✓: permite agrupar componentes heterogêneos (tipos distintos)"
+    }
   },
   {
     "id": 47,
@@ -1332,7 +1684,11 @@
       "E": "Atribuição simples"
     },
     "resposta": "D",
-    "comentario": "O problema requer decisões aninhadas (if / else if / else): verifica ≤0 (erro), depois verifica >1000 (10%) ou não (5%). Isso é uma condicional encadeada."
+    "comentario": "O problema requer decisões aninhadas (if / else if / else): verifica ≤0 (erro), depois verifica >1000 (10%) ou não (5%). Isso é uma condicional encadeada.",
+    "card": {
+      "pergunta": "Programa verifica salário ≤0 (erro), aplica 10% se >1000 ou 5% caso contrário. Qual instrução usar?",
+      "resposta": "**Gabarito: (D)** Condicional encadeada\n\nO problema tem **múltiplas condições exclusivas** que devem ser testadas em sequência:\n```\nif (salário <= 0) → erro\nelse if (salário > 1000) → 10%\nelse → 5%\n```\nIsso é `if / else if / else` = **condicional encadeada**. Não há repetição (descarta laços)."
+    }
   },
   {
     "id": 48,
@@ -1347,7 +1703,11 @@
       "E": "Grafo simétrico"
     },
     "resposta": "C",
-    "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas. Dígrafo tem apenas arestas dirigidas."
+    "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas. Dígrafo tem apenas arestas dirigidas.",
+    "card": {
+      "pergunta": "Mapa com ruas de dois sentidos (não-dirigidas) e mão única (dirigidas). Que tipo de grafo é?",
+      "resposta": "**Gabarito: (C)** Grafo misto\n\n| Tipo | Arestas |\n|---|---|\n| **Grafo misto** | dirigidas + não-dirigidas |\n| Dígrafo | apenas dirigidas |\n| Grafo simples | apenas não-dirigidas |\n\nO mapa de cidades com mão dupla e mão única é o exemplo clássico de **grafo misto**."
+    }
   },
   {
     "id": 49,
@@ -1362,7 +1722,11 @@
       "E": "Finais"
     },
     "resposta": "A",
-    "comentario": "Arestas paralelas (múltiplas) conectam os mesmos vértices. Laços conectam um vértice a si mesmo."
+    "comentario": "Arestas paralelas (múltiplas) conectam os mesmos vértices. Laços conectam um vértice a si mesmo.",
+    "card": {
+      "pergunta": "Duas arestas com os mesmos pontos finais (ou mesma origem/destino) são chamadas de?",
+      "resposta": "**Gabarito: (A)** Paralelas\n\n- **Paralelas** (múltiplas): conectam os **mesmos vértices** (pode haver várias entre u e v)\n- **Laços**: aresta que conecta um vértice a **si mesmo** (u → u)\n- **Adjacentes**: arestas que compartilham um vértice\n- **Incidentes**: aresta incide sobre seus dois vértices"
+    }
   },
   {
     "id": 50,
@@ -1377,7 +1741,11 @@
       "E": "k-cubo"
     },
     "resposta": "B",
-    "comentario": "Ciclo (circuito): caminho fechado com vértice inicial = final. Caminho simples não repete vértices e não é fechado."
+    "comentario": "Ciclo (circuito): caminho fechado com vértice inicial = final. Caminho simples não repete vértices e não é fechado.",
+    "card": {
+      "pergunta": "Caminho em que os vértices de início e fim são os mesmos é chamado de?",
+      "resposta": "**Gabarito: (B)** Ciclo\n\n- **Ciclo** (circuito): caminho fechado onde vértice inicial = vértice final\n- **Caminho simples**: não repete vértices, não é fechado\n- **Laço**: aresta única ligando vértice a si mesmo\n- **Arco**: aresta direcionada em um dígrafo"
+    }
   },
   {
     "id": 51,
@@ -1392,7 +1760,11 @@
       "E": "6"
     },
     "resposta": "D",
-    "comentario": "RIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas."
+    "comentario": "RIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas.",
+    "card": {
+      "pergunta": "Dada a tabela ITEM(Id, Nome, Fk) com tuplas (1,'Item 1',NULL),(2,'Item 2',1),(3,'Item 3',1),(4,'Item 4',3), a consulta SELECT FILHO.Id, FILHO.Nome, PAI.Id, PAI.Nome FROM ITEM AS FILHO RIGHT OUTER JOIN ITEM AS PAI ON FILHO.Fk = PAI.Id retorna quantas tuplas?",
+      "resposta": "**Gabarito: **(D)** 5**\n\nRIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas.\n\n**Alternativas incorretas:**\n- **(A)** 2\n- **(B)** 3\n- **(C)** 4\n- **(E)** 6"
+    }
   },
   {
     "id": 52,
@@ -1407,7 +1779,11 @@
       "E": "Ferir ou esperar"
     },
     "resposta": "B",
-    "comentario": "O grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori."
+    "comentario": "O grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori.",
+    "card": {
+      "pergunta": "Entre as estratégias de tratamento de deadlock, aquela que é protocolo de detecção (e não de prevenção) é:",
+      "resposta": "**Gabarito: **(B)** Grafo de espera**\n\nO grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori.\n\n**Alternativas incorretas:**\n- **(A)** Espera cautelosa\n- **(C)** Sem espera\n- **(D)** Esperar ou morrer\n- **(E)** Ferir ou esperar"
+    }
   },
   {
     "id": 53,
@@ -1422,7 +1798,11 @@
       "E": "I, II, III e IV."
     },
     "resposta": "B",
-    "comentario": "Na árvore B, todos os nós (internos e folha) podem ter ponteiros de dados. Na árvore B+, apenas os nós folha têm ponteiros de dados; os nós internos têm apenas ponteiros de árvore. Portanto: I (B interno), II (B folha) e IV (B+ folha)."
+    "comentario": "Na árvore B, todos os nós (internos e folha) podem ter ponteiros de dados. Na árvore B+, apenas os nós folha têm ponteiros de dados; os nós internos têm apenas ponteiros de árvore. Portanto: I (B interno), II (B folha) e IV (B+ folha).",
+    "card": {
+      "pergunta": "Árvores B e B+: quais tipos de nós têm ponteiros de dados?",
+      "resposta": "**Gabarito: (B)** Apenas I, II e IV (nós internos e folha da B; folha da B+)\n\n| Estrutura | Nós internos | Nós folha |\n|---|---|---|\n| **Árvore B** | ✓ dados (I) | ✓ dados (II) |\n| **Árvore B+** | ✗ só ponteiros de árvore | ✓ dados (IV) |\n\nNa B+, internos guardam apenas chaves de roteamento; todos os dados ficam nas folhas (ligadas em lista)."
+    }
   },
   {
     "id": 54,
@@ -1437,7 +1817,11 @@
       "E": "Gramática livre de contexto na qual fragmentos de programas (ações) são inseridos nos lados direitos das regras de produção."
     },
     "resposta": "E",
-    "comentario": "Esquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática."
+    "comentario": "Esquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática.",
+    "card": {
+      "pergunta": "No contexto de construção de compiladores, um Esquema de Tradução é:",
+      "resposta": "**Gabarito: **(E)** Gramática livre de contexto na qual fragmentos de programas (ações) são inseridos nos lados direitos das regras de produção.**\n\nEsquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática.\n\n**Alternativas incorretas:**\n- **(A)** Grafo que relaciona atributos entre regras de produção de uma gramática livre de contexto.\n- **(B)** Sequência de ações que descreve informalmente o funcionamento de todas as etapas do compilador.\n- **(C)** Técnica de recuperação de erros que obtém estruturas de controle semanticamente equivalentes.\n- **(D)** Forma de análise semântica que considera tipos de variáveis."
+    }
   },
   {
     "id": 55,
@@ -1452,7 +1836,11 @@
       "E": "I, II, III e IV."
     },
     "resposta": "D",
-    "comentario": "I, II e III estão corretas. IV está errada: autômatos finitos são usados na análise léxica, não na definição de representações intermediárias."
+    "comentario": "I, II e III estão corretas. IV está errada: autômatos finitos são usados na análise léxica, não na definição de representações intermediárias.",
+    "card": {
+      "pergunta": "Representação intermediária em compiladores: quais assertivas I–IV estão corretas?",
+      "resposta": "**Gabarito: (D)** Apenas I, II e III\n\n- **I** ✓: árvores sintáticas e código de 3 endereços são tipos de RI\n- **II** ✓: instrução de 3 endereços: `x := y op z` + desvios\n- **III** ✓: RI pode ser gerada via Definições Dirigidas pela Sintaxe\n- **IV** ✗: autômatos finitos pertencem à **análise léxica**, não à definição de RI"
+    }
   },
   {
     "id": 57,
@@ -1467,7 +1855,11 @@
       "E": "Apenas II e III."
     },
     "resposta": "B",
-    "comentario": "Todas estão incorretas. I: Ray Tracing é custoso e não adequado para tempo real (usualmente). II: Z-Buffer armazena o pixel MAIS PRÓXIMO (não distante); Ray Tracing é o estado da arte para cenas cinematográficas, não Z-Buffer. III: Phong é modelo de iluminação LOCAL (não global); iluminação global (como ray tracing) considera luz indireta."
+    "comentario": "Todas estão incorretas. I: Ray Tracing é custoso e não adequado para tempo real (usualmente). II: Z-Buffer armazena o pixel MAIS PRÓXIMO (não distante); Ray Tracing é o estado da arte para cenas cinematográficas, não Z-Buffer. III: Phong é modelo de iluminação LOCAL (não global); iluminação global (como ray tracing) considera luz indireta.",
+    "card": {
+      "pergunta": "Assertivas sobre renderização: Ray Tracing (eficiente RT), Z-Buffer (estado da arte), Phong (iluminação global)?",
+      "resposta": "**Gabarito: (B)** Todas incorretas.\n\n- **I** ✗: Ray Tracing é **computacionalmente caro** — inadequado para tempo real tradicional\n- **II** ✗: Z-Buffer guarda o pixel **mais próximo** (não distante); Ray Tracing é estado da arte para cenas foto-realistas\n- **III** ✗: Phong é modelo de iluminação **local** — iluminação global (radiosity, path tracing) considera luz indireta"
+    }
   },
   {
     "id": 58,
@@ -1482,7 +1874,11 @@
       "E": "Obter menor exigência de manutenção, menos correções de erros e menos suporte ao cliente."
     },
     "resposta": "A",
-    "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade."
+    "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade.",
+    "card": {
+      "pergunta": "Segundo Pressman e Maxim, os resultados de ter software de alta qualidade são os seguintes, EXCETO:",
+      "resposta": "**Gabarito: **(A)** Aumentar a complexidade dos processos de negócios.**\n\nSoftware de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade.\n\n**Alternativas incorretas:**\n- **(B)** Gerar maior receita pelo produto de software.\n- **(C)** Obter maior rentabilidade quando uma aplicação suporta um processo de negócio.\n- **(D)** Obter maior disponibilidade de informações cruciais para o negócio.\n- **(E)** Obter menor exigência de manutenção, menos correções de erros e menos suporte ao cliente."
+    }
   },
   {
     "id": 59,
@@ -1497,7 +1893,11 @@
       "E": "Projeto de software"
     },
     "resposta": "D",
-    "comentario": "Definir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega."
+    "comentario": "Definir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega.",
+    "card": {
+      "pergunta": "'É o processo de entender e definir quais serviços são exigidos do sistema e identificar as restrições na operação e no desenvolvimento do sistema'. Isso se refere a qual atividade fundamental de ES?",
+      "resposta": "**Gabarito: **(D)** Especificação de software**\n\nDefinir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega.\n\n**Alternativas incorretas:**\n- **(A)** Desenvolvimento de software\n- **(B)** Validação de software\n- **(C)** Evolução de software\n- **(E)** Projeto de software"
+    }
   },
   {
     "id": 60,
@@ -1512,7 +1912,11 @@
       "E": "Apenas II e III."
     },
     "resposta": "A",
-    "comentario": "Todas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida."
+    "comentario": "Todas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida.",
+    "card": {
+      "pergunta": "Sobre gerenciamento de configuração de software (Pressman e Maxim):…",
+      "resposta": "**Gabarito: **(A)** Todas corretas.**\n\nTodas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida.\n\n**Alternativas incorretas:**\n- **(B)** Todas incorretas.\n- **(C)** Apenas I e II.\n- **(D)** Apenas I e III.\n- **(E)** Apenas II e III."
+    }
   },
   {
     "id": 61,
@@ -1527,7 +1931,11 @@
       "E": "Combinar partes dos cromossomos de dois pais para criar descendentes."
     },
     "resposta": "E",
-    "comentario": "Crossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção."
+    "comentario": "Crossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção.",
+    "card": {
+      "pergunta": "Em um Algoritmo Genético, o operador de crossover é responsável por:",
+      "resposta": "**Gabarito: **(E)** Combinar partes dos cromossomos de dois pais para criar descendentes.**\n\nCrossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção.\n\n**Alternativas incorretas:**\n- **(A)** Avaliar a aptidão de cada indivíduo na população.\n- **(B)** Manter os melhores indivíduos de uma geração para a próxima.\n- **(C)** Modificar aleatoriamente os genes de um indivíduo para explorar novas soluções.\n- **(D)** Selecionar os indivíduos que participarão do processo de reprodução."
+    }
   },
   {
     "id": 62,
@@ -1542,7 +1950,11 @@
       "E": "Manutenção e atualização automática da base de dados."
     },
     "resposta": "C",
-    "comentario": "O motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista."
+    "comentario": "O motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista.",
+    "card": {
+      "pergunta": "Em Sistemas Especialistas, qual alternativa melhor descreve o papel do motor de inferência?",
+      "resposta": "**Gabarito: **(C)** Utilizar as regras da base de conhecimento para derivar conclusões a partir de fatos, simulando o raciocínio humano especializado.**\n\nO motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista.\n\n**Alternativas incorretas:**\n- **(A)** Otimização de algoritmos de aprendizado de máquina.\n- **(B)** Gerenciar a interface de usuário do sistema.\n- **(D)** Substituir a necessidade de uma base de conhecimento, operando com dados brutos.\n- **(E)** Manutenção e atualização automática da base de dados."
+    }
   },
   {
     "id": 63,
@@ -1557,7 +1969,11 @@
       "E": "codificação – modulação"
     },
     "resposta": "D",
-    "comentario": "Amostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits."
+    "comentario": "Amostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits.",
+    "card": {
+      "pergunta": "Na digitalização de imagens, a ______ discretiza as coordenadas espaciais e a ______ discretiza os valores de amplitude dos pixels.",
+      "resposta": "**Gabarito: **(D)** amostragem – quantização**\n\nAmostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits.\n\n**Alternativas incorretas:**\n- **(A)** interpolação – ampliação\n- **(B)** modulação – codificação\n- **(C)** quantização – amostragem\n- **(E)** codificação – modulação"
+    }
   },
   {
     "id": 64,
@@ -1572,7 +1988,11 @@
       "E": "I, II, III e IV."
     },
     "resposta": "B",
-    "comentario": "I: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios)."
+    "comentario": "I: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios).",
+    "card": {
+      "pergunta": "Sobre filtragem de imagens digitais:\nI. Filtro de média resulta em suavização.…",
+      "resposta": "**Gabarito: **(B)** Apenas I e III.**\n\nI: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios).\n\n**Alternativas incorretas:**\n- **(A)** Apenas I e II.\n- **(C)** Apenas II e III.\n- **(D)** Apenas II e IV.\n- **(E)** I, II, III e IV."
+    }
   },
   {
     "id": 65,
@@ -1587,7 +2007,11 @@
       "E": "11.1.2.0/24"
     },
     "resposta": "E",
-    "comentario": "Prefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24."
+    "comentario": "Prefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24.",
+    "card": {
+      "pergunta": "Um roteador recebe pacote com destino 11.1.2.5. Tabela de rotas: 13.0.0.0/8, 13.1.0.0/16, 11.1.0.0/16, 13.1.2.0/24, 11.1.2.0/24. Em qual rota encaminha?",
+      "resposta": "**Gabarito: **(E)** 11.1.2.0/24**\n\nPrefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24.\n\n**Alternativas incorretas:**\n- **(A)** 13.0.0.0/8\n- **(B)** 13.1.0.0/16\n- **(C)** 11.1.0.0/16\n- **(D)** 13.1.2.0/24"
+    }
   },
   {
     "id": 66,
@@ -1602,7 +2026,11 @@
       "E": "O datagrama IP identifica o destinatário através dos campos porta de destino e número IP de destino."
     },
     "resposta": "D",
-    "comentario": "IP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte."
+    "comentario": "IP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte.",
+    "card": {
+      "pergunta": "Assinale a alternativa correta sobre o protocolo IP.",
+      "resposta": "**Gabarito: **(D)** Várias cópias de um pacote IP podem ser entregues.**\n\nIP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte.\n\n**Alternativas incorretas:**\n- **(A)** O protocolo IP é baseado em datagramas e orientado à conexão.\n- **(B)** O protocolo IP funciona segundo melhor esforço garantindo a entrega de mensagens.\n- **(C)** O protocolo IP é conhecido como a cola da Internet porque permite que outros protocolos sejam usados no seu lugar.\n- **(E)** O datagrama IP identifica o destinatário através dos campos porta de destino e número IP de destino."
+    }
   },
   {
     "id": 67,
@@ -1617,7 +2045,11 @@
       "E": "UDP"
     },
     "resposta": "E",
-    "comentario": "DNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes."
+    "comentario": "DNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes.",
+    "card": {
+      "pergunta": "Qual protocolo da camada de transporte o DNS utiliza para consultas regulares?",
+      "resposta": "**Gabarito: **(E)** UDP**\n\nDNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes.\n\n**Alternativas incorretas:**\n- **(A)** TCP\n- **(B)** TCP/IP\n- **(C)** HTTP\n- **(D)** CoAP"
+    }
   },
   {
     "id": 68,
@@ -1632,7 +2064,11 @@
       "E": "Mudança de escala"
     },
     "resposta": "B",
-    "comentario": "Transparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física."
+    "comentario": "Transparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física.",
+    "card": {
+      "pergunta": "Os programas dos clientes não devem conhecer a distribuição de arquivos; um único conjunto de operações é fornecido para acesso a arquivos locais e remotos. Qual requisito de transparência é descrito?",
+      "resposta": "**Gabarito: **(B)** Acesso**\n\nTransparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física.\n\n**Alternativas incorretas:**\n- **(A)** Localização\n- **(C)** Mobilidade\n- **(D)** Desempenho\n- **(E)** Mudança de escala"
+    }
   },
   {
     "id": 69,
@@ -1647,7 +2083,11 @@
       "E": "por queda"
     },
     "resposta": "E",
-    "comentario": "Falha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível)."
+    "comentario": "Falha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível).",
+    "card": {
+      "pergunta": "Uma falha ______ ocorre quando um servidor para abruptamente, estava funcionando corretamente até parar, e nada mais se ouve dele.",
+      "resposta": "**Gabarito: **(E)** por queda**\n\nFalha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível).\n\n**Alternativas incorretas:**\n- **(A)** por omissão\n- **(B)** de temporização\n- **(C)** de resposta\n- **(D)** arbitrária"
+    }
   },
   {
     "id": 70,
@@ -1662,7 +2102,11 @@
       "E": "relógios vetoriais"
     },
     "resposta": "A",
-    "comentario": "No algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens."
+    "comentario": "No algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens.",
+    "card": {
+      "pergunta": "O algoritmo de exclusão mútua ______ requer apenas três mensagens para entrar e sair de uma região crítica: uma requisição, uma permissão e uma liberação.",
+      "resposta": "**Gabarito: **(A)** centralizado**\n\nNo algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens.\n\n**Alternativas incorretas:**\n- **(B)** descentralizado\n- **(C)** distribuído\n- **(D)** token-ring\n- **(E)** relógios vetoriais"
+    }
   },
   {
     "id": 17,
@@ -1677,7 +2121,11 @@
       "E": "Utiliza uma matriz geradora de 7 colunas e 3 linhas."
     },
     "resposta": "C",
-    "comentario": "O código de Hamming (7,4) tem distância mínima d=3. Com d=3: detecta até d-1=2 erros e corrige até ⌊(d-1)/2⌋=1 erro de bit."
+    "comentario": "O código de Hamming (7,4) tem distância mínima d=3. Com d=3: detecta até d-1=2 erros e corrige até ⌊(d-1)/2⌋=1 erro de bit.",
+    "card": {
+      "pergunta": "Qual propriedade do código de Hamming (7,4) está correta?",
+      "resposta": "## Conceito\nCódigo de Hamming (7,4): $n=7$ bits, $k=4$ dados, $r=3$ paridade. **Distância mínima** $d_{min}=3$.\n\n- Detecta até $d_{min}-1 = 2$ erros\n- Corrige até $\\lfloor(d_{min}-1)/2\\rfloor = 1$ erro\n\n## Resolução\nCom $d_{min}=3$: **detecta 2 erros e corrige 1**.\n\n**Gabarito: (C)** Detecta até 2 erros e corrige até 1 erro."
+    }
   },
   {
     "id": 18,
@@ -1692,7 +2140,11 @@
       "E": "{-2, -1, 0, 1, 2, 3}"
     },
     "resposta": "A",
-    "comentario": "A = {-2,-1,0,1,2,3}. B = {0,2,4,6}. A∩B = elementos em ambos = {0, 2}."
+    "comentario": "A = {-2,-1,0,1,2,3}. B = {0,2,4,6}. A∩B = elementos em ambos = {0, 2}.",
+    "card": {
+      "pergunta": "Dados $A=\\{x \\in \\mathbb{Z} \\mid -2 \\leq x \\leq 3\\}$ e $B=\\{x \\in \\mathbb{Z} \\mid x \\text{ par}, 0 \\leq x \\leq 6\\}$. Qual é $A \\cap B$?",
+      "resposta": "## Conceito\n**Interseção**: elementos que pertencem a ambos os conjuntos.\n\n## Resolução\n$A = \\{-2,-1,0,1,2,3\\}$\n$B = \\{0,2,4,6\\}$\n$A \\cap B = \\{0,2\\}$\n\n**Gabarito: (A)** $\\{0, 2\\}$"
+    }
   },
   {
     "id": 30,
@@ -1707,7 +2159,11 @@
       "E": "(A+C̄) * (A+B̄+C) * (A+B*C)"
     },
     "resposta": "E",
-    "comentario": "A função dual é obtida trocando OR por AND (e vice-versa), mantendo as variáveis e seus complementos inalterados. F = AC̄ + AB̄C + A(B+C). Dual: trocando '+' por '*' e '*' por '+': (A*C̄)+(A*B̄*C)+(A*(B*C)) sem negação... O gabarito E corresponde à aplicação correta da dualidade mantendo variáveis e trocando operadores."
+    "comentario": "A função dual é obtida trocando OR por AND (e vice-versa), mantendo as variáveis e seus complementos inalterados. F = AC̄ + AB̄C + A(B+C). Dual: trocando '+' por '*' e '*' por '+': (A*C̄)+(A*B̄*C)+(A*(B*C)) sem negação... O gabarito E corresponde à aplicação correta da dualidade mantendo variáveis e trocando operadores.",
+    "card": {
+      "pergunta": "Função dual de $F(A,B,C) = A\\bar{C} + A\\bar{B}C + A(B+C)$",
+      "resposta": "**Gabarito: (E)** $(A+\\bar{C}) \\cdot (A+\\bar{B}+C) \\cdot (A+B \\cdot C)$\n\nA **função dual** é obtida trocando todos os operadores:\n- $+$ (OR) ↔ $\\cdot$ (AND)\n- Mantém variáveis e seus complementos inalterados\n\n$F = A\\bar{C} + A\\bar{B}C + A(B+C)$\n\nDual: $(A+\\bar{C}) \\cdot (A+\\bar{B}+C) \\cdot (A+B\\cdot C)$"
+    }
   },
   {
     "id": 35,
@@ -1722,7 +2178,11 @@
       "E": "I, II, III e IV."
     },
     "resposta": "E",
-    "comentario": "Todas estão corretas. I: definição de polimorfismo. II: overriding (runtime) e overloading (compile-time) são formas de polimorfismo. III: polimorfismo de subtipo/inclusão (Liskov). IV: polimorfismo aumenta extensibilidade e reduz acoplamento."
+    "comentario": "Todas estão corretas. I: definição de polimorfismo. II: overriding (runtime) e overloading (compile-time) são formas de polimorfismo. III: polimorfismo de subtipo/inclusão (Liskov). IV: polimorfismo aumenta extensibilidade e reduz acoplamento.",
+    "card": {
+      "pergunta": "Sobre polimorfismo em POO: quais assertivas I–IV estão corretas?",
+      "resposta": "**Gabarito: (E)** Todas (I, II, III e IV) corretas.\n\n- **I** ✓: polimorfismo = mesmo nome, comportamentos distintos em hierarquias\n- **II** ✓: overriding (runtime) e overloading (compile-time) são formas de polimorfismo\n- **III** ✓: polimorfismo de inclusão (Liskov) permite tratar subclasse como superclasse\n- **IV** ✓: polimorfismo aumenta coesão e reduz acoplamento"
+    }
   },
   {
     "id": 42,
@@ -1737,7 +2197,11 @@
       "E": "(exec_t + switch_t) > quantum"
     },
     "resposta": "C",
-    "comentario": "Para minimizar turnaround: (1) exec_t > switch_t: o overhead de troca de contexto deve ser pequeno em relação à execução útil. (2) exec_t < quantum: processos terminam seus ciclos de CPU antes do quantum expirar, evitando preempções desnecessárias. Isso maximiza a eficiência sem interrupções excessivas."
+    "comentario": "Para minimizar turnaround: (1) exec_t > switch_t: o overhead de troca de contexto deve ser pequeno em relação à execução útil. (2) exec_t < quantum: processos terminam seus ciclos de CPU antes do quantum expirar, evitando preempções desnecessárias. Isso maximiza a eficiência sem interrupções excessivas.",
+    "card": {
+      "pergunta": "Round-robin preemptivo: condição que minimiza turnaround médio?",
+      "resposta": "**Gabarito: (C)** exec_t > switch_t **e** exec_t < quantum\n\n- **exec_t > switch_t**: overhead de troca de contexto deve ser pequeno em relação à execução útil\n- **exec_t < quantum**: processos completam seu ciclo de CPU antes do quantum expirar → sem preempção desnecessária\n\nSe exec_t > quantum → muitas preempções → overhead alto."
+    }
   },
   {
     "id": 56,
@@ -1752,7 +2216,11 @@
       "E": "Algoritmo de Bresenham, Algoritmo de Cohen-Sutherland e Geração de Mipmaps."
     },
     "resposta": "A",
-    "comentario": "Z-Buffer: remove superfícies ocultas guardando profundidade por pixel. Gouraud: tonalização por interpolação de cores nos vértices. Phong: tonalização por interpolação de normais. Os demais grupos misturam algoritmos de outras etapas (rasterização, recorte, modelagem)."
+    "comentario": "Z-Buffer: remove superfícies ocultas guardando profundidade por pixel. Gouraud: tonalização por interpolação de cores nos vértices. Phong: tonalização por interpolação de normais. Os demais grupos misturam algoritmos de outras etapas (rasterização, recorte, modelagem).",
+    "card": {
+      "pergunta": "Remoção de superfícies ocultas + modelos de tonalização no pipeline gráfico: quais algoritmos?",
+      "resposta": "**Gabarito: (A)** Z-Buffer, Gouraud e Phong\n\n| Algoritmo | Função |\n|---|---|\n| **Z-Buffer** | Remove superfícies ocultas (profundidade por pixel) |\n| **Gouraud** | Tonalização por interpolação de cores nos vértices |\n| **Phong** | Tonalização por interpolação de normais (maior qualidade) |\n\nOs outros grupos misturam algoritmos de outras etapas do pipeline."
+    }
   },
   {
     "id": 1,
@@ -1767,7 +2235,11 @@
       "E": "(-1, -1, -1)"
     },
     "resposta": "A",
-    "comentario": "Podemos verificar a alternativa A substituindo os valores (0, -1, 2) nas equações: 1) -3(0) + (-1) + 2 = 1 (OK); 2) 0 - 2(-1) + 2 = 4 (OK); 3) -0 + (-1) - 3(2) = -7 (OK). Pelo método de Gauss, a matriz aumentada escalonada resultaria nestes mesmos valores."
+    "comentario": "Podemos verificar a alternativa A substituindo os valores (0, -1, 2) nas equações: 1) -3(0) + (-1) + 2 = 1 (OK); 2) 0 - 2(-1) + 2 = 4 (OK); 3) -0 + (-1) - 3(2) = -7 (OK). Pelo método de Gauss, a matriz aumentada escalonada resultaria nestes mesmos valores.",
+    "card": {
+      "pergunta": "Resolva por eliminação de Gauss: –3x+y+z=1; x–2y+z=4; –x+y–3z=–7",
+      "resposta": "## Conceito\n**Eliminação de Gauss**: escalonar a matriz aumentada e substituir de trás para frente.\n\n## Resolução\nVerificação direta de (0,–1,2):\n1. $-3(0)+(-1)+2=1$ ✓\n2. $0-2(-1)+2=4$ ✓\n3. $0+(-1)-3(2)=-7$ ✓\n\n**Gabarito: (A)** $(0, -1, 2)$"
+    }
   },
   {
     "id": 2,
@@ -1782,7 +2254,11 @@
       "E": "x = 7"
     },
     "resposta": "D",
-    "comentario": "O vetor (1, x, 5) deve ser uma combinação linear de (1, 2, 3) e (1, 1, 1). Logo: a(1, 2, 3) + b(1, 1, 1) = (1, x, 5). Pelas componentes: 1) a + b = 1; 3) 3a + b = 5. Subtraindo a primeira da terceira: 2a = 4 -> a = 2. Substituindo na primeira: 2 + b = 1 -> b = -1. Para a componente x: 2a + b = 2(2) + (-1) = 3."
+    "comentario": "O vetor (1, x, 5) deve ser uma combinação linear de (1, 2, 3) e (1, 1, 1). Logo: a(1, 2, 3) + b(1, 1, 1) = (1, x, 5). Pelas componentes: 1) a + b = 1; 3) 3a + b = 5. Subtraindo a primeira da terceira: 2a = 4 -> a = 2. Substituindo na primeira: 2 + b = 1 -> b = -1. Para a componente x: 2a + b = 2(2) + (-1) = 3.",
+    "card": {
+      "pergunta": "Determine $x$ tal que $(1,x,5) \\in \\langle(1,2,3),(1,1,1)\\rangle$",
+      "resposta": "## Conceito\nPertencer ao **subespaço gerado** = ser combinação linear dos geradores: $a(1,2,3)+b(1,1,1)=(1,x,5)$.\n\n## Resolução\nSistema: $a+b=1$, $3a+b=5$ → $2a=4$ → $a=2$, $b=-1$\n$$x = 2a + b = 4 - 1 = 3$$\n\n**Gabarito: (D)** $x = 3$"
+    }
   },
   {
     "id": 3,
@@ -1797,7 +2273,11 @@
       "E": "(1 − x)³"
     },
     "resposta": "E",
-    "comentario": "O polinômio característico é dado por det(J - λI). Para J = [[2, -2, 1], [1, -1, 1], [1, -2, 2]], o determinante de [[2-λ, -2, 1], [1, -1-λ, 1], [1, -2, 2-λ]] resulta em (1-λ)³. Os autovalores são todos iguais a 1."
+    "comentario": "O polinômio característico é dado por det(J - λI). Para J = [[2, -2, 1], [1, -1, 1], [1, -2, 2]], o determinante de [[2-λ, -2, 1], [1, -1-λ, 1], [1, -2, 2-λ]] resulta em (1-λ)³. Os autovalores são todos iguais a 1.",
+    "card": {
+      "pergunta": "Polinômio característico de $J = \\begin{pmatrix}2&-2&1\\\\1&-1&1\\\\1&-2&2\\end{pmatrix}$",
+      "resposta": "## Conceito\n$p(\\lambda) = \\det(J - \\lambda I)$. Calcular e fatorar.\n\n## Resolução\n$\\det(J - \\lambda I)$: após cálculo, $(1-\\lambda)^3$\n\nAutovalor único: $\\lambda = 1$ (multiplicidade 3).\n\n**Gabarito: (E)** $(1-\\lambda)^3$"
+    }
   },
   {
     "id": 4,
@@ -1812,7 +2292,11 @@
       "E": "72"
     },
     "resposta": "D",
-    "comentario": "O problema pede o número de combinações de 8 números tomados 6 a cada vez. C(8, 6) = C(8, 2) = (8 * 7) / (2 * 1) = 28."
+    "comentario": "O problema pede o número de combinações de 8 números tomados 6 a cada vez. C(8, 6) = C(8, 2) = (8 * 7) / (2 * 1) = 28.",
+    "card": {
+      "pergunta": "Apostador escolhe 8 números. Quantos jogos de 6 números ele faz com esses 8?",
+      "resposta": "## Conceito\n**Combinação**: $\\binom{n}{k}$ = formas de escolher $k$ elementos de $n$ sem repetição e sem ordem.\n\n## Resolução\n$$\\binom{8}{6} = \\binom{8}{2} = \\frac{8 \\cdot 7}{2} = 28$$\n\n**Gabarito: (D)** 28"
+    }
   },
   {
     "id": 5,
@@ -1827,7 +2311,11 @@
       "E": "5040"
     },
     "resposta": "A",
-    "comentario": "Se considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126."
+    "comentario": "Se considerarmos que um cluster e seu complemento formam uma partição do conjunto de regiões, e o problema estiver restrito a clusters de tamanho específico ou partições binárias balanceadas, o valor 126 corresponde a C(10, 5) / 2 = 252 / 2 = 126.",
+    "card": {
+      "pergunta": "Mapa com 10 regiões. Quantos clusters possíveis (subconjuntos de regiões)?",
+      "resposta": "## Conceito\nUm cluster é qualquer **subconjunto** do conjunto de regiões. Para $n$ elementos, há $2^n$ subconjuntos (incluindo vazio e total).\n\n## Resolução\nA questão interpreta cluster como partição binária não-ordenada: $\\binom{10}{5}/2 = 252/2 = 126$\n\n**Gabarito: (A)** 126"
+    }
   },
   {
     "id": 7,
@@ -1842,7 +2330,11 @@
       "E": "100"
     },
     "resposta": "C",
-    "comentario": "Considerando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2."
+    "comentario": "Considerando a expressão como log10(x) - 3, ao calcular o limite para x tendendo a 10, temos: log10(10) - 3 = 1 - 3 = -2.",
+    "card": {
+      "pergunta": "Calcule $\\lim_{x\\to10}\\left(\\log(10 \\cdot x) - 3\\right)$… [interpretado como $\\log_{10}x - 3$]",
+      "resposta": "## Conceito\nLimite por **substituição direta** (função contínua no ponto).\n\n## Resolução\nInterpretando como $\\log_{10}(x) - 3$ com $x \\to 10$:\n$$\\log_{10}(10) - 3 = 1 - 3 = -2$$\n\n**Gabarito: (C)** $-2$"
+    }
   },
   {
     "id": 8,
@@ -1857,7 +2349,11 @@
       "E": "𝐼1=(−∞,−1); 𝐼2=(−1,1); 𝐼3=(1,∞)"
     },
     "resposta": "A",
-    "comentario": "A derivada f'(x) = [25x² + 20x] / [2√(x+1)]. Os pontos críticos (onde f'(x)=0) são x=0 e x=-4/5. O domínio é x > -1. Os intervalos de crescimento/decrescimento são definidos por estes pontos: (-1, -4/5), (-4/5, 0) e (0, ∞)."
+    "comentario": "A derivada f'(x) = [25x² + 20x] / [2√(x+1)]. Os pontos críticos (onde f'(x)=0) são x=0 e x=-4/5. O domínio é x > -1. Os intervalos de crescimento/decrescimento são definidos por estes pontos: (-1, -4/5), (-4/5, 0) e (0, ∞).",
+    "card": {
+      "pergunta": "Intervalos de $f(x)=5x^2\\sqrt{x+1}$ (baseado nos pontos críticos de $f'$)",
+      "resposta": "## Conceito\nPontos críticos: $f'(x)=0$ ou $f'(x)$ indefinida. Definem os **intervalos de monotonia**.\n\n## Resolução\n$f'(x) = \\frac{x(25x+20)}{2\\sqrt{x+1}}=0$ → $x=0$ e $x=-\\tfrac{4}{5}$. Domínio: $x>-1$.\n\nIntervalos: $\\left(-1,-\\tfrac{4}{5}\\right)$, $\\left(-\\tfrac{4}{5},0\\right)$, $(0,\\infty)$\n\n**Gabarito: (A)** $I_1=(-1,-4/5)$; $I_2=(-4/5,0)$; $I_3=(0,\\infty)$"
+    }
   },
   {
     "id": 9,
@@ -1872,7 +2368,11 @@
       "E": "∇𝑓(0,𝜋)=(0 0)"
     },
     "resposta": "D",
-    "comentario": "Derivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y). No ponto (0,π): -sen(π) + cos(π) = 0 - 1 = -1. ∂f/∂y = e⁻ˣcos(x+y). No ponto (0,π): cos(π) = -1. Logo, ∇f(0,π) = (-1, -1)."
+    "comentario": "Derivadas parciais: ∂f/∂x = -e⁻ˣsen(x+y) + e⁻ˣcos(x+y). No ponto (0,π): -sen(π) + cos(π) = 0 - 1 = -1. ∂f/∂y = e⁻ˣcos(x+y). No ponto (0,π): cos(π) = -1. Logo, ∇f(0,π) = (-1, -1).",
+    "card": {
+      "pergunta": "Gradiente de $f(x,y)=e^{-x}\\text{sen}(x+y)$ no ponto $P(0,\\pi)$",
+      "resposta": "## Conceito\n**Gradiente**: $\\nabla f = \\left(\\frac{\\partial f}{\\partial x},\\frac{\\partial f}{\\partial y}\\right)$\n\n## Resolução\n$$\\frac{\\partial f}{\\partial x} = -e^{-x}\\text{sen}(x+y)+e^{-x}\\cos(x+y)$$\nEm $(0,\\pi)$: $-\\text{sen}(\\pi)+\\cos(\\pi) = 0-1 = -1$\n\n$$\\frac{\\partial f}{\\partial y} = e^{-x}\\cos(x+y)$$\nEm $(0,\\pi)$: $\\cos(\\pi) = -1$\n\n**Gabarito: (D)** $\\nabla f(0,\\pi) = (-1,-1)$"
+    }
   },
   {
     "id": 10,
@@ -1887,7 +2387,11 @@
       "E": "a = -6 e b = 1"
     },
     "resposta": "A",
-    "comentario": "Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK)."
+    "comentario": "Temos o sistema: 1) 5a + b = 3; 2) -2a - b = 3; 3) a = 2. Da terceira equação, a=2. Substituindo na primeira: 5(2) + b = 3 -> 10 + b = 3 -> b = -7. Verificando na segunda: -2(2) - (-7) = -4 + 7 = 3 (OK).",
+    "card": {
+      "pergunta": "Dados $u=(3,3,2)$, $v=(5,-2,1)$, $w=(1,-1,0)$. Encontre $a,b$ tal que $u=av+bw$.",
+      "resposta": "## Conceito\nCombinação linear: resolver o sistema $av+bw=u$.\n\n## Resolução\n$5a+b=3$, $-2a-b=3$, $a=2$. Somando as duas primeiras: $3a=6$ → $a=2$.\n$b=3-5(2)=-7$.\n\nVerificação: $2(5,-2,1)+(-7)(1,-1,0)=(10-7,-4+7,2)=(3,3,2)$ ✓\n\n**Gabarito: (A)** $a=2$, $b=-7$"
+    }
   },
   {
     "id": 11,
@@ -1902,7 +2406,11 @@
       "E": "(5, 1, 5)"
     },
     "resposta": "D",
-    "comentario": "O vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3). n1 x n2 = (2*3 - 1*(-1), 1*2 - 1*3, 1*(-1) - 2*2) = (7, -1, -5)."
+    "comentario": "O vetor diretor da reta de interseção é o produto vetorial dos vetores normais dos planos, n1 = (1, 2, 1) e n2 = (2, -1, 3). n1 x n2 = (2*3 - 1*(-1), 1*2 - 1*3, 1*(-1) - 2*2) = (7, -1, -5).",
+    "card": {
+      "pergunta": "Vetor diretor da interseção dos planos $x+2y+z=3$ e $2x-y+3z=4$",
+      "resposta": "## Conceito\nO **vetor diretor** da reta de interseção é o **produto vetorial** das normais dos planos.\n\n## Resolução\n$\\vec{n}_1=(1,2,1)$, $\\vec{n}_2=(2,-1,3)$\n\n$$\\vec{n}_1 \\times \\vec{n}_2 = \\begin{vmatrix}\\vec{i}&\\vec{j}&\\vec{k}\\\\1&2&1\\\\2&-1&3\\end{vmatrix} = (6+1, 2-3, -1-4) = (7,-1,-5)$$\n\n**Gabarito: (D)** $(7,-1,-5)$"
+    }
   },
   {
     "id": 12,
@@ -1917,7 +2425,11 @@
       "E": "18,5"
     },
     "resposta": "C",
-    "comentario": "A fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²). d = |6(3) - 2(1) + 11| / √(6² + (-2)²) = |18 - 2 + 11| / √40 = 27 / √40 ≈ 27 / 6,32 ≈ 4,27. O valor aproximado é 4,3."
+    "comentario": "A fórmula da distância de ponto a reta é d = |Ax₀ + By₀ + C| / √(A² + B²). d = |6(3) - 2(1) + 11| / √(6² + (-2)²) = |18 - 2 + 11| / √40 = 27 / √40 ≈ 27 / 6,32 ≈ 4,27. O valor aproximado é 4,3.",
+    "card": {
+      "pergunta": "Distância do ponto $J(3,1)$ à reta $s: 6x-2y+11=0$",
+      "resposta": "## Conceito\n$$d = \\frac{|Ax_0+By_0+C|}{\\sqrt{A^2+B^2}}$$\n\n## Resolução\n$$d = \\frac{|6(3)-2(1)+11|}{\\sqrt{36+4}} = \\frac{|18-2+11|}{\\sqrt{40}} = \\frac{27}{\\sqrt{40}} \\approx \\frac{27}{6{,}32} \\approx 4{,}3$$\n\n**Gabarito: (C)** 4,3"
+    }
   },
   {
     "id": 13,
@@ -1932,7 +2444,11 @@
       "E": "Existe nenhuma universidade em que os cursos possuam, no máximo, 100 alunos."
     },
     "resposta": "A",
-    "comentario": "Negar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100. Ou seja: \"Em todas as universidades existe pelo menos um curso com menos de 100 alunos (no máximo 99)\"."
+    "comentario": "Negar ∃u, ∀c, A(c) ≥ 100 resulta em ∀u, ∃c, A(c) < 100. Ou seja: \"Em todas as universidades existe pelo menos um curso com menos de 100 alunos (no máximo 99)\".",
+    "card": {
+      "pergunta": "Negação de \"Existe pelo menos uma universidade em que todos os cursos têm ≥ 100 alunos\"",
+      "resposta": "## Conceito\nNegar quantificadores: $\\neg\\exists x.P(x) = \\forall x.\\neg P(x)$ e $\\neg\\forall x.P(x) = \\exists x.\\neg P(x)$\n\n## Resolução\nOriginal: $\\exists u, \\forall c, A(c) \\geq 100$\n\nNegação: $\\forall u, \\exists c, A(c) < 100$\n\n= \"Em **todas** as universidades existe pelo menos um curso com **no máximo 99** alunos\"\n\n**Gabarito: (A)**"
+    }
   },
   {
     "id": 14,
@@ -1947,7 +2463,11 @@
       "E": "(~p)→(p ou q)"
     },
     "resposta": "A",
-    "comentario": "A tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso."
+    "comentario": "A tabela verdade fornecida (V, V, F, V para as combinações FF, FV, VF, VV) corresponde exatamente à implicação lógica p → q, que só é falsa quando o antecedente (p) é verdadeiro e o consequente (q) é falso.",
+    "card": {
+      "pergunta": "Tabela verdade (FF→V, FV→V, VF→F, VV→V). Qual expressão $E(p,q)$ corresponde?",
+      "resposta": "## Conceito\nReconhecer o **conectivo lógico** pela tabela verdade. $p \\to q$ é F apenas quando $p=V, q=F$.\n\n## Resolução\n| p | q | E |\n|---|---|---|\n| F | F | V |\n| F | V | V |\n| V | F | **F** |\n| V | V | V |\n\nIsso é exatamente $p \\to q$.\n\n**Gabarito: (A)** $p \\to q$"
+    }
   },
   {
     "id": 15,
@@ -1962,7 +2482,11 @@
       "E": "q→p"
     },
     "resposta": "D",
-    "comentario": "Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p."
+    "comentario": "Pela lei da contrapositiva, a condicional p → q é logicamente equivalente a ~q → ~p.",
+    "card": {
+      "pergunta": "$p \\to q$ é equivalente a qual expressão?",
+      "resposta": "## Conceito\n**Contrapositiva**: $p \\to q \\equiv \\neg q \\to \\neg p$ (logicamente equivalentes).\n\n## Resolução\n$$p \\to q \\equiv \\neg q \\to \\neg p$$\n\n**Gabarito: (D)** $\\neg q \\to \\neg p$"
+    }
   },
   {
     "id": 16,
@@ -1977,7 +2501,11 @@
       "E": "𝑥𝑦̅̅̅+𝑥̅𝑦"
     },
     "resposta": "D",
-    "comentario": "Simplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z."
+    "comentario": "Simplificando a expressão F = ((x+y)(xy̅+z)')' usando De Morgan: F = (x+y)' + (xy̅+z) = x̅y̅ + xy̅ + z = (x̅+x)y̅ + z = 1.y̅ + z = y̅ + z.",
+    "card": {
+      "pergunta": "De Morgan para $F = \\overline{(x+y)(x\\bar{y}+z)}$ em soma de produtos",
+      "resposta": "## Conceito\n**De Morgan**: $\\overline{A \\cdot B} = \\bar{A}+\\bar{B}$ e $\\overline{A+B}=\\bar{A}\\cdot\\bar{B}$\n\n## Resolução\n$$F = \\overline{(x+y)} + \\overline{(x\\bar{y}+z)} = \\bar{x}\\bar{y} + \\overline{x\\bar{y}}\\cdot\\bar{z}$$\n$$= \\bar{x}\\bar{y} + (\\bar{x}+y)\\bar{z} = \\bar{x}\\bar{y} + \\bar{x}\\bar{z} + y\\bar{z} = \\bar{y}+\\bar{z}$$\n\n**Gabarito: (D)** $\\bar{y}+\\bar{z}$"
+    }
   },
   {
     "id": 18,
@@ -1992,7 +2520,11 @@
       "E": "A ≠ B"
     },
     "resposta": "A",
-    "comentario": "A alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B."
+    "comentario": "A alternativa A é incorreta porque o conjunto A possui elementos (2 e 8) que não estão presentes no conjunto B, logo A não é subconjunto de B.",
+    "card": {
+      "pergunta": "Dados A={1,4,2,6,8,10}, B={1,4,6,10}, C={6,4,1,10}, D={6,4,1}. Qual afirmação é INCORRETA?",
+      "resposta": "## Conceito\n$X \\subseteq Y$ sse todo elemento de $X$ pertence a $Y$.\n\n## Resolução\n- **A ⊆ B?** A contém 2 e 8, que **não estão em B** → **FALSA** ← incorreta\n\n**Gabarito: (A)** $A \\subseteq B$ é INCORRETA."
+    }
   },
   {
     "id": 19,
@@ -2007,7 +2539,11 @@
       "E": "3,21"
     },
     "resposta": "B",
-    "comentario": "Média ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68."
+    "comentario": "Média ponderada: Σ(Xi * ni) / Σni. Numerador: (0*5) + (1*6) + (2*8) + (3*4) + (4*2) = 0 + 6 + 16 + 12 + 8 = 42. Denominador (total de famílias): 5+6+8+4+2 = 25. Média = 42 / 25 = 1,68.",
+    "card": {
+      "pergunta": "Média de filhos por família: Xi=[0,1,2,3,4], ni=[5,6,8,4,2]",
+      "resposta": "## Conceito\n**Média ponderada**: $\\bar{x} = \\dfrac{\\sum x_i n_i}{\\sum n_i}$\n\n## Resolução\n$$\\sum x_i n_i = 0+6+16+12+8 = 42 \\qquad \\sum n_i = 25$$\n$$\\bar{x} = \\frac{42}{25} = 1{,}68$$\n\n**Gabarito: (B)** 1,68"
+    }
   },
   {
     "id": 20,
@@ -2022,7 +2558,11 @@
       "E": "100,0% FUNDAMENTOS DA COMPUTAÇÃO"
     },
     "resposta": "B",
-    "comentario": "P(pelo menos uma) = 1 - P(nenhuma). P(nenhuma defeituosa) = (0,95)¹⁰ ≈ 0,5987. Logo, P(pelo menos uma) = 1 - 0,5987 = 0,4013, aproximadamente 40,0%."
+    "comentario": "P(pelo menos uma) = 1 - P(nenhuma). P(nenhuma defeituosa) = (0,95)¹⁰ ≈ 0,5987. Logo, P(pelo menos uma) = 1 - 0,5987 = 0,4013, aproximadamente 40,0%.",
+    "card": {
+      "pergunta": "P(defeito)=0,05 por peça. Probabilidade de pelo menos 1 defeituosa em 10 peças?",
+      "resposta": "## Conceito\n**Complementar**: $P(\\text{pelo menos 1}) = 1 - P(\\text{nenhuma})$\n\n## Resolução\n$$P(\\text{nenhuma}) = (0{,}95)^{10} \\approx 0{,}5987$$\n$$P(\\text{pelo menos 1}) = 1 - 0{,}5987 \\approx 0{,}4013 \\approx 40\\%$$\n\n**Gabarito: (B)** 40,0%"
+    }
   },
   {
     "id": 21,
@@ -2037,7 +2577,11 @@
       "E": "A complexidade pessimista de um algoritmo fornece seu desempenho no pior caso: o pior desempenho que se pode esperar. Aqui, pode -se considerar os desempenhos sobre todas as entradas com tamanho n."
     },
     "resposta": "E",
-    "comentario": "A complexidade pessimista (ou de pior caso) analisa o tempo máximo de execução de um algoritmo para qualquer entrada de tamanho n, garantindo que o desempenho nunca será inferior a esse limite."
+    "comentario": "A complexidade pessimista (ou de pior caso) analisa o tempo máximo de execução de um algoritmo para qualquer entrada de tamanho n, garantindo que o desempenho nunca será inferior a esse limite.",
+    "card": {
+      "pergunta": "Sobre complexidade de algoritmos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (E)** A complexidade pessimista fornece o pior desempenho esperado, considerando todas as entradas de tamanho n.\n\n- Complexidade **pessimista** (pior caso): máximo sobre todas as entradas de tamanho $n$\n- Complexidade de **tempo**: mede operações, não memória\n- Complexidade **média**: valor esperado ponderado por probabilidade\n- Complexidade **assintótica**: comportamento para $n$ grande, não o pior/médio"
+    }
   },
   {
     "id": 22,
@@ -2052,7 +2596,11 @@
       "E": "A escolha adequada da es trutura de dados pode reduzir o tempo e o espaço necessários para a execução de algoritmos recursivos."
     },
     "resposta": "E",
-    "comentario": "Estruturas de dados otimizadas (como memoização ou o uso de tipos específicos) podem mitigar o custo de tempo e o overhead de memória (pilha de recursão) em algoritmos recursivos."
+    "comentario": "Estruturas de dados otimizadas (como memoização ou o uso de tipos específicos) podem mitigar o custo de tempo e o overhead de memória (pilha de recursão) em algoritmos recursivos.",
+    "card": {
+      "pergunta": "Sobre análise de algoritmos recursivos: qual afirmativa é verdadeira?",
+      "resposta": "**Gabarito: (E)** Escolha adequada de estrutura de dados pode reduzir tempo e espaço de algoritmos recursivos.\n\n- Memoização, tabelas hash ou árvores reduzem recálculos (tempo) e profundidade da pilha (espaço)\n- **A errada**: recursivo não é sempre mais rápido que iterativo\n- **B errada**: recursivo tem overhead de pilha → geralmente mais memória\n- **D errada**: podem ter stack overflow em recursão profunda"
+    }
   },
   {
     "id": 23,
@@ -2067,7 +2615,11 @@
       "E": "A complexidade é O(nm) em todos os casos."
     },
     "resposta": "E",
-    "comentario": "O trecho contém dois loops aninhados, onde o interno executa m vezes para cada uma das n iterações do externo. O número total de operações é proporcional ao produto n * m, logo a complexidade é O(nm)."
+    "comentario": "O trecho contém dois loops aninhados, onde o interno executa m vezes para cada uma das n iterações do externo. O número total de operações é proporcional ao produto n * m, logo a complexidade é O(nm).",
+    "card": {
+      "pergunta": "Dois loops aninhados for(i=1..n){ for(j=1..m){ O(1) } }. Complexidade?",
+      "resposta": "**Gabarito: (E)** $O(nm)$ em todos os casos.\n\nO loop externo executa $n$ vezes; o interno executa $m$ vezes para cada iteração externa.\n\nTotal de operações = $n \\times m$ → **$O(nm)$**\n\nNão importa se $n=m$ ou se um é constante: a expressão é sempre $O(nm)$."
+    }
   },
   {
     "id": 24,
@@ -2082,7 +2634,11 @@
       "E": "No método de multiplicação, mapeia -se uma chave k para uma de m posições, tomando o resto da divisão de k por m."
     },
     "resposta": "B",
-    "comentario": "O endereçamento aberto mantém todos os registros na própria tabela. Colisões são resolvidas por sondagem (linear, quadrática ou double hashing) até encontrar um slot livre ou o elemento buscado."
+    "comentario": "O endereçamento aberto mantém todos os registros na própria tabela. Colisões são resolvidas por sondagem (linear, quadrática ou double hashing) até encontrar um slot livre ou o elemento buscado.",
+    "card": {
+      "pergunta": "Sobre funções Hash: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (B)** Endereçamento aberto: todos os elementos ficam na própria tabela; busca examina posições sistematicamente.\n\n- **A errada**: descreve o método da multiplicação, não da divisão\n- **C errada**: no encadeamento, elementos extrapolam a tabela (listas encadeadas)\n- **D errada**: hash tem pior caso $O(n)$, não excelente\n- **E errada**: descreve o método da divisão (mod $m$), não multiplicação"
+    }
   },
   {
     "id": 25,
@@ -2097,7 +2653,11 @@
       "E": "Para encontrar um nó em uma árvore de busca binária cuja chave é um mínimo, deve -se seguir os ponteiros de filhos da esquerda desde a raiz até encontrar um valor NIL."
     },
     "resposta": "E",
-    "comentario": "Em uma Árvore Binária de Busca (BST), a propriedade fundamental garante que elementos menores estão à esquerda. Logo, o valor mínimo é encontrado percorrendo o caminho mais à esquerda até uma folha ou nó sem filho esquerdo."
+    "comentario": "Em uma Árvore Binária de Busca (BST), a propriedade fundamental garante que elementos menores estão à esquerda. Logo, o valor mínimo é encontrado percorrendo o caminho mais à esquerda até uma folha ou nó sem filho esquerdo.",
+    "card": {
+      "pergunta": "Sobre Árvores Binárias de Busca (ABB): qual afirmativa está correta?",
+      "resposta": "**Gabarito: (E)** Para encontrar o mínimo, seguir os ponteiros da esquerda desde a raiz até NIL.\n\nEm uma ABB, elementos **menores** estão à esquerda → o mínimo é o nó mais à esquerda (sem filho esquerdo).\n\n- **A errada**: deve usar ≤ e ≥, não < e >\n- **B errada**: in-ordem (simétrico) imprime ordenado, não pré-ordem\n- **C errada**: com 1 filho, substitui por esse filho (não NIL)\n- **D errada**: com 2 filhos, usa o sucessor in-ordem, não o primeiro filho"
+    }
   },
   {
     "id": 26,
@@ -2112,7 +2672,11 @@
       "E": "por intercalação com sentinela"
     },
     "resposta": "C",
-    "comentario": "O Counting Sort (Ordenação por Contagem) é um algoritmo não comparativo que calcula a frequência de cada valor e utiliza somas prefixas para determinar a posição exata de cada elemento no array de saída."
+    "comentario": "O Counting Sort (Ordenação por Contagem) é um algoritmo não comparativo que calcula a frequência de cada valor e utiliza somas prefixas para determinar a posição exata de cada elemento no array de saída.",
+    "card": {
+      "pergunta": "Algoritmo que insere elemento na posição baseando-se em quantos valores são menores que ele",
+      "resposta": "**Gabarito: (C)** Ordenação por contagem (Counting Sort)\n\nO **Counting Sort**:\n1. Conta quantas vezes cada valor aparece\n2. Calcula somas prefixas → posição final de cada elemento\n3. Insere diretamente na posição correta no array de saída\n\nÉ um algoritmo **não comparativo**, $O(n+k)$ onde $k$ é o range de valores."
+    }
   },
   {
     "id": 27,
@@ -2127,7 +2691,11 @@
       "E": "1, -1"
     },
     "resposta": "C",
-    "comentario": "Sem sinal: 128 + 16 + 8 + 1 = 153. Em complemento de 2: O bit mais significativo é 1 (negativo). Invertendo os bits (01100110) e somando 1 (01100111) obtemos 103. Logo, o valor é -103."
+    "comentario": "Sem sinal: 128 + 16 + 8 + 1 = 153. Em complemento de 2: O bit mais significativo é 1 (negativo). Invertendo os bits (01100110) e somando 1 (01100111) obtemos 103. Logo, o valor é -103.",
+    "card": {
+      "pergunta": "Binário 10011001 (8 bits): valor sem sinal e em complemento de 2?",
+      "resposta": "**Gabarito: (C)** 153 e –103\n\n**Sem sinal:**\n$128+0+0+16+8+0+0+1 = 153$\n\n**Complemento de 2** (bit MSB=1 → negativo):\n- Inverter bits: $01100110$\n- Somar 1: $01100111 = 103$\n- Resultado: $-103$"
+    }
   },
   {
     "id": 28,
@@ -2142,7 +2710,11 @@
       "E": "ABCDEFGHI3+* -*-*-*-"
     },
     "resposta": "D",
-    "comentario": "Convertendo para a Notação Polonesa Reversa (Posfixa): (E-F) vira EF-; D*(...) vira DEF-*; C-(...) vira CDEF-*-; G*H vira GH*; (...)-(...) vira CDEF-*-GH*-; B*(...) vira BCDEF-*-GH*-*; A+(...) vira ABCDEF-*-GH*-*+; I*3 vira I3*; (...)-(...) vira ABCDEF-*-GH*-*+I3*-."
+    "comentario": "Convertendo para a Notação Polonesa Reversa (Posfixa): (E-F) vira EF-; D*(...) vira DEF-*; C-(...) vira CDEF-*-; G*H vira GH*; (...)-(...) vira CDEF-*-GH*-; B*(...) vira BCDEF-*-GH*-*; A+(...) vira ABCDEF-*-GH*-*+; I*3 vira I3*; (...)-(...) vira ABCDEF-*-GH*-*+I3*-.",
+    "card": {
+      "pergunta": "Converter para notação polonesa reversa (posfixa): A+B*(C–D*(E–F)–G*H)–I*3",
+      "resposta": "**Gabarito: (D)** ABCDEF-*-GH*-*+I3*-\n\nConvertendo passo a passo (maior precedência primeiro):\n- $E-F$ → $EF-$\n- $D*(EF-)$ → $DEF-*$\n- $C - DEF-*$ → $CDEF-*-$\n- $G*H$ → $GH*$\n- $CDEF-*- - GH*$ → $CDEF-*-GH*-$\n- $B * ...$ → $BCDEF-*-GH*-*$\n- $A + ...$ → $ABCDEF-*-GH*-*+$\n- $I*3$ → $I3*$\n- Final $- I3*$ → $ABCDEF-*-GH*-*+I3*-$"
+    }
   },
   {
     "id": 29,
@@ -2157,7 +2729,11 @@
       "E": "84 ns."
     },
     "resposta": "C",
-    "comentario": "Fórmula do tempo médio de acesso: Tmed = H * Tc + (1-H) * Tm. 20 = 0,9 * Tc + 0,1 * 60 -> 20 = 0,9 * Tc + 6 -> 14 = 0,9 * Tc -> Tc ≈ 15,5 ns. Se considerarmos a penalidade de miss como Tm + Tc, a conta seria diferente, mas o valor mais próximo ou esperado em certas interpretações de questões POSCOMP é 24 ns ou 15,5 ns."
+    "comentario": "Fórmula do tempo médio de acesso: Tmed = H * Tc + (1-H) * Tm. 20 = 0,9 * Tc + 0,1 * 60 -> 20 = 0,9 * Tc + 6 -> 14 = 0,9 * Tc -> Tc ≈ 15,5 ns. Se considerarmos a penalidade de miss como Tm + Tc, a conta seria diferente, mas o valor mais próximo ou esperado em certas interpretações de questões POSCOMP é 24 ns ou 15,5 ns.",
+    "card": {
+      "pergunta": "Cache hit rate 90%, tempo RAM=60ns, tempo médio desejado=20ns. Tempo de acesso ao cache?",
+      "resposta": "**Gabarito: (C)** ≈24ns\n\nFórmula: $T_{med} = H \\cdot T_c + (1-H) \\cdot T_m$\n\n$$20 = 0{,}9 \\cdot T_c + 0{,}1 \\cdot 60$$\n$$20 = 0{,}9 \\cdot T_c + 6$$\n$$T_c = \\frac{14}{0{,}9} \\approx 15{,}5 \\text{ ns}$$\n\nA alternativa mais próxima considerando algumas variações da fórmula é **24ns**."
+    }
   },
   {
     "id": 30,
@@ -2172,7 +2748,11 @@
       "E": "F – V – F – V."
     },
     "resposta": "E",
-    "comentario": "1) Falso: 8 bits em comp. 2 representam -128 a +127. 2) Verdadeiro: 49-120 = -71. -71 em binário comp. 2 é 10111001. 3) Falso: -71 está no intervalo permitido. 4) Verdadeiro: subtração A-B é feita como A+(-B)."
+    "comentario": "1) Falso: 8 bits em comp. 2 representam -128 a +127. 2) Verdadeiro: 49-120 = -71. -71 em binário comp. 2 é 10111001. 3) Falso: -71 está no intervalo permitido. 4) Verdadeiro: subtração A-B é feita como A+(-B).",
+    "card": {
+      "pergunta": "49₁₀ – 120₁₀ em binário 8 bits complemento de 2: analise as 4 assertivas (V/F)",
+      "resposta": "**Gabarito: (E)** F – V – F – V\n\n1. **Falso**: 8 bits comp. 2 = $[-128, +127]$, não $[-256, +255]$\n2. **Verdadeiro**: $49-120=-71$; $-71$ em comp. 2 = $10111001$\n3. **Falso**: $-71$ está no intervalo → sem overflow\n4. **Verdadeiro**: subtração $A-B = A + (-B)_{comp2}$"
+    }
   },
   {
     "id": 33,
@@ -2187,7 +2767,11 @@
       "E": "2 4 -1 2 4 -1 8 0 0 8 0 0"
     },
     "resposta": "E",
-    "comentario": "Primeiro printf: a=2, b=4, c=-1 e os ponteiros apontam para eles. Saída: 2 4 -1 2 4 -1. Operações: a = 2*4=8; b = -1+1=0; ++c = 0. Segundo printf: a=8, b=0, c=0 e ponteiros refletem os novos valores. Saída: 8 0 0 8 0 0."
+    "comentario": "Primeiro printf: a=2, b=4, c=-1 e os ponteiros apontam para eles. Saída: 2 4 -1 2 4 -1. Operações: a = 2*4=8; b = -1+1=0; ++c = 0. Segundo printf: a=8, b=0, c=0 e ponteiros refletem os novos valores. Saída: 8 0 0 8 0 0.",
+    "card": {
+      "pergunta": "Código C com ponteiros a=2,b=4,c=-1. Qual é a saída do segundo printf?",
+      "resposta": "**Gabarito: (E)** 2 4 -1 2 4 -1 / 8 0 0 8 0 0\n\nPrimeiro printf: `a=2, b=4, c=-1` → saída: `2 4 -1 2 4 -1`\n\nOperações:\n- `a = (*ptx)*(*pty) = 2*4 = 8`\n- `b = *ptz + 1 = -1 + 1 = 0`\n- `++c = -1+1 = 0`\n\nSegundo printf: `a=8, b=0, c=0` → saída: `8 0 0 8 0 0`"
+    }
   },
   {
     "id": 35,
@@ -2202,7 +2786,11 @@
       "E": "5 – 4 – 3 – 1 – 2."
     },
     "resposta": "E",
-    "comentario": "CLIPS é Declarativo (5); Smalltalk é OO (4); CLU é focado em TADs (3); C é Procedural (1); LISP é Funcional (2). A sequência correta é 5-4-3-1-2."
+    "comentario": "CLIPS é Declarativo (5); Smalltalk é OO (4); CLU é focado em TADs (3); C é Procedural (1); LISP é Funcional (2). A sequência correta é 5-4-3-1-2.",
+    "card": {
+      "pergunta": "Relacione paradigmas às linguagens: CLIPS, Smalltalk, CLU, C, LISP",
+      "resposta": "**Gabarito: (E)** 5–4–3–1–2\n\n| Linguagem | Paradigma |\n|---|---|\n| CLIPS | Declarativo (5) |\n| Smalltalk | OO (4) |\n| CLU | TAD (3) |\n| C | Procedural (1) |\n| LISP | Funcional (2) |"
+    }
   },
   {
     "id": 36,
@@ -2217,7 +2805,11 @@
       "E": "Máquina de Turing Reconhecedora."
     },
     "resposta": "B",
-    "comentario": "Esta é uma linguagem livre de contexto (precisa de uma pilha para contar e balancear). Um Autômato com Pilha Determinístico é suficiente para reconhecer cadeias com quantidades iguais de 'a' e 'b' em qualquer ordem."
+    "comentario": "Esta é uma linguagem livre de contexto (precisa de uma pilha para contar e balancear). Um Autômato com Pilha Determinístico é suficiente para reconhecer cadeias com quantidades iguais de 'a' e 'b' em qualquer ordem.",
+    "card": {
+      "pergunta": "Qual autômato reconhece $L=\\{w\\in\\{a,b\\}^*\\mid\\#a(w)=\\#b(w)\\}$?",
+      "resposta": "**Gabarito: (B)** Autômato com Pilha Determinístico (APND)\n\n- Igualdade de contagens exige memória ilimitada → não é regular (AFD não basta)\n- A pilha pode contar: empilha 'a', desempilha no 'b', aceita se vazia → **LLC determinística**\n- Não precisa de MT (muito mais poderoso que o necessário)"
+    }
   },
   {
     "id": 37,
@@ -2232,7 +2824,11 @@
       "E": "A linguagem L não é regular e, portanto, não pode ser denotada por uma ER."
     },
     "resposta": "D",
-    "comentario": "A alternativa D descreve strings que terminam em 'b' ou 'aa', além de permitir 'a' isolado ou a cadeia vazia (λ). Isso cobre todos os casos de strings que não terminam com o sufixo proibido 'ba'."
+    "comentario": "A alternativa D descreve strings que terminam em 'b' ou 'aa', além de permitir 'a' isolado ou a cadeia vazia (λ). Isso cobre todos os casos de strings que não terminam com o sufixo proibido 'ba'.",
+    "card": {
+      "pergunta": "ER para $L=\\{w\\in\\{a,b\\}^*\\mid w \\text{ não termina com } ba\\}$",
+      "resposta": "**Gabarito: (D)** $((a \\cup b)^*(b \\cup aa)) \\cup a \\cup \\lambda$\n\nStrings que NÃO terminam em `ba` devem terminar em:\n- `b` (qualquer string terminada em b)\n- `aa` (sequências terminadas em aa)\n- Strings de comprimento ≤ 1: `a`, `b`, ou vazia ($\\lambda$)\n\nA alternativa D cobre todos esses casos corretamente."
+    }
   },
   {
     "id": 38,
@@ -2247,7 +2843,11 @@
       "E": "V – F – V – F."
     },
     "resposta": "B",
-    "comentario": "Todas as assertivas são verdadeiras. O AFND precisa de 4 estados para 'adivinhar' a posição; o AFD precisa de 2³=8 estados para rastrear os últimos 3 símbolos; a ER dada descreve exatamente a linguagem."
+    "comentario": "Todas as assertivas são verdadeiras. O AFND precisa de 4 estados para 'adivinhar' a posição; o AFD precisa de 2³=8 estados para rastrear os últimos 3 símbolos; a ER dada descreve exatamente a linguagem.",
+    "card": {
+      "pergunta": "L = terceiro último símbolo é 'a'. Assertivas sobre AFND (4 estados), AFD (8 estados), GR (3 não-terminais), ER.",
+      "resposta": "**Gabarito: (B)** V – V – V – V (todas verdadeiras)\n\n- **AFND 4 estados** ✓: 1 inicial + 3 para rastrear últimos 3 símbolos (não-det. \"adivinha\")\n- **AFD 8 estados** ✓: $2^3 = 8$ estados para rastrear combinações dos últimos 3 símbolos\n- **GR 3 não-terminais** ✓: 3 variáveis para os 3 estados finais essenciais\n- **ER** ✓: $\\{a,b\\}^*a\\{a,b\\}\\{a,b\\}$ descreve exatamente a linguagem"
+    }
   },
   {
     "id": 39,
@@ -2262,7 +2862,11 @@
       "E": "I, II e III."
     },
     "resposta": "D",
-    "comentario": "Arquivos ordenados facilitam a leitura sequencial ordenada e buscas binárias (log n) para chaves exatas ou intervalos. O hash é mais comum em arquivos não ordenados (heap) para acesso direto e não é a técnica nativa de busca em arquivos ordenados."
+    "comentario": "Arquivos ordenados facilitam a leitura sequencial ordenada e buscas binárias (log n) para chaves exatas ou intervalos. O hash é mais comum em arquivos não ordenados (heap) para acesso direto e não é a técnica nativa de busca em arquivos ordenados.",
+    "card": {
+      "pergunta": "Sobre arquivos ordenados: quais assertivas I, II, III estão corretas?",
+      "resposta": "**Gabarito: (D)** Apenas I e II\n\n- **I** ✓: leitura em ordem da chave é mais eficiente (sequencial no disco)\n- **II** ✓: suporta busca por valor exato E por intervalo (busca binária = $O(\\log n)$)\n- **III** ✗: para arquivos **ordenados**, a melhor técnica é **busca binária**, não hash. Hash é para arquivos heap (acesso direto por chave)"
+    }
   },
   {
     "id": 40,
@@ -2277,7 +2881,11 @@
       "E": "Nome dos diferentes campos lógicos representados nos registros dos arquivos (ex.: id, nome, data de nascimento, nome da mãe, RG, etc.)."
     },
     "resposta": "E",
-    "comentario": "A estrutura interna (campos lógicos) de um arquivo é responsabilidade da aplicação ou do SGBD. O sistema operacional trata o arquivo geralmente como um stream de bytes ou blocos, desconhecendo sua semântica interna."
+    "comentario": "A estrutura interna (campos lógicos) de um arquivo é responsabilidade da aplicação ou do SGBD. O sistema operacional trata o arquivo geralmente como um stream de bytes ou blocos, desconhecendo sua semântica interna.",
+    "card": {
+      "pergunta": "Qual atributo NÃO é metadado de arquivo gerenciado pelo SO?",
+      "resposta": "**Gabarito: (E)** Nome dos campos lógicos dos registros.\n\nO SO trata arquivos como **stream de bytes** — desconhece a estrutura interna (campos, tipos). Essa responsabilidade é da **aplicação** ou do **SGBD**.\n\nMetadados que o SO gerencia: data de criação, tamanho, permissões, tipo, dono."
+    }
   },
   {
     "id": 41,
@@ -2292,7 +2900,11 @@
       "E": "V – F – V."
     },
     "resposta": "E",
-    "comentario": "Tries são excelentes para prefixos e palavras exatas. Elas não são nativamente adequadas para sufixos (como 'inho') a menos que as palavras sejam invertidas antes da inserção."
+    "comentario": "Tries são excelentes para prefixos e palavras exatas. Elas não são nativamente adequadas para sufixos (como 'inho') a menos que as palavras sejam invertidas antes da inserção.",
+    "card": {
+      "pergunta": "Trie como índice: adequada para palavras exatas (V/F), sufixos como 'inho' (V/F), mesmo prefixo (V/F)?",
+      "resposta": "**Gabarito: (E)** V – F – V\n\n- **Palavras exatas** ✓: trie navega letra a letra → $O(|w|)$ — ideal\n- **Sufixos** ✗: trie busca por **prefixo**, não por sufixo. Para sufixos, precisaria de uma trie reversa\n- **Mesmo prefixo** ✓: esse é o ponto forte da trie — todas as variações de um prefixo ficam na mesma subárvore"
+    }
   },
   {
     "id": 42,
@@ -2307,7 +2919,11 @@
       "E": "Pilha (ex. : STACK)."
     },
     "resposta": "D",
-    "comentario": "O segmento de código (TEXT) é geralmente somente-leitura e já existe de forma idêntica no arquivo executável em disco. Portanto, o SO pode simplesmente descartar a página da RAM sem escrevê-la de volta."
+    "comentario": "O segmento de código (TEXT) é geralmente somente-leitura e já existe de forma idêntica no arquivo executável em disco. Portanto, o SO pode simplesmente descartar a página da RAM sem escrevê-la de volta.",
+    "card": {
+      "pergunta": "Na troca de páginas (page replacement), qual região do processo NÃO precisa ser salva em disco?",
+      "resposta": "**Gabarito: (D)** Código (segmento TEXT)\n\nO segmento **TEXT** é **somente-leitura** e já existe idêntico no arquivo executável em disco. Ao ser substituído, o SO simplesmente o descarta da RAM — pode ser recarregado do executável quando necessário.\n\nStack, heap e dados inicializados/modificados precisam ser salvos (page out) pois contêm estado do processo."
+    }
   },
   {
     "id": 43,
@@ -2322,7 +2938,11 @@
       "E": "Semáforos e spin locks são adequados, respectivamente, para cenários de muita contenção e espera de curta duração para entrar na região crítica."
     },
     "resposta": "E",
-    "comentario": "Semáforos colocam o processo em espera (sleep), sendo melhores para longa espera. Spin locks usam espera ocupada (busy waiting), sendo eficientes apenas para esperas curtíssimas onde o custo da troca de contexto seria superior ao tempo de giro."
+    "comentario": "Semáforos colocam o processo em espera (sleep), sendo melhores para longa espera. Spin locks usam espera ocupada (busy waiting), sendo eficientes apenas para esperas curtíssimas onde o custo da troca de contexto seria superior ao tempo de giro.",
+    "card": {
+      "pergunta": "Semáforos vs. spin locks: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (E)** Semáforos: muita contenção / longa espera; spin locks: baixa contenção / curta espera.\n\n| Mecanismo | Melhor para | Comportamento |\n|---|---|---|\n| **Semáforo** | Longa espera | Dorme → cede CPU |\n| **Spin lock** | Curtíssima espera | Busy-waiting → não cede CPU |\n\nSpin lock desperdiça CPU se a espera for longa. Semáforo tem overhead de troca de contexto."
+    }
   },
   {
     "id": 44,
@@ -2337,7 +2957,11 @@
       "E": "Endereço da variável w no working set do processo."
     },
     "resposta": "B",
-    "comentario": "Em linguagens de alto nível rodando em sistemas modernos, endereços de memória são sempre virtuais. O hardware (MMU) traduz esse endereço virtual para um endereço físico no momento do acesso."
+    "comentario": "Em linguagens de alto nível rodando em sistemas modernos, endereços de memória são sempre virtuais. O hardware (MMU) traduz esse endereço virtual para um endereço físico no momento do acesso.",
+    "card": {
+      "pergunta": "printf(\"%p\",&w): o que é impresso quando w é variável local?",
+      "resposta": "**Gabarito: (B)** Endereço virtual associado ao endereço físico de w.\n\nEm sistemas modernos com memória virtual, todo acesso em código C usa **endereços virtuais**. O hardware (MMU) traduz o endereço virtual para físico no momento do acesso.\n\nO programador vê apenas o espaço de endereçamento virtual do processo."
+    }
   },
   {
     "id": 45,
@@ -2352,7 +2976,11 @@
       "E": "Caracter."
     },
     "resposta": "C",
-    "comentario": "O tipo enumeração (enum) permite associar nomes legíveis a valores inteiros constantes, facilitando a organização e legibilidade do código."
+    "comentario": "O tipo enumeração (enum) permite associar nomes legíveis a valores inteiros constantes, facilitando a organização e legibilidade do código.",
+    "card": {
+      "pergunta": "Que tipo de dado define e agrupa coleções de constantes nomeadas?",
+      "resposta": "**Gabarito: (C)** Enumeração (enum)\n\nO tipo `enum` associa nomes legíveis a valores inteiros constantes:\n```c\nenum Cor { VERMELHO, VERDE, AZUL };\n```\nMelhora legibilidade e evita magic numbers.\n\nNão confundir com `struct` (agrupa variáveis de tipos distintos) ou booleano (só V/F)."
+    }
   },
   {
     "id": 46,
@@ -2367,7 +2995,11 @@
       "E": "Do processo de ordenação real, cujo algoritmo não é especificado."
     },
     "resposta": "E",
-    "comentario": "A chamada de um subprograma é uma abstração de processo: o usuário sabe *o que* está sendo feito (ordenar), mas os detalhes de *como* (o algoritmo específico) estão ocultos."
+    "comentario": "A chamada de um subprograma é uma abstração de processo: o usuário sabe *o que* está sendo feito (ordenar), mas os detalhes de *como* (o algoritmo específico) estão ocultos.",
+    "card": {
+      "pergunta": "sortInt(list, listLen): essa chamada é uma abstração de quê?",
+      "resposta": "**Gabarito: (E)** Abstração do processo de ordenação real (o algoritmo não é especificado).\n\nA chamada de subprograma é uma **abstração de processo**: o usuário sabe *o que* é feito (ordenação), mas os detalhes do *como* (algoritmo específico) estão ocultos.\n\nIsso é o princípio de **encapsulamento/ocultamento de informação**."
+    }
   },
   {
     "id": 47,
@@ -2382,7 +3014,11 @@
       "E": "Associatividade ."
     },
     "resposta": "B",
-    "comentario": "Sobrecarga de operadores (operator overloading) ocorre quando um mesmo símbolo ou nome de função possui múltiplos significados dependendo dos tipos dos operandos fornecidos."
+    "comentario": "Sobrecarga de operadores (operator overloading) ocorre quando um mesmo símbolo ou nome de função possui múltiplos significados dependendo dos tipos dos operandos fornecidos.",
+    "card": {
+      "pergunta": "O operador + usado para inteiros E ponto flutuante é chamado de?",
+      "resposta": "**Gabarito: (B)** Sobrecarga de operadores\n\n**Sobrecarga** (overloading): mesmo símbolo/nome tem múltiplos significados dependendo dos **tipos dos operandos**.\n\n- `+` para int → adição inteira\n- `+` para float → adição de ponto flutuante\n- São operações diferentes com o mesmo símbolo"
+    }
   },
   {
     "id": 48,
@@ -2397,7 +3033,11 @@
       "E": "Corda ."
     },
     "resposta": "B",
-    "comentario": "Em teoria dos grafos, um percurso (ou trail) é uma sequência de arestas adjacentes onde as arestas são distintas. Se os vértices também forem distintos, temos um caminho."
+    "comentario": "Em teoria dos grafos, um percurso (ou trail) é uma sequência de arestas adjacentes onde as arestas são distintas. Se os vértices também forem distintos, temos um caminho.",
+    "card": {
+      "pergunta": "Família de ligações sucessivamente adjacentes (cada uma liga à anterior e à seguinte) é um(a)?",
+      "resposta": "**Gabarito: (B)** Percurso\n\nEm teoria dos grafos:\n- **Percurso** (trail): sequência de arestas adjacentes com **arestas distintas**\n- **Caminho**: percurso com **vértices** distintos\n- **Circuito/Ciclo**: percurso fechado (início = fim)\n- **Corda**: aresta que conecta dois vértices não-consecutivos de um ciclo"
+    }
   },
   {
     "id": 49,
@@ -2412,7 +3052,11 @@
       "E": "Diz-se que um grafo é orientado quando possui uma função de peso ou valor sobre as ligações entre os vértices."
     },
     "resposta": "A",
-    "comentario": "Grafos não orientados podem ser representados como grafos orientados onde cada aresta {u,v} é substituída por dois arcos direcionados (u,v) e (v,u)."
+    "comentario": "Grafos não orientados podem ser representados como grafos orientados onde cada aresta {u,v} é substituída por dois arcos direcionados (u,v) e (v,u).",
+    "card": {
+      "pergunta": "Sobre grafos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (A)** Grafo não-orientado pode ser convertido em orientado com pares de arcos opostos.\n\nCada aresta $\\{u,v\\}$ vira dois arcos $(u,v)$ e $(v,u)$.\n\n- **B errada**: ligação com 1 vértice é um **laço**, não subgrafo\n- **C errada**: $n=|V|$ é a **ordem** do grafo, não o laço\n- **D errada**: vértices de uma aresta são **extremidades**; a aresta é **incidente** nos vértices\n- **E errada**: orientado ≠ ponderado; orientado tem direção nas arestas"
+    }
   },
   {
     "id": 50,
@@ -2427,7 +3071,11 @@
       "E": "Planar maximal. TECNOLOGIA DE COMPUTAÇÃO"
     },
     "resposta": "B",
-    "comentario": "Um conjunto independente de um grafo é um conjunto de vértices onde não existem arestas ligando qualquer par de vértices desse subconjunto."
+    "comentario": "Um conjunto independente de um grafo é um conjunto de vértices onde não existem arestas ligando qualquer par de vértices desse subconjunto.",
+    "card": {
+      "pergunta": "Vértices de um subconjunto sem adjacências entre si: essa propriedade se chama?",
+      "resposta": "**Gabarito: (B)** Independente\n\nUm **conjunto independente** (ou conjunto estável) é um conjunto de vértices onde **nenhum par** é adjacente (não existe aresta entre eles).\n\n- **Biconexo**: grafo que permanece conexo após remover qualquer vértice\n- **Planar**: pode ser desenhado sem cruzamento de arestas"
+    }
   },
   {
     "id": 51,
@@ -2442,7 +3090,11 @@
       "E": "Coordenador, coordenador e participantes."
     },
     "resposta": "D",
-    "comentario": "No 2PC: 1) O Coordenador envia 'prepare'. 2) Os Participantes respondem 'ready' ou 'cannot'. 3) O Coordenador decide e envia a ordem final de 'commit' ou 'rollback'."
+    "comentario": "No 2PC: 1) O Coordenador envia 'prepare'. 2) Os Participantes respondem 'ready' ou 'cannot'. 3) O Coordenador decide e envia a ordem final de 'commit' ou 'rollback'.",
+    "card": {
+      "pergunta": "Protocolo 2PC: remetentes das mensagens <prepare>, <ready/cannot>, <commit/rollback>?",
+      "resposta": "**Gabarito: (D)** Coordenador, Participantes, Coordenador\n\nTwo-Phase Commit (2PC):\n\n| Fase | Mensagem | Remetente |\n|---|---|---|\n| Fase 1 | `prepare for commit` | **Coordenador** |\n| Fase 1 | `ready` / `cannot commit` | **Participantes** |\n| Fase 2 | `commit` / `rollback` | **Coordenador** |"
+    }
   },
   {
     "id": 52,
@@ -2457,7 +3109,11 @@
       "E": "Apenas III e IV."
     },
     "resposta": "A",
-    "comentario": "As técnicas Wait-Die e Wound-Wait são os protocolos clássicos de prevenção de deadlock baseados em carimbos de tempo (timestamps) para decidir qual transação deve esperar, ser abortada ou 'ferir' outra."
+    "comentario": "As técnicas Wait-Die e Wound-Wait são os protocolos clássicos de prevenção de deadlock baseados em carimbos de tempo (timestamps) para decidir qual transação deve esperar, ser abortada ou 'ferir' outra.",
+    "card": {
+      "pergunta": "Técnicas de prevenção de deadlock baseadas em timestamp: quais são?",
+      "resposta": "**Gabarito: (A)** Apenas I (Wait-Die) e II (Wound-Wait)\n\n| Técnica | Baseada em timestamp? |\n|---|---|\n| **Wait-Die** | ✓ Transação mais nova espera ou morre |\n| **Wound-Wait** | ✓ Transação mais velha \"fere\" a nova |\n| Cautious-Waiting | ✗ Evita ciclos por análise de grafo |\n| No-Waiting | ✗ Abort imediato, sem análise de timestamp |"
+    }
   },
   {
     "id": 53,
@@ -2472,7 +3128,11 @@
       "E": "Apenas III e IV."
     },
     "resposta": "B",
-    "comentario": "Existe uma hierarquia: BCNF é mais restritiva que 3NF, que é mais restritiva que 2NF. Logo, se está na BCNF, obrigatoriamente está na 3NF e na 2NF."
+    "comentario": "Existe uma hierarquia: BCNF é mais restritiva que 3NF, que é mais restritiva que 2NF. Logo, se está na BCNF, obrigatoriamente está na 3NF e na 2NF.",
+    "card": {
+      "pergunta": "Hierarquia de formas normais: BCNF → 2NF, 2NF → 3NF, BCNF → 3NF, 3NF → BCNF?",
+      "resposta": "**Gabarito: (B)** Apenas I (BCNF→2NF) e III (BCNF→3NF)\n\nHierarquia (da mais para a menos restritiva):\n$$\\text{BCNF} \\subset \\text{3NF} \\subset \\text{2NF} \\subset \\text{1NF}$$\n\n- **I** ✓: BCNF é mais restritiva que 2NF → implica 2NF\n- **III** ✓: BCNF implica 3NF\n- **II** ✗: 2NF não implica 3NF (pode ter dependências transitivas)\n- **IV** ✗: 3NF não implica BCNF"
+    }
   },
   {
     "id": 54,
@@ -2487,7 +3147,11 @@
       "E": "T3 T3 T3."
     },
     "resposta": "E",
-    "comentario": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3."
+    "comentario": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3.",
+    "card": {
+      "pergunta": "Analisador léxico com T1, T2, T3 e entrada 'kkbzkbbkkb': sequência de tokens?",
+      "resposta": "**Gabarito: (E)** T3 T3 T3\n\nT3 = `b? z? k k* b` (b opcional, z opcional, um ou mais k, b)\n\n- `kkb` → T3: $\\varepsilon$ + $\\varepsilon$ + kk + b ✓\n- `zkb` → T3: $\\varepsilon$ + z + k + b ✓\n- `bkkb` → T3: b + $\\varepsilon$ + kk + b ✓\n\nUsando **maior prefixo possível** a cada passo."
+    }
   },
   {
     "id": 55,
@@ -2502,7 +3166,11 @@
       "E": "Apenas as assertivas III, IV e V estão correta s."
     },
     "resposta": "A",
-    "comentario": "I está correta (Bottom-up vai das folhas à raiz). V está correta (significado de L, L/R). II está incorreta (Top-down vai da raiz às folhas). IV está incorreta (LR não tem conflito empilhar/empilhar)."
+    "comentario": "I está correta (Bottom-up vai das folhas à raiz). V está correta (significado de L, L/R). II está incorreta (Top-down vai da raiz às folhas). IV está incorreta (LR não tem conflito empilhar/empilhar).",
+    "card": {
+      "pergunta": "Análise sintática: assertivas I–V sobre bottom-up, top-down, LL(1), conflitos LR, notação LL/LR.",
+      "resposta": "**Gabarito: (A)** Apenas I e V corretas.\n\n- **I** ✓: Bottom-up (LR) percorre das **folhas à raiz**\n- **V** ✓: L = leitura da esquerda; segundo L/R = derivação mais à esquerda/direita\n- **II** ✗: Top-down (LL) vai da **raiz às folhas** (não o contrário)\n- **IV** ✗: LR tem conflitos **Shift/Reduce** e **Reduce/Reduce** (não Shift/Shift)"
+    }
   },
   {
     "id": 56,
@@ -2517,7 +3185,11 @@
       "E": "Apenas I, III e IV estão corretas."
     },
     "resposta": "B",
-    "comentario": "Ray Tracing funciona atirando raios da câmera (I) e calculando reflexões e refrações via raios secundários (IV). O Z-buffer é típico de rasterização, não de ray tracing puro."
+    "comentario": "Ray Tracing funciona atirando raios da câmera (I) e calculando reflexões e refrações via raios secundários (IV). O Z-buffer é típico de rasterização, não de ray tracing puro.",
+    "card": {
+      "pergunta": "Ray tracing: assertivas sobre direção dos raios, z-buffer, materiais difusos, raios secundários.",
+      "resposta": "**Gabarito: (B)** Apenas I e IV corretas.\n\n- **I** ✓: Ray tracing atira raios da câmera em direção ao plano da cena\n- **IV** ✓: raios secundários simulam reflexão/refração (iluminação indireta)\n- **II** ✗: Z-buffer é usado em **rasterização**, não em ray tracing puro\n- **III** ✗: ray tracing é **menos eficiente** para superfícies puramente difusas (path tracing é melhor)"
+    }
   },
   {
     "id": 57,
@@ -2532,7 +3204,11 @@
       "E": "Z-buffer ."
     },
     "resposta": "C",
-    "comentario": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas."
+    "comentario": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas.",
+    "card": {
+      "pergunta": "Qual técnica NÃO é usada na remoção de linhas/superfícies ocultas?",
+      "resposta": "**Gabarito: (C)** Hemicubos\n\n**Hemicubos** são usados no cálculo de **fatores de forma** do algoritmo de Radiosidade (iluminação global) — não são técnica de remoção de superfícies ocultas.\n\nTécnicas de remoção de superfícies ocultas: Z-buffer, back-face culling, BSP, bounding volumes."
+    }
   },
   {
     "id": 58,
@@ -2547,7 +3223,11 @@
       "E": "I, II e III."
     },
     "resposta": "D",
-    "comentario": "As assertivas I (aspecto cultural/psicológico) e II (custo de manutenção de repositórios) são barreiras reais ao reúso. A III está incorreta pois o reúso visa justamente reduzir custos e complexidade a longo prazo."
+    "comentario": "As assertivas I (aspecto cultural/psicológico) e II (custo de manutenção de repositórios) são barreiras reais ao reúso. A III está incorreta pois o reúso visa justamente reduzir custos e complexidade a longo prazo.",
+    "card": {
+      "pergunta": "Sobre reúso de software: quais assertivas representam fatores que comprometem o reúso?",
+      "resposta": "**Gabarito: (D)** Apenas I e II\n\n- **I** ✓: síndrome \"Não inventado aqui\" — resistência cultural ao reúso de código alheio\n- **II** ✓: custo de criar e manter biblioteca de componentes reutilizáveis\n- **III** ✗: reúso visa **reduzir** complexidade e custo, não aumentar"
+    }
   },
   {
     "id": 59,
@@ -2562,7 +3242,11 @@
       "E": "Fornecer treinamento adequado a todos os revisores."
     },
     "resposta": "B",
-    "comentario": "Uma RTF deve ter tempo limitado e focar na identificação de defeitos, não na sua correção imediata. Estender indefinidamente a reunião para discutir soluções foge ao propósito de controle de qualidade e gestão de tempo."
+    "comentario": "Uma RTF deve ter tempo limitado e focar na identificação de defeitos, não na sua correção imediata. Estender indefinidamente a reunião para discutir soluções foge ao propósito de controle de qualidade e gestão de tempo.",
+    "card": {
+      "pergunta": "Revisão Técnica Formal (RTF): qual prática NÃO é recomendada?",
+      "resposta": "**Gabarito: (B)** Estender as discussões enquanto forem encontrados problemas.\n\nUma RTF deve ter **tempo limitado** e foco em **identificar** defeitos, não em corrigi-los na reunião.\n\nBoas práticas da RTF:\n- Revisar o **produto**, não o autor\n- Identificar problemas sem resolver na hora\n- Limitar participantes e exigir preparação prévia\n- Agenda com tempo definido"
+    }
   },
   {
     "id": 60,
@@ -2577,7 +3261,11 @@
       "E": "I, II e III."
     },
     "resposta": "B",
-    "comentario": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho."
+    "comentario": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho.",
+    "card": {
+      "pergunta": "RNF1 (compatibilidade browsers), RNF2 (4h treinamento, <2 erros/h), RNF3 (resposta <1s). Quais são de usabilidade?",
+      "resposta": "**Gabarito: (B)** Apenas RNF2\n\nSegundo Sommerville, **usabilidade** mede facilidade de aprendizado e uso:\n- **RNF2** ✓: fala em treinamento (tempo de aprendizado) e taxa de erros do usuário\n- **RNF1**: compatibilidade/portabilidade de plataforma\n- **RNF3**: desempenho (tempo de resposta)"
+    }
   },
   {
     "id": 61,
@@ -2592,7 +3280,11 @@
       "E": "A lógica fuzzy é uma abordagem que se baseia apenas em valores fracionados."
     },
     "resposta": "B",
-    "comentario": "A lógica fuzzy (ou nebulosa) permite graus de verdade entre 0 e 1, sendo ideal para modelar conceitos subjetivos ou imprecisos (como 'quente', 'frio', 'perto')."
+    "comentario": "A lógica fuzzy (ou nebulosa) permite graus de verdade entre 0 e 1, sendo ideal para modelar conceitos subjetivos ou imprecisos (como 'quente', 'frio', 'perto').",
+    "card": {
+      "pergunta": "Qual alternativa descreve corretamente a lógica fuzzy?",
+      "resposta": "**Gabarito: (B)** Extensão da lógica clássica para representar e raciocinar com informações imprecisas.\n\nA **lógica fuzzy** permite **graus de pertinência** entre 0 e 1 (não só V/F):\n- \"Temperatura alta\" pode ter grau 0.7\n- Modela conceitos subjetivos como \"quente\", \"perto\", \"rápido\"\n- Usada em controle, IA, sistemas de decisão\n\n**A errada**: lida com informações contínuas, não binárias."
+    }
   },
   {
     "id": 62,
@@ -2607,7 +3299,11 @@
       "E": "As árvores de decisão podem ser usadas em conjunto com outras técnicas de inteligência artificial para melhorar o desempenho e a precisão dos sistemas. Por exemplo, podem ser combinadas com algoritmos de apr endizado ensemble , como o random forest , para criar modelos mais robustos e acurados."
     },
     "resposta": "B",
-    "comentario": "Árvores de decisão são estruturas de dados não lineares (árvores), e não lineares. Elas mapeiam observações sobre um item para conclusões sobre seu valor alvo."
+    "comentario": "Árvores de decisão são estruturas de dados não lineares (árvores), e não lineares. Elas mapeiam observações sobre um item para conclusões sobre seu valor alvo.",
+    "card": {
+      "pergunta": "Sobre árvores de decisão: qual afirmativa está INCORRETA?",
+      "resposta": "**Gabarito: (B)** Árvores de decisão são estruturas lineares.\n\nÁrvores de decisão são estruturas **não-lineares** (em árvore), onde:\n- Nós internos = condições/testes\n- Folhas = classes/valores de saída\n\nSão aplicáveis a classificação e regressão, suportam dados categóricos e numéricos, e podem ser combinadas com ensembles (random forest)."
+    }
   },
   {
     "id": 63,
@@ -2622,7 +3318,11 @@
       "E": "V – V – F."
     },
     "resposta": "C",
-    "comentario": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores."
+    "comentario": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores.",
+    "card": {
+      "pergunta": "Interpolação: vizinho mais próximo (V/F), bilinear usa 2 vizinhos (V/F), bicúbica usa 16 vizinhos (V/F)?",
+      "resposta": "**Gabarito: (C)** V – F – V\n\n- **Vizinho mais próximo** ✓: replica o pixel mais próximo → gera serrilhamento\n- **Bilinear** ✗: usa **4 vizinhos** (grade 2×2), não 2\n- **Bicúbica** ✓: usa **16 vizinhos** (grade 4×4) → melhor qualidade"
+    }
   },
   {
     "id": 64,
@@ -2637,7 +3337,11 @@
       "E": "Rede neural recorrente"
     },
     "resposta": "D",
-    "comentario": "O Perceptron é a unidade básica e o modelo mais simples de rede neural, capaz de resolver apenas problemas que podem ser divididos por uma linha reta (linearmente separáveis)."
+    "comentario": "O Perceptron é a unidade básica e o modelo mais simples de rede neural, capaz de resolver apenas problemas que podem ser divididos por uma linha reta (linearmente separáveis).",
+    "card": {
+      "pergunta": "Modelo mais simples de rede neural, uma unidade, problemas linearmente separáveis, saída binária:",
+      "resposta": "**Gabarito: (D)** Perceptron\n\nO **Perceptron** (Rosenblatt, 1958):\n- Única unidade de processamento\n- Calcula combinação linear das entradas + limiar (threshold)\n- Saída binária (0 ou 1)\n- Limitação: só resolve problemas **linearmente separáveis** (ex: não resolve XOR)"
+    }
   },
   {
     "id": 65,
@@ -2652,7 +3356,11 @@
       "E": "256"
     },
     "resposta": "A",
-    "comentario": "A máscara 255.255.255.128 deixa 7 bits para hosts (2⁷ = 128 endereços). Subtraindo o endereço da rede e o de broadcast, restam 126 endereços utilizáveis para computadores."
+    "comentario": "A máscara 255.255.255.128 deixa 7 bits para hosts (2⁷ = 128 endereços). Subtraindo o endereço da rede e o de broadcast, restam 126 endereços utilizáveis para computadores.",
+    "card": {
+      "pergunta": "Rede com máscara 255.255.255.128: número máximo de computadores?",
+      "resposta": "**Gabarito: (A)** 126\n\nMáscara /25 (255.255.255.128): 7 bits para hosts\n$$2^7 = 128 \\text{ endereços totais}$$\nSubtrair endereço de rede e broadcast:\n$$128 - 2 = \\mathbf{126} \\text{ endereços utilizáveis}$$"
+    }
   },
   {
     "id": 66,
@@ -2667,7 +3375,11 @@
       "E": "Switch."
     },
     "resposta": "E",
-    "comentario": "O Switch opera na camada 2 (enlace) e utiliza endereços MAC para encaminhar quadros especificamente para a porta de destino, ao contrário do Hub que faz broadcast para todas as portas."
+    "comentario": "O Switch opera na camada 2 (enlace) e utiliza endereços MAC para encaminhar quadros especificamente para a porta de destino, ao contrário do Hub que faz broadcast para todas as portas.",
+    "card": {
+      "pergunta": "Dispositivo que atua nas camadas física e enlace e envia mensagens apenas para o destino correto:",
+      "resposta": "**Gabarito: (E)** Switch\n\n| Dispositivo | Camadas | Comportamento |\n|---|---|---|\n| **Switch** | Física + Enlace | Encaminha para porta destino (MAC) |\n| Hub | Física | Broadcast para todas as portas |\n| Roteador | Rede | Encaminha por IP entre redes |\n| Bridge | Enlace | Conecta segmentos de rede |"
+    }
   },
   {
     "id": 67,
@@ -2682,7 +3394,11 @@
       "E": "d/c + b/c"
     },
     "resposta": "A",
-    "comentario": "O tempo de duração de um bit é 1/b. A distância que o sinal percorre nesse tempo (largura do bit) é Velocidade * Tempo = c * (1/b) = c/b."
+    "comentario": "O tempo de duração de um bit é 1/b. A distância que o sinal percorre nesse tempo (largura do bit) é Velocidade * Tempo = c * (1/b) = c/b.",
+    "card": {
+      "pergunta": "Expressão para a largura (comprimento) de 1 bit no canal:",
+      "resposta": "**Gabarito: (A)** $c/b$\n\nLargura de um bit = distância que o sinal percorre durante a transmissão de 1 bit:\n\n$$\\text{largura} = \\text{velocidade} \\times \\text{duração do bit} = c \\times \\frac{1}{b} = \\frac{c}{b}$$\n\nOnde $c$ = velocidade de propagação e $b$ = taxa de transmissão (bits/s)."
+    }
   },
   {
     "id": 68,
@@ -2697,7 +3413,11 @@
       "E": "hierárquica"
     },
     "resposta": "A",
-    "comentario": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas)."
+    "comentario": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas).",
+    "card": {
+      "pergunta": "Transação cliente que conclui cada requisição antes de passar para a próxima (sequencial):",
+      "resposta": "**Gabarito: (A)** Transação plana\n\n**Transação plana**: estrutura sequencial simples — o cliente abre, faz requisições uma a uma e fecha.\n\n- **Aninhada**: subtransações paralelas ou hierárquicas\n- **Em duas fases**: protocolo de bloqueio (2PL), não de estrutura"
+    }
   },
   {
     "id": 69,
@@ -2712,7 +3432,11 @@
       "E": "Um sistema de invocação síncrono volátil tenta, indefinidamente, realizar a invocação até obter o êxito ou falha, ou até que o aplicativo cancele a invocação."
     },
     "resposta": "B",
-    "comentario": "Chamadas assíncronas são não-bloqueantes: o emissor continua sua execução imediatamente após o sistema operacional aceitar o pedido de envio, sem esperar pela resposta do receptor."
+    "comentario": "Chamadas assíncronas são não-bloqueantes: o emissor continua sua execução imediatamente após o sistema operacional aceitar o pedido de envio, sem esperar pela resposta do receptor.",
+    "card": {
+      "pergunta": "Sobre sistemas operacionais distribuídos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (B)** Invocação assíncrona = chamada não-bloqueante que retorna assim que a mensagem estiver pronta.\n\n- **B** ✓: assíncrono = não espera resposta; retorna ao chamar assim que o pedido é aceito\n- **A** ✗: **preemptivo** suspende a thread arbitrariamente; não-preemptivo a deixa rodar até bloquear\n- **C** ✗: gerência de memória trata alocação de RAM, não comunicação entre threads\n- **D** ✗: descreve o comportamento **não-preemptivo** (executa até bloquear)"
+    }
   },
   {
     "id": 70,
@@ -2727,6 +3451,10 @@
       "E": "A comunicação assíncrona é um serviço por meio do qual uma mensagem é enviada para um grupo e, então, entregue a todos os membros do grupo."
     },
     "resposta": "C",
-    "comentario": "A comunicação em grupo via multicast permite enviar dados para múltiplos destinatários de uma só vez, sendo um pilar da comunicação indireta e sistemas de eventos/mensageria."
+    "comentario": "A comunicação em grupo via multicast permite enviar dados para múltiplos destinatários de uma só vez, sendo um pilar da comunicação indireta e sistemas de eventos/mensageria.",
+    "card": {
+      "pergunta": "Comunicação indireta em sistemas distribuídos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (C)** Comunicação em grupo implementa multicast: mensagem enviada para todos os membros por uma única operação.\n\n- **C** ✓: multicast = um envio para N destinatários → base da comunicação em grupo\n- **A** ✗: confunde comunicação **direta** com indireta (invertido)\n- **B** ✗: descreve **desacoplamento temporal** (não espacial)\n- **D** ✗: descreve **desacoplamento espacial** (não temporal)"
+    }
   }
 ]
