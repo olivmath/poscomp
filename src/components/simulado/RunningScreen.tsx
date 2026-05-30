@@ -98,8 +98,12 @@ export function RunningScreen({
             </button>
           </div>
 
-          <button className="flag-btn" onClick={() => setShowIssueModal(true)} data-testid="flag-btn">
-            <span className="material-symbols-outlined">flag</span>
+          <button
+            className={`flag-btn${issueComment ? ' flag-btn--active' : ''}`}
+            onClick={() => setShowIssueModal(true)}
+            data-testid="flag-btn"
+          >
+            <span className="material-symbols-outlined">{issueComment ? 'flag' : 'outlined_flag'}</span>
             {issueComment ? 'Problema relatado' : 'Relatar problema'}
           </button>
 

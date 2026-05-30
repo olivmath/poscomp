@@ -23,6 +23,7 @@ export function Revisao() {
     showAnswer,
     sessionResults,
     reveal,
+    hide,
     submit,
     reset,
   } = useRevisao()
@@ -126,7 +127,7 @@ export function Revisao() {
       <div className="revisao-card-wrap">
         <div
           className={`revisao-flipcard${showAnswer ? ' flipped' : ''}${feedback !== 'idle' ? ` feedback-${feedback}` : ''}`}
-          onClick={!showAnswer && question ? () => reveal() : undefined}
+          onClick={question ? () => showAnswer ? hide() : reveal() : undefined}
         >
           {/* Frente — pergunta */}
           <div className="revisao-face revisao-face--front">
@@ -142,10 +143,8 @@ export function Revisao() {
           {/* Verso — resposta */}
           <div className="revisao-face revisao-face--back">
             <div className={`revisao-answer-body${question?.card?.resposta ? ' revisao-answer-body--markdown' : ''}`}>
-              <span className="material-symbols-outlined revisao-answer-icon">check_circle</span>
               {question?.card?.resposta ? (
                 <div className="revisao-gabarito-markdown">
-                  <strong>({question?.resposta})</strong>
                   <MarkdownAnswer md={question.card.resposta} />
                 </div>
               ) : (
@@ -156,23 +155,29 @@ export function Revisao() {
               )}
             </div>
 
-            <div className="revisao-result-btns" onClick={e => e.stopPropagation()}>
-              <button
-                className="revisao-result-btn revisao-result-btn--wrong"
-                onClick={() => handleSubmit(false)}
-              >
-                <span className="material-symbols-outlined">close</span>
-                Errei
-              </button>
-              <button
-                className="revisao-result-btn revisao-result-btn--correct"
-                onClick={() => handleSubmit(true)}
-              >
-                <span className="material-symbols-outlined">check</span>
-                Acertei
-              </button>
+            <div className="revisao-flip-hint revisao-flip-hint--back">
+              <span className="material-symbols-outlined">touch_app</span>
+              Toque para ver a pergunta
             </div>
           </div>
+        </div>
+
+        {/* Botões sempre visíveis — desacoplados do flip */}
+        <div className="revisao-result-btns">
+          <button
+            className="revisao-result-btn revisao-result-btn--wrong"
+            onClick={() => handleSubmit(false)}
+          >
+            <span className="material-symbols-outlined">close</span>
+            Errei
+          </button>
+          <button
+            className="revisao-result-btn revisao-result-btn--correct"
+            onClick={() => handleSubmit(true)}
+          >
+            <span className="material-symbols-outlined">check</span>
+            Acertei
+          </button>
         </div>
       </div>
     </div>

@@ -51,8 +51,9 @@ export function useRevisao() {
 
   // ── Actions ──────────────────────────────────────────────────────────────
   const reveal = useCallback(() => setShowAnswer(true), [])
+  const hide = useCallback(() => setShowAnswer(false), [])
 
-  const submit = useCallback(async (studied: boolean) => {
+  const submit = useCallback((studied: boolean) => {
     const currentCard = sortedCards[currentIndex]
     if (!currentCard) return
 
@@ -61,9 +62,14 @@ export function useRevisao() {
       [currentCard.priority]: prev[currentCard.priority] + 1,
     }))
 
-    console.log('[CF] reviewCard →', { questionId: currentCard.questionId, studied })
-    const { data: reviewData } = await callReviewCard({ questionId: currentCard.questionId, studied })
-    console.log('[CF] reviewCard ←', { nextDueDays: reviewData.nextDueDays, newInterval: reviewData.newInterval })
+    // fire-and-forget — não bloqueia a UX
+    callReviewCard({ questionId: currentCard.questionId, studied })
+      .then(({ data }) => {
+        console.log('[CF] reviewCard ←', { nextDueDays: data.nextDueDays, newInterval: data.newInterval })
+      })
+      .catch(err => {
+        console.error('[CF] reviewCard erro (silencioso):', err)
+      })
 
     if (currentIndex < sortedCards.length - 1) {
       setCurrentIndex(i => i + 1)
@@ -100,6 +106,7 @@ export function useRevisao() {
     showAnswer,
     sessionResults,
     reveal,
+    hide,
     submit,
     reset,
   }
@@ -119,6 +126,7 @@ function adaptCard(card: PendingCardOutput): AdaptedCard {
       alternativas: card.question.alternativas,
       resposta: card.question.resposta,
       comentario: card.question.comentario,
+      card: card.question.card,
     },
   }
 }

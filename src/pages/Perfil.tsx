@@ -1,17 +1,15 @@
 import '@material/web/list/list.js'
 import '@material/web/list/list-item.js'
 import '@material/web/switch/switch.js'
-import '@material/web/button/filled-button.js'
-import '@material/web/button/text-button.js'
-import '@material/web/dialog/dialog.js'
 import '@material/web/icon/icon.js'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
 import { callDeleteAllData } from '../hooks/useFunctions'
+import { ModalOverlay } from '../components/ModalOverlay'
 
 export function Perfil() {
   const { user } = useAuth()
@@ -20,15 +18,6 @@ export function Perfil() {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const { theme, toggleTheme } = useTheme()
-  const deleteDialogRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const el = deleteDialogRef.current
-    if (!el) return
-    const handler = () => setShowDeleteDialog(false)
-    el.addEventListener('cancel', handler)
-    return () => el.removeEventListener('cancel', handler)
-  }, [showDeleteDialog])
 
   async function handleLogout() {
     setLoggingOut(true)
@@ -138,20 +127,30 @@ export function Perfil() {
 
 
       {showDeleteDialog && (
-        <md-dialog ref={deleteDialogRef} open onClick={(e: React.MouseEvent) => e.stopPropagation()}>
-          <div slot="headline">Apagar todos os dados?</div>
-          <div slot="content">
-            Todo o histórico de simulados e cartões de revisão serão apagados permanentemente. Esta ação não pode ser desfeita.
+        <ModalOverlay onBackdropClick={() => !deleting && setShowDeleteDialog(false)}>
+          <div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+            <h2 id="delete-modal-title" className="modal-title">Apagar todos os dados?</h2>
+            <p className="modal-body">
+              Todo o histórico de simulados e cartões de revisão serão apagados permanentemente. Esta ação não pode ser desfeita.
+            </p>
+            <div className="modal-actions">
+              <button
+                className="modal-btn modal-btn--ghost"
+                onClick={() => setShowDeleteDialog(false)}
+                disabled={deleting}
+              >
+                Cancelar
+              </button>
+              <button
+                className="modal-btn modal-btn--danger"
+                onClick={handleDeleteAllData}
+                disabled={deleting}
+              >
+                {deleting ? 'Apagando...' : 'Apagar tudo'}
+              </button>
+            </div>
           </div>
-          <div slot="actions">
-            <md-text-button onClick={() => setShowDeleteDialog(false)} disabled={deleting}>
-              Cancelar
-            </md-text-button>
-            <md-filled-button onClick={handleDeleteAllData} disabled={deleting} className="perfil-delete-confirm-btn">
-              {deleting ? 'Apagando...' : 'Apagar tudo'}
-            </md-filled-button>
-          </div>
-        </md-dialog>
+        </ModalOverlay>
       )}
     </div>
   )

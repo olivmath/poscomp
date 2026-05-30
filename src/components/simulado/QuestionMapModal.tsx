@@ -1,5 +1,4 @@
-import '@material/web/button/text-button.js'
-import '@material/web/dialog/dialog.js'
+import { ModalOverlay } from '../ModalOverlay'
 import type { QuestionStatus } from '../../types'
 
 const LEGEND = [
@@ -22,16 +21,15 @@ export function QuestionMapModal({
   onClose: () => void
 }) {
   return (
-    <md-dialog open className="question-map-dialog">
-      <div slot="headline">
-        <div className="question-map-header">
-          <span className="question-map-title">Mapa de questões</span>
-          <button className="question-map-close" onClick={onClose} aria-label="Fechar mapa">
+    <ModalOverlay onBackdropClick={onClose}>
+      <div className="modal-card modal-card--map" role="dialog" aria-modal="true" aria-labelledby="map-modal-title">
+        <div className="modal-map-header">
+          <h2 id="map-modal-title" className="modal-title">Mapa de questões</h2>
+          <button className="modal-close-btn" onClick={onClose} aria-label="Fechar mapa">
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
-      </div>
-      <div slot="content">
+
         <div className="question-map-grid" data-testid="question-map-grid">
           {statuses.map((status, i) => (
             <button
@@ -45,6 +43,7 @@ export function QuestionMapModal({
             </button>
           ))}
         </div>
+
         <div className="question-map-legend">
           {LEGEND.map(({ status, label, icon }) => (
             <span key={status} className="map-legend-item">
@@ -53,10 +52,11 @@ export function QuestionMapModal({
             </span>
           ))}
         </div>
+
+        <div className="modal-actions">
+          <button className="modal-btn modal-btn--ghost" onClick={onClose}>Fechar</button>
+        </div>
       </div>
-      <div slot="actions">
-        <md-text-button onClick={onClose}>Fechar</md-text-button>
-      </div>
-    </md-dialog>
+    </ModalOverlay>
   )
 }

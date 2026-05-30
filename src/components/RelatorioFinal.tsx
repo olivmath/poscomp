@@ -230,7 +230,7 @@ export function RelatorioFinal({ result, onHistory, onReview, onBack }: Relatori
         )}
         {onHistory && (
           <md-outlined-button onClick={onHistory} className="btn-secondary" data-testid="history-btn">
-            Histórico
+            Novo Simulado
           </md-outlined-button>
         )}
         {onReview && result.score < result.totalQuestions && (

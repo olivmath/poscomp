@@ -1,8 +1,5 @@
-import '@material/web/button/filled-button.js'
-import '@material/web/button/text-button.js'
-import '@material/web/dialog/dialog.js'
-import '@material/web/textfield/outlined-text-field.js'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
+import { ModalOverlay } from '../ModalOverlay'
 
 export function ReportIssueModal({
   onConfirm,
@@ -14,23 +11,24 @@ export function ReportIssueModal({
   initialComment?: string
 }) {
   const [comment, setComment] = useState(initialComment || '')
-  const dialogRef = useRef<HTMLElement>(null)
 
   return (
-    <md-dialog ref={dialogRef} open onClick={(e) => e.stopPropagation()}>
-      <div slot="headline">Reportar problema</div>
-      <div slot="content">
-        <md-outlined-text-field
-          label="Comentário (opcional)"
+    <ModalOverlay onBackdropClick={onCancel}>
+      <div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="report-modal-title">
+        <h2 id="report-modal-title" className="modal-title">Reportar problema</h2>
+        <textarea
+          className="modal-textarea"
+          placeholder="Comentário (opcional)"
           value={comment}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          onInput={(e: any) => setComment(e.target.value)}
+          onChange={(e) => setComment(e.target.value)}
+          rows={3}
+          autoFocus
         />
+        <div className="modal-actions">
+          <button className="modal-btn modal-btn--ghost" onClick={onCancel}>Cancelar</button>
+          <button className="modal-btn modal-btn--primary" onClick={() => onConfirm(comment || undefined)}>Confirmar</button>
+        </div>
       </div>
-      <div slot="actions">
-        <md-text-button onClick={onCancel}>Cancelar</md-text-button>
-        <md-filled-button onClick={() => onConfirm(comment || undefined)}>Confirmar</md-filled-button>
-      </div>
-    </md-dialog>
+    </ModalOverlay>
   )
 }

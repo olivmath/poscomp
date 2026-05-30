@@ -88,7 +88,7 @@ export function Home() {
       <RelatorioFinal
         result={result}
         onReview={() => navigate('/revisao')}
-        onHistory={() => navigate('/historico')}
+        onHistory={retry}
       />
     )
   }

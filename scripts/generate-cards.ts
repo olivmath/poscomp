@@ -1,11 +1,9 @@
 /**
  * Gera o campo `card` para cada questão usando Claude API.
  *
- * Matemática → card.resposta inclui conceito + resolução passo a passo em MD+LaTeX
- * Outras áreas → card.resposta inclui explicação do gabarito em MD
- *
- * Uso: npx tsx scripts/generate-cards.ts
- * Resume automaticamente a partir de um checkpoint se interrompido.
+ * Uso:
+ *   npx tsx scripts/generate-cards.ts           # só questões sem card
+ *   npx tsx scripts/generate-cards.ts --force   # regenera todos os cards
  */
 
 import Anthropic from '@anthropic-ai/sdk'
@@ -18,7 +16,9 @@ const __dirname = path.dirname(__filename)
 
 const QUESTIONS_FILE = path.join(__dirname, 'data/questions.json')
 const CHECKPOINT_FILE = path.join(__dirname, 'data/.cards-checkpoint.json')
-const CONCURRENCY = 5
+const DATA_DIR = path.join(__dirname, 'data')
+const CONCURRENCY = 3
+const FORCE = process.argv.includes('--force')
 
 interface Question {
   id: number
@@ -38,50 +38,82 @@ interface Checkpoint {
 const MATH_AREAS = ['Matemática']
 
 function buildPrompt(q: Question): string {
-  const ismath = MATH_AREAS.includes(q.area)
   const opts = Object.entries(q.alternativas)
     .map(([k, v]) => `${k}) ${v}`)
     .join('\n')
 
   const gabarito = `${q.resposta}) ${q.alternativas[q.resposta]}`
-  const comentario = q.comentario ? `\nComentário: ${q.comentario}` : ''
+  const comentario = q.comentario ? `\nComentário oficial: ${q.comentario}` : ''
+  const ismath = MATH_AREAS.includes(q.area)
 
   if (ismath) {
-    return `Você é um tutor de Matemática para o POSCOMP. Dada a questão abaixo, gere:
+    return `Você é um professor de Matemática preparando material de revisão para o POSCOMP. Crie um MICRO-TUTORIAL completo para a questão abaixo — não uma resposta seca, mas uma mini-aula que ensina o conceito e resolve do zero.
 
-1. **pergunta**: versão concisa do enunciado (máx 2 linhas), mantendo toda informação essencial para o flashcard
-2. **resposta**: explicação completa com 2 seções obrigatórias em Markdown+LaTeX:
-   - **## Conceito**: princípio teórico necessário para resolver (2-4 linhas, use LaTeX inline $...$ para expressões)
-   - **## Resolução**: passo a passo completo usando LaTeX inline $...$ e blocos $$...$$
-
-Questão (área: ${q.area}, ano: ${q.ano}):
+QUESTÃO (área: ${q.area}, ano: ${q.ano}):
 ${q.enunciado}
 
-Alternativas:
+ALTERNATIVAS:
 ${opts}
 
-Gabarito: ${gabarito}${comentario}
+GABARITO: ${gabarito}${comentario}
 
-Responda APENAS com JSON válido (sem markdown ao redor), exatamente neste formato:
+Gere um JSON com dois campos:
+
+"pergunta": versão concisa do enunciado (máx 2 linhas), mantendo os dados essenciais.
+
+"resposta": MICRO-TUTORIAL em Markdown+LaTeX com EXATAMENTE estas seções:
+
+## Conceito
+Explique o princípio teórico de forma COMPLETA (3-6 linhas). Dê a fórmula geral em LaTeX, defina cada variável, explique a intuição. Não seja raso.
+
+## Resolução
+Passo a passo DETALHADO partindo dos dados do enunciado. Cada etapa numerada com a operação matemática completa em LaTeX. Não pule etapas intermediárias. Termine com o resultado final.
+
+**Gabarito: (${q.resposta})** $resultado$
+
+REGRAS:
+- Use $...$ para matemática inline e $$...$$ para equações em destaque
+- Cada passo deve mostrar a operação completa, não só o resultado
+- O conceito deve ser didático o suficiente para quem nunca viu o assunto entender
+- NUNCA omita etapas da resolução
+
+Responda APENAS com JSON válido (sem markdown ao redor):
 {"pergunta": "...", "resposta": "..."}`
   }
 
-  return `Você é um tutor de Ciência da Computação para o POSCOMP. Dada a questão abaixo, gere:
+  return `Você é um professor de Ciência da Computação preparando material de revisão para o POSCOMP. Crie um MICRO-TUTORIAL completo — não uma resposta seca, mas uma mini-aula que ensina o conceito e explica cada alternativa.
 
-1. **pergunta**: versão concisa do enunciado (máx 2 linhas), mantendo toda informação essencial para o flashcard
-2. **resposta**: explicação clara em Markdown (pode usar LaTeX inline $...$ se necessário) com:
-   - Por que a alternativa correta está certa
-   - Por que as demais estão erradas (se relevante)
-
-Questão (área: ${q.area}, ano: ${q.ano}):
+QUESTÃO (área: ${q.area}, ano: ${q.ano}):
 ${q.enunciado}
 
-Alternativas:
+ALTERNATIVAS:
 ${opts}
 
-Gabarito: ${gabarito}${comentario}
+GABARITO: ${gabarito}${comentario}
 
-Responda APENAS com JSON válido (sem markdown ao redor), exatamente neste formato:
+Gere um JSON com dois campos:
+
+"pergunta": versão concisa do enunciado (máx 2 linhas), mantendo os dados essenciais.
+
+"resposta": MICRO-TUTORIAL em Markdown com EXATAMENTE estas seções:
+
+## Conceito
+Explique o tema central de forma COMPLETA (3-6 linhas). O que é, como funciona, propriedades chave, exemplo prático. Seja didático — escreva como se fosse a primeira vez que o aluno vê o assunto. Use LaTeX inline $...$ quando houver expressões formais.
+
+## Por que (${q.resposta}) é correta
+Explicação direta e precisa do porquê o gabarito está certo (2-4 linhas).
+
+## Pegadinhas desta questão
+Para CADA alternativa incorreta, uma linha explicando por que ela atrai candidatos e onde está o erro conceitual. Formato: **(X)** motivo do erro.
+
+**Gabarito: (${q.resposta})**
+
+REGRAS:
+- O conceito deve ser autocontido: o aluno não deve precisar buscar nada além
+- As pegadinhas devem revelar o raciocínio errado típico, não só dizer "está errado"
+- Seja específico com nomes de algoritmos, propriedades, complexidades quando relevante
+
+Responda APENAS com JSON válido (sem markdown ao redor):
 {"pergunta": "...", "resposta": "..."}`
 }
 
@@ -103,8 +135,8 @@ async function generateCard(
   const prompt = buildPrompt(q)
 
   const response = await client.messages.create({
-    model: 'claude-haiku-4-5',
-    max_tokens: 1024,
+    model: 'claude-sonnet-4-6',
+    max_tokens: 2048,
     messages: [{ role: 'user', content: prompt }],
   })
 
@@ -114,7 +146,6 @@ async function generateCard(
     .join('')
     .trim()
 
-  // Strip possible ```json ... ``` wrapper
   const clean = text.replace(/^```json\s*/i, '').replace(/\s*```$/i, '')
 
   try {
@@ -144,6 +175,13 @@ async function processInBatches<T, R>(
 
 async function main() {
   const questions: Question[] = JSON.parse(fs.readFileSync(QUESTIONS_FILE, 'utf8'))
+
+  if (FORCE) {
+    console.log('--force: removendo cards existentes e checkpoint para regeneração completa...')
+    for (const q of questions) delete q.card
+    if (fs.existsSync(CHECKPOINT_FILE)) fs.unlinkSync(CHECKPOINT_FILE)
+  }
+
   const checkpoint = loadCheckpoint()
 
   const pending = questions.filter((q) => !(q.id in checkpoint.processed) && !q.card)
@@ -166,7 +204,6 @@ async function main() {
         done++
         const pct = Math.round(((alreadyDone.length + done) / questions.length) * 100)
         process.stdout.write(`\r[${alreadyDone.length + done}/${questions.length}] ${pct}%  `)
-        // Save checkpoint every 10 questions
         if (done % 10 === 0) saveCheckpoint(checkpoint)
       } catch (err) {
         errors.push(q.id)
@@ -190,16 +227,17 @@ async function main() {
   fs.writeFileSync(QUESTIONS_FILE, JSON.stringify(questions, null, 2))
   console.log(`Aplicados ${applied} cards ao questions.json`)
 
-  // Update by_area files
-  const byAreaDir = path.join(__dirname, 'data/by_area')
-  const areaFiles = fs.readdirSync(byAreaDir).filter((f) => f.endsWith('.json'))
+  // Update individual area files in data/
+  const areaFiles = fs.readdirSync(DATA_DIR)
+    .filter((f) => f.endsWith('.json') && f !== 'questions.json')
+
   for (const file of areaFiles) {
-    const filePath = path.join(byAreaDir, file)
+    const filePath = path.join(DATA_DIR, file)
     const areaQuestions: Question[] = JSON.parse(fs.readFileSync(filePath, 'utf8'))
     let updatedCount = 0
     for (const aq of areaQuestions) {
       const updated = questions.find((q) => q.id === aq.id)
-      if (updated?.card && !aq.card) {
+      if (updated?.card) {
         aq.card = updated.card
         updatedCount++
       }
@@ -210,12 +248,11 @@ async function main() {
     }
   }
 
-  // Clean up checkpoint after successful completion
   const allHaveCards = questions.every((q) => q.card)
-  if (allHaveCards) {
+  if (allHaveCards && fs.existsSync(CHECKPOINT_FILE)) {
     fs.unlinkSync(CHECKPOINT_FILE)
     console.log('Checkpoint removido. Todas as questões têm card.')
-  } else {
+  } else if (!allHaveCards) {
     const missing = questions.filter((q) => !q.card).map((q) => q.id)
     console.warn(`Atenção: ${missing.length} questões ainda sem card: ${missing.slice(0, 10).join(', ')}...`)
   }
