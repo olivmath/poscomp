@@ -45,6 +45,8 @@ export function RunningScreen({
   const [showIssueModal, setShowIssueModal] = useState(false)
   const [issueComment, setIssueComment] = useState<string | undefined>()
   const hasSelection = selectedOption !== null
+  const currentAnswered = questionStatuses[currentIndex] !== 'unvisited'
+  const isFirstQuestion = currentIndex === 0
 
   useEffect(() => {
     setIssueComment(undefined)
@@ -83,37 +85,56 @@ export function RunningScreen({
             ))}
           </div>
 
-          <div className="confidence-buttons">
-            <button className="confidence-btn confidence-btn--unsure" disabled={!hasSelection} onClick={() => onNext('unsure', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-unsure">
-              <span className="material-symbols-outlined confidence-btn-icon">help_outline</span>
-              <span className="confidence-btn-label">Não sei</span>
-              <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
-            </button>
-            <button className="confidence-btn confidence-btn--studying" disabled={!hasSelection} onClick={() => onNext('studying', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-studying">
-              <span className="material-symbols-outlined confidence-btn-icon">school</span>
-              <span className="confidence-btn-label">Estudando</span>
-              <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
-            </button>
-            <button className="confidence-btn confidence-btn--should-know" disabled={!hasSelection} onClick={() => onNext('should_know', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-should-know">
-              <span className="material-symbols-outlined confidence-btn-icon">warning</span>
-              <span className="confidence-btn-label">Devia saber</span>
-              <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
-            </button>
+          <div className="simulado-action-footer">
+            <div className="confidence-buttons">
+              <button className="confidence-btn confidence-btn--unsure" disabled={!hasSelection || currentAnswered} onClick={() => onNext('unsure', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-unsure" title={currentAnswered ? 'Questão já respondida' : ''}>
+                <span className="material-symbols-outlined confidence-btn-icon">help_outline</span>
+                <span className="confidence-btn-label">Não sei</span>
+                <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
+              </button>
+              <button className="confidence-btn confidence-btn--studying" disabled={!hasSelection || currentAnswered} onClick={() => onNext('studying', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-studying" title={currentAnswered ? 'Questão já respondida' : ''}>
+                <span className="material-symbols-outlined confidence-btn-icon">school</span>
+                <span className="confidence-btn-label">Estudando</span>
+                <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
+              </button>
+              <button className="confidence-btn confidence-btn--should-know" disabled={!hasSelection || currentAnswered} onClick={() => onNext('should_know', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-should-know" title={currentAnswered ? 'Questão já respondida' : ''}>
+                <span className="material-symbols-outlined confidence-btn-icon">warning</span>
+                <span className="confidence-btn-label">Devia saber</span>
+                <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
+              </button>
+            </div>
+
+            <div className="simulado-nav-actions">
+              <button
+                className="nav-action-btn"
+                onClick={() => onGoToQuestion(currentIndex - 1)}
+                disabled={isFirstQuestion}
+                aria-label="Questão anterior"
+                data-testid="previous-btn"
+              >
+                <span className="material-symbols-outlined">chevron_left</span>
+                Anterior
+              </button>
+              <button
+                className={`nav-action-btn${issueComment ? ' nav-action-btn--active' : ''}`}
+                onClick={() => setShowIssueModal(true)}
+                aria-label="Relatar problema"
+                data-testid="flag-btn"
+              >
+                <span className="material-symbols-outlined">{issueComment ? 'flag' : 'outlined_flag'}</span>
+                {issueComment ? 'Relatado' : 'Reportar'}
+              </button>
+              <button
+                className="nav-action-btn"
+                onClick={onSkip}
+                aria-label="Pular questão"
+                data-testid="skip-btn"
+              >
+                <span className="material-symbols-outlined">skip_next</span>
+                Pular
+              </button>
+            </div>
           </div>
-
-          <button
-            className={`flag-btn${issueComment ? ' flag-btn--active' : ''}`}
-            onClick={() => setShowIssueModal(true)}
-            data-testid="flag-btn"
-          >
-            <span className="material-symbols-outlined">{issueComment ? 'flag' : 'outlined_flag'}</span>
-            {issueComment ? 'Problema relatado' : 'Relatar problema'}
-          </button>
-
-          <button className="skip-btn" onClick={onSkip} data-testid="skip-btn">
-            <span className="material-symbols-outlined skip-btn-icon">skip_next</span>
-            Pular questão
-          </button>
         </div>
       </div>
 
