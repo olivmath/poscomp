@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { SrsProvider } from './contexts/SrsContext'
 import { ImmersiveModeProvider } from './contexts/ImmersiveModeContext'
+import { SnackbarProvider } from './components/SnackbarProvider'
 import { ProtectedLayout } from './components/ProtectedLayout'
 import { Login } from './pages/Login'
 import { Home } from './pages/Home'
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
+        <SnackbarProvider>
         <SrsProvider>
         <ImmersiveModeProvider>
         <Routes>
@@ -31,6 +33,7 @@ createRoot(document.getElementById('root')!).render(
         </Routes>
         </ImmersiveModeProvider>
         </SrsProvider>
+        </SnackbarProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>,

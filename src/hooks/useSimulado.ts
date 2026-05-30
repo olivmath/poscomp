@@ -31,6 +31,7 @@ interface UseSimuladoReturn {
   answers: AnswerRecord[]
   secondsLeft: number
   loading: boolean
+  loadingFinish: boolean
   error: string | null
   result: SimuladoResult | null
   lastResult: SimuladoResult | null
@@ -56,6 +57,7 @@ export function useSimulado(): UseSimuladoReturn {
   const [answers, setAnswers] = useState<AnswerRecord[]>([])
   const [secondsLeft, setSecondsLeft] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [loadingFinish, setLoadingFinish] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<SimuladoResult | null>(null)
   const [lastResult, setLastResult] = useState<SimuladoResult | null>(null)
@@ -100,6 +102,8 @@ export function useSimulado(): UseSimuladoReturn {
       stopTimer()
       if (!user) return
 
+      setLoadingFinish(true)
+
       // Filter out skipped/unanswered — backend only accepts answered questions
       const answeredInputs = finalAnswers
         .filter((a): a is AnswerRecord & { selected: Option; confidence: NonNullable<Confidence> } =>
@@ -131,6 +135,8 @@ export function useSimulado(): UseSimuladoReturn {
         setResult(fallbackResult)
         setLastResult(fallbackResult)
         setState('finished')
+      } finally {
+        setLoadingFinish(false)
       }
     },
     [user, questions]
@@ -326,6 +332,7 @@ export function useSimulado(): UseSimuladoReturn {
     answers,
     secondsLeft,
     loading,
+    loadingFinish,
     error,
     result,
     lastResult,
