@@ -29,12 +29,14 @@ export function Revisao() {
   } = useRevisao()
 
   const [feedback, setFeedback] = useState<'idle' | 'correct' | 'wrong'>('idle')
+  const [nextDueDays, setNextDueDays] = useState<number | null>(null)
 
   const handleSubmit = (acertou: boolean) => {
     setFeedback(acertou ? 'correct' : 'wrong')
     setTimeout(() => {
       setFeedback('idle')
-      submit(acertou)
+      setNextDueDays(null)
+      submit(acertou, (days) => setNextDueDays(days))
     }, 500)
   }
 
@@ -107,10 +109,11 @@ export function Revisao() {
 
   return (
     <div className="revisao-running">
-      {/* Top bar — idêntico ao ImmersiveBar */}
+      <h1 className="sr-only">Revisão</h1>
+      {/* Top bar */}
       <div className="revisao-top-bar">
-        <button className="revisao-top-back" onClick={() => navigate('/')}>
-          <span className="material-symbols-outlined">arrow_back</span>
+        <button className="revisao-top-back" onClick={() => navigate('/')} aria-label="Sair da revisão">
+          <span className="material-symbols-outlined">close</span>
         </button>
         <span className="revisao-top-counter">{currentIndex + 1} / {totalCards}</span>
       </div>
@@ -179,6 +182,17 @@ export function Revisao() {
             Acertei
           </button>
         </div>
+
+        {nextDueDays !== null && (
+          <p className="revisao-next-due" aria-live="polite">
+            <span className="material-symbols-outlined revisao-next-due-icon">schedule</span>
+            {nextDueDays === 0
+              ? 'Revisão: hoje'
+              : nextDueDays === 1
+              ? 'Próxima revisão: amanhã'
+              : `Próxima revisão: em ${nextDueDays} dias`}
+          </p>
+        )}
       </div>
     </div>
   )

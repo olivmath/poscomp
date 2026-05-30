@@ -703,6 +703,19 @@ body {
   color: var(--md-sys-color-primary);
 }
 
+/* ── Accessibility utility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ═══════════════════════════════════════════════════════════
    LAYOUT
 ═══════════════════════════════════════════════════════════ */
@@ -2621,6 +2634,38 @@ md-outlined-button.btn-full {
   color: var(--md-sys-color-on-surface-variant);
 }
 
+/* Hist card meta row — top area + trend */
+.hist-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--color-divider-subtle);
+}
+
+.hist-area-icon {
+  font-size: var(--icon-size-xs);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.hist-area-label {
+  font-size: var(--md-sys-typescale-body-xsmall-size);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.hist-trend {
+  font-size: var(--md-sys-typescale-label-small-size);
+  font-weight: 700;
+  margin-left: var(--space-2xs);
+  padding: 0 var(--space-2xs);
+  border-radius: var(--shape-xs);
+}
+
+.hist-trend--up   { color: var(--color-score-high); background: var(--color-score-high-bg); }
+.hist-trend--down { color: var(--color-score-low);  background: var(--color-score-low-bg);  }
+.hist-trend--same { color: var(--md-sys-color-on-surface-variant); background: var(--md-sys-color-surface-container); }
+
 .hist-breakdown {
   margin-top: var(--space-sm);
   padding-top: var(--space-sm);
@@ -3599,6 +3644,25 @@ md-outlined-button.btn-full {
   background: var(--color-confidence-studying-bg-dark);
   border-color: var(--color-confidence-studying-border-dark);
   color: var(--color-confidence-studying-border);
+}
+
+/* Próxima revisão — chip after result buttons */
+.revisao-next-due {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  justify-content: center;
+  font-size: var(--md-sys-typescale-body-small-size);
+  color: var(--md-sys-color-on-surface-variant);
+  padding: var(--space-xs-sm) var(--space-sm);
+  background: var(--md-sys-color-surface-container);
+  border-radius: var(--shape-full);
+  margin-top: var(--space-xs);
+}
+
+.revisao-next-due-icon {
+  font-size: var(--icon-size-xs);
+  color: inherit;
 }
 
 /* Feedback flash no verso */

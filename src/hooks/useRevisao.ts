@@ -56,7 +56,7 @@ export function useRevisao() {
   const reveal = useCallback(() => setShowAnswer(true), [])
   const hide = useCallback(() => setShowAnswer(false), [])
 
-  const submit = useCallback((studied: boolean) => {
+  const submit = useCallback((studied: boolean, onNextDue?: (days: number) => void) => {
     const currentCard = sortedCards[currentIndex]
     if (!currentCard) return
 
@@ -69,6 +69,7 @@ export function useRevisao() {
     callReviewCard({ questionId: currentCard.questionId, studied })
       .then(({ data }) => {
         console.log('[CF] reviewCard ←', { nextDueDays: data.nextDueDays, newInterval: data.newInterval })
+        onNextDue?.(data.nextDueDays)
       })
       .catch(err => {
         console.error('[CF] reviewCard erro (silencioso):', err)
