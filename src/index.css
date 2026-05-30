@@ -1638,7 +1638,7 @@ md-filter-chip {
 
 .modal-btn--danger {
   background: var(--color-error);
-  color: #fff;
+  color: var(--md-sys-color-on-error);
 }
 
 .modal-btn--danger:hover { filter: brightness(1.1); }
@@ -3794,7 +3794,7 @@ md-outlined-button.btn-full {
 }
 
 .report-success-icon {
-  font-size: 48px;
+  font-size: var(--icon-size-xl);
   color: var(--md-sys-color-primary);
   animation: scaleIn 0.4s ease-out;
 }
