@@ -14,8 +14,8 @@
     "resposta": "D",
     "comentario": "No 2PC: 1) O Coordenador envia 'prepare'. 2) Os Participantes respondem 'ready' ou 'cannot'. 3) O Coordenador decide e envia a ordem final de 'commit' ou 'rollback'.",
     "card": {
-      "pergunta": "No protocolo two‑phase commit (2PC), quem coordena o commit e quem sinaliza se está pronto para confirmar?",
-      "resposta": "O coordenador inicia a fase de preparação (envia 'prepare') e, após receber respostas 'ready' dos participantes, decide e envia 'commit' ou 'rollback'. Os participantes respondem 'ready' ou 'cannot' indicando se podem executar o commit.\\n\\nNão deve ser confundido com protocolos sem um coordenador central (onde não há um agente decisor), com modelos em que participantes decidem autonomamente sem votação, ou com transações locais que não envolvem uma fase de votação."
+      "pergunta": "Protocolo 2PC: remetentes das mensagens <prepare>, <ready/cannot>, <commit/rollback>?",
+      "resposta": "**Gabarito: (D)** Coordenador, Participantes, Coordenador\n\nTwo-Phase Commit (2PC):\n\n| Fase | Mensagem | Remetente |\n|---|---|---|\n| Fase 1 | `prepare for commit` | **Coordenador** |\n| Fase 1 | `ready` / `cannot commit` | **Participantes** |\n| Fase 2 | `commit` / `rollback` | **Coordenador** |"
     }
   },
   {
@@ -33,8 +33,8 @@
     "resposta": "A",
     "comentario": "As técnicas Wait-Die e Wound-Wait são os protocolos clássicos de prevenção de deadlock baseados em carimbos de tempo (timestamps) para decidir qual transação deve esperar, ser abortada ou 'ferir' outra.",
     "card": {
-      "pergunta": "Quais técnicas de prevenção de deadlock usam timestamps para decidir qual transação deve esperar ou ser abortada?",
-      "resposta": "Wait‑Die e Wound‑Wait são protocolos de prevenção baseados em timestamps. No Wait‑Die, uma transação mais antiga (timestamp menor) pode esperar por uma mais jovem; se a transação solicitante for mais jovem, ela é abortada. No Wound‑Wait, a transação mais antiga força a abortagem da mais jovem (''wounds''); se a solicitante for mais jovem, ela espera. Ambos usam a ordem por timestamp para evitar ciclos de espera.\n\nNão deve ser confundido com estratégias sem timestamp como 'no-wait' ou 'cautious-waiting', nem com métodos de detecção e recuperação de deadlock (detecção via grafo de espera ou timeouts)."
+      "pergunta": "Técnicas de prevenção de deadlock baseadas em timestamp: quais são?",
+      "resposta": "**Gabarito: (A)** Apenas I (Wait-Die) e II (Wound-Wait)\n\n| Técnica | Baseada em timestamp? |\n|---|---|\n| **Wait-Die** | ✓ Transação mais nova espera ou morre |\n| **Wound-Wait** | ✓ Transação mais velha \"fere\" a nova |\n| Cautious-Waiting | ✗ Evita ciclos por análise de grafo |\n| No-Waiting | ✗ Abort imediato, sem análise de timestamp |"
     }
   },
   {
@@ -52,8 +52,8 @@
     "resposta": "B",
     "comentario": "Existe uma hierarquia: BCNF é mais restritiva que 3NF, que é mais restritiva que 2NF. Logo, se está na BCNF, obrigatoriamente está na 3NF e na 2NF.",
     "card": {
-      "pergunta": "Qual é a relação típica de implicação entre BCNF, 3NF e 2NF?",
-      "resposta": "Existe uma hierarquia: BCNF é mais restritiva que 3NF, que é mais restritiva que 2NF. Logo, se está na BCNF, obrigatoriamente está na 3NF e na 2NF.\n\nNão deve ser confundido com diferença entre 3NF e BCNF e a presença de dependências funcionais que causam redundância."
+      "pergunta": "Hierarquia de formas normais: BCNF → 2NF, 2NF → 3NF, BCNF → 3NF, 3NF → BCNF?",
+      "resposta": "**Gabarito: (B)** Apenas I (BCNF→2NF) e III (BCNF→3NF)\n\nHierarquia (da mais para a menos restritiva):\n$$\\text{BCNF} \\subset \\text{3NF} \\subset \\text{2NF} \\subset \\text{1NF}$$\n\n- **I** ✓: BCNF é mais restritiva que 2NF → implica 2NF\n- **III** ✓: BCNF implica 3NF\n- **II** ✗: 2NF não implica 3NF (pode ter dependências transitivas)\n- **IV** ✗: 3NF não implica BCNF"
     }
   },
   {
@@ -71,8 +71,8 @@
     "resposta": "E",
     "comentario": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3.",
     "card": {
-      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3.\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+      "pergunta": "Analisador léxico com T1, T2, T3 e entrada 'kkbzkbbkkb': sequência de tokens?",
+      "resposta": "**Gabarito: (E)** T3 T3 T3\n\nT3 = `b? z? k k* b` (b opcional, z opcional, um ou mais k, b)\n\n- `kkb` → T3: $\\varepsilon$ + $\\varepsilon$ + kk + b ✓\n- `zkb` → T3: $\\varepsilon$ + z + k + b ✓\n- `bkkb` → T3: b + $\\varepsilon$ + kk + b ✓\n\nUsando **maior prefixo possível** a cada passo."
     }
   },
   {
@@ -90,8 +90,8 @@
     "resposta": "A",
     "comentario": "I está correta (Bottom-up vai das folhas à raiz). V está correta (significado de L, L/R). II está incorreta (Top-down vai da raiz às folhas). IV está incorreta (LR não tem conflito empilhar/empilhar).",
     "card": {
-      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "I está correta (Bottom-up vai das folhas à raiz). V está correta (significado de L, L/R). II está incorreta (Top-down vai da raiz às folhas). IV está incorreta (LR não tem conflito empilhar/empilhar).\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+      "pergunta": "Análise sintática: assertivas I–V sobre bottom-up, top-down, LL(1), conflitos LR, notação LL/LR.",
+      "resposta": "**Gabarito: (A)** Apenas I e V corretas.\n\n- **I** ✓: Bottom-up (LR) percorre das **folhas à raiz**\n- **V** ✓: L = leitura da esquerda; segundo L/R = derivação mais à esquerda/direita\n- **II** ✗: Top-down (LL) vai da **raiz às folhas** (não o contrário)\n- **IV** ✗: LR tem conflitos **Shift/Reduce** e **Reduce/Reduce** (não Shift/Shift)"
     }
   },
   {
@@ -109,8 +109,8 @@
     "resposta": "B",
     "comentario": "Ray Tracing funciona atirando raios da câmera (I) e calculando reflexões e refrações via raios secundários (IV). O Z-buffer é típico de rasterização, não de ray tracing puro.",
     "card": {
-      "pergunta": "O que caracteriza Apenas I e IV estão corretas?",
-      "resposta": "Ray Tracing funciona atirando raios da câmera (I) e calculando reflexões e refrações via raios secundários (IV). O Z-buffer é típico de rasterização, não de ray tracing puro.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Ray tracing: assertivas sobre direção dos raios, z-buffer, materiais difusos, raios secundários.",
+      "resposta": "**Gabarito: (B)** Apenas I e IV corretas.\n\n- **I** ✓: Ray tracing atira raios da câmera em direção ao plano da cena\n- **IV** ✓: raios secundários simulam reflexão/refração (iluminação indireta)\n- **II** ✗: Z-buffer é usado em **rasterização**, não em ray tracing puro\n- **III** ✗: ray tracing é **menos eficiente** para superfícies puramente difusas (path tracing é melhor)"
     }
   },
   {
@@ -128,8 +128,8 @@
     "resposta": "C",
     "comentario": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas.",
     "card": {
-      "pergunta": "O que caracteriza Hemicubos?",
-      "resposta": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas. Hemicubos.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Qual técnica NÃO é usada na remoção de linhas/superfícies ocultas?",
+      "resposta": "**Gabarito: (C)** Hemicubos\n\n**Hemicubos** são usados no cálculo de **fatores de forma** do algoritmo de Radiosidade (iluminação global) — não são técnica de remoção de superfícies ocultas.\n\nTécnicas de remoção de superfícies ocultas: Z-buffer, back-face culling, BSP, bounding volumes."
     }
   },
   {
@@ -147,8 +147,8 @@
     "resposta": "D",
     "comentario": "As assertivas I (aspecto cultural/psicológico) e II (custo de manutenção de repositórios) são barreiras reais ao reúso. A III está incorreta pois o reúso visa justamente reduzir custos e complexidade a longo prazo.",
     "card": {
-      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "As assertivas I (aspecto cultural/psicológico) e II (custo de manutenção de repositórios) são barreiras reais ao reúso. A III está incorreta pois o reúso visa justamente reduzir custos e complexidade a longo prazo.\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+      "pergunta": "Sobre reúso de software: quais assertivas representam fatores que comprometem o reúso?",
+      "resposta": "**Gabarito: (D)** Apenas I e II\n\n- **I** ✓: síndrome \"Não inventado aqui\" — resistência cultural ao reúso de código alheio\n- **II** ✓: custo de criar e manter biblioteca de componentes reutilizáveis\n- **III** ✗: reúso visa **reduzir** complexidade e custo, não aumentar"
     }
   },
   {
@@ -166,8 +166,8 @@
     "resposta": "B",
     "comentario": "Uma RTF deve ter tempo limitado e focar na identificação de defeitos, não na sua correção imediata. Estender indefinidamente a reunião para discutir soluções foge ao propósito de controle de qualidade e gestão de tempo.",
     "card": {
-      "pergunta": "O que caracteriza Definir uma agenda de revisão inicial reuniões com?",
-      "resposta": "Uma RTF deve ter tempo limitado e focar na identificação de defeitos, não na sua correção imediata. Estender indefinidamente a reunião para discutir soluções foge ao propósito de controle de qualidade e gestão de tempo.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Revisão Técnica Formal (RTF): qual prática NÃO é recomendada?",
+      "resposta": "**Gabarito: (B)** Estender as discussões enquanto forem encontrados problemas.\n\nUma RTF deve ter **tempo limitado** e foco em **identificar** defeitos, não em corrigi-los na reunião.\n\nBoas práticas da RTF:\n- Revisar o **produto**, não o autor\n- Identificar problemas sem resolver na hora\n- Limitar participantes e exigir preparação prévia\n- Agenda com tempo definido"
     }
   },
   {
@@ -185,8 +185,8 @@
     "resposta": "B",
     "comentario": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho.",
     "card": {
-      "pergunta": "O que caracteriza Apenas II?",
-      "resposta": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "RNF1 (compatibilidade browsers), RNF2 (4h treinamento, <2 erros/h), RNF3 (resposta <1s). Quais são de usabilidade?",
+      "resposta": "**Gabarito: (B)** Apenas RNF2\n\nSegundo Sommerville, **usabilidade** mede facilidade de aprendizado e uso:\n- **RNF2** ✓: fala em treinamento (tempo de aprendizado) e taxa de erros do usuário\n- **RNF1**: compatibilidade/portabilidade de plataforma\n- **RNF3**: desempenho (tempo de resposta)"
     }
   },
   {
@@ -204,8 +204,8 @@
     "resposta": "B",
     "comentario": "A lógica fuzzy (ou nebulosa) permite graus de verdade entre 0 e 1, sendo ideal para modelar conceitos subjetivos ou imprecisos (como 'quente', 'frio', 'perto').",
     "card": {
-      "pergunta": "O que caracteriza A lógica fuzzy é uma extensão da lógica?",
-      "resposta": "A lógica fuzzy (ou nebulosa) permite graus de verdade entre 0 e 1, sendo ideal para modelar conceitos subjetivos ou imprecisos (como 'quente', 'frio', 'perto'). A lógica fuzzy é uma extensão da lógica clássica que permite representar e raciocinar com informações imprecisas ou vagas.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Qual alternativa descreve corretamente a lógica fuzzy?",
+      "resposta": "**Gabarito: (B)** Extensão da lógica clássica para representar e raciocinar com informações imprecisas.\n\nA **lógica fuzzy** permite **graus de pertinência** entre 0 e 1 (não só V/F):\n- \"Temperatura alta\" pode ter grau 0.7\n- Modela conceitos subjetivos como \"quente\", \"perto\", \"rápido\"\n- Usada em controle, IA, sistemas de decisão\n\n**A errada**: lida com informações contínuas, não binárias."
     }
   },
   {
@@ -223,8 +223,8 @@
     "resposta": "B",
     "comentario": "Árvores de decisão são estruturas de dados não lineares (árvores), e não lineares. Elas mapeiam observações sobre um item para conclusões sobre seu valor alvo.",
     "card": {
-      "pergunta": "O que caracteriza As árvores de decisão são estruturas de dados?",
-      "resposta": "Árvores de decisão são estruturas de dados não lineares (árvores), e não lineares. Elas mapeiam observações sobre um item para conclusões sobre seu valor alvo.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Sobre árvores de decisão: qual afirmativa está INCORRETA?",
+      "resposta": "**Gabarito: (B)** Árvores de decisão são estruturas lineares.\n\nÁrvores de decisão são estruturas **não-lineares** (em árvore), onde:\n- Nós internos = condições/testes\n- Folhas = classes/valores de saída\n\nSão aplicáveis a classificação e regressão, suportam dados categóricos e numéricos, e podem ser combinadas com ensembles (random forest)."
     }
   },
   {
@@ -242,8 +242,8 @@
     "resposta": "C",
     "comentario": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores.",
     "card": {
-      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores.\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+      "pergunta": "Interpolação: vizinho mais próximo (V/F), bilinear usa 2 vizinhos (V/F), bicúbica usa 16 vizinhos (V/F)?",
+      "resposta": "**Gabarito: (C)** V – F – V\n\n- **Vizinho mais próximo** ✓: replica o pixel mais próximo → gera serrilhamento\n- **Bilinear** ✗: usa **4 vizinhos** (grade 2×2), não 2\n- **Bicúbica** ✓: usa **16 vizinhos** (grade 4×4) → melhor qualidade"
     }
   },
   {
@@ -261,8 +261,8 @@
     "resposta": "D",
     "comentario": "O Perceptron é a unidade básica e o modelo mais simples de rede neural, capaz de resolver apenas problemas que podem ser divididos por uma linha reta (linearmente separáveis).",
     "card": {
-      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "O Perceptron é a unidade básica e o modelo mais simples de rede neural, capaz de resolver apenas problemas que podem ser divididos por uma linha reta (linearmente separáveis).\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+      "pergunta": "Modelo mais simples de rede neural, uma unidade, problemas linearmente separáveis, saída binária:",
+      "resposta": "**Gabarito: (D)** Perceptron\n\nO **Perceptron** (Rosenblatt, 1958):\n- Única unidade de processamento\n- Calcula combinação linear das entradas + limiar (threshold)\n- Saída binária (0 ou 1)\n- Limitação: só resolve problemas **linearmente separáveis** (ex: não resolve XOR)"
     }
   },
   {
@@ -280,8 +280,8 @@
     "resposta": "A",
     "comentario": "A máscara 255.255.255.128 deixa 7 bits para hosts (2⁷ = 128 endereços). Subtraindo o endereço da rede e o de broadcast, restam 126 endereços utilizáveis para computadores.",
     "card": {
-      "pergunta": "O que caracteriza 126?",
-      "resposta": "A máscara 255.255.255.128 deixa 7 bits para hosts (2⁷ = 128 endereços). Subtraindo o endereço da rede e o de broadcast, restam 126 endereços utilizáveis para computadores.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Rede com máscara 255.255.255.128: número máximo de computadores?",
+      "resposta": "**Gabarito: (A)** 126\n\nMáscara /25 (255.255.255.128): 7 bits para hosts\n$$2^7 = 128 \\text{ endereços totais}$$\nSubtrair endereço de rede e broadcast:\n$$128 - 2 = \\mathbf{126} \\text{ endereços utilizáveis}$$"
     }
   },
   {
@@ -299,8 +299,8 @@
     "resposta": "E",
     "comentario": "O Switch opera na camada 2 (enlace) e utiliza endereços MAC para encaminhar quadros especificamente para a porta de destino, ao contrário do Hub que faz broadcast para todas as portas.",
     "card": {
-      "pergunta": "O que caracteriza Switch?",
-      "resposta": "O Switch opera na camada 2 (enlace) e utiliza endereços MAC para encaminhar quadros especificamente para a porta de destino, ao contrário do Hub que faz broadcast para todas as portas. Switch.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Dispositivo que atua nas camadas física e enlace e envia mensagens apenas para o destino correto:",
+      "resposta": "**Gabarito: (E)** Switch\n\n| Dispositivo | Camadas | Comportamento |\n|---|---|---|\n| **Switch** | Física + Enlace | Encaminha para porta destino (MAC) |\n| Hub | Física | Broadcast para todas as portas |\n| Roteador | Rede | Encaminha por IP entre redes |\n| Bridge | Enlace | Conecta segmentos de rede |"
     }
   },
   {
@@ -318,8 +318,8 @@
     "resposta": "A",
     "comentario": "O tempo de duração de um bit é 1/b. A distância que o sinal percorre nesse tempo (largura do bit) é Velocidade * Tempo = c * (1/b) = c/b.",
     "card": {
-      "pergunta": "O que caracteriza cb?",
-      "resposta": "O tempo de duração de um bit é 1/b. A distância que o sinal percorre nesse tempo (largura do bit) é Velocidade * Tempo = c * (1/b) = c/b.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Expressão para a largura (comprimento) de 1 bit no canal:",
+      "resposta": "**Gabarito: (A)** $c/b$\n\nLargura de um bit = distância que o sinal percorre durante a transmissão de 1 bit:\n\n$$\\text{largura} = \\text{velocidade} \\times \\text{duração do bit} = c \\times \\frac{1}{b} = \\frac{c}{b}$$\n\nOnde $c$ = velocidade de propagação e $b$ = taxa de transmissão (bits/s)."
     }
   },
   {
@@ -337,8 +337,8 @@
     "resposta": "A",
     "comentario": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas).",
     "card": {
-      "pergunta": "O que caracteriza plana?",
-      "resposta": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas).\n\nNão deve ser confundido com diferenças entre bloqueio pessimista/otimista e políticas de serialização."
+      "pergunta": "Transação cliente que conclui cada requisição antes de passar para a próxima (sequencial):",
+      "resposta": "**Gabarito: (A)** Transação plana\n\n**Transação plana**: estrutura sequencial simples — o cliente abre, faz requisições uma a uma e fecha.\n\n- **Aninhada**: subtransações paralelas ou hierárquicas\n- **Em duas fases**: protocolo de bloqueio (2PL), não de estrutura"
     }
   },
   {
@@ -356,8 +356,8 @@
     "resposta": "B",
     "comentario": "Chamadas assíncronas são não-bloqueantes: o emissor continua sua execução imediatamente após o sistema operacional aceitar o pedido de envio, sem esperar pela resposta do receptor.",
     "card": {
-      "pergunta": "O que caracteriza Uma invocação assíncrona é aquela que é feita?",
-      "resposta": "Chamadas assíncronas são não-bloqueantes: o emissor continua sua execução imediatamente após o sistema operacional aceitar o pedido de envio, sem esperar pela resposta do receptor. Uma invocação assíncrona é aquela que é feita com o auxílio de uma chamada não bloqueante, a qual retorna assim que a mensagem de requisição da invocação tenha sido criada e esteja pronta para o envio.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis ou confundir prevenção com detecção/recuperação."
+      "pergunta": "Sobre sistemas operacionais distribuídos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (B)** Invocação assíncrona = chamada não-bloqueante que retorna assim que a mensagem estiver pronta.\n\n- **B** ✓: assíncrono = não espera resposta; retorna ao chamar assim que o pedido é aceito\n- **A** ✗: **preemptivo** suspende a thread arbitrariamente; não-preemptivo a deixa rodar até bloquear\n- **C** ✗: gerência de memória trata alocação de RAM, não comunicação entre threads\n- **D** ✗: descreve o comportamento **não-preemptivo** (executa até bloquear)"
     }
   },
   {
@@ -375,8 +375,8 @@
     "resposta": "C",
     "comentario": "A comunicação em grupo via multicast permite enviar dados para múltiplos destinatários de uma só vez, sendo um pilar da comunicação indireta e sistemas de eventos/mensageria.",
     "card": {
-      "pergunta": "Qual critério normalmente determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "A comunicação em grupo via multicast permite enviar dados para múltiplos destinatários de uma só vez, sendo um pilar da comunicação indireta e sistemas de eventos/mensageria. Na comunicação em grupo , implementa comunicação por multicast , na qual uma mensag em é enviada para todos os membros do grupo por meio de uma única operação.\n\nNão deve ser confundido com máscaras de sub-rede, roteamento por política vs. especificidade do prefixo, ou rotas estáticas."
+      "pergunta": "Comunicação indireta em sistemas distribuídos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (C)** Comunicação em grupo implementa multicast: mensagem enviada para todos os membros por uma única operação.\n\n- **C** ✓: multicast = um envio para N destinatários → base da comunicação em grupo\n- **A** ✗: confunde comunicação **direta** com indireta (invertido)\n- **B** ✗: descreve **desacoplamento temporal** (não espacial)\n- **D** ✗: descreve **desacoplamento espacial** (não temporal)"
     }
   }
 ]

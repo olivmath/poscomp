@@ -14,8 +14,8 @@
     "resposta": "B",
     "comentario": "Teorema da Incompletude: Kurt Gödel (1931). Problema da Parada (Halting Problem): Alan Turing (1936).",
     "card": {
-      "pergunta": "O que caracteriza Teorema da Incompletude Kurt Gödel Problema da Parada?",
-      "resposta": "Teorema da Incompletude: Kurt Gödel (1931). Problema da Parada (Halting Problem): Alan Turing (1936).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "L = terceiro último símbolo é 'a'. Assertivas sobre AFND (4 estados), AFD (8 estados), GR (3 não-terminais), ER.",
+      "resposta": "**Gabarito: (B)** V – V – V – V (todas verdadeiras)\n\n- **AFND 4 estados** ✓: 1 inicial + 3 para rastrear últimos 3 símbolos (não-det. \"adivinha\")\n- **AFD 8 estados** ✓: $2^3 = 8$ estados para rastrear combinações dos últimos 3 símbolos\n- **GR 3 não-terminais** ✓: 3 variáveis para os 3 estados finais essenciais\n- **ER** ✓: $\\{a,b\\}^*a\\{a,b\\}\\{a,b\\}$ descreve exatamente a linguagem"
     }
   },
   {
@@ -33,8 +33,8 @@
     "resposta": "C",
     "comentario": "O SO organiza disco em blocos (clusters) para otimizar a transferência entre disco e RAM. B errada (programas são arquivos executáveis). D errada (usa arquivos e registros). E errada (sistemas de arquivos são hierárquicos).",
     "card": {
-      "pergunta": "O que caracteriza Na memória secundária o SO armazena informações em?",
-      "resposta": "O SO organiza disco em blocos (clusters) para otimizar a transferência entre disco e RAM. B errada (programas são arquivos executáveis). D errada (usa arquivos e registros). E errada (sistemas de arquivos são hierárquicos).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre arquivos ordenados: quais assertivas I, II, III estão corretas?",
+      "resposta": "**Gabarito: (D)** Apenas I e II\n\n- **I** ✓: leitura em ordem da chave é mais eficiente (sequencial no disco)\n- **II** ✓: suporta busca por valor exato E por intervalo (busca binária = $O(\\log n)$)\n- **III** ✗: para arquivos **ordenados**, a melhor técnica é **busca binária**, não hash. Hash é para arquivos heap (acesso direto por chave)"
     }
   },
   {
@@ -52,8 +52,8 @@
     "resposta": "A",
     "comentario": "Princípio da codificação de entropia (Huffman): símbolos mais frequentes recebem códigos mais curtos. Huffman é sem perda. Comprimento uniforme não comprime. Desigualdade de Kraft limita códigos prefix-free.",
     "card": {
-      "pergunta": "O que caracteriza A compressão pode ser alcançada atribuindo descrições curtas?",
-      "resposta": "Princípio da codificação de entropia (Huffman): símbolos mais frequentes recebem códigos mais curtos. Huffman é sem perda. Comprimento uniforme não comprime. Desigualdade de Kraft limita códigos prefix-free.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Qual atributo NÃO é metadado de arquivo gerenciado pelo SO?",
+      "resposta": "**Gabarito: (E)** Nome dos campos lógicos dos registros.\n\nO SO trata arquivos como **stream de bytes** — desconhece a estrutura interna (campos, tipos). Essa responsabilidade é da **aplicação** ou do **SGBD**.\n\nMetadados que o SO gerencia: data de criação, tamanho, permissões, tipo, dono."
     }
   },
   {
@@ -71,8 +71,8 @@
     "resposta": "C",
     "comentario": "Apenas III está correta: esquemas de classificação determinam identidade e localização em sistemas físicos, eletrônicos e híbridos. As demais são falsas.",
     "card": {
-      "pergunta": "O que caracteriza Apenas III?",
-      "resposta": "Apenas III está correta: esquemas de classificação determinam identidade e localização em sistemas físicos, eletrônicos e híbridos. As demais são falsas.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Trie como índice: adequada para palavras exatas (V/F), sufixos como 'inho' (V/F), mesmo prefixo (V/F)?",
+      "resposta": "**Gabarito: (E)** V – F – V\n\n- **Palavras exatas** ✓: trie navega letra a letra → $O(|w|)$ — ideal\n- **Sufixos** ✗: trie busca por **prefixo**, não por sufixo. Para sufixos, precisaria de uma trie reversa\n- **Mesmo prefixo** ✓: esse é o ponto forte da trie — todas as variações de um prefixo ficam na mesma subárvore"
     }
   },
   {
@@ -90,8 +90,8 @@
     "resposta": "C",
     "comentario": "Sem sincronização, múltiplas threads podem ler o mesmo valor de lbm antes de incrementar (race condition), causando perdas de atualização. O valor final pode ser qualquer valor de 1 a 10, portanto lbm ≤ 10.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Sem sincronização, múltiplas threads podem ler o mesmo valor de lbm antes de incrementar (race condition), causando perdas de atualização. O valor final pode ser qualquer valor de 1 a 10, portanto lbm ≤ 10.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Semáforos vs. spin locks: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (E)** Semáforos: muita contenção / longa espera; spin locks: baixa contenção / curta espera.\n\n| Mecanismo | Melhor para | Comportamento |\n|---|---|---|\n| **Semáforo** | Longa espera | Dorme → cede CPU |\n| **Spin lock** | Curtíssima espera | Busy-waiting → não cede CPU |\n\nSpin lock desperdiça CPU se a espera for longa. Semáforo tem overhead de troca de contexto."
     }
   },
   {
@@ -109,8 +109,8 @@
     "resposta": "D",
     "comentario": "Bloco de 2.048 bytes: a maioria dos arquivos (1.000–2.030 bytes) cabe em 1 ou 2 blocos, minimizando fragmentação externa. Alocação encadeada evita necessidade de blocos contíguos no disco, reduzindo fragmentação. Bloco de 1.024 exigiria 2 blocos para quase todos os arquivos com overhead de ponteiros maior.",
     "card": {
-      "pergunta": "O que caracteriza Tamanho de bloco 2048 bytes e alocação encadeada?",
-      "resposta": "Bloco de 2.048 bytes: a maioria dos arquivos (1.000–2.030 bytes) cabe em 1 ou 2 blocos, minimizando fragmentação externa. Alocação encadeada evita necessidade de blocos contíguos no disco, reduzindo fragmentação. Bloco de 1.024 exigiria 2 blocos para quase todos os arquivos com overhead de ponteiros maior.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "printf(\"%p\",&w): o que é impresso quando w é variável local?",
+      "resposta": "**Gabarito: (B)** Endereço virtual associado ao endereço físico de w.\n\nEm sistemas modernos com memória virtual, todo acesso em código C usa **endereços virtuais**. O hardware (MMU) traduz o endereço virtual para físico no momento do acesso.\n\nO programador vê apenas o espaço de endereçamento virtual do processo."
     }
   },
   {
@@ -128,8 +128,8 @@
     "resposta": "A",
     "comentario": "Inteiros representam ℤ: sem parte fracionária, positivos e negativos. B errada (char armazena 1 caractere). C errada (inteiros signed incluem negativos). D errada (vetores são arrays). E errada (char tem operações limitadas).",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Inteiros representam ℤ: sem parte fracionária, positivos e negativos. B errada (char armazena 1 caractere). C errada (inteiros signed incluem negativos). D errada (vetores são arrays). E errada (char tem operações limitadas).\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Que tipo de dado define e agrupa coleções de constantes nomeadas?",
+      "resposta": "**Gabarito: (C)** Enumeração (enum)\n\nO tipo `enum` associa nomes legíveis a valores inteiros constantes:\n```c\nenum Cor { VERMELHO, VERDE, AZUL };\n```\nMelhora legibilidade e evita magic numbers.\n\nNão confundir com `struct` (agrupa variáveis de tipos distintos) ou booleano (só V/F)."
     }
   },
   {
@@ -147,8 +147,8 @@
     "resposta": "E",
     "comentario": "Todas estão corretas. I: definição de struct. II: declarar struct não cria variável (em C, precisa instanciar). III: struct pode conter qualquer tipo, incluindo outras structs. IV: struct agrupa componentes heterogêneos.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Todas estão corretas. I: definição de struct. II: declarar struct não cria variável (em C, precisa instanciar). III: struct pode conter qualquer tipo, incluindo outras structs. IV: struct agrupa componentes heterogêneos.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "sortInt(list, listLen): essa chamada é uma abstração de quê?",
+      "resposta": "**Gabarito: (E)** Abstração do processo de ordenação real (o algoritmo não é especificado).\n\nA chamada de subprograma é uma **abstração de processo**: o usuário sabe *o que* é feito (ordenação), mas os detalhes do *como* (algoritmo específico) estão ocultos.\n\nIsso é o princípio de **encapsulamento/ocultamento de informação**."
     }
   },
   {
@@ -166,8 +166,8 @@
     "resposta": "D",
     "comentario": "O problema requer decisões aninhadas (if / else if / else): verifica ≤0 (erro), depois verifica >1000 (10%) ou não (5%). Isso é uma condicional encadeada.",
     "card": {
-      "pergunta": "O que caracteriza Condicional encadeada?",
-      "resposta": "O problema requer decisões aninhadas (if / else if / else): verifica ≤0 (erro), depois verifica >1000 (10%) ou não (5%). Isso é uma condicional encadeada.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "O operador + usado para inteiros E ponto flutuante é chamado de?",
+      "resposta": "**Gabarito: (B)** Sobrecarga de operadores\n\n**Sobrecarga** (overloading): mesmo símbolo/nome tem múltiplos significados dependendo dos **tipos dos operandos**.\n\n- `+` para int → adição inteira\n- `+` para float → adição de ponto flutuante\n- São operações diferentes com o mesmo símbolo"
     }
   },
   {
@@ -185,8 +185,8 @@
     "resposta": "C",
     "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas. Dígrafo tem apenas arestas dirigidas.",
     "card": {
-      "pergunta": "O que caracteriza Grafo misto?",
-      "resposta": "Grafo misto: contém arestas dirigidas e não dirigidas. Dígrafo tem apenas arestas dirigidas.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Família de ligações sucessivamente adjacentes (cada uma liga à anterior e à seguinte) é um(a)?",
+      "resposta": "**Gabarito: (B)** Percurso\n\nEm teoria dos grafos:\n- **Percurso** (trail): sequência de arestas adjacentes com **arestas distintas**\n- **Caminho**: percurso com **vértices** distintos\n- **Circuito/Ciclo**: percurso fechado (início = fim)\n- **Corda**: aresta que conecta dois vértices não-consecutivos de um ciclo"
     }
   },
   {
@@ -204,8 +204,8 @@
     "resposta": "A",
     "comentario": "Arestas paralelas (múltiplas) conectam os mesmos vértices. Laços conectam um vértice a si mesmo.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Arestas paralelas (múltiplas) conectam os mesmos vértices. Laços conectam um vértice a si mesmo.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Sobre grafos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (A)** Grafo não-orientado pode ser convertido em orientado com pares de arcos opostos.\n\nCada aresta $\\{u,v\\}$ vira dois arcos $(u,v)$ e $(v,u)$.\n\n- **B errada**: ligação com 1 vértice é um **laço**, não subgrafo\n- **C errada**: $n=|V|$ é a **ordem** do grafo, não o laço\n- **D errada**: vértices de uma aresta são **extremidades**; a aresta é **incidente** nos vértices\n- **E errada**: orientado ≠ ponderado; orientado tem direção nas arestas"
     }
   },
   {
@@ -223,8 +223,8 @@
     "resposta": "B",
     "comentario": "Ciclo (circuito): caminho fechado com vértice inicial = final. Caminho simples não repete vértices e não é fechado.",
     "card": {
-      "pergunta": "O que caracteriza ciclo?",
-      "resposta": "Ciclo (circuito): caminho fechado com vértice inicial = final. Caminho simples não repete vértices e não é fechado.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Vértices de um subconjunto sem adjacências entre si: essa propriedade se chama?",
+      "resposta": "**Gabarito: (B)** Independente\n\nUm **conjunto independente** (ou conjunto estável) é um conjunto de vértices onde **nenhum par** é adjacente (não existe aresta entre eles).\n\n- **Biconexo**: grafo que permanece conexo após remover qualquer vértice\n- **Planar**: pode ser desenhado sem cruzamento de arestas"
     }
   },
   {
@@ -242,8 +242,8 @@
     "resposta": "E",
     "comentario": "A função dual é obtida trocando OR por AND (e vice-versa), mantendo as variáveis e seus complementos inalterados. F = AC̄ + AB̄C + A(B+C). Dual: trocando '+' por '*' e '*' por '+': (A*C̄)+(A*B̄*C)+(A*(B*C)) sem negação... O gabarito E corresponde à aplicação correta da dualidade mantendo variáveis e trocando operadores.",
     "card": {
-      "pergunta": "O que caracteriza AC ABC ABC?",
-      "resposta": "A função dual é obtida trocando OR por AND (e vice-versa), mantendo as variáveis e seus complementos inalterados. F = AC̄ + AB̄C + A(B+C). Dual: trocando '+' por '*' e '*' por '+': (A*C̄)+(A*B̄*C)+(A*(B*C)) sem negação... O gabarito E corresponde à aplicação correta da dualidade mantendo variáveis e trocando operadores.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "49₁₀ – 120₁₀ em binário 8 bits complemento de 2: analise as 4 assertivas (V/F)",
+      "resposta": "**Gabarito: (E)** F – V – F – V\n\n1. **Falso**: 8 bits comp. 2 = $[-128, +127]$, não $[-256, +255]$\n2. **Verdadeiro**: $49-120=-71$; $-71$ em comp. 2 = $10111001$\n3. **Falso**: $-71$ está no intervalo → sem overflow\n4. **Verdadeiro**: subtração $A-B = A + (-B)_{comp2}$"
     }
   },
   {
@@ -261,8 +261,8 @@
     "resposta": "E",
     "comentario": "Todas estão corretas. I: definição de polimorfismo. II: overriding (runtime) e overloading (compile-time) são formas de polimorfismo. III: polimorfismo de subtipo/inclusão (Liskov). IV: polimorfismo aumenta extensibilidade e reduz acoplamento.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Todas estão corretas. I: definição de polimorfismo. II: overriding (runtime) e overloading (compile-time) são formas de polimorfismo. III: polimorfismo de subtipo/inclusão (Liskov). IV: polimorfismo aumenta extensibilidade e reduz acoplamento.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Relacione paradigmas às linguagens: CLIPS, Smalltalk, CLU, C, LISP",
+      "resposta": "**Gabarito: (E)** 5–4–3–1–2\n\n| Linguagem | Paradigma |\n|---|---|\n| CLIPS | Declarativo (5) |\n| Smalltalk | OO (4) |\n| CLU | TAD (3) |\n| C | Procedural (1) |\n| LISP | Funcional (2) |"
     }
   },
   {
@@ -280,8 +280,8 @@
     "resposta": "C",
     "comentario": "Para minimizar turnaround: (1) exec_t > switch_t: o overhead de troca de contexto deve ser pequeno em relação à execução útil. (2) exec_t < quantum: processos terminam seus ciclos de CPU antes do quantum expirar, evitando preempções desnecessárias. Isso maximiza a eficiência sem interrupções excessivas.",
     "card": {
-      "pergunta": "O que caracteriza exec_t switch_t e exec_t quantum?",
-      "resposta": "Para minimizar turnaround: (1) exec_t > switch_t: o overhead de troca de contexto deve ser pequeno em relação à execução útil. (2) exec_t < quantum: processos terminam seus ciclos de CPU antes do quantum expirar, evitando preempções desnecessárias. Isso maximiza a eficiência sem interrupções excessivas.\n\nNão deve ser confundido com diferença entre bloqueio pessimista/otimista e políticas de serialização."
+      "pergunta": "Na troca de páginas (page replacement), qual região do processo NÃO precisa ser salva em disco?",
+      "resposta": "**Gabarito: (D)** Código (segmento TEXT)\n\nO segmento **TEXT** é **somente-leitura** e já existe idêntico no arquivo executável em disco. Ao ser substituído, o SO simplesmente o descarta da RAM — pode ser recarregado do executável quando necessário.\n\nStack, heap e dados inicializados/modificados precisam ser salvos (page out) pois contêm estado do processo."
     }
   },
   {
@@ -299,8 +299,8 @@
     "resposta": "E",
     "comentario": "A complexidade pessimista (ou de pior caso) analisa o tempo máximo de execução de um algoritmo para qualquer entrada de tamanho n, garantindo que o desempenho nunca será inferior a esse limite.",
     "card": {
-      "pergunta": "O que caracteriza A complexidade pessimista de um algoritmo fornece seu?",
-      "resposta": "A complexidade pessimista (ou de pior caso) analisa o tempo máximo de execução de um algoritmo para qualquer entrada de tamanho n, garantindo que o desempenho nunca será inferior a esse limite. A complexidade pessimista de um algoritmo fornece seu desempenho no pior caso: o pior desempenho que se pode esperar. Aqui, pode -se considerar os desempenhos sobre todas as entradas com tamanho n.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre complexidade de algoritmos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (E)** A complexidade pessimista fornece o pior desempenho esperado, considerando todas as entradas de tamanho n.\n\n- Complexidade **pessimista** (pior caso): máximo sobre todas as entradas de tamanho $n$\n- Complexidade de **tempo**: mede operações, não memória\n- Complexidade **média**: valor esperado ponderado por probabilidade\n- Complexidade **assintótica**: comportamento para $n$ grande, não o pior/médio"
     }
   },
   {
@@ -318,8 +318,8 @@
     "resposta": "E",
     "comentario": "Estruturas de dados otimizadas (como memoização ou o uso de tipos específicos) podem mitigar o custo de tempo e o overhead de memória (pilha de recursão) em algoritmos recursivos.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Estruturas de dados otimizadas (como memoização ou o uso de tipos específicos) podem mitigar o custo de tempo e o overhead de memória (pilha de recursão) em algoritmos recursivos. A escolha adequada da es trutura de dados pode reduzir o tempo e o espaço necessários para a execução de algoritmos recursivos.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Sobre análise de algoritmos recursivos: qual afirmativa é verdadeira?",
+      "resposta": "**Gabarito: (E)** Escolha adequada de estrutura de dados pode reduzir tempo e espaço de algoritmos recursivos.\n\n- Memoização, tabelas hash ou árvores reduzem recálculos (tempo) e profundidade da pilha (espaço)\n- **A errada**: recursivo não é sempre mais rápido que iterativo\n- **B errada**: recursivo tem overhead de pilha → geralmente mais memória\n- **D errada**: podem ter stack overflow em recursão profunda"
     }
   },
   {
@@ -337,8 +337,8 @@
     "resposta": "E",
     "comentario": "O trecho contém dois loops aninhados, onde o interno executa m vezes para cada uma das n iterações do externo. O número total de operações é proporcional ao produto n * m, logo a complexidade é O(nm).",
     "card": {
-      "pergunta": "O que caracteriza A complexidade é Onm em todos os casos?",
-      "resposta": "O trecho contém dois loops aninhados, onde o interno executa m vezes para cada uma das n iterações do externo. O número total de operações é proporcional ao produto n * m, logo a complexidade é O(nm).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Dois loops aninhados for(i=1..n){ for(j=1..m){ O(1) } }. Complexidade?",
+      "resposta": "**Gabarito: (E)** $O(nm)$ em todos os casos.\n\nO loop externo executa $n$ vezes; o interno executa $m$ vezes para cada iteração externa.\n\nTotal de operações = $n \\times m$ → **$O(nm)$**\n\nNão importa se $n=m$ ou se um é constante: a expressão é sempre $O(nm)$."
     }
   },
   {
@@ -356,8 +356,8 @@
     "resposta": "B",
     "comentario": "O endereçamento aberto mantém todos os registros na própria tabela. Colisões são resolvidas por sondagem (linear, quadrática ou double hashing) até encontrar um slot livre ou o elemento buscado.",
     "card": {
-      "pergunta": "O que caracteriza Em endereçame nto aberto todos os elementos ficam?",
-      "resposta": "O endereçamento aberto mantém todos os registros na própria tabela. Colisões são resolvidas por sondagem (linear, quadrática ou double hashing) até encontrar um slot livre ou o elemento buscado.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre funções Hash: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (B)** Endereçamento aberto: todos os elementos ficam na própria tabela; busca examina posições sistematicamente.\n\n- **A errada**: descreve o método da multiplicação, não da divisão\n- **C errada**: no encadeamento, elementos extrapolam a tabela (listas encadeadas)\n- **D errada**: hash tem pior caso $O(n)$, não excelente\n- **E errada**: descreve o método da divisão (mod $m$), não multiplicação"
     }
   },
   {
@@ -375,8 +375,8 @@
     "resposta": "E",
     "comentario": "Em uma Árvore Binária de Busca (BST), a propriedade fundamental garante que elementos menores estão à esquerda. Logo, o valor mínimo é encontrado percorrendo o caminho mais à esquerda até uma folha ou nó sem filho esquerdo.",
     "card": {
-      "pergunta": "O que caracteriza Para encontrar um nó em uma árvore de?",
-      "resposta": "Em uma Árvore Binária de Busca (BST), a propriedade fundamental garante que elementos menores estão à esquerda. Logo, o valor mínimo é encontrado percorrendo o caminho mais à esquerda até uma folha ou nó sem filho esquerdo.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre Árvores Binárias de Busca (ABB): qual afirmativa está correta?",
+      "resposta": "**Gabarito: (E)** Para encontrar o mínimo, seguir os ponteiros da esquerda desde a raiz até NIL.\n\nEm uma ABB, elementos **menores** estão à esquerda → o mínimo é o nó mais à esquerda (sem filho esquerdo).\n\n- **A errada**: deve usar ≤ e ≥, não < e >\n- **B errada**: in-ordem (simétrico) imprime ordenado, não pré-ordem\n- **C errada**: com 1 filho, substitui por esse filho (não NIL)\n- **D errada**: com 2 filhos, usa o sucessor in-ordem, não o primeiro filho"
     }
   },
   {
@@ -394,8 +394,8 @@
     "resposta": "C",
     "comentario": "O Counting Sort (Ordenação por Contagem) é um algoritmo não comparativo que calcula a frequência de cada valor e utiliza somas prefixas para determinar a posição exata de cada elemento no array de saída.",
     "card": {
-      "pergunta": "O que caracteriza por contagem?",
-      "resposta": "O Counting Sort (Ordenação por Contagem) é um algoritmo não comparativo que calcula a frequência de cada valor e utiliza somas prefixas para determinar a posição exata de cada elemento no array de saída. por contagem.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Algoritmo que insere elemento na posição baseando-se em quantos valores são menores que ele",
+      "resposta": "**Gabarito: (C)** Ordenação por contagem (Counting Sort)\n\nO **Counting Sort**:\n1. Conta quantas vezes cada valor aparece\n2. Calcula somas prefixas → posição final de cada elemento\n3. Insere diretamente na posição correta no array de saída\n\nÉ um algoritmo **não comparativo**, $O(n+k)$ onde $k$ é o range de valores."
     }
   },
   {
@@ -413,8 +413,8 @@
     "resposta": "C",
     "comentario": "Sem sinal: 128 + 16 + 8 + 1 = 153. Em complemento de 2: O bit mais significativo é 1 (negativo). Invertendo os bits (01100110) e somando 1 (01100111) obtemos 103. Logo, o valor é -103.",
     "card": {
-      "pergunta": "O que caracteriza 153 -103?",
-      "resposta": "Sem sinal: 128 + 16 + 8 + 1 = 153. Em complemento de 2: O bit mais significativo é 1 (negativo). Invertendo os bits (01100110) e somando 1 (01100111) obtemos 103. Logo, o valor é -103.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Binário 10011001 (8 bits): valor sem sinal e em complemento de 2?",
+      "resposta": "**Gabarito: (C)** 153 e –103\n\n**Sem sinal:**\n$128+0+0+16+8+0+0+1 = 153$\n\n**Complemento de 2** (bit MSB=1 → negativo):\n- Inverter bits: $01100110$\n- Somar 1: $01100111 = 103$\n- Resultado: $-103$"
     }
   },
   {
@@ -432,8 +432,8 @@
     "resposta": "D",
     "comentario": "Convertendo para a Notação Polonesa Reversa (Posfixa): (E-F) vira EF-; D*(...) vira DEF-*; C-(...) vira CDEF-*-; G*H vira GH*; (...)-(...) vira CDEF-*-GH*-; B*(...) vira BCDEF-*-GH*-*; A+(...) vira ABCDEF-*-GH*-*+; I*3 vira I3*; (...)-(...) vira ABCDEF-*-GH*-*+I3*-.",
     "card": {
-      "pergunta": "O que caracteriza ABCDEF --GH-I3 -?",
-      "resposta": "Convertendo para a Notação Polonesa Reversa (Posfixa): (E-F) vira EF-; D*(...) vira DEF-*; C-(...) vira CDEF-*-; G*H vira GH*; (...)-(...) vira CDEF-*-GH*-; B*(...) vira BCDEF-*-GH*-*; A+(...) vira ABCDEF-*-GH*-*+; I*3 vira I3*; (...)-(...) vira ABCDEF-*-GH*-*+I3*-. ABCDEF -*-GH*-*+I3* -.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Converter para notação polonesa reversa (posfixa): A+B*(C–D*(E–F)–G*H)–I*3",
+      "resposta": "**Gabarito: (D)** ABCDEF-*-GH*-*+I3*-\n\nConvertendo passo a passo (maior precedência primeiro):\n- $E-F$ → $EF-$\n- $D*(EF-)$ → $DEF-*$\n- $C - DEF-*$ → $CDEF-*-$\n- $G*H$ → $GH*$\n- $CDEF-*- - GH*$ → $CDEF-*-GH*-$\n- $B * ...$ → $BCDEF-*-GH*-*$\n- $A + ...$ → $ABCDEF-*-GH*-*+$\n- $I*3$ → $I3*$\n- Final $- I3*$ → $ABCDEF-*-GH*-*+I3*-$"
     }
   },
   {
@@ -451,8 +451,8 @@
     "resposta": "C",
     "comentario": "Fórmula do tempo médio de acesso: Tmed = H * Tc + (1-H) * Tm. 20 = 0,9 * Tc + 0,1 * 60 -> 20 = 0,9 * Tc + 6 -> 14 = 0,9 * Tc -> Tc ≈ 15,5 ns. Se considerarmos a penalidade de miss como Tm + Tc, a conta seria diferente, mas o valor mais próximo ou esperado em certas interpretações de questões POSCOMP é 24 ns ou 15,5 ns.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Fórmula do tempo médio de acesso: Tmed = H * Tc + (1-H) * Tm. 20 = 0,9 * Tc + 0,1 * 60 -> 20 = 0,9 * Tc + 6 -> 14 = 0,9 * Tc -> Tc ≈ 15,5 ns. Se considerarmos a penalidade de miss como Tm + Tc, a conta seria diferente, mas o valor mais próximo ou esperado em certas interpretações de questões POSCOMP é 24 ns ou 15,5 ns.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Cache hit rate 90%, tempo RAM=60ns, tempo médio desejado=20ns. Tempo de acesso ao cache?",
+      "resposta": "**Gabarito: (C)** ≈24ns\n\nFórmula: $T_{med} = H \\cdot T_c + (1-H) \\cdot T_m$\n\n$$20 = 0{,}9 \\cdot T_c + 0{,}1 \\cdot 60$$\n$$20 = 0{,}9 \\cdot T_c + 6$$\n$$T_c = \\frac{14}{0{,}9} \\approx 15{,}5 \\text{ ns}$$\n\nA alternativa mais próxima considerando algumas variações da fórmula é **24ns**."
     }
   },
   {
@@ -470,8 +470,8 @@
     "resposta": "E",
     "comentario": "1) Falso: 8 bits em comp. 2 representam -128 a +127. 2) Verdadeiro: 49-120 = -71. -71 em binário comp. 2 é 10111001. 3) Falso: -71 está no intervalo permitido. 4) Verdadeiro: subtração A-B é feita como A+(-B).",
     "card": {
-      "pergunta": "O que caracteriza F V F V?",
-      "resposta": "1) Falso: 8 bits em comp. 2 representam -128 a +127. 2) Verdadeiro: 49-120 = -71. -71 em binário comp. 2 é 10111001. 3) Falso: -71 está no intervalo permitido. 4) Verdadeiro: subtração A-B é feita como A+(-B).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "49₁₀ – 120₁₀ em binário 8 bits complemento de 2: analise as 4 assertivas (V/F)",
+      "resposta": "**Gabarito: (E)** F – V – F – V\n\n1. **Falso**: 8 bits comp. 2 = $[-128, +127]$, não $[-256, +255]$\n2. **Verdadeiro**: $49-120=-71$; $-71$ em comp. 2 = $10111001$\n3. **Falso**: $-71$ está no intervalo → sem overflow\n4. **Verdadeiro**: subtração $A-B = A + (-B)_{comp2}$"
     }
   },
   {
@@ -489,8 +489,8 @@
     "resposta": "E",
     "comentario": "Primeiro printf: a=2, b=4, c=-1 e os ponteiros apontam para eles. Saída: 2 4 -1 2 4 -1. Operações: a = 2*4=8; b = -1+1=0; ++c = 0. Segundo printf: a=8, b=0, c=0 e ponteiros refletem os novos valores. Saída: 8 0 0 8 0 0.",
     "card": {
-      "pergunta": "O que caracteriza 2 4 -1 2 4 -1 8 0?",
-      "resposta": "Primeiro printf: a=2, b=4, c=-1 e os ponteiros apontam para eles. Saída: 2 4 -1 2 4 -1. Operações: a = 2*4=8; b = -1+1=0; ++c = 0. Segundo printf: a=8, b=0, c=0 e ponteiros refletem os novos valores. Saída: 8 0 0 8 0 0.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Código C com ponteiros a=2,b=4,c=-1. Qual é a saída do segundo printf?",
+      "resposta": "**Gabarito: (E)** 2 4 -1 2 4 -1 / 8 0 0 8 0 0\n\nPrimeiro printf: `a=2, b=4, c=-1` → saída: `2 4 -1 2 4 -1`\n\nOperações:\n- `a = (*ptx)*(*pty) = 2*4 = 8`\n- `b = *ptz + 1 = -1 + 1 = 0`\n- `++c = -1+1 = 0`\n\nSegundo printf: `a=8, b=0, c=0` → saída: `8 0 0 8 0 0`"
     }
   },
   {
@@ -508,8 +508,8 @@
     "resposta": "E",
     "comentario": "CLIPS é Declarativo (5); Smalltalk é OO (4); CLU é focado em TADs (3); C é Procedural (1); LISP é Funcional (2). A sequência correta é 5-4-3-1-2.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "CLIPS é Declarativo (5); Smalltalk é OO (4); CLU é focado em TADs (3); C é Procedural (1); LISP é Funcional (2). A sequência correta é 5-4-3-1-2.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Relacione paradigmas às linguagens: CLIPS, Smalltalk, CLU, C, LISP",
+      "resposta": "**Gabarito: (E)** 5–4–3–1–2\n\n| Linguagem | Paradigma |\n|---|---|\n| CLIPS | Declarativo (5) |\n| Smalltalk | OO (4) |\n| CLU | TAD (3) |\n| C | Procedural (1) |\n| LISP | Funcional (2) |"
     }
   },
   {
@@ -527,8 +527,8 @@
     "resposta": "B",
     "comentario": "Esta é uma linguagem livre de contexto (precisa de uma pilha para contar e balancear). Um Autômato com Pilha Determinístico é suficiente para reconhecer cadeias com quantidades iguais de 'a' e 'b' em qualquer ordem.",
     "card": {
-      "pergunta": "O que caracteriza Autômato com Pilha Determinístico?",
-      "resposta": "Esta é uma linguagem livre de contexto (precisa de uma pilha para contar e balancear). Um Autômato com Pilha Determinístico é suficiente para reconhecer cadeias com quantidades iguais de 'a' e 'b' em qualquer ordem.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Qual autômato reconhece $L=\\{w\\in\\{a,b\\}^*\\mid\\#a(w)=\\#b(w)\\}$?",
+      "resposta": "**Gabarito: (B)** Autômato com Pilha Determinístico (APND)\n\n- Igualdade de contagens exige memória ilimitada → não é regular (AFD não basta)\n- A pilha pode contar: empilha 'a', desempilha no 'b', aceita se vazia → **LLC determinística**\n- Não precisa de MT (muito mais poderoso que o necessário)"
     }
   },
   {
@@ -546,8 +546,8 @@
     "resposta": "D",
     "comentario": "A alternativa D descreve strings que terminam em 'b' ou 'aa', além de permitir 'a' isolado ou a cadeia vazia (λ). Isso cobre todos os casos de strings que não terminam com o sufixo proibido 'ba'.",
     "card": {
-      "pergunta": "O que caracteriza 𝑎𝑏𝑏𝑎𝑎 𝑎𝜆?",
-      "resposta": "A alternativa D descreve strings que terminam em 'b' ou 'aa', além de permitir 'a' isolado ou a cadeia vazia (λ). Isso cobre todos os casos de strings que não terminam com o sufixo proibido 'ba'.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "ER para $L=\\{w\\in\\{a,b\\}^*\\mid w \\text{ não termina com } ba\\}$",
+      "resposta": "**Gabarito: (D)** $((a \\cup b)^*(b \\cup aa)) \\cup a \\cup \\lambda$\n\nStrings que NÃO terminam em `ba` devem terminar em:\n- `b` (qualquer string terminada em b)\n- `aa` (sequências terminadas em aa)\n- Strings de comprimento ≤ 1: `a`, `b`, ou vazia ($\\lambda$)\n\nA alternativa D cobre todos esses casos corretamente."
     }
   },
   {
@@ -565,8 +565,8 @@
     "resposta": "B",
     "comentario": "Todas as assertivas são verdadeiras. O AFND precisa de 4 estados para 'adivinhar' a posição; o AFD precisa de 2³=8 estados para rastrear os últimos 3 símbolos; a ER dada descreve exatamente a linguagem.",
     "card": {
-      "pergunta": "O que caracteriza V V V V?",
-      "resposta": "Todas as assertivas são verdadeiras. O AFND precisa de 4 estados para 'adivinhar' a posição; o AFD precisa de 2³=8 estados para rastrear os últimos 3 símbolos; a ER dada descreve exatamente a linguagem.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "L = terceiro último símbolo é 'a'. Assertivas sobre AFND (4 estados), AFD (8 estados), GR (3 não-terminais), ER.",
+      "resposta": "**Gabarito: (B)** V – V – V – V (todas verdadeiras)\n\n- **AFND 4 estados** ✓: 1 inicial + 3 para rastrear últimos 3 símbolos (não-det. \"adivinha\")\n- **AFD 8 estados** ✓: $2^3 = 8$ estados para rastrear combinações dos últimos 3 símbolos\n- **GR 3 não-terminais** ✓: 3 variáveis para os 3 estados finais essenciais\n- **ER** ✓: $\\{a,b\\}^*a\\{a,b\\}\\{a,b\\}$ descreve exatamente a linguagem"
     }
   }
 ]

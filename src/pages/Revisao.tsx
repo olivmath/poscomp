@@ -141,11 +141,11 @@ export function Revisao() {
 
           {/* Verso — resposta */}
           <div className="revisao-face revisao-face--back">
-            <div className="revisao-answer-body">
+            <div className={`revisao-answer-body${question?.card?.resposta ? ' revisao-answer-body--markdown' : ''}`}>
               <span className="material-symbols-outlined revisao-answer-icon">check_circle</span>
               {question?.card?.resposta ? (
                 <div className="revisao-gabarito-markdown">
-                  <strong>({question?.resposta})</strong>{' '}
+                  <strong>({question?.resposta})</strong>
                   <MarkdownAnswer md={question.card.resposta} />
                 </div>
               ) : (

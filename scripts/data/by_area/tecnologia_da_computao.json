@@ -14,8 +14,8 @@
     "comentario": "RIGHT JOIN retorna todos os PAIs. Item1 aparece 2x (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 sem filhos → NULL. Total: 5 tuplas.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza 5?",
-      "resposta": "RIGHT JOIN retorna todos os PAIs. Item1 aparece 2x (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 sem filhos → NULL. Total: 5 tuplas.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Protocolo 2PC: remetentes das mensagens <prepare>, <ready/cannot>, <commit/rollback>?",
+      "resposta": "**Gabarito: (D)** Coordenador, Participantes, Coordenador\n\nTwo-Phase Commit (2PC):\n\n| Fase | Mensagem | Remetente |\n|---|---|---|\n| Fase 1 | `prepare for commit` | **Coordenador** |\n| Fase 1 | `ready` / `cannot commit` | **Participantes** |\n| Fase 2 | `commit` / `rollback` | **Coordenador** |"
     }
   },
   {
@@ -33,8 +33,8 @@
     "comentario": "Grafo de espera detecta deadlock via ciclos. As demais são protocolos de prevenção.",
     "ano": 2024,
     "card": {
-      "pergunta": "Como protocolos de prevenção evitam deadlocks em sistemas de bancos de dados?",
-      "resposta": "Grafo de espera detecta deadlock via ciclos. As demais são protocolos de prevenção.\n\nNão deve ser confundido com detecção/recuperação de deadlocks ou estratégias sem timestamps (no-wait, timeouts)."
+      "pergunta": "Técnicas de prevenção de deadlock baseadas em timestamp: quais são?",
+      "resposta": "**Gabarito: (A)** Apenas I (Wait-Die) e II (Wound-Wait)\n\n| Técnica | Baseada em timestamp? |\n|---|---|\n| **Wait-Die** | ✓ Transação mais nova espera ou morre |\n| **Wound-Wait** | ✓ Transação mais velha \"fere\" a nova |\n| Cautious-Waiting | ✗ Evita ciclos por análise de grafo |\n| No-Waiting | ✗ Abort imediato, sem análise de timestamp |"
     }
   },
   {
@@ -52,8 +52,8 @@
     "comentario": "Esquema de Tradução: GLC com ações semânticas embutidas nos lados direitos, executadas durante a análise.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza Gramática livre de contexto na qual fragmentos de?",
-      "resposta": "Esquema de Tradução: GLC com ações semânticas embutidas nos lados direitos, executadas durante a análise. Gramática livre de contexto na qual fragmentos de programas são inseridos nos lados direitos das regras de produção.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Analisador léxico com T1, T2, T3 e entrada 'kkbzkbbkkb': sequência de tokens?",
+      "resposta": "**Gabarito: (E)** T3 T3 T3\n\nT3 = `b? z? k k* b` (b opcional, z opcional, um ou mais k, b)\n\n- `kkb` → T3: $\\varepsilon$ + $\\varepsilon$ + kk + b ✓\n- `zkb` → T3: $\\varepsilon$ + z + k + b ✓\n- `bkkb` → T3: b + $\\varepsilon$ + kk + b ✓\n\nUsando **maior prefixo possível** a cada passo."
     }
   },
   {
@@ -71,8 +71,8 @@
     "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza Aumentar a complexidade dos processos de negócios?",
-      "resposta": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Aumentar a complexidade dos processos de negócios.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre reúso de software: quais assertivas representam fatores que comprometem o reúso?",
+      "resposta": "**Gabarito: (D)** Apenas I e II\n\n- **I** ✓: síndrome \"Não inventado aqui\" — resistência cultural ao reúso de código alheio\n- **II** ✓: custo de criar e manter biblioteca de componentes reutilizáveis\n- **III** ✗: reúso visa **reduzir** complexidade e custo, não aumentar"
     }
   },
   {
@@ -90,8 +90,8 @@
     "comentario": "Especificação de software (Engenharia de Requisitos): entender e documentar os serviços exigidos e restrições.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza Especificação de software?",
-      "resposta": "Especificação de software (Engenharia de Requisitos): entender e documentar os serviços exigidos e restrições.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Revisão Técnica Formal (RTF): qual prática NÃO é recomendada?",
+      "resposta": "**Gabarito: (B)** Estender as discussões enquanto forem encontrados problemas.\n\nUma RTF deve ter **tempo limitado** e foco em **identificar** defeitos, não em corrigi-los na reunião.\n\nBoas práticas da RTF:\n- Revisar o **produto**, não o autor\n- Identificar problemas sem resolver na hora\n- Limitar participantes e exigir preparação prévia\n- Agenda com tempo definido"
     }
   },
   {
@@ -109,8 +109,8 @@
     "comentario": "Todas as três assertivas estão alinhadas com Pressman e Maxim sobre GCS.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza Todas as assertivas estão corretas?",
-      "resposta": "Todas as três assertivas estão alinhadas com Pressman e Maxim sobre GCS. Todas as assertivas estão corretas.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "RNF1 (compatibilidade browsers), RNF2 (4h treinamento, <2 erros/h), RNF3 (resposta <1s). Quais são de usabilidade?",
+      "resposta": "**Gabarito: (B)** Apenas RNF2\n\nSegundo Sommerville, **usabilidade** mede facilidade de aprendizado e uso:\n- **RNF2** ✓: fala em treinamento (tempo de aprendizado) e taxa de erros do usuário\n- **RNF1**: compatibilidade/portabilidade de plataforma\n- **RNF3**: desempenho (tempo de resposta)"
     }
   },
   {
@@ -128,8 +128,8 @@
     "comentario": "Crossover = recombinação de cromossomos de dois pais. Mutação = C. Seleção = D. Elitismo = B.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza Combinar partes dos cromossomos de dois pais para?",
-      "resposta": "Crossover = recombinação de cromossomos de dois pais. Mutação = C. Seleção = D. Elitismo = B.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Qual alternativa descreve corretamente a lógica fuzzy?",
+      "resposta": "**Gabarito: (B)** Extensão da lógica clássica para representar e raciocinar com informações imprecisas.\n\nA **lógica fuzzy** permite **graus de pertinência** entre 0 e 1 (não só V/F):\n- \"Temperatura alta\" pode ter grau 0.7\n- Modela conceitos subjetivos como \"quente\", \"perto\", \"rápido\"\n- Usada em controle, IA, sistemas de decisão\n\n**A errada**: lida com informações contínuas, não binárias."
     }
   },
   {
@@ -147,8 +147,8 @@
     "comentario": "Motor de inferência: aplica regras da base de conhecimento sobre fatos (forward/backward chaining).",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza O motor de inferência utiliza as regras definidas?",
-      "resposta": "Motor de inferência: aplica regras da base de conhecimento sobre fatos (forward/backward chaining). O motor de inferência utiliza as regras definidas na base de conhecimento para derivar conclusões a partir de fatos específicos, simulando o raciocínio humano especializado.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre árvores de decisão: qual afirmativa está INCORRETA?",
+      "resposta": "**Gabarito: (B)** Árvores de decisão são estruturas lineares.\n\nÁrvores de decisão são estruturas **não-lineares** (em árvore), onde:\n- Nós internos = condições/testes\n- Folhas = classes/valores de saída\n\nSão aplicáveis a classificação e regressão, suportam dados categóricos e numéricos, e podem ser combinadas com ensembles (random forest)."
     }
   },
   {
@@ -166,8 +166,8 @@
     "comentario": "Amostragem: discretiza coordenadas (x,y). Quantização: discretiza amplitude (intensidade).",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza amostragem quantização?",
-      "resposta": "Amostragem: discretiza coordenadas (x,y). Quantização: discretiza amplitude (intensidade).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Interpolação: vizinho mais próximo (V/F), bilinear usa 2 vizinhos (V/F), bicúbica usa 16 vizinhos (V/F)?",
+      "resposta": "**Gabarito: (C)** V – F – V\n\n- **Vizinho mais próximo** ✓: replica o pixel mais próximo → gera serrilhamento\n- **Bilinear** ✗: usa **4 vizinhos** (grade 2×2), não 2\n- **Bicúbica** ✓: usa **16 vizinhos** (grade 4×4) → melhor qualidade"
     }
   },
   {
@@ -185,8 +185,8 @@
     "comentario": "Longest prefix match: 11.1.2.5 corresponde a 11.1.0.0/16 e 11.1.2.0/24. /24 é mais específico.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Longest prefix match: 11.1.2.5 corresponde a 11.1.0.0/16 e 11.1.2.0/24. /24 é mais específico.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Rede com máscara 255.255.255.128: número máximo de computadores?",
+      "resposta": "**Gabarito: (A)** 126\n\nMáscara /25 (255.255.255.128): 7 bits para hosts\n$$2^7 = 128 \\text{ endereços totais}$$\nSubtrair endereço de rede e broadcast:\n$$128 - 2 = \\mathbf{126} \\text{ endereços utilizáveis}$$"
     }
   },
   {
@@ -204,8 +204,8 @@
     "comentario": "IP é best-effort sem conexão. Fragmentação pode gerar duplicatas entregues. Porta pertence à camada de transporte.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "IP é best-effort sem conexão. Fragmentação pode gerar duplicatas entregues. Porta pertence à camada de transporte.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Dispositivo que atua nas camadas física e enlace e envia mensagens apenas para o destino correto:",
+      "resposta": "**Gabarito: (E)** Switch\n\n| Dispositivo | Camadas | Comportamento |\n|---|---|---|\n| **Switch** | Física + Enlace | Encaminha para porta destino (MAC) |\n| Hub | Física | Broadcast para todas as portas |\n| Roteador | Rede | Encaminha por IP entre redes |\n| Bridge | Enlace | Conecta segmentos de rede |"
     }
   },
   {
@@ -223,8 +223,8 @@
     "comentario": "DNS usa UDP porta 53 para consultas rápidas. TCP apenas para transferências de zona ou respostas > 512 bytes.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza UDP?",
-      "resposta": "DNS usa UDP porta 53 para consultas rápidas. TCP apenas para transferências de zona ou respostas > 512 bytes.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Expressão para a largura (comprimento) de 1 bit no canal:",
+      "resposta": "**Gabarito: (A)** $c/b$\n\nLargura de um bit = distância que o sinal percorre durante a transmissão de 1 bit:\n\n$$\\text{largura} = \\text{velocidade} \\times \\text{duração do bit} = c \\times \\frac{1}{b} = \\frac{c}{b}$$\n\nOnde $c$ = velocidade de propagação e $b$ = taxa de transmissão (bits/s)."
     }
   },
   {
@@ -242,8 +242,8 @@
     "comentario": "Transparência de acesso: mesma interface para arquivos locais e remotos.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza Acesso?",
-      "resposta": "Transparência de acesso: mesma interface para arquivos locais e remotos. Acesso.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Transação cliente que conclui cada requisição antes de passar para a próxima (sequencial):",
+      "resposta": "**Gabarito: (A)** Transação plana\n\n**Transação plana**: estrutura sequencial simples — o cliente abre, faz requisições uma a uma e fecha.\n\n- **Aninhada**: subtransações paralelas ou hierárquicas\n- **Em duas fases**: protocolo de bloqueio (2PL), não de estrutura"
     }
   },
   {
@@ -261,8 +261,8 @@
     "comentario": "Falha por queda (crash): componente para abruptamente após operar corretamente.",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza por queda?",
-      "resposta": "Falha por queda (crash): componente para abruptamente após operar corretamente.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre sistemas operacionais distribuídos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (B)** Invocação assíncrona = chamada não-bloqueante que retorna assim que a mensagem estiver pronta.\n\n- **B** ✓: assíncrono = não espera resposta; retorna ao chamar assim que o pedido é aceito\n- **A** ✗: **preemptivo** suspende a thread arbitrariamente; não-preemptivo a deixa rodar até bloquear\n- **C** ✗: gerência de memória trata alocação de RAM, não comunicação entre threads\n- **D** ✗: descreve o comportamento **não-preemptivo** (executa até bloquear)"
     }
   },
   {
@@ -280,8 +280,8 @@
     "comentario": "Centralizado: coordenador único gerencia acesso → exatamente 3 mensagens (req, grant, release).",
     "ano": 2024,
     "card": {
-      "pergunta": "O que caracteriza centralizado?",
-      "resposta": "Centralizado: coordenador único gerencia acesso → exatamente 3 mensagens (req, grant, release). centralizado.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Comunicação indireta em sistemas distribuídos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (C)** Comunicação em grupo implementa multicast: mensagem enviada para todos os membros por uma única operação.\n\n- **C** ✓: multicast = um envio para N destinatários → base da comunicação em grupo\n- **A** ✗: confunde comunicação **direta** com indireta (invertido)\n- **B** ✗: descreve **desacoplamento temporal** (não espacial)\n- **D** ✗: descreve **desacoplamento espacial** (não temporal)"
     }
   }
 ]

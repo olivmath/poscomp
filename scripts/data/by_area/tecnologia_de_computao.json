@@ -14,8 +14,8 @@
     "resposta": "D",
     "comentario": "RIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas.",
     "card": {
-      "pergunta": "O que caracteriza 5?",
-      "resposta": "RIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Protocolo 2PC: remetentes das mensagens <prepare>, <ready/cannot>, <commit/rollback>?",
+      "resposta": "**Gabarito: (D)** Coordenador, Participantes, Coordenador\n\nTwo-Phase Commit (2PC):\n\n| Fase | Mensagem | Remetente |\n|---|---|---|\n| Fase 1 | `prepare for commit` | **Coordenador** |\n| Fase 1 | `ready` / `cannot commit` | **Participantes** |\n| Fase 2 | `commit` / `rollback` | **Coordenador** |"
     }
   },
   {
@@ -33,8 +33,8 @@
     "resposta": "B",
     "comentario": "O grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori.",
     "card": {
-      "pergunta": "Como protocolos de prevenção evitam deadlocks em sistemas de bancos de dados?",
-      "resposta": "O grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori.\n\nNão deve ser confundido com detecção/recuperação de deadlocks ou estratégias sem timestamps (no-wait, timeouts)."
+      "pergunta": "Técnicas de prevenção de deadlock baseadas em timestamp: quais são?",
+      "resposta": "**Gabarito: (A)** Apenas I (Wait-Die) e II (Wound-Wait)\n\n| Técnica | Baseada em timestamp? |\n|---|---|\n| **Wait-Die** | ✓ Transação mais nova espera ou morre |\n| **Wound-Wait** | ✓ Transação mais velha \"fere\" a nova |\n| Cautious-Waiting | ✗ Evita ciclos por análise de grafo |\n| No-Waiting | ✗ Abort imediato, sem análise de timestamp |"
     }
   },
   {
@@ -52,8 +52,8 @@
     "resposta": "B",
     "comentario": "Na árvore B, todos os nós (internos e folha) podem ter ponteiros de dados. Na árvore B+, apenas os nós folha têm ponteiros de dados; os nós internos têm apenas ponteiros de árvore. Portanto: I (B interno), II (B folha) e IV (B+ folha).",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Na árvore B, todos os nós (internos e folha) podem ter ponteiros de dados. Na árvore B+, apenas os nós folha têm ponteiros de dados; os nós internos têm apenas ponteiros de árvore. Portanto: I (B interno), II (B folha) e IV (B+ folha).\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Hierarquia de formas normais: BCNF → 2NF, 2NF → 3NF, BCNF → 3NF, 3NF → BCNF?",
+      "resposta": "**Gabarito: (B)** Apenas I (BCNF→2NF) e III (BCNF→3NF)\n\nHierarquia (da mais para a menos restritiva):\n$$\\text{BCNF} \\subset \\text{3NF} \\subset \\text{2NF} \\subset \\text{1NF}$$\n\n- **I** ✓: BCNF é mais restritiva que 2NF → implica 2NF\n- **III** ✓: BCNF implica 3NF\n- **II** ✗: 2NF não implica 3NF (pode ter dependências transitivas)\n- **IV** ✗: 3NF não implica BCNF"
     }
   },
   {
@@ -71,8 +71,8 @@
     "resposta": "E",
     "comentario": "Esquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática.",
     "card": {
-      "pergunta": "O que caracteriza Gramática livre de contexto na qual fragmentos de?",
-      "resposta": "Esquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática. Gramática livre de contexto na qual fragmentos de programas (ações) são inseridos nos lados direitos das regras de produção.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Analisador léxico com T1, T2, T3 e entrada 'kkbzkbbkkb': sequência de tokens?",
+      "resposta": "**Gabarito: (E)** T3 T3 T3\n\nT3 = `b? z? k k* b` (b opcional, z opcional, um ou mais k, b)\n\n- `kkb` → T3: $\\varepsilon$ + $\\varepsilon$ + kk + b ✓\n- `zkb` → T3: $\\varepsilon$ + z + k + b ✓\n- `bkkb` → T3: b + $\\varepsilon$ + kk + b ✓\n\nUsando **maior prefixo possível** a cada passo."
     }
   },
   {
@@ -90,8 +90,8 @@
     "resposta": "D",
     "comentario": "I, II e III estão corretas. IV está errada: autômatos finitos são usados na análise léxica, não na definição de representações intermediárias.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "I, II e III estão corretas. IV está errada: autômatos finitos são usados na análise léxica, não na definição de representações intermediárias.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Análise sintática: assertivas I–V sobre bottom-up, top-down, LL(1), conflitos LR, notação LL/LR.",
+      "resposta": "**Gabarito: (A)** Apenas I e V corretas.\n\n- **I** ✓: Bottom-up (LR) percorre das **folhas à raiz**\n- **V** ✓: L = leitura da esquerda; segundo L/R = derivação mais à esquerda/direita\n- **II** ✗: Top-down (LL) vai da **raiz às folhas** (não o contrário)\n- **IV** ✗: LR tem conflitos **Shift/Reduce** e **Reduce/Reduce** (não Shift/Shift)"
     }
   },
   {
@@ -109,8 +109,8 @@
     "resposta": "B",
     "comentario": "Todas estão incorretas. I: Ray Tracing é custoso e não adequado para tempo real (usualmente). II: Z-Buffer armazena o pixel MAIS PRÓXIMO (não distante); Ray Tracing é o estado da arte para cenas cinematográficas, não Z-Buffer. III: Phong é modelo de iluminação LOCAL (não global); iluminação global (como ray tracing) considera luz indireta.",
     "card": {
-      "pergunta": "O que caracteriza Todas incorretas?",
-      "resposta": "Todas estão incorretas. I: Ray Tracing é custoso e não adequado para tempo real (usualmente). II: Z-Buffer armazena o pixel MAIS PRÓXIMO (não distante); Ray Tracing é o estado da arte para cenas cinematográficas, não Z-Buffer. III: Phong é modelo de iluminação LOCAL (não global); iluminação global (como ray tracing) considera luz indireta.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Qual técnica NÃO é usada na remoção de linhas/superfícies ocultas?",
+      "resposta": "**Gabarito: (C)** Hemicubos\n\n**Hemicubos** são usados no cálculo de **fatores de forma** do algoritmo de Radiosidade (iluminação global) — não são técnica de remoção de superfícies ocultas.\n\nTécnicas de remoção de superfícies ocultas: Z-buffer, back-face culling, BSP, bounding volumes."
     }
   },
   {
@@ -128,8 +128,8 @@
     "resposta": "A",
     "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade.",
     "card": {
-      "pergunta": "O que caracteriza Aumentar a complexidade dos processos de negócios?",
-      "resposta": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre reúso de software: quais assertivas representam fatores que comprometem o reúso?",
+      "resposta": "**Gabarito: (D)** Apenas I e II\n\n- **I** ✓: síndrome \"Não inventado aqui\" — resistência cultural ao reúso de código alheio\n- **II** ✓: custo de criar e manter biblioteca de componentes reutilizáveis\n- **III** ✗: reúso visa **reduzir** complexidade e custo, não aumentar"
     }
   },
   {
@@ -147,8 +147,8 @@
     "resposta": "D",
     "comentario": "Definir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega.",
     "card": {
-      "pergunta": "O que caracteriza Especificação de software?",
-      "resposta": "Definir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Revisão Técnica Formal (RTF): qual prática NÃO é recomendada?",
+      "resposta": "**Gabarito: (B)** Estender as discussões enquanto forem encontrados problemas.\n\nUma RTF deve ter **tempo limitado** e foco em **identificar** defeitos, não em corrigi-los na reunião.\n\nBoas práticas da RTF:\n- Revisar o **produto**, não o autor\n- Identificar problemas sem resolver na hora\n- Limitar participantes e exigir preparação prévia\n- Agenda com tempo definido"
     }
   },
   {
@@ -166,8 +166,8 @@
     "resposta": "A",
     "comentario": "Todas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida.",
     "card": {
-      "pergunta": "O que caracteriza Todas corretas?",
-      "resposta": "Todas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "RNF1 (compatibilidade browsers), RNF2 (4h treinamento, <2 erros/h), RNF3 (resposta <1s). Quais são de usabilidade?",
+      "resposta": "**Gabarito: (B)** Apenas RNF2\n\nSegundo Sommerville, **usabilidade** mede facilidade de aprendizado e uso:\n- **RNF2** ✓: fala em treinamento (tempo de aprendizado) e taxa de erros do usuário\n- **RNF1**: compatibilidade/portabilidade de plataforma\n- **RNF3**: desempenho (tempo de resposta)"
     }
   },
   {
@@ -185,8 +185,8 @@
     "resposta": "E",
     "comentario": "Crossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção.",
     "card": {
-      "pergunta": "O que caracteriza Combinar partes dos cromossomos de dois pais para?",
-      "resposta": "Crossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Qual alternativa descreve corretamente a lógica fuzzy?",
+      "resposta": "**Gabarito: (B)** Extensão da lógica clássica para representar e raciocinar com informações imprecisas.\n\nA **lógica fuzzy** permite **graus de pertinência** entre 0 e 1 (não só V/F):\n- \"Temperatura alta\" pode ter grau 0.7\n- Modela conceitos subjetivos como \"quente\", \"perto\", \"rápido\"\n- Usada em controle, IA, sistemas de decisão\n\n**A errada**: lida com informações contínuas, não binárias."
     }
   },
   {
@@ -204,8 +204,8 @@
     "resposta": "C",
     "comentario": "O motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista.",
     "card": {
-      "pergunta": "O que caracteriza Utilizar as regras da base de conhecimento para?",
-      "resposta": "O motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista. Utilizar as regras da base de conhecimento para derivar conclusões a partir de fatos, simulando o raciocínio humano especializado.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre árvores de decisão: qual afirmativa está INCORRETA?",
+      "resposta": "**Gabarito: (B)** Árvores de decisão são estruturas lineares.\n\nÁrvores de decisão são estruturas **não-lineares** (em árvore), onde:\n- Nós internos = condições/testes\n- Folhas = classes/valores de saída\n\nSão aplicáveis a classificação e regressão, suportam dados categóricos e numéricos, e podem ser combinadas com ensembles (random forest)."
     }
   },
   {
@@ -223,8 +223,8 @@
     "resposta": "D",
     "comentario": "Amostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits.",
     "card": {
-      "pergunta": "O que caracteriza amostragem quantização?",
-      "resposta": "Amostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Interpolação: vizinho mais próximo (V/F), bilinear usa 2 vizinhos (V/F), bicúbica usa 16 vizinhos (V/F)?",
+      "resposta": "**Gabarito: (C)** V – F – V\n\n- **Vizinho mais próximo** ✓: replica o pixel mais próximo → gera serrilhamento\n- **Bilinear** ✗: usa **4 vizinhos** (grade 2×2), não 2\n- **Bicúbica** ✓: usa **16 vizinhos** (grade 4×4) → melhor qualidade"
     }
   },
   {
@@ -242,8 +242,8 @@
     "resposta": "B",
     "comentario": "I: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios).",
     "card": {
-      "pergunta": "O que caracteriza Apenas I e III?",
-      "resposta": "I: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Modelo mais simples de rede neural, uma unidade, problemas linearmente separáveis, saída binária:",
+      "resposta": "**Gabarito: (D)** Perceptron\n\nO **Perceptron** (Rosenblatt, 1958):\n- Única unidade de processamento\n- Calcula combinação linear das entradas + limiar (threshold)\n- Saída binária (0 ou 1)\n- Limitação: só resolve problemas **linearmente separáveis** (ex: não resolve XOR)"
     }
   },
   {
@@ -261,8 +261,8 @@
     "resposta": "E",
     "comentario": "Prefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Prefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Rede com máscara 255.255.255.128: número máximo de computadores?",
+      "resposta": "**Gabarito: (A)** 126\n\nMáscara /25 (255.255.255.128): 7 bits para hosts\n$$2^7 = 128 \\text{ endereços totais}$$\nSubtrair endereço de rede e broadcast:\n$$128 - 2 = \\mathbf{126} \\text{ endereços utilizáveis}$$"
     }
   },
   {
@@ -280,8 +280,8 @@
     "resposta": "D",
     "comentario": "IP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte.",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "IP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte.\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Dispositivo que atua nas camadas física e enlace e envia mensagens apenas para o destino correto:",
+      "resposta": "**Gabarito: (E)** Switch\n\n| Dispositivo | Camadas | Comportamento |\n|---|---|---|\n| **Switch** | Física + Enlace | Encaminha para porta destino (MAC) |\n| Hub | Física | Broadcast para todas as portas |\n| Roteador | Rede | Encaminha por IP entre redes |\n| Bridge | Enlace | Conecta segmentos de rede |"
     }
   },
   {
@@ -299,8 +299,8 @@
     "resposta": "E",
     "comentario": "DNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes.",
     "card": {
-      "pergunta": "O que caracteriza UDP?",
-      "resposta": "DNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Expressão para a largura (comprimento) de 1 bit no canal:",
+      "resposta": "**Gabarito: (A)** $c/b$\n\nLargura de um bit = distância que o sinal percorre durante a transmissão de 1 bit:\n\n$$\\text{largura} = \\text{velocidade} \\times \\text{duração do bit} = c \\times \\frac{1}{b} = \\frac{c}{b}$$\n\nOnde $c$ = velocidade de propagação e $b$ = taxa de transmissão (bits/s)."
     }
   },
   {
@@ -318,8 +318,8 @@
     "resposta": "B",
     "comentario": "Transparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física.",
     "card": {
-      "pergunta": "O que caracteriza Acesso?",
-      "resposta": "Transparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Transação cliente que conclui cada requisição antes de passar para a próxima (sequencial):",
+      "resposta": "**Gabarito: (A)** Transação plana\n\n**Transação plana**: estrutura sequencial simples — o cliente abre, faz requisições uma a uma e fecha.\n\n- **Aninhada**: subtransações paralelas ou hierárquicas\n- **Em duas fases**: protocolo de bloqueio (2PL), não de estrutura"
     }
   },
   {
@@ -337,8 +337,8 @@
     "resposta": "E",
     "comentario": "Falha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível).",
     "card": {
-      "pergunta": "O que caracteriza por queda?",
-      "resposta": "Falha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível).\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Sobre sistemas operacionais distribuídos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (B)** Invocação assíncrona = chamada não-bloqueante que retorna assim que a mensagem estiver pronta.\n\n- **B** ✓: assíncrono = não espera resposta; retorna ao chamar assim que o pedido é aceito\n- **A** ✗: **preemptivo** suspende a thread arbitrariamente; não-preemptivo a deixa rodar até bloquear\n- **C** ✗: gerência de memória trata alocação de RAM, não comunicação entre threads\n- **D** ✗: descreve o comportamento **não-preemptivo** (executa até bloquear)"
     }
   },
   {
@@ -356,8 +356,8 @@
     "resposta": "A",
     "comentario": "No algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens.",
     "card": {
-      "pergunta": "O que caracteriza centralizado?",
-      "resposta": "No algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens.\n\nNão deve ser confundido com erros conceituais comuns, como inverter papéis, confundir prevenção com detecção/recuperação, ou interpretar incorretamente a semântica do protocolo."
+      "pergunta": "Comunicação indireta em sistemas distribuídos: qual afirmativa está correta?",
+      "resposta": "**Gabarito: (C)** Comunicação em grupo implementa multicast: mensagem enviada para todos os membros por uma única operação.\n\n- **C** ✓: multicast = um envio para N destinatários → base da comunicação em grupo\n- **A** ✗: confunde comunicação **direta** com indireta (invertido)\n- **B** ✗: descreve **desacoplamento temporal** (não espacial)\n- **D** ✗: descreve **desacoplamento espacial** (não temporal)"
     }
   },
   {
@@ -375,8 +375,8 @@
     "resposta": "A",
     "comentario": "Z-Buffer: remove superfícies ocultas guardando profundidade por pixel. Gouraud: tonalização por interpolação de cores nos vértices. Phong: tonalização por interpolação de normais. Os demais grupos misturam algoritmos de outras etapas (rasterização, recorte, modelagem).",
     "card": {
-      "pergunta": "O que determina a seleção da rota mais específica em tabelas de roteamento?",
-      "resposta": "Z-Buffer: remove superfícies ocultas guardando profundidade por pixel. Gouraud: tonalização por interpolação de cores nos vértices. Phong: tonalização por interpolação de normais. Os demais grupos misturam algoritmos de outras etapas (rasterização, recorte, modelagem).\n\nNão deve ser confundido com máscaras de sub-rede e roteamento por política que não dependem apenas da especificidade do prefixo."
+      "pergunta": "Ray tracing: assertivas sobre direção dos raios, z-buffer, materiais difusos, raios secundários.",
+      "resposta": "**Gabarito: (B)** Apenas I e IV corretas.\n\n- **I** ✓: Ray tracing atira raios da câmera em direção ao plano da cena\n- **IV** ✓: raios secundários simulam reflexão/refração (iluminação indireta)\n- **II** ✗: Z-buffer é usado em **rasterização**, não em ray tracing puro\n- **III** ✗: ray tracing é **menos eficiente** para superfícies puramente difusas (path tracing é melhor)"
     }
   }
 ]
