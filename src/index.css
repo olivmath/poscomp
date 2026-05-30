@@ -126,39 +126,69 @@
   --color-page-gradient:       linear-gradient(135deg, #F3EFF4 0%, #EAE2F8 100%);
   --color-divider:             var(--md-sys-color-outline-variant);
   --color-divider-subtle:      var(--md-sys-color-surface-container-low);
+  --color-progress-gradient:   linear-gradient(90deg, #6750A4, #7D5260);
+  --color-error:               var(--md-sys-color-error);
+  --color-on-error:            var(--md-sys-color-on-error);
 
-  /* Confidence state colors */
-  --color-confidence-unsure-bg:       #E3F2FD;
-  --color-confidence-unsure-border:   #90CAF9;
-  --color-confidence-unsure-text:     #1565C0;
-  --color-confidence-studying-bg:     #E0F7FA;
-  --color-confidence-studying-border: #80DEEA;
-  --color-confidence-studying-text:   #00695C;
-  --color-confidence-should-bg:       #FFF8E1;
-  --color-confidence-should-border:   #FFD54F;
-  --color-confidence-should-text:     #E65100;
-  --color-confidence-skipped-bg:      #FFF3CD;
-  --color-confidence-skipped-border:  #FFCA28;
-  --color-confidence-skipped-text:    #7B5800;
-  --color-confidence-certain-dot:     #A5D6A7;
+  /* Confidence state colors — tonal palettes MD3 with AA contrast */
+  /* Unsure — Blue (MD3 Blue tonal palette) */
+  --color-confidence-unsure-container:       #E3F2FD;
+  --color-confidence-unsure-on-container:    #0D47A1;
+  --color-confidence-unsure-container-dark:  #0D47A1;
+  --color-confidence-unsure-on-container-dark: #E3F2FD;
 
-  /* Confidence dark-mode variants */
-  --color-confidence-unsure-bg-dark:       rgba(21, 101, 192, 0.18);
-  --color-confidence-unsure-border-dark:   rgba(100, 181, 246, 0.4);
-  --color-confidence-unsure-text-dark:     #90CAF9;
-  --color-confidence-studying-bg-dark:     rgba(0, 105, 92, 0.18);
-  --color-confidence-studying-border-dark: rgba(128, 222, 234, 0.4);
-  --color-confidence-studying-text-dark:   #80DEEA;
-  --color-confidence-should-bg-dark:       rgba(230, 81, 0, 0.18);
-  --color-confidence-should-border-dark:   rgba(255, 213, 79, 0.4);
-  --color-confidence-should-text-dark:     #FFD54F;
-  --color-confidence-skipped-bg-dark:         rgba(255, 202, 40, 0.15);
-  --color-confidence-skipped-border-dark:     rgba(255, 202, 40, 0.4);
+  /* Studying — Teal/Cyan (MD3 Teal tonal palette) */
+  --color-confidence-studying-container:       #E0F2F1;
+  --color-confidence-studying-on-container:    #004D40;
+  --color-confidence-studying-container-dark:  #004D40;
+  --color-confidence-studying-on-container-dark: #B2DFDB;
 
-  /* Confidence hover dark variants */
-  --color-confidence-unsure-hover-dark:    rgba(21, 101, 192, 0.28);
-  --color-confidence-should-hover-dark:    rgba(230, 81, 0, 0.28);
-  --color-confidence-studying-hover-dark:  rgba(0, 105, 92, 0.28);
+  /* Should Know — Orange/Red (MD3 Deep Orange tonal palette) */
+  --color-confidence-should-container:       #FFE0B2;
+  --color-confidence-should-on-container:    #A52714;
+  --color-confidence-should-container-dark:  #A52714;
+  --color-confidence-should-on-container-dark: #FFE0B2;
+
+  /* Skipped — Amber (MD3 Amber tonal palette) */
+  --color-confidence-skipped-container:       #FFF9C4;
+  --color-confidence-skipped-on-container:    #6D4C00;
+  --color-confidence-skipped-container-dark:  #6D4C00;
+  --color-confidence-skipped-on-container-dark: #FFF9C4;
+
+  /* Certain — Green indicator dot */
+  --color-confidence-certain-dot:             #A5D6A7;
+
+  /* Backwards compatibility aliases (deprecated) */
+  --color-confidence-unsure-bg:       var(--color-confidence-unsure-container);
+  --color-confidence-unsure-border:   var(--md-sys-color-outline);
+  --color-confidence-unsure-text:     var(--color-confidence-unsure-on-container);
+  --color-confidence-studying-bg:     var(--color-confidence-studying-container);
+  --color-confidence-studying-border: var(--md-sys-color-outline);
+  --color-confidence-studying-text:   var(--color-confidence-studying-on-container);
+  --color-confidence-should-bg:       var(--color-confidence-should-container);
+  --color-confidence-should-border:   var(--md-sys-color-outline);
+  --color-confidence-should-text:     var(--color-confidence-should-on-container);
+  --color-confidence-skipped-bg:      var(--color-confidence-skipped-container);
+  --color-confidence-skipped-border:  var(--md-sys-color-outline);
+  --color-confidence-skipped-text:    var(--color-confidence-skipped-on-container);
+
+  /* Dark mode variants (now using new tokens) */
+  --color-confidence-unsure-bg-dark:        var(--color-confidence-unsure-container-dark);
+  --color-confidence-unsure-border-dark:    var(--md-sys-color-outline);
+  --color-confidence-unsure-text-dark:      var(--color-confidence-unsure-on-container-dark);
+  --color-confidence-studying-bg-dark:      var(--color-confidence-studying-container-dark);
+  --color-confidence-studying-border-dark:  var(--md-sys-color-outline);
+  --color-confidence-studying-text-dark:    var(--color-confidence-studying-on-container-dark);
+  --color-confidence-should-bg-dark:        var(--color-confidence-should-container-dark);
+  --color-confidence-should-border-dark:    var(--md-sys-color-outline);
+  --color-confidence-should-text-dark:      var(--color-confidence-should-on-container-dark);
+  --color-confidence-skipped-bg-dark:       var(--color-confidence-skipped-container-dark);
+  --color-confidence-skipped-border-dark:   var(--md-sys-color-outline);
+
+  /* Hover variants dark mode */
+  --color-confidence-unsure-hover-dark:    rgba(13, 71, 161, 0.12);
+  --color-confidence-should-hover-dark:    rgba(230, 81, 0, 0.12);
+  --color-confidence-studying-hover-dark:  rgba(0, 77, 64, 0.12);
 
   /* Interactive border highlights */
   --color-card-border-hover:      rgba(103, 80, 164, 0.15);
@@ -204,6 +234,7 @@
   --z-bar:      199;
   --z-bar-top:  200;
   --z-modal:    300;
+  --z-portal:   9000;
   --z-sheet:    301;
 
   /* Transitions — durations */
@@ -1261,7 +1292,7 @@ md-filter-chip {
 
 .immersive-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: var(--color-progress-gradient);
   border-radius: var(--shape-full);
   transition: width var(--duration-slower) ease;
 }
@@ -1534,7 +1565,7 @@ md-filter-chip {
   background: rgba(0, 0, 0, 0.52);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  z-index: 9000;
+  z-index: var(--z-portal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1611,7 +1642,7 @@ md-filter-chip {
 
 .modal-btn {
   flex: 1;
-  padding: 10px var(--space-md);
+  padding: var(--space-sm-md) var(--space-md);
   border-radius: var(--shape-lg);
   font-family: inherit;
   font-size: var(--md-sys-typescale-label-large-size);
@@ -1641,7 +1672,7 @@ md-filter-chip {
 
 .modal-btn--danger {
   background: var(--color-error);
-  color: #fff;
+  color: var(--color-on-error);
 }
 
 .modal-btn--danger:hover { filter: brightness(1.1); }
@@ -1739,7 +1770,7 @@ md-filter-chip {
 }
 
 .exit-modal-btn--confirm:hover {
-  background: #922018;
+  filter: brightness(0.9);
 }
 
 /* ═══════════════════════════════════════════════════════════
