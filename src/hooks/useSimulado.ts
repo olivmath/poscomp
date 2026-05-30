@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from 'react'
 import { useAuth } from '../hooks/useAuth'
+import { useSnackbar } from '../components/SnackbarProvider'
 import { callGetSimuladoQuestions, callFinishSimulado } from './useFunctions'
 import type {
   Question,
@@ -49,6 +50,7 @@ interface UseSimuladoReturn {
 
 export function useSimulado(): UseSimuladoReturn {
   const { user } = useAuth()
+  const { show: showSnackbar } = useSnackbar()
 
   const [state, setState] = useState<SimuladoState>('idle')
   const [questions, setQuestions] = useState<Question[]>([])
@@ -101,7 +103,6 @@ export function useSimulado(): UseSimuladoReturn {
     async (finalAnswers: AnswerRecord[], timeSpent: number) => {
       stopTimer()
       if (!user) return
-
       setLoadingFinish(true)
 
       // Filter out skipped/unanswered — backend only accepts answered questions
@@ -130,6 +131,7 @@ export function useSimulado(): UseSimuladoReturn {
         setState('finished')
       } catch (err) {
         console.error('finishSimulado failed:', err)
+        showSnackbar('Erro ao finalizar simulado. Exibindo resultado local.', 'error')
         // Fallback: still finish locally so user sees the result
         const fallbackResult = buildFallbackResult(finalAnswers, questions, timeSpent)
         setResult(fallbackResult)
@@ -139,7 +141,7 @@ export function useSimulado(): UseSimuladoReturn {
         setLoadingFinish(false)
       }
     },
-    [user, questions]
+    [user, questions, showSnackbar]
   )
 
   // ── timer ────────────────────────────────────────────────────────────────

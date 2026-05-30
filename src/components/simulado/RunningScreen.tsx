@@ -4,7 +4,7 @@ import { ImmersiveBar } from './ImmersiveBar'
 import { ExitModal } from './ExitModal'
 import { QuestionMapModal } from './QuestionMapModal'
 import { ReportIssueModal } from './ReportIssueModal'
-import LoadingModal from '../LoadingModal'
+import { LoadingModal } from '../LoadingModal'
 import type { Option, QuestionStatus, Confidence, Question } from '../../types'
 
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
