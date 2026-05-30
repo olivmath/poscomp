@@ -3297,7 +3297,7 @@ md-outlined-button.btn-full {
 }
 
 .revisao-gabarito-markdown li {
-  margin: 2px 0;
+  margin: var(--space-2xs) 0;
 }
 
 /* Blocos de equação LaTeX ($$...$$) */
@@ -3318,8 +3318,8 @@ md-outlined-button.btn-full {
   font-family: 'JetBrains Mono', 'Fira Mono', monospace;
   font-size: 0.88em;
   background: var(--md-sys-color-surface-container-highest);
-  padding: 1px 4px;
-  border-radius: 4px;
+  padding: var(--space-3xs) var(--space-xs);
+  border-radius: var(--shape-sm-xs);
 }
 
 /* Bloco de código */
