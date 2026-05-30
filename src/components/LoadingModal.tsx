@@ -1,5 +1,4 @@
-import React from 'react';
-import ModalOverlay from './ModalOverlay';
+import { ModalOverlay } from './ModalOverlay';
 
 interface LoadingModalProps {
   open: boolean;
@@ -10,7 +9,7 @@ export default function LoadingModal({ open, label }: LoadingModalProps) {
   if (!open) return null;
 
   return (
-    <ModalOverlay onClick={(e) => e.stopPropagation()}>
+    <ModalOverlay>
       <div className="loading-modal-card">
         <md-circular-progress indeterminate />
         <p className="loading-modal-label">{label}</p>

@@ -126,39 +126,51 @@
   --color-page-gradient:       linear-gradient(135deg, #F3EFF4 0%, #EAE2F8 100%);
   --color-divider:             var(--md-sys-color-outline-variant);
   --color-divider-subtle:      var(--md-sys-color-surface-container-low);
+  --color-progress-gradient:   linear-gradient(90deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+  --color-error:               var(--md-sys-color-error);
+  --color-on-error:            var(--md-sys-color-on-error);
 
-  /* Confidence state colors */
-  --color-confidence-unsure-bg:       #E3F2FD;
-  --color-confidence-unsure-border:   #90CAF9;
-  --color-confidence-unsure-text:     #1565C0;
-  --color-confidence-studying-bg:     #E0F7FA;
-  --color-confidence-studying-border: #80DEEA;
-  --color-confidence-studying-text:   #00695C;
-  --color-confidence-should-bg:       #FFF8E1;
-  --color-confidence-should-border:   #FFD54F;
-  --color-confidence-should-text:     #E65100;
-  --color-confidence-skipped-bg:      #FFF3CD;
-  --color-confidence-skipped-border:  #FFCA28;
-  --color-confidence-skipped-text:    #7B5800;
-  --color-confidence-certain-dot:     #A5D6A7;
+  /* Confidence state colors — mapped to @material/web MD3 system roles.
+     Each container/on-container pair is an official baseline pair (AA ≥4.5:1
+     light & dark). Roles auto-flip per scheme, so -dark aliases reference the
+     same role and resolve correctly inside `.dark`. */
+  /* Não sei (unsure) → secondary */
+  --color-confidence-unsure-bg:       var(--md-sys-color-secondary-container);
+  --color-confidence-unsure-text:     var(--md-sys-color-on-secondary-container);
+  --color-confidence-unsure-border:   var(--md-sys-color-secondary);
+  /* Estudando (studying) → tertiary */
+  --color-confidence-studying-bg:     var(--md-sys-color-tertiary-container);
+  --color-confidence-studying-text:   var(--md-sys-color-on-tertiary-container);
+  --color-confidence-studying-border: var(--md-sys-color-tertiary);
+  /* Devia saber (should_know) → error */
+  --color-confidence-should-bg:       var(--md-sys-color-error-container);
+  --color-confidence-should-text:     var(--md-sys-color-on-error-container);
+  --color-confidence-should-border:   var(--md-sys-color-error);
+  /* Pulou (skipped) → neutral surface */
+  --color-confidence-skipped-bg:      var(--md-sys-color-surface-container-high);
+  --color-confidence-skipped-text:    var(--md-sys-color-on-surface-variant);
+  --color-confidence-skipped-border:  var(--md-sys-color-outline);
+  /* Tenho certeza (certain) indicator → primary */
+  --color-confidence-certain-dot:     var(--md-sys-color-primary);
 
-  /* Confidence dark-mode variants */
-  --color-confidence-unsure-bg-dark:       rgba(21, 101, 192, 0.18);
-  --color-confidence-unsure-border-dark:   rgba(100, 181, 246, 0.4);
-  --color-confidence-unsure-text-dark:     #90CAF9;
-  --color-confidence-studying-bg-dark:     rgba(0, 105, 92, 0.18);
-  --color-confidence-studying-border-dark: rgba(128, 222, 234, 0.4);
-  --color-confidence-studying-text-dark:   #80DEEA;
-  --color-confidence-should-bg-dark:       rgba(230, 81, 0, 0.18);
-  --color-confidence-should-border-dark:   rgba(255, 213, 79, 0.4);
-  --color-confidence-should-text-dark:     #FFD54F;
-  --color-confidence-skipped-bg-dark:         rgba(255, 202, 40, 0.15);
-  --color-confidence-skipped-border-dark:     rgba(255, 202, 40, 0.4);
+  /* Dark-mode aliases — roles already flip, so these mirror the base tokens */
+  --color-confidence-unsure-bg-dark:        var(--color-confidence-unsure-bg);
+  --color-confidence-unsure-text-dark:      var(--color-confidence-unsure-text);
+  --color-confidence-unsure-border-dark:    var(--color-confidence-unsure-border);
+  --color-confidence-studying-bg-dark:      var(--color-confidence-studying-bg);
+  --color-confidence-studying-text-dark:    var(--color-confidence-studying-text);
+  --color-confidence-studying-border-dark:  var(--color-confidence-studying-border);
+  --color-confidence-should-bg-dark:        var(--color-confidence-should-bg);
+  --color-confidence-should-text-dark:      var(--color-confidence-should-text);
+  --color-confidence-should-border-dark:    var(--color-confidence-should-border);
+  --color-confidence-skipped-bg-dark:       var(--color-confidence-skipped-bg);
+  --color-confidence-skipped-text-dark:     var(--color-confidence-skipped-text);
+  --color-confidence-skipped-border-dark:   var(--color-confidence-skipped-border);
 
-  /* Confidence hover dark variants */
-  --color-confidence-unsure-hover-dark:    rgba(21, 101, 192, 0.28);
-  --color-confidence-should-hover-dark:    rgba(230, 81, 0, 0.28);
-  --color-confidence-studying-hover-dark:  rgba(0, 105, 92, 0.28);
+  /* Hover overlays (dark) — state layer derived from the role accent */
+  --color-confidence-unsure-hover-dark:    color-mix(in srgb, var(--md-sys-color-secondary) 12%, transparent);
+  --color-confidence-studying-hover-dark:  color-mix(in srgb, var(--md-sys-color-tertiary) 12%, transparent);
+  --color-confidence-should-hover-dark:    color-mix(in srgb, var(--md-sys-color-error) 12%, transparent);
 
   /* Interactive border highlights */
   --color-card-border-hover:      rgba(103, 80, 164, 0.15);
@@ -204,6 +216,7 @@
   --z-bar:      199;
   --z-bar-top:  200;
   --z-modal:    300;
+  --z-portal:   9000;
   --z-sheet:    301;
 
   /* Transitions — durations */
@@ -1261,7 +1274,7 @@ md-filter-chip {
 
 .immersive-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: var(--color-progress-gradient);
   border-radius: var(--shape-full);
   transition: width var(--duration-slower) ease;
 }
@@ -1437,7 +1450,7 @@ md-filter-chip {
 
 .confidence-btn--should-know:not(:disabled):hover {
   background: var(--color-confidence-should-bg);
-  border-color: var(--color-confidence-skipped-border);
+  border-color: var(--color-confidence-should-border);
 }
 
 .dark .confidence-btn--should-know:not(:disabled):hover {
@@ -1494,10 +1507,6 @@ md-filter-chip {
   margin-top: var(--space-sm);
 }
 
-.flag-btn .material-symbols-outlined {
-  font-size: var(--icon-size-sm);
-}
-
 .flag-btn:hover {
   background: var(--color-surface-elevated);
   border-color: var(--md-sys-color-outline);
@@ -1534,7 +1543,7 @@ md-filter-chip {
   background: rgba(0, 0, 0, 0.52);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  z-index: 9000;
+  z-index: var(--z-portal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1611,7 +1620,7 @@ md-filter-chip {
 
 .modal-btn {
   flex: 1;
-  padding: 10px var(--space-md);
+  padding: var(--space-sm-md) var(--space-md);
   border-radius: var(--shape-lg);
   font-family: inherit;
   font-size: var(--md-sys-typescale-label-large-size);
@@ -1641,7 +1650,7 @@ md-filter-chip {
 
 .modal-btn--danger {
   background: var(--color-error);
-  color: #fff;
+  color: var(--color-on-error);
 }
 
 .modal-btn--danger:hover { filter: brightness(1.1); }
@@ -1739,7 +1748,7 @@ md-filter-chip {
 }
 
 .exit-modal-btn--confirm:hover {
-  background: #922018;
+  filter: brightness(0.9);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1842,7 +1851,7 @@ md-filter-chip {
 .dark .question-map-btn--skipped {
   background: var(--color-confidence-skipped-bg-dark);
   border-color: var(--color-confidence-skipped-border-dark);
-  color: var(--color-confidence-skipped-border);
+  color: var(--color-confidence-skipped-text-dark);
 }
 
 .question-map-btn--unsure {
@@ -1854,7 +1863,7 @@ md-filter-chip {
 .dark .question-map-btn--unsure {
   background: var(--color-confidence-unsure-bg-dark);
   border-color: var(--color-confidence-unsure-border-dark);
-  color: var(--color-confidence-unsure-border);
+  color: var(--color-confidence-unsure-text-dark);
 }
 
 .question-map-btn--studying {
@@ -1866,7 +1875,7 @@ md-filter-chip {
 .dark .question-map-btn--studying {
   background: var(--color-confidence-studying-bg-dark);
   border-color: var(--color-confidence-studying-border-dark);
-  color: var(--color-confidence-studying-border);
+  color: var(--color-confidence-studying-text-dark);
 }
 
 .question-map-btn--should-know {
@@ -1878,7 +1887,7 @@ md-filter-chip {
 .dark .question-map-btn--should-know {
   background: var(--color-confidence-should-bg-dark);
   border-color: var(--color-confidence-should-border-dark);
-  color: var(--color-confidence-should-border);
+  color: var(--color-confidence-should-text-dark);
 }
 
 /* Legend */
@@ -2653,6 +2662,12 @@ md-outlined-button.btn-full {
   font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Sized icon inside flag button — defined after the base rule to keep
+   ascending specificity (no-descending-specificity). */
+.flag-btn .material-symbols-outlined {
+  font-size: var(--icon-size-sm);
 }
 
 .md-icon--filled {
@@ -3729,12 +3744,12 @@ md-outlined-button.btn-full {
   border-left: 4px solid;
   animation: slideUp 0.3s ease-out;
   pointer-events: auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-md);
 }
 
 .snackbar-icon {
   flex-shrink: 0;
-  font-size: 20px;
+  font-size: var(--icon-size-md);
 }
 
 .snackbar-message {
@@ -3797,7 +3812,7 @@ md-outlined-button.btn-full {
 }
 
 .report-success-icon {
-  font-size: 48px;
+  font-size: var(--icon-size-2xl);
   color: var(--md-sys-color-primary);
   animation: scaleIn 0.4s ease-out;
 }
