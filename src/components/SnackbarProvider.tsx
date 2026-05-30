@@ -15,6 +15,7 @@ interface SnackbarContextType {
 
 const SnackbarContext = createContext<SnackbarContextType | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useSnackbar(): SnackbarContextType {
   const context = useContext(SnackbarContext);
   if (!context) {

@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { ModalOverlay } from '../ModalOverlay'
-import { useSnackbar } from '../SnackbarProvider'
 
 export function ReportIssueModal({
   onConfirm,
@@ -13,7 +12,6 @@ export function ReportIssueModal({
 }) {
   const [comment, setComment] = useState(initialComment || '')
   const [success, setSuccess] = useState(false)
-  const { show: showSnackbar } = useSnackbar()
 
   const handleConfirm = async () => {
     setSuccess(true)
