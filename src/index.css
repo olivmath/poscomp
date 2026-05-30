@@ -126,69 +126,51 @@
   --color-page-gradient:       linear-gradient(135deg, #F3EFF4 0%, #EAE2F8 100%);
   --color-divider:             var(--md-sys-color-outline-variant);
   --color-divider-subtle:      var(--md-sys-color-surface-container-low);
-  --color-progress-gradient:   linear-gradient(90deg, #6750A4, #7D5260);
+  --color-progress-gradient:   linear-gradient(90deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
   --color-error:               var(--md-sys-color-error);
   --color-on-error:            var(--md-sys-color-on-error);
 
-  /* Confidence state colors — tonal palettes MD3 with AA contrast */
-  /* Unsure — Blue (MD3 Blue tonal palette) */
-  --color-confidence-unsure-container:       #E3F2FD;
-  --color-confidence-unsure-on-container:    #0D47A1;
-  --color-confidence-unsure-container-dark:  #0D47A1;
-  --color-confidence-unsure-on-container-dark: #E3F2FD;
-
-  /* Studying — Teal/Cyan (MD3 Teal tonal palette) */
-  --color-confidence-studying-container:       #E0F2F1;
-  --color-confidence-studying-on-container:    #004D40;
-  --color-confidence-studying-container-dark:  #004D40;
-  --color-confidence-studying-on-container-dark: #B2DFDB;
-
-  /* Should Know — Orange/Red (MD3 Deep Orange tonal palette) */
-  --color-confidence-should-container:       #FFE0B2;
-  --color-confidence-should-on-container:    #A52714;
-  --color-confidence-should-container-dark:  #A52714;
-  --color-confidence-should-on-container-dark: #FFE0B2;
-
-  /* Skipped — Amber (MD3 Amber tonal palette) */
-  --color-confidence-skipped-container:       #FFF9C4;
-  --color-confidence-skipped-on-container:    #6D4C00;
-  --color-confidence-skipped-container-dark:  #6D4C00;
-  --color-confidence-skipped-on-container-dark: #FFF9C4;
-
-  /* Certain — Green indicator dot */
-  --color-confidence-certain-dot:             #A5D6A7;
-
-  /* Backwards compatibility aliases (deprecated) */
-  --color-confidence-unsure-bg:       var(--color-confidence-unsure-container);
-  --color-confidence-unsure-border:   var(--md-sys-color-outline);
-  --color-confidence-unsure-text:     var(--color-confidence-unsure-on-container);
-  --color-confidence-studying-bg:     var(--color-confidence-studying-container);
-  --color-confidence-studying-border: var(--md-sys-color-outline);
-  --color-confidence-studying-text:   var(--color-confidence-studying-on-container);
-  --color-confidence-should-bg:       var(--color-confidence-should-container);
-  --color-confidence-should-border:   var(--md-sys-color-outline);
-  --color-confidence-should-text:     var(--color-confidence-should-on-container);
-  --color-confidence-skipped-bg:      var(--color-confidence-skipped-container);
+  /* Confidence state colors — mapped to @material/web MD3 system roles.
+     Each container/on-container pair is an official baseline pair (AA ≥4.5:1
+     light & dark). Roles auto-flip per scheme, so -dark aliases reference the
+     same role and resolve correctly inside `.dark`. */
+  /* Não sei (unsure) → secondary */
+  --color-confidence-unsure-bg:       var(--md-sys-color-secondary-container);
+  --color-confidence-unsure-text:     var(--md-sys-color-on-secondary-container);
+  --color-confidence-unsure-border:   var(--md-sys-color-secondary);
+  /* Estudando (studying) → tertiary */
+  --color-confidence-studying-bg:     var(--md-sys-color-tertiary-container);
+  --color-confidence-studying-text:   var(--md-sys-color-on-tertiary-container);
+  --color-confidence-studying-border: var(--md-sys-color-tertiary);
+  /* Devia saber (should_know) → error */
+  --color-confidence-should-bg:       var(--md-sys-color-error-container);
+  --color-confidence-should-text:     var(--md-sys-color-on-error-container);
+  --color-confidence-should-border:   var(--md-sys-color-error);
+  /* Pulou (skipped) → neutral surface */
+  --color-confidence-skipped-bg:      var(--md-sys-color-surface-container-high);
+  --color-confidence-skipped-text:    var(--md-sys-color-on-surface-variant);
   --color-confidence-skipped-border:  var(--md-sys-color-outline);
-  --color-confidence-skipped-text:    var(--color-confidence-skipped-on-container);
+  /* Tenho certeza (certain) indicator → primary */
+  --color-confidence-certain-dot:     var(--md-sys-color-primary);
 
-  /* Dark mode variants (now using new tokens) */
-  --color-confidence-unsure-bg-dark:        var(--color-confidence-unsure-container-dark);
-  --color-confidence-unsure-border-dark:    var(--md-sys-color-outline);
-  --color-confidence-unsure-text-dark:      var(--color-confidence-unsure-on-container-dark);
-  --color-confidence-studying-bg-dark:      var(--color-confidence-studying-container-dark);
-  --color-confidence-studying-border-dark:  var(--md-sys-color-outline);
-  --color-confidence-studying-text-dark:    var(--color-confidence-studying-on-container-dark);
-  --color-confidence-should-bg-dark:        var(--color-confidence-should-container-dark);
-  --color-confidence-should-border-dark:    var(--md-sys-color-outline);
-  --color-confidence-should-text-dark:      var(--color-confidence-should-on-container-dark);
-  --color-confidence-skipped-bg-dark:       var(--color-confidence-skipped-container-dark);
-  --color-confidence-skipped-border-dark:   var(--md-sys-color-outline);
+  /* Dark-mode aliases — roles already flip, so these mirror the base tokens */
+  --color-confidence-unsure-bg-dark:        var(--color-confidence-unsure-bg);
+  --color-confidence-unsure-text-dark:      var(--color-confidence-unsure-text);
+  --color-confidence-unsure-border-dark:    var(--color-confidence-unsure-border);
+  --color-confidence-studying-bg-dark:      var(--color-confidence-studying-bg);
+  --color-confidence-studying-text-dark:    var(--color-confidence-studying-text);
+  --color-confidence-studying-border-dark:  var(--color-confidence-studying-border);
+  --color-confidence-should-bg-dark:        var(--color-confidence-should-bg);
+  --color-confidence-should-text-dark:      var(--color-confidence-should-text);
+  --color-confidence-should-border-dark:    var(--color-confidence-should-border);
+  --color-confidence-skipped-bg-dark:       var(--color-confidence-skipped-bg);
+  --color-confidence-skipped-text-dark:     var(--color-confidence-skipped-text);
+  --color-confidence-skipped-border-dark:   var(--color-confidence-skipped-border);
 
-  /* Hover variants dark mode */
-  --color-confidence-unsure-hover-dark:    rgba(13, 71, 161, 0.12);
-  --color-confidence-should-hover-dark:    rgba(230, 81, 0, 0.12);
-  --color-confidence-studying-hover-dark:  rgba(0, 77, 64, 0.12);
+  /* Hover overlays (dark) — state layer derived from the role accent */
+  --color-confidence-unsure-hover-dark:    color-mix(in srgb, var(--md-sys-color-secondary) 12%, transparent);
+  --color-confidence-studying-hover-dark:  color-mix(in srgb, var(--md-sys-color-tertiary) 12%, transparent);
+  --color-confidence-should-hover-dark:    color-mix(in srgb, var(--md-sys-color-error) 12%, transparent);
 
   /* Interactive border highlights */
   --color-card-border-hover:      rgba(103, 80, 164, 0.15);
@@ -1468,7 +1450,7 @@ md-filter-chip {
 
 .confidence-btn--should-know:not(:disabled):hover {
   background: var(--color-confidence-should-bg);
-  border-color: var(--color-confidence-skipped-border);
+  border-color: var(--color-confidence-should-border);
 }
 
 .dark .confidence-btn--should-know:not(:disabled):hover {
@@ -1523,10 +1505,6 @@ md-filter-chip {
   transition: background var(--duration-fast) ease, border-color var(--duration-fast) ease, color var(--duration-fast) ease;
   -webkit-tap-highlight-color: transparent;
   margin-top: var(--space-sm);
-}
-
-.flag-btn .material-symbols-outlined {
-  font-size: var(--icon-size-sm);
 }
 
 .flag-btn:hover {
@@ -1873,7 +1851,7 @@ md-filter-chip {
 .dark .question-map-btn--skipped {
   background: var(--color-confidence-skipped-bg-dark);
   border-color: var(--color-confidence-skipped-border-dark);
-  color: var(--color-confidence-skipped-border);
+  color: var(--color-confidence-skipped-text-dark);
 }
 
 .question-map-btn--unsure {
@@ -1885,7 +1863,7 @@ md-filter-chip {
 .dark .question-map-btn--unsure {
   background: var(--color-confidence-unsure-bg-dark);
   border-color: var(--color-confidence-unsure-border-dark);
-  color: var(--color-confidence-unsure-border);
+  color: var(--color-confidence-unsure-text-dark);
 }
 
 .question-map-btn--studying {
@@ -1897,7 +1875,7 @@ md-filter-chip {
 .dark .question-map-btn--studying {
   background: var(--color-confidence-studying-bg-dark);
   border-color: var(--color-confidence-studying-border-dark);
-  color: var(--color-confidence-studying-border);
+  color: var(--color-confidence-studying-text-dark);
 }
 
 .question-map-btn--should-know {
@@ -1909,7 +1887,7 @@ md-filter-chip {
 .dark .question-map-btn--should-know {
   background: var(--color-confidence-should-bg-dark);
   border-color: var(--color-confidence-should-border-dark);
-  color: var(--color-confidence-should-border);
+  color: var(--color-confidence-should-text-dark);
 }
 
 /* Legend */
@@ -2684,6 +2662,12 @@ md-outlined-button.btn-full {
   font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Sized icon inside flag button — defined after the base rule to keep
+   ascending specificity (no-descending-specificity). */
+.flag-btn .material-symbols-outlined {
+  font-size: var(--icon-size-sm);
 }
 
 .md-icon--filled {
