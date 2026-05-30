@@ -3681,4 +3681,132 @@ md-outlined-button.btn-full {
 .status-dot--ok   { background: var(--color-score-high); }
 .status-dot--warn { background: var(--color-score-mid); }
 
+/* ═══════════════════════════════════════════════════════════
+   LOADING MODAL
+═══════════════════════════════════════════════════════════ */
+.loading-modal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--md-sys-color-surface);
+  border-radius: var(--shape-lg);
+  padding: var(--space-lg);
+  max-width: 280px;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.loading-modal-label {
+  font-size: var(--md-sys-typescale-body-medium-size);
+  color: var(--md-sys-color-on-surface);
+  text-align: center;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SNACKBAR
+═══════════════════════════════════════════════════════════ */
+.snackbar-container {
+  position: fixed;
+  bottom: max(80px, var(--space-bottom-nav, 80px));
+  left: var(--space-md);
+  right: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  pointer-events: none;
+  z-index: var(--z-snackbar, 1000);
+}
+
+.snackbar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: var(--md-sys-color-surface-container);
+  border-radius: var(--shape-md);
+  padding: var(--space-md);
+  border-left: 4px solid;
+  animation: slideUp 0.3s ease-out;
+  pointer-events: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.snackbar-icon {
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+.snackbar-message {
+  flex: 1;
+  font-size: var(--md-sys-typescale-body-small-size);
+  color: var(--md-sys-color-on-surface);
+}
+
+.snackbar-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: var(--md-sys-color-on-surface-variant);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.snackbar-close:hover {
+  color: var(--md-sys-color-on-surface);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════════════════════════ */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   REPORT SUCCESS
+═══════════════════════════════════════════════════════════ */
+.report-success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.report-success-icon {
+  font-size: 48px;
+  color: var(--md-sys-color-primary);
+  animation: scaleIn 0.4s ease-out;
+}
+
+.report-success-title {
+  font-size: var(--md-sys-typescale-title-medium-size);
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+  font-weight: 500;
+}
+
 

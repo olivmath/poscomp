@@ -23,6 +23,7 @@ export function Home() {
     selectedOption,
     secondsLeft,
     loading,
+    loadingFinish,
     error,
     result,
     config,
@@ -74,6 +75,7 @@ export function Home() {
         timerMode={config.timerMode}
         questionStatuses={questionStatuses}
         currentIndex={currentIndex}
+        loadingFinish={loadingFinish}
         onSelect={select}
         onNext={next}
         onSkip={skip}

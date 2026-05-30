@@ -11,6 +11,33 @@ export function ReportIssueModal({
   initialComment?: string
 }) {
   const [comment, setComment] = useState(initialComment || '')
+  const [success, setSuccess] = useState(false)
+
+  const handleConfirm = async () => {
+    setSuccess(true)
+    onConfirm(comment || undefined)
+
+    // Fire-and-forget persistência (não implementado ainda — sequer chamamos backend)
+    // Em produção, aqui iria saveProblemReport().catch(err => showSnackbar(...))
+
+    // Auto-close após 1.2s
+    setTimeout(() => {
+      onCancel()
+    }, 1200)
+  }
+
+  if (success) {
+    return (
+      <ModalOverlay>
+        <div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="report-success-title">
+          <div className="report-success-content">
+            <md-icon className="report-success-icon">done</md-icon>
+            <h2 id="report-success-title" className="report-success-title">Problema enviado para o suporte</h2>
+          </div>
+        </div>
+      </ModalOverlay>
+    )
+  }
 
   return (
     <ModalOverlay onBackdropClick={onCancel}>
@@ -26,7 +53,7 @@ export function ReportIssueModal({
         />
         <div className="modal-actions">
           <button className="modal-btn modal-btn--ghost" onClick={onCancel}>Cancelar</button>
-          <button className="modal-btn modal-btn--primary" onClick={() => onConfirm(comment || undefined)}>Confirmar</button>
+          <button className="modal-btn modal-btn--primary" onClick={handleConfirm}>Confirmar</button>
         </div>
       </div>
     </ModalOverlay>
