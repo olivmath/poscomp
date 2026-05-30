@@ -3784,4 +3784,29 @@ md-outlined-button.btn-full {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   REPORT SUCCESS
+═══════════════════════════════════════════════════════════ */
+.report-success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.report-success-icon {
+  font-size: 48px;
+  color: var(--md-sys-color-primary);
+  animation: scaleIn 0.4s ease-out;
+}
+
+.report-success-title {
+  font-size: var(--md-sys-typescale-title-medium-size);
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+  font-weight: 500;
+}
+
 
