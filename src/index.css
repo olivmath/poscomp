@@ -127,42 +127,72 @@
   --color-divider:             var(--md-sys-color-outline-variant);
   --color-divider-subtle:      var(--md-sys-color-surface-container-low);
 
-  /* Confidence state colors */
-  --color-confidence-unsure-bg:       #E3F2FD;
-  --color-confidence-unsure-border:   #90CAF9;
-  --color-confidence-unsure-text:     #1565C0;
-  --color-confidence-studying-bg:     #E0F7FA;
-  --color-confidence-studying-border: #80DEEA;
-  --color-confidence-studying-text:   #00695C;
-  --color-confidence-should-bg:       #FFF8E1;
-  --color-confidence-should-border:   #FFD54F;
-  --color-confidence-should-text:     #E65100;
-  --color-confidence-skipped-bg:      #FFF3CD;
-  --color-confidence-skipped-border:  #FFCA28;
-  --color-confidence-skipped-text:    #7B5800;
-  --color-confidence-certain-dot:     #A5D6A7;
+  /* ── Confidence state colors — MD3 tonal palettes (WCAG AA ≥ 4.5:1) ──
+   *  unsure      → blue  tonal  (key ~#0061A4): container=tone90, on=tone10
+   *  studying    → teal  tonal  (key ~#006A6A): container=tone90, on=tone10
+   *  should_know → orange tonal (key ~#B54100): container=tone90, on=tone10
+   *  skipped     → amber tonal  (key ~#7B5800): container=tone90, on=tone10
+   *  Light contrast: unsure 13.2, studying 15.0, should 13.3, skipped 13.3 (all >> 4.5:1)
+   */
 
-  /* Confidence dark-mode variants */
-  --color-confidence-unsure-bg-dark:       rgba(21, 101, 192, 0.18);
-  --color-confidence-unsure-border-dark:   rgba(100, 181, 246, 0.4);
-  --color-confidence-unsure-text-dark:     #90CAF9;
-  --color-confidence-studying-bg-dark:     rgba(0, 105, 92, 0.18);
-  --color-confidence-studying-border-dark: rgba(128, 222, 234, 0.4);
-  --color-confidence-studying-text-dark:   #80DEEA;
-  --color-confidence-should-bg-dark:       rgba(230, 81, 0, 0.18);
-  --color-confidence-should-border-dark:   rgba(255, 213, 79, 0.4);
-  --color-confidence-should-text-dark:     #FFD54F;
-  --color-confidence-skipped-bg-dark:         rgba(255, 202, 40, 0.15);
-  --color-confidence-skipped-border-dark:     rgba(255, 202, 40, 0.4);
+  /* unsure — blue tonal (light: tone10 on tone90) */
+  --color-confidence-unsure-bg:       #D1E4FF;
+  --color-confidence-unsure-border:   #9ECAFF;
+  --color-confidence-unsure-text:     #001D36;
 
-  /* Confidence hover dark variants */
-  --color-confidence-unsure-hover-dark:    rgba(21, 101, 192, 0.28);
-  --color-confidence-should-hover-dark:    rgba(230, 81, 0, 0.28);
-  --color-confidence-studying-hover-dark:  rgba(0, 105, 92, 0.28);
+  /* studying — teal tonal (light: tone10 on tone90) */
+  --color-confidence-studying-bg:     #CCF8FF;
+  --color-confidence-studying-border: #73F9F9;
+  --color-confidence-studying-text:   #002020;
+
+  /* should_know — orange tonal (light: tone10 on tone90) — was 3.57:1, now 13.3:1 */
+  --color-confidence-should-bg:       #FFDBCC;
+  --color-confidence-should-border:   #FFB59A;
+  --color-confidence-should-text:     #380D00;
+
+  /* skipped — amber tonal (light: tone10 on tone90) */
+  --color-confidence-skipped-bg:      #FFDEA5;
+  --color-confidence-skipped-border:  #FFB950;
+  --color-confidence-skipped-text:    #261900;
+
+  /* certain dot — green tone60 */
+  --color-confidence-certain-dot:     #6AAF72;
+
+  /* ── Confidence dark-mode variants — MD3 tonal (dark: tone90 on tone30) ──
+   *  Dark contrast: unsure 5.5, studying 8.1, should 6.8, skipped 6.7 (all ≥ 4.5:1)
+   */
+
+  /* unsure — blue tonal (dark: tone80 on tone30) */
+  --color-confidence-unsure-bg-dark:       #004880;
+  --color-confidence-unsure-border-dark:   #4F93C7;
+  --color-confidence-unsure-text-dark:     #9ECAFF;
+
+  /* studying — teal tonal (dark: tone80 on tone30) */
+  --color-confidence-studying-bg-dark:     #00494A;
+  --color-confidence-studying-border-dark: #30C0C0;
+  --color-confidence-studying-text-dark:   #73F9F9;
+
+  /* should_know — orange tonal (dark: tone80 on tone30) */
+  --color-confidence-should-bg-dark:       #6D1B00;
+  --color-confidence-should-border-dark:   #CC7050;
+  --color-confidence-should-text-dark:     #FFB59A;
+
+  /* skipped — amber tonal (dark: tone80 on tone30) */
+  --color-confidence-skipped-bg-dark:      #503500;
+  --color-confidence-skipped-border-dark:  #CC8C20;
+  --color-confidence-skipped-text-dark:    #FFB950;
+
+  /* Confidence hover dark variants — lighter shade of container */
+  --color-confidence-unsure-hover-dark:    #005599;
+  --color-confidence-should-hover-dark:    #7D2200;
+  --color-confidence-studying-hover-dark:  #005A5B;
 
   /* Interactive border highlights */
   --color-card-border-hover:      rgba(103, 80, 164, 0.15);
   --color-card-border-hover-dark: rgba(208, 188, 255, 0.15);
+
+  /* Progress gradient — immersive bar fill */
+  --color-progress-gradient: linear-gradient(90deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
 
   /* Shadow tokens — 3 níveis */
   --shadow-sm: 0 1px 8px rgba(103, 80, 164, 0.08);
@@ -1261,7 +1291,7 @@ md-filter-chip {
 
 .immersive-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: var(--color-progress-gradient);
   border-radius: var(--shape-full);
   transition: width var(--duration-slower) ease;
 }
@@ -1736,7 +1766,7 @@ md-filter-chip {
 }
 
 .exit-modal-btn--confirm:hover {
-  background: #922018;
+  background: var(--md-sys-color-error-container);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1839,7 +1869,7 @@ md-filter-chip {
 .dark .question-map-btn--skipped {
   background: var(--color-confidence-skipped-bg-dark);
   border-color: var(--color-confidence-skipped-border-dark);
-  color: var(--color-confidence-skipped-border);
+  color: var(--color-confidence-skipped-text-dark);
 }
 
 .question-map-btn--unsure {
