@@ -84,6 +84,23 @@ resolve-flagged:
 	@read -p "Enter flag ID to resolve: " id; \
 	npx tsx scripts/resolve-flagged.ts "$$id"
 
+# ── Local Admin ───────────────────────────────────────────────────────────────
+local-get-flagged: get-flagged
+local-resolve-flagged: resolve-flagged
+
+# ── Dev Admin ─────────────────────────────────────────────────────────────────
+dev-get-flagged: get-flagged
+dev-resolve-flagged: resolve-flagged
+
+# ── Helper ────────────────────────────────────────────────────────────────────
+helper:
+	@echo "Available commands:"
+	@echo "  make local-get-flagged     - View flagged questions (local)"
+	@echo "  make local-resolve-flagged - Resolve a flagged question (local)"
+	@echo "  make dev-get-flagged       - View flagged questions (dev)"
+	@echo "  make dev-resolve-flagged   - Resolve a flagged question (dev)"
+	@echo "  (and others documented in help)"
+
 # ── Deploy ────────────────────────────────────────────────────────────────────
 deploy-hosting:
 	firebase deploy --only hosting
