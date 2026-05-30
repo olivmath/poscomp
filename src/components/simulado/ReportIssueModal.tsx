@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ModalOverlay } from '../ModalOverlay'
+import { useSnackbar } from '../SnackbarProvider'
 
 export function ReportIssueModal({
   onConfirm,
@@ -12,27 +13,45 @@ export function ReportIssueModal({
 }) {
   const [comment, setComment] = useState(initialComment || '')
   const [success, setSuccess] = useState(false)
+  const { show: showSnackbar } = useSnackbar()
 
-  const handleConfirm = async () => {
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        onCancel()
+      }, 1200)
+      return () => clearTimeout(timer)
+    }
+  }, [success, onCancel])
+
+  const handleSubmit = async () => {
     setSuccess(true)
+
+    // Fire-and-forget com snackbar de erro
+    try {
+      // TODO: chamar função de persistência quando existir
+      // await saveProblemReport(comment)
+    } catch {
+      showSnackbar('Erro ao enviar relatório', 'error')
+      setSuccess(false)
+    }
+
     onConfirm(comment || undefined)
-
-    // Fire-and-forget persistência (não implementado ainda — sequer chamamos backend)
-    // Em produção, aqui iria saveProblemReport().catch(err => showSnackbar(...))
-
-    // Auto-close após 1.2s
-    setTimeout(() => {
-      onCancel()
-    }, 1200)
   }
 
   if (success) {
     return (
       <ModalOverlay>
-        <div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="report-success-title">
+        <div
+          className="modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="report-success-title"
+        >
           <div className="report-success-content">
-            <md-icon className="report-success-icon">done</md-icon>
-            <h2 id="report-success-title" className="report-success-title">Problema enviado para o suporte</h2>
+            <span className="material-symbols-outlined report-success-icon">done</span>
+            <h2 id="report-success-title" className="modal-title">Problema enviado</h2>
+            <p className="modal-body">Obrigado por reportar. Analisaremos em breve.</p>
           </div>
         </div>
       </ModalOverlay>
@@ -41,7 +60,12 @@ export function ReportIssueModal({
 
   return (
     <ModalOverlay onBackdropClick={onCancel}>
-      <div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="report-modal-title">
+      <div
+        className="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="report-modal-title"
+      >
         <h2 id="report-modal-title" className="modal-title">Reportar problema</h2>
         <textarea
           className="modal-textarea"
@@ -52,8 +76,12 @@ export function ReportIssueModal({
           autoFocus
         />
         <div className="modal-actions">
-          <button className="modal-btn modal-btn--ghost" onClick={onCancel}>Cancelar</button>
-          <button className="modal-btn modal-btn--primary" onClick={handleConfirm}>Confirmar</button>
+          <button className="modal-btn modal-btn--ghost" onClick={onCancel}>
+            Cancelar
+          </button>
+          <button className="modal-btn modal-btn--primary" onClick={handleSubmit}>
+            Enviar
+          </button>
         </div>
       </div>
     </ModalOverlay>

@@ -20,9 +20,9 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <AuthProvider>
         <SnackbarProvider>
-        <SrsProvider>
-        <ImmersiveModeProvider>
-        <Routes>
+          <SrsProvider>
+            <ImmersiveModeProvider>
+              <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<ProtectedLayout><Home /></ProtectedLayout>} />
           <Route path="/historico" element={<ProtectedLayout><Historico /></ProtectedLayout>} />
@@ -30,9 +30,9 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/revisao" element={<ProtectedLayout><Revisao /></ProtectedLayout>} />
           <Route path="/perfil" element={<ProtectedLayout><Perfil /></ProtectedLayout>} />
 <Route path="*" element={<ProtectedLayout><Navigate to="/" replace /></ProtectedLayout>} />
-        </Routes>
-        </ImmersiveModeProvider>
-        </SrsProvider>
+              </Routes>
+            </ImmersiveModeProvider>
+          </SrsProvider>
         </SnackbarProvider>
       </AuthProvider>
     </BrowserRouter>

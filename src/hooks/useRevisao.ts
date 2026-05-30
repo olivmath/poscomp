@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from 'react'
 import { useAuth } from './useAuth'
+import { useSnackbar } from '../components/SnackbarProvider'
 import { callGetPendingCards, callReviewCard } from './useFunctions'
 import type { PendingCardOutput } from './useFunctions'
 import type { Question } from '../types'
@@ -15,6 +16,7 @@ export interface AdaptedCard {
 
 export function useRevisao() {
   const { user } = useAuth()
+  const { show: showSnackbar } = useSnackbar()
   const [cards, setCards] = useState<PendingCardOutput[]>([])
   const [loading, setLoading] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -37,6 +39,7 @@ export function useRevisao() {
         setCards(data.cards)
       } catch (err) {
         console.error('[CF] getPendingCards (revisao) erro:', err)
+        showSnackbar('Erro ao carregar cards para revisão', 'error')
         setCards([])
       } finally {
         setLoading(false)
@@ -44,7 +47,7 @@ export function useRevisao() {
     }
 
     fetchCards()
-  }, [user])
+  }, [user, showSnackbar])
 
   // ── sortedCards: backend already sorts P1→P2→P3, dueDate ASC ────────────
   const sortedCards = useMemo(() => cards, [cards])

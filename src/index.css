@@ -3682,23 +3682,29 @@ md-outlined-button.btn-full {
    LOADING MODAL
 ═══════════════════════════════════════════════════════════ */
 .loading-modal-card {
+  background: var(--color-card-bg);
+  border-radius: var(--shape-2xl);
+  padding: var(--space-xl) var(--space-lg);
+  width: 100%;
+  max-width: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-sm);
-  background: var(--md-sys-color-surface);
-  border-radius: var(--shape-lg);
-  padding: var(--space-lg);
-  max-width: 280px;
-  animation: scaleIn 0.3s ease-out;
+  gap: var(--space-lg);
+  box-shadow: var(--shadow-modal);
+  animation: scaleIn var(--duration-base) cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .loading-modal-label {
+  margin: 0;
   font-size: var(--md-sys-typescale-body-medium-size);
   color: var(--md-sys-color-on-surface);
   text-align: center;
-  margin: 0;
-  font-weight: 500;
+}
+
+md-circular-progress {
+  --md-circular-progress-size: 48px;
+  --md-circular-progress-color: var(--md-sys-color-primary);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -3706,27 +3712,38 @@ md-outlined-button.btn-full {
 ═══════════════════════════════════════════════════════════ */
 .snackbar-container {
   position: fixed;
-  bottom: max(80px, var(--space-bottom-nav, 80px));
+  bottom: calc(var(--space-bottom-nav, 80px) + var(--space-md));
   left: var(--space-md);
   right: var(--space-md);
+  z-index: var(--z-snackbar, 1000);
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
   pointer-events: none;
-  z-index: var(--z-snackbar, 1000);
 }
 
 .snackbar-item {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border-radius: var(--shape-lg);
+  padding: var(--space-md) var(--space-lg);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-md);
-  background: var(--md-sys-color-surface-container);
-  border-radius: var(--shape-md);
-  padding: var(--space-md);
-  border-left: var(--border-md) solid;
-  animation: slideUp var(--duration-base) ease-out;
-  pointer-events: auto;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-modal);
+  animation: slideUp var(--duration-base) ease;
+  pointer-events: all;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.snackbar-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
 }
 
 .snackbar-icon {
@@ -3735,25 +3752,32 @@ md-outlined-button.btn-full {
 }
 
 .snackbar-message {
-  flex: 1;
-  font-size: var(--md-sys-typescale-body-small-size);
-  color: var(--md-sys-color-on-surface);
+  font-size: var(--md-sys-typescale-body-medium-size);
+  font-weight: 500;
 }
 
-.snackbar-close {
+.snackbar-close-btn {
   background: none;
   border: none;
+  color: inherit;
   cursor: pointer;
-  padding: 0;
   display: flex;
   align-items: center;
-  color: var(--md-sys-color-on-surface-variant);
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--shape-circle);
   flex-shrink: 0;
-  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--duration-fast) ease;
 }
 
-.snackbar-close:hover {
-  color: var(--md-sys-color-on-surface);
+.snackbar-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.snackbar-close-btn span {
+  font-size: var(--icon-size-md);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -3789,21 +3813,12 @@ md-outlined-button.btn-full {
   flex-direction: column;
   align-items: center;
   gap: var(--space-md);
-  padding: var(--space-lg);
   text-align: center;
 }
 
 .report-success-icon {
-  font-size: var(--icon-size-xl);
+  font-size: var(--icon-size-2xl);
   color: var(--md-sys-color-primary);
-  animation: scaleIn 0.4s ease-out;
-}
-
-.report-success-title {
-  font-size: var(--md-sys-typescale-title-medium-size);
-  color: var(--md-sys-color-on-surface);
-  margin: 0;
-  font-weight: 500;
 }
 
 
