@@ -2060,6 +2060,7 @@ md-filter-chip {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  padding-bottom: calc(var(--space-xxl) * 3);
 }
 
 .simulado-option {
