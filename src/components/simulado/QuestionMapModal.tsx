@@ -2,11 +2,11 @@ import { ModalOverlay } from '../ModalOverlay'
 import type { QuestionStatus } from '../../types'
 
 const LEGEND = [
-  { status: 'unvisited',   label: 'Não visitada', icon: 'radio_button_unchecked' },
-  { status: 'skipped',     label: 'Pulada',        icon: 'skip_next' },
-  { status: 'unsure',      label: 'Não sei',       icon: 'help_outline' },
-  { status: 'studying',    label: 'Estudando',     icon: 'school' },
-  { status: 'should_know', label: 'Devia saber',   icon: 'warning' },
+  { status: 'unvisited',   label: 'Não visitada' },
+  { status: 'skipped',     label: 'Pulada'        },
+  { status: 'unsure',      label: 'Não sei'        },
+  { status: 'studying',    label: 'Estudando'      },
+  { status: 'should_know', label: 'Devia saber'    },
 ] as const
 
 export function QuestionMapModal({
@@ -45,9 +45,9 @@ export function QuestionMapModal({
         </div>
 
         <div className="question-map-legend">
-          {LEGEND.map(({ status, label, icon }) => (
+          {LEGEND.map(({ status, label }) => (
             <span key={status} className="map-legend-item">
-              <span className={`material-symbols-outlined map-legend-icon map-legend-icon--${status.replace(/_/g, '-')}`}>{icon}</span>
+              <span className={`map-legend-dot map-legend-dot--${status.replace(/_/g, '-')}`} />
               {label}
             </span>
           ))}

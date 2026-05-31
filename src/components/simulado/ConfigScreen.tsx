@@ -1,13 +1,16 @@
 import '@material/web/button/filled-button.js'
 import '@material/web/button/outlined-button.js'
-import '@material/web/chips/chip-set.js'
-import '@material/web/chips/filter-chip.js'
-import '@material/web/labs/segmentedbuttonset/outlined-segmented-button-set.js'
-import '@material/web/labs/segmentedbutton/outlined-segmented-button.js'
 import { useState } from 'react'
 import type { Area, SimuladoConfig } from '../../types'
+import { AREA_ICONS } from '../../utils/areaIcons'
 
 const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
+
+const AREA_SHORT: Record<Area, string> = {
+  'Matemática': 'Matemática',
+  'Fundamentos da Computação': 'Fund. Computação',
+  'Tecnologia da Computação': 'Tec. Computação',
+}
 
 export function ConfigScreen({
   initialConfig,
@@ -36,54 +39,86 @@ export function ConfigScreen({
       <div className="simulado-card">
         <h2 className="config-title">Configurar Simulado</h2>
 
-        <div className="config-section config-section--full">
-          <p className="config-label">Temas</p>
-          <md-chip-set className="area-chips area-chips--mt">
-            <md-filter-chip label="Todas" selected={areas.length === 0} onClick={() => setAreas([])} data-testid="chip-all" />
+        {/* Step 1 — Temas / Áreas */}
+        <div className="config-step">
+          <div className="config-step-header">
+            <span className="config-step-badge">1</span>
+            <p className="config-label">Temas</p>
+          </div>
+          <div className="area-chips">
+            <button
+              className={`area-chip${areas.length === 0 ? ' area-chip--active' : ''}`}
+              onClick={() => setAreas([])}
+              data-testid="chip-all"
+              aria-pressed={areas.length === 0}
+            >
+              <span className="material-symbols-outlined area-chip-icon">apps</span>
+              Todas
+            </button>
             {AREAS.map(area => (
-              <md-filter-chip
+              <button
                 key={area}
-                label={area}
-                selected={areas.includes(area)}
+                className={`area-chip${areas.includes(area) ? ' area-chip--active' : ''}`}
                 onClick={() => toggleArea(area)}
                 data-testid={`chip-${area}`}
-              />
+                aria-pressed={areas.includes(area)}
+              >
+                <span className="material-symbols-outlined area-chip-icon">{AREA_ICONS[area]}</span>
+                {AREA_SHORT[area]}
+              </button>
             ))}
-          </md-chip-set>
+          </div>
         </div>
 
-        <div className="config-section config-section--full config-section--mt">
-          <p className="config-label">Nº de questões</p>
-          <md-outlined-segmented-button-set className="segmented-buttons--mt config-segmented">
+        {/* Step 2 — Nº de questões */}
+        <div className="config-step">
+          <div className="config-step-header">
+            <span className="config-step-badge">2</span>
+            <p className="config-label">Nº de questões</p>
+          </div>
+          <div className="segmented-buttons segmented-buttons--mt">
             {[5, 10, 20, 0].map(val => (
-              <md-outlined-segmented-button
+              <button
                 key={val}
-                label={val === 0 ? 'Máximo' : String(val)}
-                selected={totalQuestions === val}
+                className={`segmented-btn${totalQuestions === val ? ' active' : ''}`}
                 onClick={() => setTotalQuestions(val)}
                 data-testid={`q-${val === 0 ? 'max' : val}`}
-              />
+              >
+                {val === 0 ? 'Máximo' : String(val)}
+              </button>
             ))}
-          </md-outlined-segmented-button-set>
+          </div>
         </div>
 
-        <div className="config-section config-section--full config-section--mt">
-          <p className="config-label">Tempo por questão</p>
-          <md-outlined-segmented-button-set className="segmented-buttons--mt config-segmented">
-            <md-outlined-segmented-button label="Sem limite" selected={timerMode === 'none'} onClick={() => setTimerMode('none')} data-testid="t-none" />
-            <md-outlined-segmented-button
-              label="1 min"
-              selected={timerMode === 'per-question' && secondsPerQuestion === 60}
+        {/* Step 3 — Tempo */}
+        <div className="config-step">
+          <div className="config-step-header">
+            <span className="config-step-badge">3</span>
+            <p className="config-label">Tempo por questão</p>
+          </div>
+          <div className="segmented-buttons segmented-buttons--mt">
+            <button
+              className={`segmented-btn${timerMode === 'none' ? ' active' : ''}`}
+              onClick={() => setTimerMode('none')}
+              data-testid="t-none"
+            >
+              Sem limite
+            </button>
+            <button
+              className={`segmented-btn${timerMode === 'per-question' && secondsPerQuestion === 60 ? ' active' : ''}`}
               onClick={() => { setTimerMode('per-question'); setSecondsPerQuestion(60) }}
               data-testid="t-1min"
-            />
-            <md-outlined-segmented-button
-              label="2 min"
-              selected={timerMode === 'per-question' && secondsPerQuestion === 120}
+            >
+              1 min
+            </button>
+            <button
+              className={`segmented-btn${timerMode === 'per-question' && secondsPerQuestion === 120 ? ' active' : ''}`}
               onClick={() => { setTimerMode('per-question'); setSecondsPerQuestion(120) }}
               data-testid="t-2min"
-            />
-          </md-outlined-segmented-button-set>
+            >
+              2 min
+            </button>
+          </div>
         </div>
 
         <div className="simulado-actions simulado-actions--mt-lg">
