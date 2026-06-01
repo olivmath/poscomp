@@ -4,9 +4,11 @@ import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useResults } from '../hooks/useResults'
 import { useSimulado } from '../hooks/useSimulado'
+import { useAnnouncements } from '../hooks/useAnnouncements'
 import { useImmersiveMode } from '../contexts/ImmersiveModeContext'
 import { WeekHeader } from '../components/home/WeekHeader'
 import { AnalysisCarousel } from '../components/home/AnalysisCarousel'
+import { AnnouncementBanner } from '../components/AnnouncementBanner'
 import { RelatorioFinal } from '../components/RelatorioFinal'
 import { ConfigScreen } from '../components/simulado/ConfigScreen'
 import { RunningScreen } from '../components/simulado/RunningScreen'
@@ -16,6 +18,7 @@ export function Home() {
   const location = useLocation()
   const { analytics, loading: analyticsLoading } = useResults()
   const { setImmersive } = useImmersiveMode()
+  const announcements = useAnnouncements()
   const {
     state,
     questions,
@@ -99,6 +102,7 @@ export function Home() {
   return (
     <main className="page-shell">
       <section className="section-stack">
+        <AnnouncementBanner announcements={announcements} />
         <WeekHeader activeDays={activeDays} streak={streak} />
         <AnalysisCarousel analytics={analytics} loading={analyticsLoading} />
       </section>

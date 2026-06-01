@@ -1,5 +1,13 @@
 {
   "projects": {
     "default": "poscomp-olivmath"
+  },
+  "targets": {
+    "poscomp-olivmath": {
+      "hosting": {
+        "app": ["poscomp-olivmath"],
+        "admin": ["poscomp-admin"]
+      }
+    }
   }
 }

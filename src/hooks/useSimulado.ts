@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, useMemo } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { useSnackbar } from '../components/SnackbarProvider'
-import { callGetSimuladoQuestions, callFinishSimulado } from './useFunctions'
+import { callGetSimuladoQuestions, callFinishSimulado, callReportQuestion } from './useFunctions'
 import type {
   Question,
   Option,
@@ -114,7 +114,6 @@ export function useSimulado(): UseSimuladoReturn {
           questionId: a.questionId,
           selected: a.selected,
           confidence: a.confidence,
-          ...(a.issue ? { issue: a.issue } : {}),
         }))
 
       console.log('[CF] finishSimulado →', answeredInputs.length, 'respostas')
@@ -243,6 +242,13 @@ export function useSimulado(): UseSimuladoReturn {
         skipped: false,
         confidence,
         ...(issue ? { issue } : {}),
+      }
+
+      // Fire-and-forget: envia o report imediatamente sem bloquear o fluxo
+      if (issue) {
+        callReportQuestion({ questionId: current.id, comment: issue.comment }).catch((err) =>
+          console.error('[reportQuestion] falhou:', err)
+        )
       }
 
       const updated = [

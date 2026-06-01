@@ -2,15 +2,35 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // questions: qualquer usuário autenticado pode ler
-    match /questions/{questionId} {
-      allow read: if request.auth != null;
-      allow write: if false; // somente via Admin SDK / seed
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
     }
 
-    // users: cada usuário lê/escreve apenas seus próprios dados
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // questions: leitura autenticada, escrita só admin
+    match /questions/{questionId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // users: próprio dono OU admin pode ler/escrever
     match /users/{userId}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // announcements: leitura autenticada, escrita só admin
+    match /announcements/{id} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // flagged_questions: usuário autenticado reporta (write), só admin resolve/deleta
+    match /flagged_questions/{id} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
     }
   }
 }

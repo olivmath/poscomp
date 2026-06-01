@@ -84,3 +84,13 @@ export interface SrsCard {
 }
 
 export type Grade = 1 | 3 | 5
+
+export interface Announcement {
+  id: string
+  message: string
+  active: boolean
+  type: 'info' | 'warning' | 'success'
+  url?: string | null
+  createdAt: Timestamp
+  expiresAt?: Timestamp | null
+}
