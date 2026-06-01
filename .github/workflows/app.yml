@@ -16,6 +16,7 @@ on:
       - '.stylelintrc.json'
       - 'stylelint-plugins/**'
       - 'playwright.config.*'
+      - 'firestore.rules'
       - '.github/workflows/app.yml'
   pull_request:
     branches: [main]
@@ -31,6 +32,7 @@ on:
       - '.stylelintrc.json'
       - 'stylelint-plugins/**'
       - 'playwright.config.*'
+      - 'firestore.rules'
       - '.github/workflows/app.yml'
 
 permissions:
@@ -206,6 +208,8 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           channelId: live
           projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
+      - name: Deploy Firestore rules
+        run: npx firebase-tools@latest deploy --only firestore:rules --project ${{ secrets.FIREBASE_PROJECT_ID }}
 
   auto_merge:
     if: github.event_name == 'pull_request'
