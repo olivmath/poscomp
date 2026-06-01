@@ -3,8 +3,84 @@ import { collection, getDocs, orderBy, query } from 'firebase/firestore'
 import { httpsCallable } from 'firebase/functions'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import rehypeSanitize from 'rehype-sanitize'
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import { db, functions } from '../firebase'
+
+const sanitizeSchema = {
+  ...defaultSchema,
+  attributes: {
+    ...defaultSchema.attributes,
+    a: [...(defaultSchema.attributes?.a ?? []), 'target', 'rel', 'class', /^data-/],
+    img: ['src', 'alt', 'title', 'width', 'height', 'style'],
+    iframe: ['src', 'width', 'height', 'frameborder', 'style', 'allow', 'aria-hidden', 'tabindex'],
+    div: [...(defaultSchema.attributes?.div ?? []), 'style', 'class'],
+  },
+  tagNames: [...(defaultSchema.tagNames ?? []), 'img', 'iframe'],
+}
+
+const mdComponents = {
+  a: ({ href, className, children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    <a href={href} className={className} target="_blank" rel="noopener noreferrer" {...rest}>{children}</a>
+  ),
+  img: ({ src, alt, width, height, style }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    <img src={src} alt={alt} width={width} height={height}
+      style={{ maxWidth: '100%', borderRadius: 6, marginTop: 4, ...(style as React.CSSProperties) }} />
+  ),
+  iframe: ({ src, width, height, ...rest }: React.IframeHTMLAttributes<HTMLIFrameElement>) => (
+    <div style={{ width: '100%', overflowX: 'auto', marginTop: 6 }}>
+      <iframe src={src} width={width ?? '100%'} height={height ?? 400}
+        style={{ maxWidth: '100%', display: 'block', border: 'none', borderRadius: 6 }}
+        {...rest} />
+    </div>
+  ),
+}
+
+function collapseHtmlTags(md: string): string {
+  return md.replace(/<[^<>]+>/gs, (tag) => tag.replace(/\s*\n\s*/g, ' '))
+}
+
+const HELP_CONTENT = `
+## Texto
+| Markdown | Resultado |
+|---|---|
+| \`**negrito**\` | **negrito** |
+| \`_itálico_\` | _itálico_ |
+| \`# Título\` | título grande |
+| \`## Subtítulo\` | título médio |
+
+## Links
+\`\`\`
+[Texto do link](https://exemplo.com)
+\`\`\`
+
+## Imagens
+\`\`\`markdown
+![descrição](https://url-da-imagem.png)
+\`\`\`
+Ou com tamanho customizado:
+\`\`\`html
+<img src="https://url.png" width="300" alt="descrição">
+\`\`\`
+
+## iFrame (embed externo)
+\`\`\`html
+<iframe
+  src="https://luma.com/embed/event/evt-xxx/simple"
+  width="600" height="450"
+  frameborder="0"
+  allow="fullscreen; payment"
+></iframe>
+\`\`\`
+
+## Botão de evento Luma
+> ⚠️ Tags HTML devem estar em **uma única linha** — multi-linha não é interpretado como HTML.
+
+\`\`\`html
+<a href="https://luma.com/event/evt-xxx" class="luma-checkout--button" data-luma-action="checkout" data-luma-event-id="evt-xxx">Cadastrar-se no Evento</a>
+\`\`\`
+> O script do Luma é carregado automaticamente — não precisa colar a tag \`<script>\`.
+`
 
 interface Announcement {
   id: string
@@ -31,6 +107,7 @@ export function BannersPage() {
   const [editing, setEditing] = useState<Announcement | null>(null)
   const [form, setForm] = useState(EMPTY_FORM)
   const [saving, setSaving] = useState(false)
+  const [showHelp, setShowHelp] = useState(false)
   const [deleting, setDeleting] = useState<string | null>(null)
   const [toggling, setToggling] = useState<string | null>(null)
 
@@ -76,9 +153,8 @@ export function BannersPage() {
     if (!b.active) {
       const currentActive = banners.find((x) => x.active && x.id !== b.id)
       if (currentActive) {
-        const msg = currentActive.message.length > 60
-          ? currentActive.message.slice(0, 60) + '…'
-          : currentActive.message
+        const plain = currentActive.message.replace(/<[^>]*>/g, '').replace(/[#*_`[\]!]/g, '').trim()
+        const msg = plain.length > 60 ? plain.slice(0, 60) + '…' : plain
         const ok = confirm(`Ativar este banner vai desativar:\n\n"${msg}"\n\nContinuar?`)
         if (!ok) return
       }
@@ -107,7 +183,9 @@ export function BannersPage() {
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, flex: 1, minWidth: 0 }}>
                 <span className={`badge ann-${b.type}`} style={{ marginTop: 2, flexShrink: 0 }}>{b.type}</span>
                 <div style={{ minWidth: 0 }}>
-                  <p style={{ fontSize: 14, color: 'var(--text-primary)', fontWeight: 500, marginBottom: b.url ? 4 : 0 }}>{b.message}</p>
+                  <p style={{ fontSize: 14, color: 'var(--text-primary)', fontWeight: 500, marginBottom: b.url ? 4 : 0 }}>
+                    {b.message.replace(/<[^>]*>/g, '').replace(/[#*_`[\]!]/g, '').trim().slice(0, 120) || '(sem texto)'}
+                  </p>
                   {b.url && (
                     <a
                       href={b.url}
@@ -148,7 +226,22 @@ export function BannersPage() {
             </div>
             <div className="modal-body">
               <div className="field" style={{ marginBottom: '1rem' }}>
-                <label className="field-label">Mensagem (Markdown)</label>
+                <label className="field-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  Mensagem (Markdown)
+                  <button
+                    type="button"
+                    onClick={() => setShowHelp(true)}
+                    title="Ver guia de formatação"
+                    style={{
+                      width: 18, height: 18, borderRadius: '50%',
+                      border: '1px solid var(--text-muted)',
+                      background: 'transparent', color: 'var(--text-muted)',
+                      fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      lineHeight: 1, padding: 0,
+                    }}
+                  >i</button>
+                </label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, alignItems: 'start' }}>
                   <textarea
                     rows={5}
@@ -156,7 +249,7 @@ export function BannersPage() {
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     className="input"
                     style={{ resize: 'vertical', fontFamily: 'monospace', fontSize: 13 }}
-                    placeholder="Suporta **negrito**, _itálico_, [links](url), `código`..."
+                    placeholder="Suporta **negrito**, _itálico_, [links](url), ![img](url), `código`..."
                   />
                   <div style={{
                     border: '1px solid var(--card-border)',
@@ -170,8 +263,12 @@ export function BannersPage() {
                   }}>
                     {form.message ? (
                       <div className="md-preview">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
-                          {form.message}
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}
+                          components={mdComponents}
+                        >
+                          {collapseHtmlTags(form.message)}
                         </ReactMarkdown>
                       </div>
                     ) : (
@@ -211,6 +308,25 @@ export function BannersPage() {
               <button onClick={handleSave} disabled={saving} className="btn btn-primary">
                 {saving ? 'Salvando...' : 'Salvar'}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showHelp && (
+        <div className="modal-backdrop" style={{ zIndex: 200 }}>
+          <div className="modal modal-lg">
+            <div className="modal-header">
+              <h2 className="modal-title">Guia de formatação do banner</h2>
+              <button onClick={() => setShowHelp(false)} className="modal-close">×</button>
+            </div>
+            <div className="modal-body" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
+              <div className="md-preview" style={{ fontSize: 13, lineHeight: 1.7 }}>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{HELP_CONTENT}</ReactMarkdown>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button onClick={() => setShowHelp(false)} className="btn btn-primary">Entendido</button>
             </div>
           </div>
         </div>

@@ -4,14 +4,16 @@
 # Leaf words that appear as 2nd/3rd goals after a namespace become no-ops.
 # Namespace targets (local, dev, func, app) use inline guards instead.
 ifneq ($(filter local dev func app,$(firstword $(MAKECMDGOALS))),)
-up down restart seed gf rf get-flagged resolve-flagged deploy install build lint typecheck test:
+up down restart seed gf rf get-flagged resolve-flagged deploy install build lint typecheck test admin set-admin:
+	@:
+.DEFAULT:
 	@:
 endif
 
 .PHONY: help validate \
         deploy-hosting deploy-functions deploy \
         local dev func app \
-        up seed gf rf get-flagged resolve-flagged deploy \
+        up seed gf rf get-flagged resolve-flagged deploy admin \
         install build lint typecheck test
 
 # ── Help ──────────────────────────────────────────────────────────────────────
@@ -38,13 +40,17 @@ help:
 	@echo "  make local up        Start Firebase emulators (builds functions first)"
 	@echo "  make local down      Stop Firebase emulators (kill ports)"
 	@echo "  make local restart   Stop + rebuild + start emulators"
-	@echo "  make local app       Vite dev server connected to emulators"
+	@echo "  make local app       Vite dev server connected to emulators (port 5173)"
+	@echo "  make local admin     Admin panel dev server connected to emulators (port 5174)"
+	@echo "  make local set-admin foo@bar.com         Set admin:true claim (emulator)"
 	@echo "  make local seed      Seed questions into local Firestore emulator"
 	@echo "  make local gf        List pending flagged questions (emulator)"
 	@echo "  make local rf        Resolve a flagged question (emulator)"
 	@echo ""
 	@echo "dev:"
-	@echo "  make dev app         Vite dev server connected to real Firebase (prod)"
+	@echo "  make dev app         Vite dev server connected to real Firebase (port 5173)"
+	@echo "  make dev admin       Admin panel dev server connected to real Firebase (port 5174)"
+	@echo "  make dev set-admin foo@bar.com           Set admin:true claim (prod, uses ADC)"
 	@echo "  make dev seed        Seed questions into real Firestore (prod, uses ADC)"
 	@echo "  make dev gf          List pending flagged questions (prod)"
 	@echo "  make dev rf          Resolve a flagged question (prod)"
@@ -93,6 +99,10 @@ local:
 			firebase emulators:start --only auth,functions,firestore ;; \
 		app) \
 			VITE_USE_EMULATOR=true pnpm dev ;; \
+		admin) \
+			VITE_USE_EMULATOR=true pnpm --prefix $(CURDIR)/admin dev ;; \
+		set-admin) \
+			FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIREBASE_PROJECT_ID=poscomp-olivmath pnpm tsx scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
 		seed) \
 			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed ;; \
 		get-flagged|gf) \
@@ -109,6 +119,10 @@ dev:
 	case "$(word 2,$(MAKECMDGOALS))" in \
 		app) \
 			pnpm dev ;; \
+		admin) \
+			pnpm --prefix $(CURDIR)/admin dev ;; \
+		set-admin) \
+			FIREBASE_PROJECT_ID=poscomp-olivmath pnpm tsx scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
 		seed) \
 			FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed ;; \
 		get-flagged|gf) \

@@ -99,3 +99,8 @@ export const callDeleteAllData = httpsCallable<
   Record<string, never>,
   { deleted: boolean }
 >(functions, 'deleteAllData')
+
+export const callReportQuestion = httpsCallable<
+  { questionId: number; comment?: string },
+  { success: boolean }
+>(functions, 'reportQuestion')

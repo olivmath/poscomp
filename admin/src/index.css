@@ -421,6 +421,9 @@ select.input { cursor: pointer; }
 .toggle-off { background: #f3f4f6; color: var(--text-muted); }
 
 /* ── Markdown preview in banner modal ──────────────────────────────── */
+.md-preview h1 { font-size: 1.4em; font-weight: 700; margin: 0 0 0.2em; }
+.md-preview h2 { font-size: 1.2em; font-weight: 700; margin: 0 0 0.2em; }
+.md-preview h3 { font-size: 1.05em; font-weight: 600; margin: 0 0 0.15em; }
 .md-preview p { margin: 0; }
 .md-preview p + p { margin-top: 0.3em; }
 .md-preview strong { font-weight: 700; }

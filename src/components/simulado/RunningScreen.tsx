@@ -2,6 +2,7 @@ import '@material/web/button/filled-button.js'
 import { useState, useEffect } from 'react'
 import { ImmersiveBar } from './ImmersiveBar'
 import { ExitModal } from './ExitModal'
+import { FinishModal } from './FinishModal'
 import { QuestionMapModal } from './QuestionMapModal'
 import { ReportIssueModal } from './ReportIssueModal'
 import { LoadingModal } from '../LoadingModal'
@@ -43,14 +44,26 @@ export function RunningScreen({
   const [showExitModal, setShowExitModal] = useState(false)
   const [showMap, setShowMap] = useState(false)
   const [showIssueModal, setShowIssueModal] = useState(false)
+  const [showFinishModal, setShowFinishModal] = useState(false)
   const [issueComment, setIssueComment] = useState<string | undefined>()
+  const [pendingFinish, setPendingFinish] = useState<{ confidence: Confidence; issue?: { comment?: string } } | null>(null)
   const hasSelection = selectedOption !== null
   const currentAnswered = questionStatuses[currentIndex] !== 'unvisited'
   const isFirstQuestion = currentIndex === 0
+  const isLastQuestion = questionNumber === totalQuestions
 
   useEffect(() => {
     setIssueComment(undefined)
   }, [currentIndex])
+
+  const handleNext = (confidence: Confidence, issue?: { comment?: string }) => {
+    if (isLastQuestion) {
+      setPendingFinish({ confidence, issue })
+      setShowFinishModal(true)
+    } else {
+      onNext(confidence, issue)
+    }
+  }
 
   return (
     <div className="simulado-running-immersive" data-testid="simulado-running">
@@ -87,17 +100,17 @@ export function RunningScreen({
 
           <div className="simulado-action-footer">
             <div className="confidence-buttons">
-              <button className="confidence-btn confidence-btn--unsure" disabled={!hasSelection || currentAnswered} onClick={() => onNext('unsure', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-unsure" title={currentAnswered ? 'Questão já respondida' : ''}>
+              <button className="confidence-btn confidence-btn--unsure" disabled={!hasSelection || currentAnswered} onClick={() => handleNext('unsure', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-unsure" title={currentAnswered ? 'Questão já respondida' : ''}>
                 <span className="material-symbols-outlined confidence-btn-icon">help_outline</span>
                 <span className="confidence-btn-label">Não sei</span>
                 <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
               </button>
-              <button className="confidence-btn confidence-btn--studying" disabled={!hasSelection || currentAnswered} onClick={() => onNext('studying', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-studying" title={currentAnswered ? 'Questão já respondida' : ''}>
+              <button className="confidence-btn confidence-btn--studying" disabled={!hasSelection || currentAnswered} onClick={() => handleNext('studying', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-studying" title={currentAnswered ? 'Questão já respondida' : ''}>
                 <span className="material-symbols-outlined confidence-btn-icon">school</span>
                 <span className="confidence-btn-label">Estudando</span>
                 <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
               </button>
-              <button className="confidence-btn confidence-btn--should-know" disabled={!hasSelection || currentAnswered} onClick={() => onNext('should_know', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-should-know" title={currentAnswered ? 'Questão já respondida' : ''}>
+              <button className="confidence-btn confidence-btn--should-know" disabled={!hasSelection || currentAnswered} onClick={() => handleNext('should_know', issueComment ? { comment: issueComment } : undefined)} data-testid="btn-should-know" title={currentAnswered ? 'Questão já respondida' : ''}>
                 <span className="material-symbols-outlined confidence-btn-icon">warning</span>
                 <span className="confidence-btn-label">Devia saber</span>
                 <span className="material-symbols-outlined confidence-btn-arrow">arrow_forward</span>
@@ -148,6 +161,19 @@ export function RunningScreen({
             setShowIssueModal(false)
           }}
           onCancel={() => setShowIssueModal(false)}
+        />
+      )}
+      {showFinishModal && pendingFinish && (
+        <FinishModal
+          onConfirm={() => {
+            setShowFinishModal(false)
+            onNext(pendingFinish.confidence, pendingFinish.issue)
+            setPendingFinish(null)
+          }}
+          onCancel={() => {
+            setShowFinishModal(false)
+            setPendingFinish(null)
+          }}
         />
       )}
       <LoadingModal open={loadingFinish} label="Calculando resultado…" />
