@@ -1,0 +1,230 @@
+[
+  {
+    "id": 39,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Nos arquivos ordenados, os registros são dispostos fisicamente no disco de acordo com os valores de um de seus campos: o campo de ordenação (chave). Analise as seguintes assertivas sobre arquivos ordenados: I. A leitura dos registros na ordem dos valores da chave de ordenação é mais eficiente se comparada à leitura desses registros em arquivos heap. II. Permite atender de forma eficiente condições de pesquisa sobre o campo de ordenação no formato <chave = valor> ou condição de intervalo ( isto é, a chave estar no intervalo entre o valor1 e valor2). III. Para acelerar o acesso a um registro baseado no valor de uma chave em arquivos ordenados, a melhor técnica de pesquisa é a técnica de hash. Quais estão corretas?",
+    "alternativas": {
+      "A": "Apenas I.",
+      "B": "Apenas II.",
+      "C": "Apenas III.",
+      "D": "Apenas I e II.",
+      "E": "I, II e III."
+    },
+    "resposta": "D",
+    "comentario": "Arquivos ordenados facilitam a leitura sequencial ordenada e buscas binárias (log n) para chaves exatas ou intervalos. O hash é mais comum em arquivos não ordenados (heap) para acesso direto e não é a técnica nativa de busca em arquivos ordenados.",
+    "card": {
+      "pergunta": "Em arquivos ordenados, quais das assertivas (I. Eficiência vs heap, II. Pesquisa por intervalo, III. Melhor técnica é hash) são verdadeiras?",
+      "resposta": "## Conceito\nArquivos ordenados armazenam registros fisicamente dispostos de acordo com o valor de uma **chave de ordenação**. Essa estrutura permite o uso da **busca binária** ($O(\\log n)$), sendo muito superior aos arquivos *heap* (desordenados) para pesquisas pontuais ou de intervalo. Contudo, a manutenção da ordem torna as inserções e deleções custosas ($O(n)$), pois exigem o deslocamento físico de registros no disco.\n\n## Por que (D) é correta\nAs assertivas I e II estão corretas pois a ordenação física garante que registros sucessores estejam próximos (localidade), otimizando a leitura sequencial (I), e permite que a busca binária localize rapidamente o início de um intervalo de valores (II).\n\n## Pegadinhas desta questão\n** (A, B, C) ** Ignoram que tanto I quanto II são vantagens inerentes à ordenação física.\n** (III) ** A melhor técnica para arquivos ordenados é a **busca binária**. O *hashing* é uma técnica de acesso direto que não depende da ordenação física dos registros e é comumente aplicada em arquivos *heap* ou através de índices externos.\n** (E) ** Inclui a assertiva III, que confunde as propriedades de arquivos indexados por hash com as de arquivos ordenados.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 40,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Os sistemas operacionais mantêm várias informações sobre cada arquivo, chamadas de metadados. Assinale o atributo que NÃO é um metadado de arquivo gerenciado pelo sistema operacional.",
+    "alternativas": {
+      "A": "Data da criação do arquivo.",
+      "B": "Tamanho do registro ( ex.: número em bytes do registro).",
+      "C": "Tamanho atual do arquivo ( ex.: número máximo em bytes do arquivo).",
+      "D": "Flag (indicador) de tipo de arquivo ( ex.: sistema/normal).",
+      "E": "Nome dos diferentes campos lógicos representados nos registros dos arquivos (ex.: id, nome, data de nascimento, nome da mãe, RG, etc.)."
+    },
+    "resposta": "E",
+    "comentario": "A estrutura interna (campos lógicos) de um arquivo é responsabilidade da aplicação ou do SGBD. O sistema operacional trata o arquivo geralmente como um stream de bytes ou blocos, desconhecendo sua semântica interna.",
+    "card": {
+      "pergunta": "Qual dos atributos listados NÃO é um metadado de arquivo gerenciado diretamente pelo Sistema Operacional?",
+      "resposta": "## Conceito\nMetadados são \"dados sobre dados\". O Sistema Operacional (SO) gerencia atributos genéricos para controlar o ciclo de vida e a segurança dos arquivos (nome, dono, permissões, datas, tamanho em bytes). O SO enxerga o arquivo como uma **sequência de bytes** (*byte stream*), sem compreender a estrutura lógica interna dos dados armazenados.\n\n## Por que (E) é correta\nO nome dos campos lógicos (como `id`, `nome`, `RG`) pertence à **semântica da aplicação** ou do SGBD. O SO não sabe se um arquivo contém uma tabela de banco de dados ou um texto; ele apenas gerencia o arquivo como um bloco de dados opaco.\n\n## Pegadinhas desta questão\n** (A) ** Data de criação é essencial para auditoria e controle do SO.\n** (B) ** Embora o SO veja bytes, o tamanho do registro pode ser um metadado em sistemas de arquivos que suportam registros de tamanho fixo (embora raro em Unix, é comum em sistemas legados).\n** (C) ** O tamanho atual é crítico para gerenciar o espaço em disco.\n** (D) ** Flags de sistema/normal definem como o SO deve tratar o arquivo (ex: oculto ou protegido).\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 41,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Um desenvolvedor de software armazenou registros representando tweets em um arquivo. Ele optou por utilizar uma árvore trie como índice des se arquivo para tornar eficientes alguns tipos de busca de tweets contendo palavras de determinada natureza. Sobre o uso de árvores trie, analise as assertivas abaixo e assinale V, se verdadeiras, ou F, se falsas. ( ) São adequadas para encontrar de forma eficiente palavras exatas (por exemplo, as palavras “amor” e “be ijo”). ( ) São adequadas para encontrar de forma eficiente variações de palavras, tais como diminutivos e aumentativos (por exem plo, palavras que terminam com o sufixo “inho”, como “amorzinho”, “nenezinho”, “beijinho”). ( ) São adequadas para encontrar de forma eficiente variações de palavras com o mesmo prefixo (por exemplo, as variações da palavra “amor”, como “amorzinho” e “amorzão”). A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+    "alternativas": {
+      "A": "F – V – V.",
+      "B": "F – F – V.",
+      "C": "V – V – V.",
+      "D": "V – F – F.",
+      "E": "V – F – V."
+    },
+    "resposta": "E",
+    "comentario": "Tries são excelentes para prefixos e palavras exatas. Elas não são nativamente adequadas para sufixos (como 'inho') a menos que as palavras sejam invertidas antes da inserção.",
+    "card": {
+      "pergunta": "Sobre Árvores Trie: são eficientes para encontrar palavras exatas ( ), variações por sufixo ( ) e variações com mesmo prefixo ( )?",
+      "resposta": "## Conceito\nUma **Trie** (ou árvore de prefixos) é uma estrutura de dados de árvore ordenada usada para armazenar um conjunto dinâmico de strings. Cada nó representa um caractere, e o caminho da raiz até um nó define um prefixo comum. É extremamente eficiente para buscas do tipo \"autocompletar\" e para verificar a existência de palavras, com complexidade $O(m)$, onde $m$ é o comprimento da palavra.\n\n| Operação | Eficiência na Trie |\n| :--- | :--- |\n| Busca por Prefixo | Excelente (natural da estrutura) |\n| Busca por Palavra Exata | Excelente |\n| Busca por Sufixo | Ruim (exige percorrer toda a árvore ou usar Trie reversa) |\n\n## Por que (E) é correta\nA primeira assertiva é verdadeira (busca exata é a base da Trie). A segunda é falsa porque encontrar sufixos (final da palavra) não é natural para uma árvore que organiza dados do início para o fim. A terceira é verdadeira, pois a Trie agrupa palavras com prefixos comuns em subárvores.\n\n## Pegadinhas desta questão\n** (A, B, C, D) ** Tentam confundir a capacidade de busca de prefixos (início) com a de sufixos (fim). Lembre-se: \"Trie = Prefix Tree\".\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 42,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Em um computador com suporte à memória virtual e paginação, quando ocorre um page fault , o sistema operacional, às vezes, precisa escolher uma página da memória principal ( page frame ) para dar lugar à página virtual que será carregada do disco como resultado do page fault . Dependendo do tipo de conteúdo presente na página selecionada para substituição, esse conteúdo precisa ser salvo no disco ( page out ) antes da substituição. Assinale a alternativa que indica uma região de memória típica de um processo, cujo conteúdo não exige salvamento prévio em casos de troca de páginas ( page replacement ).",
+    "alternativas": {
+      "A": ".",
+      "B": "Dados não inicializados (ex. : BSS).",
+      "C": "Dados inicializados (ex. : DAT",
+      "D": "Código (ex. : TEXT).",
+      "E": "Pilha (ex. : STACK)."
+    },
+    "resposta": "D",
+    "comentario": "O segmento de código (TEXT) é geralmente somente-leitura e já existe de forma idêntica no arquivo executável em disco. Portanto, o SO pode simplesmente descartar a página da RAM sem escrevê-la de volta.",
+    "card": {
+      "pergunta": "Qual região de memória de um processo NÃO exige *page out* (salvamento em disco) ao ser substituída da RAM?",
+      "resposta": "## Conceito\nQuando o SO precisa liberar espaço na RAM (*Page Replacement*), ele verifica se a página foi modificada (*dirty bit*). Páginas que contêm dados dinâmicos (Pilha, Heap) precisam ser salvas na área de *swap* se alteradas. No entanto, se o conteúdo da página já existe de forma idêntica no disco (como no executável), o SO pode simplesmente descartá-la e recarregá-la depois.\n\n## Por que (D) é correta\nO segmento de **Código (TEXT)** é estático e somente-leitura. Como o binário original está no disco, o SO não precisa escrever a página de volta; ele apenas a marca como ausente e a lê novamente do arquivo executável quando necessário.\n\n## Pegadinhas desta questão\n** (B) ** O BSS contém variáveis globais não inicializadas que mudam durante a execução.\n** (C) ** O DATA contém variáveis globais inicializadas que também podem sofrer alteração.\n** (E) ** A Pilha (Stack) é altamente dinâmica, armazenando variáveis locais e endereços de retorno.\n** (A) ** O item \".\" parece ser um erro de formatação ou alternativa vazia, mas as outras são claramente modificáveis.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 43,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "O aumento dos requisitos de paralelismo nas aplicações modernas exige mecanismos de bloqueio ( locking ) e sincronização cada vez mais eficientes. Nes se contexto, dois mecanismos muito usados são semáforos e spin locks . Sobre esses dois mecanismos, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Spin locks são adequados para cenários de muita contenção entre os processos concorrentes.",
+      "B": "Semáforos são adequados para cenários de espera de curta duração para entrar na região crítica.",
+      "C": "Semáforos e spin locks são adequados, respectivamente, para cenários de baixa contenção e espera de longa duração para entrar na região crítica.",
+      "D": "Spin locks e semáforos são adequados para ce nários de muita contenção e espera de curta duração para entrar na região crítica.",
+      "E": "Semáforos e spin locks são adequados, respectivamente, para cenários de muita contenção e espera de curta duração para entrar na região crítica."
+    },
+    "resposta": "E",
+    "comentario": "Semáforos colocam o processo em espera (sleep), sendo melhores para longa espera. Spin locks usam espera ocupada (busy waiting), sendo eficientes apenas para esperas curtíssimas onde o custo da troca de contexto seria superior ao tempo de giro.",
+    "card": {
+      "pergunta": "Comparando Semáforos e Spin Locks: qual a aplicação ideal para cada um considerando contenção e tempo de espera?",
+      "resposta": "## Conceito\nSão mecanismos de sincronização para evitar condições de corrida.\n- **Spin Lock**: O processo fica em \"espera ocupada\" (*busy-waiting*), testando o bloqueio repetidamente em um laço. Consome CPU enquanto espera.\n- **Semáforo**: O processo é colocado em estado de espera (*sleep*) e removido da fila de execução da CPU, sendo acordado apenas quando o recurso libera.\n\n| Mecanismo | Espera | Custo | Melhor para |\n| :--- | :--- | :--- | :--- |\n| **Spin Lock** | Ocupada | Alto (CPU) | Curtíssima duração |\n| **Semáforo** | Bloqueada | Troca de contexto | Longa duração / Alta contenção |\n\n## Por que (E) é correta\nSemáforos são ideais para alta contenção e esperas longas, pois evitam o desperdício de ciclos de CPU. Spin locks são eficientes apenas se o tempo de espera for menor que o custo de duas trocas de contexto do SO.\n\n## Pegadinhas desta questão\n** (A) ** Spin locks em alta contenção fritam a CPU sem progresso útil.\n** (B) ** Semáforos têm custo fixo de troca de contexto, o que os torna \"caros\" para esperas minúsculas.\n** (C, D) ** Invertem as aplicações ideais dos mecanismos.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 44,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considere que o programa abaixo, escrito em Linguagem C, execute em um computador com suporte à memória virtual e segmentação paginada, tal como em sistemas baseados em Intel x86 -64. 1 #include <stdio.h> 2 main(){ 3 int w; 4 printf(“%p”,&w); 5 } Quando a linha 4 é executada, o valor impresso na tela corresponde ao:",
+    "alternativas": {
+      "A": "Endereço físico representando o segmento, a página e o offset onde se localiza a variável w.",
+      "B": "Endereço virtual associado ao endereço físico onde se localiza a variável w.",
+      "C": "Resultado do processamento realizado pela MMU (Memory Management Unit).",
+      "D": "Endereço da variável w no space de endereçamento físico do processo.",
+      "E": "Endereço da variável w no working set do processo."
+    },
+    "resposta": "B",
+    "comentario": "Em linguagens de alto nível rodando em sistemas modernos, endereços de memória são sempre virtuais. O hardware (MMU) traduz esse endereço virtual para um endereço físico no momento do acesso.",
+    "card": {
+      "pergunta": "Em um sistema com memória virtual, o que o comando `printf(\"%p\", &w)` efetivamente imprime na tela?",
+      "resposta": "## Conceito\nProgramas modernos não acessam a memória física diretamente. O espaço de endereçamento é **virtual**, fornecendo a cada processo a ilusão de ter uma memória contígua e privada. A tradução de Endereço Virtual $\\rightarrow$ Endereço Físico é feita em tempo de execução pelo hardware (**MMU**) usando Tabelas de Páginas.\n\n## Por que (B) é correta\nO ponteiro `&w` em C representa o endereço no espaço virtual do processo. O sistema operacional e o hardware garantem que esse endereço virtual aponte para algum local físico na RAM (ou disco, via paginação), mas o programa só \"vê\" o valor virtual.\n\n## Pegadinhas desta questão\n** (A, D) ** Usuários e programas comuns nunca manipulam endereços físicos por questões de segurança e portabilidade.\n** (C) ** A MMU realiza a tradução \"por baixo dos panos\"; o `printf` apenas mostra o dado que já está no registrador, que é o endereço virtual.\n** (E) ** *Working set* é o conjunto de páginas usadas recentemente, não um tipo de endereço.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 45,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é o tipo de dado que fornece uma maneira de definir e agrupar coleções de constantes nomeadas?",
+    "alternativas": {
+      "A": "Ponto flutuante.",
+      "B": "Decimal.",
+      "C": "Enumeração.",
+      "D": "Booleano.",
+      "E": "Caracter."
+    },
+    "resposta": "C",
+    "comentario": "O tipo enumeração (enum) permite associar nomes legíveis a valores inteiros constantes, facilitando a organização e legibilidade do código.",
+    "card": {
+      "pergunta": "Qual tipo de dado permite agrupar uma coleção de constantes nomeadas para melhorar a legibilidade do código?",
+      "resposta": "## Conceito\nO tipo **Enumeração (enum)** permite definir um novo tipo cujos valores são identificadores fixos (constantes). Internamente, o compilador costuma associar esses nomes a números inteiros ($0, 1, 2...$), mas para o programador, usar `COR_VERMELHO` é muito mais claro do que usar o número `1`.\n\n```c\nenum Dia { SEGUNDA, TERCA, QUARTA };\nenum Dia hoje = SEGUNDA;\n```\n\n## Por que (C) é correta\nA definição de \"agrupar constantes nomeadas\" é a descrição clássica do tipo enumerado em linguagens como C, C++, Java e C#.\n\n## Pegadinhas desta questão\n** (A, B, D, E) ** São tipos primitivos básicos para representar valores únicos (números, caracteres ou booleanos), não coleções ou grupos de nomes.\n** (C) ** Às vezes confundido com `struct`, mas a `struct` agrupa variáveis de **diferentes tipos**, enquanto a `enum` agrupa **valores possíveis** de um mesmo tipo.\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 46,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considere, por exemplo, que um programa precisa ordenar um vetor de objetos de dados numéricos de algum tipo e, para isso, ele usa um subprograma para o processo de ordenação. No momento em que um processo de ordenação é necessário, uma sentença como sortInt(list, listLen) é colocada no programa. Essa chamada é uma abs tração :",
+    "alternativas": {
+      "A": "Do subprograma, no qual os únicos atributos essenciais são o nome do vetor a ser ordenado e o tipo de seus elementos.",
+      "B": "De código, no qual a chamada é dependente do algoritmo implementado no subprograma chamado.",
+      "C": "Do algoritmo que implementa o atributo essencial para o usuário, que precisa ver o nome e o protocolo do subprograma de ordenação.",
+      "D": "De tipo que inclui apenas a representação de dados de um tipo específico e os subprogramas que fornecem as operações para es se tipo.",
+      "E": "Do processo de ordenação real, cujo algoritmo não é especificado."
+    },
+    "resposta": "E",
+    "comentario": "A chamada de um subprograma é uma abstração de processo: o usuário sabe *o que* está sendo feito (ordenar), mas os detalhes de *como* (o algoritmo específico) estão ocultos.",
+    "card": {
+      "pergunta": "A chamada `sortInt(list, listLen)` é uma abstração de qual natureza no desenvolvimento de software?",
+      "resposta": "## Conceito\nA **Abstração de Processo** permite que um programador use uma funcionalidade complexa sem precisar conhecer seus detalhes internos. Ao chamar `sort()`, o foco está no **resultado** (vetor ordenado) e não no **mecanismo** (se é QuickSort, MergeSort ou BubbleSort). Isso promove o encapsulamento e a modularidade.\n\n## Por que (E) é correta\nA chamada abstrai o \"processo real\" de ordenação. O algoritmo específico é irrelevante para quem chama a função, desde que o contrato (protocolo) seja respeitado.\n\n## Pegadinhas desta questão\n** (A, B) ** Sugerem dependência do algoritmo ou tipo, o que contradiz o conceito de abstração (que busca a independência).\n** (C) ** Foca no usuário final, mas a abstração em questão é para o programador.\n** (D) ** Descreve abstração de dados (como um Objeto ou TAD), e não a chamada de um procedimento/processo.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 47,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Nas linguagens de programação imperativas, o sinal + é usado para especificar a adição tanto de inteiros quanto de valores de ponto flutuante. Esse uso múltiplo de um operador é chamado de :",
+    "alternativas": {
+      "A": "Conversão de tipos.",
+      "B": "Sobrecarga de operadores.",
+      "C": "Transparência referencial.",
+      "D": "Efeito colateral.",
+      "E": "Associatividade ."
+    },
+    "resposta": "B",
+    "comentario": "Sobrecarga de operadores (operator overloading) ocorre quando um mesmo símbolo ou nome de função possui múltiplos significados dependendo dos tipos dos operandos fornecidos.",
+    "card": {
+      "pergunta": "Como se chama o uso de um mesmo símbolo (como +) para realizar operações diferentes baseadas nos tipos dos dados?",
+      "resposta": "## Conceito\nA **Sobrecarga de Operadores** (*Operator Overloading*) ocorre quando um operador tem múltiplos significados definidos pela linguagem ou pelo programador. O compilador decide qual implementação usar analisando o tipo dos operandos.\n\n- `5 + 2` $\rightarrow$ Adição de Inteiros.\n- `5.0 + 2.0` $\rightarrow$ Adição de Ponto Flutuante (instruções de CPU diferentes!).\n- `\"Olá \" + \"Mundo\"` $\rightarrow$ Concatenação (em algumas linguagens).\n\n## Por que (B) é correta\nO termo técnico para um símbolo que assume várias formas/comportamentos dependendo do contexto dos tipos é \"sobrecarga\".\n\n## Pegadinhas desta questão\n** (A) ** Conversão (coerção) é quando um dado muda de tipo (ex: int vira float) para que a operação ocorra, mas o símbolo em si continua sendo sobrecarregado.\n** (C) ** Transparência referencial é um conceito funcional onde uma expressão pode ser substituída pelo seu valor sem alterar o programa.\n** (D) ** Efeito colateral é quando uma função altera algo fora de seu escopo.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 48,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Uma família de ligações sucessivamente adjacentes, cada uma tendo uma extremidade adjacente à anterior e outra à subsequente (à exceção da primeira e da última) é um(a):",
+    "alternativas": {
+      "A": "Circuito .",
+      "B": "Percurso .",
+      "C": "Caminho .",
+      "D": "Ciclo.",
+      "E": "Corda ."
+    },
+    "resposta": "B",
+    "comentario": "Em teoria dos grafos, um percurso (ou trail) é uma sequência de arestas adjacentes onde as arestas são distintas. Se os vértices também forem distintos, temos um caminho.",
+    "card": {
+      "pergunta": "Na teoria dos grafos, uma sequência de arestas adjacentes onde cada uma liga a anterior à próxima é definida como?",
+      "resposta": "## Conceito\nA terminologia de grafos pode variar entre autores, mas as definições padrão são:\n- **Percurso (Trail)**: Sequência de vértices e arestas onde as **arestas não se repetem**.\n- **Caminho (Path)**: Percurso onde **nem arestas nem vértices se repetem**.\n- **Circuito**: Percurso fechado (início = fim).\n\n| Termo | Repete Vértice? | Repete Aresta? |\n| :--- | :--- | :--- |\n| **Passeio** | Sim | Sim |\n| **Percurso** | Sim | Não |\n| **Caminho** | Não | Não |\n\n## Por que (B) é correta\nA questão descreve a estrutura básica de uma \"família de ligações\" (arestas) encadeadas. Pelas definições formais, isso caracteriza um percurso.\n\n## Pegadinhas desta questão\n** (C) ** Um caminho é um tipo específico de percurso. Como a questão não restringiu a repetição de vértices, \"percurso\" é o termo mais genérico e correto.\n** (A, D) ** Exigem que a sequência seja fechada (volte ao início).\n** (E) ** Corda é uma aresta que liga dois vértices de um ciclo mas não faz parte do ciclo.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 49,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre os conceitos de grafos , é correto afirmar que:",
+    "alternativas": {
+      "A": "A todo grafo não orientado G pode ser associado um grafo orientado G’ no qual cada aresta de G corresponderá, biunivocamente, a um par de arcos de sentidos opostos em G’.",
+      "B": "Uma ligação que envolver ape nas um vértice é chamada subgrafo.",
+      "C": "Os elementos de V são chamados vértices e o valor n=|v| é o laço do grafo.",
+      "D": "Dois vértices que participam de uma ligação são ditos incidentes, termo também usado para duas ligações envolvendo um dado vértice.",
+      "E": "Diz-se que um grafo é orientado quando possui uma função de peso ou valor sobre as ligações entre os vértices."
+    },
+    "resposta": "A",
+    "comentario": "Grafos não orientados podem ser representados como grafos orientados onde cada aresta {u,v} é substituída por dois arcos direcionados (u,v) e (v,u).",
+    "card": {
+      "pergunta": "Qual afirmação sobre as propriedades fundamentais de grafos orientados e não-orientados é correta?",
+      "resposta": "## Conceito\nGrafos são estruturas matemáticas $G = (V, A)$.\n- **Não-orientado**: Arestas são conjuntos $\\{u, v\\}$ (sem direção).\n- **Orientado (Dígrafo)**: Arcos são pares ordenados $(u, v)$ (com direção).\nQualquer grafo não-orientado pode ser simulado por um orientado se substituirmos cada aresta por dois arcos de sentidos opostos.\n\n## Por que (A) é correta\nSe temos uma conexão entre A e B sem direção, isso equivale a dizer que podemos ir de A para B **E** de B para A. Matematicamente, a aresta $\\{A, B\\}$ mapeia-se nos arcos $(A, B)$ e $(B, A)$.\n\n## Pegadinhas desta questão\n** (B) ** Uma ligação de um vértice com ele mesmo é um **Laço**. Subgrafo é uma porção do grafo original.\n** (C) ** $n = |V|$ é a **Ordem** do grafo. Laço é uma aresta específica.\n** (D) ** Vértices são **adjacentes**; arestas são **incidentes** aos vértices.\n** (E) ** Grafo com pesos é um grafo **ponderado**. Orientado refere-se apenas à direção das setas.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 50,
+    "ano": 2023,
+    "area": "Fundamentos da Computação",
+    "enunciado": "A propriedade em que vértices de um subconjunto não apresentam relações de adjacência entre si é denominada de:",
+    "alternativas": {
+      "A": "Biconexo.",
+      "B": "Independente.",
+      "C": "Instável.",
+      "D": "Complemento.",
+      "E": "Planar maximal. TECNOLOGIA DE COMPUTAÇÃO"
+    },
+    "resposta": "B",
+    "comentario": "Um conjunto independente de um grafo é um conjunto de vértices onde não existem arestas ligando qualquer par de vértices desse subconjunto.",
+    "card": {
+      "pergunta": "Como se chama um conjunto de vértices em um grafo onde nenhum par de vértices dentro desse conjunto é vizinho (adjacente)?",
+      "resposta": "## Conceito\nUm **Conjunto Independente** (ou conjunto estável) é um subconjunto de vértices $S \\subseteq V$ tal que, para quaisquer dois vértices $u, v \\in S$, não existe a aresta $\\{u, v\\}$. É um conceito central em problemas de otimização (como encontrar o Conjunto Independente Máximo).\n\nExemplo: Em um Grafo Bipartido, os dois conjuntos de cores são conjuntos independentes.\n\n## Por que (B) é correta\nA definição exata de \"vértices sem relações de adjacência entre si\" é a definição de independência em grafos.\n\n## Pegadinhas desta questão\n** (A) ** Biconexo refere-se à conectividade do grafo após a remoção de vértices (pontos de articulação).\n** (D) ** O Complemento de um grafo $G$ é um grafo $\\bar{G}$ onde as arestas existem se, e somente se, não existiam em $G$. Se um conjunto é independente em $G$, ele formará um **clique** (todos conectados) no Complemento.\n** (E) ** Planar maximal é um grafo planar ao qual não se pode adicionar mais arestas sem perder a planaridade.\n\n**Gabarito: (B)**"
+    }
+  }
+]

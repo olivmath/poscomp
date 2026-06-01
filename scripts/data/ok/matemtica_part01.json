@@ -1,0 +1,347 @@
+[
+  {
+    "pergunta": "Resolva o sistema linear por eliminação de Gauss: $2x - 2y + z = -3$, $x + 3y - 2z = 1$ e $3x - y - z = 2$.",
+    "resposta": "## Conceito\nO método de eliminação de Gauss consiste em transformar o sistema original em um sistema triangular equivalente através de operações elementares nas linhas da matriz aumentada $[A|b]$. As operações permitidas são: troca de linhas, multiplicação de uma linha por um escalar não nulo e soma de uma linha com o múltiplo de outra. Uma vez escalonada, resolve-se o sistema por substituição retroativa.\n\n## Resolução\nMatriz aumentada:\n$$ \\begin{pmatrix} 2 & -2 & 1 & | & -3 \\\\ 1 & 3 & -2 & | & 1 \\\\ 3 & -1 & -1 & | & 2 \\end{pmatrix} $$\n1. $L_1 \\leftrightarrow L_2$:\n$$ \\begin{pmatrix} 1 & 3 & -2 & | & 1 \\\\ 2 & -2 & 1 & | & -3 \\\\ 3 & -1 & -1 & | & 2 \\end{pmatrix} $$\n2. $L_2 \\leftarrow L_2 - 2L_1$ e $L_3 \\leftarrow L_3 - 3L_1$:\n$$ \\begin{pmatrix} 1 & 3 & -2 & | & 1 \\\\ 0 & -8 & 5 & | & -5 \\\\ 0 & -10 & 5 & | & -1 \\end{pmatrix} $$\n3. $L_3 \\leftarrow L_3 - 1.25L_2$:\n$$ \\begin{pmatrix} 1 & 3 & -2 & | & 1 \\\\ 0 & -8 & 5 & | & -5 \\\\ 0 & 0 & -1.25 & | & 5.25 \\end{pmatrix} $$\n4. Resolvendo por substituição:\n$-1.25z = 5.25 \\implies z = -4.2 = -21/5$\n$-8y + 5(-21/5) = -5 \\implies -8y - 21 = -5 \\implies -8y = 16 \\implies y = -2$\n$x + 3(-2) - 2(-21/5) = 1 \\implies x - 6 + 42/5 = 1 \\implies x = 7 - 42/5 = -7/5$\n\n**Gabarito: (D)** $(-7/5, -2, -21/5)$"
+  },
+  {
+    "pergunta": "Calcule $\\alpha$ para que $\\det(Z) = 8$, onde $Z = \\begin{pmatrix} 1 & -1 & -1 \\\\ -1 & 1 & -1 \\\\ 2 & 2 & \\alpha \\end{pmatrix}$.",
+    "resposta": "## Conceito\nO determinante de uma matriz $3 \\times 3$ pode ser calculado pela Regra de Sarrus ou pela expansão em cofatores (Teorema de Laplace). Para uma matriz $A$, o determinante relaciona os elementos de forma que se um escalar altera uma linha, o determinante é multiplicado por esse escalar. A fórmula de Leibniz para $3 \\times 3$ é: $\\det(A) = a_{11}(a_{22}a_{33} - a_{23}a_{32}) - a_{12}(a_{21}a_{33} - a_{23}a_{31}) + a_{13}(a_{21}a_{32} - a_{22}a_{31})$.\n\n## Resolução\nExpandindo o determinante de $Z$ pela primeira linha:\n$\\det(Z) = 1 \\cdot \\begin{vmatrix} 1 & -1 \\\\ 2 & \\alpha \\end{vmatrix} - (-1) \\cdot \\begin{vmatrix} -1 & -1 \\\\ 2 & \\alpha \\end{vmatrix} + (-1) \\cdot \\begin{vmatrix} -1 & 1 \\\\ 2 & 2 \\end{vmatrix}$\n1. Primeiro termo: $1 \\cdot (1 \\cdot \\alpha - (-1) \\cdot 2) = \\alpha + 2$\n2. Segundo termo: $+1 \\cdot ((-1) \\cdot \\alpha - (-1) \\cdot 2) = -\\alpha + 2$\n3. Terceiro termo: $-1 \\cdot ((-1) \\cdot 2 - 1 \\cdot 2) = -1 \\cdot (-4) = 4$\n4. Soma: $(\\alpha + 2) + (-\\alpha + 2) + 4 = 8$\nComo $8 = 8$, o determinante é 8 independente do valor de $\\alpha$. Todas as alternativas satisfazem; seguindo o gabarito oficial:\n\n**Gabarito: (A)** $\\alpha = 1$"
+  },
+  {
+    "pergunta": "Qual o polinômio característico da matriz $A = \\begin{pmatrix} 1 & -1 & -1 \\\\ -1 & 1 & -1 \\\\ 2 & 2 & 4 \\end{pmatrix}$?",
+    "resposta": "## Conceito\nO polinômio característico de uma matriz quadrada $A$ é definido por $p(\\lambda) = \\det(A - \\lambda I)$, onde $I$ é a matriz identidade e $\\lambda$ representa os autovalores. As raízes deste polinômio são os autovalores da matriz. Para uma matriz $3 \\times 3$, o polinômio será de grau 3 e sua forma fatorada revela as multiplicidades algébricas.\n\n## Resolução\nMontando $A - \\lambda I$:\n$$ A - \\lambda I = \\begin{pmatrix} 1-\\lambda & -1 & -1 \\\\ -1 & 1-\\lambda & -1 \\\\ 2 & 2 & 4-\\lambda \\end{pmatrix} $$\n1. Calculando o determinante:\n$(1-\\lambda)[(1-\\lambda)(4-\\lambda) + 2] + 1[-(4-\\lambda) + 2] - 1[-2 - 2(1-\\lambda)]$\n2. Simplificando os termos:\n$(1-\\lambda)[\\lambda^2 - 5\\lambda + 6] + [\\lambda - 2] - [2\\lambda - 4]$\n3. Fatorando $(\\lambda-2)$:\n$(1-\\lambda)(\\lambda-2)(\\lambda-3) - (\\lambda-2)$\n$(\\lambda-2) [(1-\\lambda)(\\lambda-3) - 1] = (\\lambda-2) [-\\lambda^2 + 4\\lambda - 3 - 1]$\n$(\\lambda-2)(-\\lambda^2 + 4\\lambda - 4) = -(\\lambda-2)(\\lambda-2)^2 = -(\\lambda-2)^3$\n\n**Gabarito: (E)** $-(\\lambda - 2)^3$"
+  },
+  {
+    "pergunta": "Formas de permutar $\\{1,2,3,4\\}$ tal que o número 1 não esteja na 1ª posição e o número 2 não esteja na 2ª posição.",
+    "resposta": "## Conceito\nEste problema de permutação com restrições é resolvido pelo Princípio da Inclusão-Exclusão. Seja $S$ o conjunto de todas as permutações e $P_i$ a propriedade de o elemento $i$ estar na posição $i$. O número de permutações que não satisfazem nem $P_1$ nem $P_2$ é dado por: $|S| - |P_1 \\cup P_2| = |S| - (|P_1| + |P_2| - |P_1 \\cap P_2|)$.\n\n## Resolução\n1. Total de permutações sem restrições: $4! = 24$.\n2. Permutações com 1 na 1ª posição ($P_1$): fixamos o 1 e permutamos os outros 3 $\\implies 3! = 6$.\n3. Permutações com 2 na 2ª posição ($P_2$): fixamos o 2 e permutamos os outros 3 $\\implies 3! = 6$.\n4. Permutações com 1 na 1ª e 2 na 2ª ($P_1 \\cap P_2$): fixamos ambos e permutamos os outros 2 $\\implies 2! = 2$.\n5. Aplicando a Inclusão-Exclusão:\n$|P_1 \\cup P_2| = 6 + 6 - 2 = 10$.\n6. Subtraindo do total:\n$24 - 10 = 14$.\n\n**Gabarito: (E)** $14$"
+  },
+  {
+    "pergunta": "Qual o número máximo de arestas que um grafo não direcionado com 7 vértices pode ter sem formar um ciclo?",
+    "resposta": "## Conceito\nUm grafo acíclico (sem ciclos) é chamado de floresta. Se o grafo for conexo e acíclico, ele é uma árvore. Uma propriedade fundamental da Teoria dos Grafos estabelece que uma árvore com $n$ vértices possui exatamente $n - 1$ arestas. Qualquer aresta adicional inserida entre dois vértices de uma árvore criará exatamente um ciclo.\n\n## Resolução\n1. Identificamos o número de vértices: $n = 7$.\n2. Para maximizar as arestas sem formar ciclos, o grafo deve ser uma árvore única (conexo).\n3. Aplicamos a fórmula $m = n - 1$ para árvores:\n$m = 7 - 1 = 6$.\n4. Conclusão: Um grafo com 7 vértices e 6 arestas pode ser acíclico. Ao adicionar a 7ª aresta, o Teorema Fundamental das Árvores garante a formação de pelo menos um ciclo.\n\n**Gabarito: (A)** $6$"
+  },
+  {
+    "pergunta": "Startup com 7 jogos de ação e 5 de esportes. Quantas opções de pacotes de 4 jogos possuem pelo menos 2 de esportes?",
+    "resposta": "## Conceito\nProblemas de escolha onde a ordem não importa são resolvidos por Combinações: $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$. A restrição \"pelo menos 2\" exige a soma dos casos mutuamente exclusivos: exatamente 2, exatamente 3 e exatamente 4 jogos de esportes no pacote de 4.\n\n## Resolução\nO pacote total deve ter 4 jogos. Vamos calcular cada cenário:\n1. 2 de Esportes e 2 de Ação:\n$\\binom{5}{2} \\cdot \\binom{7}{2} = 10 \\cdot 21 = 210$.\n2. 3 de Esportes e 1 de Ação:\n$\\binom{5}{3} \\cdot \\binom{7}{1} = 10 \\cdot 7 = 70$.\n3. 4 de Esportes e 0 de Ação:\n$\\binom{5}{4} \\cdot \\binom{7}{0} = 5 \\cdot 1 = 5$.\n4. Soma total das possibilidades:\n$210 + 70 + 5 = 285$.\n\n**Gabarito: (D)** $285$"
+  },
+  {
+    "pergunta": "Calcule o limite no infinito: $\\lim_{x \\to \\infty} (\\sqrt{x^2 + 1} - x)$.",
+    "resposta": "## Conceito\nLimites envolvendo a diferença de raízes quadradas no infinito frequentemente resultam na indeterminação $\\infty - \\infty$. Para resolvê-la, utilizamos a técnica de multiplicação pelo conjugado, baseada no produto notável $(a-b)(a+b) = a^2 - b^2$, para simplificar a expressão e permitir a análise do comportamento assintótico.\n\n## Resolução\n1. Multiplicamos e dividimos pelo conjugado $(\\sqrt{x^2 + 1} + x)$:\n$$ \\lim_{x \\to \\infty} \\frac{(\\sqrt{x^2 + 1} - x)(\\sqrt{x^2 + 1} + x)}{\\sqrt{x^2 + 1} + x} $$\n2. Aplicamos o produto notável no numerador:\n$$ \\lim_{x \\to \\infty} \\frac{(x^2 + 1) - x^2}{\\sqrt{x^2 + 1} + x} = \\lim_{x \\to \\infty} \\frac{1}{\\sqrt{x^2 + 1} + x} $$\n3. Avaliamos o limite: Conforme $x$ cresce para o infinito, o denominador $\\sqrt{x^2 + 1} + x$ também cresce para o infinito.\n$$ \\frac{1}{\\infty} = 0 $$\n\n**Gabarito: (C)** $0$"
+  },
+  {
+    "pergunta": "Assinale o intervalo em que a função $g(x) = \\frac{\\sqrt{4 - x^2}}{3x - 1}$ é contínua.",
+    "resposta": "## Conceito\nA continuidade de uma função composta por frações e raízes é garantida em todo o seu domínio. As restrições do domínio são: 1) Radicandos de raízes quadradas devem ser não-negativos; 2) Denominadores devem ser diferentes de zero. O conjunto desses pontos define os intervalos de continuidade.\n\n## Resolução\n1. Condição da raiz quadrada: $4 - x^2 \\ge 0$.\n$x^2 \\le 4 \\implies |x| \\le 2 \\implies x \\in [-2, 2]$.\n2. Condição do denominador: $3x - 1 \\ne 0$.\n$3x \\ne 1 \\implies x \\ne 1/3$.\n3. Interseção das restrições:\nO ponto de descontinuidade $1/3$ pertence ao intervalo $[-2, 2]$. Portanto, o intervalo de continuidade é o conjunto $[-2, 2]$ excluindo o valor $1/3$.\n$$ [-2, 1/3) \\cup (1/3, 2] $$\n\n**Gabarito: (C)** $[-2, 1/3) \\cup (1/3, 2]$"
+  },
+  {
+    "pergunta": "Calcule a integral definida $\\int_1^e \\frac{\\ln x}{x} dx$.",
+    "resposta": "## Conceito\nO método da substituição (ou mudança de variável) simplifica integrais ao identificar uma função $u = g(x)$ tal que sua derivada $du = g'(x)dx$ esteja presente na integral. Ao aplicar este método em integrais definidas, é fundamental ajustar os limites de integração para a nova variável $u$.\n\n## Resolução\n1. Escolhemos a substituição: $u = \\ln x$.\n2. Calculamos o diferencial: $du = \\frac{1}{x} dx$.\n3. Ajustamos os limites de integração:\nSe $x = 1 \\implies u = \\ln(1) = 0$.\nSe $x = e \\implies u = \\ln(e) = 1$.\n4. Substituímos na integral original:\n$$ \\int_0^1 u \\, du $$\n5. Calculamos a primitiva e aplicamos os limites:\n$$ \\left[ \\frac{u^2}{2} \\right]_0^1 = \\frac{1^2}{2} - \\frac{0^2}{2} = \\frac{1}{2} $$\n\n**Gabarito: (D)** $1/2$"
+  },
+  {
+    "pergunta": "O ponto médio do segmento de extremos $A(5, -1)$ e $B(4, -2)$ é:",
+    "resposta": "## Conceito\nO ponto médio $M$ de um segmento $AB$ é o ponto que divide o segmento em duas partes iguais. No plano cartesiano, as coordenadas de $M(x_M, y_M)$ são dadas pela média aritmética das coordenadas dos extremos $A(x_A, y_A)$ e $B(x_B, y_B)$: $x_M = \\frac{x_A + x_B}{2}$ e $y_M = \\frac{y_A + y_B}{2}$.\n\n## Resolução\nDados os pontos $A(5, -1)$ e $B(4, -2)$:\n1. Cálculo da abscissa ($x_M$):\n$$ x_M = \\frac{5 + 4}{2} = \\frac{9}{2} = 4,5 $$\n2. Cálculo da ordenada ($y_M$):\n$$ y_M = \\frac{-1 + (-2)}{2} = \\frac{-3}{2} = -1,5 $$\n3. O ponto médio é:\n$M = (9/2, -3/2)$.\n\n**Gabarito: (B)** $(9/2, -3/2)$"
+  },
+  {
+    "pergunta": "Determine os valores de $k$ para que a distância do ponto $P(2, k)$ até a reta $r: x - y + 3 = 0$ seja $\\sqrt{2}$.",
+    "resposta": "## Conceito\nA distância $d$ entre um ponto $(x_0, y_0)$ e uma reta $Ax + By + C = 0$ é calculada pela fórmula: $d = \\frac{|Ax_0 + By_0 + C|}{\\sqrt{A^2 + B^2}}$. Como a distância envolve um valor absoluto, teremos dois valores possíveis de $k$ que satisfazem a condição, representando pontos em lados opostos da reta.\n\n## Resolução\nDados: $P(2, k)$, reta $x - y + 3 = 0$ (onde $A=1, B=-1, C=3$) e $d = \\sqrt{2}$.\n1. Aplicando a fórmula:\n$$ \\sqrt{2} = \\frac{|1(2) + (-1)(k) + 3|}{\\sqrt{1^2 + (-1)^2}} $$\n2. Simplificando o denominador e o numerador:\n$$ \\sqrt{2} = \\frac{|5 - k|}{\\sqrt{2}} $$\n3. Multiplicando por $\\sqrt{2}$:\n$2 = |5 - k|$\n4. Resolvendo a equação modular:\nCaso 1: $5 - k = 2 \\implies k = 3$.\nCaso 2: $5 - k = -2 \\implies k = 7$.\n\n**Gabarito: (A)** $k = 3 \\text{ e } k = 7$"
+  },
+  {
+    "pergunta": "Determine o ponto de intersecção das retas $r: x = 2 - 4t, y = -2 + t$ e $s: x = 3 + 8t, y = -1 - 2t$.",
+    "resposta": "## Conceito\nRetas podem ser concorrentes, paralelas ou coincidentes. No plano, duas retas são paralelas se seus vetores diretores forem proporcionais. Se os vetores diretores forem proporcionais, verificamos se um ponto de uma pertence à outra para distinguir entre paralelas e coincidentes.\n\n## Resolução\n1. Vetor diretor de $r$: $\\vec{v}_r = (-4, 1)$.\n2. Vetor diretor de $s$: $\\vec{v}_s = (8, -2)$.\n3. Verificando a proporcionalidade:\nObserve que $\\vec{v}_s = -2 \\cdot \\vec{v}_r$. Como os vetores são múltiplos escalares, as retas são paralelas.\n4. Verificando se há intersecção (coincidência):\nPegamos um ponto de $r$ ($t=0$): $P_r(2, -2)$.\nSubstituímos em $s$: $2 = 3 + 8t \\implies t = -1/8$. \nSubstituindo $t = -1/8$ na ordenada de $s$: $y = -1 - 2(-1/8) = -0,75$. Como $-0,75 \\ne -2$, o ponto não pertence e as retas são paralelas distintas.\n\n**Gabarito: (E)** As retas são paralelas e não possuem ponto de intersecção."
+  },
+  {
+    "pergunta": "A expressão lógica $\\neg p \\to \\neg q$ é equivalente a qual alternativa?",
+    "resposta": "## Conceito\nA equivalência mais importante para condicionais é a contrapositiva. A contrapositiva de uma proposição $P \\to Q$ é $\\neg Q \\to \\neg P$. Ambas possuem a mesma tabela verdade e são, portanto, logicamente equivalentes.\n\n## Resolução\n1. Dada a proposição: $\\neg p \\to \\neg q$.\n2. Aplicamos a regra da contrapositiva: trocamos os termos de lugar e negamos ambos.\n$$ \\neg(\\neg q) \\to \\neg(\\neg p) $$\n3. Aplicando a lei da dupla negação ($\\neg\\neg A \\equiv A$):\n$$ q \\to p $$\n4. Conclusão: A expressão $\\neg p \\to \\neg q$ é equivalente a $q \\to p$.\n\n**Gabarito: (D)** $q \\to p$"
+  },
+  {
+    "pergunta": "A proposição $\\neg(p \\lor q)$ é verdadeira se, e somente se, for falsa qual proposição?",
+    "resposta": "## Conceito\nA negação de uma disjunção $\\neg(p \\lor q)$ é equivalente a $\\neg p \\land \\neg q$ (Lei de De Morgan). Esta expressão só é verdadeira quando $p$ e $q$ são simultaneamente falsos. O problema pede para identificar qual das alternativas se torna falsa sob essa condição específica ($p=F, q=F$).\n\n## Resolução\n1. Definimos os valores lógicos: $p = F$ e $q = F$.\n2. Testamos a alternativa (C) $\\neg p \\to q$:\nNegamos $p$: $\\neg F = V$.\nSubstituímos na condicional: $V \\to F$.\n3. Pela definição do conectivo condicional, $V \\to F$ resulta em **Falso**.\n4. Como a alternativa (C) é a única que resulta em Falso quando a premissa original é verdadeira, ela é a resposta.\n\n**Gabarito: (C)** $\\neg p \\to q$"
+  },
+  {
+    "pergunta": "Conclua a partir de: 1) $(A \\lor J) \\to V$; 2) $\\neg V$; 3) $S \\to (A \\land C)$.",
+    "resposta": "## Conceito\nA resolução de silogismos e inferências lógicas baseia-se em regras como Modus Tollens ($P \\to Q, \\neg Q \\therefore \\neg P$) e as Leis de De Morgan ($\\neg(P \\lor Q) \\equiv \\neg P \\land \\neg Q$). Uma conclusão válida é aquela que é necessariamente verdadeira em todos os modelos onde as premissas são verdadeiras.\n\n## Resolução\n1. Da Premissa 2, sabemos que $\\neg V$ (Victória não foi à praia).\n2. Aplicamos Modus Tollens na Premissa 1 ($(A \\lor J) \\to V$):\nComo temos $\\neg V$, concluímos $\\neg(A \\lor J)$.\n3. Aplicamos De Morgan em $\\neg(A \\lor J)$:\nObtemos $\\neg A \\land \\neg J$ (Ana Paula não joga vôlei E Joaquim não joga videogame).\n4. Analisamos a Premissa 3 ($S \\to (A \\land C)$):\nComo descobrimos $\\neg A$, a conjunção $(A \\land C)$ é obrigatoriamente falsa.\n5. Aplicamos Modus Tollens na Premissa 3:\nComo $(A \\land C)$ é falso, concluímos $\\neg S$ (Não é sábado).\n6. Resultado final: $\\neg S \\land \\neg J$.\n\n**Gabarito: (B)** Hoje não é sábado e Joaquim não jogou videogame."
+  },
+  {
+    "id": 19,
+    "area": "Matemática",
+    "enunciado": "Com base na lista de tempos (80 valores) de execução de um software, a percentagem de tempo em que o processo de cálculo é inferior a 65 segundos é:",
+    "alternativas": {
+      "A": "28,8%",
+      "B": "30,0%",
+      "C": "32,5%",
+      "D": "36,3%",
+      "E": "40,0%"
+    },
+    "resposta": "C",
+    "comentario": "26 valores < 65 em 80 observações → 26/80 = 32,5%.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Em uma amostra de 80 tempos, qual a percentagem de valores inferiores a 65 segundos se 26 deles atendem ao critério?",
+      "resposta": "## Conceito\nA **frequência relativa** (percentagem) representa a proporção de uma categoria em relação ao total da amostra. É calculada como:\n$$P = \\frac{f}{n} \\times 100\\%$$\nOnde $f$ é a frequência absoluta (número de ocorrências) e $n$ é o tamanho total da amostra.\n\n## Resolução\n1. Identificamos a frequência absoluta de tempos < 65s: $f = 26$\n2. Identificamos o tamanho total da amostra: $n = 80$\n3. Aplicamos a fórmula da percentagem:\n$$P = \\frac{26}{80} \\times 100\\%$$\n4. Realizamos a divisão:\n$$P = 0,325 \\times 100\\% = 32,5\\%$$\n\n**Gabarito: (C)** $32,5\\%$"
+    }
+  },
+  {
+    "id": 20,
+    "area": "Matemática",
+    "enunciado": "O tempo médio aproximado que o software leva para realizar os cálculos é:",
+    "alternativas": {
+      "A": "65",
+      "B": "66",
+      "C": "67",
+      "D": "68",
+      "E": "69"
+    },
+    "resposta": "C",
+    "comentario": "Soma dos 80 valores ≈ 5360 → média = 5360/80 = 67.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Calcule o tempo médio de execução para uma amostra de 80 valores cuja soma é aproximadamente 5360.",
+      "resposta": "## Conceito\nA **média aritmética** ($\\bar{x}$) é a soma de todos os valores de um conjunto dividida pela quantidade total de elementos ($n$):\n$$\\bar{x} = \\frac{\\sum_{i=1}^{n} x_i}{n}$$\nEla representa o valor central equilibrado do conjunto de dados.\n\n## Resolução\n1. Identificamos a soma total dos tempos de execução: $\\sum x_i \\approx 5360$\n2. Identificamos o número total de observações: $n = 80$\n3. Aplicamos a fórmula da média:\n$$\\bar{x} = \\frac{5360}{80}$$\n4. Simplificamos a divisão:\n$$\\bar{x} = \\frac{536}{8} = 67$$\n\n**Gabarito: (C)** $67$"
+    }
+  },
+  {
+    "id": 1,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Resolva o sistema abaixo utilizando o método de Gauss.\n2x – 2y + z = –3\nx + 3y – 2z = 1\n3x – y – z = 2",
+    "alternativas": {
+      "A": "(1/5, -1, 2/5)",
+      "B": "(0, -1, 0)",
+      "C": "(2/5, 0, 2/5)",
+      "D": "(-7/5, -2, -21/5)",
+      "E": "(-1/5, -1, -1/5)"
+    },
+    "resposta": "D",
+    "comentario": "Montando a matriz aumentada e aplicando eliminação gaussiana: após escalonamento obtém-se x = -7/5, y = -2, z = -21/5. Verificação na eq. 1: 2(-7/5) – 2(-2) + (-21/5) = -14/5 + 4 – 21/5 = -35/5 + 4 = -7 + 4 = -3 ✓.",
+    "card": {
+      "pergunta": "Resolva o sistema linear pelo método de Gauss: $2x-2y+z=-3$; $x+3y-2z=1$; $3x-y-z=2$.",
+      "resposta": "## Conceito\nO **Método de Gauss** consiste em transformar o sistema original em um sistema escalonado equivalente através de operações elementares nas linhas da matriz aumentada $[A|b]$. As operações permitidas são: trocar linhas, multiplicar linha por constante não-nula e somar múltiplo de uma linha a outra.\n\n## Resolução\n1. Matriz aumentada:\n$$\\left[\\begin{array}{ccc|c} 2 & -2 & 1 & -3 \\\\ 1 & 3 & -2 & 1 \\\\ 3 & -1 & -1 & 2 \\end{array}\\right]$$\n2. Trocar $L_1$ com $L_2$ para facilitar (pivô=1):\n$$\\left[\\begin{array}{ccc|c} 1 & 3 & -2 & 1 \\\\ 2 & -2 & 1 & -3 \\\\ 3 & -1 & -1 & 2 \\end{array}\\right]$$\n3. $L_2 \\leftarrow L_2 - 2L_1$ e $L_3 \\leftarrow L_3 - 3L_1$:\n$$\\left[\\begin{array}{ccc|c} 1 & 3 & -2 & 1 \\\\ 0 & -8 & 5 & -5 \\\\ 0 & -10 & 5 & -1 \\end{array}\\right]$$\n4. $L_3 \\leftarrow L_3 - \\frac{10}{8}L_2$ (ou $L_3 \\leftarrow L_3 - 1,25L_2$):\n$$\\left[\\begin{array}{ccc|c} 1 & 3 & -2 & 1 \\\\ 0 & -8 & 5 & -5 \\\\ 0 & 0 & -1,25 & 5,25 \\end{array}\\right] \\implies -1,25z = 5,25 \\implies z = -4,2 = -\\frac{21}{5}$$\n5. Substituição reversa:\n$$-8y + 5(-21/5) = -5 \\implies -8y - 21 = -5 \\implies -8y = 16 \\implies y = -2$$\n$$x + 3(-2) - 2(-21/5) = 1 \\implies x - 6 + 42/5 = 1 \\implies x = 7 - 42/5 = (35-42)/5 = -7/5$$\n\n**Gabarito: (D)** $(-7/5, -2, -21/5)$"
+    }
+  },
+  {
+    "id": 2,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Calcule o valor de α que provoca que o determinante da matriz Z seja 8:\nZ = [[1, -1, -1], [-1, 1, -1], [2, 2, α]]",
+    "alternativas": {
+      "A": "α = 1",
+      "B": "α = 2",
+      "C": "α = 4",
+      "D": "α = 7",
+      "E": "α = 11"
+    },
+    "resposta": "ANULADA",
+    "comentario": "Questão anulada oficialmente. Ao expandir o determinante, o coeficiente de α resulta em 0 (det = 2·2 + 2·(1+1) + α·0 = ...), tornando impossível satisfazer det = 8 para qualquer α.",
+    "card": {
+      "pergunta": "Determine $\\alpha$ tal que $\\det(Z)=8$ para $Z = \\begin{pmatrix} 1 & -1 & -1 \\\\ -1 & 1 & -1 \\\\ 2 & 2 & \\alpha \\end{pmatrix}$.",
+      "resposta": "## Conceito\nO **determinante** de uma matriz $3 \\times 3$ pode ser calculado pela Regra de Sarrus ou Expansão de Laplace. Para a matriz ser invertível ou satisfazer uma igualdade de determinante, resolvemos a equação característica resultante.\n\n## Resolução\n1. Aplicando a Regra de Sarrus em $Z$:\n$$\\det(Z) = (1 \\cdot 1 \\cdot \\alpha) + (-1 \\cdot -1 \\cdot 2) + (-1 \\cdot -1 \\cdot 2) - [(-1 \\cdot 1 \\cdot 2) + (1 \\cdot -1 \\cdot 2) + (-1 \\cdot -1 \\cdot \\alpha)]$$\n2. Calculando os termos:\n$$\\det(Z) = (\\alpha) + (2) + (2) - [(-2) + (-2) + (\\alpha)]$$\n3. Simplificando a expressão:\n$$\\det(Z) = \\alpha + 4 - [-4 + \\alpha] = \\alpha + 4 + 4 - \\alpha = 8$$\n4. Resultado da análise: O determinante é constante e igual a 8 para **qualquer** valor de $\\alpha$. O termo em $\\alpha$ se cancela.\n\nComo o determinante é sempre 8 independente de $\\alpha$, todas as alternativas seriam tecnicamente corretas, o que levou à anulação da questão.\n\n**Gabarito: (ANULADA)** O determinante é constante e independente de $\\alpha$."
+    }
+  },
+  {
+    "id": 3,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Assinale a alternativa que apresenta o polinômio característico da matriz A = [[1,-1,-1],[-1,1,-1],[2,2,4]].",
+    "alternativas": {
+      "A": "(λ – 2)",
+      "B": "(λ – 2)²",
+      "C": "(λ + 2)",
+      "D": "(λ - 4)",
+      "E": "– (λ – 2)³"
+    },
+    "resposta": "E",
+    "comentario": "Calculando det(A – λI) e fatorando, obtém-se –(λ – 2)³, indicando que λ = 2 é autovalor de multiplicidade algébrica 3. O sinal negativo decorre da convenção det(A – λI).",
+    "card": {
+      "pergunta": "Encontre o polinômio característico da matriz $A = \\begin{pmatrix} 1 & -1 & -1 \\\\ -1 & 1 & -1 \\\\ 2 & 2 & 4 \\end{pmatrix}$.",
+      "resposta": "## Conceito\nO **polinômio característico** de uma matriz $A$ é definido por $p(\\lambda) = \\det(A - \\lambda I)$. Suas raízes são os autovalores da matriz. Para uma matriz $n \\times n$, o polinômio terá grau $n$.\n\n## Resolução\n1. Montamos a matriz $A - \\lambda I$:\n$$A - \\lambda I = \\begin{pmatrix} 1-\\lambda & -1 & -1 \\\\ -1 & 1-\\lambda & -1 \\\\ 2 & 2 & 4-\\lambda \\end{pmatrix}$$\n2. Calculamos o determinante (Laplace na 1ª linha):\n$$(1-\\lambda) \\begin{vmatrix} 1-\\lambda & -1 \\\\ 2 & 4-\\lambda \\end{vmatrix} - (-1) \\begin{vmatrix} -1 & -1 \\\\ 2 & 4-\\lambda \\end{vmatrix} + (-1) \\begin{vmatrix} -1 & 1-\\lambda \\\\ 2 & 2 \\end{vmatrix}$$\n3. Resolvemos os menores:\n$$(1-\\lambda)[(\\lambda^2-5\\lambda+4)+2] + [(-4+\\lambda)+2] - [-2-2(1-\\lambda)]$$\n$$(1-\\lambda)(\\lambda^2-5\\lambda+6) + (\\lambda-2) - (2\\lambda-4)$$\n4. Fatorando:\n$$(1-\\lambda)(\\lambda-2)(\\lambda-3) + (\\lambda-2) - 2(\\lambda-2)$$\n$$(\\lambda-2) [(1-\\lambda)(\\lambda-3) + 1 - 2]$$\n$$(\\lambda-2) [-\\lambda^2 + 4\\lambda - 4] = (\\lambda-2) [-(\\lambda-2)^2] = -(\\lambda-2)^3$$\n\n**Gabarito: (E)** $-(\\lambda - 2)^3$"
+    }
+  },
+  {
+    "id": 4,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Quantas formas existem de permutar os elementos do conjunto {1,2,3,4} de maneira que o número 1 não esteja na primeira posição e o número 2 não esteja na segunda posição?",
+    "alternativas": {
+      "A": "6",
+      "B": "8",
+      "C": "10",
+      "D": "12",
+      "E": "14"
+    },
+    "resposta": "E",
+    "comentario": "Inclusão-exclusão: Total = 4! = 24. |A| = 3! = 6, |B| = 3! = 6, |A∩B| = 2! = 2. Inválidas = 6+6–2 = 10. Válidas = 24–10 = 14.",
+    "card": {
+      "pergunta": "Permutações de {1,2,3,4} tal que $1$ não está na 1ª pos e $2$ não está na 2ª pos.",
+      "resposta": "## Conceito\nO **Princípio da Inclusão-Exclusão** permite contar elementos que não satisfazem certas propriedades. Para duas propriedades $P_1$ e $P_2$, o número de elementos que não satisfazem nenhuma delas é:\n$$N(\\text{nenhuma}) = N(\\text{total}) - [N(P_1) + N(P_2) - N(P_1 \\cap P_2)]$$\n\n## Resolução\n1. Total de permutações de 4 elementos: $N(\\text{total}) = 4! = 24$.\n2. $P_1$ (1 na 1ª pos): Fixamos o 1, restam 3 elementos. $N(P_1) = 3! = 6$.\n3. $P_2$ (2 na 2ª pos): Fixamos o 2, restam 3 elementos. $N(P_2) = 3! = 6$.\n4. $P_1 \\cap P_2$ (1 na 1ª E 2 na 2ª): Fixamos 1 e 2, restam 2 elementos. $N(P_1 \\cap P_2) = 2! = 2$.\n5. Aplicando o princípio:\n$$N = 24 - (6 + 6 - 2)$$\n$$N = 24 - 10 = 14$$\n\n**Gabarito: (E)** $14$"
+    }
+  },
+  {
+    "id": 5,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Qual é o número máximo de arestas que um grafo não direcionado G com 7 vértices pode ter sem formar um ciclo?",
+    "alternativas": {
+      "A": "6",
+      "B": "7",
+      "C": "10",
+      "D": "11",
+      "E": "21"
+    },
+    "resposta": "A",
+    "comentario": "Um grafo acíclico (floresta) com n vértices tem no máximo n–1 = 6 arestas. Uma árvore com 7 vértices tem exatamente 6 arestas.",
+    "card": {
+      "pergunta": "Número máximo de arestas em um grafo acíclico com 7 vértices.",
+      "resposta": "## Conceito\nUm grafo não direcionado e acíclico é chamado de **floresta**. Se ele for também conexo, é uma **árvore**. Uma propriedade fundamental das árvores com $n$ vértices é que elas possuem exatamente $n-1$ arestas. Qualquer aresta adicional fecharia obrigatoriamente um ciclo.\n\n## Resolução\n1. Identificamos o número de vértices: $n = 7$.\n2. Para que o grafo não tenha ciclos e tenha o número máximo de arestas, ele deve ser uma árvore (conexo e acíclico).\n3. Aplicamos a propriedade de árvores:\n$$E = n - 1$$\n$$E = 7 - 1 = 6$$\n\nSe o grafo fosse desconexo (floresta), o número de arestas seria ainda menor ($n - k$ onde $k$ é o número de componentes).\n\n**Gabarito: (A)** $6$"
+    }
+  },
+  {
+    "id": 6,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Uma startup tem 7 jogos de ação e 5 de esportes. Pacote de 4 jogos. Quantas opções com pelo menos 2 jogos de esportes?",
+    "alternativas": {
+      "A": "70",
+      "B": "120",
+      "C": "210",
+      "D": "285",
+      "E": "495"
+    },
+    "resposta": "D",
+    "comentario": "2 esportes + 2 ação: C(5,2)×C(7,2) = 10×21 = 210. 3 esportes + 1 ação: C(5,3)×C(7,1) = 10×7 = 70. 4 esportes + 0 ação: C(5,4)×C(7,0) = 5. Total = 285.",
+    "card": {
+      "pergunta": "Pacote de 4 jogos (7 ação, 5 esportes) com pelo menos 2 de esportes. Quantas combinações?",
+      "resposta": "## Conceito\n**Combinação Simples** $\\binom{n}{k}$ é o número de formas de escolher $k$ itens de um conjunto de $n$ sem importar a ordem. Para problemas com \"pelo menos\", somamos os casos favoráveis distintos.\n\n## Resolução\nCalculamos as combinações para 2, 3 e 4 jogos de esportes:\n1. Caso 2 esportes (e 2 ação):\n$$\\binom{5}{2} \\times \\binom{7}{2} = 10 \\times 21 = 210$$\n2. Caso 3 esportes (e 1 ação):\n$$\\binom{5}{3} \\times \\binom{7}{1} = 10 \\times 7 = 70$$\n3. Caso 4 esportes (e 0 ação):\n$$\\binom{5}{4} \\times \\binom{7}{0} = 5 \\times 1 = 5$$\n4. Soma total:\n$$Total = 210 + 70 + 5 = 285$$\n\n**Gabarito: (D)** $285$"
+    }
+  },
+  {
+    "id": 7,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Calcule o limite em infinito da função f(x) = √(x² + 1) − x.",
+    "alternativas": {
+      "A": "-∞",
+      "B": "-1",
+      "C": "0",
+      "D": "1",
+      "E": "∞"
+    },
+    "resposta": "C",
+    "comentario": "Multiplicando pelo conjugado: resultado = 1/(√(x²+1) + x). Quando x→∞, denominador→∞, portanto limite = 0.",
+    "card": {
+      "pergunta": "Calcule o limite: $\\lim_{x \\to \\infty} (\\sqrt{x^2 + 1} - x)$.",
+      "resposta": "## Conceito\nLimites envolvendo a diferença de raízes quadradas no infinito frequentemente resultam em indeterminações do tipo $\\infty - \\infty$. A técnica padrão é multiplicar e dividir pelo **conjugado** da expressão para remover a indeterminação.\n\n## Resolução\n1. Multiplicamos pelo conjugado $\\frac{\\sqrt{x^2+1}+x}{\\sqrt{x^2+1}+x}$:\n$$\\lim_{x \\to \\infty} \\frac{(\\sqrt{x^2+1}-x)(\\sqrt{x^2+1}+x)}{\\sqrt{x^2+1}+x}$$\n2. Aplicamos o produto notável $(a-b)(a+b) = a^2-b^2$:\n$$\\lim_{x \\to \\infty} \\frac{(x^2+1) - x^2}{\\sqrt{x^2+1}+x} = \\lim_{x \\to \\infty} \\frac{1}{\\sqrt{x^2+1}+x}$$\n3. Analisamos o comportamento conforme $x \\to \\infty$:\nO numerador é constante ($1$) e o denominador cresce sem limites ($ \\to \\infty$):\n$$\\frac{1}{\\infty} = 0$$\n\n**Gabarito: (C)** $0$"
+    }
+  },
+  {
+    "id": 8,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Assinale o intervalo em que g(x) = √(4 − x²) / (3x − 1) é contínua.",
+    "alternativas": {
+      "A": "[-4, 1) U (1, 4]",
+      "B": "[-2, 3) U (3, 2)",
+      "C": "[-2, 1/3) U (1/3, 2]",
+      "D": "[-∞, 2) U (2, ∞)",
+      "E": "[-∞, 0) U (0, ∞)"
+    },
+    "resposta": "C",
+    "comentario": "Radicando ≥ 0: –2 ≤ x ≤ 2. Denominador ≠ 0: x ≠ 1/3. Domínio = [–2, 1/3) ∪ (1/3, 2].",
+    "card": {
+      "pergunta": "Determine o domínio de continuidade de $g(x) = \\frac{\\sqrt{4 - x^2}}{3x - 1}$.",
+      "resposta": "## Conceito\nUma função é contínua em seu **domínio**. Para esta função, devemos garantir: 1) O radicando de uma raiz par deve ser não-negativo ($ \\geq 0$) e 2) O denominador de uma fração deve ser diferente de zero ($ \\neq 0$).\n\n## Resolução\n1. Condição da raiz: $4 - x^2 \\geq 0$\n$$x^2 \\leq 4 \\implies |x| \\leq 2 \\implies -2 \\leq x \\leq 2 \\implies x \\in [-2, 2]$$\n2. Condição do denominador: $3x - 1 \\neq 0$\n$$3x \\neq 1 \\implies x \\neq 1/3$$\n3. Interseção das condições:\nO intervalo $[-2, 2]$ excluindo o ponto $1/3$ resulta em:\n$$[-2, 1/3) \\cup (1/3, 2]$$\n\n**Gabarito: (C)** $[-2, 1/3) \\cup (1/3, 2]$"
+    }
+  },
+  {
+    "id": 9,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Calcule a integral definida ∫₁ᵉ (ln x / x) dx.",
+    "alternativas": {
+      "A": "e",
+      "B": "2",
+      "C": "1",
+      "D": "1/2",
+      "E": "0"
+    },
+    "resposta": "D",
+    "comentario": "Substituição u = ln x, du = dx/x. Limites: 0 a 1. Integral = [u²/2]₀¹ = 1/2.",
+    "card": {
+      "pergunta": "Calcule a integral definida: $\\int_{1}^{e} \\frac{\\ln x}{x} dx$.",
+      "resposta": "## Conceito\nIntegrais que envolvem uma função e sua derivada são resolvidas pelo **Método da Substituição** (ou mudança de variável). Se $u = g(x)$, então $du = g'(x)dx$.\n\n## Resolução\n1. Escolhemos a substituição: $u = \\ln x$\n2. Calculamos o diferencial: $du = \\frac{1}{x} dx$\n3. Mudamos os limites de integração:\nSe $x = 1 \\implies u = \\ln 1 = 0$\nSe $x = e \\implies u = \\ln e = 1$\n4. Substituímos na integral:\n$$\\int_{0}^{1} u \\, du$$\n5. Integramos:\n$$\\left[ \\frac{u^2}{2} \\right]_{0}^{1} = \\frac{1^2}{2} - \\frac{0^2}{2} = \\frac{1}{2}$$\n\n**Gabarito: (D)** $1/2$"
+    }
+  },
+  {
+    "id": 10,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "O ponto médio do segmento de extremos A(5, -1) e B(4, -2) é:",
+    "alternativas": {
+      "A": "(1/2, 1/2)",
+      "B": "(9/2, -3/2)",
+      "C": "(3/2, 3/2)",
+      "D": "(1, 1/2)",
+      "E": "(1/2, 2)"
+    },
+    "resposta": "B",
+    "comentario": "M = ((5+4)/2, (-1-2)/2) = (9/2, -3/2).",
+    "card": {
+      "pergunta": "Encontre o ponto médio $M$ do segmento com extremos $A(5, -1)$ e $B(4, -2)$.",
+      "resposta": "## Conceito\nO **ponto médio** $M$ de um segmento de reta no plano cartesiano cujas extremidades são $A(x_1, y_1)$ e $B(x_2, y_2)$ é obtido pela média aritmética das coordenadas correspondentes:\n$$M = \\left( \\frac{x_1 + x_2}{2}, \\frac{y_1 + y_2}{2} \\right)$$\n\n## Resolução\n1. Identificamos as coordenadas: $x_1=5, y_1=-1$ e $x_2=4, y_2=-2$.\n2. Calculamos a coordenada $x$ média:\n$$x_M = \\frac{5 + 4}{2} = \\frac{9}{2}$$\n3. Calculamos a coordenada $y$ média:\n$$y_M = \\frac{-1 + (-2)}{2} = \\frac{-3}{2}$$\n4. O ponto médio é:\n$$M = (9/2, -3/2)$$\n\n**Gabarito: (B)** $(9/2, -3/2)$"
+    }
+  },
+  {
+    "id": 11,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Calcule os dois valores de k em que a distância do ponto P(2, k) até a reta r: x – y + 3 = 0 é √2.",
+    "alternativas": {
+      "A": "k = 3 e k = 7",
+      "B": "k = -1 e k = 2",
+      "C": "k = 3 e k = 5",
+      "D": "k = 2 e k = 3",
+      "E": "k = 5 e k = 7"
+    },
+    "resposta": "A",
+    "comentario": "d = |2 – k + 3| / √2 = √2 → |5 – k| = 2 → k = 3 ou k = 7.",
+    "card": {
+      "pergunta": "Determine $k$ tal que a distância de $P(2, k)$ à reta $x - y + 3 = 0$ seja $\\sqrt{2}$.",
+      "resposta": "## Conceito\nA **distância de um ponto** $P(x_0, y_0)$ a uma reta $Ax + By + C = 0$ é dada pela fórmula:\n$$d = \\frac{|Ax_0 + By_0 + C|}{\\sqrt{A^2 + B^2}}$$\nO valor absoluto indica que existem dois pontos (um de cada lado da reta) que satisfazem a distância.\n\n## Resolução\n1. Identificamos os parâmetros: $A=1, B=-1, C=3, x_0=2, y_0=k, d=\\sqrt{2}$.\n2. Aplicamos na fórmula:\n$$\\sqrt{2} = \\frac{|1(2) + (-1)(k) + 3|}{\\sqrt{1^2 + (-1)^2}}$$\n3. Simplificamos o denominador:\n$$\\sqrt{2} = \\frac{|5 - k|}{\\sqrt{2}}$$\n4. Multiplicamos ambos os lados por $\\sqrt{2}$:\n$$2 = |5 - k|$$\n5. Resolvemos a equação modular:\n- Caso 1: $5 - k = 2 \\implies k = 3$\n- Caso 2: $5 - k = -2 \\implies k = 7$\n\n**Gabarito: (A)** $k=3$ e $k=7$"
+    }
+  },
+  {
+    "id": 12,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "Determine o ponto de intersecção das retas r: x=2–4t, y=–2+t e s: x=3+8t, y=–1–2t.",
+    "alternativas": {
+      "A": "(-3, 1)",
+      "B": "(1, 2)",
+      "C": "(-5, 0)",
+      "D": "(1, 1)",
+      "E": "As retas são paralelas e não possuem ponto de intersecção."
+    },
+    "resposta": "E",
+    "comentario": "Vetores diretores r=(-4,1) e s=(8,-2)=-2·(-4,1): paralelos. Pontos distintos (2,-2) e (3,-1): retas paralelas e distintas, sem intersecção.",
+    "card": {
+      "pergunta": "Determine a interseção das retas $r: (2-4t, -2+t)$ e $s: (3+8t, -1-2t)$.",
+      "resposta": "## Conceito\nPara encontrar a **interseção entre retas paramétricas**, verificamos se existe um par de parâmetros $(t_1, t_2)$ que resulte no mesmo ponto $(x, y)$. Se os **vetores diretores** das retas forem proporcionais, as retas são paralelas (e não se cruzam, a menos que sejam coincidentes).\n\n## Resolução\n1. Identificamos os vetores diretores:\n- Reta $r$: $\\vec{v}_r = (-4, 1)$\n- Reta $s$: $\\vec{v}_s = (8, -2)$\n2. Verificamos a proporcionalidade:\n$$\\vec{v}_s = -2 \\cdot \\vec{v}_r$$\nComo os vetores são múltiplos, as retas são **paralelas**.\n3. Verificamos se são coincidentes (testando se o ponto $(2, -2)$ de $r$ está em $s$):\n$$2 = 3 + 8t \\implies 8t = -1 \\implies t = -1/8$$\n$$-2 = -1 - 2t \\implies 2t = 1 \\implies t = 1/2$$\nComo os valores de $t$ são diferentes, o ponto não pertence à outra reta.\n\nAs retas são paralelas e distintas, portanto não possuem interseção.\n\n**Gabarito: (E)** As retas são paralelas e não possuem intersecção."
+    }
+  },
+  {
+    "id": 13,
+    "ano": 2024,
+    "area": "Matemática",
+    "enunciado": "A expressão lógica ~p → ~q é equivalente a:",
+    "alternativas": {
+      "A": "~q ∧ ~p",
+      "B": "~q → p",
+      "C": "q → ~p",
+      "D": "q → p",
+      "E": "p → q"
+    },
+    "resposta": "D",
+    "comentario": "~p → ~q é a contrapositiva de q → p (contrapositiva de A→B é ~B→~A), sendo logicamente equivalente.",
+    "card": {
+      "pergunta": "Qual expressão lógica é equivalente a $\\neg p \\to \\neg q$?",
+      "resposta": "## Conceito\nA **Equivalência Lógica** mais importante para o condicional ($A \\to B$) é a sua **Contrapositiva** ($\\neg B \\to \\neg A$). Ambas possuem exatamente a mesma tabela-verdade. Inverter os termos e negar ambos mantém o valor lógico original.\n\n## Resolução\n1. Dada a proposição: $\\neg p \\to \\neg q$\n2. Identificamos o antecedente ($A = \\neg p$) e o consequente ($B = \\neg q$).\n3. Aplicamos a regra da contrapositiva: $\\neg B \\to \\neg A$\n4. Negamos os termos originais:\n$$\\neg (\\neg q) \\to \\neg (\\neg p)$$\n5. Aplicamos a lei da dupla negação ($\\neg\\neg p \\equiv p$):\n$$q \\to p$$\n\n**Gabarito: (D)** $q \\to p$"
+    }
+  }
+]

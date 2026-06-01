@@ -96,13 +96,3 @@ REGRAS:
 Responda APENAS com JSON válido (sem markdown ao redor):
 {"pergunta": "...", "resposta": "..."}
 ```
-
----
-
-## Exemplos de output esperado
-
-Ver `scripts/data/sample-cards.json` para referência de qualidade.
-
-## Implementação atual
-
-`scripts/generate-cards.ts` — usa Claude (`claude-sonnet-4-6`), concorrência 3, com checkpoint para retomar interrupções.
