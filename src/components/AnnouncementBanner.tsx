@@ -26,10 +26,9 @@ const mdComponents = (color: string) => ({
     <img src={src} alt={alt} width={width} height={height}
       style={{ maxWidth: '100%', borderRadius: 8, marginTop: 6, display: 'block', ...(style as React.CSSProperties) }} />
   ),
-  iframe: ({ src, height, width: _width, ...rest }: React.IframeHTMLAttributes<HTMLIFrameElement>) => (
-    <iframe src={src} width="100%" height={height ?? 400}
-      style={{ display: 'block', border: 'none' }}
-      {...rest} />
+  iframe: ({ src, height, ...rest }: React.IframeHTMLAttributes<HTMLIFrameElement>) => (
+    <iframe {...rest} src={src} width="100%" height={height ?? 400}
+      style={{ display: 'block', border: 'none' }} />
   ),
 })
 
@@ -61,11 +60,11 @@ interface Props {
 }
 
 export function AnnouncementBanner({ announcements }: Props) {
+  useLumaScript(announcements[0]?.message ?? '')
   if (announcements.length === 0) return null
   const a = announcements[0]
   const t = THEME[a.type] ?? THEME.info
   const hasBlock = /<iframe|<img/i.test(a.message)
-  useLumaScript(a.message)
   return (
     <div
       role="alert"
