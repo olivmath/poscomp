@@ -54,8 +54,9 @@ help:
 	@echo "  make dev seed        Seed questions into real Firestore (prod, uses ADC)"
 	@echo "  make dev gf          List pending flagged questions (prod)"
 	@echo "  make dev rf          Resolve a flagged question (prod)"
-	@echo "  make dev deploy app  Deploy frontend to Firebase Hosting"
-	@echo "  make dev deploy func Build + deploy Cloud Functions"
+	@echo "  make dev deploy app   Deploy app to Firebase Hosting"
+	@echo "  make dev deploy admin Deploy admin panel to Firebase Hosting"
+	@echo "  make dev deploy func  Build + deploy Cloud Functions"
 	@echo ""
 	@echo "top-level:"
 	@echo "  validate             Full pipeline: install → lint → typecheck → test → build"
@@ -110,7 +111,7 @@ local:
 		resolve-flagged|rf) \
 			read -p "Enter flag ID to resolve: " id; \
 			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath npx tsx scripts/resolve-flagged.ts "$$id" ;; \
-		*) echo "Unknown: make local [up|down|restart|app|seed|gf|rf]"; exit 1 ;; \
+		*) echo "Unknown: make local [up|down|restart|app|admin|set-admin|seed|gf|rf]"; exit 1 ;; \
 	esac
 
 # ── dev namespace (prod) ──────────────────────────────────────────────────────
@@ -132,11 +133,12 @@ dev:
 			FIREBASE_PROJECT_ID=poscomp-olivmath npx tsx scripts/resolve-flagged.ts "$$id" ;; \
 		deploy) \
 			case "$(word 3,$(MAKECMDGOALS))" in \
-				app)  firebase deploy --only hosting ;; \
-				func) cd functions && npm run build && cd .. && firebase deploy --only functions ;; \
-				*) echo "Unknown: make dev deploy [app|func]"; exit 1 ;; \
+				app)   firebase deploy --only hosting:app ;; \
+				admin) pnpm --prefix $(CURDIR)/admin build && firebase deploy --only hosting:admin ;; \
+				func)  cd functions && npm run build && cd .. && firebase deploy --only functions ;; \
+				*) echo "Unknown: make dev deploy [app|admin|func]"; exit 1 ;; \
 			esac ;; \
-		*) echo "Unknown: make dev [app|seed|gf|rf|get-flagged|resolve-flagged|deploy]"; exit 1 ;; \
+		*) echo "Unknown: make dev [app|admin|set-admin|seed|gf|rf|deploy]"; exit 1 ;; \
 	esac
 
 # ── Validate (full pipeline) ──────────────────────────────────────────────────
