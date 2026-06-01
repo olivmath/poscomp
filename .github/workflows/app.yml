@@ -209,7 +209,9 @@ jobs:
           channelId: live
           projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
       - name: Deploy Firestore rules
-        run: npx firebase-tools@latest deploy --only firestore:rules --project ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/sa.json
+          GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json npx firebase-tools@latest deploy --only firestore:rules --project ${{ secrets.FIREBASE_PROJECT_ID }}
 
   auto_merge:
     if: github.event_name == 'pull_request'
