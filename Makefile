@@ -44,6 +44,8 @@ help:
 	@echo "  make local rf        Resolve a flagged question (emulator)"
 	@echo ""
 	@echo "dev:"
+	@echo "  make dev app         Vite dev server connected to real Firebase (prod)"
+	@echo "  make dev seed        Seed questions into real Firestore (prod, uses ADC)"
 	@echo "  make dev gf          List pending flagged questions (prod)"
 	@echo "  make dev rf          Resolve a flagged question (prod)"
 	@echo "  make dev deploy app  Deploy frontend to Firebase Hosting"
@@ -105,6 +107,10 @@ local:
 dev:
 	@if [ "$(firstword $(MAKECMDGOALS))" != "dev" ]; then exit 0; fi; \
 	case "$(word 2,$(MAKECMDGOALS))" in \
+		app) \
+			pnpm dev ;; \
+		seed) \
+			FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed ;; \
 		get-flagged|gf) \
 			FIREBASE_PROJECT_ID=poscomp-olivmath npx tsx scripts/get-flagged.ts ;; \
 		resolve-flagged|rf) \
@@ -116,7 +122,7 @@ dev:
 				func) cd functions && npm run build && cd .. && firebase deploy --only functions ;; \
 				*) echo "Unknown: make dev deploy [app|func]"; exit 1 ;; \
 			esac ;; \
-		*) echo "Unknown: make dev [gf|rf|get-flagged|resolve-flagged|deploy]"; exit 1 ;; \
+		*) echo "Unknown: make dev [app|seed|gf|rf|get-flagged|resolve-flagged|deploy]"; exit 1 ;; \
 	esac
 
 # ── Validate (full pipeline) ──────────────────────────────────────────────────
