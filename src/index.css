@@ -3610,6 +3610,17 @@ md-outlined-button.btn-full {
   padding: var(--space-xs) 0;
 }
 
+/* ── Announcement banner markdown ──────────────────────────────────── */
+.announcement-md { flex: 1; min-width: 0; }
+.announcement-md p { margin: 0; }
+.announcement-md p + p { margin-top: var(--space-xs); }
+.announcement-md strong { font-weight: 700; }
+.announcement-md em { font-style: italic; }
+.announcement-md a { color: inherit; text-decoration: underline; }
+.announcement-md code { font-family: monospace; font-size: 0.85em; background: var(--md-sys-color-surface-container-highest); border-radius: var(--shape-xs); padding: 0 var(--space-xs); }
+.announcement-md ul, .announcement-md ol { margin: var(--space-xs) 0 0 var(--space-md); padding: 0; }
+.announcement-md li { margin: 0; }
+
 /* Equações inline ($...$) */
 .revisao-gabarito-markdown .katex {
   font-size: 1.05em;
@@ -3973,14 +3984,3 @@ md-circular-progress {
 }
 
 
-
-/* ── Announcement banner markdown ──────────────────────────────────── */
-.announcement-md { flex: 1; min-width: 0; }
-.announcement-md p { margin: 0; }
-.announcement-md p + p { margin-top: 0.25em; }
-.announcement-md strong { font-weight: 700; }
-.announcement-md em { font-style: italic; }
-.announcement-md a { color: inherit; text-decoration: underline; }
-.announcement-md code { font-family: monospace; font-size: 0.85em; background: rgba(0,0,0,0.08); border-radius: 3px; padding: 0 3px; }
-.announcement-md ul, .announcement-md ol { margin: 0.25em 0 0 1.2em; padding: 0; }
-.announcement-md li { margin: 0; }
