@@ -134,16 +134,16 @@ export function PremiumFlowModal({ open, onClose }: Props) {
                   Pro MAX
                 </span>
                 <span style={{ fontFamily: 'var(--md-sys-typescale-headline-small-font)', fontSize: '22px', color: 'var(--md-sys-color-primary)', fontWeight: 700 }}>
-                  R$ 60<span style={{ fontSize: '14px', fontWeight: 400 }}>/ano</span>
+                  R$ 5<span style={{ fontSize: '14px', fontWeight: 400 }}>/mês</span>
                 </span>
                 <span style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: 'var(--md-sys-typescale-body-small-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
-                  1 ano de acesso · Revisão espaçada · Histórico
+                  Revisão espaçada · Histórico<span style={{ opacity: 0.6 }}> · anual</span>
                 </span>
               </button>
             </div>
 
-            <p style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: '11px', color: 'var(--md-sys-color-on-surface-variant)', opacity: 0.7, marginBottom: '16px', textAlign: 'center' }}>
-              Pro: R$10/mês · Pro MAX: R$5/mês
+            <p style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: '11px', color: 'var(--md-sys-color-on-surface-variant)', opacity: 0.55, marginBottom: '16px', textAlign: 'center' }}>
+              Pro R$10/mês · Pro MAX R$5/mês
             </p>
 
             <md-filled-button
