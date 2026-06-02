@@ -4305,6 +4305,70 @@ md-circular-progress {
   width: 100%;
 }
 
+/* ── Plan picker (step 1 do PremiumFlowModal) ── */
+.plan-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.plan-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  border-radius: var(--shape-xl);
+  border: 2px solid var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-surface-container);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.plan-option--selected {
+  border-color: var(--md-sys-color-primary);
+  background: var(--md-sys-color-primary-container);
+}
+
+.plan-option__name {
+  font-size: var(--md-sys-typescale-title-medium-size);
+  font-weight: var(--md-sys-typescale-title-medium-weight);
+  color: var(--md-sys-color-on-surface);
+  line-height: 1;
+}
+
+.plan-option__price {
+  font-size: var(--md-sys-typescale-headline-small-size);
+  font-weight: 700;
+  color: var(--md-sys-color-primary);
+  line-height: 1;
+}
+
+.plan-option__price-unit {
+  font-size: var(--md-sys-typescale-body-medium-size);
+  font-weight: 400;
+}
+
+.plan-option__desc {
+  font-size: var(--md-sys-typescale-body-small-size);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.plan-option__desc--muted {
+  opacity: 0.6;
+}
+
+.plan-compare {
+  font-size: var(--md-sys-typescale-body-small-size);
+  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.55;
+  text-align: center;
+  width: 100%;
+}
+
 /* ── Revisao paywall ── */
 .revisao-paywall-card {
   display: flex;

@@ -84,67 +84,35 @@ export function PremiumFlowModal({ open, onClose }: Props) {
           <div className="premium-modal-step">
             <md-icon className="premium-modal-icon">workspace_premium</md-icon>
             <h2 id="premium-modal-title" className="premium-modal-title">Escolha seu plano</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', marginBottom: '8px' }}>
+            <div className="plan-options">
               <button
+                className={`plan-option${selectedPlan === 'pro' ? ' plan-option--selected' : ''}`}
                 onClick={() => setSelectedPlan('pro')}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  gap: '4px',
-                  padding: '16px',
-                  borderRadius: '12px',
-                  border: `2px solid ${selectedPlan === 'pro' ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline-variant)'}`,
-                  background: selectedPlan === 'pro' ? 'var(--md-sys-color-primary-container)' : 'var(--md-sys-color-surface-container)',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  width: '100%',
-                }}
                 aria-pressed={selectedPlan === 'pro'}
               >
-                <span style={{ fontFamily: 'var(--md-sys-typescale-title-medium-font)', fontSize: 'var(--md-sys-typescale-title-medium-size)', color: 'var(--md-sys-color-on-surface)', fontWeight: 600 }}>
-                  Pro
+                <span className="plan-option__name">Pro</span>
+                <span className="plan-option__price">
+                  R$ 10<span className="plan-option__price-unit">/mês</span>
                 </span>
-                <span style={{ fontFamily: 'var(--md-sys-typescale-headline-small-font)', fontSize: '22px', color: 'var(--md-sys-color-primary)', fontWeight: 700 }}>
-                  R$ 10<span style={{ fontSize: '14px', fontWeight: 400 }}>/mês</span>
-                </span>
-                <span style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: 'var(--md-sys-typescale-body-small-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
-                  1 mês de acesso · Revisão espaçada · Histórico
-                </span>
+                <span className="plan-option__desc">Revisão espaçada · Histórico</span>
               </button>
 
               <button
+                className={`plan-option${selectedPlan === 'pro_max' ? ' plan-option--selected' : ''}`}
                 onClick={() => setSelectedPlan('pro_max')}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  gap: '4px',
-                  padding: '16px',
-                  borderRadius: '12px',
-                  border: `2px solid ${selectedPlan === 'pro_max' ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline-variant)'}`,
-                  background: selectedPlan === 'pro_max' ? 'var(--md-sys-color-primary-container)' : 'var(--md-sys-color-surface-container)',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  width: '100%',
-                }}
                 aria-pressed={selectedPlan === 'pro_max'}
               >
-                <span style={{ fontFamily: 'var(--md-sys-typescale-title-medium-font)', fontSize: 'var(--md-sys-typescale-title-medium-size)', color: 'var(--md-sys-color-on-surface)', fontWeight: 600 }}>
-                  Pro MAX
+                <span className="plan-option__name">Pro MAX</span>
+                <span className="plan-option__price">
+                  R$ 5<span className="plan-option__price-unit">/mês</span>
                 </span>
-                <span style={{ fontFamily: 'var(--md-sys-typescale-headline-small-font)', fontSize: '22px', color: 'var(--md-sys-color-primary)', fontWeight: 700 }}>
-                  R$ 5<span style={{ fontSize: '14px', fontWeight: 400 }}>/mês</span>
-                </span>
-                <span style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: 'var(--md-sys-typescale-body-small-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
-                  Revisão espaçada · Histórico<span style={{ opacity: 0.6 }}> · anual</span>
+                <span className="plan-option__desc">
+                  Revisão espaçada · Histórico<span className="plan-option__desc--muted"> · anual</span>
                 </span>
               </button>
             </div>
 
-            <p style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: '11px', color: 'var(--md-sys-color-on-surface-variant)', opacity: 0.55, marginBottom: '16px', textAlign: 'center' }}>
-              Pro R$10/mês · Pro MAX R$5/mês
-            </p>
+            <p className="plan-compare">Pro R$10/mês · Pro MAX R$5/mês</p>
 
             <md-filled-button
               onClick={() => selectedPlan && setStep(2)}
