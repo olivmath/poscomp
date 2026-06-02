@@ -1,3 +1,4 @@
+import * as admin from 'firebase-admin'
 import { onCall, HttpsError } from 'firebase-functions/v2/https'
 import { logger } from 'firebase-functions'
 import { getAuth } from 'firebase-admin/auth'
@@ -76,4 +77,23 @@ export const resetUserSrs = onCall(async (request) => {
   await batch.commit()
   logger.info('resetUserSrs completed', { uid, deleted: snapshot.size })
   return { success: true, deleted: snapshot.size }
+})
+
+export const grantPremiumAdmin = onCall(async (request) => {
+  const callerUid = request.auth?.uid
+  logger.info('[grantPremiumAdmin] started', { callerUid })
+  requireAdmin(request)
+
+  const { uid, planType } = request.data as { uid?: unknown; planType?: unknown }
+
+  if (!uid || typeof uid !== 'string') throw new HttpsError('invalid-argument', 'Missing uid')
+  if (planType !== 'pro' && planType !== 'pro_max') throw new HttpsError('invalid-argument', 'planType must be pro or pro_max')
+
+  const daysMs = planType === 'pro_max' ? 365 * 24 * 60 * 60 * 1000 : 30 * 24 * 60 * 60 * 1000
+  const premiumExpiresAt = admin.firestore.Timestamp.fromDate(new Date(Date.now() + daysMs))
+
+  await db.collection('users').doc(uid).set({ isPremium: true, planType, premiumExpiresAt }, { merge: true })
+
+  logger.info('[grantPremiumAdmin] premium granted', { callerUid, uid, planType, premiumExpiresAt })
+  return { success: true }
 })

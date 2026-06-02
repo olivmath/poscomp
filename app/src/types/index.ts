@@ -87,6 +87,8 @@ export type Grade = 1 | 3 | 5
 
 export type PremiumStatus = 'free' | 'pending' | 'premium'
 
+export type PlanType = 'free' | 'pro' | 'pro_max'
+
 export interface PremiumRequest {
   id: string
   uid: string
@@ -95,12 +97,15 @@ export interface PremiumRequest {
   createdAt: import('firebase/firestore').Timestamp
   reviewedAt?: import('firebase/firestore').Timestamp
   reviewedBy?: string
+  planType?: PlanType
 }
 
 export interface UserProfile {
   uid: string
   isPremium: boolean
   premiumSince?: import('firebase/firestore').Timestamp
+  planType?: PlanType
+  premiumExpiresAt?: import('firebase/firestore').Timestamp
 }
 
 export interface Announcement {

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { httpsCallable } from 'firebase/functions'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore'
 import { db, functions } from '../firebase'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 
@@ -18,12 +18,16 @@ interface UserRecord {
 interface UserDetail {
   srsCount: number
   resultsCount: number
+  planType?: 'pro' | 'pro_max'
+  isPremium?: boolean
+  premiumExpiresAt?: Date | null
 }
 
 const listUsersFn = httpsCallable<{ pageToken?: string }, { users: UserRecord[]; pageToken: string | null }>(functions, 'listUsers')
 const disableUserFn = httpsCallable<{ uid: string }, { success: boolean }>(functions, 'disableUser')
 const enableUserFn = httpsCallable<{ uid: string }, { success: boolean }>(functions, 'enableUser')
 const resetUserSrsFn = httpsCallable<{ uid: string }, { success: boolean; deleted: number }>(functions, 'resetUserSrs')
+const grantPremiumAdminFn = httpsCallable<{ uid: string; planType: 'pro' | 'pro_max' }, { success: boolean }>(functions, 'grantPremiumAdmin')
 
 export function UsuariosPage() {
   const [users, setUsers] = useState<UserRecord[]>([])
@@ -33,6 +37,7 @@ export function UsuariosPage() {
   const [detailUid, setDetailUid] = useState<string | null>(null)
   const [detail, setDetail] = useState<UserDetail | null>(null)
   const [detailLoading, setDetailLoading] = useState(false)
+  const [grantingPlan, setGrantingPlan] = useState<'pro' | 'pro_max' | null>(null)
   const [search, setSearch] = useState('')
 
   const [confirmConfig, setConfirmConfig] = useState<{
@@ -106,13 +111,35 @@ export function UsuariosPage() {
     setDetail(null)
     setDetailLoading(true)
     try {
-      const [srsSnap, resultsSnap] = await Promise.all([
+      const [srsSnap, resultsSnap, userDoc] = await Promise.all([
         getDocs(collection(db, `users/${uid}/srs_cards`)),
         getDocs(collection(db, `users/${uid}/results`)),
+        getDoc(doc(db, 'users', uid)),
       ])
-      setDetail({ srsCount: srsSnap.size, resultsCount: resultsSnap.size })
+      const userData = userDoc.data()
+      const premiumExpiresAt = userData?.premiumExpiresAt
+        ? (userData.premiumExpiresAt.toDate ? userData.premiumExpiresAt.toDate() : new Date(userData.premiumExpiresAt.seconds * 1000))
+        : null
+      setDetail({
+        srsCount: srsSnap.size,
+        resultsCount: resultsSnap.size,
+        planType: userData?.planType,
+        isPremium: userData?.isPremium ?? false,
+        premiumExpiresAt,
+      })
     } finally {
       setDetailLoading(false)
+    }
+  }
+
+  const handleGrantPremium = async (planType: 'pro' | 'pro_max') => {
+    if (!detailUid) return
+    setGrantingPlan(planType)
+    try {
+      await grantPremiumAdminFn({ uid: detailUid, planType })
+      await openDetail(detailUid)
+    } finally {
+      setGrantingPlan(null)
     }
   }
 
@@ -203,12 +230,39 @@ export function UsuariosPage() {
               {detailLoading ? <div className="empty-state"><p>Calculando...</p></div> : detail ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <div className="card" style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontWeight: 500 }}>Plano</span>
+                    <span>
+                      {detail.isPremium && detail.planType === 'pro_max' ? <span className="badge badge-indigo">Pro MAX</span>
+                        : detail.isPremium ? <span className="badge" style={{ background: 'var(--md-sys-color-primary)', color: 'var(--md-sys-color-on-primary)' }}>Pro</span>
+                        : <span className="badge">Free</span>}
+                    </span>
+                  </div>
+                  {detail.isPremium && detail.premiumExpiresAt && (
+                    <div className="card" style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontWeight: 500 }}>Expira em</span>
+                      <span className="mono">{detail.premiumExpiresAt.toLocaleDateString('pt-BR')}</span>
+                    </div>
+                  )}
+                  <div className="card" style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontWeight: 500 }}>Cards no SRS</span>
                     <span className="mono" style={{ fontSize: '18px', fontWeight: 700 }}>{detail.srsCount}</span>
                   </div>
                   <div className="card" style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontWeight: 500 }}>Simulados finalizados</span>
                     <span className="mono" style={{ fontSize: '18px', fontWeight: 700 }}>{detail.resultsCount}</span>
+                  </div>
+                  <div style={{ borderTop: '1px solid var(--md-sys-color-outline-variant)', paddingTop: '16px' }}>
+                    <p style={{ fontSize: '13px', fontWeight: 600, color: 'var(--md-sys-color-on-surface-variant)', marginBottom: '12px' }}>Conceder Premium manualmente</p>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <button onClick={() => handleGrantPremium('pro')} disabled={grantingPlan !== null} className="btn btn-ghost" style={{ flex: 1 }}>
+                        <span className="material-symbols-outlined">workspace_premium</span>
+                        Pro (1 mês)
+                      </button>
+                      <button onClick={() => handleGrantPremium('pro_max')} disabled={grantingPlan !== null} className="btn btn-primary" style={{ flex: 1 }}>
+                        <span className="material-symbols-outlined">star</span>
+                        Pro MAX (1 ano)
+                      </button>
+                    </div>
                   </div>
                 </div>
               ) : null}

@@ -21,6 +21,7 @@ const mockAuth = {
   isPremium: false,
   premiumStatus: 'free' as const,
   premiumExpiresAt: null,
+  planType: 'free' as const,
   profileLoading: false
 }
 

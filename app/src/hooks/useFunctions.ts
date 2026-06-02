@@ -108,6 +108,7 @@ export const callReportQuestion = httpsCallable<
 export interface SubmitPremiumRequestInput {
   storagePath: string
   receiptType?: string
+  planType: 'pro' | 'pro_max'
 }
 export interface SubmitPremiumRequestOutput {
   requestId: string

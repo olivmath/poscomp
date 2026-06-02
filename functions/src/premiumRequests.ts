@@ -17,10 +17,14 @@ export const submitPremiumRequest = onCall(async (request) => {
   if (!request.auth) throw new HttpsError('unauthenticated', 'Login required')
 
   const uid = request.auth.uid
-  const { storagePath, receiptType } = request.data as { storagePath?: unknown; receiptType?: unknown }
+  const { storagePath, receiptType, planType } = request.data as { storagePath?: unknown; receiptType?: unknown; planType?: unknown }
 
   if (typeof storagePath !== 'string') {
     throw new HttpsError('invalid-argument', 'storagePath is required')
+  }
+
+  if (planType !== 'pro' && planType !== 'pro_max') {
+    throw new HttpsError('invalid-argument', 'planType must be pro or pro_max')
   }
 
   // garante que o path pertence ao uid autenticado — impede acesso a arquivos de outros usuários
@@ -41,10 +45,11 @@ export const submitPremiumRequest = onCall(async (request) => {
     status: 'pending',
     receiptUrl,
     receiptType: typeof receiptType === 'string' ? receiptType : null,
+    planType,
     createdAt: FieldValue.serverTimestamp(),
   })
 
-  logger.info('[submitPremiumRequest] ticket criado', { uid, requestId: docRef.id })
+  logger.info('[submitPremiumRequest] ticket criado', { uid, requestId: docRef.id, planType })
   return { requestId: docRef.id }
 })
 
@@ -77,7 +82,7 @@ export const reviewPremiumRequest = onCall(async (request) => {
     throw new HttpsError('not-found', `premium_request not found: ${requestId}`)
   }
 
-  const data = snap.data() as { uid: string; status: string }
+  const data = snap.data() as { uid: string; status: string; planType?: 'pro' | 'pro_max' }
   logger.info('[reviewPremiumRequest] documento encontrado', { requestId, uid: data.uid, status: data.status })
 
   if (data.status !== 'pending') {
@@ -89,10 +94,13 @@ export const reviewPremiumRequest = onCall(async (request) => {
   const reviewedBy = request.auth!.uid!
 
   if (action === 'approve') {
-    logger.info('[reviewPremiumRequest] aprovando — setando isPremium=true', { uid: data.uid })
-    await db.collection('users').doc(data.uid).set({ isPremium: true }, { merge: true })
+    const planType = data.planType ?? 'pro'
+    const daysMs = planType === 'pro_max' ? 365 * 24 * 60 * 60 * 1000 : 30 * 24 * 60 * 60 * 1000
+    const premiumExpiresAt = admin.firestore.Timestamp.fromDate(new Date(Date.now() + daysMs))
+    logger.info('[reviewPremiumRequest] aprovando — setando isPremium=true', { uid: data.uid, planType, premiumExpiresAt })
+    await db.collection('users').doc(data.uid).set({ isPremium: true, planType, premiumExpiresAt }, { merge: true })
     await reqRef.update({ status: 'approved', reviewedAt, reviewedBy })
-    logger.info('[reviewPremiumRequest] aprovado com sucesso', { requestId, uid: data.uid, reviewedBy })
+    logger.info('[reviewPremiumRequest] aprovado com sucesso', { requestId, uid: data.uid, reviewedBy, planType, premiumExpiresAt })
     notifyPremiumApproved(data.uid).catch((e) =>
       logger.warn('[reviewPremiumRequest] push failed (non-critical)', { uid: data.uid, error: e?.message }),
     )

@@ -10,7 +10,11 @@ import { callSubmitPremiumRequest } from '../../hooks/useFunctions'
 import { ModalOverlay } from '../ModalOverlay'
 
 const PIX_KEY = 'poscomp@app.com'
-const QR_URL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(PIX_KEY)}`
+
+const PLAN_PRICE: Record<'pro' | 'pro_max', string> = {
+  pro: 'R$ 10,00',
+  pro_max: 'R$ 60,00',
+}
 
 interface Props {
   open: boolean
@@ -19,7 +23,8 @@ interface Props {
 
 export function PremiumFlowModal({ open, onClose }: Props) {
   const { user } = useAuth()
-  const [step, setStep] = useState<1 | 2 | 3 | 4>(1)
+  const [step, setStep] = useState<1 | 2 | 3 | 4 | 5>(1)
+  const [selectedPlan, setSelectedPlan] = useState<'pro' | 'pro_max' | null>(null)
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
@@ -27,8 +32,12 @@ export function PremiumFlowModal({ open, onClose }: Props) {
 
   if (!open) return null
 
+  const price = selectedPlan ? PLAN_PRICE[selectedPlan] : ''
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(PIX_KEY)}`
+
   function handleClose() {
     setStep(1)
+    setSelectedPlan(null)
     setUploadError(null)
     onClose()
   }
@@ -41,7 +50,7 @@ export function PremiumFlowModal({ open, onClose }: Props) {
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
-    if (!file || !user) return
+    if (!file || !user || !selectedPlan) return
 
     setUploading(true)
     setUploadError(null)
@@ -55,9 +64,9 @@ export function PremiumFlowModal({ open, onClose }: Props) {
       )
       await Promise.race([uploadBytes(storageRef, file), timeout])
 
-      await callSubmitPremiumRequest({ storagePath, receiptType: file.type })
+      await callSubmitPremiumRequest({ storagePath, receiptType: file.type, planType: selectedPlan })
 
-      setStep(4)
+      setStep(5)
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Erro ao enviar comprovante.'
       setUploadError(msg)
@@ -70,11 +79,90 @@ export function PremiumFlowModal({ open, onClose }: Props) {
     <ModalOverlay onBackdropClick={uploading ? undefined : handleClose}>
       <div className="modal-card premium-modal-card" role="dialog" aria-modal="true" aria-labelledby="premium-modal-title">
 
-        {/* Step 1 — Info */}
+        {/* Step 1 — Escolha do plano */}
         {step === 1 && (
           <div className="premium-modal-step">
             <md-icon className="premium-modal-icon">workspace_premium</md-icon>
-            <h2 id="premium-modal-title" className="premium-modal-title">Assinar Premium</h2>
+            <h2 id="premium-modal-title" className="premium-modal-title">Escolha seu plano</h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', marginBottom: '8px' }}>
+              <button
+                onClick={() => setSelectedPlan('pro')}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: '4px',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  border: `2px solid ${selectedPlan === 'pro' ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline-variant)'}`,
+                  background: selectedPlan === 'pro' ? 'var(--md-sys-color-primary-container)' : 'var(--md-sys-color-surface-container)',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  width: '100%',
+                }}
+                aria-pressed={selectedPlan === 'pro'}
+              >
+                <span style={{ fontFamily: 'var(--md-sys-typescale-title-medium-font)', fontSize: 'var(--md-sys-typescale-title-medium-size)', color: 'var(--md-sys-color-on-surface)', fontWeight: 600 }}>
+                  Pro
+                </span>
+                <span style={{ fontFamily: 'var(--md-sys-typescale-headline-small-font)', fontSize: '22px', color: 'var(--md-sys-color-primary)', fontWeight: 700 }}>
+                  R$ 10<span style={{ fontSize: '14px', fontWeight: 400 }}>/mês</span>
+                </span>
+                <span style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: 'var(--md-sys-typescale-body-small-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
+                  1 mês de acesso · Revisão espaçada · Histórico
+                </span>
+              </button>
+
+              <button
+                onClick={() => setSelectedPlan('pro_max')}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: '4px',
+                  padding: '16px',
+                  borderRadius: '12px',
+                  border: `2px solid ${selectedPlan === 'pro_max' ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline-variant)'}`,
+                  background: selectedPlan === 'pro_max' ? 'var(--md-sys-color-primary-container)' : 'var(--md-sys-color-surface-container)',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  width: '100%',
+                }}
+                aria-pressed={selectedPlan === 'pro_max'}
+              >
+                <span style={{ fontFamily: 'var(--md-sys-typescale-title-medium-font)', fontSize: 'var(--md-sys-typescale-title-medium-size)', color: 'var(--md-sys-color-on-surface)', fontWeight: 600 }}>
+                  Pro MAX
+                </span>
+                <span style={{ fontFamily: 'var(--md-sys-typescale-headline-small-font)', fontSize: '22px', color: 'var(--md-sys-color-primary)', fontWeight: 700 }}>
+                  R$ 60<span style={{ fontSize: '14px', fontWeight: 400 }}>/ano</span>
+                </span>
+                <span style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: 'var(--md-sys-typescale-body-small-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
+                  1 ano de acesso · Revisão espaçada · Histórico
+                </span>
+              </button>
+            </div>
+
+            <p style={{ fontFamily: 'var(--md-sys-typescale-body-small-font)', fontSize: '11px', color: 'var(--md-sys-color-on-surface-variant)', opacity: 0.7, marginBottom: '16px', textAlign: 'center' }}>
+              Pro: R$10/mês · Pro MAX: R$5/mês
+            </p>
+
+            <md-filled-button
+              onClick={() => selectedPlan && setStep(2)}
+              className="btn-full"
+              disabled={!selectedPlan || undefined}
+            >
+              Continuar
+            </md-filled-button>
+          </div>
+        )}
+
+        {/* Step 2 — Info do plano */}
+        {step === 2 && (
+          <div className="premium-modal-step">
+            <md-icon className="premium-modal-icon">workspace_premium</md-icon>
+            <h2 id="premium-modal-title" className="premium-modal-title">
+              Plano {selectedPlan === 'pro_max' ? 'Pro MAX' : 'Pro'}
+            </h2>
             <p className="premium-modal-desc">
               Desbloqueie a <strong>Revisão Espaçada</strong> e acelere sua preparação para o POSCOMP com o algoritmo SM-2.
             </p>
@@ -83,20 +171,20 @@ export function PremiumFlowModal({ open, onClose }: Props) {
               <li><md-icon>check_circle</md-icon> Priorização por confiança</li>
               <li><md-icon>check_circle</md-icon> Histórico completo</li>
             </ul>
-            <div className="premium-modal-price">R$ 10,00</div>
-            <md-filled-button onClick={() => setStep(2)} className="btn-full">
+            <div className="premium-modal-price">{price}</div>
+            <md-filled-button onClick={() => setStep(3)} className="btn-full">
               Continuar
             </md-filled-button>
           </div>
         )}
 
-        {/* Step 2 — PIX */}
-        {step === 2 && (
+        {/* Step 3 — PIX */}
+        {step === 3 && (
           <div className="premium-modal-step">
             <h2 id="premium-modal-title" className="premium-modal-title">Pagamento via PIX</h2>
-            <p className="premium-modal-desc">Valor: <strong>R$ 10,00</strong></p>
+            <p className="premium-modal-desc">Valor: <strong>{price}</strong></p>
             <img
-              src={QR_URL}
+              src={qrUrl}
               alt="QR Code PIX"
               className="premium-modal-qr"
               width={200}
@@ -112,17 +200,17 @@ export function PremiumFlowModal({ open, onClose }: Props) {
               />
               <md-outlined-button onClick={handleCopyPix}>
                 <md-icon slot="icon">{copied ? 'check' : 'content_copy'}</md-icon>
-                {copied ? 'Copiar' : 'Copiar'}
+                {copied ? 'Copiado' : 'Copiar'}
               </md-outlined-button>
             </div>
-            <md-filled-button onClick={() => setStep(3)} className="btn-full">
+            <md-filled-button onClick={() => setStep(4)} className="btn-full">
               Pagamento enviado
             </md-filled-button>
           </div>
         )}
 
-        {/* Step 3 — Upload */}
-        {step === 3 && (
+        {/* Step 4 — Upload */}
+        {step === 4 && (
           <div className="premium-modal-step">
             <h2 id="premium-modal-title" className="premium-modal-title">Enviar comprovante</h2>
             <p className="premium-modal-desc">
@@ -159,13 +247,13 @@ export function PremiumFlowModal({ open, onClose }: Props) {
           </div>
         )}
 
-        {/* Step 4 — Feedback */}
-        {step === 4 && (
+        {/* Step 5 — Feedback */}
+        {step === 5 && (
           <div className="premium-modal-step">
             <md-icon className="premium-modal-icon premium-modal-icon--success">check_circle</md-icon>
             <h2 id="premium-modal-title" className="premium-modal-title">Estamos liberando seu acesso!</h2>
             <p className="premium-modal-desc">
-              Seu comprovante foi recebido. Em até 24h seu acesso Premium será ativado.
+              Seu comprovante foi recebido. Em até 24h seu acesso será ativado.
             </p>
             <md-filled-button onClick={handleClose} className="btn-full">
               Fechar

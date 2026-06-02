@@ -8,6 +8,7 @@ import '@material/web/button/text-button.js'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
+import type { PlanType } from '../types'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
@@ -18,7 +19,7 @@ import { PremiumFlowModal } from '../components/premium/PremiumFlowModal'
 import { LegalModal } from '../components/LegalModal'
 
 export function Perfil() {
-  const { user, isPremium, premiumStatus, premiumExpiresAt, profileLoading } = useAuth()
+  const { user, isPremium, premiumStatus, premiumExpiresAt, planType, profileLoading } = useAuth()
   const navigate = useNavigate()
   const [loggingOut, setLoggingOut] = useState(false)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
@@ -48,6 +49,12 @@ export function Perfil() {
     ? `Renova em ${premiumExpiresAt.toLocaleDateString('pt-BR')}`
     : null
 
+  const PLAN_LABELS: Record<PlanType, string> = {
+    free: 'Plano Free',
+    pro: 'Plano Pro',
+    pro_max: 'Plano Pro MAX',
+  }
+
   return (
     <div className="perfil-page">
       <div className="perfil-header">
@@ -75,7 +82,7 @@ export function Perfil() {
               {isPremium ? 'workspace_premium' : 'person'}
             </md-icon>
             <span slot="headline">
-              {profileLoading ? '...' : isPremium ? 'Plano Premium' : premiumStatus === 'pending' ? 'Aguardando aprovação' : 'Plano Free'}
+              {profileLoading ? '...' : isPremium ? PLAN_LABELS[planType] : premiumStatus === 'pending' ? 'Aguardando aprovação' : 'Plano Free'}
             </span>
             {!profileLoading && renewalLabel && (
               <span slot="supporting-text">{renewalLabel}</span>
@@ -85,7 +92,7 @@ export function Perfil() {
                 slot="end"
                 onClick={() => setShowPremiumModal(true)}
               >
-                Assinar R$ 10
+                Ver planos
               </md-outlined-button>
             )}
           </md-list-item>

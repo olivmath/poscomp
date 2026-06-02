@@ -12,6 +12,7 @@ type FilterStatus = 'pending' | 'resolved'
 interface Ticket {
   id: string; type: TicketType; uid: string; status: TicketStatus; createdAt: number;
   receiptUrl?: string; receiptType?: string; questionId?: number; comment?: string | null;
+  planType?: 'pro' | 'pro_max';
 }
 
 interface FlaggedQuestion {
@@ -21,7 +22,7 @@ interface FlaggedQuestion {
 
 interface PremiumRequest {
   id: string; uid: string; status: 'pending' | 'approved' | 'denied'; receiptUrl: string;
-  receiptType?: string; createdAt: { seconds: number } | null;
+  receiptType?: string; createdAt: { seconds: number } | null; planType?: 'pro' | 'pro_max';
 }
 
 const getFlaggedQuestionsFn = httpsCallable<void, FlaggedQuestion[]>(functions, 'getFlaggedQuestions')
@@ -77,7 +78,7 @@ export function TicketsPage() {
       ])
       const premiums: PremiumRequest[] = premiumSnap.docs.map(d => ({ id: d.id, ...(d.data() as Omit<PremiumRequest, 'id'>) }))
       const flagTickets: Ticket[] = flagsRes.data.map(f => ({ id: f.id, type: 'flag', uid: f.uid, status: f.resolved ? 'resolved' : 'pending', createdAt: toEpochMs(f.createdAt), questionId: f.questionId, comment: f.comment }))
-      const premiumTickets: Ticket[] = premiums.map(p => ({ id: p.id, type: 'premium', uid: p.uid, status: p.status, createdAt: toEpochMs(p.createdAt), receiptUrl: p.receiptUrl, receiptType: p.receiptType }))
+      const premiumTickets: Ticket[] = premiums.map(p => ({ id: p.id, type: 'premium', uid: p.uid, status: p.status, createdAt: toEpochMs(p.createdAt), receiptUrl: p.receiptUrl, receiptType: p.receiptType, planType: p.planType }))
       setTickets([...flagTickets, ...premiumTickets].sort((a, b) => b.createdAt - a.createdAt))
     } finally { setLoading(false) }
   }
@@ -145,6 +146,7 @@ export function TicketsPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px', flexWrap: 'wrap' }}>
                     <span style={{ fontWeight: 700, fontSize: '15px' }}>{t.type === 'premium' ? 'Solicitação de Premium' : `Reporte Questão #${t.questionId}`}</span>
                     <span className={statusBadgeClass(t.status)}>{statusLabel(t.status)}</span>
+                    {t.type === 'premium' && (t.planType === 'pro_max' ? <span className="badge badge-indigo">Pro MAX</span> : <span className="badge" style={{ background: 'var(--md-sys-color-primary)', color: 'var(--md-sys-color-on-primary)' }}>Pro</span>)}
                   </div>
                   {t.type === 'flag' && t.comment && <p style={{ fontSize: '14px', color: 'var(--md-sys-color-on-surface)', margin: '4px 0 8px' }}>"{t.comment}"</p>}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '12px', color: 'var(--md-sys-color-on-surface-variant)', flexWrap: 'wrap' }}>
@@ -177,6 +179,10 @@ export function TicketsPage() {
               <div style={{ marginBottom: '20px', padding: '12px', background: 'var(--md-sys-color-surface-container)', borderRadius: '12px', fontSize: '13px' }}>
                 <p style={{ margin: 0, color: 'var(--md-sys-color-on-surface-variant)' }}><strong>Usuário:</strong> <span className="mono">{premiumModal.uid}</span></p>
                 <p style={{ margin: '4px 0 0', color: 'var(--md-sys-color-on-surface-variant)' }}><strong>Solicitado em:</strong> {formatDate(premiumModal.createdAt)}</p>
+                <p style={{ margin: '4px 0 0', color: 'var(--md-sys-color-on-surface-variant)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <strong>Plano solicitado:</strong>
+                  {premiumModal.planType === 'pro_max' ? <span className="badge badge-indigo">Pro MAX</span> : <span className="badge" style={{ background: 'var(--md-sys-color-primary)', color: 'var(--md-sys-color-on-primary)' }}>Pro</span>}
+                </p>
               </div>
               <div style={{ background: 'var(--md-sys-color-surface-variant)', borderRadius: '16px', overflow: 'hidden', minHeight: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {premiumModal.receiptUrl ? (
@@ -188,7 +194,7 @@ export function TicketsPage() {
               <button onClick={() => setPremiumModal(null)} className="btn btn-ghost">Fechar</button>
               <div style={{ flex: 1 }} />
               <button onClick={() => handlePremiumAction(premiumModal.id, 'deny')} disabled={actioning === premiumModal.id} className="btn btn-ghost" style={{ color: 'var(--md-sys-color-error)' }}>Negar Pedido</button>
-              <button onClick={() => handlePremiumAction(premiumModal.id, 'approve')} disabled={actioning === premiumModal.id} className="btn btn-primary">Aprovar Premium</button>
+              <button onClick={() => handlePremiumAction(premiumModal.id, 'approve')} disabled={actioning === premiumModal.id} className="btn btn-primary">{premiumModal.planType === 'pro_max' ? 'Aprovar Pro MAX' : 'Aprovar Pro'}</button>
             </div>
           </div>
         </div>

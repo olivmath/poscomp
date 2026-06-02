@@ -2,7 +2,7 @@ import { createContext, useEffect, useState, ReactNode } from 'react'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useUserProfile } from '../hooks/useUserProfile'
-import type { PremiumStatus } from '../types'
+import type { PremiumStatus, PlanType } from '../types'
 
 interface AuthContextType {
   user: User | null
@@ -10,6 +10,7 @@ interface AuthContextType {
   isPremium: boolean
   premiumStatus: PremiumStatus
   premiumExpiresAt: Date | null
+  planType: PlanType
   profileLoading: boolean
 }
 
@@ -20,14 +21,15 @@ export const AuthContext = createContext<AuthContextType>({
   isPremium: false,
   premiumStatus: 'free',
   premiumExpiresAt: null,
+  planType: 'free',
   profileLoading: true,
 })
 
 function AuthProviderInner({ user, loading, children }: { user: User | null; loading: boolean; children: ReactNode }) {
-  const { isPremium, premiumStatus, premiumExpiresAt, loading: profileLoading } = useUserProfile(user?.uid ?? null)
+  const { isPremium, premiumStatus, premiumExpiresAt, planType, loading: profileLoading } = useUserProfile(user?.uid ?? null)
 
   return (
-    <AuthContext.Provider value={{ user, loading, isPremium, premiumStatus, premiumExpiresAt, profileLoading }}>
+    <AuthContext.Provider value={{ user, loading, isPremium, premiumStatus, premiumExpiresAt, planType, profileLoading }}>
       {children}
     </AuthContext.Provider>
   )
