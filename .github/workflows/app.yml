@@ -83,7 +83,8 @@ jobs:
 
           git add app/package.json admin/package.json package.json
           git commit -m "chore: bump version to v$NEW_VERSION [skip ci]"
-          git fetch --tags
+          git fetch origin main --tags
+          git rebase origin/main
           if git rev-parse "v$NEW_VERSION" >/dev/null 2>&1; then
             echo "Tag v$NEW_VERSION already exists, pushing commit only"
             git push origin HEAD:main
