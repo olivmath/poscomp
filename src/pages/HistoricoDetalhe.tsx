@@ -16,7 +16,10 @@ export function HistoricoDetalhe() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!user || !id) return
+    if (!user || !id || profileLoading || !isPremium) {
+      if (!profileLoading) setLoading(false)
+      return
+    }
 
     setLoading(true)
     getDoc(doc(db, 'users', user.uid, 'results', id))
@@ -56,7 +59,7 @@ export function HistoricoDetalhe() {
       })
       .catch(() => setError('Erro ao carregar resultado. Verifique sua conexão.'))
       .finally(() => setLoading(false))
-  }, [user, id])
+  }, [user, id, isPremium, profileLoading])
 
   if (profileLoading || loading) {
     return (

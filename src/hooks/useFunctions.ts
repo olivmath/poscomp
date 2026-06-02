@@ -106,7 +106,8 @@ export const callReportQuestion = httpsCallable<
 >(functions, 'reportQuestion')
 
 export interface SubmitPremiumRequestInput {
-  receiptUrl: string
+  storagePath: string
+  receiptType?: string
 }
 export interface SubmitPremiumRequestOutput {
   requestId: string

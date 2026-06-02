@@ -48,7 +48,7 @@ interface UseResultsReturn {
 
 const AREAS: Area[] = ['Matemática', 'Fundamentos da Computação', 'Tecnologia da Computação']
 
-export function useResults(): UseResultsReturn {
+export function useResults(isPremium = false): UseResultsReturn {
   const { user } = useAuth()
   const [results, setResults] = useState<SimuladoResult[]>([])
   const [analytics, setAnalytics] = useState<Analytics | null>(null)
@@ -56,7 +56,7 @@ export function useResults(): UseResultsReturn {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!user) {
+    if (!user || !isPremium) {
       setLoading(false)
       return
     }
@@ -248,7 +248,7 @@ export function useResults(): UseResultsReturn {
         setError('Erro ao carregar resultados. Verifique sua conexão.')
       })
       .finally(() => setLoading(false))
-  }, [user])
+  }, [user, isPremium])
 
   return { results, analytics, loading, error }
 }

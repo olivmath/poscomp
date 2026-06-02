@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
-import { doc, onSnapshot, collection, query, where } from 'firebase/firestore'
+import { doc, onSnapshot, collection, query, where, Timestamp } from 'firebase/firestore'
 import { db } from '../firebase'
 import type { PremiumStatus } from '../types'
 
 export function useUserProfile(uid: string | null) {
   const [premiumStatus, setPremiumStatus] = useState<PremiumStatus>('free')
+  const [premiumExpiresAt, setPremiumExpiresAt] = useState<Date | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!uid) {
       setPremiumStatus('free')
+      setPremiumExpiresAt(null)
       setLoading(false)
       return
     }
@@ -30,6 +32,8 @@ export function useUserProfile(uid: string | null) {
     const userRef = doc(db, 'users', uid)
     const unsubProfile = onSnapshot(userRef, (snap) => {
       isPremiumFromDoc = snap.exists() ? snap.data()?.isPremium === true : false
+      const raw = snap.exists() ? snap.data()?.premiumExpiresAt : null
+      setPremiumExpiresAt(raw instanceof Timestamp ? raw.toDate() : null)
       profileResolved = true
       resolve()
     })
@@ -51,5 +55,5 @@ export function useUserProfile(uid: string | null) {
     }
   }, [uid])
 
-  return { premiumStatus, isPremium: premiumStatus === 'premium', loading }
+  return { premiumStatus, isPremium: premiumStatus === 'premium', premiumExpiresAt, loading }
 }

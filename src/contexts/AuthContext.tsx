@@ -9,6 +9,7 @@ interface AuthContextType {
   loading: boolean
   isPremium: boolean
   premiumStatus: PremiumStatus
+  premiumExpiresAt: Date | null
   profileLoading: boolean
 }
 
@@ -18,14 +19,15 @@ export const AuthContext = createContext<AuthContextType>({
   loading: true,
   isPremium: false,
   premiumStatus: 'free',
+  premiumExpiresAt: null,
   profileLoading: true,
 })
 
 function AuthProviderInner({ user, loading, children }: { user: User | null; loading: boolean; children: ReactNode }) {
-  const { isPremium, premiumStatus, loading: profileLoading } = useUserProfile(user?.uid ?? null)
+  const { isPremium, premiumStatus, premiumExpiresAt, loading: profileLoading } = useUserProfile(user?.uid ?? null)
 
   return (
-    <AuthContext.Provider value={{ user, loading, isPremium, premiumStatus, profileLoading }}>
+    <AuthContext.Provider value={{ user, loading, isPremium, premiumStatus, premiumExpiresAt, profileLoading }}>
       {children}
     </AuthContext.Provider>
   )

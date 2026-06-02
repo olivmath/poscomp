@@ -1,9 +1,12 @@
 import '@material/web/progress/circular-progress.js'
+import '@material/web/button/filled-button.js'
+import '@material/web/button/outlined-button.js'
+import '@material/web/icon/icon.js'
 import { useState, useRef } from 'react'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
-import { storage, db } from '../../firebase'
+import { ref, uploadBytes } from 'firebase/storage'
+import { storage } from '../../firebase'
 import { useAuth } from '../../hooks/useAuth'
+import { callSubmitPremiumRequest } from '../../hooks/useFunctions'
 import { ModalOverlay } from '../ModalOverlay'
 
 const PIX_KEY = 'poscomp@app.com'
@@ -52,15 +55,7 @@ export function PremiumFlowModal({ open, onClose }: Props) {
       )
       await Promise.race([uploadBytes(storageRef, file), timeout])
 
-      const receiptUrl = await getDownloadURL(storageRef)
-
-      await addDoc(collection(db, 'premium_requests'), {
-        uid: user.uid,
-        status: 'pending',
-        receiptUrl,
-        receiptType: file.type,
-        createdAt: serverTimestamp(),
-      })
+      await callSubmitPremiumRequest({ storagePath, receiptType: file.type })
 
       setStep(4)
     } catch (err) {
@@ -73,25 +68,25 @@ export function PremiumFlowModal({ open, onClose }: Props) {
 
   return (
     <ModalOverlay onBackdropClick={uploading ? undefined : handleClose}>
-      <div className="premium-modal-card" role="dialog" aria-modal="true" aria-labelledby="premium-modal-title">
+      <div className="modal-card premium-modal-card" role="dialog" aria-modal="true" aria-labelledby="premium-modal-title">
 
         {/* Step 1 — Info */}
         {step === 1 && (
           <div className="premium-modal-step">
-            <span className="material-symbols-outlined premium-modal-icon">workspace_premium</span>
+            <md-icon className="premium-modal-icon">workspace_premium</md-icon>
             <h2 id="premium-modal-title" className="premium-modal-title">Assinar Premium</h2>
             <p className="premium-modal-desc">
               Desbloqueie a <strong>Revisão Espaçada</strong> e acelere sua preparação para o POSCOMP com o algoritmo SM-2.
             </p>
             <ul className="premium-modal-benefits">
-              <li><span className="material-symbols-outlined">check_circle</span> Revisão espaçada (SM-2)</li>
-              <li><span className="material-symbols-outlined">check_circle</span> Priorização por confiança</li>
-              <li><span className="material-symbols-outlined">check_circle</span> Histórico completo</li>
+              <li><md-icon>check_circle</md-icon> Revisão espaçada (SM-2)</li>
+              <li><md-icon>check_circle</md-icon> Priorização por confiança</li>
+              <li><md-icon>check_circle</md-icon> Histórico completo</li>
             </ul>
             <div className="premium-modal-price">R$ 10,00</div>
-            <button className="premium-modal-btn premium-modal-btn--primary" onClick={() => setStep(2)}>
+            <md-filled-button onClick={() => setStep(2)} className="btn-full">
               Continuar
-            </button>
+            </md-filled-button>
           </div>
         )}
 
@@ -115,18 +110,14 @@ export function PremiumFlowModal({ open, onClose }: Props) {
                 className="premium-modal-pix-input"
                 aria-label="Chave PIX"
               />
-              <button
-                className="premium-modal-btn premium-modal-btn--ghost"
-                onClick={handleCopyPix}
-                aria-label="Copiar chave PIX"
-              >
-                <span className="material-symbols-outlined">{copied ? 'check' : 'content_copy'}</span>
-                {copied ? 'Copiado' : 'Copiar'}
-              </button>
+              <md-outlined-button onClick={handleCopyPix}>
+                <md-icon slot="icon">{copied ? 'check' : 'content_copy'}</md-icon>
+                {copied ? 'Copiar' : 'Copiar'}
+              </md-outlined-button>
             </div>
-            <button className="premium-modal-btn premium-modal-btn--primary" onClick={() => setStep(3)}>
+            <md-filled-button onClick={() => setStep(3)} className="btn-full">
               Pagamento enviado
-            </button>
+            </md-filled-button>
           </div>
         )}
 
@@ -136,7 +127,7 @@ export function PremiumFlowModal({ open, onClose }: Props) {
             <h2 id="premium-modal-title" className="premium-modal-title">Enviar comprovante</h2>
             <p className="premium-modal-desc">
               Envie o comprovante do pagamento para ativarmos seu acesso.<br />
-              <span style={{ fontSize: '0.85em', opacity: 0.7 }}>Formatos aceitos: imagem (JPG, PNG) ou PDF.</span>
+              <span className="type-label-medium" style={{ opacity: 0.7 }}>Formatos aceitos: imagem (JPG, PNG) ou PDF.</span>
             </p>
             {uploading ? (
               <div className="premium-modal-spinner">
@@ -147,7 +138,7 @@ export function PremiumFlowModal({ open, onClose }: Props) {
               <>
                 {uploadError && (
                   <p className="premium-modal-error" role="alert">
-                    <span className="material-symbols-outlined">error</span>
+                    <md-icon>error</md-icon>
                     {uploadError}
                   </p>
                 )}
@@ -159,13 +150,10 @@ export function PremiumFlowModal({ open, onClose }: Props) {
                   onChange={handleFileChange}
                   aria-label="Selecionar comprovante"
                 />
-                <button
-                  className="premium-modal-btn premium-modal-btn--primary"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <span className="material-symbols-outlined">upload</span>
+                <md-filled-button onClick={() => fileInputRef.current?.click()} className="btn-full">
+                  <md-icon slot="icon">upload</md-icon>
                   {uploadError ? 'Tentar novamente' : 'Selecionar arquivo'}
-                </button>
+                </md-filled-button>
               </>
             )}
           </div>
@@ -174,14 +162,14 @@ export function PremiumFlowModal({ open, onClose }: Props) {
         {/* Step 4 — Feedback */}
         {step === 4 && (
           <div className="premium-modal-step">
-            <span className="material-symbols-outlined premium-modal-icon premium-modal-icon--success">check_circle</span>
+            <md-icon className="premium-modal-icon premium-modal-icon--success">check_circle</md-icon>
             <h2 id="premium-modal-title" className="premium-modal-title">Estamos liberando seu acesso!</h2>
             <p className="premium-modal-desc">
               Seu comprovante foi recebido. Em até 24h seu acesso Premium será ativado.
             </p>
-            <button className="premium-modal-btn premium-modal-btn--primary" onClick={handleClose}>
+            <md-filled-button onClick={handleClose} className="btn-full">
               Fechar
-            </button>
+            </md-filled-button>
           </div>
         )}
       </div>

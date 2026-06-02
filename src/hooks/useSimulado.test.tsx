@@ -15,7 +15,14 @@ vi.mock('./useFunctions', () => ({
   callFinishSimulado: vi.fn(),
 }))
 
-const mockAuth = { user: { uid: 'test-uid' } as User, loading: false }
+const mockAuth = {
+  user: { uid: 'test-uid' } as User,
+  loading: false,
+  isPremium: false,
+  premiumStatus: 'free' as const,
+  premiumExpiresAt: null,
+  profileLoading: false
+}
 
 function SnackbarWrapper({ children }: { children: React.ReactNode }) {
   return <SnackbarProvider>{children}</SnackbarProvider>

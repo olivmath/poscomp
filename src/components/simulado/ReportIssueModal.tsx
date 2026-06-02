@@ -1,3 +1,6 @@
+import '@material/web/button/filled-button.js'
+import '@material/web/button/text-button.js'
+import '@material/web/icon/icon.js'
 import { useState, useEffect } from 'react'
 import { ModalOverlay } from '../ModalOverlay'
 import { useSnackbar } from '../SnackbarProvider'
@@ -49,7 +52,7 @@ export function ReportIssueModal({
           aria-labelledby="report-success-title"
         >
           <div className="report-success-content">
-            <span className="material-symbols-outlined report-success-icon">done</span>
+            <md-icon className="report-success-icon">done</md-icon>
             <h2 id="report-success-title" className="modal-title">Problema enviado</h2>
             <p className="modal-body">Obrigado por reportar. Analisaremos em breve.</p>
           </div>
@@ -75,13 +78,13 @@ export function ReportIssueModal({
           rows={3}
           autoFocus
         />
-        <div className="modal-actions">
-          <button className="modal-btn modal-btn--ghost" onClick={onCancel}>
+        <div className="modal-actions" style={{ justifyContent: 'flex-end' }}>
+          <md-text-button onClick={onCancel}>
             Cancelar
-          </button>
-          <button className="modal-btn modal-btn--primary" onClick={handleSubmit}>
+          </md-text-button>
+          <md-filled-button onClick={handleSubmit}>
             Enviar
-          </button>
+          </md-filled-button>
         </div>
       </div>
     </ModalOverlay>

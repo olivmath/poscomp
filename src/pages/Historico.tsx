@@ -72,8 +72,8 @@ function ResultCard({ result, prevResult, onClick }: { result: SimuladoResult; p
 }
 
 export function Historico() {
-  const { results, loading, error } = useResults()
   const { isPremium, profileLoading } = useAuth()
+  const { results, loading, error } = useResults(isPremium)
   const navigate = useNavigate()
 
   if (profileLoading) {

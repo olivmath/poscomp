@@ -2,24 +2,31 @@ import '@material/web/list/list.js'
 import '@material/web/list/list-item.js'
 import '@material/web/switch/switch.js'
 import '@material/web/icon/icon.js'
+import '@material/web/button/filled-button.js'
+import '@material/web/button/outlined-button.js'
+import '@material/web/button/text-button.js'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useAuth } from '../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
+import { useNotifications } from '../hooks/useNotifications'
 import { callDeleteAllData } from '../hooks/useFunctions'
 import { ModalOverlay } from '../components/ModalOverlay'
 import { PremiumFlowModal } from '../components/premium/PremiumFlowModal'
+import { LegalModal } from '../components/LegalModal'
 
 export function Perfil() {
-  const { user, isPremium, premiumStatus, profileLoading } = useAuth()
+  const { user, isPremium, premiumStatus, premiumExpiresAt, profileLoading } = useAuth()
   const navigate = useNavigate()
   const [loggingOut, setLoggingOut] = useState(false)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [showPremiumModal, setShowPremiumModal] = useState(false)
+  const [showLegal, setShowLegal] = useState<'privacy' | 'terms' | null>(null)
   const { theme, toggleTheme } = useTheme()
+  const { permission: notifPermission, enabled: notifEnabled, loading: notifLoading, toggle: toggleNotifications } = useNotifications()
 
   async function handleLogout() {
     setLoggingOut(true)
@@ -37,6 +44,10 @@ export function Perfil() {
     }
   }
 
+  const renewalLabel = premiumExpiresAt
+    ? `Renova em ${premiumExpiresAt.toLocaleDateString('pt-BR')}`
+    : null
+
   return (
     <div className="perfil-page">
       <div className="perfil-header">
@@ -48,60 +59,41 @@ export function Perfil() {
           />
         ) : (
           <div className="perfil-avatar-placeholder">
-            <span className="material-symbols-outlined md-icon--lg">person</span>
+            <md-icon style={{ '--md-icon-size': 'var(--icon-size-2xl)' } as any}>person</md-icon>
           </div>
         )}
         <h1 className="perfil-name">{user?.displayName ?? 'Usuário'}</h1>
         <p className="perfil-email">{user?.email}</p>
       </div>
+
+      {/* Assinatura */}
       <div className="perfil-section">
-        <h2 className="perfil-section-title">Plano</h2>
+        <h2 className="perfil-section-title">Assinatura</h2>
         <md-list className="perfil-info-list">
           <md-list-item className="perfil-info-row">
-            <span slot="start" className="material-symbols-outlined perfil-info-icon">
+            <md-icon slot="start">
               {isPremium ? 'workspace_premium' : 'person'}
-            </span>
+            </md-icon>
             <span slot="headline">
-              {profileLoading ? '...' : isPremium ? 'Premium' : premiumStatus === 'pending' ? 'Free' : 'Free'}
+              {profileLoading ? '...' : isPremium ? 'Plano Premium' : premiumStatus === 'pending' ? 'Aguardando aprovação' : 'Plano Free'}
             </span>
-            {!profileLoading && premiumStatus === 'pending' && (
-              <span slot="supporting-text" style={{ color: 'var(--md-sys-color-tertiary)' }}>
-                Aguardando aprovação
-              </span>
+            {!profileLoading && renewalLabel && (
+              <span slot="supporting-text">{renewalLabel}</span>
             )}
             {!profileLoading && premiumStatus === 'free' && (
-              <button
+              <md-outlined-button
                 slot="end"
-                className="premium-upgrade-btn"
                 onClick={() => setShowPremiumModal(true)}
               >
                 Assinar R$ 10
-              </button>
+              </md-outlined-button>
             )}
           </md-list-item>
         </md-list>
       </div>
 
+      {/* Preferências */}
       <div className="perfil-section">
-        <h2 className="perfil-section-title">Conta</h2>
-        <md-list className="perfil-info-list">
-          <md-list-item className="perfil-info-row">
-            <span slot="start" className="material-symbols-outlined perfil-info-icon">info</span>
-            <span slot="headline">Versão</span>
-            <span slot="supporting-text">{`v${__APP_VERSION__}`}</span>
-          </md-list-item>
-
-          <md-list-item
-            type="button"
-            onClick={handleLogout}
-            className="perfil-info-row perfil-logout-row"
-          >
-            <span slot="start" className="material-symbols-outlined perfil-info-icon perfil-logout-icon-list">logout</span>
-            <span slot="headline">{loggingOut ? 'Saindo...' : 'Sair da conta'}</span>
-          </md-list-item>
-        </md-list>
-      </div>
-            <div className="perfil-section">
         <h2 className="perfil-section-title">Preferências</h2>
         <md-list className="perfil-info-list">
           <md-list-item
@@ -109,9 +101,9 @@ export function Perfil() {
             onClick={toggleTheme}
             className="perfil-info-row"
           >
-            <span slot="start" className="material-symbols-outlined perfil-info-icon">
+            <md-icon slot="start">
               {theme === 'dark' ? 'light_mode' : 'dark_mode'}
-            </span>
+            </md-icon>
             <span slot="headline">Tema escuro</span>
             <md-switch
               slot="end"
@@ -123,29 +115,101 @@ export function Perfil() {
               aria-label="Alternar tema escuro"
             />
           </md-list-item>
+          <md-list-item
+            className="perfil-info-row"
+            type="button"
+            onClick={notifPermission !== 'denied' && notifPermission !== 'unsupported' ? toggleNotifications : undefined}
+            disabled={notifLoading || notifPermission === 'denied' || notifPermission === 'unsupported'}
+          >
+            <md-icon slot="start">
+              {notifEnabled ? 'notifications_active' : 'notifications_off'}
+            </md-icon>
+            <span slot="headline">Notificações</span>
+            {notifPermission === 'denied' && (
+              <span slot="supporting-text">Bloqueado no navegador</span>
+            )}
+            {notifPermission === 'unsupported' && (
+              <span slot="supporting-text">Não suportado</span>
+            )}
+            <md-switch
+              slot="end"
+              selected={notifEnabled}
+              disabled={notifLoading || notifPermission === 'denied' || notifPermission === 'unsupported'}
+              onClick={(e: React.MouseEvent) => {
+                e.stopPropagation()
+                if (notifPermission !== 'denied' && notifPermission !== 'unsupported') toggleNotifications()
+              }}
+              aria-label="Alternar notificações"
+            />
+          </md-list-item>
         </md-list>
       </div>
 
+      {/* Sobre */}
+      <div className="perfil-section">
+        <h2 className="perfil-section-title">Sobre</h2>
+        <md-list className="perfil-info-list">
+          <md-list-item className="perfil-info-row">
+            <md-icon slot="start">info</md-icon>
+            <span slot="headline">Versão</span>
+            <span slot="supporting-text">{`v${__APP_VERSION__}`}</span>
+          </md-list-item>
+          <md-list-item
+            className="perfil-info-row"
+            type="button"
+            onClick={() => setShowLegal('privacy')}
+          >
+            <md-icon slot="start">policy</md-icon>
+            <span slot="headline">Política de privacidade</span>
+            <md-icon slot="end">chevron_right</md-icon>
+          </md-list-item>
+          <md-list-item
+            className="perfil-info-row"
+            type="button"
+            onClick={() => setShowLegal('terms')}
+          >
+            <md-icon slot="start">gavel</md-icon>
+            <span slot="headline">Termos de uso</span>
+            <md-icon slot="end">chevron_right</md-icon>
+          </md-list-item>
+        </md-list>
+      </div>
 
+      {/* Conta */}
+      <div className="perfil-section">
+        <h2 className="perfil-section-title">Conta</h2>
+        <md-list className="perfil-info-list">
+          <md-list-item
+            type="button"
+            onClick={handleLogout}
+            className="perfil-info-row perfil-logout-row"
+          >
+            <md-icon slot="start" className="perfil-logout-icon-list">logout</md-icon>
+            <span slot="headline">{loggingOut ? 'Saindo...' : 'Sair da conta'}</span>
+          </md-list-item>
+        </md-list>
+      </div>
+
+      {/* Cuidado */}
       <div className="perfil-danger-zone">
         <div className="perfil-danger-zone__header">
-          <span className="material-symbols-outlined perfil-danger-zone__icon">warning</span>
+          <md-icon className="perfil-danger-zone__icon">warning</md-icon>
           <span className="perfil-danger-zone__title">Cuidado</span>
         </div>
         <p className="perfil-danger-zone__desc">
           Remove permanentemente todo o histórico de simulados e cartões de revisão. Esta ação não pode ser desfeita.
         </p>
-        <button
-          className="perfil-danger-zone__btn"
+        <md-outlined-button
           onClick={() => setShowDeleteDialog(true)}
+          style={{ '--md-outlined-button-outline-color': 'var(--md-sys-color-error)', '--md-outlined-button-label-text-color': 'var(--md-sys-color-error)' } as any}
         >
-          <span className="material-symbols-outlined">delete_forever</span>
+          <md-icon slot="icon">delete_forever</md-icon>
           Apagar todos os dados
-        </button>
+        </md-outlined-button>
       </div>
 
-
       <PremiumFlowModal open={showPremiumModal} onClose={() => setShowPremiumModal(false)} />
+      {showLegal && <LegalModal type={showLegal} onClose={() => setShowLegal(null)} />}
 
       {showDeleteDialog && (
         <ModalOverlay onBackdropClick={() => !deleting && setShowDeleteDialog(false)}>
@@ -154,21 +218,20 @@ export function Perfil() {
             <p className="modal-body">
               Todo o histórico de simulados e cartões de revisão serão apagados permanentemente. Esta ação não pode ser desfeita.
             </p>
-            <div className="modal-actions">
-              <button
-                className="modal-btn modal-btn--ghost"
+            <div className="modal-actions" style={{ justifyContent: 'flex-end' }}>
+              <md-text-button
                 onClick={() => setShowDeleteDialog(false)}
                 disabled={deleting}
               >
                 Cancelar
-              </button>
-              <button
-                className="modal-btn modal-btn--danger"
+              </md-text-button>
+              <md-filled-button
                 onClick={handleDeleteAllData}
                 disabled={deleting}
+                style={{ '--md-filled-button-container-color': 'var(--md-sys-color-error)', '--md-filled-button-label-text-color': 'var(--md-sys-color-on-error)' } as any}
               >
                 {deleting ? 'Apagando...' : 'Apagar tudo'}
-              </button>
+              </md-filled-button>
             </div>
           </div>
         </ModalOverlay>
