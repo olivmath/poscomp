@@ -215,15 +215,16 @@ async function saveResult(
   uid: string,
   data: Omit<FinishSimuladoOutput, 'resultId'>,
 ): Promise<string> {
-  const ref = await db
-    .collection(`users/${uid}/results`)
-    .add({
-      ...data,
-      completedAt: FieldValue.serverTimestamp(),
-    })
-    .catch((e) => {
-      throw new HttpsError('internal', 'Result save failed', e)
-    })
+  const [ref] = await Promise.all([
+    db
+      .collection(`users/${uid}/results`)
+      .add({ ...data, completedAt: FieldValue.serverTimestamp() })
+      .catch((e) => { throw new HttpsError('internal', 'Result save failed', e) }),
+    db
+      .collection('users')
+      .doc(uid)
+      .set({ lastActivity: FieldValue.serverTimestamp() }, { merge: true }),
+  ])
 
   return ref.id
 }

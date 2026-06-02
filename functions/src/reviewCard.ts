@@ -57,6 +57,7 @@ async function persistReview(uid: string, questionId: number, card: SrsCard, stu
       dueDate:     Timestamp.fromDate(new Date(updated.nextDueDate)),
       studied:     true,
     })
+    txn.set(db.collection('users').doc(uid), { lastActivity: Timestamp.now() }, { merge: true })
   }).catch((e) => { throw new HttpsError('internal', 'DB write failed', e) })
 
   return updated

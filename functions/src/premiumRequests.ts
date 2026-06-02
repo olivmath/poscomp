@@ -1,13 +1,52 @@
+import * as admin from 'firebase-admin'
 import { onCall, HttpsError } from 'firebase-functions/v2/https'
 import { onDocumentCreated } from 'firebase-functions/v2/firestore'
 import { logger } from 'firebase-functions'
 import { FieldValue } from 'firebase-admin/firestore'
 import { db } from './index'
+import { notifyPremiumApproved } from './notifications'
 
 function requireAdmin(request: { auth?: { uid?: string; token?: Record<string, unknown> } }) {
   if (!request.auth) throw new HttpsError('unauthenticated', 'Login required')
   if (request.auth.token?.admin !== true) throw new HttpsError('permission-denied', 'Admin required')
 }
+
+export const submitPremiumRequest = onCall(async (request) => {
+  logger.info('[submitPremiumRequest] iniciado', { callerUid: request.auth?.uid })
+
+  if (!request.auth) throw new HttpsError('unauthenticated', 'Login required')
+
+  const uid = request.auth.uid
+  const { storagePath, receiptType } = request.data as { storagePath?: unknown; receiptType?: unknown }
+
+  if (typeof storagePath !== 'string') {
+    throw new HttpsError('invalid-argument', 'storagePath is required')
+  }
+
+  // garante que o path pertence ao uid autenticado — impede acesso a arquivos de outros usuários
+  const expectedPrefix = `receipts/${uid}/`
+  if (!storagePath.startsWith(expectedPrefix)) {
+    logger.warn('[submitPremiumRequest] storagePath não pertence ao uid', { uid, storagePath })
+    throw new HttpsError('permission-denied', 'storagePath does not belong to the authenticated user')
+  }
+
+  const bucket = admin.storage().bucket()
+  const receiptUrl = await bucket.file(storagePath).getSignedUrl({
+    action: 'read',
+    expires: '2099-01-01',
+  }).then(([url]) => url)
+
+  const docRef = await db.collection('premium_requests').add({
+    uid,
+    status: 'pending',
+    receiptUrl,
+    receiptType: typeof receiptType === 'string' ? receiptType : null,
+    createdAt: FieldValue.serverTimestamp(),
+  })
+
+  logger.info('[submitPremiumRequest] ticket criado', { uid, requestId: docRef.id })
+  return { requestId: docRef.id }
+})
 
 export const onPremiumRequestCreated = onDocumentCreated('premium_requests/{requestId}', (event) => {
   const data = event.data?.data()
@@ -54,6 +93,9 @@ export const reviewPremiumRequest = onCall(async (request) => {
     await db.collection('users').doc(data.uid).set({ isPremium: true }, { merge: true })
     await reqRef.update({ status: 'approved', reviewedAt, reviewedBy })
     logger.info('[reviewPremiumRequest] aprovado com sucesso', { requestId, uid: data.uid, reviewedBy })
+    notifyPremiumApproved(data.uid).catch((e) =>
+      logger.warn('[reviewPremiumRequest] push failed (non-critical)', { uid: data.uid, error: e?.message }),
+    )
   } else {
     logger.info('[reviewPremiumRequest] negando ticket', { requestId, uid: data.uid })
     await reqRef.update({ status: 'denied', reviewedAt, reviewedBy })
