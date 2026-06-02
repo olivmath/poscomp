@@ -82,7 +82,7 @@ export function AnnouncementBanner({ announcements }: Props) {
           className="announcement-cta"
         >
           Saiba mais
-          <md-icon style={{ '--md-icon-size': '18px' } as any}>open_in_new</md-icon>
+          <md-icon style={{ '--md-icon-size': '18px' }}>open_in_new</md-icon>
         </a>
       )}
     </div>

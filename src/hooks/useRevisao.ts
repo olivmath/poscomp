@@ -35,7 +35,7 @@ export function useRevisao() {
       try {
         const { data } = await callGetPendingCards({})
         setCards(data.cards)
-      } catch (err) {
+      } catch {
         showSnackbar('Erro ao carregar cards para revisão', 'error')
         setCards([])
       } finally {

@@ -59,7 +59,7 @@ export function Perfil() {
           />
         ) : (
           <div className="perfil-avatar-placeholder">
-            <md-icon style={{ '--md-icon-size': 'var(--icon-size-2xl)' } as any}>person</md-icon>
+            <md-icon style={{ '--md-icon-size': 'var(--icon-size-2xl)' }}>person</md-icon>
           </div>
         )}
         <h1 className="perfil-name">{user?.displayName ?? 'Usuário'}</h1>
@@ -201,7 +201,7 @@ export function Perfil() {
         </p>
         <md-outlined-button
           onClick={() => setShowDeleteDialog(true)}
-          style={{ '--md-outlined-button-outline-color': 'var(--md-sys-color-error)', '--md-outlined-button-label-text-color': 'var(--md-sys-color-error)' } as any}
+          style={{ '--md-outlined-button-outline-color': 'var(--md-sys-color-error)', '--md-outlined-button-label-text-color': 'var(--md-sys-color-error)' }}
         >
           <md-icon slot="icon">delete_forever</md-icon>
           Apagar todos os dados
@@ -228,7 +228,7 @@ export function Perfil() {
               <md-filled-button
                 onClick={handleDeleteAllData}
                 disabled={deleting}
-                style={{ '--md-filled-button-container-color': 'var(--md-sys-color-error)', '--md-filled-button-label-text-color': 'var(--md-sys-color-on-error)' } as any}
+                style={{ '--md-filled-button-container-color': 'var(--md-sys-color-error)', '--md-filled-button-label-text-color': 'var(--md-sys-color-on-error)' }}
               >
                 {deleting ? 'Apagando...' : 'Apagar tudo'}
               </md-filled-button>

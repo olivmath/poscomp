@@ -3672,7 +3672,7 @@ md-outlined-button.btn-full {
   gap: 0;
 }
 
-.announcement-banner--block .announcement-md {
+.announcement-md {
   padding: 0;
 }
 
@@ -4091,7 +4091,7 @@ md-circular-progress {
   align-items: center;
   gap: var(--space-xs);
   padding: var(--space-xs) var(--space-sm);
-  border-radius: 20px;
+  border-radius: var(--shape-corner-full);
   font-size: var(--md-sys-typescale-label-large-size);
   font-weight: var(--md-sys-typescale-label-large-weight);
 }
@@ -4137,7 +4137,7 @@ md-circular-progress {
   gap: var(--space-sm);
   padding: var(--space-md);
   background: var(--md-sys-color-primary-container);
-  border-radius: 12px;
+  border-radius: var(--shape-corner-medium);
 }
 
 .premium-plan-card__text {
@@ -4152,7 +4152,7 @@ md-circular-progress {
   align-items: center;
   gap: var(--space-xs);
   padding: var(--space-xs) var(--space-md);
-  border-radius: 20px;
+  border-radius: var(--shape-corner-full);
   border: none;
   cursor: pointer;
   font-size: var(--md-sys-typescale-label-large-size);
@@ -4166,8 +4166,8 @@ md-circular-progress {
 .premium-upgrade-btn {
   display: inline-flex;
   align-items: center;
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--shape-corner-full);
   border: 1.5px solid var(--md-sys-color-primary);
   background: transparent;
   color: var(--md-sys-color-primary);

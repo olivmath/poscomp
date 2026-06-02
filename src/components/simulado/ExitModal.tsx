@@ -12,7 +12,7 @@ export function ExitModal({ onConfirm, onCancel }: { onConfirm: () => void; onCa
           <md-text-button onClick={onCancel}>Continuar</md-text-button>
           <md-filled-button 
             onClick={onConfirm}
-            style={{ '--md-filled-button-container-color': 'var(--md-sys-color-error)', '--md-filled-button-label-text-color': 'var(--md-sys-color-on-error)' } as any}
+            style={{ '--md-filled-button-container-color': 'var(--md-sys-color-error)', '--md-filled-button-label-text-color': 'var(--md-sys-color-on-error)' }}
           >
             Sair
           </md-filled-button>
