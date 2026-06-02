@@ -9,6 +9,8 @@
     "preview": "vite preview --port 5174"
   },
   "dependencies": {
+    "@material/material-color-utilities": "^0.4.0",
+    "@material/web": "^2.4.1",
     "@tailwindcss/vite": "^4.3.0",
     "firebase": "^11.9.0",
     "react": "^19.1.0",

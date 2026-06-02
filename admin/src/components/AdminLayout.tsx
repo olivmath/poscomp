@@ -1,14 +1,15 @@
+import '@material/web/icon/icon.js'
 import { NavLink, Outlet } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 
 const NAV = [
-  { to: '/dashboard', label: 'Dashboard' },
-  { to: '/questoes',  label: 'Questões'  },
-  { to: '/usuarios',  label: 'Usuários'  },
-  { to: '/tickets',   label: 'Tickets'   },
-  { to: '/banners',   label: 'Banners'   },
-  { to: '/admins',    label: 'Admins'    },
+  { to: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
+  { to: '/questoes',  label: 'Questões',  icon: 'quiz' },
+  { to: '/usuarios',  label: 'Usuários',  icon: 'group' },
+  { to: '/tickets',   label: 'Tickets',   icon: 'confirmation_number' },
+  { to: '/banners',   label: 'Banners',   icon: 'campaign' },
+  { to: '/admins',    label: 'Admins',    icon: 'admin_panel_settings' },
 ]
 
 export function AdminLayout() {
@@ -21,12 +22,13 @@ export function AdminLayout() {
         </div>
 
         <nav className="sidebar-nav">
-          {NAV.map(({ to, label }) => (
+          {NAV.map(({ to, label, icon }) => (
             <NavLink
               key={to}
               to={to}
               className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
             >
+              <md-icon>{icon}</md-icon>
               {label}
             </NavLink>
           ))}
@@ -34,7 +36,8 @@ export function AdminLayout() {
 
         <div className="sidebar-footer">
           <button className="sidebar-signout" onClick={() => signOut(auth)}>
-            ← Sair
+            <md-icon style={{ marginRight: '12px' }}>logout</md-icon>
+            Sair
           </button>
         </div>
       </aside>
@@ -45,3 +48,4 @@ export function AdminLayout() {
     </div>
   )
 }
+

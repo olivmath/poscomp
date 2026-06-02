@@ -1,3 +1,5 @@
+import '@material/web/button/filled-button.js'
+import '@material/web/icon/icon.js'
 import { useState } from 'react'
 import { signInWithPopup } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
@@ -24,21 +26,37 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex h-screen items-center justify-center bg-slate-50">
-      <div className="bg-white rounded-2xl shadow-xl p-10 text-center space-y-6 w-96 border border-slate-200">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">POSCOMP</h1>
-          <p className="text-sm font-medium text-indigo-600 uppercase tracking-wider">Admin Console</p>
+    <div className="login-page-container">
+      <div className="card login-card-admin">
+        <div className="login-header-admin">
+          <h1 className="login-logo-text-admin">POSCOMP</h1>
+          <p className="login-badge-admin">Admin Console</p>
         </div>
-        <p className="text-base text-slate-600 leading-relaxed">Acesso restrito a administradores do sistema.</p>
-        {error && <p className="text-sm font-medium text-red-600 bg-red-50 py-2 rounded-lg">{error}</p>}
-        <button
+
+        <div className="login-body-admin">
+          <p className="login-desc-admin">
+            Bem-vindo ao portal administrativo. Acesse para gerenciar questões, usuários e banners.
+          </p>
+          
+          {error && (
+            <div className="login-error-admin" role="alert">
+              {error}
+            </div>
+          )}
+        </div>
+
+        <md-filled-button
           onClick={handleLogin}
           disabled={loading}
-          className="w-full bg-indigo-600 text-white rounded-xl py-3 text-base font-semibold shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+          className="login-btn-admin"
         >
+          <md-icon slot="icon">login</md-icon>
           {loading ? 'Verificando...' : 'Entrar com Google'}
-        </button>
+        </md-filled-button>
+
+        <p className="login-footer-text-admin">
+          Acesso restrito a administradores autorizados.
+        </p>
       </div>
     </div>
   )
