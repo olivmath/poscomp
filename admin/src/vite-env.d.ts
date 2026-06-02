@@ -1,2 +1,2 @@
 /// <reference types="vite/client" />
-/// <reference path="./material-web.d.ts" />
+import './material-web.d.ts'

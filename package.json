@@ -5,10 +5,17 @@
   "scripts": {
     "app:dev": "pnpm --prefix app dev",
     "app:build": "pnpm --prefix app build",
+    "app:lint": "pnpm --prefix app lint",
+    "app:typecheck": "pnpm --prefix app typecheck",
+    "app:test": "pnpm --prefix app test",
     "admin:dev": "pnpm --prefix admin dev",
     "admin:build": "pnpm --prefix admin build",
+    "admin:lint": "pnpm --prefix admin lint",
+    "admin:typecheck": "pnpm --prefix admin typecheck",
     "func:dev": "pnpm --prefix functions dev",
     "func:build": "pnpm --prefix functions build",
+    "func:lint": "pnpm --prefix functions lint",
+    "func:test": "pnpm --prefix functions test",
     "deploy": "firebase deploy"
   },
   "devDependencies": {

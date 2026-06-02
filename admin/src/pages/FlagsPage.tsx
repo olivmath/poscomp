@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { doc, getDoc } from 'firebase/firestore'
 import { httpsCallable } from 'firebase/functions'
 import { db, functions } from '../firebase'
-import type { Question, Area, Option } from '../../../src/types/index'
+import type { Question, Area, Option } from '../../../app/src/types/index'
 
 interface FlaggedQuestion {
   id: string

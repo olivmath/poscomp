@@ -3,8 +3,8 @@
 # ── Sub-command absorption ────────────────────────────────────────────────────
 # Leaf words that appear as 2nd/3rd goals after a namespace become no-ops.
 # Namespace targets (local, dev, func, app) use inline guards instead.
-ifneq ($(filter local dev func app,$(firstword $(MAKECMDGOALS))),)
-up down restart seed gf rf get-flagged resolve-flagged deploy install build lint typecheck test admin set-admin:
+ifneq ($(filter local dev func fn app admin,$(firstword $(MAKECMDGOALS))),)
+up down restart seed gf rf get-flagged resolve-flagged deploy install build lint typecheck test set-admin:
 	@:
 .DEFAULT:
 	@:
@@ -12,7 +12,7 @@ endif
 
 .PHONY: help validate \
         deploy-hosting deploy-functions deploy \
-        local dev func app \
+        local dev func fn app admin \
         up seed gf rf get-flagged resolve-flagged deploy admin \
         install build lint typecheck test
 
@@ -30,7 +30,14 @@ help:
 	@echo "  make app typecheck   Type-check (tsc --noEmit)"
 	@echo "  make app test        Run tests (Vitest)"
 	@echo ""
-	@echo "func:"
+	@echo "admin:"
+	@echo "  make admin install   Install admin dependencies (pnpm)"
+	@echo "  make admin build     Build admin for production"
+	@echo "  make admin lint      Lint admin"
+	@echo "  make admin typecheck Type-check admin"
+	@echo "  make admin test      Run admin tests"
+	@echo ""
+	@echo "func / fn:"
 	@echo "  make func install    Install functions dependencies (npm)"
 	@echo "  make func build      Compile Cloud Functions (tsc)"
 	@echo "  make func lint       Lint Cloud Functions"
@@ -74,15 +81,28 @@ app:
 		*) echo "Unknown: make app [install|build|lint|typecheck|test]"; exit 1 ;; \
 	esac
 
+# ── admin namespace ───────────────────────────────────────────────────────────
+admin:
+	@if [ "$(firstword $(MAKECMDGOALS))" != "admin" ]; then exit 0; fi; \
+	case "$(word 2,$(MAKECMDGOALS))" in \
+		install)   pnpm --prefix admin install --frozen-lockfile ;; \
+		build)     pnpm --prefix admin build ;; \
+		lint)      pnpm --prefix admin lint ;; \
+		typecheck) pnpm --prefix admin typecheck ;; \
+		test)      pnpm --prefix admin test ;; \
+		*) echo "Unknown: make admin [install|build|lint|typecheck|test]"; exit 1 ;; \
+	esac
+
 # ── func namespace ────────────────────────────────────────────────────────────
-func:
-	@if [ "$(firstword $(MAKECMDGOALS))" != "func" ]; then exit 0; fi; \
+func fn:
+	@if [ "$(firstword $(MAKECMDGOALS))" != "func" ] && [ "$(firstword $(MAKECMDGOALS))" != "fn" ]; then exit 0; fi; \
 	case "$(word 2,$(MAKECMDGOALS))" in \
 		install) cd functions && npm install ;; \
 		build)   cd functions && npm run build ;; \
 		lint)    cd functions && npm run lint ;; \
 		test)    cd functions && npm test ;; \
-		*) echo "Unknown: make func [install|build|lint|test]"; exit 1 ;; \
+		typecheck) cd functions && npx tsc --noEmit ;; \
+		*) echo "Unknown: make func [install|build|lint|test|typecheck]"; exit 1 ;; \
 	esac
 
 # ── local namespace ───────────────────────────────────────────────────────────
