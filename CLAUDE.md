@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-App de preparação para o POSCOMP. Simulados cronometrados + revisão espaçada (SM-2) com classificação de confiança por questão.
-
-**Objetivo pedagógico**: reduzir progressivamente erros do tipo "devia saber" — não acumular conteúdo novo infinitamente.
+Minimal React web app with Google authentication powered by Firebase and the full Google stack.
+Managed as a pnpm workspace with modules: `/app` (frontend), `/admin` (admin panel), and `/functions` (backend).
+Use `Makefile` at root for cross-workspace commands.
 
 ## Stack
 
@@ -16,75 +16,29 @@ App de preparação para o POSCOMP. Simulados cronometrados + revisão espaçada
 | Auth | Firebase Authentication (Google OAuth) |
 | Database | Firestore |
 | Hosting | Firebase Hosting |
-| Functions | Firebase Cloud Functions (when needed) |
-| Storage | Firebase Storage (when needed) |
+| Functions | Firebase Cloud Functions |
+| Storage | Firebase Storage |
 | Styling | Tailwind CSS |
 
 ## Package Manager & Commands
 
 **SEMPRE usar `pnpm`** — nunca `npm` ou `yarn`.
+Preferir usar o `Makefile` na raiz para orquestração.
 
 ```bash
-pnpm install                              # dependências
-pnpm dev                                  # dev server
-pnpm build                                # build produção
-pnpm test                                 # testes
-pnpm test -- src/path/to/file.test.ts     # arquivo específico
-pnpm lint                                 # lint
-pnpm typecheck                            # type check
-firebase deploy                           # deploy completo
-firebase deploy --only hosting            # só hosting
-firebase deploy --only functions          # só functions
+make app install      # dependências do app
+make app dev          # dev server do app
+make app build        # build produção do app
+make local up         # subir emuladores firebase
+make dev deploy app   # deploy do app
 ```
-
-## Fluxo de Dados SRS (Revisão Espaçada)
-
-1. **Simulado (Origem)**: Ao finalizar o simulado (`finishSimulado.ts`), o sistema gera/atualiza registros na coleção `users/{uid}/srs_cards`.
-2. **Revisão (Consumo)**: O front-end chama `getPendingCards`, que:
-    - Busca `srs_cards` pendentes (data de revisão ≤ agora).
-    - Busca as `Question` correspondentes na coleção global `questions` (que contém o campo `card` com `pergunta` e `resposta`).
-    - Retorna ao front-end os dados do card + conteúdo da questão formatado.
-3. **Ajuste (Feedback)**: Após o usuário estudar o flashcard (pergunta/resposta), o front-end chama `reviewCard.ts`, que atualiza os parâmetros do algoritmo SM-2 e a próxima data de revisão no Firestore.
-
-
-O app implementa este ciclo:
-
-```
-Simulado → classificar erro por questão → Revisão direcionada → Reteste → Novo Simulado
-```
-
-### Classificação de confiança (durante simulado, após revelar gabarito)
-
-| Label | Tipo | Quando usar |
-|---|---|---|
-| NÃO SEI (`unsure`) | nunca viu ou não lembra nada | "Não faço ideia" |
-| ESTUDANDO (`studying`) | conhecimento parcial ou confuso | "Eu quase lembrava" |
-| DEVIA SABER (`should_know`) | estudou várias vezes, erro inadmissível | "Eu sabia isso" |
-| TENHO CERTEZA (`certain`) | acertou com confiança total | sem revisão necessária |
-
-### Prioridade da revisão
-
-```
-DEVIA SABER  →  ESTUDANDO  →  NÃO SEI
-   (P1)            (P2)          (P3)
-```
-
-Erros "inadmissíveis" têm prioridade máxima — a aprovação depende de consistência, não de conteúdo novo.
-
-### Fluxo por questão no simulado
-
-```
-seleciona opção → revela gabarito → vê certo/errado → classifica confiança → próxima
-```
-
-**Nunca** classificar antes de ver o gabarito — a categoria depende de saber se acertou.
 
 ---
 
-## Architecture
+## Architecture (app/)
 
 ```
-src/
+app/src/
 ├── firebase/          # Firebase config e SDK
 │   └── index.ts       # initializeApp, auth, db, storage
 ├── contexts/
@@ -125,13 +79,14 @@ src/
 
 ## Firebase Setup
 
-- Project config lives in `src/firebase/index.ts` — loaded from env vars (`VITE_FIREBASE_*`)
-- `.env.local` holds the Firebase project credentials (never committed)
+- Project config lives in `app/src/firebase/index.ts` — loaded from env vars (`VITE_FIREBASE_*`)
+- `app/.env.local` holds the Firebase project credentials (never committed)
 - Auth flow: `signInWithPopup(auth, googleProvider)` → `onAuthStateChanged` → `AuthContext`
-- Protected routes check `AuthContext` and redirect to `/login` when unauthenticated
+- Rules located in `infra/firebase/`
 
 ## Environment Variables
 
+Localizadas em `app/.env.local`:
 ```env
 VITE_FIREBASE_API_KEY=
 VITE_FIREBASE_AUTH_DOMAIN=
@@ -149,7 +104,7 @@ VITE_FIREBASE_APP_ID=
 - Para inspecionar Shadow DOM de Web Components (ex: `md-filled-button`):
   - `getComputedStyle` no host **não** reflete o interior — use `element.shadowRoot.querySelector(...)`
   - CSS custom properties (`--md-*`) **penetram** o Shadow DOM; `font-family` herdado **não** penetra
-- Antes de rodar Playwright, garantir que `.env.local` existe no worktree (copiar de `~/Documents/dev/poscomp/.env.local`)
+- Antes de rodar Playwright, garantir que `app/.env.local` existe no worktree (copiar de `~/Documents/dev/poscomp/.env.local`)
 
 ## Accounts & Identity
 

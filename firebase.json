@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "app",
-      "public": "dist",
+      "public": "app/dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [{ "source": "**", "destination": "/index.html" }]
     },
@@ -14,10 +14,10 @@
     }
   ],
   "firestore": {
-    "rules": "firestore.rules"
+    "rules": "infra/firebase/firestore.rules"
   },
   "storage": {
-    "rules": "storage.rules"
+    "rules": "infra/firebase/storage.rules"
   },
   "functions": [{
     "source": "functions",

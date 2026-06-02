@@ -66,11 +66,11 @@ help:
 app:
 	@if [ "$(firstword $(MAKECMDGOALS))" != "app" ]; then exit 0; fi; \
 	case "$(word 2,$(MAKECMDGOALS))" in \
-		install)   pnpm install --frozen-lockfile ;; \
-		build)     pnpm build ;; \
-		lint)      pnpm lint ;; \
-		typecheck) pnpm typecheck ;; \
-		test)      pnpm test ;; \
+		install)   pnpm --prefix app install --frozen-lockfile ;; \
+		build)     pnpm --prefix app build ;; \
+		lint)      pnpm --prefix app lint ;; \
+		typecheck) pnpm --prefix app typecheck ;; \
+		test)      pnpm --prefix app test ;; \
 		*) echo "Unknown: make app [install|build|lint|typecheck|test]"; exit 1 ;; \
 	esac
 
@@ -99,18 +99,18 @@ local:
 			cd functions && npm run build && cd .. && \
 			firebase emulators:start --only auth,functions,firestore ;; \
 		app) \
-			VITE_USE_EMULATOR=true pnpm dev ;; \
+			VITE_USE_EMULATOR=true pnpm --prefix app dev ;; \
 		admin) \
-			VITE_USE_EMULATOR=true pnpm --prefix $(CURDIR)/admin dev ;; \
+			VITE_USE_EMULATOR=true pnpm --prefix admin dev ;; \
 		set-admin) \
-			FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIREBASE_PROJECT_ID=poscomp-olivmath pnpm tsx scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
+			FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIREBASE_PROJECT_ID=poscomp-olivmath pnpm --prefix app tsx scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
 		seed) \
-			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed ;; \
+			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath pnpm --prefix app seed ;; \
 		get-flagged|gf) \
-			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath npx tsx scripts/get-flagged.ts ;; \
+			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath npx --prefix app tsx scripts/get-flagged.ts ;; \
 		resolve-flagged|rf) \
 			read -p "Enter flag ID to resolve: " id; \
-			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath npx tsx scripts/resolve-flagged.ts "$$id" ;; \
+			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath npx --prefix app tsx scripts/resolve-flagged.ts "$$id" ;; \
 		*) echo "Unknown: make local [up|down|restart|app|admin|set-admin|seed|gf|rf]"; exit 1 ;; \
 	esac
 
@@ -119,22 +119,22 @@ dev:
 	@if [ "$(firstword $(MAKECMDGOALS))" != "dev" ]; then exit 0; fi; \
 	case "$(word 2,$(MAKECMDGOALS))" in \
 		app) \
-			pnpm dev ;; \
+			pnpm --prefix app dev ;; \
 		admin) \
-			pnpm --prefix $(CURDIR)/admin dev ;; \
+			pnpm --prefix admin dev ;; \
 		set-admin) \
-			FIREBASE_PROJECT_ID=poscomp-olivmath pnpm tsx scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
+			FIREBASE_PROJECT_ID=poscomp-olivmath pnpm --prefix app tsx scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
 		seed) \
-			FIREBASE_PROJECT_ID=poscomp-olivmath pnpm seed ;; \
+			FIREBASE_PROJECT_ID=poscomp-olivmath pnpm --prefix app seed ;; \
 		get-flagged|gf) \
-			FIREBASE_PROJECT_ID=poscomp-olivmath npx tsx scripts/get-flagged.ts ;; \
+			FIREBASE_PROJECT_ID=poscomp-olivmath npx --prefix app tsx scripts/get-flagged.ts ;; \
 		resolve-flagged|rf) \
 			read -p "Enter flag ID to resolve: " id; \
-			FIREBASE_PROJECT_ID=poscomp-olivmath npx tsx scripts/resolve-flagged.ts "$$id" ;; \
+			FIREBASE_PROJECT_ID=poscomp-olivmath npx --prefix app tsx scripts/resolve-flagged.ts "$$id" ;; \
 		deploy) \
 			case "$(word 3,$(MAKECMDGOALS))" in \
 				app)   firebase deploy --only hosting:app ;; \
-				admin) pnpm --prefix $(CURDIR)/admin build && firebase deploy --only hosting:admin ;; \
+				admin) pnpm --prefix admin build && firebase deploy --only hosting:admin ;; \
 				func)  cd functions && npm run build && cd .. && firebase deploy --only functions ;; \
 				*) echo "Unknown: make dev deploy [app|admin|func]"; exit 1 ;; \
 			esac ;; \

@@ -1,10 +1,13 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-## Project Overview
+# Project Overview
 
 Minimal React web app with Google authentication powered by Firebase and the full Google stack.
+Managed as a pnpm workspace:
+- `/app`: Main frontend application
+- `/admin`: Administration panel
+- `/functions`: Firebase Cloud Functions
+- `/infra/firebase`: Firebase rules and configurations
+
+Use the `Makefile` at the root for orchestration.
 
 ## Stack
 
@@ -14,8 +17,8 @@ Minimal React web app with Google authentication powered by Firebase and the ful
 | Auth | Firebase Authentication (Google OAuth) |
 | Database | Firestore |
 | Hosting | Firebase Hosting |
-| Functions | Firebase Cloud Functions (when needed) |
-| Storage | Firebase Storage (when needed) |
+| Functions | Firebase Cloud Functions |
+| Storage | Firebase Storage |
 | Styling | Tailwind CSS |
 
 ## Package Manager
@@ -23,73 +26,49 @@ Minimal React web app with Google authentication powered by Firebase and the ful
 **SEMPRE usar `pnpm`** — nunca `npm` ou `yarn` neste projeto.
 
 ```bash
-pnpm install      # instalar dependências
-pnpm dev          # dev server
-pnpm build        # build produção
-pnpm lint         # lint
-pnpm typecheck    # type check
+make app install      # instalar dependências do app
+make app dev          # dev server do app
+make app build        # build produção do app
 ```
 
 ## Commands
 
+Use the root `Makefile` for most tasks:
+
 ```bash
-# Install dependencies
-pnpm install
-
-# Dev server
-pnpm dev
-
-# Build for production
-pnpm build
-
-# Deploy to Firebase Hosting
-firebase deploy
-
-# Deploy only hosting
-firebase deploy --only hosting
-
-# Deploy only functions
-firebase deploy --only functions
-
-# Run tests
-pnpm test
-
-# Run single test file
-pnpm test -- src/path/to/file.test.ts
-
-# Lint
-pnpm lint
-
-# Type check
-pnpm typecheck
+make help             # list available commands
+make local up         # start firebase emulators
+make dev deploy app   # deploy frontend
+make dev deploy func  # deploy functions
 ```
 
-## Architecture
+## Architecture (app/)
 
 ```
-src/
+app/src/
 ├── firebase/          # Firebase config and SDK initialization
 │   └── index.ts       # initializeApp, auth, db, storage exports
 ├── hooks/             # Custom React hooks
 │   ├── useAuth.ts     # Firebase auth state (onAuthStateChanged)
-│   └── useFirestore.ts
+│   └── useSrs.ts
 ├── pages/             # Route-level components
 │   ├── Login.tsx      # Google sign-in entry point
 │   └── Home.tsx       # Post-auth main page
 ├── components/        # Reusable UI components
-├── contexts/          # React contexts (AuthContext)
+├── contexts/          # React contexts (AuthContext, SrsContext)
 └── main.tsx           # App entry + Router + AuthProvider
 ```
 
 ## Firebase Setup
 
-- Project config lives in `src/firebase/index.ts` — loaded from env vars (`VITE_FIREBASE_*`)
-- `.env.local` holds the Firebase project credentials (never committed)
+- Project config lives in `app/src/firebase/index.ts` — loaded from env vars (`VITE_FIREBASE_*`)
+- `app/.env.local` holds the Firebase project credentials (never committed)
+- Rules located in `infra/firebase/`
 - Auth flow: `signInWithPopup(auth, googleProvider)` → `onAuthStateChanged` → `AuthContext`
-- Protected routes check `AuthContext` and redirect to `/login` when unauthenticated
 
 ## Environment Variables
 
+Located in `app/.env.local`:
 ```env
 VITE_FIREBASE_API_KEY=
 VITE_FIREBASE_AUTH_DOMAIN=
@@ -106,8 +85,8 @@ VITE_FIREBASE_APP_ID=
 - Snapshots/logs do MCP ficam em `.playwright-mcp/` (ignorado pelo git)
 - Para inspecionar Shadow DOM de Web Components (ex: `md-filled-button`):
   - `getComputedStyle` no host **não** reflete o interior — use `element.shadowRoot.querySelector(...)`
-  - CSS custom properties (`--md-*`) **penetram** o Shadow DOM; `font-family` herdado **não** penetra
-- Antes de rodar Playwright, garantir que `.env.local` existe no worktree (copiar de `~/Documents/dev/poscomp/.env.local`)
+  - CSS custom properties (`--md-*`) **penetram** the Shadow DOM; `font-family` herdado **não** penetra
+- Antes de rodar Playwright, garantir que `app/.env.local` existe no worktree (copiar de `~/Documents/dev/poscomp/.env.local`)
 
 ## Accounts & Identity
 
