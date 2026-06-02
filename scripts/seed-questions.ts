@@ -26,7 +26,7 @@ initializeApp({ credential, projectId })
 const db = getFirestore()
 
 async function seed() {
-  const dataDir = join(import.meta.dirname, 'data')
+  const dataDir = join(import.meta.dirname, 'data', 'ok')
   const files = readdirSync(dataDir).filter(file => file.endsWith('.json'))
   
   let totalCount = 0
