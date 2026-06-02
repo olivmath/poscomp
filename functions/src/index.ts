@@ -1,5 +1,6 @@
 import * as admin from 'firebase-admin'
 
+// v1.1.0
 admin.initializeApp()
 
 export const db = admin.firestore()
