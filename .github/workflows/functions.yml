@@ -97,7 +97,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --prefix functions typecheck
+      - run: pnpm func:typecheck
 
   test:
     needs: [version_bump]

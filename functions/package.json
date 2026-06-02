@@ -7,6 +7,7 @@
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
     "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --ext .ts .",
+    "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests"
   },
   "engines": {
