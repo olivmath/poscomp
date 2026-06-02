@@ -5,34 +5,20 @@ on:
   push:
     branches: [main]
     paths:
-      - 'src/**'
-      - 'public/**'
-      - 'index.html'
-      - 'vite.config.*'
-      - 'tsconfig*.json'
+      - 'app/**'
+      - 'admin/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
-      - 'eslint.config.*'
-      - '.stylelintrc.json'
-      - 'stylelint-plugins/**'
-      - 'playwright.config.*'
-      - 'firestore.rules'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/app.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'src/**'
-      - 'public/**'
-      - 'index.html'
-      - 'vite.config.*'
-      - 'tsconfig*.json'
+      - 'app/**'
+      - 'admin/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
-      - 'eslint.config.*'
-      - '.stylelintrc.json'
-      - 'stylelint-plugins/**'
-      - 'playwright.config.*'
-      - 'firestore.rules'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/app.yml'
 
 permissions:
@@ -66,24 +52,36 @@ jobs:
             echo "type=patch" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Bump version
+      - name: Bump versions
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
 
           NEW_VERSION=$(node -e "
             const fs = require('fs');
-            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-            let [major, minor, patch] = pkg.version.split('.').map(Number);
+            const paths = ['app/package.json', 'admin/package.json', 'package.json'];
+            
+            // Use app/package.json as the source of truth for the version
+            const appPkg = JSON.parse(fs.readFileSync('app/package.json', 'utf8'));
+            let [major, minor, patch] = appPkg.version.split('.').map(Number);
+            
             if ('${{ steps.detect.outputs.type }}' === 'major') { major++; minor = 0; patch = 0; }
             else if ('${{ steps.detect.outputs.type }}' === 'minor') { minor++; patch = 0; }
             else { patch++; }
-            pkg.version = \`\${major}.\${minor}.\${patch}\`;
-            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
-            console.log(pkg.version);
+            
+            const newVer = \`\${major}.\${minor}.\${patch}\`;
+            
+            paths.forEach(p => {
+              if (fs.existsSync(p)) {
+                const pkg = JSON.parse(fs.readFileSync(p, 'utf8'));
+                pkg.version = newVer;
+                fs.writeFileSync(p, JSON.stringify(pkg, null, 2) + '\n');
+              }
+            });
+            console.log(newVer);
           ")
 
-          git add package.json
+          git add app/package.json admin/package.json package.json
           git commit -m "chore: bump version to v$NEW_VERSION [skip ci]"
           git tag "v$NEW_VERSION"
           git push origin HEAD:main --tags
@@ -103,7 +101,8 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
+      - run: pnpm app:lint
+      - run: pnpm admin:lint
 
   typecheck:
     needs: [version_bump]
@@ -120,7 +119,8 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm typecheck
+      - run: pnpm app:typecheck
+      - run: pnpm admin:typecheck
 
   test:
     needs: [version_bump]
@@ -137,7 +137,7 @@ jobs:
           node-version: 20
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test
+      - run: pnpm app:test
 
   build:
     needs: [version_bump]
@@ -155,7 +155,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Build app
-        run: pnpm build
+        run: pnpm app:build
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
@@ -164,7 +164,7 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
       - name: Build admin
-        run: pnpm --prefix admin install --frozen-lockfile && pnpm --prefix admin build
+        run: pnpm admin:build
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
@@ -175,7 +175,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist/
+          path: app/dist/
           retention-days: 1
       - uses: actions/upload-artifact@v4
         with:
@@ -196,7 +196,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: dist
-          path: dist/
+          path: app/dist/
       - uses: actions/download-artifact@v4
         with:
           name: admin-dist
