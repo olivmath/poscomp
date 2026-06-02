@@ -60,8 +60,8 @@ export function Revisao() {
           <p className="revisao-paywall-desc">
             A revisão espaçada é exclusiva para assinantes.
           </p>
-          <md-filled-button onClick={() => navigate('/perfil')}>
-            Assinar Agora
+          <md-filled-button className="btn-full" onClick={() => navigate('/perfil')}>
+            Ver planos
           </md-filled-button>
         </div>
       </div>

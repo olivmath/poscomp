@@ -91,8 +91,8 @@ export function Historico() {
           <span className="material-symbols-outlined revisao-paywall-icon">lock</span>
           <h2 className="revisao-paywall-title">Recurso Premium</h2>
           <p className="revisao-paywall-desc">O histórico de simulados + Comentários são exclusivos para assinantes.</p>
-          <md-filled-button onClick={() => navigate('/perfil')}>
-            Assinar Agora
+          <md-filled-button className="btn-full" onClick={() => navigate('/perfil')}>
+            Ver planos
           </md-filled-button>
         </div>
       </div>
