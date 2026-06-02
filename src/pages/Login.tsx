@@ -21,9 +21,8 @@ export function Login() {
     setError('')
     try {
       await signInWithPopup(auth, googleProvider)
-    } catch (err) {
+    } catch {
       setError('Falha ao fazer login. Tente novamente.')
-      console.error(err)
       setLoading(false)
     }
   }

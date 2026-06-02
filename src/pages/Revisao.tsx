@@ -4,6 +4,7 @@ import '@material/web/progress/circular-progress.js'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRevisao } from '../hooks/useRevisao'
+import { useAuth } from '../hooks/useAuth'
 import MarkdownAnswer from '../components/MarkdownAnswer'
 import type { Priority, AdaptedCard } from '../hooks/useRevisao'
 
@@ -15,6 +16,7 @@ const PRIORITY_LABELS: Record<Priority, { label: string; color: string }> = {
 
 export function Revisao() {
   const navigate = useNavigate()
+  const { isPremium, profileLoading } = useAuth()
   const {
     state,
     currentCard,
@@ -38,6 +40,32 @@ export function Revisao() {
       setNextDueDays(null)
       submit(acertou, (days) => setNextDueDays(days))
     }, 500)
+  }
+
+  if (profileLoading) {
+    return (
+      <div className="revisao-container revisao-container--loading">
+        <md-circular-progress indeterminate />
+        <p>Carregando...</p>
+      </div>
+    )
+  }
+
+  if (!isPremium) {
+    return (
+      <div className="revisao-container revisao-container--center">
+        <div className="revisao-paywall-card">
+          <span className="material-symbols-outlined revisao-paywall-icon">lock</span>
+          <h2 className="revisao-paywall-title">Recurso Premium</h2>
+          <p className="revisao-paywall-desc">
+            A revisão espaçada é exclusiva para assinantes.
+          </p>
+          <md-filled-button onClick={() => navigate('/perfil')}>
+            Assinar Agora
+          </md-filled-button>
+        </div>
+      </div>
+    )
   }
 
   if (state === 'loading') {

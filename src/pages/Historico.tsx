@@ -1,6 +1,7 @@
 import '@material/web/button/filled-button.js'
 import { useNavigate } from 'react-router-dom'
 import { useResults } from '../hooks/useResults'
+import { useAuth } from '../hooks/useAuth'
 import { formatDuration } from '../utils/formatDuration'
 import { AREA_ICONS } from '../utils/areaIcons'
 import type { SimuladoResult, Area } from '../types'
@@ -72,7 +73,31 @@ function ResultCard({ result, prevResult, onClick }: { result: SimuladoResult; p
 
 export function Historico() {
   const { results, loading, error } = useResults()
+  const { isPremium, profileLoading } = useAuth()
   const navigate = useNavigate()
+
+  if (profileLoading) {
+    return (
+      <div className="page-placeholder">
+        <div className="spinner" />
+      </div>
+    )
+  }
+
+  if (!isPremium) {
+    return (
+      <div className="revisao-container revisao-container--center">
+        <div className="revisao-paywall-card">
+          <span className="material-symbols-outlined revisao-paywall-icon">lock</span>
+          <h2 className="revisao-paywall-title">Recurso Premium</h2>
+          <p className="revisao-paywall-desc">O histórico de simulados + Comentários são exclusivos para assinantes.</p>
+          <md-filled-button onClick={() => navigate('/perfil')}>
+            Assinar Agora
+          </md-filled-button>
+        </div>
+      </div>
+    )
+  }
 
   if (loading) {
     return (

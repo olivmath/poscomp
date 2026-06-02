@@ -10,13 +10,15 @@ import { useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
 import { callDeleteAllData } from '../hooks/useFunctions'
 import { ModalOverlay } from '../components/ModalOverlay'
+import { PremiumFlowModal } from '../components/premium/PremiumFlowModal'
 
 export function Perfil() {
-  const { user } = useAuth()
+  const { user, isPremium, premiumStatus, profileLoading } = useAuth()
   const navigate = useNavigate()
   const [loggingOut, setLoggingOut] = useState(false)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [showPremiumModal, setShowPremiumModal] = useState(false)
   const { theme, toggleTheme } = useTheme()
 
   async function handleLogout() {
@@ -52,6 +54,34 @@ export function Perfil() {
         <h1 className="perfil-name">{user?.displayName ?? 'Usuário'}</h1>
         <p className="perfil-email">{user?.email}</p>
       </div>
+      <div className="perfil-section">
+        <h2 className="perfil-section-title">Plano</h2>
+        <md-list className="perfil-info-list">
+          <md-list-item className="perfil-info-row">
+            <span slot="start" className="material-symbols-outlined perfil-info-icon">
+              {isPremium ? 'workspace_premium' : 'person'}
+            </span>
+            <span slot="headline">
+              {profileLoading ? '...' : isPremium ? 'Premium' : premiumStatus === 'pending' ? 'Free' : 'Free'}
+            </span>
+            {!profileLoading && premiumStatus === 'pending' && (
+              <span slot="supporting-text" style={{ color: 'var(--md-sys-color-tertiary)' }}>
+                Aguardando aprovação
+              </span>
+            )}
+            {!profileLoading && premiumStatus === 'free' && (
+              <button
+                slot="end"
+                className="premium-upgrade-btn"
+                onClick={() => setShowPremiumModal(true)}
+              >
+                Assinar R$ 10
+              </button>
+            )}
+          </md-list-item>
+        </md-list>
+      </div>
+
       <div className="perfil-section">
         <h2 className="perfil-section-title">Conta</h2>
         <md-list className="perfil-info-list">
@@ -114,6 +144,8 @@ export function Perfil() {
         </button>
       </div>
 
+
+      <PremiumFlowModal open={showPremiumModal} onClose={() => setShowPremiumModal(false)} />
 
       {showDeleteDialog && (
         <ModalOverlay onBackdropClick={() => !deleting && setShowDeleteDialog(false)}>

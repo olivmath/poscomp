@@ -244,8 +244,7 @@ export function useResults(): UseResultsReturn {
           activeDaysThisWeek,
         })
       })
-      .catch((err) => {
-        console.error('useResults error:', err)
+      .catch(() => {
         setError('Erro ao carregar resultados. Verifique sua conexão.')
       })
       .finally(() => setLoading(false))

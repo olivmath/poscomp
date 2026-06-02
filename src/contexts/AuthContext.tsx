@@ -1,14 +1,35 @@
 import { createContext, useEffect, useState, ReactNode } from 'react'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from '../firebase'
+import { useUserProfile } from '../hooks/useUserProfile'
+import type { PremiumStatus } from '../types'
 
 interface AuthContextType {
   user: User | null
   loading: boolean
+  isPremium: boolean
+  premiumStatus: PremiumStatus
+  profileLoading: boolean
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const AuthContext = createContext<AuthContextType>({ user: null, loading: true })
+export const AuthContext = createContext<AuthContextType>({
+  user: null,
+  loading: true,
+  isPremium: false,
+  premiumStatus: 'free',
+  profileLoading: true,
+})
+
+function AuthProviderInner({ user, loading, children }: { user: User | null; loading: boolean; children: ReactNode }) {
+  const { isPremium, premiumStatus, loading: profileLoading } = useUserProfile(user?.uid ?? null)
+
+  return (
+    <AuthContext.Provider value={{ user, loading, isPremium, premiumStatus, profileLoading }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
@@ -23,8 +44,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthProviderInner user={user} loading={loading}>
       {children}
-    </AuthContext.Provider>
+    </AuthProviderInner>
   )
 }

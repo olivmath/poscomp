@@ -33,12 +33,9 @@ export function useRevisao() {
     async function fetchCards() {
       setLoading(true)
       try {
-        console.log('[CF] getPendingCards (revisao) →')
         const { data } = await callGetPendingCards({})
-        console.log('[CF] getPendingCards (revisao) ←', data.cards.length, 'cards', data.cards.map(c => c.priority))
         setCards(data.cards)
       } catch (err) {
-        console.error('[CF] getPendingCards (revisao) erro:', err)
         showSnackbar('Erro ao carregar cards para revisão', 'error')
         setCards([])
       } finally {
@@ -68,12 +65,9 @@ export function useRevisao() {
     // fire-and-forget — não bloqueia a UX
     callReviewCard({ questionId: currentCard.questionId, studied })
       .then(({ data }) => {
-        console.log('[CF] reviewCard ←', { nextDueDays: data.nextDueDays, newInterval: data.newInterval })
         onNextDue?.(data.nextDueDays)
       })
-      .catch(err => {
-        console.error('[CF] reviewCard erro (silencioso):', err)
-      })
+      .catch(() => { /* silencioso */ })
 
     if (currentIndex < sortedCards.length - 1) {
       setCurrentIndex(i => i + 1)

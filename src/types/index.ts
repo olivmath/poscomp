@@ -85,6 +85,24 @@ export interface SrsCard {
 
 export type Grade = 1 | 3 | 5
 
+export type PremiumStatus = 'free' | 'pending' | 'premium'
+
+export interface PremiumRequest {
+  id: string
+  uid: string
+  status: 'pending' | 'approved' | 'denied'
+  receiptUrl: string
+  createdAt: import('firebase/firestore').Timestamp
+  reviewedAt?: import('firebase/firestore').Timestamp
+  reviewedBy?: string
+}
+
+export interface UserProfile {
+  uid: string
+  isPremium: boolean
+  premiumSince?: import('firebase/firestore').Timestamp
+}
+
 export interface Announcement {
   id: string
   message: string

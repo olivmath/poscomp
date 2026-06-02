@@ -9,7 +9,7 @@ import type { SimuladoResult } from '../types'
 
 export function HistoricoDetalhe() {
   const { id } = useParams<{ id: string }>()
-  const { user } = useAuth()
+  const { user, isPremium, profileLoading } = useAuth()
   const navigate = useNavigate()
   const [result, setResult] = useState<SimuladoResult | null>(null)
   const [loading, setLoading] = useState(true)
@@ -58,7 +58,7 @@ export function HistoricoDetalhe() {
       .finally(() => setLoading(false))
   }, [user, id])
 
-  if (loading) {
+  if (profileLoading || loading) {
     return (
       <div className="page-placeholder">
         <div className="spinner" />
@@ -66,6 +66,22 @@ export function HistoricoDetalhe() {
       </div>
     )
   }
+
+  if (!isPremium) {
+    return (
+      <div className="revisao-container revisao-container--center">
+        <div className="revisao-paywall-card">
+          <span className="material-symbols-outlined revisao-paywall-icon">lock</span>
+          <h2 className="revisao-paywall-title">Recurso Premium</h2>
+          <p className="revisao-paywall-desc">O histórico de simulados + Comentários são exclusivos para assinantes.</p>
+          <md-filled-button onClick={() => navigate('/perfil')}>
+            Assinar Agora
+          </md-filled-button>
+        </div>
+      </div>
+    )
+  }
+
 
   if (error || !result) {
     return (

@@ -104,3 +104,37 @@ export const callReportQuestion = httpsCallable<
   { questionId: number; comment?: string },
   { success: boolean }
 >(functions, 'reportQuestion')
+
+export interface SubmitPremiumRequestInput {
+  receiptUrl: string
+}
+export interface SubmitPremiumRequestOutput {
+  requestId: string
+}
+export const callSubmitPremiumRequest = httpsCallable<
+  SubmitPremiumRequestInput,
+  SubmitPremiumRequestOutput
+>(functions, 'submitPremiumRequest')
+
+export interface ReviewPremiumRequestInput {
+  requestId: string
+  action: 'approve' | 'deny'
+}
+export interface ReviewPremiumRequestOutput {
+  success: boolean
+}
+export const callReviewPremiumRequest = httpsCallable<
+  ReviewPremiumRequestInput,
+  ReviewPremiumRequestOutput
+>(functions, 'reviewPremiumRequest')
+
+export interface ResolveFlaggedQuestionInput {
+  id: string
+}
+export interface ResolveFlaggedQuestionOutput {
+  success: boolean
+}
+export const callResolveFlaggedQuestion = httpsCallable<
+  ResolveFlaggedQuestionInput,
+  ResolveFlaggedQuestionOutput
+>(functions, 'resolveFlaggedQuestion')

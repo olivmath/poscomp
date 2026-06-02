@@ -15,3 +15,4 @@ export { setAdminRole, revokeAdminRole, listUsers, disableUser, enableUser, rese
 export { createQuestion, updateQuestion, deleteQuestion } from './adminQuestions'
 export { createAnnouncement, updateAnnouncement, deleteAnnouncement } from './adminAnnouncements'
 export { deleteFlaggedQuestion } from './deleteFlaggedQuestion'
+export { reviewPremiumRequest, onPremiumRequestCreated } from './premiumRequests'

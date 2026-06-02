@@ -5,7 +5,7 @@ import { LoginPage } from './pages/LoginPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { QuestoesPage } from './pages/QuestoesPage'
 import { UsuariosPage } from './pages/UsuariosPage'
-import { FlagsPage } from './pages/FlagsPage'
+import { TicketsPage } from './pages/TicketsPage'
 import { BannersPage } from './pages/BannersPage'
 import { AdminsPage } from './pages/AdminsPage'
 
@@ -19,7 +19,7 @@ export default function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/questoes" element={<QuestoesPage />} />
           <Route path="/usuarios" element={<UsuariosPage />} />
-          <Route path="/flags" element={<FlagsPage />} />
+          <Route path="/tickets" element={<TicketsPage />} />
           <Route path="/banners" element={<BannersPage />} />
           <Route path="/admins" element={<AdminsPage />} />
         </Route>

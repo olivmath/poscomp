@@ -90,12 +90,12 @@ local:
 	@case "$(word 2,$(MAKECMDGOALS))" in \
 		up) \
 			cd functions && npm run build && cd .. && \
-			firebase emulators:start --only auth,functions,firestore ;; \
+			firebase emulators:start --only auth,functions,firestore,storage ;; \
 		down) \
-			lsof -ti :4000,9099,8080,4400,4500 | xargs kill -9 2>/dev/null; \
+			lsof -ti :4000,9099,8080,9199,4400,4500 | xargs kill -9 2>/dev/null; \
 			echo "Emulators stopped." ;; \
 		restart) \
-			lsof -ti :4000,9099,8080,4400,4500 | xargs kill -9 2>/dev/null; \
+			lsof -ti :4000,9099,8080,9199,4400,4500 | xargs kill -9 2>/dev/null; \
 			cd functions && npm run build && cd .. && \
 			firebase emulators:start --only auth,functions,firestore ;; \
 		app) \

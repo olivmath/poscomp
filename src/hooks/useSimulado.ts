@@ -116,20 +116,17 @@ export function useSimulado(): UseSimuladoReturn {
           confidence: a.confidence,
         }))
 
-      console.log('[CF] finishSimulado →', answeredInputs.length, 'respostas')
       try {
         const { data } = await callFinishSimulado({
           answers: answeredInputs,
           timeSpentSeconds: timeSpent,
         })
-        console.log('[CF] finishSimulado ←', { score: data.score, total: data.totalQuestions, resultId: data.resultId })
 
         const fullResult = mapFinishOutput(data, finalAnswers, questions)
         setResult(fullResult)
         setLastResult(fullResult)
         setState('finished')
-      } catch (err) {
-        console.error('finishSimulado failed:', err)
+      } catch {
         showSnackbar('Erro ao finalizar simulado. Exibindo resultado local.', 'error')
         // Fallback: still finish locally so user sees the result
         const fallbackResult = buildFallbackResult(finalAnswers, questions, timeSpent)
@@ -188,12 +185,10 @@ export function useSimulado(): UseSimuladoReturn {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newConfig))
         setConfig(newConfig)
 
-        console.log('[CF] getSimuladoQuestions →', { areas: newConfig.areas, total: newConfig.totalQuestions })
         const { data } = await callGetSimuladoQuestions({
           areas: newConfig.areas,
           total: newConfig.totalQuestions === 0 ? 40 : newConfig.totalQuestions,
         })
-        console.log('[CF] getSimuladoQuestions ←', data.questions.length, 'questões')
 
         if (!data.questions || data.questions.length === 0) {
           setError('Nenhuma questão encontrada. Execute o seed primeiro.')
@@ -218,8 +213,7 @@ export function useSimulado(): UseSimuladoReturn {
         }
 
         setState('running')
-      } catch (err) {
-        console.error(err)
+      } catch {
         setError('Erro ao carregar questões. Verifique sua conexão.')
       } finally {
         setLoading(false)
@@ -246,9 +240,7 @@ export function useSimulado(): UseSimuladoReturn {
 
       // Fire-and-forget: envia o report imediatamente sem bloquear o fluxo
       if (issue) {
-        callReportQuestion({ questionId: current.id, comment: issue.comment }).catch((err) =>
-          console.error('[reportQuestion] falhou:', err)
-        )
+        callReportQuestion({ questionId: current.id, comment: issue.comment }).catch(() => { /* silencioso */ })
       }
 
       const updated = [
