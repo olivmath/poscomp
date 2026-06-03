@@ -6,10 +6,9 @@ Modo imersivo: BottomNav some. Tela toda de conteúdo.
 
 ```
 ┌─────────────────────────────┐
-│ [ Sair]   3/10   [ Mapa] │ ← ImmersiveBar
-│             1:43          │ ← timer (só se timerMode = per-question)
+│ [ Sair]              1:43   │ ← sair, timer (só se timerMode = per-question)
 ├─────────────────────────────┤
-│ ██████░░░░░░░░░░░░░░░░░░░   │ ← progress bar (3/10 = 30%)
+│ ██████░░░░░░░░░░░░░░  3/10  │ ← progress bar (3/10 = 30%)
 ├─────────────────────────────┤
 │                             │
 │ Qual é a complexidade do   │
@@ -23,13 +22,14 @@ Modo imersivo: BottomNav some. Tela toda de conteúdo.
 │ └──────────────────────┘  │
 │ ...C, D, E...              │
 │                             │
-│ ┌────┐  ┌────────┐  ┌────┐ │
-│  │  │  │      │  │  │ │ ← confidence buttons
-│  │Não sei│Estudando│Devia│  │
-│ └────┘  └────────┘  └────┘ │
+│ ┌────────┐  ┌────────┐  ┌─────┐ │
+│  │Não sei│  │Estudando│ │Devia│ │  ← confidence buttons
+│ └────────┘  └────────┘  └────┘ │
 │                             │
 │ [← Ant] [ Reportar] [ Pular] │
-└─────────────────────────────┘
+│                             │
+├─────────────────────────────┤
+└────────────⬆────────────────┘  ← Puxa de baixo pra cima revela o mapa
 ```
 
 ## ImmersiveBar
@@ -79,9 +79,10 @@ Modo imersivo: BottomNav some. Tela toda de conteúdo.
 │  Mapa de Questões   │
 │ 1  2  3  4  5  6   │
 │ ●  ●  ◉  ○  ○  ○   │
-│ ●= respondida       │
+│ ●= respondida (deve ter a letra + cor da resposta)      │
 │ ◉= atual           │
-│ ○= não visitada    │
-│ ×= pulada          │
+│ ○= não respondida    │
 └──────────────────────┘
 ```
+
+* cada letra tem uma cor difente, nas respostas e no mapa

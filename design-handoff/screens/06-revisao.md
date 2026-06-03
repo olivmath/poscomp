@@ -14,6 +14,8 @@
 
 ```
 ┌─────────────────────────────┐
+│ =                     ( )   │ ← esquerda menu sandwich; direita foto perfil leva para /perfil
+├─────────────────────────────┤
 │ ████████░░░░░░░░░░░░░░░░░   │ ← progress strip
 ├─────────────────────────────┤
 │                             │
@@ -32,8 +34,6 @@
 │                             │
 │  Próxima revisão: amanhã  │ ← feedback temporário (500ms)
 │                             │
-├─────────────────────────────┤
-│ Home  Revisão  Hist  Perfil│
 └─────────────────────────────┘
 ```
 

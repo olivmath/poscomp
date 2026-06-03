@@ -8,8 +8,9 @@ Componente `RelatorioFinal` reutilizado em dois contextos:
 
 ```
 ┌─────────────────────────────┐
-│                             │
-│ Seção 1 — Score            │
+│ x                          │ <- volta para home `/`
+|─────────────────────────────|
+│  Score                        │
 │      ┌───────────┐         │
 │       │   72%    │         │ ← ScoreGauge (SVG circular)
 │       │ 18 / 25  │         │
@@ -17,15 +18,17 @@ Componente `RelatorioFinal` reutilizado em dois contextos:
 │     24min 32seg            │
 │ Na média. Revise os erros.  │
 │                             │
-│ Seção 2 — Distribuição     │
+|─────────────────────────────|
+│ Distribuição              │
 │  Devia saber  ████  8    │
 │  Estudando    ██    4    │
 │  Não sei      ██░   3    │
 │                             │
 │  Você tinha 8 questões que│
-│ devia saber — priorize...  │
+│ devia saber e errou — priorize...  │
 │                             │
-│ Seção 3 — Por matéria         │
+|─────────────────────────────|
+│ Por matéria               │
 │  Matemática  7/10        │
 │ ████████░░ 70%             │
 │  Fundamentos 6/10        │
@@ -33,13 +36,12 @@ Componente `RelatorioFinal` reutilizado em dois contextos:
 │  Tecnologia  5/5         │
 │ ████████████ 100%          │
 │                             │
-│ Seção 4 — Questões         │
+|─────────────────────────────|
+│ Questões                  │
 │ [lista expandível Q1..Qn]  │
 │                             │
+|─────────────────────────────|
 │ [Novo Simulado] [Revisar]  │
-│                             │
-├─────────────────────────────┤
-│ Home  Revisão  Hist  Perfil│
 └─────────────────────────────┘
 ```
 
@@ -63,7 +65,6 @@ Componente `RelatorioFinal` reutilizado em dois contextos:
 
 | Botão         | Quando aparece                        | Ação                  |
 |---------------|---------------------------------------|-----------------------|
-| Voltar        | em `/historico/:id`                   | navigate('/historico')|
 | Novo Simulado | após simulado finalizado              | state: idle           |
 | Revisar       | após simulado + score < total         | navigate('/revisao')  |
 

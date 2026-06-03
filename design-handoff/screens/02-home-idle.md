@@ -5,7 +5,7 @@
 ```
 ┌─────────────────────────────┐
 │ =                     ( )   │ ← esquerda menu sandwich; direita foto perfil leva para /perfil
-│                             │
+|─────────────────────────────|
 │                             │
 │ [AnnouncementBanner]       │ ← carrocel, condicional, adicionar via admin; suporte a markdown view
 │                             │

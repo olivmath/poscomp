@@ -1,4 +1,4 @@
-# Componente — BottomNav
+# Componente — menu sandwitch
 
 ## Tabs
 

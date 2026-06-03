@@ -80,3 +80,6 @@
 | PremiumFlowModal | "Ver planos"           | Fluxo de compra 5 steps     |
 | LegalModal       | "Política..." ou "Termos..." | Texto legal em modal  |
 | ModalOverlay     | "Apagar dados"         | Confirmação de deleção      |
+
+
+* O perfil sempre está disponivel na Home (/), Histórico (/history) e na revisao (/review) apeans rolando da direita pra esquerda ou tocando a foto no topo

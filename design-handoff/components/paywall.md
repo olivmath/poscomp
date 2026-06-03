@@ -18,7 +18,7 @@ Reutilizado em: Revisão, Histórico, HistoricoDetalhe.
 
 | Página            | Descrição                                           |
 |-------------------|-----------------------------------------------------|
-| Revisão           | "A revisão espaçada é exclusiva para assinantes."   |
+| Revisão           | "A revisão personalizada é exclusiva para assinantes."   |
 | Histórico         | "O histórico de simulados + Comentários são exclusivos para assinantes." |
 | HistoricoDetalhe  | Idem Histórico — botão "Assinar Agora" (variação)   |
 
