@@ -16,7 +16,14 @@
 
 ```
 ┌──────────────────────────────────────────────────────┐
-│ Mensagem:  [textarea — suporte a markdown]           │
+│ Mensagem (markdown):                                 │
+│ ┌──────────────────────────────────────────────────┐ │
+│ │ [textarea]                                       │ │
+│ └──────────────────────────────────────────────────┘ │
+│ Preview:                                             │
+│ ┌──────────────────────────────────────────────────┐ │
+│ │ [renderização markdown em tempo real]            │ │
+│ └──────────────────────────────────────────────────┘ │
 │ Tipo:      ( ) info  ( ) warning  ( ) success        │
 │ URL (opcional): [____]  (link ao clicar no banner)  │
 │ Expira em: [data/hora]  (vazio = sem expiração)     │
@@ -25,6 +32,8 @@
 │ [Cancelar]                          [Salvar]         │
 └──────────────────────────────────────────────────────┘
 ```
+
+O preview renderiza em tempo real enquanto o admin digita — mesmo engine de markdown do app.
 
 ## Ações por linha
 

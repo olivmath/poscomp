@@ -40,7 +40,7 @@
 
 | Componente         | Condicional          | Descrição                              |
 |--------------------|----------------------|----------------------------------------|
-| AnnouncementBanner | só se há anúncios    | banner dismissível no topo             |
+| AnnouncementBanner | só se há anúncios    | carousel de slides, conteúdo em markdown, dismissível por slide |
 | WeekHeader         | sempre               | grade de 7 dias + streak               |
 | AnalysisCarousel   | sempre               | gráfico geral + barras por matéria        |
 | footer com CTAs    | sempre               | 2 botões de ação                       |

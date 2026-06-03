@@ -18,21 +18,30 @@
 ┌──────────────────────────────────────────────────────┐
 │ Ano:      [____]                                     │
 │ Matéria:  [Matemática | Fund. Computação | Tec. Comp]│
-│ Enunciado: [textarea]                                │
+│ Enunciado: [textarea — texto simples]                │
 │                                                      │
 │ Alternativas:                                        │
 │ A: [____]   B: [____]   C: [____]                   │
 │ D: [____]   E: [____]                               │
 │ Gabarito: ( ) A  ( ) B  ( ) C  ( ) D  ( ) E         │
 │                                                      │
-│ Comentário (Premium): [textarea — markdown]         │
+│ Comentário (Premium — markdown):                    │
+│ ┌────────────────────┐  ┌────────────────────┐      │
+│ │ [textarea]         │  │ [preview markdown] │      │
+│ └────────────────────┘  └────────────────────┘      │
 │                                                      │
 │ Card flashcard (opcional):                           │
-│   Pergunta: [____]   Resposta: [textarea — markdown]│
+│   Pergunta: [textarea — texto simples]               │
+│   Resposta (markdown):                               │
+│   ┌────────────────────┐  ┌────────────────────┐    │
+│   │ [textarea]         │  │ [preview markdown] │    │
+│   └────────────────────┘  └────────────────────┘    │
 │                                                      │
 │ [Cancelar]                          [Salvar]         │
 └──────────────────────────────────────────────────────┘
 ```
+
+Campos com preview lado a lado (editor | render). O preview usa o mesmo engine de markdown do app.
 
 ## Ações por linha (`[..]`)
 
