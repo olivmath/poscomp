@@ -60,8 +60,8 @@ A barra some completamente no modo imersivo (simulado em andamento).
 | Plano    | Preço        | Recursos desbloqueados              |
 |----------|-------------|-------------------------------------|
 | Free     | R$0          | Simulado ilimitado                  |
-| Pro      | R$10/mês     | + Revisão espaçada + Histórico      |
-| Pro MAX  | R$5/mês      | Idem Pro, cobrança anual (R$60/ano) |
+| Pro      | R$10/mês     | + Revisão espaçada + Histórico com comentários. 1 mês de acesso apenas     |
+| Pro MAX  | R$5/mês      | Idem Pro. R$5 x 12 = R$60 acesso por 1 ano |
 
 Pagamento manual via PIX — usuário envia comprovante, admin aprova em até 1h.
 
