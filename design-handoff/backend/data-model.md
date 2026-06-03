@@ -24,7 +24,7 @@ Firestore
 interface Question {
   id: number                          // PK numérico, auto-incrementado
   ano: number                         // ex: 2023
-  area: 'Matemática'
+  materia: 'Matemática'
        | 'Fundamentos da Computação'
        | 'Tecnologia da Computação'
   enunciado: string                   // texto da questão
@@ -51,7 +51,7 @@ interface Question {
 - Escrita: somente admin (via `createQuestion`, `updateQuestion`, `deleteQuestion`)
 
 **Indexação necessária**:
-- `area` (where-in para filtro por área)
+- `materia` (where-in para filtro por matéria)
 - `id desc` (para auto-incremento no `createQuestion`)
 
 ---
@@ -110,19 +110,19 @@ interface SrsCard {
   simuladoCorrect: boolean            // se acertou no simulado que criou o card
 
   // ── Denormalização ─────────────────────────────────────────────
-  area: 'Matemática'
+  materia: 'Matemática'
       | 'Fundamentos da Computação'
-      | 'Tecnologia da Computação'    // copiado de questions/{questionId}.area em finishSimulado
-                                      // permite query por área sem join com questions
+      | 'Tecnologia da Computação'    // copiado de questions/{questionId}.materia em finishSimulado
+                                      // permite query por matéria sem join com questions
 }
 ```
 
-**Como é criado**: automaticamente por `finishSimulado` para cada questão respondida — inclui `area` copiado do snapshot da questão.
+**Como é criado**: automaticamente por `finishSimulado` para cada questão respondida — inclui `materia` copiado do snapshot da questão.
 **Como é atualizado**: `finishSimulado` (reseta dueDate ao now quando o simulado é refeito) e `reviewCard` (aplica SM-2 e agenda próxima revisão).
 
 **Indexação necessária**:
 - `dueDate` (where `<=` now — query principal de `getPendingCards` e notificações)
-- `area, dueDate` — composto, usado por `getAreaReviewStats` para calcular `min(dueDate)` por área
+- `materia, dueDate` — composto, usado por `getMateriaReviewStats` para calcular `min(dueDate)` por matéria
 
 ---
 
@@ -141,9 +141,9 @@ interface SimuladoResult {
   // ── Timestamps ────────────────────────────────────────────────
   completedAt: Timestamp              // serverTimestamp()
 
-  // ── Breakdown por área ────────────────────────────────────────
-  areaBreakdown: {
-    [area: string]: {
+  // ── Breakdown por matéria ────────────────────────────────────────
+  materiaBreakdown: {
+    [materia: string]: {
       correct: number
       total: number
     }
@@ -157,7 +157,7 @@ interface SimuladoResult {
     confidence: 'unsure' | 'studying' | 'should_know'
     question: {                       // snapshot da questão no momento do simulado
       id: number
-      area: string
+      materia: string
       enunciado: string
       alternativas: Record<string, string>
       resposta: string
@@ -172,7 +172,7 @@ interface SimuladoResult {
   questionReviews?: Array<{           // alias/compatibilidade legada
     id: number
     ano: number
-    area: string
+    materia: string
     enunciado: string
     alternativas: Record<string, string>
     resposta: string
@@ -257,7 +257,7 @@ interface Announcement {
                     questions/{id}
                     ┌──────────────────────────────┐
                     │ id (PK)                      │
-                    │ ano, area, enunciado          │
+                    │ ano, materia, enunciado       │
                     │ alternativas, resposta        │
                     │ comentario?, card?            │
                    └───────────┬──────────────────┘

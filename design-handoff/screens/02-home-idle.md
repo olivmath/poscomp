@@ -42,7 +42,7 @@
 |--------------------|----------------------|----------------------------------------|
 | AnnouncementBanner | só se há anúncios    | banner dismissível no topo             |
 | WeekHeader         | sempre               | grade de 7 dias + streak               |
-| AnalysisCarousel   | sempre               | gráfico geral + barras por área        |
+| AnalysisCarousel   | sempre               | gráfico geral + barras por matéria        |
 | footer com CTAs    | sempre               | 2 botões de ação                       |
 
 ## Estados do AnalysisCarousel
@@ -52,7 +52,7 @@
 | loading             | ícone `hourglass_empty` + "Carregando…"             |
 | sem dados           | ícone `bar_chart` + "Faça seu primeiro simulado..." |
 | com dados + <2 sims | "Realize mais simulados para ver o progresso."      |
-| com dados + ≥2 sims | LineChart + barras de área                          |
+| com dados + ≥2 sims | LineChart + barras de matéria                          |
 
 ## WeekHeader — lógica visual
 

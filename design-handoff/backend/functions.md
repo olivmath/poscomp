@@ -24,7 +24,7 @@ Não há REST endpoints — não há URL pública direta.
 **Input**:
 ```typescript
 {
-  areas: Area[]    // [] = todas as áreas
+  materias: Materia[]    // [] = todas as matérias
   total: number    // número de questões (inteiro positivo)
 }
 ```
@@ -38,10 +38,10 @@ Não há REST endpoints — não há URL pública direta.
 
 **Validações**:
 - `total` deve ser inteiro positivo
-- `areas` deve conter apenas valores de `VALID_AREAS`
+- `materias` deve conter apenas valores de `VALID_MATERIAS`
 
 **Comportamento**:
-1. Busca questões no Firestore filtrando por área (ou tudo se `areas = []`)
+1. Busca questões no Firestore filtrando por matéria (ou tudo se `materias = []`)
 2. Embaralha com Fisher-Yates simplificado (`sort(() => Math.random() - 0.5)`)
 3. Retorna os primeiros `total` elementos
 
@@ -75,7 +75,7 @@ Não há REST endpoints — não há URL pública direta.
   score: number
   totalQuestions: number
   timeSpentSeconds: number
-  areaBreakdown: Record<Area, { correct: number; total: number }>
+  materiaBreakdown: Record<Materia, { correct: number; total: number }>
   answers: AnswerOutput[]
 }
 ```
@@ -133,7 +133,7 @@ Não há REST endpoints — não há URL pública direta.
 
 ---
 
-### `getAreaReviewStats`
+### `getMateriaReviewStats`
 
 **Auth**: usuário autenticado
 
@@ -142,18 +142,18 @@ Não há REST endpoints — não há URL pública direta.
 **Output**:
 ```typescript
 {
-  areas: Array<{
-    area: string                  // nome da área
-    reviewDates: string[]         // ISO 8601 — datas dos simulados que cobriram essa área
-    nextDueDate: string | null    // ISO 8601 — menor dueDate dos srs_cards da área
+  materias: Array<{
+    materia: string                  // nome da matéria
+    reviewDates: string[]         // ISO 8601 — datas dos simulados que cobriram essa matéria
+    nextDueDate: string | null    // ISO 8601 — menor dueDate dos srs_cards da matéria
   }>
   // ordenado por nextDueDate ASC (mais urgente primeiro); null vai por último
 }
 ```
 
 **Comportamento**:
-1. Busca todos os `srs_cards` do usuário, agrupa por `area`, extrai `min(dueDate)` por área
-2. Busca todos os `results` do usuário, extrai `completedAt` agrupados pelas áreas presentes em `areaBreakdown`
+1. Busca todos os `srs_cards` do usuário, agrupa por `materia`, extrai `min(dueDate)` por matéria
+2. Busca todos os `results` do usuário, extrai `completedAt` agrupados pelas áreas presentes em `materiaBreakdown`
 3. Monta e ordena: `nextDueDate` mais próxima primeiro; áreas sem cards SRS não aparecem
 
 **Erros possíveis**:

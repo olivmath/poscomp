@@ -23,7 +23,7 @@ interface Analytics {
     total: number
     date: Date
   }>
-  byArea: Record<Area, {
+  byMateria: Record<Materia, {
     pct: number                           // % de acerto cumulativo
     correct: number
     total: number
@@ -66,7 +66,7 @@ Tudo que existe hoje pode ser agregado por um job batch:
 |--------------------------|-------------------------------------|---------------|
 | Acertos por questão      | `results/{id}.answers[].correct`    | Por usuário   |
 | Tempo por simulado       | `results/{id}.timeSpentSeconds`     | Por simulado  |
-| Área mais fraca          | `results/{id}.areaBreakdown`        | Por simulado  |
+| Área mais fraca          | `results/{id}.materiaBreakdown`        | Por simulado  |
 | Uso da revisão           | `srs_cards/{id}.repetitions`        | Por card      |
 | Retenção básica          | `users/{uid}.lastActivity`          | Por usuário   |
 | Plano atual              | `users/{uid}.isPremium + planType`  | Por usuário   |
@@ -89,7 +89,7 @@ Disponíveis no console Firebase sem código adicional:
 
 ## Recomendações para o novo backend
 
-1. **Event logging**: ao finalizar um simulado, emitir um evento estruturado (BigQuery, Segment, etc.) com: `uid, planType, score, totalQuestions, areas, timeSpentSeconds, completedAt` — sem PII além do uid
+1. **Event logging**: ao finalizar um simulado, emitir um evento estruturado (BigQuery, Segment, etc.) com: `uid, planType, score, totalQuestions, materias, timeSpentSeconds, completedAt` — sem PII além do uid
 2. **Funil de billing**: logar eventos `premium_flow_started`, `pix_copied`, `receipt_uploaded`, `request_approved/denied`
 3. **Stripe/Pagar.me**: substituir o fluxo manual de PIX + aprovação manual por um webhook de pagamento — elimina o lag de 24h e possibilita métricas de revenue real-time
 4. **Alertas**: configurar alertas no Cloud Monitoring para `error_count > 0` nas functions críticas (`finishSimulado`, `reviewPremiumRequest`)

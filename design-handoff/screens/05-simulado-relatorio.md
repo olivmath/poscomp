@@ -25,7 +25,7 @@ Componente `RelatorioFinal` reutilizado em dois contextos:
 │  Você tinha 8 questões que│
 │ devia saber — priorize...  │
 │                             │
-│ Seção 3 — Por área         │
+│ Seção 3 — Por matéria         │
 │  Matemática  7/10        │
 │ ████████░░ 70%             │
 │  Fundamentos 6/10        │

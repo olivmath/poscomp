@@ -44,5 +44,5 @@
 
 - Clicável (role="button", teclado: Enter/Space)
 - Área exibida = a com maior % de acerto
-- Linha 2 some se não há dados de área breakdown
+- Linha 2 some se não há dados de matéria breakdown
 - Trend some para o primeiro simulado (sem anterior para comparar)

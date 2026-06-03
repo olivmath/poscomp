@@ -96,7 +96,7 @@ Acessível via tab ou botão na tela `/revisao` (estado `empty` ou `finished`).
 ```
 ┌─────────────────────────────────────────┐
 │                                         │
-│ Algoritmos                             │ ← área
+│ Algoritmos                             │ ← matéria
 │ ● [30/05]  → (04/06)                   │ ←  mais urgente primeiro
 │                                         │
 │ Computação                             │
@@ -112,15 +112,15 @@ Acessível via tab ou botão na tela `/revisao` (estado `empty` ou `finished`).
 
 | Elemento        | Significado                                                    |
 |-----------------|----------------------------------------------------------------|
-| `[DD/MM]`       | Data de um simulado que cobriu essa área                       |
-| `→ (DD/MM)`     | Próxima revisão agendada (menor `dueDate` dos cards da área)   |
-| Ordem das linhas | Urgência crescente — área com revisão mais próxima aparece primeiro |
+| `[DD/MM]`       | Data de um simulado que cobriu essa matéria                       |
+| `→ (DD/MM)`     | Próxima revisão agendada (menor `dueDate` dos cards da matéria)   |
+| Ordem das linhas | Urgência crescente — matéria com revisão mais próxima aparece primeiro |
 
 ### Fonte dos dados
 
 | Dado                | Origem                                                             |
 |---------------------|--------------------------------------------------------------------|
-| Datas passadas `[]` | `results/{resultId}.completedAt` filtrado por área em `areaBreakdown` |
-| Próxima revisão `→` | `min(srs_cards.dueDate)` dos cards onde `srs_cards.area == X`      |
+| Datas passadas `[]` | `results/{resultId}.completedAt` filtrado por matéria em `materiaBreakdown` |
+| Próxima revisão `→` | `min(srs_cards.dueDate)` dos cards onde `srs_cards.materia == X`      |
 
-> `SrsCard` precisa do campo `area` (denormalizado) para evitar joins com `questions`. Ver `data-model.md`.
+> `SrsCard` precisa do campo `materia` (denormalizado) para evitar joins com `questions`. Ver `data-model.md`.

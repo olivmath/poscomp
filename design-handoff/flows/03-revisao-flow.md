@@ -62,7 +62,7 @@ Fila de revisão: P1 (devia saber) → P2 (estudando) → P3 (não sei).
 
 ## Visualização por Matéria
 
-Tela acessível a partir de `/revisao` — mostra o histórico de simulados e a próxima revisão agrupados por área.
+Tela acessível a partir de `/revisao` — mostra o histórico de simulados e a próxima revisão agrupados por matéria.
 
 ```
 ┌─────────────────────────────────────────┐

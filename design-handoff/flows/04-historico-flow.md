@@ -10,14 +10,13 @@
    ├── [error] ──► mensagem de erro
     │
    ├── [empty] ──► "Nenhum simulado realizado"
-    │      └── "Começar Simulado" ──► /simulado (NOTA: rota /simulado não existe — bug)
+    │      └── "Começar Simulado" ──► /
     │
    └── [lista de resultados] ──► cards clicáveis
               │
              └── click em card ──► /historico/:id
                         │
                        ├── [loading] ──► spinner
-                        ├── [Free user] ──► Paywall
                         ├── [error/not found] ──► erro com "Voltar ao Histórico"
                         └── [sucesso] ──► RelatorioFinal
                                   └── "Voltar" ──► /historico
@@ -27,8 +26,8 @@
 
 ```
 ┌─────────────────────────────────────────┐
-│ 02/06/2026    8/10  +5%   12:34   ›   │
-│  Matemática: 90%                     │
+│ 02/06/2026    8/10  +5%   12:34   ›     │
+│ Mat.: 90%  Comp.: 50%   Alg.: 75%          │
 └─────────────────────────────────────────┘
 ```
 
@@ -37,5 +36,5 @@
 | Data          | `completedAt` (Firestore Timestamp)    | —                           |
 | Score         | `score / totalQuestions`              | ≥80% verde · ≥60% amarelo · <60% vermelho |
 | Trend         | diff % vs resultado anterior          | + verde · - vermelho · = neutro |
-| Tempo         | `timeSpentSeconds` formatado           | —                           |
-| Melhor área   | área com maior % de acerto            | —                           |
+| Tempo         | `timeSpentSeconds` formatado          | —                           |
+| matérias      | matérias e % de acerto                | icone de cada matéria ao invez do nome abreviado |

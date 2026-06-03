@@ -27,7 +27,7 @@ Renderizado na rota `/`, substitui o dashboard. Sem BottomNav visível (não ime
 
 ## Componentes de seleção
 
-### Chips de área (Step 1)
+### Chips de matéria (Step 1)
 - Toggle individual
 - "Todas" = desseleciona tudo (array vazio = busca sem filtro)
 - Múltiplas áreas podem ser selecionadas simultaneamente

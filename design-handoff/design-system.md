@@ -113,8 +113,8 @@ Uso: `<span class="material-symbols-outlined">icon_name</span>`
 | Copiado           | `check`                |
 | Erro              | `error`                |
 | Próxima revisão   | `schedule`             |
-| Matemática (área) | `calculate` ou similar |
-| Computação (área) | `memory` / `code`      |
+| Matemática (matéria) | `calculate` ou similar |
+| Computação (matéria) | `memory` / `code`      |
 
 ---
 
