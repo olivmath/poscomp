@@ -3,18 +3,18 @@
 ```
 [Acesso à rota protegida]
         │
-        ▼
+       ▼
   Autenticado?
   ┌──── Não ────► /login
   │                  │
-  │         [Botão "Entrar com Google"]
+  │        [Botão "Entrar com Google"]
   │                  │
-  │         signInWithPopup()
+  │        signInWithPopup()
   │                  │
-  │         ┌── Sucesso ──► onAuthStateChanged ──► / (Home)
-  │         └── Falha   ──► toast "Falha ao fazer login: <detalhes>"
+  │        ┌── Sucesso ──► onAuthStateChanged ──► / (Home)
+  │        └── Falha   ──► toast "Falha ao fazer login: <detalhes>"
   │
-  └──── Sim ────► rota solicitada
+ └──── Sim ────► rota solicitada
 ```
 
 ## Estados do fluxo

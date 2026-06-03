@@ -14,27 +14,26 @@
 
 ```
 ┌─────────────────────────────┐
-│  [✕]              3 / 12   │  ← top bar
+│ ████████░░░░░░░░░░░░░░░░░   │ ← progress strip
 ├─────────────────────────────┤
-│ ████████░░░░░░░░░░░░░░░░░   │  ← progress strip
 │                             │
-│  ┌─────────────────────┐   │
+│ ┌─────────────────────┐   │
 │  │                     │   │
-│  │  Enunciado da       │   │  ← frente do card (flip)
-│  │  questão vai aqui   │   │
+│  │ Enunciado da       │   │ ← frente do card (flip)
+│  │ questão vai aqui   │   │
 │  │                     │   │
-│  │  👆 Toque p/ resposta│   │
+│  │  Toque p/ resposta│   │
 │  │                     │   │
-│  └─────────────────────┘   │
+│ └─────────────────────┘   │
 │                             │
-│  ┌──────────┐ ┌──────────┐ │
-│  │ [✕] Errei│ │Acertei[✓]│ │  ← sempre visíveis
-│  └──────────┘ └──────────┘ │
+│ ┌──────────┐ ┌──────────┐ │
+│  │ [] Errei│ │Acertei[]│ │ ← sempre visíveis
+│ └──────────┘ └──────────┘ │
 │                             │
-│  ⏰ Próxima revisão: amanhã  │  ← feedback temporário (500ms)
+│  Próxima revisão: amanhã  │ ← feedback temporário (500ms)
 │                             │
 ├─────────────────────────────┤
-│  Home  Revisão  Hist  Perfil│
+│ Home  Revisão  Hist  Perfil│
 └─────────────────────────────┘
 ```
 
@@ -50,15 +49,15 @@
 
 ```
 ┌─────────────────────────────┐
-│         ✅ check_circle      │
-│    Sessão concluída!         │
-│    12 cards revisados        │
+│         check_circle      │
+│   Sessão concluída!         │
+│   12 cards revisados        │
 │                             │
-│  ● Devia saber        5     │
-│  ● Estudando          4     │
-│  ● Não sei            3     │
+│ ● Devia saber        5     │
+│ ● Estudando          4     │
+│ ● Não sei            3     │
 │                             │
-│  [Fazer Simulado]           │
+│ [Fazer Simulado]           │
 └─────────────────────────────┘
 ```
 
@@ -66,12 +65,12 @@
 
 ```
 ┌─────────────────────────────┐
-│       🎉 celebration        │
-│    Tudo em dia!              │
-│  Nenhuma questão para revisar│
-│  hoje. Volte amanhã ou...   │
+│       celebration        │
+│   Tudo em dia!              │
+│ Nenhuma questão para revisar│
+│ hoje. Volte amanhã ou...   │
 │                             │
-│  [Fazer Simulado]           │
+│ [Fazer Simulado]           │
 └─────────────────────────────┘
 ```
 
@@ -79,11 +78,49 @@
 
 ```
 ┌─────────────────────────────┐
-│         🔒 lock             │
-│    Recurso Premium           │
-│  A revisão espaçada é        │
-│  exclusiva para assinantes. │
+│         lock             │
+│   Recurso Premium           │
+│ A revisão espaçada é        │
+│ exclusiva para assinantes. │
 │                             │
-│  [Ver planos]               │
+│ [Ver planos]               │
 └─────────────────────────────┘
 ```
+
+---
+
+## Visualização por Matéria
+
+Acessível via tab ou botão na tela `/revisao` (estado `empty` ou `finished`).
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│ Algoritmos                             │ ← área
+│ ● [30/05]  → (04/06)                   │ ←  mais urgente primeiro
+│                                         │
+│ Computação                             │
+│ ● [02/06]  → (07/06)                   │
+│                                         │
+│ Matemática                             │
+│ ● [02/06]  [03/06]  → (10/06)          │ ← múltiplas sessões
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Legenda visual
+
+| Elemento        | Significado                                                    |
+|-----------------|----------------------------------------------------------------|
+| `[DD/MM]`       | Data de um simulado que cobriu essa área                       |
+| `→ (DD/MM)`     | Próxima revisão agendada (menor `dueDate` dos cards da área)   |
+| Ordem das linhas | Urgência crescente — área com revisão mais próxima aparece primeiro |
+
+### Fonte dos dados
+
+| Dado                | Origem                                                             |
+|---------------------|--------------------------------------------------------------------|
+| Datas passadas `[]` | `results/{resultId}.completedAt` filtrado por área em `areaBreakdown` |
+| Próxima revisão `→` | `min(srs_cards.dueDate)` dos cards onde `srs_cards.area == X`      |
+
+> `SrsCard` precisa do campo `area` (denormalizado) para evitar joins com `questions`. Ver `data-model.md`.

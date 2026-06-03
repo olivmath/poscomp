@@ -6,16 +6,16 @@
 ┌─────────────────────────────┐
 │                             │
 │                             │
-│          [LOGO]             │
+│         [LOGO]             │
 │                             │
-│          POSCOMP            │
-│  Prepare-se para o sucesso  │
+│         POSCOMP            │
+│ Prepare-se para o sucesso  │
 │                             │
-│  ┌───────────────────────┐  │
-│  │  G  Entrar com Google │  │
-│  └───────────────────────┘  │
+│ ┌───────────────────────┐  │
+│  │ G  Entrar com Google │  │
+│ └───────────────────────┘  │
 │                             │
-│     [mensagem de erro]      │
+│    [mensagem de erro]      │
 └─────────────────────────────┘
 ```
 

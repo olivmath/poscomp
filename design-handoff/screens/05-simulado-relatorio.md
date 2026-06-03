@@ -9,37 +9,37 @@ Componente `RelatorioFinal` reutilizado em dois contextos:
 ```
 ┌─────────────────────────────┐
 │                             │
-│  Seção 1 — Score            │
-│       ┌───────────┐         │
-│       │    72%    │         │  ← ScoreGauge (SVG circular)
-│       │  18 / 25  │         │
-│       └───────────┘         │
-│     ⏱ 24min 32seg            │
-│  Na média. Revise os erros.  │
+│ Seção 1 — Score            │
+│      ┌───────────┐         │
+│       │   72%    │         │ ← ScoreGauge (SVG circular)
+│       │ 18 / 25  │         │
+│      └───────────┘         │
+│     24min 32seg            │
+│ Na média. Revise os erros.  │
 │                             │
-│  Seção 2 — Distribuição     │
-│  ⚠️ Devia saber  ████  8    │
-│  🎓 Estudando    ██    4    │
-│  ❓ Não sei      ██░   3    │
+│ Seção 2 — Distribuição     │
+│  Devia saber  ████  8    │
+│  Estudando    ██    4    │
+│  Não sei      ██░   3    │
 │                             │
-│  ⚠️ Você tinha 8 questões que│
-│  devia saber — priorize...  │
+│  Você tinha 8 questões que│
+│ devia saber — priorize...  │
 │                             │
-│  Seção 3 — Por área         │
-│  📐 Matemática  7/10        │
-│  ████████░░ 70%             │
-│  💻 Fundamentos 6/10        │
-│  ██████░░░░ 60%             │
-│  ⚙️ Tecnologia  5/5         │
-│  ████████████ 100%          │
+│ Seção 3 — Por área         │
+│  Matemática  7/10        │
+│ ████████░░ 70%             │
+│  Fundamentos 6/10        │
+│ ██████░░░░ 60%             │
+│  Tecnologia  5/5         │
+│ ████████████ 100%          │
 │                             │
-│  Seção 4 — Questões         │
-│  [lista expandível Q1..Qn]  │
+│ Seção 4 — Questões         │
+│ [lista expandível Q1..Qn]  │
 │                             │
-│  [Novo Simulado] [Revisar]  │
+│ [Novo Simulado] [Revisar]  │
 │                             │
 ├─────────────────────────────┤
-│  Home  Revisão  Hist  Perfil│
+│ Home  Revisão  Hist  Perfil│
 └─────────────────────────────┘
 ```
 

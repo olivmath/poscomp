@@ -5,44 +5,44 @@ A tela `/` (Home) implementa uma máquina de estados inline. O mesmo componente 
 ```
 [Home - state: idle]
         │
-        ├── "Começar Simulado" ──► start(config padrão) ──► state: running
+       ├── "Começar Simulado" ──► start(config padrão) ──► state: running
         │
-        └── "Simulado Customizado" ──► state: config
+       └── "Simulado Customizado" ──► state: config
                     │
-                    ├── "Voltar" ──► state: idle
+                   ├── "Voltar" ──► state: idle
                     └── "Começar Simulado" ──► start(config) ──► state: running
 
 [state: running]
         │
-        ├── Selecionar opção (A/B/C/D/E)
+       ├── Selecionar opção (A/B/C/D/E)
         │
-        ├── Classificar confiança:
-        │     ├── "Não sei"       (confidence: unsure)
-        │     ├── "Estudando"     (confidence: studying)
-        │     └── "Devia saber"   (confidence: should_know)
-        │           
-        ├── "Pular" ──► próxima questão (sem classificar)
+       ├── Classificar confiança:
+        │    ├── "Não sei"       (confidence: unsure)
+        │    ├── "Estudando"     (confidence: studying)
+        │    └── "Devia saber"   (confidence: should_know)
         │
-        ├── "Anterior" ──► questão anterior (pode modificar a resposta)
+       ├── "Pular" ──► próxima questão (sem classificar)
         │
-        ├── "Reportar" ──► ReportIssueModal ──► flag na questão + comentário opcional
+       ├── "Anterior" ──► questão anterior (pode modificar a resposta)
+        │
+       ├── "Reportar" ──► ReportIssueModal ──► flag na questão + comentário opcional
         │
         │
-        ├── "Finalizar" (respondeu todas?)
-        │     ├── Não ──► Botão bloqueado
-        │     └── Sim ──► FinishModal com mapa
-        │                   ├── "Confirmar" ──► state: finished
-        │                   ├── "Cancelar" ──► continua na questão
-        │                   └── "Questão N" ──► pode escolher uma questao no mapa para voltar diretamente nela
+       ├── "Finalizar" (respondeu todas?)
+        │    ├── Não ──► Botão bloqueado
+        │    └── Sim ──► FinishModal com mapa
+        │                  ├── "Confirmar" ──► state: finished
+        │                  ├── "Cancelar" ──► continua na questão
+        │                  └── "Questão N" ──► pode escolher uma questao no mapa para voltar diretamente nela
         ├── [ícone mapa] ──► QuestionMapModal ──► navegar por número
         │
-        └── [ícone sair] ──► ExitModal
+       └── [ícone sair] ──► ExitModal
                               ├── "Sair" ──► state: idle (descarta progresso)
                               └── "Cancelar" ──► continua
 
 [state: finished]
         │
-        └── RelatorioFinal
+       └── RelatorioFinal
               ├── "Novo Simulado" ──► state: idle
               └── "Revisar"       ──► navigate('/revisao')
 ```
@@ -59,7 +59,7 @@ Seleção de áreas: chips toggle. "Todas" ou Múltiplas áreas.
 
 ## Indicadores durante o simulado
 
-- **Barra de progresso** 
+- **Barra de progresso**
 - **Timer** — conta regressiva por questão (só se timerMode = 'per-question')
 - **QuestionMap** — modal com grade de todas as questões por status:
   - `unvisited` — não visitada

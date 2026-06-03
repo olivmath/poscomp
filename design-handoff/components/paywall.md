@@ -6,11 +6,11 @@ Reutilizado em: Revisão, Histórico, HistoricoDetalhe.
 
 ```
 ┌─────────────────────────────┐
-│           🔒 lock           │
-│      Recurso Premium        │
-│  [descrição do recurso]     │
+│           lock           │
+│     Recurso Premium        │
+│ [descrição do recurso]     │
 │                             │
-│     [Ver planos]            │
+│    [Ver planos]            │
 └─────────────────────────────┘
 ```
 

@@ -2,7 +2,7 @@
 
 ---
 
-## 🔴 Crítico (segurança / corretude)
+##  Crítico (segurança / corretude)
 
 ### 1. `getFlaggedQuestions` e `resolveFlaggedQuestion` sem verificação de admin
 
@@ -23,7 +23,7 @@
 
 ---
 
-## 🟡 Importante (qualidade / escalabilidade)
+##  Importante (qualidade / escalabilidade)
 
 ### 3. IDs de questões como inteiros auto-incrementados
 
@@ -74,7 +74,7 @@
 
 ---
 
-## 🔵 Melhoria (operações / observabilidade)
+##  Melhoria (operações / observabilidade)
 
 ### 10. Sem idempotência no `finishSimulado`
 
@@ -103,7 +103,7 @@
 
 ---
 
-## 📋 Funcionalidades faltando no backend
+##  Funcionalidades faltando no backend
 
 | Feature                              | Impacto    | Complexidade |
 |--------------------------------------|------------|--------------|

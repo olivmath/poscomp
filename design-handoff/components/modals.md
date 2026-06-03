@@ -15,14 +15,14 @@ Todos os modais usam `ModalOverlay` como wrapper (backdrop escuro + centralizaç
 
 ## ExitModal (Simulado)
 
-**Trigger**: botão sair (✕) na ImmersiveBar
+**Trigger**: botão sair () na ImmersiveBar
 
 ```
 ┌──────────────────┐
-│  Sair do simulado│
-│  O progresso será│
-│  perdido.        │
-│  [Cancelar] [Sair│
+│ Sair do simulado│
+│ O progresso será│
+│ perdido.        │
+│ [Cancelar] [Sair│
 └──────────────────┘
 ```
 
@@ -34,9 +34,9 @@ Todos os modais usam `ModalOverlay` como wrapper (backdrop escuro + centralizaç
 
 ```
 ┌──────────────────┐
-│  Finalizar       │
-│  simulado?       │
-│  [Cancelar][OK]  │
+│ Finalizar       │
+│ simulado?       │
+│ [Cancelar][OK]  │
 └──────────────────┘
 ```
 

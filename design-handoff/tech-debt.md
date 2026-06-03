@@ -4,7 +4,7 @@ Lista de problemas identificados no código atual para o dev frontend endereçar
 
 ---
 
-## 🔴 Crítico (quebra funcionalidade)
+##  Crítico (quebra funcionalidade)
 
 ### 1. Rota `/simulado` não existe
 **Onde**: `Historico.tsx:129` — `navigate('/simulado')`
@@ -13,7 +13,7 @@ Lista de problemas identificados no código atual para o dev frontend endereçar
 
 ---
 
-## 🟡 Importante (UX / manutenibilidade)
+##  Importante (UX / manutenibilidade)
 
 ### 2. Machine de estados do simulado acoplada ao Home
 **Onde**: `pages/Home.tsx` — 4 estados inline (idle/config/running/finished)
@@ -42,7 +42,7 @@ Lista de problemas identificados no código atual para o dev frontend endereçar
 
 ---
 
-## 🔵 Melhoria (qualidade / escalabilidade)
+##  Melhoria (qualidade / escalabilidade)
 
 ### 7. RelatorioFinal recebe props variáveis para esconder/mostrar botões
 **Onde**: `RelatorioFinal.tsx:117-122`
@@ -75,7 +75,7 @@ Lista de problemas identificados no código atual para o dev frontend endereçar
 
 ---
 
-## 📋 Missing Features (funcionalidades faltando)
+##  Missing Features (funcionalidades faltando)
 
 | Feature                        | Onde falta              | Impacto    |
 |-------------------------------|-------------------------|------------|

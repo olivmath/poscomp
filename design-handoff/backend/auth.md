@@ -5,19 +5,19 @@
 ```
 Cliente
   │
-  ├─ signInWithPopup(googleProvider)
+ ├─ signInWithPopup(googleProvider)
   │        │
-  │        ▼
-  │  Firebase Auth
-  │  ├─ valida credencial Google
-  │  └─ emite Firebase ID Token (JWT)
+  │       ▼
+  │ Firebase Auth
+  │ ├─ valida credencial Google
+  │ └─ emite Firebase ID Token (JWT)
   │        │
-  │        ▼
-  │  onAuthStateChanged → user disponível no app
+  │       ▼
+  │ onAuthStateChanged → user disponível no app
   │
-  └─ httpsCallable('nomeDaFunction')(payload)
+ └─ httpsCallable('nomeDaFunction')(payload)
            │
-           │  Firebase SDK inclui o ID Token automaticamente no header
+           │ Firebase SDK inclui o ID Token automaticamente no header
            ▼
       Cloud Function
       ├─ SDK verifica o token (automático, sem código manual)
@@ -30,29 +30,29 @@ Cliente
 
 ```
 ┌──────────────────────────────────────────────────────┐
-│  Público                                             │
-│  (nenhuma function — não há endpoints públicos)     │
+│ Público                                             │
+│ (nenhuma function — não há endpoints públicos)     │
 ├──────────────────────────────────────────────────────┤
-│  Usuário autenticado  (request.auth != null)         │
-│  ├─ getSimuladoQuestions                             │
-│  ├─ finishSimulado                                   │
-│  ├─ getPendingCards                                  │
-│  ├─ reviewCard                                       │
-│  ├─ deleteAllData                                    │
-│  ├─ submitPremiumRequest                             │
-│  ├─ reportQuestion                                   │
-│  └─ getFlaggedQuestions (deveria ser admin — bug)    │
-│     resolveFlaggedQuestion (deveria ser admin — bug) │
+│ Usuário autenticado  (request.auth != null)         │
+│ ├─ getSimuladoQuestions                             │
+│ ├─ finishSimulado                                   │
+│ ├─ getPendingCards                                  │
+│ ├─ reviewCard                                       │
+│ ├─ deleteAllData                                    │
+│ ├─ submitPremiumRequest                             │
+│ ├─ reportQuestion                                   │
+│ └─ getFlaggedQuestions (deveria ser admin — bug)    │
+│    resolveFlaggedQuestion (deveria ser admin — bug) │
 ├──────────────────────────────────────────────────────┤
-│  Admin  (request.auth.token.admin === true)          │
-│  ├─ reviewPremiumRequest                             │
-│  ├─ setAdminRole / revokeAdminRole                   │
-│  ├─ listUsers / disableUser / enableUser             │
-│  ├─ resetUserSrs / grantPremiumAdmin                 │
-│  ├─ createQuestion / updateQuestion / deleteQuestion │
-│  ├─ createAnnouncement / updateAnnouncement          │
-│  ├─ deleteAnnouncement                               │
-│  └─ deleteFlaggedQuestion                            │
+│ Admin  (request.auth.token.admin === true)          │
+│ ├─ reviewPremiumRequest                             │
+│ ├─ setAdminRole / revokeAdminRole                   │
+│ ├─ listUsers / disableUser / enableUser             │
+│ ├─ resetUserSrs / grantPremiumAdmin                 │
+│ ├─ createQuestion / updateQuestion / deleteQuestion │
+│ ├─ createAnnouncement / updateAnnouncement          │
+│ ├─ deleteAnnouncement                               │
+│ └─ deleteFlaggedQuestion                            │
 └──────────────────────────────────────────────────────┘
 ```
 

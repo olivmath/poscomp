@@ -133,6 +133,34 @@ Não há REST endpoints — não há URL pública direta.
 
 ---
 
+### `getAreaReviewStats`
+
+**Auth**: usuário autenticado
+
+**Input**: nenhum
+
+**Output**:
+```typescript
+{
+  areas: Array<{
+    area: string                  // nome da área
+    reviewDates: string[]         // ISO 8601 — datas dos simulados que cobriram essa área
+    nextDueDate: string | null    // ISO 8601 — menor dueDate dos srs_cards da área
+  }>
+  // ordenado por nextDueDate ASC (mais urgente primeiro); null vai por último
+}
+```
+
+**Comportamento**:
+1. Busca todos os `srs_cards` do usuário, agrupa por `area`, extrai `min(dueDate)` por área
+2. Busca todos os `results` do usuário, extrai `completedAt` agrupados pelas áreas presentes em `areaBreakdown`
+3. Monta e ordena: `nextDueDate` mais próxima primeiro; áreas sem cards SRS não aparecem
+
+**Erros possíveis**:
+- `internal`: falha no Firestore
+
+---
+
 ### `reviewCard`
 
 **Auth**: usuário autenticado

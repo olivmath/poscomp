@@ -5,37 +5,37 @@
 ```
 ┌─────────────────────────────┐
 │                             │
-│    [foto do Google]  ou     │
-│    [ícone person]           │
-│    Nome do usuário          │
-│    email@gmail.com          │
+│   [foto do Google]  ou     │
+│   [ícone person]           │
+│   Nome do usuário          │
+│   email@gmail.com          │
 │                             │
-│  ─── Assinatura ────────── │
-│  [premium icon] Plano Pro   │
-│                 Renova em 01/07
-│                         [Ver planos] (só Free)
+│ ─── Assinatura ────────── │
+│ [premium icon] Plano Pro   │
+│                Renova em 01/07
+│                        [Ver planos] (só Free)
 │                             │
-│  ─── Preferências ──────── │
-│  [dark_mode]  Tema escuro    │  [switch]
-│  [notifications] Notificações│  [switch]
+│ ─── Preferências ──────── │
+│ [dark_mode]  Tema escuro    │ [switch]
+│ [notifications] Notificações│ [switch]
 │                             │
-│  ─── Sobre ─────────────── │
-│  [info]   Versão     v4.6.2 │
-│  [policy] Política privac. ›│
-│  [gavel]  Termos de uso   ›│
+│ ─── Sobre ─────────────── │
+│ [info]   Versão     v4.6.2 │
+│ [policy] Política privac. ›│
+│ [gavel]  Termos de uso   ›│
 │                             │
-│  ─── Conta ─────────────── │
-│  [logout] Sair da conta     │
+│ ─── Conta ─────────────── │
+│ [logout] Sair da conta     │
 │                             │
 │ ┌─────────────────────────┐ │
-│ │ ⚠️  Cuidado             │ │
-│ │  Remove permanentemente  │ │
-│ │  todos os dados.         │ │
+│ │  Cuidado             │ │
+│ │ Remove permanentemente  │ │
+│ │ todos os dados.         │ │
 │ │ [Apagar todos os dados]  │ │
 │ └─────────────────────────┘ │
 │                             │
 ├─────────────────────────────┤
-│  Home  Revisão  Hist  Perfil│
+│ Home  Revisão  Hist  Perfil│
 └─────────────────────────────┘
 ```
 

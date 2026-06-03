@@ -49,10 +49,10 @@ function applySm2(card: SrsCard, studied: boolean): ReviewCardOutput {
 | Revisão | Studied | interval              | easeFactor | Próxima revisão |
 |---------|---------|-----------------------|------------|-----------------|
 | Inicial | —       | 1                     | 2.5        | 1 dia           |
-| 1ª      | ✓       | round(1 × 2.5) = 3   | 2.6        | 3 dias          |
-| 2ª      | ✓       | round(3 × 2.6) = 8   | 2.7        | 8 dias          |
-| 3ª      | ✓       | round(8 × 2.7) = 22  | 2.8        | 22 dias         |
-| 4ª      | ✓       | round(22 × 2.8) = 62 | 2.9        | 62 dias         |
+| 1ª      |        | round(1 × 2.5) = 3   | 2.6        | 3 dias          |
+| 2ª      |        | round(3 × 2.6) = 8   | 2.7        | 8 dias          |
+| 3ª      |        | round(8 × 2.7) = 22  | 2.8        | 22 dias         |
+| 4ª      |        | round(22 × 2.8) = 62 | 2.9        | 62 dias         |
 
 ---
 

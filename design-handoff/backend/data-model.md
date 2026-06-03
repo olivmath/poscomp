@@ -108,14 +108,21 @@ interface SrsCard {
   lastConfidence: 'unsure' | 'studying' | 'should_know' | null
   studied: boolean                    // true após pelo menos 1 reviewCard
   simuladoCorrect: boolean            // se acertou no simulado que criou o card
+
+  // ── Denormalização ─────────────────────────────────────────────
+  area: 'Matemática'
+      | 'Fundamentos da Computação'
+      | 'Tecnologia da Computação'    // copiado de questions/{questionId}.area em finishSimulado
+                                      // permite query por área sem join com questions
 }
 ```
 
-**Como é criado**: automaticamente por `finishSimulado` para cada questão respondida.
+**Como é criado**: automaticamente por `finishSimulado` para cada questão respondida — inclui `area` copiado do snapshot da questão.
 **Como é atualizado**: `finishSimulado` (reseta dueDate ao now quando o simulado é refeito) e `reviewCard` (aplica SM-2 e agenda próxima revisão).
 
 **Indexação necessária**:
 - `dueDate` (where `<=` now — query principal de `getPendingCards` e notificações)
+- `area, dueDate` — composto, usado por `getAreaReviewStats` para calcular `min(dueDate)` por área
 
 ---
 
@@ -253,7 +260,7 @@ interface Announcement {
                     │ ano, area, enunciado          │
                     │ alternativas, resposta        │
                     │ comentario?, card?            │
-                    └───────────┬──────────────────┘
+                   └───────────┬──────────────────┘
                                 │ FK: questionId
               ┌─────────────────┼─────────────────────┐
               ▼                 ▼                     ▼
@@ -261,10 +268,10 @@ interface Announcement {
    /{questionId}           /{id}                /{resultId}
    ┌─────────────────┐    ┌──────────────────┐  ┌──────────────────┐
    │ questionId (FK) │    │ questionId (FK)  │  │ answers[].       │
-   │ SM-2 params     │    │ uid (FK)         │  │   questionId(FK) │
-   │ dueDate         │    │ comment          │  │   question(snap) │
+   │ SM-2 params     │    │ uid (FK)         │  │  questionId(FK) │
+   │ dueDate         │    │ comment          │  │  question(snap) │
    │ lastConfidence  │    │ resolved         │  │ score, breakdown │
-   └─────────────────┘    └──────────────────┘  └──────────────────┘
+  └─────────────────┘    └──────────────────┘  └──────────────────┘
               ▲
               │ parent
    users/{uid}
@@ -274,7 +281,7 @@ interface Announcement {
    │ lastActivity                │
    │ notificationsEnabled        │
    │ fcmTokens[]                 │
-   └─────────────────────────────┘
+  └─────────────────────────────┘
               │ FK: uid
               ▼
    premium_requests/{id}
@@ -282,5 +289,5 @@ interface Announcement {
    │ uid (FK)                   │
    │ status, planType            │
    │ receiptUrl, receiptType     │
-   └─────────────────────────────┘
+  └─────────────────────────────┘
 ```

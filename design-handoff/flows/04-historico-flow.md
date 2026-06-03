@@ -3,20 +3,20 @@
 ```
 [/historico]
     │
-    ├── [Free user] ──► Paywall card ──► "Ver planos" ──► /perfil
+   ├── [Free user] ──► Paywall card ──► "Ver planos" ──► /perfil
     │
-    ├── [loading] ──► spinner
+   ├── [loading] ──► spinner
     │
-    ├── [error] ──► mensagem de erro
+   ├── [error] ──► mensagem de erro
     │
-    ├── [empty] ──► "Nenhum simulado realizado"
-    │       └── "Começar Simulado" ──► /simulado (NOTA: rota /simulado não existe — bug)
+   ├── [empty] ──► "Nenhum simulado realizado"
+    │      └── "Começar Simulado" ──► /simulado (NOTA: rota /simulado não existe — bug)
     │
-    └── [lista de resultados] ──► cards clicáveis
+   └── [lista de resultados] ──► cards clicáveis
               │
-              └── click em card ──► /historico/:id
+             └── click em card ──► /historico/:id
                         │
-                        ├── [loading] ──► spinner
+                       ├── [loading] ──► spinner
                         ├── [Free user] ──► Paywall
                         ├── [error/not found] ──► erro com "Voltar ao Histórico"
                         └── [sucesso] ──► RelatorioFinal
@@ -27,8 +27,8 @@
 
 ```
 ┌─────────────────────────────────────────┐
-│  02/06/2026    8/10  +5%   12:34   ›   │
-│  📐 Matemática: 90%                     │
+│ 02/06/2026    8/10  +5%   12:34   ›   │
+│  Matemática: 90%                     │
 └─────────────────────────────────────────┘
 ```
 

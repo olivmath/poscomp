@@ -6,29 +6,29 @@ Modo imersivo: BottomNav some. Tela toda de conteúdo.
 
 ```
 ┌─────────────────────────────┐
-│  [✕ Sair]   3/10   [🗺 Mapa] │  ← ImmersiveBar
-│             ⏱ 1:43          │  ← timer (só se timerMode = per-question)
+│ [ Sair]   3/10   [ Mapa] │ ← ImmersiveBar
+│             1:43          │ ← timer (só se timerMode = per-question)
 ├─────────────────────────────┤
-│ ██████░░░░░░░░░░░░░░░░░░░   │  ← progress bar (3/10 = 30%)
+│ ██████░░░░░░░░░░░░░░░░░░░   │ ← progress bar (3/10 = 30%)
 ├─────────────────────────────┤
 │                             │
-│  Qual é a complexidade do   │
-│  algoritmo de ordenação...  │  ← enunciado
+│ Qual é a complexidade do   │
+│ algoritmo de ordenação...  │ ← enunciado
 │                             │
-│  ┌──────────────────────┐  │
-│  │ A  primeira opção    │  │  ← option button
-│  └──────────────────────┘  │
-│  ┌──────────────────────┐  │
-│  │ B  segunda opção     │  │  ← selected = destaque primário
-│  └──────────────────────┘  │
-│  ...C, D, E...              │
+│ ┌──────────────────────┐  │
+│  │ A  primeira opção    │  │ ← option button
+│ └──────────────────────┘  │
+│ ┌──────────────────────┐  │
+│  │ B  segunda opção     │  │ ← selected = destaque primário
+│ └──────────────────────┘  │
+│ ...C, D, E...              │
 │                             │
-│  ┌────┐  ┌────────┐  ┌────┐ │
-│  │❓  │  │🎓      │  │⚠️  │ │  ← confidence buttons
+│ ┌────┐  ┌────────┐  ┌────┐ │
+│  │  │  │      │  │  │ │ ← confidence buttons
 │  │Não sei│Estudando│Devia│  │
-│  └────┘  └────────┘  └────┘ │
+│ └────┘  └────────┘  └────┘ │
 │                             │
-│  [← Ant] [🚩 Reportar] [⏭ Pular] │
+│ [← Ant] [ Reportar] [ Pular] │
 └─────────────────────────────┘
 ```
 
@@ -36,10 +36,10 @@ Modo imersivo: BottomNav some. Tela toda de conteúdo.
 
 | Elemento  | Sempre | Só com timer |
 |-----------|--------|--------------|
-| Botão sair (✕) | ✓ | ✓ |
-| "questão N/Total" | ✓ | ✓ |
-| Botão mapa (🗺)  | ✓ | ✓ |
-| Countdown timer  | — | ✓ |
+| Botão sair () |  |  |
+| "questão N/Total" |  |  |
+| Botão mapa ()  |  |  |
+| Countdown timer  | — |  |
 
 ## Botões de confiança (confidence)
 
@@ -66,8 +66,8 @@ Modo imersivo: BottomNav some. Tela toda de conteúdo.
 
 | Modal            | Trigger                | Ação principal                   |
 |------------------|------------------------|----------------------------------|
-| ExitModal        | botão sair (✕)         | "Sair" → state: idle             |
-| QuestionMapModal | botão mapa (🗺)        | clique em questão → navega       |
+| ExitModal        | botão sair ()         | "Sair" → state: idle             |
+| QuestionMapModal | botão mapa ()        | clique em questão → navega       |
 | ReportIssueModal | botão Reportar         | texto livre → flag na questão    |
 | FinishModal      | última questão + conf. | "Confirmar" → state: finished    |
 | LoadingModal     | `loadingFinish: true`  | spinner bloqueante "Calculando…" |
@@ -76,12 +76,12 @@ Modo imersivo: BottomNav some. Tela toda de conteúdo.
 
 ```
 ┌──────────────────────┐
-│   Mapa de Questões   │
-│  1  2  3  4  5  6   │
-│  ●  ●  ◉  ○  ○  ○   │
-│  ●= respondida       │
-│  ◉= atual           │
-│  ○= não visitada    │
-│  ×= pulada          │
+│  Mapa de Questões   │
+│ 1  2  3  4  5  6   │
+│ ●  ●  ◉  ○  ○  ○   │
+│ ●= respondida       │
+│ ◉= atual           │
+│ ○= não visitada    │
+│ ×= pulada          │
 └──────────────────────┘
 ```

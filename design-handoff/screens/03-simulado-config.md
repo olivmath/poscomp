@@ -7,20 +7,20 @@ Renderizado na rota `/`, substitui o dashboard. Sem BottomNav visível (não ime
 ```
 ┌─────────────────────────────┐
 │                             │
-│  ┌─────────────────────┐   │
-│  │  Configurar Simulado │   │
+│ ┌─────────────────────┐   │
+│  │ Configurar Simulado │   │
 │  │                     │   │
-│  │  ① Temas            │   │
-│  │  [Todas][Mat][Fund][Tec] │
+│  │ ① Temas            │   │
+│  │ [Todas][Mat][Fund][Tec] │
 │  │                     │   │
-│  │  ② Nº de questões   │   │
-│  │  [ 5 ][ 10 ][ 20 ][Máx] │
+│  │ ② Nº de questões   │   │
+│  │ [ 5 ][ 10 ][ 20 ][Máx] │
 │  │                     │   │
-│  │  ③ Tempo/questão    │   │
-│  │  [S/limite][1min][2min]  │
+│  │ ③ Tempo/questão    │   │
+│  │ [S/limite][1min][2min]  │
 │  │                     │   │
-│  │  [Voltar] [Começar] │   │
-│  └─────────────────────┘   │
+│  │ [Voltar] [Começar] │   │
+│ └─────────────────────┘   │
 │                             │
 └─────────────────────────────┘
 ```

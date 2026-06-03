@@ -7,31 +7,31 @@
 │ =                     ( )   │ ← esquerda menu sandwich; direita foto perfil leva para /perfil
 │                             │
 │                             │
-│  [AnnouncementBanner]       │  ← carrocel, condicional, adicionar via admin; suporte a markdown view
+│ [AnnouncementBanner]       │ ← carrocel, condicional, adicionar via admin; suporte a markdown view
 │                             │
 │ ┌─────────────────────────┐ │
-│ │  Frequência semanal     │ │
-│ │  🔥 5 dias seguidos      │ │
-│ │  Dom Seg Ter Qua Qui Sex Sáb │
-│ │  ( ) (●) (●) (●) (●) (●) (T)│
+│ │ Frequência semanal     │ │
+│ │  5 dias seguidos      │ │
+│ │ Dom Seg Ter Qua Qui Sex Sáb │
+│ │ ( ) (●) (●) (●) (●) (●) (T)│
 │ └─────────────────────────┘ │
 │                             │
 │ ┌─────────────────────────┐ │
-│ │  Geral                  │ │
-│ │  [LineChart T1→T5]      │ │
+│ │ Geral                  │ │
+│ │ [LineChart T1→T5]      │ │
 │ │                         │ │
-│ │  Individual             │ │
-│ │  Matemática    ████ 72% │ │
-│ │  Fundamentos   ██░░ 48% │ │
-│ │  Tecnologia    ███░ 61% │ │
+│ │ Individual             │ │
+│ │ Matemática    ████ 72% │ │
+│ │ Fundamentos   ██░░ 48% │ │
+│ │ Tecnologia    ███░ 61% │ │
 │ └─────────────────────────┘ │
 │                             │
-│  ┌───────────────────────┐  │
-│  │  Simulado customizado │  │  ← outlined button
-│  └───────────────────────┘  │
-│  ┌───────────────────────┐  │
-│  │   Começar Simulado    │  │  ← filled button (primário)
-│  └───────────────────────┘  │
+│ ┌───────────────────────┐  │
+│  │ Simulado customizado │  │ ← outlined button
+│ └───────────────────────┘  │
+│ ┌───────────────────────┐  │
+│  │  Começar Simulado    │  │ ← filled button (primário)
+│ └───────────────────────┘  │
 │                             │
 └─────────────────────────────┘
 ```
