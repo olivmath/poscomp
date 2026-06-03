@@ -466,7 +466,7 @@ Não há REST endpoints — não há URL pública direta.
 }
 ```
 
-**Invariante**: se `active=true`, desativa todos os outros antes de criar.
+**Comportamento**: cria o documento. Múltiplos announcements podem ter `active=true` simultaneamente — sem batch de desativação.
 
 ---
 
@@ -476,7 +476,7 @@ Não há REST endpoints — não há URL pública direta.
 
 **Input**: `{ id: string, ...campos parciais }`
 
-**Invariante**: se `active=true`, desativa todos os outros antes de atualizar.
+**Comportamento**: atualiza campos parciais. Sem lógica de exclusividade — `active` de outros documentos não é alterado.
 
 ---
 

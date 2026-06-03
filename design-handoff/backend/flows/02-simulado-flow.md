@@ -41,7 +41,7 @@ O frontend lê diretamente do Firestore após `finishSimulado`:
 | Coleção                        | Quando                          |
 |--------------------------------|---------------------------------|
 | `users/{uid}/results/{id}`     | tela de relatório pós-simulado  |
-| `announcements` (onSnapshot)   | banner na Home — filtragem de `active=true` e `expiresAt > now` feita no cliente |
+| `announcements` (onSnapshot)   | carousel na Home — filtra `active=true` e `expiresAt > now` client-side, ordena por `createdAt` ASC |
 
 ## Dados gravados por `finishSimulado`
 

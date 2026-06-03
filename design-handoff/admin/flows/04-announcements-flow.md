@@ -8,18 +8,17 @@
 [Criar banner]
         │
         └── createAnnouncement({ message, type, active, url?, expiresAt? })
-              └── Se active=true: batch desativa todos os outros primeiro
-                    Invariante: apenas 1 ativo por vez
+              └── Salva o documento — sem alterar outros banners
 
 [Editar banner]
         │
         └── updateAnnouncement({ id, ...campos parciais })
-              └── Se active=true: batch desativa todos os outros primeiro
+              └── Atualiza campos — sem alterar outros banners
 
-[Ativar banner existente]
+[Ativar / desativar banner]
         │
-        └── updateAnnouncement({ id, active: true })
-              └── Batch: desativa os outros + ativa este
+        └── updateAnnouncement({ id, active: true | false })
+              └── Altera apenas este banner
 
 [Deletar banner]
         │
@@ -32,12 +31,14 @@
 ```
 criado (active=false)
         │
-        └── ativado (active=true) ──► exibido no app
+        └── ativado (active=true) ──► entra no carousel do app
                   │
-                  ├── expiresAt < now ──► some do app (verificação client-side)
+                  ├── expiresAt < now ──► some do carousel (verificação client-side)
                   │
-                  └── desativado manualmente (active=false) ──► some do app
+                  └── desativado manualmente (active=false) ──► some do carousel
 ```
+
+O carousel exibe simultaneamente todos os banners `active=true` com `expiresAt > now`, ordenados por `createdAt` ASC.
 
 ## Tipos e visual no app
 

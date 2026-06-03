@@ -243,14 +243,14 @@ interface PremiumRequest {
 interface Announcement {
   message: string                     // texto do banner
   type: 'info' | 'warning' | 'success'
-  active: boolean                     // só 1 announcement ativo por vez (invariante garantida pelo backend)
+  active: boolean                     // múltiplos podem ser true — carousel exibe todos os ativos
   url: string | null                  // link opcional ao clicar no banner
   createdAt: Timestamp
   expiresAt: Timestamp | null         // expiração automática (verificada no frontend)
 }
 ```
 
-**Invariante**: ao criar ou ativar um announcement, `createAnnouncement` desativa todos os outros automaticamente via batch.
+**Carousel**: o app exibe todos os announcements com `active=true` (e `expiresAt > now`) como slides ordenados por `createdAt` ASC. Não há invariante de exclusividade — o admin controla quantos ficam ativos.
 
 ---
 

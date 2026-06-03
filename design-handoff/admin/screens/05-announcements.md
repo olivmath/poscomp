@@ -28,20 +28,16 @@
 
 ## Ações por linha
 
-| Ação    | Function backend       | Comportamento                                           |
-|---------|------------------------|----------------------------------------------------------|
-| Editar  | `updateAnnouncement`   | Se `active=true`, desativa todos os outros primeiro      |
-| Deletar | `deleteAnnouncement`   | Confirmação obrigatória                                  |
-| Ativar  | `updateAnnouncement({ active: true })` | Desativa todos os outros automaticamente |
+| Ação        | Function backend       | Comportamento                              |
+|-------------|------------------------|--------------------------------------------|
+| Editar      | `updateAnnouncement`   | Atualiza campos; não altera outros banners |
+| Ativar/Desativar | `updateAnnouncement({ active: true/false })` | Só altera este banner |
+| Deletar     | `deleteAnnouncement`   | Confirmação obrigatória                    |
 
-## Invariante
+## Exibição no app (carousel)
 
-Apenas **1 announcement ativo** por vez — o backend garante via batch ao criar/ativar.
-A tela deve refletir isso: ao ativar um banner, os outros ficam com `ativo = NÃO` imediatamente.
+Todos os banners com `active=true` e `expiresAt > now` aparecem como slides na Home, ordenados por `createdAt` ASC. O admin controla quantos ficam ativos ao mesmo tempo.
 
-## Exibição no app
-
-O banner aparece na Home (`/`) acima do WeekHeader.
 - Texto renderizado como markdown
-- Dismissível pelo usuário (persiste no `localStorage` do cliente — não no backend)
-- Expiração verificada no cliente: `expiresAt < now` → não exibe mesmo se `active = true`
+- Dismissível pelo usuário (persiste no `localStorage` — não no backend)
+- Expiração verificada no cliente: `expiresAt < now` → slide não aparece mesmo se `active = true`
