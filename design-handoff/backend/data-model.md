@@ -72,6 +72,9 @@ interface UserDocument {
   // ── Campos de atividade ────────────────────────────────────────
   lastActivity: Timestamp             // último simulado ou revisão
                                       // atualizado por: finishSimulado, reviewCard
+  activeDays: string[]                // datas com atividade no formato 'YYYY-MM-DD'
+                                      // atualizado por: finishSimulado, reviewCard (union com o dia atual)
+                                      // usado pelo WeekHeader para pintar os círculos dos últimos 7 dias
 
   // ── Campos de notificações ─────────────────────────────────────
   notificationsEnabled: boolean       // opt-in global para push

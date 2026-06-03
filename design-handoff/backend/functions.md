@@ -82,11 +82,11 @@ Não há REST endpoints — não há URL pública direta.
 
 **Side effects** (tudo em paralelo onde possível):
 1. Salva `users/{uid}/results/{resultId}` com o resultado completo
-2. Atualiza `users/{uid}.lastActivity` = serverTimestamp
+2. Atualiza `users/{uid}.lastActivity` = serverTimestamp e faz union de `today` em `activeDays`
 3. Para cada questão com `issue`: cria `flagged_questions/{id}`
 4. Batch-update/set `users/{uid}/srs_cards/{questionId}` para cada resposta:
-   - Se card já existe: atualiza `lastConfidence`, `dueDate = now`, `simuladoCorrect`
-   - Se card não existe: cria com valores iniciais SM-2 (`easeFactor=2.5`, `interval=1`, `repetitions=0`)
+   - Se card já existe: atualiza `lastConfidence`, `dueDate = now`, `simuladoCorrect`, `materia`
+   - Se card não existe: cria com valores iniciais SM-2 (`easeFactor=2.5`, `interval=1`, `repetitions=0`) + `materia` copiado do snapshot da questão
 
 **Validações**:
 - `answers` não pode ser vazio
@@ -113,7 +113,7 @@ Não há REST endpoints — não há URL pública direta.
 {
   cards: Array<{
     questionId: number
-    priority: 'P1' | 'P2' | 'P3'
+    priority: 'P1' | 'P2'
     lastConfidence: Confidence
     dueDate: string           // ISO 8601
     repetitions: number
@@ -126,9 +126,9 @@ Não há REST endpoints — não há URL pública direta.
 
 **Comportamento**:
 1. Busca todos os `srs_cards` onde `dueDate <= now`
-2. Filtra cards sem `lastConfidence` (não devem aparecer na fila)
-3. Mapeia confiança → prioridade: `should_know → P1`, `studying → P2`, `unsure → P3`
-4. Ordena: P1 antes de P2 antes de P3, empate por `dueDate` mais antiga primeiro
+2. Filtra cards sem `lastConfidence` e cards com `lastConfidence = 'unsure'` (P3 não entra na fila)
+3. Mapeia confiança → prioridade: `should_know → P1`, `studying → P2`
+4. Ordena: P1 antes de P2, empate por `dueDate` mais antiga primeiro
 5. Hydrata com dados da questão (busca em chunks de 30)
 
 ---
@@ -153,8 +153,9 @@ Não há REST endpoints — não há URL pública direta.
 
 **Comportamento**:
 1. Busca todos os `srs_cards` do usuário, agrupa por `materia`, extrai `min(dueDate)` por matéria
-2. Busca todos os `results` do usuário, extrai `completedAt` agrupados pelas áreas presentes em `materiaBreakdown`
-3. Monta e ordena: `nextDueDate` mais próxima primeiro; áreas sem cards SRS não aparecem
+2. Busca todos os `results` do usuário (sem limite — histórico completo), extrai `completedAt` agrupados pelas matérias presentes em `materiaBreakdown`
+3. Monta e ordena: `nextDueDate` mais próxima primeiro; matérias sem cards SRS não aparecem
+4. `reviewDates` retorna no máximo as **últimas 10 datas** por matéria (mais antigas descartadas)
 
 **Erros possíveis**:
 - `internal`: falha no Firestore
@@ -187,10 +188,54 @@ Não há REST endpoints — não há URL pública direta.
 **Comportamento** (transação Firestore):
 1. Aplica algoritmo SM-2 (ver `algorithm-sm2.md`)
 2. Atualiza `srs_cards/{questionId}`: interval, easeFactor, repetitions, dueDate, studied=true
-3. Atualiza `users/{uid}.lastActivity = now`
+3. Atualiza `users/{uid}.lastActivity = now` e faz union de `today` em `activeDays`
 
 **Erros possíveis**:
 - `not-found`: card não existe (questão nunca respondida num simulado)
+
+---
+
+### `getPendingCount`
+
+**Auth**: usuário autenticado
+
+**Input**: nenhum
+
+**Output**:
+```typescript
+{ count: number }
+```
+
+**Comportamento**:
+1. Busca `srs_cards` onde `dueDate <= now` e `lastConfidence IN ['should_know', 'studying']`
+2. Retorna apenas o count — sem hydrate de questão
+
+**Uso**: badge de cards pendentes no BottomNav (evita chamar `getPendingCards` completo só para o número)
+
+---
+
+## Grupo: Billing / Config
+
+### `getPixConfig`
+
+**Auth**: usuário autenticado
+
+**Input**: nenhum
+
+**Output**:
+```typescript
+{
+  pixKey: string        // chave PIX para recebimento
+  pixQrBase64: string   // QR code em base64 (PNG 200×200) gerado pelo backend
+}
+```
+
+**Comportamento**:
+1. Lê configuração PIX de variável de ambiente (não exposta ao cliente)
+2. Gera o QR code server-side e retorna como base64
+3. Resultado pode ser cacheado pelo cliente por até 1h
+
+**Motivo**: chave PIX não deve ser exposta no bundle do frontend (tech-debt #8).
 
 ---
 
