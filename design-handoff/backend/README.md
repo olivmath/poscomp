@@ -42,6 +42,20 @@ infra/firebase/
 
 ---
 
+## Fluxos por jornada
+
+Espelham os fluxos do app (`flows/`):
+
+| Arquivo                  | Jornada                                    |
+|--------------------------|--------------------------------------------|
+| `01-auth-flow.md`        | Login Google + leitura inicial do perfil   |
+| `02-simulado-flow.md`    | Busca de questões → resposta → gravação    |
+| `03-revisao-flow.md`     | Fila SRS → flashcard → agendamento SM-2    |
+| `04-historico-flow.md`   | Leitura de resultados + métricas client-side|
+| `05-premium-flow.md`     | PIX config → upload → aprovação admin      |
+
+---
+
 ## Grupos funcionais
 
 | Grupo             | Functions                                                          |
