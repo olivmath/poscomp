@@ -12,7 +12,7 @@
   │         signInWithPopup()
   │                  │
   │         ┌── Sucesso ──► onAuthStateChanged ──► / (Home)
-  │         └── Falha   ──► toast "Falha ao fazer login"
+  │         └── Falha   ──► toast "Falha ao fazer login: <detalhes>"
   │
   └──── Sim ────► rota solicitada
 ```

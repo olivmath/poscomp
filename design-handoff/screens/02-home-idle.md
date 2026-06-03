@@ -4,8 +4,10 @@
 
 ```
 ┌─────────────────────────────┐
+│ =                     ( )   │ ← esquerda menu sandwich; direita foto perfil leva para /perfil
 │                             │
-│  [AnnouncementBanner]       │  ← condicional, some se vazio
+│                             │
+│  [AnnouncementBanner]       │  ← carrocel, condicional, adicionar via admin; suporte a markdown view
 │                             │
 │ ┌─────────────────────────┐ │
 │ │  Frequência semanal     │ │
@@ -31,8 +33,6 @@
 │  │   Começar Simulado    │  │  ← filled button (primário)
 │  └───────────────────────┘  │
 │                             │
-├─────────────────────────────┤
-│  Home  Revisão  Hist  Perfil│  ← BottomNav
 └─────────────────────────────┘
 ```
 

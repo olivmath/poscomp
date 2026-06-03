@@ -9,13 +9,13 @@
 │          [LOGO]             │
 │                             │
 │          POSCOMP            │
-│   Prepare-se para o sucesso │
+│  Prepare-se para o sucesso  │
 │                             │
-│  ┌─────────────────────┐   │
-│  │  G  Entrar com Google│   │
-│  └─────────────────────┘   │
+│  ┌───────────────────────┐  │
+│  │  G  Entrar com Google │  │
+│  └───────────────────────┘  │
 │                             │
-│  [mensagem de erro]         │
+│     [mensagem de erro]      │
 └─────────────────────────────┘
 ```
 
@@ -38,6 +38,6 @@
 
 ## Comportamento
 
-- Fundo: gradiente ou cor de fundo `--md-sys-color-surface`
+- Fundo: cor de fundo `--md-sys-color-surface`
 - Card centralizado vertical e horizontalmente
 - Se já autenticado → redirect para `/` sem renderizar a tela
