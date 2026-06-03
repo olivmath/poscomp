@@ -9,12 +9,23 @@ Mobile-first PWA. Stack atual: React + Firebase + Material Web Components (MD3).
 
 ```
 design-handoff/
-  README.md              ← este arquivo
-  design-system.md       ← cores, tipografia, espaçamentos, componentes base
-  tech-debt.md           ← o que está ruim no código atual e precisa refatorar
-  flows/                 ← jornadas de usuário (fluxogramas)
-  screens/               ← spec de cada tela (layout, estados, ações)
-  components/            ← componentes compartilhados
+  README.md        ← este arquivo
+  app/             ← frontend (React PWA — usuário final)
+    design-system.md
+    tech-debt.md
+    flows/         ← jornadas de usuário
+    screens/       ← spec de cada tela
+    components/    ← componentes compartilhados
+  backend/         ← Cloud Functions + Firestore
+    flows/         ← fluxos por jornada
+    functions.md
+    data-model.md
+    auth.md
+    ...
+  admin/           ← painel de operações internas
+    flows/         ← fluxos operacionais
+    screens/       ← spec de cada módulo admin
+    README.md
 ```
 
 ---
@@ -52,7 +63,7 @@ A barra some completamente no modo imersivo (simulado em andamento).
 | Pro      | R$10/mês     | + Revisão espaçada + Histórico      |
 | Pro MAX  | R$5/mês      | Idem Pro, cobrança anual (R$60/ano) |
 
-Pagamento manual via PIX — usuário envia comprovante, admin aprova em até 24h.
+Pagamento manual via PIX — usuário envia comprovante, admin aprova em até 1h.
 
 ---
 
