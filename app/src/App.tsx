@@ -75,7 +75,7 @@ export function App() {
           <Routes>
             <Route element={<PublicOnlyRoute />}>
               <Route path="/login" element={<Login />} />
-              {import.meta.env.DEV && <Route path="/__e2e__/auth" element={<E2ELogin />} />}
+              {(import.meta.env.DEV || import.meta.env.VITE_USE_EMULATOR === 'true') && <Route path="/__e2e__/auth" element={<E2ELogin />} />}
             </Route>
 
             {/* Routes with BottomNav */}
