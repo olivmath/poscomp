@@ -1,0 +1,572 @@
+[
+  {
+    "id": 21,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre busca sequencial em arquivo com chave única, sendo f(n) o número de registros consultados, é correto afirmar que:",
+    "alternativas": {
+      "A": "O caso médio é f(n) = (n + 1)/2",
+      "B": "O melhor caso é f(n) = n – 1",
+      "C": "O caso ótimo é f(n) = 3n/2 – 3/2",
+      "D": "O caso recorrente é f(n) = 2(n – 1)",
+      "E": "O pior caso é f(n) = 1"
+    },
+    "resposta": "A",
+    "comentario": "Na busca sequencial: melhor = 1, pior = n, médio = (n+1)/2 (distribuição uniforme).",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Busca sequencial em arquivo com chave única: qual a afirmação correta sobre o número de registros consultados f(n)?",
+      "resposta": "## Conceito\nA busca sequencial percorre um arquivo registro por registro, do início ao fim, até encontrar a chave desejada ou atingir o final do arquivo. É o método mais simples, porém ineficiente para grandes volumes de dados se comparado a buscas indexadas ou binárias.\n\n## Por que (A) é correta\nNum cenário de chave única e distribuição uniforme de probabilidade (o registro pode estar em qualquer posição com a mesma chance), o número médio de consultas é a média aritmética das posições possíveis: $\\frac{1 + 2 + \\dots + n}{n} = \\frac{n(n+1)}{2n} = \\frac{n+1}{2}$.\n\n## Pegadinhas desta questão\n- O **Melhor Caso** (ou caso ótimo) ocorre quando o registro é o primeiro: $f(n) = 1$ (A alternativa B dizia $n-1$).\n- O **Pior Caso** ocorre quando o registro é o último ou não existe: $f(n) = n$ (A alternativa E dizia $1$).\n- Termos como \"caso recorrente\" ou fórmulas complexas como $3n/2$ são apenas distrações matemáticas sem fundamento na busca sequencial simples.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 22,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é o objetivo da análise assintótica de algoritmos?",
+    "alternativas": {
+      "A": "Analisar conjuntamente o pior caso e o caso médio.",
+      "B": "Analisar o desempenho para entradas muito pequenas.",
+      "C": "Determinar o desempenho para todas as possíveis entradas.",
+      "D": "Analisar o desempenho para entradas médias.",
+      "E": "Analisar o comportamento à medida que o tamanho da entrada aumenta indefinidamente."
+    },
+    "resposta": "E",
+    "comentario": "A análise assintótica foca no comportamento quando o tamanho da entrada tende ao infinito (notações O, Ω, Θ).",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual o objetivo principal da análise assintótica de algoritmos no contexto da Ciência da Computação?",
+      "resposta": "## Conceito\nA análise assintótica estuda a eficiência de um algoritmo focando no seu comportamento de crescimento (ordem de magnitude) em relação ao tamanho da entrada ($n$). Em vez de medir segundos ou ciclos de CPU exatos, usamos notações como $O$, $\\Omega$ e $\\Theta$.\n\n## Por que (E) é correta\nO termo \"assintótico\" refere-se ao limite quando $n \\to \\infty$. O objetivo é entender como o algoritmo escala: se dobrarmos o tamanho da entrada, o tempo de execução dobra, quadruplica ou cresce exponencialmente? Detalhes de hardware e entradas pequenas são ignorados porque o comportamento para grandes valores de $n$ é o que define a viabilidade do sistema.\n\n## Pegadinhas desta questão\n- **Entradas pequenas (B):** Para valores pequenos de $n$, um algoritmo com complexidade pior (ex: $O(n^2)$) pode ser mais rápido que um melhor (ex: $O(n \\log n)$) devido a constantes ocultas. A análise assintótica ignora isso.\n- **Caso médio e pior (A/D):** Embora a análise assintótica seja aplicada a esses casos, ela não é o \"objetivo\" em si, mas a ferramenta usada para descrevê-los.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 23,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é a complexidade de tempo da busca em uma tabela hash, considerando a complexidade média e do pior caso, respectivamente?",
+    "alternativas": {
+      "A": "O(1) e O(1)",
+      "B": "O(1) e O(n)",
+      "C": "O(log n) e O(log n)",
+      "D": "O(log n) e O(n)",
+      "E": "O(n) e O(2^n)"
+    },
+    "resposta": "B",
+    "comentario": "Hash bem dimensionada: O(1) médio. Com muitas colisões (pior caso): O(n).",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual a complexidade de tempo da busca em uma tabela hash (caso médio e pior caso, respectivamente)?",
+      "resposta": "## Conceito\nUma Tabela Hash usa uma função para mapear chaves a índices de um array. Idealmente, cada chave vai para um índice único, permitindo acesso imediato. Contudo, quando duas chaves diferentes resultam no mesmo índice, ocorre uma **colisão**.\n\n## Por que (B) é correta\n- **Caso Médio $O(1)$**: Se a função hash for boa (distribuição uniforme) e a tabela não estiver cheia, o tempo de acesso é constante, independente do número de elementos $n$.\n- **Pior Caso $O(n)$**: Se todas as $n$ chaves colidirem no mesmo índice (ex: função hash ruim), a tabela se comporta como uma lista encadeada simples, exigindo percorrer todos os elementos para encontrar a chave.\n\n## Pegadinhas desta questão\n- Muitas pessoas acham que Hash é sempre $O(1)$. Isso só é verdade se garantirmos ausência de colisões (Hash Perfeito), o que raramente ocorre na prática.\n- Não confunda com Árvores Binárias de Busca (ABB), onde a busca é $O(\\log n)$ no caso médio.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 24,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Em uma estrutura de dados lista ______, cada elemento armazena dados e um ponteiro para o próximo elemento, mantém a estrutura linear e possui campo-chave para ordenação.",
+    "alternativas": {
+      "A": "duplamente encadeada ordenada",
+      "B": "circular não ordenada",
+      "C": "de prioridades",
+      "D": "duplamente encadeada não ordenada",
+      "E": "simplesmente encadeada ordenada"
+    },
+    "resposta": "E",
+    "comentario": "Um ponteiro (próximo) → simplesmente encadeada. Campo-chave para ordenação → ordenada.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual estrutura possui dados, um único ponteiro para o próximo, forma linear e campo-chave para ordenação?",
+      "resposta": "## Conceito\nListas encadeadas são coleções lineares de elementos (nós) onde a ordem não é dada pela posição física na memória, mas por ponteiros. O tipo de encadeamento define como os nós se conectam.\n\n## Por que (E) é correta\n- **Simplesmente encadeada**: O enunciado menciona \"um ponteiro para o próximo elemento\". Se houvesse ponteiro para o anterior, seria duplamente encadeada.\n- **Ordenada**: O enunciado afirma que a estrutura possui um \"campo-chave para ordenação\", indicando que os elementos são mantidos em uma sequência lógica baseada nesse valor.\n\n## Pegadinhas desta questão\n- A pegadinha está em diferenciar \"simples\" de \"dupla\". Leia atentamente: se falar apenas em \"ponteiro para o próximo\", é simples. Se falar em \"anterior e próximo\", é dupla.\n- \"Circular\" implicaria que o último ponteiro aponta de volta para o primeiro, o que não foi mencionado.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 25,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre as instruções de repetição de uma linguagem de programação, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Na instrução while, a instrução é executada uma ou mais vezes e a condição é testada depois.",
+      "B": "O corpo do do...while é executado pelo menos uma vez; nos laços while e for o corpo pode nunca ser executado.",
+      "C": "A instrução if adapta-se a situações em que o número de iterações é conhecido a priori.",
+      "D": "A instrução break passa o laço para a próxima iteração.",
+      "E": "Na instrução for, a condição é testada depois da instrução."
+    },
+    "resposta": "B",
+    "comentario": "do...while garante ao menos uma execução. while e for testam antes — corpo pode não executar.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Sobre instruções de repetição (while, do...while, for), qual afirmação está correta?",
+      "resposta": "## Conceito\nEstruturas de repetição (loops) permitem executar um bloco de código múltiplas vezes. Elas se dividem em pré-testadas (teste antes de entrar no bloco) e pós-testadas (teste após executar o bloco).\n\n## Por que (B) é correta\n- No **do...while**, a condição só é verificada ao final do bloco. Portanto, o código roda uma vez antes mesmo de saber se deveria.\n- No **while** e no **for**, a condição é verificada *antes* da execução. Se a condição for falsa logo de cara, o bloco é ignorado completamente (zero execuções).\n\n## Pegadinhas desta questão\n- **break vs continue (D)**: O `break` interrompe e sai do laço. O `continue` é que pula para a próxima iteração.\n- **if (C)**: `if` não é uma instrução de repetição, mas de decisão (seleção).\n- **while vs do...while (A)**: A alternativa A descreve o `do...while`, mas atribui ao `while`.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 26,
+    "area": "Fundamentos da Computação",
+    "enunciado": "No caminhamento ______ de uma árvore T, a raiz de T é visitada em primeiro lugar, e então as subárvores enraizadas nos seus filhos são percorridas recursivamente.",
+    "alternativas": {
+      "A": "simétrico",
+      "B": "em largura",
+      "C": "central",
+      "D": "pré-fixado",
+      "E": "pós-fixado"
+    },
+    "resposta": "D",
+    "comentario": "Pré-fixado (pré-ordem): raiz → filhos. Simétrico: esq → raiz → dir. Pós-fixado: filhos → raiz.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Em qual caminhamento de árvore a raiz é visitada primeiro, seguida pelas subárvores dos filhos?",
+      "resposta": "## Conceito\nCaminhamento (ou travessia) em árvores define a ordem em que os nós são visitados. Para árvores binárias, os nomes referem-se à posição da **Raiz** em relação à Subárvore Esquerda (E) e Direita (D).\n\n## Por que (D) é correta\nNo caminhamento **Pré-fixado** (ou Pré-ordem), a sequência é: **Raiz** $\\to$ Esquerda $\\to$ Direita. Ou seja, a raiz é visitada antes de qualquer descendente.\n\n## Pegadinhas desta questão\n- **Pós-fixado (E)**: Esquerda $\\to$ Direita $\\to$ **Raiz**. A raiz é a última.\n- **Simétrico/Central (A/C)**: Esquerda $\\to$ **Raiz** $\\to$ Direita. A raiz fica no meio. (Simétrico e Central são sinônimos em árvores binárias).\n- **Largura (B)**: Visita por níveis (raiz, depois todos os filhos, depois todos os netos), não é essencialmente recursivo da forma descrita.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 29,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual dos seguintes métodos permite a transferência de dados entre um dispositivo de E/S e a memória principal sem o intermédio da CPU?",
+    "alternativas": {
+      "A": "Polling",
+      "B": "Interrupções",
+      "C": "E/S mapeada em memória",
+      "D": "Direct Memory Access (DMA)",
+      "E": "E/S programada"
+    },
+    "resposta": "D",
+    "comentario": "DMA permite transferência direta dispositivo↔RAM sem envolver a CPU em cada byte.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual método permite transferência de dados entre E/S e memória sem a intervenção constante da CPU?",
+      "resposta": "## Conceito\nA transferência de dados em computadores pode sobrecarregar a CPU se ela tiver que mover cada byte individualmente. Existem técnicas para delegar essa tarefa ou torná-la mais eficiente.\n\n## Por que (D) é correta\nO **DMA (Acesso Direto à Memória)** é um hardware especializado que assume o controle do barramento para transferir blocos de dados diretamente entre o periférico (ex: disco) e a RAM. A CPU apenas inicia a transferência e é avisada quando termina, ficando livre para processar outras tarefas nesse intervalo.\n\n## Pegadinhas desta questão\n- **Polling (A)**: A CPU fica em um loop infinito perguntando ao dispositivo se ele tem dados. É o método que mais consome CPU.\n- **Interrupções (B)**: O dispositivo avisa a CPU quando tem dados, mas a CPU ainda precisa realizar a transferência.\n- **E/S Programada (E)**: É o termo genérico para a CPU movendo dados manualmente via instruções de entrada/saída.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 33,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Analise o código C:\nint main() {\n  int valor1 = 12;\n  int *valor2;\n  int cont = 0;\n  valor2 = &valor1;\n  do {\n    valor1 >>= 1;\n    cont++;\n  } while (*valor2 > 0);\n  printf(\"%d\", cont);\n}\nA saída do programa é:",
+    "alternativas": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5",
+      "E": "6"
+    },
+    "resposta": "C",
+    "comentario": "12→6→3→1→0: 4 iterações. Saída: 4.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Dado o código C com `valor1 = 12`, `valor1 >>= 1` em loop `do...while(*valor2 > 0)`, qual a saída de `cont`?",
+      "resposta": "## Conceito\nEste código demonstra o uso de ponteiros e operadores bitwise. `valor2` aponta para `valor1`. O operador `>>= 1` (shift right) desloca os bits uma posição à direita, o que equivale a uma divisão inteira por 2.\n\n## Por que (C) é correta\nAcompanhando as iterações do `do...while`:\n1. `valor1` começa em 12. Entra no loop. `valor1` vira 6 ($12 \\div 2$). `cont` = 1. Condição: `*valor2` (que é `valor1`) é $6 > 0$? Sim.\n2. `valor1` vira 3 ($6 \\div 2$). `cont` = 2. Condição: $3 > 0$? Sim.\n3. `valor1` vira 1 ($3 \\div 2$). `cont` = 3. Condição: $1 > 0$? Sim.\n4. `valor1` vira 0 ($1 \\div 2$). `cont` = 4. Condição: $0 > 0$? Falso.\nO loop termina e imprime `cont = 4`.\n\n## Pegadinhas desta questão\n- Lembre-se que o `do...while` executa o bloco **antes** de testar a condição.\n- Note que `valor2` é apenas um apelido para `valor1`. Mudar um altera o outro.\n- Divisão inteira: $1 >> 1$ resulta em $0$.\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 36,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual das seguintes linguagens pode ser gerada por uma gramática regular?",
+    "alternativas": {
+      "A": "{w | nº de a' > nº de b'}",
+      "B": "{w | nº de a' = 2×nº de b'}",
+      "C": "{w | nº de a' divisível por 3 e nº de b' ímpar}",
+      "D": "{w | mesmo nº de a' e b'}",
+      "E": "{w | diferentes nº de a' e b'}"
+    },
+    "resposta": "C",
+    "comentario": "Contagens mod 3 e paridade são rastreáveis com estados finitos. As demais requerem comparação ilimitada.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual destas linguagens é Regular (pode ser gerada por uma Gramática Regular ou reconhecida por um AFD)?",
+      "resposta": "## Conceito\nLinguagens Regulares são o nível mais baixo da Hierarquia de Chomsky. Elas podem ser reconhecidas por Autômatos Finitos (AFD/AFN), que possuem memória **finita** (apenas os estados).\n\n## Por que (C) é correta\nPara saber se um número é divisível por 3, basta contar \"módulo 3\" (3 estados: resto 0, 1, 2). Para saber se é ímpar, basta contar \"módulo 2\" (2 estados: par, ímpar). Como ambos são finitos, podemos construir um AFD que rastreia essas duas informações simultaneamente (um autômato produto de 6 estados).\n\n## Pegadinhas desta questão\n- A grande pegadinha das linguagens regulares é a **contagem**. Autômatos finitos **não conseguem comparar** quantidades ilimitadas (ex: $n$ de 'a' igual a $n$ de 'b').\n- Alternativas A, B, D e E exigem memória infinita (pilha ou fita) para contar e comparar, logo são Livres de Contexto ou Sensíveis ao Contexto, mas nunca Regulares.\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 38,
+    "area": "Fundamentos da Computação",
+    "enunciado": "O ______, de ______, demonstra limitações dos sistemas formais. Já o ______, de ______, pergunta se um programa irá parar ou entrar em loop infinito.",
+    "alternativas": {
+      "A": "Teorema da Incompletude – Turing – Problema da Parada – Gödel",
+      "B": "Teorema da Incompletude – Kurt Gödel – Problema da Parada – Alan Turing",
+      "C": "Problema da Parada – Turing – Incompletude – Gödel",
+      "D": "Problema da Parada – Gödel – Incompletude – Church",
+      "E": "Teorema da Incompletude – Church – Problema da Parada – Turing"
+    },
+    "resposta": "B",
+    "comentario": "Incompletude = Gödel (1931). Problema da Parada = Turing (1936).",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Complete: O ____ de ____ demonstra limitações formais; o ____ de ____ trata da terminação de programas.",
+      "resposta": "## Conceito\nA Teoria da Computação e a Lógica Matemática estabeleceram limites fundamentais sobre o que pode ser provado e o que pode ser computado.\n\n## Por que (B) é correta\n- **Kurt Gödel (1931)**: Provou o **Teorema da Incompletude**, mostrando que em qualquer sistema aritmético consistente, existem proposições verdadeiras que não podem ser provadas dentro do próprio sistema.\n- **Alan Turing (1936)**: Formulou o **Problema da Parada** (*Halting Problem*), provando que não existe um algoritmo genérico que possa determinar se qualquer programa arbitrário irá eventualmente parar ou rodar para sempre.\n\n## Pegadinhas desta questão\n- A questão troca os nomes e os teoremas nas outras alternativas.\n- Lembre-se: **Gödel** está associado à **Lógica/Prova**; **Turing** está associado a **Algoritmos/Máquinas**. Ambos mostraram que a matemática e a computação têm \"buracos\" intransponíveis.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 39,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre a estrutura de armazenamento e recuperação de informações em memória secundária, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "Um arquivo é um conjunto de dados de diferentes tipos, e cada item individual é chamado de byte.",
+      "B": "Um programa não pode ser considerado um arquivo.",
+      "C": "Na memória secundária, o SO armazena informações em grupos chamados blocos para aumentar a eficiência.",
+      "D": "A estrutura não utiliza o conceito de arquivos e registros, mas sim páginas e segmentos.",
+      "E": "Na memória secundária, os dados são armazenados exclusivamente em formato não hierárquico."
+    },
+    "resposta": "C",
+    "comentario": "O SO organiza memória secundária em blocos (clusters) para otimizar a transferência entre disco e RAM.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Sobre o armazenamento em memória secundária (disco), qual afirmação está correta?",
+      "resposta": "## Conceito\nA memória secundária (HDs, SSDs) é persistente e lenta comparada à RAM. O Sistema Operacional abstrai o hardware bruto para oferecer uma visão organizada ao usuário e às aplicações.\n\n## Por que (C) é correta\nLer um único byte do disco é ineficiente devido ao overhead mecânico ou eletrônico. Por isso, o SO lê e escreve em **blocos** (ou setores/clusters), que são grupos de bytes (ex: 4KB). Mesmo que você queira mudar um único bit, o SO traz o bloco inteiro para a RAM, altera e devolve.\n\n## Pegadinhas desta questão\n- **Arquivos (A/B)**: Um arquivo é apenas uma coleção de bytes. Um programa executável **é** um arquivo.\n- **Páginas e Segmentos (D)**: Estes são conceitos de **Gerenciamento de Memória (RAM)**, não de armazenamento em disco (embora existam arquivos de paginação, a unidade de disco continua sendo o bloco).\n- **Hierarquia (E)**: Sistemas de arquivos modernos são quase sempre hierárquicos (pastas dentro de pastas).\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 40,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considerando a compressão de dados, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "A compressão pode ser alcançada atribuindo descrições curtas aos resultados mais frequentes e longas aos menos frequentes.",
+      "B": "A compressão pode ser alcançada atribuindo descrições de comprimento uniforme a todos os resultados.",
+      "C": "A desigualdade de Kraft afirma que os comprimentos dos códigos não precisam seguir qualquer padrão.",
+      "D": "A codificação de Huffman minimiza o tamanho codificado, porém com perda de informação.",
+      "E": "A compressão de dados sempre resulta em perda de qualidade."
+    },
+    "resposta": "A",
+    "comentario": "Princípio da codificação de entropia: símbolos mais frequentes → códigos mais curtos (Huffman, Shannon-Fano).",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual o princípio fundamental para alcançar a compressão de dados de forma eficiente?",
+      "resposta": "## Conceito\nCompressão de dados reduz o espaço ocupado por uma informação removendo redundâncias. Existem métodos **com perda** (*lossy*, como JPEG) e **sem perda** (*lossless*, como ZIP/Huffman).\n\n## Por que (A) é correta\nEste é o princípio da **Codificação de Comprimento Variável**. Se em um texto a letra 'e' aparece 1000 vezes e a letra 'z' apenas 1 vez, atribuímos um código binário bem pequeno (ex: 2 bits) para 'e' e um código grande para 'z'. No total, economizamos muitos bits.\n\n## Pegadinhas desta questão\n- **Codificação de Huffman (D)**: Ela é uma técnica **sem perda** de informação (*lossless*). O dado original pode ser recuperado bit a bit.\n- **Perda de qualidade (E)**: Nem toda compressão causa perda. Arquivos de texto e código-fonte usam compressão sem perda para garantir integridade.\n- **Uniformidade (B)**: Se todos os códigos tiverem o mesmo tamanho, não há compressão por frequência.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 45,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre os tipos de dados básicos, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "As variáveis do tipo inteiro são utilizadas para armazenar valores que pertencem ao conjunto de números naturais positivos e negativos.",
+      "B": "O tipo caractere permite armazenar strings em uma variável do tipo caractere.",
+      "C": "Por padrão, uma variável do tipo inteiro admite somente valores positivos.",
+      "D": "As variáveis do tipo vetor são utilizadas para armazenar valores numéricos com parte fracionária.",
+      "E": "O conjunto de operações para o tipo caractere inclui soma, subtração, multiplicação, divisão inteira e resto."
+    },
+    "resposta": "A",
+    "comentario": "Inteiros = ℤ: positivos e negativos sem parte fracionária.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Sobre os tipos de dados básicos em programação (int, char, float), qual afirmação é verdadeira?",
+      "resposta": "## Conceito\nTipos de dados definem o domínio de valores que uma variável pode assumir e quais operações podem ser realizadas com eles.\n\n## Por que (A) é correta\nO tipo **inteiro** representa o conjunto matemático $\\mathbb{Z}$. Ele armazena números sem casas decimais, podendo ser positivos, negativos ou zero. (Nota: Embora o enunciado use \"naturais positivos e negativos\" — o que é tecnicamente contraditório em matemática pura — no contexto de programação refere-se a números inteiros).\n\n## Pegadinhas desta questão\n- **Caractere (B)**: Uma variável `char` armazena **um único** caractere. Para strings, precisamos de um vetor/array de caracteres.\n- **Vetor (D)**: Vetor é uma estrutura de dados (arranjo), não um tipo básico para frações (que seria `float` ou `double`).\n- **Operações com Char (E)**: Embora char seja internamente um número (ASCII), operações de multiplicação ou divisão não fazem sentido semântico para \"letras\".\n- **Sinal (C)**: Por padrão (`signed`), inteiros aceitam negativos. Só são apenas positivos se usarmos o modificador `unsigned`.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 47,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Para um programa que solicita salário, mostra erro se negativo/zero, e aplica 10% de imposto se > 1000 ou 5% caso contrário, qual instrução deve ser utilizada?",
+    "alternativas": {
+      "A": "Laço encadeado",
+      "B": "Atribuição composta",
+      "C": "Laço infinito",
+      "D": "Condicional encadeada",
+      "E": "Atribuição simples"
+    },
+    "resposta": "D",
+    "comentario": "Decisões aninhadas (if/else if/else) → condicional encadeada. Não há repetição.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual estrutura de controle deve ser usada para aplicar diferentes taxas de imposto baseadas em faixas salariais?",
+      "resposta": "## Conceito\nEstruturas de controle direcionam o fluxo do programa. Quando precisamos escolher entre vários caminhos baseados em condições, usamos estruturas de seleção.\n\n## Por que (D) é correta\nUma **condicional encadeada** (como `if...else if...else`) permite testar múltiplas condições em sequência.\n1. `if (salario <= 0)` $\\to$ Erro.\n2. `else if (salario > 1000)` $\to$ 10%.\n3. `else` $\to$ 5%.\nCada \"else if\" encadeia uma nova decisão caso a anterior seja falsa.\n\n## Pegadinhas desta questão\n- **Laços (A/C)**: Laços são para **repetição**. O problema pede apenas uma decisão lógica sobre um valor, não que o código rode várias vezes.\n- **Atribuição (B/E)**: Atribuição é apenas colocar um valor na variável (`x = 10`). Ela faz parte do processo, mas não resolve a lógica de escolha da taxa.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 48,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Um mapa de cidade modelado como grafo com arestas não dirigidas (ruas de dois sentidos) e arestas dirigidas (ruas de um sentido) é um:",
+    "alternativas": {
+      "A": "Dígrafo",
+      "B": "Grafo completo",
+      "C": "Grafo misto",
+      "D": "Bígrafo",
+      "E": "Grafo simétrico"
+    },
+    "resposta": "C",
+    "comentario": "Grafo misto: contém arestas dirigidas e não dirigidas simultaneamente.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Como se chama um grafo que possui tanto arestas com direção definida quanto arestas sem direção?",
+      "resposta": "## Conceito\nGrafos são conjuntos de vértices conectados por arestas. A natureza das arestas define o tipo do grafo.\n\n## Por que (C) é correta\n- **Grafo Dirigido (Dígrafo)**: Todas as arestas têm direção.\n- **Grafo Não-Dirigido**: Nenhuma aresta tem direção.\n- **Grafo Misto**: Permite que coexistam arestas dirigidas e não-dirigidas. No exemplo da cidade, é a representação perfeita para ruas que podem ser \"mão única\" ou \"mão dupla\".\n\n## Pegadinhas desta questão\n- **Grafo Completo (B)**: É aquele onde todos os vértices estão conectados a todos os outros vértices.\n- **Dígrafo (A)**: Muitas pessoas marcam esta por acharem que \"rua de dois sentidos\" são apenas \"duas setas\". Embora possa ser modelado assim, a definição de grafo misto é mais precisa quando o modelo aceita arestas não-dirigidas nativamente.\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 49,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Duas arestas não dirigidas com os mesmos pontos finais, ou duas arestas dirigidas com a mesma origem e destino, são chamadas de:",
+    "alternativas": {
+      "A": "Paralelas",
+      "B": "Laços",
+      "C": "Adjacentes",
+      "D": "Incidentes",
+      "E": "Finais"
+    },
+    "resposta": "A",
+    "comentario": "Arestas paralelas (múltiplas): conectam os mesmos vértices. Laços: conectam vértice a si mesmo.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Como são chamadas arestas paralelas (múltiplas) em um grafo?",
+      "resposta": "## Conceito\nArestas paralelas ou múltiplas são aquelas que conectam o mesmo par de vértices.\n\n## Por que (A) é correta\nEm grafos não dirigidos, são arestas com os mesmos pontos finais. Em grafos dirigidos, são arcos com a mesma origem e o mesmo destino.\n\n## Pegadinhas desta questão\nNão confundir com **Laços** (vértice conectado a si mesmo) ou **Adjacentes** (vértices vizinhos ou arestas que compartilham um vértice).\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 50,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Um ______ é um caminho em que os vértices de início e fim são os mesmos.",
+    "alternativas": {
+      "A": "arco",
+      "B": "ciclo",
+      "C": "caminho simples",
+      "D": "laço",
+      "E": "k-cubo"
+    },
+    "resposta": "B",
+    "comentario": "Ciclo (circuito): caminho fechado onde vértice inicial = vértice final.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual o nome do caminho em que os vértices de início e fim são os mesmos?",
+      "resposta": "## Conceito\nUm ciclo (ou circuito) é uma sequência de vértices e arestas onde o vértice inicial coincide com o final.\n\n## Por que (B) é correta\nA definição formal de caminho fechado em teoria dos grafos é um ciclo.\n\n## Pegadinhas desta questão\nUm **laço** é uma aresta única de um vértice para si mesmo, enquanto um **ciclo** pode envolver vários vértices.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 21,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre busca sequencial em arquivo com chave única, sendo f(n) o número de registros consultados, é correto afirmar que:",
+    "alternativas": {
+      "A": "O caso médio é f(n) = (n + 1)/2",
+      "B": "O melhor caso é f(n) = n – 1",
+      "C": "O caso ótimo é f(n) = 3n/2 – 3/2",
+      "D": "O caso recorrente é f(n) = 2(n – 1)",
+      "E": "O pior caso é f(n) = 1"
+    },
+    "resposta": "A",
+    "comentario": "Busca sequencial: melhor caso = 1 (primeiro elemento), pior caso = n (último/ausente), caso médio = (1+2+...+n)/n = (n+1)/2.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Na busca sequencial em arquivo com n registros, qual a fórmula do caso médio?",
+      "resposta": "## Conceito\nA busca sequencial percorre o arquivo do início ao fim até encontrar a chave desejada.\n\n## Por que (A) é correta\nO caso médio é a média aritmética das posições: $(1 + 2 + ... + n) / n = [n(n+1)/2] / n = (n+1)/2$.\n\n## Pegadinhas desta questão\nA alternativa E inverte o melhor caso (1) com o pior caso (n). O item B não faz sentido matemático para essa análise.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 22,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é o objetivo da análise assintótica de algoritmos?",
+    "alternativas": {
+      "A": "Analisar conjuntamente o pior caso e o caso médio.",
+      "B": "Analisar o desempenho para entradas muito pequenas.",
+      "C": "Determinar o desempenho para todas as possíveis entradas.",
+      "D": "Analisar o desempenho para entradas médias.",
+      "E": "Analisar o comportamento do algoritmo à medida que o tamanho da entrada aumenta indefinidamente."
+    },
+    "resposta": "E",
+    "comentario": "A análise assintótica descreve a taxa de crescimento do algoritmo quando n→∞, usando notações O, Ω, Θ.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual o objetivo principal da análise assintótica de algoritmos?",
+      "resposta": "## Conceito\nAnálise assintótica estuda a eficiência de um algoritmo ignorando constantes e termos de menor ordem.\n\n## Por que (E) é correta\nEla foca na taxa de crescimento ($n \\to \\infty$), permitindo comparar algoritmos independentemente de hardware.\n\n## Pegadinhas desta questão\nAnálise assintótica **não** serve para entradas pequenas (onde constantes importam mais) nem para valores exatos de tempo.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 23,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual é a complexidade de tempo da busca em tabela hash (média e pior caso, respectivamente)?",
+    "alternativas": {
+      "A": "O(1) e O(1)",
+      "B": "O(1) e O(n)",
+      "C": "O(log n) e O(log n)",
+      "D": "O(log n) e O(n)",
+      "E": "O(n) e O(2^n)"
+    },
+    "resposta": "B",
+    "comentario": "Hash bem dimensionada: busca O(1) em média. Com muitas colisões (pior caso), degenera para O(n) (lista encadeada no bucket).",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual a complexidade de busca em Tabela Hash (Caso Médio e Pior Caso)?",
+      "resposta": "## Conceito\nTabelas Hash usam funções para mapear chaves a índices. Colisões ocorrem quando chaves diferentes mapeiam para o mesmo índice.\n\n## Por que (B) é correta\nEm média, o acesso é $O(1)$. No pior caso (todas as chaves colidindo no mesmo slot), a busca vira sequencial $O(n)$.\n\n## Pegadinhas desta questão\nNão confunda com árvores balanceadas ($O(\\log n)$). O pior caso só é $O(1)$ se a tabela for perfeita e estática.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 24,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Em uma estrutura de dados lista ______, cada elemento armazena dados e um ponteiro para o próximo, mantém a estrutura linear e possui campo-chave para ordenação.",
+    "alternativas": {
+      "A": "duplamente encadeada ordenada",
+      "B": "circular não ordenada",
+      "C": "de prioridades",
+      "D": "duplamente encadeada não ordenada",
+      "E": "simplesmente encadeada ordenada"
+    },
+    "resposta": "E",
+    "comentario": "Um ponteiro para o próximo → simplesmente encadeada. Campo-chave que mantém ordenação → ordenada.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Lista com um ponteiro p/ o próximo e campo-chave de ordenação é chamada de?",
+      "resposta": "## Conceito\nListas encadeadas usam ponteiros para ligar nós. A ordenação é mantida no momento da inserção.\n\n## Por que (E) é correta\n\"Um ponteiro para o próximo\" define a lista como **simplesmente encadeada**. O \"campo-chave para ordenação\" a define como **ordenada**.\n\n## Pegadinhas desta questão\n**Duplamente encadeada** exigiria dois ponteiros (próximo e anterior). **Circular** ligaria o último nó de volta ao primeiro.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 25,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre as instruções de repetição, assinale a alternativa correta.",
+    "alternativas": {
+      "A": "No while, a instrução é executada uma ou mais vezes e a condição é testada depois.",
+      "B": "O corpo do do...while é executado pelo menos uma vez, enquanto nos laços while e for o corpo pode nunca ser executado.",
+      "C": "A instrução if adapta-se a situações em que o número de iterações é conhecido a priori.",
+      "D": "A instrução break passa o laço para a próxima iteração.",
+      "E": "No for, a condição é testada depois da instrução."
+    },
+    "resposta": "B",
+    "comentario": "do...while executa o corpo antes do teste (ao menos 1 vez). while e for testam antes: se falso de início, nunca executam. break encerra o laço (não itera); continue é quem pula para a próxima iteração.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual a diferença fundamental entre do...while e os laços while/for?",
+      "resposta": "## Conceito\nLaços controlam o fluxo de repetição baseados em uma condição lógica.\n\n## Por que (B) é correta\n`do...while` testa a condição **após** a primeira execução. `while` e `for` testam **antes**, podendo saltar o corpo inteiramente.\n\n## Pegadinhas desta questão\n`break` sai do laço; `continue` pula para a próxima iteração. `if` não é instrução de repetição, mas de seleção.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 26,
+    "area": "Fundamentos da Computação",
+    "enunciado": "No caminhamento ______ de uma árvore T, a raiz é visitada em primeiro lugar, e então as subárvores são percorridas recursivamente.",
+    "alternativas": {
+      "A": "simétrico",
+      "B": "em largura",
+      "C": "central",
+      "D": "pré-fixado",
+      "E": "pós-fixado"
+    },
+    "resposta": "D",
+    "comentario": "Pré-fixado (pré-ordem): visita raiz primeiro, depois recursivamente as subárvores. Pós-fixado visita raiz por último. Simétrico/central visita raiz entre os filhos.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "No percurso de árvores, qual método visita a raiz ANTES das subárvores?",
+      "resposta": "## Conceito\nO percurso em profundidade define a ordem de visitação: Raiz, Esquerda e Direita.\n\n## Por que (D) é correta\nNo percurso **Pré-fixado** (ou Pré-ordem), a ordem é: Raiz $\\to$ Subárvore Esquerda $\\to$ Subárvore Direita.\n\n## Pegadinhas desta questão\n**Pós-fixado**: Raiz por último. **Simétrico/Central**: Raiz no meio. **Largura**: Visita nível por nível.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 27,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Considerando memória cache com mapeamento por conjunto associativo contendo 64 linhas divididas em 16 conjuntos, e memória principal com 4K blocos de 128 palavras cada, quantos bits são necessários para endereçar uma palavra e quais os tamanhos dos campos tag, s, d e w?",
+    "alternativas": {
+      "A": "Endereço total de 19 bits, com tag = 8 bits, s = 12 bits, d = 4 bits e w = 7 bits.",
+      "B": "Endereço total de 19 bits, com tag = 12 bits, s = 7 bits, d = 4 bits e w = 12 bits.",
+      "C": "Endereço total de 23 bits, com tag = 7 bits, s = 4 bits, d = 7 bits e w = 12 bits.",
+      "D": "Endereço total de 19 bits, com tag = 8 bits, s = 12 bits, d = 7 bits e w = 4 bits.",
+      "E": "Endereço total de 21 bits, com tag = 4 bits, s = 5 bits, d = 7 bits e w = 9 bits."
+    },
+    "resposta": "A",
+    "comentario": "w = log2(128) = 7 bits (offset na palavra). 16 conjuntos → s = log2(16) = 4 bits. 4K = 4096 blocos → endereço de bloco = log2(4096) = 12 bits. tag = 12 – 4 = 8 bits. Total = tag + s + w = 8 + 4 + 7 = 19 bits.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Cache (64 linhas, 16 conj.) + RAM (4K blocos de 128 pal.). Tamanho do endereço e campos?",
+      "resposta": "## Conceito\nMapeamento Conjunto-Associativo: o endereço é dividido em Tag, Índice do Conjunto (s) e Offset da Palavra (w).\n\n## Por que (A) é correta\n1. $w = \\log_2(128) = 7$ bits.\n2. Conjuntos = 16 $\\to s = \\log_2(16) = 4$ bits.\n3. RAM = 4K blocos $\\to 4096$ blocos $\\to 12$ bits p/ identificar o bloco.\n4. Tag = bits do bloco (12) - bits do conjunto (4) = 8 bits.\n5. Total = $8 + 4 + 7 = 19$ bits.\n\n## Pegadinhas desta questão\nCuidado ao calcular o campo Tag: ele é o que resta do endereço do bloco após identificar o conjunto na cache.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 28,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre ponte norte e ponte sul em placa-mãe, analise as assertivas: I. Ponte norte: comunicação com dispositivos de baixa velocidade; ponte sul: conecta RAM e vídeo. II. Ponte sul: conecta processador à RAM e vídeo; ponte norte: lida com armazenamento e periféricos. III. Ponte norte: interface com componentes de alta velocidade (RAM e vídeo); ponte sul: gerencia dispositivos de E/S de menor velocidade. IV. Ponte norte e sul são substituíveis e usadas indistintamente.",
+    "alternativas": {
+      "A": "Apenas I.",
+      "B": "Apenas II.",
+      "C": "Apenas III.",
+      "D": "Apenas I e II.",
+      "E": "Apenas III e IV."
+    },
+    "resposta": "C",
+    "comentario": "Apenas III está correta: a ponte norte (northbridge) gerencia a comunicação de alta velocidade entre CPU, RAM e GPU. A ponte sul (southbridge) gerencia dispositivos de E/S mais lentos (USB, SATA, PCI). I e II invertem os papéis. IV está errada pois não são intercambiáveis.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Quais as funções da Ponte Norte (Northbridge) e Ponte Sul (Southbridge)?",
+      "resposta": "## Conceito\nO Chipset é dividido em dois componentes principais para gerenciar o fluxo de dados na placa-mãe.\n\n## Por que (C) é correta\n**Ponte Norte**: Conecta a CPU a componentes rápidos (RAM, Barramento Gráfico).\n**Ponte Sul**: Gerencia periféricos lentos (USB, SATA, Som, Teclado).\n\n## Pegadinhas desta questão\nA questão inverte as funções nas assertivas I e II. Elas não são substituíveis (IV).\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 29,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual método permite a transferência de dados entre dispositivo de E/S e memória principal sem o intermédio da CPU?",
+    "alternativas": {
+      "A": "Polling",
+      "B": "Interrupções",
+      "C": "E/S mapeada em memória",
+      "D": "Direct Memory Access (DMA)",
+      "E": "E/S programada"
+    },
+    "resposta": "D",
+    "comentario": "DMA transfere dados diretamente entre dispositivo e RAM sem envolver a CPU em cada transferência. Polling e E/S programada requerem CPU monitorando. Interrupções ainda passam pela CPU.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual tecnologia permite E/S direto na RAM sem envolver a CPU?",
+      "resposta": "## Conceito\nDMA é um recurso que libera a CPU da tarefa tediosa de mover grandes volumes de dados byte a byte.\n\n## Por que (D) é correta\nO controlador de DMA assume o barramento e realiza a transferência direta entre o periférico e a memória principal.\n\n## Pegadinhas desta questão\n**Polling** e **Interrupções** são métodos de *controle*, mas a transferência de dados neles ainda costuma passar pela CPU.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 33,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Analise o código C: int valor1 = 12; int *valor2; int cont = 0; valor2 = &valor1; do { valor1 >>= 1; cont++; } while (*valor2 > 0); printf(\"%d\", cont);",
+    "alternativas": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5",
+      "E": "6"
+    },
+    "resposta": "C",
+    "comentario": "valor2 aponta para valor1. Iterações: 12→6 (cont=1), 6→3 (cont=2), 3→1 (cont=3), 1→0 (cont=4). *valor2 = 0, condição falsa, encerra. Saída: 4.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual a saída do código C: v1=12; v2=&v1; do { v1>>=1; cont++; } while (*v2>0);?",
+      "resposta": "## Conceito\nShift right (`>>`) em inteiros equivale à divisão por 2. O ponteiro `*v2` reflete as alterações de `v1`.\n\n## Por que (C) é correta\n1. v1=12, cont=1, v1=6\n2. v1=6, cont=2, v1=3\n3. v1=3, cont=3, v1=1\n4. v1=1, cont=4, v1=0\nFim: v1=0, logo `*v2 > 0` é falso.\n\n## Pegadinhas desta questão\nO laço é `do...while`, então ele executa a operação ANTES de testar se v1 chegou a zero.\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 34,
+    "area": "Fundamentos da Computação",
+    "enunciado": "f_rec conta caracteres de 'Ola mundo!' (10 chars). resultado = var / 2 (divisão inteira), impresso com %f. A saída correta é:",
+    "alternativas": {
+      "A": "A saída é o número de caracteres dividido por 2, mostrado como ponto flutuante.",
+      "B": "A saída é o número de caracteres dividido por 2, mostrado como inteiro.",
+      "C": "Erro: f_rec não aceita char array.",
+      "D": "Erro: var inteiro em operação com double.",
+      "E": "Erro: printf usa especificador errado."
+    },
+    "resposta": "A",
+    "comentario": "f_rec retorna 10. resultado = 10/2 = 5 (divisão inteira antes de atribuir ao double). printf(\"%f\") imprime 5.000000. A saída é correta como ponto flutuante (valor 5.0).",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Var=10; res (double) = Var/2; printf(\"%f\", res); Qual o resultado?",
+      "resposta": "## Conceito\nPromoção de tipos em C: se você atribui um inteiro a um `double`, ele é convertido automaticamente.\n\n## Por que (A) é correta\n`10 / 2` é calculado como inteiro (5), então atribuído ao double `res` (5.0). O `%f` imprime `5.000000`.\n\n## Pegadinhas desta questão\nSe a divisão fosse `5 / 2`, o resultado seria `2.0` (inteiro 2 convertido), e não `2.5`, pois a divisão de dois int é truncada.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 36,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Qual das linguagens pode ser gerada por uma gramática regular?",
+    "alternativas": {
+      "A": "{w ∈ {a,b}* | #a(w) > #b(w)}",
+      "B": "{w ∈ {a,b}* | #a(w) = 2·#b(w)}",
+      "C": "{w ∈ {a,b}* | #a(w) divisível por 3 e #b(w) ímpar}",
+      "D": "{w ∈ {a,b}* | #a(w) = #b(w)}",
+      "E": "{w ∈ {a,b}* | #a(w) ≠ #b(w)}"
+    },
+    "resposta": "C",
+    "comentario": "'Número de a's divisível por 3' é rastreável com 3 estados (mod 3). 'Número de b's ímpar' com 2 estados (paridade). Produto = AFD com 6 estados → linguagem regular.",
+    "ano": 2024,
+    "card": {
+      "pergunta": "Qual dessas linguagens sobre {a,b} é REGULAR?",
+      "resposta": "## Conceito\nLinguagens Regulares são aquelas reconhecidas por AFDs. Elas não podem comparar contagens ilimitadas.\n\n## Por que (C) é correta\nVerificar se algo é divisível por 3 ou se é ímpar só exige memória finita (ciclos de estados).\n\n## Pegadinhas desta quest\nAs opções A, B, D e E exigem comparar a contagem de 'a' com a de 'b', o que requer uma pilha (Livre de Contexto).\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 37,
+    "area": "Fundamentos da Computação",
+    "enunciado": "Sobre linguagens formais e computabilidade, quais assertivas estão corretas? I. AFN pode ter ε-transições, AFD não pode. II. MTs são sempre determinísticas. III. Autômato com pilha aceita linguagens regulares. IV. Problemas NP-completos são subconjunto de NP.",
+    "alternativas": {
+      "A": "Apenas I",
+      "B": "Apenas IV",
+      "C": "Apenas I e II",
+      "D": "Apenas II e III",
+      "E": "Apenas III e IV"
+    },
+    "resposta": "E",
+    "comentario": "Gabarito oficial: E. IV é verdadeira (NP-completo ⊆ NP). III é verdadeira (AP aceita LLC, e Regular ⊆ LLC).",
+    "ano": 2024,
+    "card": {
+      "pergunta": "AP aceita linguagens regulares? NP-Completo está em NP?",
+      "resposta": "## Conceito\nHierarquia de Chomsky e Classes de Complexidade definem o poder dos modelos computacionais.\n\n## Por que (E) é correta\nIII: Todo Autômato com Pilha aceita LLCs, e as Regulares são um subconjunto das LLCs. \nIV: Por definição, a classe NP-Completo está contida em NP.\n\n## Pegadinhas desta quest\nMTs podem ser não-determinísticas (embora equivalentes às Det). AFDs e AFNs são equivalentes, mas a definição estrita de AFD exclui vazios.\n\n**Gabarito: (E)**"
+    }
+  }
+]

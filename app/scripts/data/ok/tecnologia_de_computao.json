@@ -1,0 +1,382 @@
+[
+  {
+    "id": 51,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Dada a tabela ITEM(Id, Nome, Fk) com tuplas (1,'Item 1',NULL),(2,'Item 2',1),(3,'Item 3',1),(4,'Item 4',3), a consulta SELECT FILHO.Id, FILHO.Nome, PAI.Id, PAI.Nome FROM ITEM AS FILHO RIGHT OUTER JOIN ITEM AS PAI ON FILHO.Fk = PAI.Id retorna quantas tuplas?",
+    "alternativas": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5",
+      "E": "6"
+    },
+    "resposta": "D",
+    "comentario": "RIGHT JOIN retorna todas as linhas de PAI. Item1 aparece 2x como PAI (filhos 2 e 3), Item3 aparece 1x (filho 4), Item2 e Item4 como PAI não têm filhos mas são incluídos com FILHO NULL. Total: 5 tuplas.",
+    "card": {
+      "pergunta": "Dada a tabela ITEM, quantas tuplas retorna a consulta SELECT ... RIGHT OUTER JOIN ITEM AS PAI ON FILHO.Fk = PAI.Id?",
+      "resposta": "## Conceito\nO **RIGHT OUTER JOIN** retorna todas as linhas da tabela à direita (`PAI`), mesmo que não haja correspondência na tabela à esquerda (`FILHO`).\nDados da tabela `ITEM`:\n1. `(1, 'Item 1', NULL)`\n2. `(2, 'Item 2', 1)`\n3. `(3, 'Item 3', 1)`\n4. `(4, 'Item 4', 3)`\n\n## Por que (D) é correta\nAnalisando cada linha da tabela `PAI`:\n- **ID 1 (Item 1):** Tem 2 filhos (`Fk=1` nos itens 2 e 3). → **2 tuplas**.\n- **ID 3 (Item 3):** Tem 1 filho (`Fk=3` no item 4). → **1 tupla**.\n- **ID 2 (Item 2):** Não é pai de ninguém. Como é *Right Join*, aparece com FILHO NULL. → **1 tupla**.\n- **ID 4 (Item 4):** Não é pai de ninguém. Aparece com FILHO NULL. → **1 tupla**.\nTotal: $2 + 1 + 1 + 1 = 5$ tuplas.\n\n## Pegadinhas desta questão\n** (A) ** Contou apenas os pais que possuem filhos diretos na tabela.\n** (B) ** Contou apenas a quantidade de IDs distintos que aparecem como pais.\n** (C) ** Esqueceu que o Item 1 aparece duas vezes (uma para cada filho) no resultado.\n** (E) ** Contou as tuplas originais da tabela ou adicionou linhas inexistentes.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 52,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Entre as estratégias de tratamento de deadlock, aquela que é protocolo de detecção (e não de prevenção) é:",
+    "alternativas": {
+      "A": "Espera cautelosa",
+      "B": "Grafo de espera",
+      "C": "Sem espera",
+      "D": "Esperar ou morrer",
+      "E": "Ferir ou esperar"
+    },
+    "resposta": "B",
+    "comentario": "O grafo de espera (wait-for graph) detecta deadlocks verificando ciclos. As demais são protocolos de prevenção que evitam a formação de ciclos a priori.",
+    "card": {
+      "pergunta": "Qual das seguintes estratégias de tratamento de deadlock é um protocolo de DETECÇÃO (e não de prevenção)?",
+      "resposta": "## Conceito\nEstratégias para lidar com Deadlock:\n- **Prevenção:** Regras rígidas (como timestamps) que impedem a formação de ciclos *antes* que ocorram.\n- **Evitação:** Algoritmos dinâmicos (como o do Banqueiro) que analisam se a alocação levará a um estado inseguro.\n- **Detecção:** Permite que o deadlock ocorra, identifica-o (geralmente via Grafo de Espera) e então realiza a recuperação.\n\n## Por que (B) é correta\nO **Grafo de Espera (Wait-for Graph)** é o método padrão de detecção. O sistema mantém um grafo onde nós são transações e arestas representam \"T1 espera por recurso de T2\". A presença de um **ciclo** no grafo indica a ocorrência de um deadlock.\n\n## Pegadinhas desta questão\n** (A) ** *Espera Cautelosa* é um protocolo de prevenção (pessimista).\n** (C) ** *Sem Espera (No-waiting)* é uma técnica agressiva de prevenção.\n** (D) ** *Esperar-ou-morrer (Wait-die)* é prevenção baseada em timestamps.\n** (E) ** *Ferir-ou-esperar (Wound-wait)* também é prevenção por timestamps.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 53,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Em árvores B e B+, quais tipos de nós possuem ponteiros de dados?\nI. Nós internos na árvore B.\nII. Nós folha na árvore B.\nIII. Nós internos na árvore B+.\nIV. Nós folha na árvore B+.",
+    "alternativas": {
+      "A": "Apenas I, II e III.",
+      "B": "Apenas I, II e IV.",
+      "C": "Apenas I, III e IV.",
+      "D": "Apenas II, III e IV.",
+      "E": "I, II, III e IV."
+    },
+    "resposta": "B",
+    "comentario": "Na árvore B, todos os nós (internos e folha) podem ter ponteiros de dados. Na árvore B+, apenas os nós folha têm ponteiros de dados; os nós internos têm apenas ponteiros de árvore. Portanto: I (B interno), II (B folha) e IV (B+ folha).",
+    "card": {
+      "pergunta": "Em quais casos existem ponteiros de dados em nós internos e folhas nas árvores B e B+?",
+      "resposta": "## Conceito\nÁrvores B e B+ são usadas em índices de bancos de dados.\n| Característica | Árvore B | Árvore B+ |\n|---|---|---|\n| **Nós Internos** | Guardam chaves e **ponteiros de dados**. | Guardam apenas chaves (índices). |\n| **Nós Folha** | Guardam chaves e **ponteiros de dados**. | Guardam chaves e **ponteiros de dados**. |\n| **Folhas ligadas** | Geralmente não. | Sim (lista ligada), facilitando busca sequencial. |\n\n## Por que (B) é correta\n- **I e II (Árvore B):** Em uma árvore B, os registros (ou ponteiros para eles) podem estar em qualquer nó, interno ou folha.\n- **IV (Árvore B+):** Na B+, os nós internos são apenas navegacionais. Os dados residem **exclusivamente** nas folhas.\nPortanto, as assertivas I, II e IV estão corretas.\n\n## Pegadinhas desta questão\n** (A) ** Afirma que nós internos da B+ têm dados (III), o que violaria o design da B+.\n** (C) ** Ignora que as folhas da árvore B também contêm ponteiros de dados (II).\n** (D) ** Ignora que os nós internos da árvore B guardam dados para economizar espaço de busca (I).\n** (E) ** Considera que nós internos da B+ (III) guardam dados, o que é o erro mais comum sobre B-trees.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 54,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "No contexto de construção de compiladores, um Esquema de Tradução é:",
+    "alternativas": {
+      "A": "Grafo que relaciona atributos entre regras de produção de uma gramática livre de contexto.",
+      "B": "Sequência de ações que descreve informalmente o funcionamento de todas as etapas do compilador.",
+      "C": "Técnica de recuperação de erros que obtém estruturas de controle semanticamente equivalentes.",
+      "D": "Forma de análise semântica que considera tipos de variáveis.",
+      "E": "Gramática livre de contexto na qual fragmentos de programas (ações) são inseridos nos lados direitos das regras de produção."
+    },
+    "resposta": "E",
+    "comentario": "Esquema de Tradução (Translation Scheme): GLC com ações semânticas embutidas nos lados direitos das produções, executadas durante a análise sintática.",
+    "card": {
+      "pergunta": "No contexto de construção de compiladores, o que define um Esquema de Tradução?",
+      "resposta": "## Conceito\nUm **Esquema de Tradução Dirigida pela Sintaxe (SDTS)** é uma Gramática Livre de Contexto onde **ações semânticas** (fragmentos de código) são inseridas no lado direito das produções.\n- **Diferença:** Enquanto Definições Dirigidas pela Sintaxe (SDD) são declarativas, o Esquema de Tradução é procedural, indicando *quando* a ação deve ser executada durante o parse.\nExemplo: $A \\rightarrow B \\{ \\text{print('+')} \\} C$.\n\n## Por que (E) é correta\nA definição exata de um Esquema de Tradução é uma gramática cujas regras de produção foram enriquecidas com ações embutidas. Essas ações são executadas na ordem em que aparecem durante a análise sintática (geralmente durante um parse *depth-first*).\n\n## Pegadinhas desta questão\n** (A) ** Descreve o grafo de dependências de atributos, que é usado em SDDs, não o esquema em si.\n** (B) ** Descreve a arquitetura geral do compilador, não um termo técnico específico da análise semântica.\n** (C) ** Refere-se a técnicas de otimização ou refatoração, não a esquemas de tradução.\n** (D) ** A análise semântica usa esquemas de tradução, mas o esquema é a *ferramenta*, não a análise em si.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 55,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Sobre representação intermediária em compiladores:\nI. Árvores sintáticas e código de três endereços são dois tipos de RI.\nII. Enunciados do código de três endereços têm a forma x := y op z, com desvios condicionais/incondicionais também possíveis.\nIII. Representações intermediárias podem ser produzidas usando Definições Dirigidas pela Sintaxe.\nIV. Autômatos finitos são usados na definição de representações intermediárias.\nQuais estão corretas?",
+    "alternativas": {
+      "A": "Apenas I.",
+      "B": "Apenas I e II.",
+      "C": "Apenas II e IV.",
+      "D": "Apenas I, II e III.",
+      "E": "I, II, III e IV."
+    },
+    "resposta": "D",
+    "comentario": "I, II e III estão corretas. IV está errada: autômatos finitos são usados na análise léxica, não na definição de representações intermediárias.",
+    "card": {
+      "pergunta": "Sobre representação intermediária (RI) em compiladores: Árvores sintáticas, Código de 3 endereços e SDDs. Quais estão corretas?",
+      "resposta": "## Conceito\nA **Representação Intermediária (RI)** é uma etapa entre o *Front-end* (analisador) e o *Back-end* (gerador de código).\n- **Tipos de RI:** Árvores (High-level), Código de Três Endereços (Low-level).\n- **Código de 3 Endereços:** Instruções do tipo $x = y \\text{ op } z$, facilitando otimizações.\n- **Geração:** Frequentemente gerada através de **Definições Dirigidas pela Sintaxe (SDD)**.\n\n## Por que (D) é correta\n- **I e II:** Estão corretas ao identificar os tipos comuns de RI e a estrutura clássica do código de três endereços.\n- **III:** Está correta pois as SDDs mapeiam a sintaxe para ações que geram a RI.\n- **IV:** Está **errada**, pois Autômatos Finitos são usados na **Análise Léxica**, não na definição de RIs complexas.\n\n## Pegadinhas desta questão\n** (A) ** Muito restritiva, ignora que a descrição do código de 3 endereços (II) é padrão.\n** (B) ** Esquece que as SDDs (III) são o mecanismo formal para gerar essas representações.\n** (C) ** Aceita o erro sobre autômatos finitos (IV), que não lidam com estruturas de dados de RI.\n** (E) ** Considera a IV correta, confundindo a fase léxica com a fase de síntese de código.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 57,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Sobre técnicas de renderização e iluminação:\nI. Ray Tracing simula propagação da luz; é eficiente para tempo real.\nII. Z-Buffer armazena profundidade por pixel para quais objetos estão mais próximos; representa estado da arte para cenas cinematográficas.\nIII. Modelo de Phong combina reflexão difusa, especular e ambiente; é técnica de iluminação global com alto custo.\nQuais assertivas estão corretas?",
+    "alternativas": {
+      "A": "Todas corretas.",
+      "B": "Todas incorretas.",
+      "C": "Apenas I e II.",
+      "D": "Apenas I e III.",
+      "E": "Apenas II e III."
+    },
+    "resposta": "B",
+    "comentario": "Todas estão incorretas. I: Ray Tracing é custoso e não adequado para tempo real (usualmente). II: Z-Buffer armazena o pixel MAIS PRÓXIMO (não distante); Ray Tracing é o estado da arte para cenas cinematográficas, não Z-Buffer. III: Phong é modelo de iluminação LOCAL (não global); iluminação global (como ray tracing) considera luz indireta.",
+    "card": {
+      "pergunta": "Ray Tracing em tempo real, Z-buffer para cinema e Modelo de Phong global. Quais assertivas estão corretas?",
+      "resposta": "## Conceito\nDiferenciação técnica em Computação Gráfica:\n- **Ray Tracing:** Simula luz indireta (Global). Alto custo, não é o padrão nativo de tempo real (apesar de avanços recentes).\n- **Z-Buffer:** Simples e rápido. Padrão de jogos/tempo real, não de \"cinema\" (onde usa-se Ray/Path Tracing).\n- **Phong:** Modelo de iluminação **Local** (considera apenas luz direta sobre o ponto).\n\n## Por que (B) é correta\nTodas as assertivas são **falsas**:\n- **I:** Ray Tracing é historicamente lento para tempo real.\n- **II:** Z-buffer é para velocidade, não para o realismo cinematográfico de ponta; ele guarda o pixel **mais perto**, não o mais distante.\n- **III:** Phong é um modelo **Local**, não Global (ignora luz refletida de outros objetos).\n\n## Pegadinhas desta questão\n** (A) ** Aceita todas as confusões conceituais entre modelos locais/globais e técnicas de tempo real/cinema.\n** (C) ** Erra ao achar que Z-buffer é a técnica de elite para fidelidade cinematográfica.\n** (D) ** Confunde o modelo de Phong (simples) com uma técnica de iluminação global complexa.\n** (E) ** Agrupa dois erros técnicos fundamentais sobre visibilidade e iluminação.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 58,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Segundo Pressman e Maxim, os resultados de ter software de alta qualidade são os seguintes, EXCETO:",
+    "alternativas": {
+      "A": "Aumentar a complexidade dos processos de negócios.",
+      "B": "Gerar maior receita pelo produto de software.",
+      "C": "Obter maior rentabilidade quando uma aplicação suporta um processo de negócio.",
+      "D": "Obter maior disponibilidade de informações cruciais para o negócio.",
+      "E": "Obter menor exigência de manutenção, menos correções de erros e menos suporte ao cliente."
+    },
+    "resposta": "A",
+    "comentario": "Software de alta qualidade visa simplificar processos, não aumentar sua complexidade. Todos os demais itens são benefícios esperados de alta qualidade.",
+    "card": {
+      "pergunta": "Segundo Pressman e Maxim, qual dos itens abaixo NÃO é um resultado esperado de um software de alta qualidade?",
+      "resposta": "## Conceito\nA **Qualidade de Software** traz benefícios tanto para o provedor quanto para o cliente:\n- **Rentabilidade:** Redução de retrabalho e suporte.\n- **Satisfação:** Software cumpre o que promete sem falhas.\n- **Eficiência:** Otimiza os processos de negócio em vez de complicá-los.\nSoftware de qualidade deve ser um **facilitador**, eliminando gargalos e complexidade desnecessária.\n\n## Por que (A) é correta\nAumentar a **complexidade dos processos de negócios** é o oposto do objetivo de um bom software. Um sistema de alta qualidade deve simplificar, automatizar e tornar mais ágeis os processos, nunca torná-los mais difíceis ou complexos para os usuários.\n\n## Pegadinhas desta questão\n** (B) ** Qualidade gera confiança, o que se traduz em mais vendas e renovações de licença.\n** (C) ** Software que suporta bem o negócio reduz custos operacionais, aumentando a rentabilidade.\n** (D) ** Disponibilidade de dados íntegros é uma consequência direta de processos de QA robustos.\n** (E) ** Menos bugs significam menos horas gastas em manutenção corretiva e suporte técnico.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 59,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "'É o processo de entender e definir quais serviços são exigidos do sistema e identificar as restrições na operação e no desenvolvimento do sistema'. Isso se refere a qual atividade fundamental de ES?",
+    "alternativas": {
+      "A": "Desenvolvimento de software",
+      "B": "Validação de software",
+      "C": "Evolução de software",
+      "D": "Especificação de software",
+      "E": "Projeto de software"
+    },
+    "resposta": "D",
+    "comentario": "Definir serviços exigidos e restrições é a Especificação de Software (Engenharia de Requisitos). Projeto define arquitetura. Validação verifica conformidade. Evolução trata mudanças pós-entrega.",
+    "card": {
+      "pergunta": "Entender serviços exigidos e identificar restrições\". A qual atividade fundamental da ES isso se refere?",
+      "resposta": "## Conceito\nAs atividades fundamentais do processo de software (Sommerville/Pressman) são:\n1. **Especificação:** O que o sistema deve fazer? (Requisitos e Restrições).\n2. **Desenvolvimento:** Construção do código e projeto.\n3. **Validação:** O sistema está certo? (Testes).\n4. **Evolução:** Mudanças para atender novas necessidades.\n\n## Por que (D) é correta\nA **Especificação de Software** (também chamada de Engenharia de Requisitos) é a fase dedicada a elicitar, analisar e documentar as funcionalidades (serviços) e as limitações (restrições) do produto antes da construção.\n\n## Pegadinhas desta questão\n** (A) ** O desenvolvimento foca na implementação da solução, não na definição do problema.\n** (B) ** A validação verifica se o produto atende à especificação, mas ocorre após o desenvolvimento.\n** (C) ** A evolução é a manutenção pós-entrega, não a definição inicial de serviços.\n** (E) ** O projeto (design) define *como* o software será construído internamente (arquitetura).\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 60,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Sobre gerenciamento de configuração de software (Pressman e Maxim):\nI. Elementos de todas as informações geradas durante o processo de software são coletivamente a configuração de software.\nII. À medida que o trabalho progride, forma-se uma hierarquia de itens de configuração.\nIII. O GCS consiste em atividades para administrar mudanças ao longo de todo o ciclo de vida.\nQuais estão corretas?",
+    "alternativas": {
+      "A": "Todas corretas.",
+      "B": "Todas incorretas.",
+      "C": "Apenas I e II.",
+      "D": "Apenas I e III.",
+      "E": "Apenas II e III."
+    },
+    "resposta": "A",
+    "comentario": "Todas corretas: I define configuração de software. II descreve a hierarquia crescente de itens de configuração. III define o escopo do GCS ao longo de todo o ciclo de vida.",
+    "card": {
+      "pergunta": "Sobre Gerenciamento de Configuração de Software (GCS): itens de configuração, hierarquia e administração de mudanças. Quais estão corretas?",
+      "resposta": "## Conceito\nO **Gerenciamento de Configuração de Software (GCS)** é um conjunto de atividades para controlar mudanças.\n- **Itens de Configuração (SCI):** Documentos, código, modelos, planos de teste.\n- **Baseline:** Um estado estável de um SCI após revisão formal.\n- **Objetivo:** Garantir a integridade do produto ao longo de todo o ciclo de vida, sabendo exatamente o que mudou, quem mudou e por quê.\n\n## Por que (A) é correta\nTodas as assertivas estão corretas e refletem a definição clássica de Pressman:\n- **I:** Tudo o que é gerado no processo (docs, código) compõe a configuração.\n- **II:** Os itens se organizam em hierarquias (ex: sistema → subsistema → módulo).\n- **III:** O GCS deve atuar do início ao fim do projeto para evitar o caos nas mudanças.\n\n## Pegadinhas desta questão\n** (B) ** Nega conceitos fundamentais da disciplina de GCS.\n** (C) ** Ignora que o controle de mudanças (III) é a alma do gerenciamento de configuração.\n** (D) ** Esquece que os itens de configuração se organizam de forma estruturada/hierárquica (II).\n** (E) ** Deixa de fora a definição básica de que o produto do trabalho de engenharia é o SCI (I).\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 61,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Em um Algoritmo Genético, o operador de crossover é responsável por:",
+    "alternativas": {
+      "A": "Avaliar a aptidão de cada indivíduo na população.",
+      "B": "Manter os melhores indivíduos de uma geração para a próxima.",
+      "C": "Modificar aleatoriamente os genes de um indivíduo para explorar novas soluções.",
+      "D": "Selecionar os indivíduos que participarão do processo de reprodução.",
+      "E": "Combinar partes dos cromossomos de dois pais para criar descendentes."
+    },
+    "resposta": "E",
+    "comentario": "Crossover (recombinação) combina material genético de dois pais. Avaliar aptidão é a função objetivo. Manter os melhores é elitismo. Modificar aleatoriamente é mutação. Selecionar para reprodução é o operador de seleção.",
+    "card": {
+      "pergunta": "Em um Algoritmo Genético, qual a responsabilidade do operador de Crossover (Recombinação)?",
+      "resposta": "## Conceito\n**Algoritmos Genéticos (AGs)** simulam a evolução natural.\n| Operador | Função |\n|---|---|\n| **Seleção** | Escolhe os mais aptos para reproduzir. |\n| **Crossover** | Troca de material genético entre dois pais (gera filhos). |\n| **Mutação** | Mudança aleatória em genes (mantém diversidade). |\nO Crossover é o principal operador de exploração local, convergindo para soluções melhores ao combinar características boas de pais diferentes.\n\n## Por que (E) é correta\nO **Crossover** é definido exatamente como o processo de combinar partes dos cromossomos de dois indivíduos \"pais\" para gerar novos indivíduos \"filhos\", na esperança de que os descendentes herdem as melhores características de ambos.\n\n## Pegadinhas desta questão\n** (A) ** Esta é a função da **Avaliação de Fitness** (aptidão).\n** (B) ** Refere-se ao **Elitismo**, técnica para não perder a melhor solução já encontrada.\n** (C) ** Esta é a definição de **Mutação**, que evita a convergência prematura.\n** (D) ** Esta é a responsabilidade do operador de **Seleção** (ex: Roleta ou Torneio).\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 62,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Em Sistemas Especialistas, qual alternativa melhor descreve o papel do motor de inferência?",
+    "alternativas": {
+      "A": "Otimização de algoritmos de aprendizado de máquina.",
+      "B": "Gerenciar a interface de usuário do sistema.",
+      "C": "Utilizar as regras da base de conhecimento para derivar conclusões a partir de fatos, simulando o raciocínio humano especializado.",
+      "D": "Substituir a necessidade de uma base de conhecimento, operando com dados brutos.",
+      "E": "Manutenção e atualização automática da base de dados."
+    },
+    "resposta": "C",
+    "comentario": "O motor de inferência aplica regras lógicas da base de conhecimento para derivar novas conclusões (forward ou backward chaining), simulando o raciocínio de um especialista.",
+    "card": {
+      "pergunta": "Qual o papel do Motor de Inferência em um Sistema Especialista?",
+      "resposta": "## Conceito\nUm **Sistema Especialista** é composto por duas partes principais:\n1. **Base de Conhecimento:** Fatos e regras ($IF \\dots THEN$) fornecidos por especialistas.\n2. **Motor de Inferência:** O \"cérebro\" que aplica as regras aos fatos conhecidos para chegar a novas conclusões.\nEle pode usar o encadeamento para frente (*forward chaining*) ou para trás (*backward chaining*).\n\n## Por que (C) é correta\nO **Motor de Inferência** é o componente lógico que raciocina sobre o conhecimento armazenado. Ele busca regras cujas condições sejam satisfeitas pelos fatos atuais e as executa, simulando o processo dedutivo de um especialista humano.\n\n## Pegadinhas desta questão\n** (A) ** Sistemas especialistas são baseados em regras simbólicas, não necessariamente em algoritmos de aprendizado estatístico.\n** (B) ** A interface é um módulo à parte; o motor foca apenas no raciocínio lógico.\n** (D) ** Absurdo: sem a base de conhecimento, o motor não tem sobre o que raciocinar.\n** (E) ** O motor utiliza a base, mas a manutenção (atualização) costuma ser feita via módulo de aquisição de conhecimento.\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 63,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Na digitalização de imagens, a ______ discretiza as coordenadas espaciais e a ______ discretiza os valores de amplitude dos pixels.",
+    "alternativas": {
+      "A": "interpolação – ampliação",
+      "B": "modulação – codificação",
+      "C": "quantização – amostragem",
+      "D": "amostragem – quantização",
+      "E": "codificação – modulação"
+    },
+    "resposta": "D",
+    "comentario": "Amostragem (sampling): discretiza coordenadas (x,y) → resolução espacial. Quantização: discretiza amplitude (intensidade) → profundidade de bits.",
+    "card": {
+      "pergunta": "Na digitalização de imagens, quais processos discretizam o espaço (coordenadas) e a amplitude (intensidade)?",
+      "resposta": "## Conceito\nPara converter uma imagem analógica em digital, ocorrem dois processos de discretização:\n1. **Amostragem (Sampling):** Discretiza o domínio espacial $(x, y)$. Define a **Resolução** (ex: $1024 \\times 768$ pixels).\n2. **Quantização:** Discretiza a intensidade (brilho/cor). Define a **Profundidade de Bits** (ex: 8 bits = 256 níveis).\n\n## Por que (D) é correta\nA **Amostragem** transforma a imagem contínua em uma grade de pontos (pixels). A **Quantização** atribui um valor numérico finito para a cor de cada um desses pontos. Sem esses dois passos, não há imagem digital.\n\n## Pegadinhas desta questão\n** (A) ** Interpolação é usada para aumentar/diminuir imagens já digitais, não na digitalização inicial.\n** (B) ** Termos da área de comunicações/sinais, mas não os específicos de processamento de imagem.\n** (C) ** Inverte os conceitos: a quantização cuida do valor (amplitude) e a amostragem do espaço.\n** (E) ** Codificação refere-se à compressão ou armazenamento, não à discretização física do sinal.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 64,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Sobre filtragem de imagens digitais:\nI. Filtro de média resulta em suavização.\nII. Filtro passa-baixa em frequência resulta em aguçamento.\nIII. Filtro laplaciano (espacial) resulta em aguçamento.\nIV. Suavização usa apenas filtros espaciais; aguçamento usa apenas filtros de frequência.\nQuais estão corretas?",
+    "alternativas": {
+      "A": "Apenas I e II.",
+      "B": "Apenas I e III.",
+      "C": "Apenas II e III.",
+      "D": "Apenas II e IV.",
+      "E": "I, II, III e IV."
+    },
+    "resposta": "B",
+    "comentario": "I: correto (filtro de média suaviza). III: correto (laplaciano realça bordas/aguça). II: errado (passa-baixa suaviza, não aguça). IV: errado (ambas as técnicas podem ser aplicadas nos dois domínios).",
+    "card": {
+      "pergunta": "Sobre filtragem de imagens: Média (suaviza), Passa-baixa (aguça), Laplaciano (aguça). Quais estão corretas?",
+      "resposta": "## Conceito\nFiltros em processamento de imagens atuam nas frequências espaciais:\n- **Suavização (Blur):** Remove ruído/detalhes. Usa filtros de **Média** ou **Passa-Baixa** (bloqueia altas frequências).\n- **Aguçamento (Sharpen):** Realça bordas. Usa filtros de **Derivada** (ex: **Laplaciano**) ou **Passa-Alta**.\nEles podem ser aplicados no domínio espacial (máscaras/convolução) ou no domínio da frequência (Fourier).\n\n## Por que (B) é correta\n- **I (Correta):** O filtro de média suaviza ao tirar a média dos vizinhos.\n- **III (Correta):** O Laplaciano é uma derivada de segunda ordem que realça variações bruscas (bordas).\n- **II (Errada):** Um filtro passa-baixa **suaviza**; quem aguça é o passa-alta.\n- **IV (Errada):** Ambas as técnicas existem tanto no domínio espacial quanto na frequência.\n\n## Pegadinhas desta questão\n** (A) ** Aceita a inversão do conceito de filtro passa-baixa (ele não aguça).\n** (C) ** Agrupa o erro da assertiva II com a afirmação correta do Laplaciano.\n** (D) ** Aceita a restrição falsa de que aguçamento é apenas em frequência (IV).\n** (E) ** Considera todas corretas, ignorando os princípios básicos de filtragem linear.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 65,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Um roteador recebe pacote com destino 11.1.2.5. Tabela de rotas: 13.0.0.0/8, 13.1.0.0/16, 11.1.0.0/16, 13.1.2.0/24, 11.1.2.0/24. Em qual rota encaminha?",
+    "alternativas": {
+      "A": "13.0.0.0/8",
+      "B": "13.1.0.0/16",
+      "C": "11.1.0.0/16",
+      "D": "13.1.2.0/24",
+      "E": "11.1.2.0/24"
+    },
+    "resposta": "E",
+    "comentario": "Prefixo mais longo (longest prefix match) sobre IP destino 11.1.2.5: 11.1.0.0/16 (16 bits) e 11.1.2.0/24 (24 bits) ambos casam, mas /24 é mais específico → encaminha para 11.1.2.0/24.",
+    "card": {
+      "pergunta": "Qual rota o roteador escolhe para o destino 11.1.2.5 entre várias máscaras coincidentes?",
+      "resposta": "## Conceito\nRoteadores IP utilizam a regra do **Casamento de Prefixo mais Longo (Longest Prefix Match)**.\nSe um endereço de destino coincide com mais de uma entrada na tabela de rotas, a rota com a **máscara mais específica** (maior número de bits 1, ex: `/24` é mais específico que `/16`) é a escolhida.\n- IP: `11.1.2.5`\n- Rota A: `11.1.0.0/16` (16 bits batem: `11.1`)\n- Rota B: `11.1.2.0/24` (24 bits batem: `11.1.2`)\n\n## Por que (E) é correta\nAmbas as rotas `11.1.0.0/16` e `11.1.2.0/24` contêm o endereço `11.1.2.5`. No entanto, a rota `/24` é mais específica (tem um prefixo mais longo). Portanto, o roteador encaminhará o pacote pela interface associada à rede `11.1.2.0/24`.\n\n## Pegadinhas desta questão\n** (A, B, D) ** Estas rotas (`13.x.x.x`) sequer batem com o primeiro byte do destino (`11`).\n** (C) ** Embora esta rota bata, ela é menos específica que a opção E. O roteador sempre prefere a mais \"justa\".\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 66,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Assinale a alternativa correta sobre o protocolo IP.",
+    "alternativas": {
+      "A": "O protocolo IP é baseado em datagramas e orientado à conexão.",
+      "B": "O protocolo IP funciona segundo melhor esforço garantindo a entrega de mensagens.",
+      "C": "O protocolo IP é conhecido como a cola da Internet porque permite que outros protocolos sejam usados no seu lugar.",
+      "D": "Várias cópias de um pacote IP podem ser entregues.",
+      "E": "O datagrama IP identifica o destinatário através dos campos porta de destino e número IP de destino."
+    },
+    "resposta": "D",
+    "comentario": "IP é best-effort sem garantia de entrega. Fragmentação e reordenação podem gerar duplicatas. D está correta. A: IP não é orientado a conexão. B: melhor esforço ≠ garantia. E: porta pertence à camada de transporte.",
+    "card": {
+      "pergunta": "Qual das alternativas abaixo sobre o protocolo IP está correta?",
+      "resposta": "## Conceito\nO **Internet Protocol (IP)** é o protocolo central da camada de Rede.\n- **Natureza:** Baseado em datagramas (cada pacote é independente).\n- **Confiabilidade:** \"Best-effort\" (melhor esforço). Não garante entrega, ordem ou integridade.\n- **Desconexão:** Não há estabelecimento de sessão (handshake) antes do envio.\n\n## Por que (D) é correta\nDevido à natureza da rede e retransmissões em camadas superiores ou falhas em roteadores, é possível que **várias cópias de um pacote IP sejam entregues** ao destino. O IP não possui mecanismos nativos para descartar duplicatas; essa tarefa fica para a camada de Transporte (TCP).\n\n## Pegadinhas desta questão\n** (A) ** IP **não** é orientado à conexão (o TCP é).\n** (B) ** \"Melhor esforço\" significa justamente que ele **não** garante a entrega.\n** (C) ** O IP é a \"cola\", mas outros protocolos (como IPv6) não o substituem \"no lugar\", eles coexistem ou o atualizam.\n** (E) ** \"Porta\" é um conceito da camada de **Transporte** (TCP/UDP), não do cabeçalho IP.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 67,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Qual protocolo da camada de transporte o DNS utiliza para consultas regulares?",
+    "alternativas": {
+      "A": "TCP",
+      "B": "TCP/IP",
+      "C": "HTTP",
+      "D": "CoAP",
+      "E": "UDP"
+    },
+    "resposta": "E",
+    "comentario": "DNS usa UDP porta 53 para consultas regulares (mensagens pequenas, velocidade > confiabilidade). TCP é usado apenas para transferências de zona ou respostas > 512 bytes.",
+    "card": {
+      "pergunta": "Qual protocolo da camada de transporte o DNS utiliza para consultas regulares?",
+      "resposta": "## Conceito\nO **DNS (Domain Name System)** pode usar tanto UDP quanto TCP, mas em situações diferentes:\n- **UDP (Porta 53):** Usado para consultas e respostas padrão. É rápido e gera pouco overhead (essencial para trilhões de requisições).\n- **TCP (Porta 53):** Usado apenas quando a resposta excede 512 bytes ou para transferências de zona entre servidores.\n\n## Por que (E) é correta\nPara consultas regulares de resolução de nomes (ex: buscar o IP de `google.com`), o DNS utiliza o **UDP**. A simplicidade do UDP é ideal para mensagens curtas onde, se houver perda, o cliente simplesmente tenta de novo, sem o custo de abrir uma conexão TCP.\n\n## Pegadinhas desta questão\n** (A) ** O TCP é usado pelo DNS, mas não para consultas \"regulares\" e sim para casos especiais de mensagens grandes.\n** (B) ** TCP/IP é a arquitetura de rede completa, não um protocolo de transporte.\n** (C) ** HTTP é um protocolo de Aplicação que roda sobre o TCP (usado no moderno \"DNS over HTTPS\", mas não no DNS clássico).\n** (D) ** CoAP é um protocolo para IoT (Internet das Coisas).\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 68,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Os programas dos clientes não devem conhecer a distribuição de arquivos; um único conjunto de operações é fornecido para acesso a arquivos locais e remotos. Qual requisito de transparência é descrito?",
+    "alternativas": {
+      "A": "Localização",
+      "B": "Acesso",
+      "C": "Mobilidade",
+      "D": "Desempenho",
+      "E": "Mudança de escala"
+    },
+    "resposta": "B",
+    "comentario": "Transparência de acesso: mesma interface de operações para arquivos locais e remotos. Transparência de localização: nomes não revelam localização física.",
+    "card": {
+      "pergunta": "Qual requisito de transparência garante que arquivos locais e remotos sejam acessados pelo mesmo conjunto de operações?",
+      "resposta": "## Conceito\nEm Sistemas Distribuídos, a **Transparência** oculta a separação dos recursos:\n| Tipo | O que oculta? |\n|---|---|\n| **Acesso** | Diferença entre acesso local e remoto (usa a mesma API). |\n| **Localização** | Onde o recurso está fisicamente (usa nomes lógicos). |\n| **Replicação** | Se existem várias cópias do mesmo dado. |\n| **Falha** | A ocorrência de erros em nós remotos. |\n\n## Por que (B) é correta\nA **Transparência de Acesso** permite que o programador use as mesmas chamadas de sistema (ex: `read`, `write`) tanto para arquivos no disco local quanto para arquivos em um servidor remoto, sem precisar saber os detalhes do protocolo de rede subjacente.\n\n## Pegadinhas desta questão\n** (A) ** Transparência de Localização esconde o endereço físico, mas não necessariamente unifica a interface de acesso.\n** (C) ** Mobilidade (ou Migração) permite mover recursos sem afetar os usuários.\n** (D) ** Desempenho visa manter a velocidade apesar da distribuição.\n** (E) ** Escala refere-se à capacidade de expandir o sistema para mais usuários.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 69,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Uma falha ______ ocorre quando um servidor para abruptamente, estava funcionando corretamente até parar, e nada mais se ouve dele.",
+    "alternativas": {
+      "A": "por omissão",
+      "B": "de temporização",
+      "C": "de resposta",
+      "D": "arbitrária",
+      "E": "por queda"
+    },
+    "resposta": "E",
+    "comentario": "Falha por queda (crash failure): componente para abruptamente após operar corretamente. Diferente de omissão (deixa de responder a algumas requisições), temporização (responde fora do tempo), arbitrária/Bizantina (comportamento imprevisível).",
+    "card": {
+      "pergunta": "Como se chama a falha em que um servidor para abruptamente e não responde mais?",
+      "resposta": "## Conceito\nModelos de falhas em sistemas distribuídos:\n- **Falha por Queda (Crash Failure):** O servidor para de funcionar e não dá mais sinal de vida.\n- **Falha por Omissão:** O servidor \"pula\" algumas mensagens, mas continua rodando.\n- **Falha Bizantina (Arbitrária):** O servidor se comporta de forma errática ou maliciosa.\n- **Falha de Temporização:** O servidor responde, mas fora do prazo esperado.\n\n## Por que (E) é correta\nA **Falha por Queda (Crash)** é caracterizada exatamente por essa parada repentina. É o modelo de falha mais comum e simples de tratar, onde se assume que se o servidor não respondeu em um certo tempo, ele \"morreu\".\n\n## Pegadinhas desta questão\n** (A) ** Omissão é quando ele esquece de enviar/receber, mas o processo ainda existe.\n** (B) ** Temporização ocorre quando o servidor está muito lento (atraso sincronia).\n** (C) ** \"Falha de resposta\" é um termo genérico, não o nome técnico do modelo de crash.\n** (D) ** Arbitrária (ou Bizantina) inclui enviar dados errados ou mentir, o que é mais complexo que apenas parar.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 70,
+    "ano": 2024,
+    "area": "Tecnologia de Computação",
+    "enunciado": "O algoritmo de exclusão mútua ______ requer apenas três mensagens para entrar e sair de uma região crítica: uma requisição, uma permissão e uma liberação.",
+    "alternativas": {
+      "A": "centralizado",
+      "B": "descentralizado",
+      "C": "distribuído",
+      "D": "token-ring",
+      "E": "relógios vetoriais"
+    },
+    "resposta": "A",
+    "comentario": "No algoritmo centralizado, um coordenador central gerencia o acesso: o processo envia requisição, recebe permissão e envia liberação ao sair. Total: 3 mensagens. O algoritmo de Ricart-Agrawala (distribuído) usa 2(n-1) mensagens.",
+    "card": {
+      "pergunta": "Qual algoritmo de exclusão mútua requer apenas 3 mensagens (Requisição, Permissão, Liberação)?",
+      "resposta": "## Conceito\nAlgoritmos de **Exclusão Mútua** garantem que apenas um processo entre na Região Crítica (RC):\n- **Centralizado:** Um coordenador gerencia a fila.\n- **Distribuído (Ricart-Agrawala):** Multicast para todos, aguarda OK de todos.\n- **Anel (Token Ring):** Um bastão (*token*) circula logicamente entre os nós.\nO modelo centralizado é o mais simples e economiza mensagens, mas cria um ponto único de falha.\n\n## Por que (A) é correta\nNo algoritmo **Centralizado**, o fluxo é:\n1. Processo pede ao Coordenador (**Requisição**).\n2. Coordenador responde dando o OK (**Permissão**).\n3. Processo sai da RC e avisa o Coordenador (**Liberação**).\nTotal exato de 3 mensagens, independentemente do número de processos no sistema.\n\n## Pegadinhas desta questão\n** (B, C) ** Algoritmos distribuídos exigem muito mais mensagens ($2(n-1)$ no caso de Ricart-Agrawala).\n** (D) ** No Token Ring, a quantidade de mensagens depende de onde o token está no anel no momento.\n** (E) ** Relógios vetoriais são para sincronização de eventos (ordem causal), não para exclusão mútua.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 56,
+    "ano": 2025,
+    "area": "Tecnologia de Computação",
+    "enunciado": "Considerando somente as tarefas de remoção de superfícies ocultas e aplicação de modelos de tonalização (shading), quais algoritmos pertencem a essa parte específica do pipeline gráfico?",
+    "alternativas": {
+      "A": "Algoritmo Z-Buffer, método de Gouraud e método de Phong.",
+      "B": "Geração de Curvas de Bézier, Transformações Geométricas e X-Ray.",
+      "C": "Algoritmo de Flood Fill, Algoritmo de Divisão Recursiva e Mapeamento de Texturas.",
+      "D": "Coordenadas Homogêneas, Construção de Árvore BSP e Transformação de Iluminação Global.",
+      "E": "Algoritmo de Bresenham, Algoritmo de Cohen-Sutherland e Geração de Mipmaps."
+    },
+    "resposta": "A",
+    "comentario": "Z-Buffer: remove superfícies ocultas guardando profundidade por pixel. Gouraud: tonalização por interpolação de cores nos vértices. Phong: tonalização por interpolação de normais. Os demais grupos misturam algoritmos de outras etapas (rasterização, recorte, modelagem).",
+    "card": {
+      "pergunta": "Quais algoritmos pertencem especificamente à remoção de superfícies ocultas e aplicação de modelos de tonalização (shading)?",
+      "resposta": "## Conceito\nNo **Pipeline Gráfico**, após a projeção, ocorre a rasterização e o processamento de pixels:\n| Tarefa | Algoritmos Típicos |\n|---|---|\n| **Remoção Superfícies** | **Z-Buffer**, Scan-line, BSP. |\n| **Shading (Tonalização)** | Constant, **Gouraud**, **Phong**. |\nEssas etapas garantem que objetos atrás de outros não sejam desenhados e que a luz seja simulada sobre as faces.\n\n## Por que (A) é correta\nO **Z-Buffer** é a técnica padrão para visibilidade (superfícies ocultas). **Gouraud** e **Phong** são os dois modelos de tonalização clássicos (interpolação de cores e normais, respectivamente) que definem como a luz \"pinta\" os polígonos.\n\n## Pegadinhas desta questão\n** (B) ** Bézier e Transformações ocorrem na fase de **modelagem** e geometria, bem antes do shading.\n** (C) ** *Flood Fill* é preenchimento 2D; Mapeamento de texturas é relacionado, mas não remove superfícies.\n** (D) ** Árvore BSP remove superfícies, mas Iluminação Global é uma etapa muito mais ampla e custosa.\n** (E) ** Bresenham é para desenhar linhas (rasterização básica); Cohen-Sutherland é para **clipping** (recorte).\n\n**Gabarito: (A)**"
+    }
+  }
+]

@@ -1,0 +1,382 @@
+[
+  {
+    "id": 51,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Sobre bancos de dados distribuídos, partes do banco de dados residem em diferentes nós (sites) conectados em rede, cada qual dotado de um software gerenciador de dados. Há o nó coordenador, com competência para gerir a recuperação global de uma transação, e os demais nós participantes que gerem a transação em cada site e mantêm seus próprios dados locais. Em uma transação, o coordenador requisita cada participante que processará alguma parte da transação. Quando todos os participantes sinalizarem ao coordenador que a parte da transação envolvendo cada um foi processada, inicia -se o protocolo de confirmação de duas fases ( two-phase commit protocol ). Nesse protocolo, há o registro d o desdobramento da transação nos arquivos de log, bem como a troca de mensagens entre o coordenador e os participantes. Neste último, considere os três tipos de mensagens usualmente enviadas: I. Mensagem < prepare for commit > II. Mensagem < ready to commit > ou < cannot commit > III. Mensagem < commit > ou < roll back > Os remetentes das mensagens I, II e III, respectivamente, são:",
+    "alternativas": {
+      "A": "Participantes, participantes e coordenador.",
+      "B": "Participantes, coordenador e coordenador.",
+      "C": "Participantes, coordenador e participantes.",
+      "D": "Coord enador, participantes e coordenador.",
+      "E": "Coordenador, coordenador e participantes."
+    },
+    "resposta": "D",
+    "comentario": "No 2PC: 1) O Coordenador envia 'prepare'. 2) Os Participantes respondem 'ready' ou 'cannot'. 3) O Coordenador decide e envia a ordem final de 'commit' ou 'rollback'.",
+    "card": {
+      "pergunta": "Protocolo Two-Phase Commit (2PC): quem são os remetentes das mensagens <prepare>, <ready/cannot> e <commit/roll back>?",
+      "resposta": "## Conceito\nO protocolo de **Confirmação em Duas Fases (2PC)** garante a atomicidade em transações distribuídas, assegurando que ou todos os nós confirmam (*commit*) ou todos abortam (*rollback*). Ele opera com um **Coordenador** (gerencia o processo global) e vários **Participantes** (gerenciam dados locais).\n| Fase | Nome | Descrição |\n|---|---|---|\n| 1 | Preparação | O Coordenador pergunta se todos podem efetivar a transação. |\n| 2 | Efetivação | O Coordenador decide o desfecho com base nas respostas. |\n\n## Por que (D) é correta\nA sequência correta de remetentes é:\n- **I (<prepare>):** Enviada pelo **Coordenador** para iniciar a votação.\n- **II (<ready/cannot>):** Respostas dos **Participantes** sobre sua prontidão local.\n- **III (<commit/roll back>):** Ordem final do **Coordenador** após coletar os votos.\n\n## Pegadinhas desta questão\n** (A) ** Inverte o papel inicial, sugerindo que participantes iniciam a coordenação.\n** (B) ** Erra ao dizer que o coordenador envia a mensagem de prontidão local.\n** (C) ** Sugere que os participantes dão a ordem final de commit/rollback.\n** (E) ** Afirma que o coordenador envia o voto de prontidão e os participantes decidem o desfecho.\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 52,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Quando há impasse no controle de concorrência em sistemas de bancos de dados, uma forma para o tratamento é o emprego de protocolos de prevenção, que são pessimistas quanto à efetiva ocorrência de deadlock . Considere as seguintes técnicas usadas em protoco los de prevenção: I. Esperar -ou-morrer ( wait-die). II. Ferir-ou-esperar ( wound -wait). III. Espera -cautelosa ( cautious -waiting ). IV. Sem-espera ( no-waiting ). Algumas dessas técnicas usam o conceito de timestamp (TS) de transações: se TS(T1) < TS(T2), então a transação T1 foi iniciada antes da transação T2. Dentre as técnicas acima, as baseadas em timestamp são:",
+    "alternativas": {
+      "A": "Apenas I e II.",
+      "B": "Apenas I e III.",
+      "C": "Apenas II e III.",
+      "D": "Apenas II e IV.",
+      "E": "Apenas III e IV."
+    },
+    "resposta": "A",
+    "comentario": "As técnicas Wait-Die e Wound-Wait são os protocolos clássicos de prevenção de deadlock baseados em carimbos de tempo (timestamps) para decidir qual transação deve esperar, ser abortada ou 'ferir' outra.",
+    "card": {
+      "pergunta": "Quais das técnicas de prevenção de deadlock (Wait-Die, Wound-Wait, Cautious-Waiting, No-Waiting) são baseadas em Timestamp?",
+      "resposta": "## Conceito\nProtocolos de prevenção de deadlock baseados em **Timestamp (TS)** usam o tempo de início da transação para decidir prioridades. Se $TS(T_1) < TS(T_2)$, $T_1$ é mais antiga.\n- **Wait-Die:** Transação mais antiga espera; a mais nova morre (é abortada).\n- **Wound-Wait:** Transação mais antiga \"fere\" (aborta) a mais nova; a mais nova espera.\nTécnicas como *No-Waiting* e *Cautious-Waiting* não exigem timestamps para a decisão de aborto.\n\n## Por que (A) é correta\nAs técnicas **Wait-Die (I)** e **Wound-Wait (II)** são os dois protocolos clássicos de prevenção que utilizam explicitamente a comparação de timestamps das transações envolvidas em um conflito de bloqueio para evitar ciclos de espera.\n\n## Pegadinhas desta questão\n** (B) ** *Cautious-Waiting* evita deadlocks verificando se o detentor do bloqueio não está bloqueado, sem usar timestamps.\n** (C) ** Novamente, *Cautious-Waiting* não é baseada em carimbos de tempo.\n** (D) ** *No-Waiting* aborta qualquer transação que encontre um conflito, independentemente da idade.\n** (E) ** Combina duas técnicas que não utilizam timestamps para a prevenção.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 53,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "A normalização de esquemas de bancos de dados relacionais visa à redução da redundância de dados e à melho ria da integridade dos dados, pelo atendimento a requisitos denominados de formas normais, tais como: segunda forma normal (2NF), terceira forma norma l (3NF) e forma normal de Boyce -Codd (BCNF). Um esquema de relação que atende aos requisitos de uma forma normal pode, potencialmente, atender aos requisitos de outras formas normais. Nesse sentido, se o esquema atende à: I. BCNF, então atende à 2NF. II. 2NF, en tão atende à 3NF. III. BCNF, então atende à 3NF. IV. 3NF, então atende à BCNF. As alternativas verdadeiras com respeito à relação entre formas normais são:",
+    "alternativas": {
+      "A": "Apenas I e II.",
+      "B": "Apenas I e III.",
+      "C": "Apenas II e III.",
+      "D": "Apenas II e IV.",
+      "E": "Apenas III e IV."
+    },
+    "resposta": "B",
+    "comentario": "Existe uma hierarquia: BCNF é mais restritiva que 3NF, que é mais restritiva que 2NF. Logo, se está na BCNF, obrigatoriamente está na 3NF e na 2NF.",
+    "card": {
+      "pergunta": "Qual a relação correta de implicação entre as formas normais 2NF, 3NF e BCNF em esquemas relacionais?",
+      "resposta": "## Conceito\nA normalização é uma hierarquia de restrições para eliminar redundâncias. Cada forma normal superior engloba os requisitos das inferiores:\n| Forma | Requisito Principal |\n|---|---|\n| **2NF** | Sem dependências parciais da chave primária. |\n| **3NF** | Sem dependências transitivas (inclui 2NF). |\n| **BCNF** | Todo determinante deve ser uma chave candidata (inclui 3NF). |\nA relação é de subconjunto: $\\text{BCNF} \\subset \\text{3NF} \\subset \\text{2NF} \\subset \\text{1NF}$.\n\n## Por que (B) é correta\nAs assertivas **I (BCNF → 2NF)** e **III (BCNF → 3NF)** são verdadeiras porque a BCNF é uma forma mais restritiva e \"forte\". Se uma relação está na BCNF, ela satisfaz automaticamente as condições das formas normais mais \"fracas\", como 3NF e 2NF.\n\n## Pegadinhas desta questão\n** (A) ** A 2NF não garante a 3NF (pode haver dependências transitivas).\n** (C) ** Afirma que 2NF implica 3NF, o que é o inverso da regra hierárquica.\n** (D) ** Inverte a lógica: 2NF não implica 3NF, e 3NF não garante BCNF.\n** (E) ** A 3NF não implica BCNF (pode haver dependências de chaves candidatas sobre parte de outra chave).\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 54,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Seja o alfabeto A = { b, k, z } . Expressões regulares sobre A são definidas (da forma habitual) como cadeias ( strings ) contendo símbolos do alfabeto dado pela união de A com o conjunto { (, ), *, | }. Assim:  () e e, as quais denotam respectivamente a linguagem vazia e a linguagem que contém apenas a cadeia vazia .  Cada símbolo do alfabeto é uma expressão regular, denotando a linguagem formada pelo símbolo .  Dadas expressões regulares R, R1 e R2, notamos com R*, (R1 | R2) e R1 R2 as expressões regulares, representando, respectivamente, as operações de Estrela de Kleene (repetição), Escolha e Concatenação. A notação R? é usada como abreviatura para (R | e ) , marcando que R é opcional. Sejam os Tokens de uma certa linguagem definidos pelas expressões regul ares sobre A a seguir: Token Expressão Regular T1 k? b? z z* k T2 z? k? b b* z T3 b? z? k k* b Seja um analisador léxico que reconhece os tokens acima, procurando sempre casar a maior parte possível da entrada (maior prefixo possível). Caso a cadeia kkbzkbbkkb seja dada como entrada ao analisador léxico , qual será a sequência de tokens devolvida por ele ?",
+    "alternativas": {
+      "A": "T1 T3 T2 T3.",
+      "B": "T1 T1 T3.",
+      "C": "T2 T3.",
+      "D": "T3 T2 T3.",
+      "E": "T3 T3 T3."
+    },
+    "resposta": "E",
+    "comentario": "O analisador casa o maior prefixo: 1) 'kkb' casa com T3 (ε b, ε z, k k*, b). 2) 'zkb' casa com T3 (ε b, z z?, k k*, b). 3) 'bkkb' casa com T3 (b b?, ε z, k k*, b). Resultado: T3 T3 T3.",
+    "card": {
+      "pergunta": "Qual a sequência de tokens gerada pelo analisador léxico para a entrada \"kkbzkbbkkb\" usando a regra do maior prefixo?",
+      "resposta": "## Conceito\nAnalisadores léxicos usam **Expressões Regulares** para identificar tokens. A regra do **Maior Prefixo (Longest Match)** dita que o analisador deve casar a maior sequência possível de caracteres da entrada que corresponda a um padrão antes de emitir um token.\n- **T1:** `k? b? z z* k` (z's seguidos de k)\n- **T2:** `z? k? b b* z` (b's seguidos de z)\n- **T3:** `b? z? k k* b` (k's seguidos de b)\n\n## Por que (E) é correta\nAnalisando a cadeia `kkbzkbbkkb`:\n1. `kkb`: Casa com **T3** ($\\epsilon, \\epsilon, k, k, b$). É o maior prefixo possível.\n2. `zkb`: Casa com **T3** ($\\epsilon, z, k, \\epsilon, b$).\n3. `bkkb`: Casa com **T3** ($b, \\epsilon, k, k, b$).\nA sequência final é **T3 T3 T3**.\n\n## Pegadinhas desta questão\n** (A) ** Sugere que `zkb` casaria com T2 ou T3 de forma intercalada, mas o padrão T2 exige um `z` no final.\n** (B) ** Divide `kkb` em `k` e `kb`, ignorando a regra do maior prefixo.\n** (C) ** Ignora os primeiros caracteres ou tenta um casamento impossível com T2.\n** (D) ** Tenta casar o início com T3 mas falha na análise do meio da cadeia.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 55,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Analise as seguintes assertivas , em relação à análise sintática no contexto da construção de compiladores para linguagens de programação e assinale a alternativa correta. I. O funcionamento do algoritmo de análise sintática ascendente ( Bottom -up, LR) corresponde ao percurso da árvore sintática do programa a partir das folha s (representando os símbolos terminais da gramática que define a linguagem), até chegar à raiz (que representa a variável ou símbolo não terminal inicial da gramática). II. O funcionamento do algoritmo de análise sintática descendente ( Top-down , LL) correspond e ao percurso da árvore sintática do programa a partir das folhas (representando as variáveis ou símbolos não terminais da gramática que define a linguagem), até chegar à raiz (que representa a sequência de símbolos terminais da gramática). III. Dada uma gramática LL(1) qualquer, se verifica que os lados direitos de qualquer par de regras dela não contêm prefixos não vazios em comum. Por exemplo, uma gramática com regras X -> abBc e Y -> ab não pode ser LL(1), pois o prefixo ab aparece nos lados direitos de ambas as regras. IV. Na construção de tabelas de análise sintática LR, podem aparecer três tipos de conflitos: Conflitos Empilhar/Empilhar, Conflitos Empilhar/Reduzir e Conflitos Reduzir/Reduzir. V. Na notação de gramáticas LL(k) e LR(k), o primeiro símbolo (L) indica que a entrada é lida/processada da esquerda para a direita ( Left-to-right). O segundo símbolo (L ou R) indica que a derivação implementada pelo algoritmo na construção/percurso da árvore sintática é mais à esquerda (L) ou mais à direita (R).",
+    "alternativas": {
+      "A": "Apenas as assertivas I e V estão corretas.",
+      "B": "Apenas as assertivas II e IV estão corretas.",
+      "C": "Apenas as assertivas I, II e IV estão corretas.",
+      "D": "Apenas as assertivas II, III e IV estão corretas.",
+      "E": "Apenas as assertivas III, IV e V estão correta s."
+    },
+    "resposta": "A",
+    "comentario": "I está correta (Bottom-up vai das folhas à raiz). V está correta (significado de L, L/R). II está incorreta (Top-down vai da raiz às folhas). IV está incorreta (LR não tem conflito empilhar/empilhar).",
+    "card": {
+      "pergunta": "Análise sintática: quais assertivas sobre Bottom-up, Top-down, LL(1), conflitos LR e notação LL/LR estão corretas?",
+      "resposta": "## Conceito\nA análise sintática verifica a estrutura gramatical.\n- **Top-Down (LL):** Parte da raiz (S) para as folhas. \"L\" (leitura esquerda-direita), \"L\" (derivação mais à esquerda).\n- **Bottom-Up (LR):** Parte das folhas para a raiz. \"L\" (leitura), \"R\" (derivação mais à direita reversa).\n| Tipo | Derivação | Conflitos |\n|---|---|---|\n| **LL** | Esquerda | Ambiguidade, recursão à esquerda |\n| **LR** | Direita (Rev) | Shift/Reduce, Reduce/Reduce |\n\n## Por que (A) é correta\nAs assertivas **I** (Bottom-up vai das folhas à raiz) e **V** (significado das siglas L, L/R) estão corretas. A análise LR constrói a árvore de baixo para cima reduzindo subcadeias ao símbolo inicial, e as siglas descrevem o método de leitura e derivação.\n\n## Pegadinhas desta questão\n** (B) ** A assertiva II inverte o Top-down (ele vai da raiz às folhas) e IV cita \"Empilhar/Empilhar\" (não existe este conflito).\n** (C) ** Mantém o erro da assertiva II sobre a direção do percurso.\n** (D) ** A assertiva III erra: LL(1) permite prefixos comuns em regras diferentes se o símbolo seguinte (*lookahead*) os distinguir.\n** (E) ** Inclui o erro dos conflitos LR (IV) que são apenas Shift/Reduce e Reduce/Reduce.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 56,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "O algoritmo de ray tracing é um algoritmo bastante utilizad o para gerar renderizações fotor realísticas. Sobre o ray tracing, a nalise as assertivas abaixo e assinale a alternativa correta. I. Atira raios da câmera virtual na direção do plano do filme para determinar se existem objetos que os intersectam. II. Utiliza a técnica de z-buffer para determinar se os objetos estão visíveis. III. É uma técnica muito eficiente na renderização de superfícies que têm materiais difusos. IV. Simula iluminação indireta através de raios secundários atirados em direções próximas à direção de reflexão do raio primário no objeto atingido.",
+    "alternativas": {
+      "A": "Apenas I e III estão corretas.",
+      "B": "Apenas I e IV estão corretas.",
+      "C": "Apenas II e III estão corretas.",
+      "D": "Apenas II e IV estão corretas.",
+      "E": "Apenas I, III e IV estão corretas."
+    },
+    "resposta": "B",
+    "comentario": "Ray Tracing funciona atirando raios da câmera (I) e calculando reflexões e refrações via raios secundários (IV). O Z-buffer é típico de rasterização, não de ray tracing puro.",
+    "card": {
+      "pergunta": "Sobre Ray Tracing: atirar raios da câmera, uso de z-buffer, eficiência em materiais difusos e iluminação indireta. Quais estão corretas?",
+      "resposta": "## Conceito\n**Ray Tracing** é um algoritmo de renderização que simula o caminho físico da luz.\n1. **Raios Primários:** Disparados do olho (câmera) através de cada pixel no plano da imagem.\n2. **Interseção:** Identifica o primeiro objeto atingido.\n3. **Raios Secundários:** Gerados do ponto de impacto para calcular sombras, reflexões e refrações (iluminação indireta).\nDiferente da rasterização, ele não usa nativamente o z-buffer para visibilidade.\n\n## Por que (B) é correta\nAs assertivas **I** (raios da câmera para o plano) e **IV** (raios secundários para iluminação indireta) definem o núcleo do Ray Tracing clássico. Ele é focado em simular fenômenos ópticos complexos através do rastreamento reverso dos raios.\n\n## Pegadinhas desta questão\n** (A) ** Ray Tracing é reconhecidamente **ineficiente** para materiais puramente difusos (requer muitos raios, o que leva ao *Path Tracing*).\n** (C) ** Z-buffer (II) é uma técnica de **rasterização** para resolver visibilidade, não de Ray Tracing.\n** (D) ** Reitera o uso incorreto do Z-buffer em Ray Tracing.\n** (E) ** Mantém a afirmação falsa sobre a eficiência em materiais difusos (III).\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 57,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Selecione a opção abaixo que NÃO é uma técnica/ferramenta utilizada na remoção de linhas ou superfícies ocultas.",
+    "alternativas": {
+      "A": "Eliminação de faces traseiras ( back-face culling ).",
+      "B": "Árvores BSP ( Binary Space Partitioning ).",
+      "C": "Hemicubos.",
+      "D": "Volumes de delimitação ( bounding volumes ).",
+      "E": "Z-buffer ."
+    },
+    "resposta": "C",
+    "comentario": "Hemicubos são uma técnica específica para o cálculo de fatores de forma no algoritmo de Radiosidade, que trata de iluminação global, e não são a técnica primária de remoção de superfícies ocultas.",
+    "card": {
+      "pergunta": "Qual das seguintes opções NÃO é uma técnica ou ferramenta utilizada para a remoção de linhas ou superfícies ocultas?",
+      "resposta": "## Conceito\nA remoção de superfícies ocultas (Hidden Surface Removal) determina quais partes de uma cena 3D são visíveis de um ponto de vista.\n- **Z-buffer:** Compara profundidades por pixel.\n- **Back-face culling:** Remove faces voltadas para \"trás\".\n- **Árvores BSP:** Organiza o espaço para determinar ordem de pintura.\n- **Bounding Volumes:** Acelera testes de visibilidade descartando objetos inteiros.\n\n## Por que (C) é correta\n**Hemicubos** são uma ferramenta usada especificamente no algoritmo de **Radiosidade** para calcular o *form factor* (troca de energia luminosa entre superfícies). Embora ajudem na iluminação global, não são uma técnica primária para remoção de superfícies ocultas.\n\n## Pegadinhas desta questão\n** (A) ** *Back-face culling* é a técnica mais básica para remover faces não visíveis.\n** (B) ** Árvores BSP são amplamente usadas (ex: motores de DOOM) para visibilidade.\n** (D) ** *Bounding volumes* otimizam a visibilidade ao evitar testes em objetos fora do campo de visão.\n** (E) ** *Z-buffer* é o padrão da indústria para remoção de superfícies ocultas em hardware.\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 58,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Analise as seguintes assertivas sobre re úso no contexto de engenharia de software: I. Muitos desenvolvedores de software preferem reescrever eles mesmos seus componentes porque acreditam que seu trabalho será de melhor qualidade, se comparado à adaptação de componentes escritos por outros (síndrome do “Não inventado aqui”). II. O reú so pressupõe a existência de bibliotecas com componentes reutilizáveis. Criar, manter e assegurar que desenvolvedores de software usem es sa biblioteca pode ser bastante custoso. III. Desenvolver softwares através do reú so, por tipicamente adicionar uma complexidade muito grande ao código, exige desenvolvedores que sejam especialistas em re úso, o que torna o desenvolvimento base ado em reú so muito caro. Dentre as assertivas acima , quais represent am fatores que comprometem o reúso de software?",
+    "alternativas": {
+      "A": "Apenas I.",
+      "B": "Apenas II.",
+      "C": "Apenas III.",
+      "D": "Apenas I e II.",
+      "E": "I, II e III."
+    },
+    "resposta": "D",
+    "comentario": "As assertivas I (aspecto cultural/psicológico) e II (custo de manutenção de repositórios) são barreiras reais ao reúso. A III está incorreta pois o reúso visa justamente reduzir custos e complexidade a longo prazo.",
+    "card": {
+      "pergunta": "Quais assertivas (I. Síndrome NIH, II. Custo de bibliotecas, III. Complexidade) representam fatores que comprometem o reúso de software?",
+      "resposta": "## Conceito\nO **Reúso de Software** busca utilizar artefatos existentes em novos sistemas. Seus desafios incluem:\n- **Culturais:** Síndrome de \"Não Inventado Aqui\" (NIH) – preferência por fazer do zero.\n- **Técnicos:** Dificuldade em encontrar e adaptar componentes.\n- **Econômicos:** Custo de manter bibliotecas e documentação.\nEmbora o reúso tenha custos iniciais, seu objetivo final é **reduzir** a complexidade e o tempo de desenvolvimento.\n\n## Por que (D) é correta\nAs assertivas **I** e **II** são barreiras clássicas. A NIH (I) é uma resistência psicológica, e o gerenciamento de bibliotecas (II) exige investimento em infraestrutura e curadoria, o que pode desencorajar organizações com foco em curto prazo.\n\n## Pegadinhas desta questão\n** (A) ** Ignora que o custo de manutenção de bibliotecas (II) também é um grande entrave.\n** (B) ** Ignora o fator humano/cultural da síndrome NIH (I).\n** (C) ** A assertiva III está errada: o reúso visa **diminuir** a complexidade total do projeto, não aumentar.\n** (E) ** Inclui a assertiva III, que afirma falsamente que o reúso torna o desenvolvimento obrigatoriamente \"muito caro\".\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 59,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Uma revisão técnica formal (RTF) é uma atividade de controle de qualidade de software executada por engenheiros de software sobre um artefato de software (especificações, código, etc .). As diretrizes para a realização de uma RTF devem ser estabelecidas com antecedência, distribuídas a todos os revisores, e seguidas durante o processo de revisão. Assinale a alternativa que NÃO representa uma boa prática na condução de uma RTF.",
+    "alternativas": {
+      "A": "Revisar o produto (artefato), e não quem o desenvolveu.",
+      "B": "Definir uma agenda de revisão inicial (reuniões com datas e hor ários específicas), mas estender as discussões enquanto forem encontrados problemas nos artefatos revisados.",
+      "C": "Identificar áreas problemáticas, sem tentar resolver os problemas apontados.",
+      "D": "Limitar o número de participantes e exigir preparação prévia de todos .",
+      "E": "Fornecer treinamento adequado a todos os revisores."
+    },
+    "resposta": "B",
+    "comentario": "Uma RTF deve ter tempo limitado e focar na identificação de defeitos, não na sua correção imediata. Estender indefinidamente a reunião para discutir soluções foge ao propósito de controle de qualidade e gestão de tempo.",
+    "card": {
+      "pergunta": "No contexto de uma Revisão Técnica Formal (RTF), qual das alternativas NÃO representa uma boa prática?",
+      "resposta": "## Conceito\nA **Revisão Técnica Formal (RTF)** é uma técnica de garantia de qualidade (SQA) com o objetivo de descobrir erros em artefatos de software.\n| Regra de Ouro | Descrição |\n|---|---|\n| **Focar no Produto** | Não critique o autor, critique o código/documento. |\n| **Identificar, não Corrigir** | A reunião serve para achar bugs, não para resolvê-los. |\n| **Limitar o Tempo** | Reuniões curtas e objetivas (máx 2h) para manter o foco. |\n\n## Por que (B) é correta\nEstender discussões para tentar **resolver** problemas durante a reunião (B) é uma má prática. A RTF deve ser estritamente focada na **detecção**. A correção deve ser feita posteriormente pelo autor, para não desperdiçar o tempo dos demais revisores.\n\n## Pegadinhas desta questão\n** (A) ** Esta é a regra fundamental: \"Revisar o produto, não o produtor\".\n** (C) ** Correto: a reunião não deve se tornar uma sessão de depuração ou design coletivo.\n** (D) ** Correto: muitos participantes geram ruído; preparação prévia é essencial para a eficiência.\n** (E) ** Correto: revisores precisam entender o processo e os critérios de qualidade.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 60,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Segundo Sommerville (2011), requisitos não funcionais (RNF) podem ser classificados como de produto, organizacional ou externo. Considere os seguintes RNF de produto: I. RNF1: “As interfaces projetadas para o sistema on -line devem funcionar nos navegadores Google Chrome e Safari”. II. RNF2: “Os funcionários devem poder usar todas as funções do sistema após quatro horas de treinamento. Espera -se que usuários treinados não façam mais que 2 erros em média por hora de uso”. III. RNF3: “Todos os pedidos feitos por usuários através da interface gráfica devem ter um tempo de resposta máximo de 1 segundo”. Entre os RNF de produto, está a usabilidade. São RNFs classificados como requisitos de usabil idade :",
+    "alternativas": {
+      "A": "Apenas I.",
+      "B": "Apenas II.",
+      "C": "Apenas III.",
+      "D": "Apenas I e II.",
+      "E": "I, II e III."
+    },
+    "resposta": "B",
+    "comentario": "Apenas o RNF2 trata de usabilidade (facilidade de aprendizado e taxa de erro do usuário). O RNF1 é compatibilidade/portabilidade e o RNF3 é desempenho.",
+    "card": {
+      "pergunta": "RNF1 (browsers), RNF2 (treinamento e erros), RNF3 (tempo de resposta). Quais são requisitos de USABILIDADE?",
+      "resposta": "## Conceito\n**Requisitos Não Funcionais (RNF)** descrevem restrições de sistema. A **Usabilidade** foca na experiência do usuário final:\n- **Aprendizado:** Quão fácil é aprender a usar?\n- **Eficiência:** Quão rápido o usuário realiza tarefas?\n- **Robustez:** Qual a tolerância a erros do usuário?\n| Tipo de RNF | Exemplo |\n|---|---|\n| **Usabilidade** | Tempo de treinamento, taxa de erros do usuário. |\n| **Portabilidade** | Suporte a diferentes navegadores/SO. |\n| **Desempenho** | Tempo de resposta, vazão. |\n\n## Por que (B) é correta\nApenas o **RNF2** trata de usabilidade, pois define métricas de treinamento (facilidade de aprendizado) e limite de erros cometidos pelo usuário (operacionalidade). Estes são indicadores clássicos de quão \"usável\" o sistema é.\n\n## Pegadinhas desta questão\n** (A) ** RNF1 é um requisito de **Portabilidade** ou **Compatibilidade**, não de usabilidade direta.\n** (C) ** RNF3 é um requisito de **Desempenho** (tempo de resposta do sistema).\n** (D) ** Inclui o RNF1, que foca na plataforma tecnológica e não no humano.\n** (E) ** Mistura usabilidade, portabilidade e desempenho em uma única categoria.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 61,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "A lógica fuzzy é um componente essencial da inteligência artificial, podendo ajudar na tomada de decisão de maneira flexível e adaptativa. Considerando o estudo em inteligência artificial , assin ale a alternativa que apresenta corretamente a descrição da lógica fuzzy .",
+    "alternativas": {
+      "A": "A lógica fuzzy é uma abordagem que lida apenas com informações binárias.",
+      "B": "A lógica fuzzy é uma extensão da lógica clássica que permite representar e raciocinar com informações imprecisas ou vagas.",
+      "C": "A lógica fuzzy é uma técnica utilizada exclusivamente na área da robótica.",
+      "D": "A lógica fuzzy é uma abordagem que se baseia apenas em valores absolut os.",
+      "E": "A lógica fuzzy é uma abordagem que se baseia apenas em valores fracionados."
+    },
+    "resposta": "B",
+    "comentario": "A lógica fuzzy (ou nebulosa) permite graus de verdade entre 0 e 1, sendo ideal para modelar conceitos subjetivos ou imprecisos (como 'quente', 'frio', 'perto').",
+    "card": {
+      "pergunta": "Qual alternativa apresenta corretamente a descrição da lógica fuzzy?",
+      "resposta": "## Conceito\nA **Lógica Fuzzy** lida com a incerteza e a imprecisão, permitindo que elementos pertençam a conjuntos com **graus de pertinência** no intervalo $[0, 1]$.\n- **Lógica Clássica:** Binária (0 ou 1, Falso ou Verdadeiro).\n- **Lógica Fuzzy:** Multivalorada. Um café pode estar \"quente\" com grau 0.8 e \"morno\" com grau 0.2.\nEla é ideal para modelar o raciocínio humano, que raramente é absoluto.\n\n## Por que (B) é correta\nA alternativa B define precisamente a lógica fuzzy como uma extensão da lógica clássica (booleana) projetada para lidar com a vaguidade de conceitos linguísticos e informações que não possuem fronteiras nítidas.\n\n## Pegadinhas desta questão\n** (A) ** Afirma que lida apenas com informações binárias, o que é o oposto do seu propósito.\n** (C) ** Restringe o uso à robótica, embora seja usada em sistemas de decisão, IA e eletrodomésticos.\n** (D) ** Diz que se baseia apenas em valores absolutos, ignorando os graus de pertinência.\n** (E) ** Confunde \"valores fracionados\" (números) com o conceito lógico de pertinência em conjuntos.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 62,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "As árvores de decisão desempenham um papel fundamental na área da inteligência artificial, sendo amplamente utilizadas em diversos domínios, fornecendo uma forma eficaz de tomar decisões automatizadas com base em padrões e características presentes nos dados. Considerando esses aspectos, assinale a alternativa INCORRETA sobre árvores de decisão .",
+    "alternativas": {
+      "A": "As árvores de decisão são comumente utilizadas para problemas de cla ssificação, sendo aplicáveis tanto em problemas de regressão quanto em problemas de classificação .",
+      "B": "As árvores de decisão são estruturas de dados lineares que representam o fluxo de execução de um algoritmo.",
+      "C": "As árvores de decisão são capazes de lidar com d ados categóricos, assim como atributos numéricos, possibilitando a inclusão de informações de differentes tipos em suas estruturas de decisão.",
+      "D": "As árvores de decisão são algoritmos que podem ser aplicados em conjuntos de dados de diferentes tamanhos, incluin do grandes conjuntos de dados, e são escaláveis.",
+      "E": "As árvores de decisão podem ser usadas em conjunto com outras técnicas de inteligência artificial para melhorar o desempenho e a precisão dos sistemas. Por exemplo, podem ser combinadas com algoritmos de apr endizado ensemble , como o random forest , para criar modelos mais robustos e acurados."
+    },
+    "resposta": "B",
+    "comentario": "Árvores de decisão são estruturas de dados não lineares (árvores), e não lineares. Elas mapeiam observações sobre um item para conclusões sobre seu valor alvo.",
+    "card": {
+      "pergunta": "Sobre Árvores de Decisão na IA: qual das afirmativas abaixo está INCORRETA?",
+      "resposta": "## Conceito\nUma **Árvore de Decisão** é um modelo de aprendizado supervisionado estruturado de forma hierárquica.\n- **Nós de Decisão:** Representam testes em atributos.\n- **Ramos:** Representam o resultado do teste.\n- **Folhas:** Representam o rótulo da classe ou valor final.\nPode ser usada para **Classificação** (saídas discretas) ou **Regressão** (saídas contínuas). É um modelo altamente interpretável.\n\n## Por que (B) é correta\nA afirmativa B está incorreta porque árvores de decisão **não são estruturas lineares**. Elas são estruturas de dados **não-lineares** (grafos acíclicos) que se ramificam a cada decisão, criando múltiplos caminhos possíveis.\n\n## Pegadinhas desta questão\n** (A) ** Afirmação correta: apesar do nome \"decisão\", elas servem para regressão (CART).\n** (C) ** Afirmação correta: algoritmos como C4.5 e ID3 lidam bem com dados mistos.\n** (D) ** Afirmação correta: são modelos eficientes e escaláveis para grandes volumes de dados.\n** (E) ** Afirmação correta: a combinação de múltiplas árvores gera o poderoso *Random Forest*.\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 63,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Em relação aos métodos de interpolação de intensidade de níveis de cinza ou cor de uma imagem, analise as assertivas abaixo e assinale V, se verdadeiras, ou F, se falsas. ( ) O método do vizinho mais próximo atribui a cada nova posição a intensidade de seu vizinho mais próximo na imagem original. O método pode causar distorções em detalhes finos ou criar formas serrilhadas em bordas retas de image ns. ( ) Na interpolação bilinear , os dois vizinhos mais próximos são utilizados para estimar a intensidade de uma dada posição. O método se baseia na média aritmética de distância desses pixels e causa borramento devido à sua característica de suavização. ( ) A interpolação bicúbica inclui os dezesseis vizinhos mais próximos de um ponto. Esse tipo de interpolação preserva detalhes finos na imagem. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+    "alternativas": {
+      "A": "F – F – V.",
+      "B": "F – V – F.",
+      "C": "V – F – V.",
+      "D": "V – V – V.",
+      "E": "V – V – F."
+    },
+    "resposta": "C",
+    "comentario": "V-F-V. A interpolação bilinear usa os 4 vizinhos mais próximos (2x2), não apenas dois. A bicúbica usa os 16 vizinhos (4x4) e oferece resultados superiores.",
+    "card": {
+      "pergunta": "Interpolação de imagens: Vizinho mais próximo (V/F), Bilinear usa 2 vizinhos (V/F), Bicúbica usa 16 vizinhos (V/F)?",
+      "resposta": "## Conceito\nA **Interpolação** é usada para estimar valores de intensidade em posições não inteiras da grade de pixels ao redimensionar imagens.\n| Método | Vizinhos | Qualidade | Efeito |\n|---|---|---|---|\n| **Vizinho Prox.** | 1 | Baixa | Serrilhado (*aliasing*) |\n| **Bilinear** | 4 ($2 \\times 2$) | Média | Suavização/Borramento |\n| **Bicúbica** | 16 ($4 \\times 4$) | Alta | Preserva detalhes |\n\n## Por que (C) é correta\n- **(V):** O vizinho mais próximo apenas copia o valor do pixel adjacente, gerando serrilhamento.\n- **(F):** A interpolação bilinear usa os **4 vizinhos** mais próximos, realizando uma média ponderada em duas direções.\n- **(V):** A bicúbica usa uma grade $4 \\times 4$ (16 pixels) e polinômios cúbicos para um resultado superior.\n\n## Pegadinhas desta questão\n** (A) ** Erra ao considerar a primeira assertiva falsa (o vizinho mais próximo causa sim distorções).\n** (B) ** Afirma que a bilinear usa 2 vizinhos como verdadeiro, o que é um erro técnico comum.\n** (D) ** Considera todas verdadeiras, ignorando que a bilinear exige 4 pontos para o cálculo.\n** (E) ** Considera a bicúbica falsa, apesar de ela ser a técnica padrão para alta qualidade com 16 vizinhos.\n\n**Gabarito: (C)**"
+    }
+  },
+  {
+    "id": 64,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "As redes neurais são utilizadas na área de reconhecimento de padrões. O modelo mais simples de rede neural possui apenas uma unidade, denominada ______________________. O modelo é utilizado apenas em problemas de classificação linearmente separáveis. Essa rede mapeia múltiplas entradas para uma saída representada por um valor binário. Assinale a alternativa que preenche corretamente a lacuna do trecho acima.",
+    "alternativas": {
+      "A": "Rede neural convolucional",
+      "B": "Retropropagação",
+      "C": "Perceptron mu lticamadas",
+      "D": "Perceptron",
+      "E": "Rede neural recorrente"
+    },
+    "resposta": "D",
+    "comentario": "O Perceptron é a unidade básica e o modelo mais simples de rede neural, capaz de resolver apenas problemas que podem ser divididos por uma linha reta (linearmente separáveis).",
+    "card": {
+      "pergunta": "Como se chama o modelo mais simples de rede neural, de uma unidade, para problemas linearmente separáveis?",
+      "resposta": "## Conceito\nO **Perceptron** é a forma mais básica de rede neural artificial (criado por Frank Rosenblatt).\n- **Estrutura:** Recebe entradas ponderadas por pesos, soma-as e aplica uma função de ativação de limiar (step function).\n- **Capacidade:** Só consegue aprender padrões que podem ser separados por uma linha reta (hiperplano).\n- **Limitação:** Não resolve problemas como o XOR (Ou-Exclusivo).\n\n## Por que (D) é correta\nO enunciado descreve exatamente as características do Perceptron: unidade única, mapeamento de múltiplas entradas para uma saída binária e restrição a problemas linearmente separáveis.\n\n## Pegadinhas desta questão\n** (A) ** Redes Convolucionais (CNNs) são modelos complexos de múltiplas camadas para imagens.\n** (B) ** *Retropropagação* (Backpropagation) é um algoritmo de treino, não um modelo de rede.\n** (C) ** O Perceptron Multicamadas (MLP) resolve problemas **não-lineares** e possui muitas unidades.\n** (E) ** Redes Recorrentes (RNNs) são voltadas para dados sequenciais (texto, áudio).\n\n**Gabarito: (D)**"
+    }
+  },
+  {
+    "id": 65,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Uma rede conectada à Internet possui a máscara de sub -rede 255.255.255.128. Qual o número máximo de computadores que a rede suporta?",
+    "alternativas": {
+      "A": "126",
+      "B": "128",
+      "C": "254",
+      "D": "255.255.255.128",
+      "E": "256"
+    },
+    "resposta": "A",
+    "comentario": "A máscara 255.255.255.128 deixa 7 bits para hosts (2⁷ = 128 endereços). Subtraindo o endereço da rede e o de broadcast, restam 126 endereços utilizáveis para computadores.",
+    "card": {
+      "pergunta": "Uma rede com máscara de sub-rede 255.255.255.128 suporta quantos computadores (hosts)?",
+      "resposta": "## Conceito\nNo endereçamento IP, a máscara define a divisão entre rede e hosts.\n- Máscara `255.255.255.128` em binário termina em `10000000`.\n- Isso significa que restam **7 bits** para identificar os hosts.\n- O número total de endereços é $2^n$, onde $n$ é o número de bits de host.\n**Regra de Ouro:** Deve-se subtrair 2 endereços (o da própria Rede e o de *Broadcast*).\n\n## Por que (A) é correta\nCom 7 bits para hosts:\n1. $2^7 = 128$ endereços totais.\n2. $128 - 2 = 126$ endereços utilizáveis para computadores.\nOs dois endereços reservados não podem ser atribuídos a interfaces de rede de hosts.\n\n## Pegadinhas desta questão\n** (B) ** 128 é o número total de endereços, mas não o de computadores (esqueceu de subtrair rede/broadcast).\n** (C) ** 254 seria o resultado para uma máscara `/24` (255.255.255.0).\n** (D) ** Apenas repete a máscara, o que não faz sentido como contagem de hosts.\n** (E) ** 256 é o total de endereços de uma classe C completa.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 66,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Qual dispositivo atua somente nas camadas física e enlace e só envia mensagens às portas para as quais essas mensagens são destinadas?",
+    "alternativas": {
+      "A": "Hub.",
+      "B": "Roteador.",
+      "C": "Repetidor.",
+      "D": "Gateway.",
+      "E": "Switch."
+    },
+    "resposta": "E",
+    "comentario": "O Switch opera na camada 2 (enlace) e utiliza endereços MAC para encaminhar quadros especificamente para a porta de destino, ao contrário do Hub que faz broadcast para todas as portas.",
+    "card": {
+      "pergunta": "Qual dispositivo opera nas camadas Física e de Enlace, filtrando mensagens pelo destino correto?",
+      "resposta": "## Conceito\nDispositivos de rede operam em diferentes camadas do modelo OSI:\n| Dispositivo | Camada | Função Principal |\n|---|---|---|\n| **Hub** | 1 (Física) | Repetidor burro (faz broadcast). |\n| **Switch** | 2 (Enlace) | Aprende endereços MAC e filtra quadros. |\n| **Roteador** | 3 (Rede) | Encaminha pacotes via endereços IP. |\nO Switch é o dispositivo que \"segmenta\" o domínio de colisão enviando dados apenas para a porta necessária.\n\n## Por que (E) é correta\nO **Switch** atua na camada de Enlace (L2) e Física (L1). Ele utiliza uma tabela de endereços MAC para garantir que uma mensagem seja enviada apenas para a porta onde o destinatário está conectado, evitando o tráfego desnecessário em outras portas.\n\n## Pegadinhas desta questão\n** (A) ** O Hub envia mensagens para **todas** as portas (broadcast), não apenas para o destino.\n** (B) ** O Roteador opera na camada de **Rede** (L3), não parando na de Enlace.\n** (C) ** O Repetidor apenas regenera o sinal elétrico (L1), sem inteligência de destino.\n** (D) ** O Gateway geralmente atua em todas as camadas (até a Aplicação) para tradução de protocolos.\n\n**Gabarito: (E)**"
+    }
+  },
+  {
+    "id": 67,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Considere um pacote de p bytes, enviados por um canal de d metros à taxa de b bits por segundo. Suponha que a velocidade de propagação no meio seja igual a da velocidade da luz no vácuo (c). Qual é a expressão para se determinar a largura/comprimento de um bit?",
+    "alternativas": {
+      "A": "c/b",
+      "B": "b/c",
+      "C": "8p/b",
+      "D": "d/c",
+      "E": "d/c + b/c"
+    },
+    "resposta": "A",
+    "comentario": "O tempo de duração de um bit é 1/b. A distância que o sinal percorre nesse tempo (largura do bit) é Velocidade * Tempo = c * (1/b) = c/b.",
+    "card": {
+      "pergunta": "Dado um pacote de $p$ bytes, taxa $b$ bits/s e velocidade de propagação $c$, qual o comprimento de um bit?",
+      "resposta": "## Conceito\nA \"largura\" ou comprimento físico de um bit em um cabo é a distância que o sinal percorre durante o tempo de transmissão de um único bit.\n- **Tempo de um bit ($T$):** Se transmitimos $b$ bits por segundo, um bit dura $1/b$ segundos.\n- **Velocidade ($V$):** O sinal viaja a velocidade $c$ (metros por segundo).\n- **Distância ($d$):** $V \\times T$.\n\n## Por que (A) é correta\nSubstituindo os valores:\n$$\\text{Comprimento} = \\text{Velocidade} \\times \\text{Tempo de 1 bit}$$\n$$\\text{Comprimento} = c \\times \\left(\\frac{1}{b}\\right) = \\frac{c}{b}$$\nIsso define quantos metros de cabo o sinal de um bit ocupa fisicamente.\n\n## Pegadinhas desta questão\n** (B) ** Inverte a fórmula ($b/c$), resultando em uma unidade de bits/metro, não metros.\n** (C) ** $8p/b$ é o tempo total de transmissão do pacote ($p$ bytes converted to bits / taxa), não o comprimento do bit.\n** (D) ** $d/c$ é o tempo de propagação do sinal no canal de comprimento $d$.\n** (E) ** Uma soma sem sentido dimensional para determinar comprimento.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 68,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Uma transação cliente se torna distribuída se ativa operações em vários servidores diferentes, isto é, um cliente faz requisições para mais de um servidor. A transação cliente ____________ __ conclui cada uma de suas requisições antes de passar para a próxima. Portanto, cada transação acessa objetos dos servidores em sequência. Quando os servidores usam locks, uma transação só pode estar esperando um objeto por vez. Assinale a alternativa que preenche corretamente a lacuna do trecho acima.",
+    "alternativas": {
+      "A": "plana",
+      "B": "aninhada",
+      "C": "coordenadora",
+      "D": "em duas fases",
+      "E": "hierárquica"
+    },
+    "resposta": "A",
+    "comentario": "Transações planas são sequenciais e simples: o cliente abre a transação, faz pedidos aos servidores um a um, e então fecha a transação. Não há subtransações paralelas (como nas aninhadas).",
+    "card": {
+      "pergunta": "Como se chama a transação distribuída em que o cliente conclui cada requisição sequencialmente antes da próxima?",
+      "resposta": "## Conceito\nTransações distribuídas podem ter diferentes estruturas:\n- **Transação Plana:** O cliente faz chamadas sequenciais aos servidores. Uma operação deve terminar antes da outra começar.\n- **Transação Aninhada:** A transação principal abre subtransações que podem rodar em paralelo em diferentes servidores.\nA transação plana é o modelo mais simples, mantendo o fluxo de controle linear.\n\n## Por que (A) é correta\nA definição de transação **plana** em sistemas distribuídos refere-se exatamente a essa natureza sequencial e simples, onde não há hierarquia de subtransações e o cliente interage com os servidores um após o outro dentro do mesmo contexto transacional.\n\n## Pegadinhas desta questão\n** (B) ** Transações aninhadas permitem concorrência entre subtransações, não sendo puramente sequenciais.\n** (C) ** \"Coordenadora\" descreve o papel de um nó no protocolo de commit, não o tipo da transação.\n** (D) ** \"Em duas fases\" refere-se ao protocolo de bloqueio (2PL) ou confirmação (2PC), não à estrutura da chamada.\n** (E) ** \"Hierárquica\" é um sinônimo para aninhada, onde há dependência entre pai e filho.\n\n**Gabarito: (A)**"
+    }
+  },
+  {
+    "id": 69,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Em sistemas operacionais distribuídos, é correto afirmar que:",
+    "alternativas": {
+      "A": "No escalonamento não preemptivo, uma thread pode ser suspensa, em qualquer ponto de sua execução, para permitir a execução de outra thread .",
+      "B": "Uma invocação assíncrona é aquela que é feita com o auxílio de uma chamada não bloqueante, a qual retorna assim que a mensagem de requisição da invocação tenha sido criada e esteja pronta para o envio.",
+      "C": "A gerência de memória trata da comunicação entre dua s threads associadas a diferentes processos no mesmo computador.",
+      "D": "No escalonamento preemptivo, uma thread é executada até realizar uma operação, por exemplo, uma chamada de sistema, que a bloqueie e leve ao escalonamento de uma outra thread .",
+      "E": "Um sistema de invocação síncrono volátil tenta, indefinidamente, realizar a invocação até obter o êxito ou falha, ou até que o aplicativo cancele a invocação."
+    },
+    "resposta": "B",
+    "comentario": "Chamadas assíncronas são não-bloqueantes: o emissor continua sua execução imediatamente após o sistema operacional aceitar o pedido de envio, sem esperar pela resposta do receptor.",
+    "card": {
+      "pergunta": "Em sistemas distribuídos, o que define uma invocação assíncrona?",
+      "resposta": "## Conceito\nA comunicação em sistemas distribuídos pode ser:\n- **Síncrona:** O cliente bloqueia e espera a resposta do servidor para continuar.\n- **Assíncrona:** O cliente envia a requisição e continua seu trabalho imediatamente. Ele pode ser notificado depois ou buscar o resultado posteriormente.\nA chamada assíncrona desacopla o tempo de execução do cliente e do servidor.\n\n## Por que (B) é correta\nUma **invocação assíncrona** utiliza chamadas não bloqueantes. Isso significa que o controle retorna ao programa cliente assim que o sistema operacional aceita a mensagem para envio, permitindo que o cliente execute outras tarefas enquanto o servidor processa o pedido.\n\n## Pegadinhas desta questão\n** (A) ** Incorreto. No escalonamento **não preemptivo**, a thread só sai da CPU quando quer ou quando bloqueia.\n** (C) ** A gerência de memória não trata de comunicação entre threads (isso é IPC/Sistemas Distribuídos).\n** (D) ** Incorreto. A descrição dada é de escalonamento **não preemptivo**.\n** (E) ** A semântica de \"invocação síncrona volátil\" não é um termo padrão para tentativas indefinidas (isso seria *at-least-once* ou *reliable*).\n\n**Gabarito: (B)**"
+    }
+  },
+  {
+    "id": 70,
+    "ano": 2023,
+    "area": "Tecnologia de Computadores",
+    "enunciado": "Sobre comunicação indireta em sistemas distribuídos, é correto afirmar que:",
+    "alternativas": {
+      "A": "A comunicação direta é definida como a comunicação entre entidades de um sistema distribuído por meio de um intermediário, sem nenhum acoplamento direto entre o remetente e o destinatário (ou destinatários).",
+      "B": "No desacoplamento espacial, o remetente e o destinat ário (ou destinatários) podem ter tempos de vida independentes, isto é, o remetente e o destinatário (ou destinatários) não precisa m existir ao mesmo tempo para se comunicar.",
+      "C": "Na comunicação em grupo , implementa comunicação por multicast , na qual uma mensag em é enviada para todos os membros do grupo por meio de uma única operação.",
+      "D": "No desacoplamento temporal, o remetente não sabe ou não precisa saber a identidade do destinatário (ou destinatários) e vice -versa. O desenvolvedor do sistema tem muitos graus de liberdade para lidar com alterações: os participantes (remetentes ou destinatários) podem ser substituídos, atualizados, duplicados ou migrados.",
+      "E": "A comunicação assíncrona é um serviço por meio do qual uma mensagem é enviada para um grupo e, então, entregue a todos os membros do grupo."
+    },
+    "resposta": "C",
+    "comentario": "A comunicação em grupo via multicast permite enviar dados para múltiplos destinatários de uma só vez, sendo um pilar da comunicação indireta e sistemas de eventos/mensageria.",
+    "card": {
+      "pergunta": "Sobre a comunicação em grupo, qual afirmativa sobre multicast está correta?",
+      "resposta": "## Conceito\nA comunicação em sistemas distribuídos pode ser direta ou indireta.\n- **Multicast:** Envio de uma mensagem para um grupo de destinatários específicos de uma só vez.\n- **Desacoplamento Espacial:** O remetente não precisa saber quem são os destinatários.\n- **Desacoplamento Temporal:** Remetente e destinatário não precisam estar ativos ao mesmo tempo.\n\n## Por que (C) é correta\nA **comunicação em grupo** é fundamentada na operação de **multicast**. Ela permite que um processo envie uma única mensagem para um \"identificador de grupo\" e a infraestrutura do sistema distribuído se encarregue de entregá-la a todos os membros atuais.\n\n## Pegadinhas desta questão\n** (A) ** Troca a definição: a comunicação descrita (com intermediário e sem acoplamento) é a **indireta**.\n** (B) ** Descreve o desacoplamento **temporal**, mas chama de espacial.\n** (D) ** Descreve o desacoplamento **espacial** (identidade), mas chama de temporal.\n** (E) ** A comunicação assíncrona refere-se ao tempo de bloqueio, não ao destino da mensagem (grupo).\n\n**Gabarito: (C)**"
+    }
+  }
+]
