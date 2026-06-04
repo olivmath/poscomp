@@ -170,6 +170,71 @@ test('step 4 upload → step 5 confirmação (se CF disponível)', async ({ page
   }
 })
 
+// Happy: step 2 → botão Voltar → volta para step 1
+test('step 2 → Voltar → step 1', async ({ page }) => {
+  await loginFreePerfil(page)
+  await page.getByRole('button', { name: 'Ver planos' }).click()
+
+  await proBtn(page).click()
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await expect(page.getByText('Benefícios inclusos')).toBeVisible()
+
+  await page.getByRole('button', { name: 'Voltar' }).click()
+  await expect(page.getByText('Escolha seu plano')).toBeVisible()
+})
+
+// Happy: step 3 → botão Voltar → volta para step 2 (se CF disponível)
+test('step 3 → Voltar → step 2', async ({ page }) => {
+  await loginFreePerfil(page)
+  await page.getByRole('button', { name: 'Ver planos' }).click()
+
+  await proBtn(page).click()
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await page.waitForTimeout(5000)
+
+  if (!(await page.getByText('Pagamento via PIX').isVisible().catch(() => false))) {
+    test.skip(true, 'CF getPixConfig indisponível')
+    return
+  }
+
+  await page.getByRole('button', { name: 'Voltar' }).click()
+  await expect(page.getByText('Benefícios inclusos')).toBeVisible()
+})
+
+// Sad: step 4 com erro de upload → apenas botão "Tentar novamente" (sem "Selecionar arquivo")
+test('step 4 erro upload → só botão Tentar novamente', async ({ page }) => {
+  await loginFreePerfil(page)
+  await page.getByRole('button', { name: 'Ver planos' }).click()
+
+  await proBtn(page).click()
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await page.waitForTimeout(5000)
+
+  if (!(await page.getByText('Pagamento via PIX').isVisible().catch(() => false))) {
+    test.skip(true, 'CF getPixConfig indisponível')
+    return
+  }
+
+  await page.getByRole('button', { name: 'Pagamento enviado' }).click()
+  await expect(page.getByText('Enviar comprovante')).toBeVisible()
+
+  // intercepta a CF para forçar erro
+  await page.route('**/submitPremiumRequest**', (route) => route.fulfill({
+    status: 500,
+    contentType: 'application/json',
+    body: JSON.stringify({ error: { status: 'INTERNAL', message: 'forced error' } }),
+  }))
+
+  await page.locator('input[type="file"]').setInputFiles('tests/e2e/assets/receipt.png')
+  await expect(page.getByText(/Erro ao enviar comprovante/i)).toBeVisible({ timeout: 10000 })
+
+  // apenas "Tentar novamente" visível — "Selecionar arquivo" NÃO deve aparecer
+  await expect(page.getByRole('button', { name: 'Tentar novamente' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Selecionar arquivo' })).not.toBeVisible()
+})
+
 // Happy: perfil premium não mostra botão "Ver planos"
 test('perfil premium → sem botão Ver planos', async ({ page }) => {
   const email = `e2e+premV${Date.now()}@local.test`

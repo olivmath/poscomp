@@ -85,13 +85,24 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
 
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <h3 style={{ margin: 0, fontSize: 18 }}>
-          {step === 1 && 'Escolha seu plano'}
-          {step === 2 && 'Benefícios inclusos'}
-          {step === 3 && 'Pagamento via PIX'}
-          {step === 4 && 'Enviar comprovante'}
-          {step === 5 && 'Pedido enviado!'}
-        </h3>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          {(step === 2 || step === 3) && (
+            <button
+              onClick={() => setStep((s) => (s - 1) as Step)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex' }}
+              aria-label="Voltar"
+            >
+              <span className="material-symbols-outlined">arrow_back</span>
+            </button>
+          )}
+          <h3 style={{ margin: 0, fontSize: 18 }}>
+            {step === 1 && 'Escolha seu plano'}
+            {step === 2 && 'Benefícios inclusos'}
+            {step === 3 && 'Pagamento via PIX'}
+            {step === 4 && 'Enviar comprovante'}
+            {step === 5 && 'Pedido enviado!'}
+          </h3>
+        </div>
         {canClose && (
           <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}>
             <span className="material-symbols-outlined">close</span>
@@ -300,6 +311,24 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
               </span>
               <p style={{ margin: 0, fontSize: 14 }}>Enviando…</p>
             </div>
+          ) : uploadError ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <p style={{ margin: 0, fontSize: 13, color: 'var(--md-sys-color-error)' }}>{uploadError}</p>
+              <button
+                onClick={() => { setUploadError(''); fileRef.current?.click() }}
+                style={{
+                  background: 'none',
+                  border: '1px solid var(--md-sys-color-error)',
+                  borderRadius: 8,
+                  padding: '10px 0',
+                  cursor: 'pointer',
+                  color: 'var(--md-sys-color-error)',
+                  fontWeight: 600,
+                }}
+              >
+                Tentar novamente
+              </button>
+            </div>
           ) : (
             <button
               onClick={() => fileRef.current?.click()}
@@ -321,25 +350,6 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
               <span className="material-symbols-outlined" style={{ fontSize: 20 }}>upload_file</span>
               Selecionar arquivo
             </button>
-          )}
-          {uploadError && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <p style={{ margin: 0, fontSize: 13, color: 'var(--md-sys-color-error)' }}>{uploadError}</p>
-              <button
-                onClick={() => { setUploadError(''); fileRef.current?.click() }}
-                style={{
-                  background: 'none',
-                  border: '1px solid var(--md-sys-color-error)',
-                  borderRadius: 8,
-                  padding: '10px 0',
-                  cursor: 'pointer',
-                  color: 'var(--md-sys-color-error)',
-                  fontWeight: 600,
-                }}
-              >
-                Tentar novamente
-              </button>
-            </div>
           )}
         </div>
       )}
