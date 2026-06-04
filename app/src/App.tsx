@@ -5,6 +5,7 @@ import { AppBar } from './components/AppBar'
 import { useTheme } from './hooks/useTheme'
 
 const Login = lazy(() => import('./pages/Login').then((m) => ({ default: m.Login })))
+const E2ELogin = lazy(() => import('./pages/E2ELogin').then((m) => ({ default: m.E2ELogin })))
 const Home = lazy(() => import('./pages/Home').then((m) => ({ default: m.Home })))
 const SimuladoConfig = lazy(() => import('./pages/SimuladoConfig').then((m) => ({ default: m.SimuladoConfig })))
 const SimuladoRunning = lazy(() => import('./pages/SimuladoRunning').then((m) => ({ default: m.SimuladoRunning })))
@@ -74,6 +75,7 @@ export function App() {
           <Routes>
             <Route element={<PublicOnlyRoute />}>
               <Route path="/login" element={<Login />} />
+              {import.meta.env.DEV && <Route path="/__e2e__/auth" element={<E2ELogin />} />}
             </Route>
 
             {/* Routes with BottomNav */}
