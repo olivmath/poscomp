@@ -37,9 +37,12 @@ Cliente
 │ ├─ getSimuladoQuestions                             │
 │ ├─ finishSimulado                                   │
 │ ├─ getPendingCards                                  │
+│ ├─ getPendingCount                                  │
+│ ├─ getMateriaReviewStats                            │
 │ ├─ reviewCard                                       │
-│ ├─ deleteAllData                                    │
+│ ├─ getPixConfig                                     │
 │ ├─ submitPremiumRequest                             │
+│ ├─ deleteAllData                                    │
 │ ├─ reportQuestion                                   │
 │ └─ getFlaggedQuestions (deveria ser admin — bug)    │
 │    resolveFlaggedQuestion (deveria ser admin — bug) │

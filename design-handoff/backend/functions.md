@@ -214,7 +214,7 @@ Não há REST endpoints — não há URL pública direta.
 
 ---
 
-## Grupo: Billing / Config
+## Grupo: Billing (usuário)
 
 ### `getPixConfig`
 
@@ -238,26 +238,6 @@ Não há REST endpoints — não há URL pública direta.
 **Motivo**: chave PIX não deve ser exposta no bundle do frontend (tech-debt #8).
 
 ---
-
-## Grupo: Conta
-
-### `deleteAllData`
-
-**Auth**: usuário autenticado
-
-**Input**: nenhum
-
-**Output**: `{ deleted: true }`
-
-**Side effects**: deleta em batch (400 docs por batch) as coleções:
-- `users/{uid}/srs_cards` — todos os cards SRS
-- `users/{uid}/results` — todo o histórico de simulados
-
-**Não** deleta: o documento `users/{uid}` raiz (perfil, premium, FCM tokens).
-
----
-
-## Grupo: Billing / Premium
 
 ### `submitPremiumRequest`
 
@@ -284,6 +264,36 @@ Não há REST endpoints — não há URL pública direta.
 
 ---
 
+## Grupo: Conta (usuário)
+
+### `deleteAllData`
+
+**Auth**: usuário autenticado
+
+**Input**: nenhum
+
+**Output**: `{ deleted: true }`
+
+**Side effects**: deleta em batch (400 docs por batch) as coleções:
+- `users/{uid}/srs_cards` — todos os cards SRS
+- `users/{uid}/results` — todo o histórico de simulados
+
+**Não** deleta: o documento `users/{uid}` raiz (perfil, premium, FCM tokens).
+
+---
+
+### `reportQuestion`
+
+**Auth**: usuário autenticado
+
+**Input**: `{ questionId: number, comment?: string }`
+
+**Comportamento**: cria `flagged_questions/{id}` standalone (não vinculado a um simulado).
+
+---
+
+## Grupo: Admin — Premium
+
 ### `reviewPremiumRequest`
 
 **Auth**: admin
@@ -309,13 +319,6 @@ Não há REST endpoints — não há URL pública direta.
 2. **Não** altera o documento `users/{uid}`
 
 **Precondição**: ticket deve estar com `status='pending'` → `failed-precondition` se já processado.
-
----
-
-### `onPremiumRequestCreated` ← Firestore Trigger
-
-**Tipo**: `onDocumentCreated('premium_requests/{requestId}')`
-**Propósito**: apenas logging do novo ticket. Sem side effects no banco.
 
 ---
 
@@ -439,16 +442,6 @@ Não há REST endpoints — não há URL pública direta.
 
 ---
 
-### `reportQuestion`
-
-**Auth**: usuário autenticado
-
-**Input**: `{ questionId: number, comment?: string }`
-
-**Comportamento**: cria `flagged_questions/{id}` standalone (não vinculado a um simulado).
-
----
-
 ## Grupo: Admin — Announcements
 
 ### `createAnnouncement`
@@ -488,7 +481,16 @@ Não há REST endpoints — não há URL pública direta.
 
 ---
 
-## Grupo: Notificações (Scheduled)
+## Grupo: Background — Triggers
+
+### `onPremiumRequestCreated` ← Firestore Trigger
+
+**Tipo**: `onDocumentCreated('premium_requests/{requestId}')`
+**Propósito**: apenas logging do novo ticket. Sem side effects no banco.
+
+---
+
+## Grupo: Background — Scheduled
 
 Ver `notifications.md` para detalhes.
 

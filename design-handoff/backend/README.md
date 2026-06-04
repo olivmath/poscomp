@@ -21,19 +21,35 @@
 functions/src/
   index.ts               ← entry point: registra todas as functions
   types.ts               ← domínio: tipos, constantes, interfaces
+
+  // User — Simulado
   getSimuladoQuestions.ts
   finishSimulado.ts
+
+  // User — Revisão
   getPendingCards.ts
+  getPendingCount.ts
+  getMateriaReviewStats.ts
   reviewCard.ts
+
+  // User — Billing
+  getPixConfig.ts
+  premiumRequests.ts     ← submitPremiumRequest
+
+  // User — Conta
   deleteAllData.ts
   reportQuestion.ts
-  premiumRequests.ts
-  notifications.ts
-  admin.ts               ← flagged questions (admin)
-  adminUsers.ts          ← gestão de usuários (admin)
-  adminQuestions.ts      ← CRUD de questões (admin)
-  adminAnnouncements.ts  ← CRUD de announcements (admin)
-  deleteFlaggedQuestion.ts
+
+  // Admin
+  adminUsers.ts          ← setAdminRole, revokeAdminRole, listUsers, disableUser, enableUser, resetUserSrs, grantPremiumAdmin
+  adminPremium.ts        ← reviewPremiumRequest
+  adminQuestions.ts      ← createQuestion, updateQuestion, deleteQuestion
+  adminFlags.ts          ← getFlaggedQuestions, resolveFlaggedQuestion, deleteFlaggedQuestion
+  adminAnnouncements.ts  ← createAnnouncement, updateAnnouncement, deleteAnnouncement
+
+  // Background
+  notifications.ts       ← sendReviewReminder, sendStreakReminder, sendWeeklySimuladoReminder
+  triggers.ts            ← onPremiumRequestCreated
 
 infra/firebase/
   firestore.rules        ← regras de segurança do Firestore
@@ -56,19 +72,41 @@ Espelham os fluxos do app (`flows/`):
 
 ---
 
-## Grupos funcionais
+## Capacidades do backend
 
-| Grupo             | Functions                                                          |
-|-------------------|--------------------------------------------------------------------|
-| **Simulado**      | getSimuladoQuestions, finishSimulado                               |
-| **Revisão (SRS)** | getPendingCards, reviewCard                                        |
-| **Conta**         | deleteAllData                                                      |
-| **Billing**       | submitPremiumRequest, reviewPremiumRequest, onPremiumRequestCreated|
-| **Notificações**  | sendReviewReminder, sendStreakReminder, sendWeeklySimuladoReminder |
-| **Admin — Users** | setAdminRole, revokeAdminRole, listUsers, disableUser, enableUser, resetUserSrs, grantPremiumAdmin |
-| **Admin — Q&A**   | createQuestion, updateQuestion, deleteQuestion                     |
-| **Admin — Flags** | getFlaggedQuestions, resolveFlaggedQuestion, deleteFlaggedQuestion |
-| **Admin — Annc.** | createAnnouncement, updateAnnouncement, deleteAnnouncement         |
+| Função | O que faz |
+|---|---|
+| `getSimuladoQuestions` | Retorna questões embaralhadas filtradas por matéria e quantidade |
+| `finishSimulado` | Grava resultado, atualiza SRS cards e registra questões flagadas |
+| `getPendingCards` | Retorna fila de flashcards SRS vencidos, ordenados por prioridade |
+| `getPendingCount` | Retorna o número de cards SRS vencidos (badge do BottomNav) |
+| `getMateriaReviewStats` | Retorna próxima data de revisão e histórico por matéria |
+| `reviewCard` | Aplica SM-2 num card e agenda a próxima revisão |
+| `getPixConfig` | Retorna chave PIX e QR code gerado server-side |
+| `submitPremiumRequest` | Cria ticket de assinatura com comprovante de pagamento |
+| `deleteAllData` | Apaga todo o histórico de simulados e cards SRS do usuário |
+| `reportQuestion` | Reporta um problema em uma questão (fora de simulado) |
+| `reviewPremiumRequest` | Aprova ou nega um ticket de assinatura (admin) |
+| `setAdminRole` / `revokeAdminRole` | Concede ou remove o papel de admin (admin) |
+| `listUsers` | Lista todos os usuários paginados (admin) |
+| `disableUser` / `enableUser` | Bloqueia ou desbloqueia o login de um usuário (admin) |
+| `resetUserSrs` | Apaga todos os SRS cards de um usuário (admin) |
+| `grantPremiumAdmin` | Concede premium diretamente sem comprovante (admin) |
+| `createQuestion` | Cria uma nova questão no banco (admin) |
+| `updateQuestion` | Atualiza campos de uma questão existente (admin) |
+| `deleteQuestion` | Remove uma questão do banco (admin) |
+| `getFlaggedQuestions` | Lista questões reportadas não resolvidas (admin)¹ |
+| `resolveFlaggedQuestion` | Marca um report como resolvido (admin)¹ |
+| `deleteFlaggedQuestion` | Remove um report do banco (admin) |
+| `createAnnouncement` | Cria um banner de aviso no app (admin) |
+| `updateAnnouncement` | Atualiza um banner existente (admin) |
+| `deleteAnnouncement` | Remove um banner (admin) |
+| `onPremiumRequestCreated` | Log automático quando um ticket de premium é criado (trigger) |
+| `sendReviewReminder` | Push diário para usuários com cards SRS vencidos (9h BRT) |
+| `sendStreakReminder` | Push diário para usuários sem atividade no dia (21h BRT) |
+| `sendWeeklySimuladoReminder` | Push semanal de lembrete de simulado (segunda 9h BRT) |
+
+¹ Auth ainda como `user` (bug — deve ser corrigida para `admin`, ver `requisitos-tecnicos.md`)
 
 ---
 
