@@ -1,10 +1,13 @@
 import { onCall, HttpsError } from 'firebase-functions/v2/https'
+import { defineSecret } from 'firebase-functions/params'
 import * as admin from 'firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
 import { requireAuth } from '../utils/auth'
 import * as QRCode from 'qrcode'
 
-export const getPixConfig = onCall(async (request) => {
+const pixKeySecret = defineSecret('PIX_KEY')
+
+export const getPixConfig = onCall({ secrets: [pixKeySecret] }, async (request) => {
   const auth = requireAuth(request)
   const { planType } = request.data as { planType: 'pro' | 'pro_max' }
 
@@ -14,14 +17,9 @@ export const getPixConfig = onCall(async (request) => {
     throw new HttpsError('invalid-argument', 'planType must be pro or pro_max')
   }
 
-  let pixKey = process.env.PIX_KEY
+  const pixKey = pixKeySecret.value() || (process.env.NODE_ENV !== 'production' ? 'local-pix-key' : null)
   if (!pixKey) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn('PIX_KEY not configured — using fallback local key for development')
-      pixKey = 'local-pix-key'
-    } else {
-      throw new HttpsError('internal', 'PIX_KEY not configured')
-    }
+    throw new HttpsError('internal', 'PIX_KEY not configured')
   }
 
   const transactionId = admin.firestore().collection('premium_requests').doc().id

@@ -53,7 +53,7 @@ export function HistoricoDetalhe() {
       >
         <button
           onClick={() => navigate('/historico')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', color: 'var(--md-sys-color-on-surface)' }}
         >
           <span className="material-symbols-outlined">arrow_back</span>
         </button>

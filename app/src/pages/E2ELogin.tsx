@@ -16,6 +16,9 @@ export function E2ELogin() {
     const params = new URLSearchParams(window.location.search)
     const email = params.get('email') || `e2e+${Date.now()}@local.test`
     const pwd = params.get('pwd') || 'password123'
+    const premiumParam = params.get('premium') || 'true' // default to true for convenience
+    const isPremium = premiumParam === 'true'
+    const planType = (params.get('plan') as 'pro' | 'pro_max') || (isPremium ? 'pro' : 'free')
 
     setStatus('criando usuário')
 
@@ -30,8 +33,8 @@ export function E2ELogin() {
         if (user) {
           // garante documento de usuário para habilitar conteúdos premium e outros campos necessários
           await setDoc(doc(db, 'users', user.uid), {
-            isPremium: true,
-            planType: 'pro',
+            isPremium,
+            planType: isPremium ? planType : 'free',
             activeDays: [],
             displayName: user.displayName ?? 'E2E Test'
           }, { merge: true })

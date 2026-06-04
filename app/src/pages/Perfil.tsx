@@ -115,7 +115,7 @@ export function Perfil() {
       >
         <button
           onClick={() => navigate('/')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--md-sys-color-on-surface)' }}
         >
           <span className="material-symbols-outlined">arrow_back</span>
         </button>
@@ -129,7 +129,7 @@ export function Perfil() {
             <img
               src={user.photoURL}
               alt="Foto de perfil"
-              style={{ width: 80, height: 80, borderRadius: '50%', objectFit: 'cover' }}
+              style={{ width: 80, height: 80, borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--md-sys-color-on-surface)' }}
             />
           ) : (
             <div

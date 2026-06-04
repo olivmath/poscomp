@@ -57,7 +57,7 @@ export function AppBar() {
       >
         <button
           onClick={() => setOpen(true)}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4 }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: 'var(--md-sys-color-on-surface)' }}
           aria-label="Abrir menu"
         >
           <span className="material-symbols-outlined">menu</span>
@@ -76,7 +76,7 @@ export function AppBar() {
             <img
               src={user.photoURL}
               alt="Perfil"
-              style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover' }}
+              style={{ width: 32, height: 32, borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--md-sys-color-on-surface)' }}
             />
           ) : (
             <span className="material-symbols-outlined" style={{ fontSize: 32 }}>account_circle</span>
