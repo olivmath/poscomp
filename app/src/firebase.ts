@@ -4,8 +4,16 @@ import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
 import { getFunctions, connectFunctionsEmulator } from 'firebase/functions'
 import { getStorage, connectStorageEmulator } from 'firebase/storage'
 
+const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
+const placeholderApiKey = 'dummy-key-for-emulator';
+
+if (import.meta.env.MODE === 'production' && (!apiKey || apiKey === placeholderApiKey)) {
+  console.error('Firebase API key missing or invalid for production. Set VITE_FIREBASE_API_KEY in your deployment environment.');
+  throw new Error('Missing/invalid Firebase API key in production');
+}
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: apiKey,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
