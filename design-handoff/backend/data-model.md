@@ -24,9 +24,7 @@ Firestore
 interface Question {
   id: number                          // PK numérico, auto-incrementado
   ano: number                         // ex: 2023
-  materia: 'Matemática'
-       | 'Fundamentos da Computação'
-       | 'Tecnologia da Computação'
+  materia: 'Matemática' | 'Computação' | 'Tecnologias'
   enunciado: string                   // texto da questão
   alternativas: {                     // sempre 5 opções
     A: string
@@ -36,10 +34,8 @@ interface Question {
     E: string
   }
   resposta: 'A' | 'B' | 'C' | 'D' | 'E'  // gabarito correto
-
-  // campos opcionais
-  comentario?: string                 // explicação/resolução (Premium)
-  card?: {
+  comentario: string                 // explicação/resolução (Premium)
+  card: {
     pergunta: string                  // versão resumida para flashcard
     resposta: string                  // resposta do flashcard (markdown)
   }
@@ -108,19 +104,18 @@ interface SrsCard {
   createdAt: Timestamp                // criado por finishSimulado
 
   // ── Estado ────────────────────────────────────────────────────
-  lastConfidence: 'unsure' | 'studying' | 'should_know' | null
+  lastConfidence: 'unsure' | 'studying' | 'should_know'
   studied: boolean                    // true após pelo menos 1 reviewCard
   simuladoCorrect: boolean            // se acertou no simulado que criou o card
 
   // ── Denormalização ─────────────────────────────────────────────
-  materia: 'Matemática'
-      | 'Fundamentos da Computação'
-      | 'Tecnologia da Computação'    // copiado de questions/{questionId}.materia em finishSimulado
-                                      // permite query por matéria sem join com questions
+  // copiado de questions/{questionId}.materia em finishSimulado
+  // permite query por matéria sem join com questions
+  materia: 'Matemática' | 'Computação' | 'Tecnologias' 
 }
 ```
 
-**Como é criado**: automaticamente por `finishSimulado` para cada questão respondida — inclui `materia` copiado do snapshot da questão.
+**Como é criado**: automaticamente por `finishSimulado` para cada questão respondida errado — inclui `materia` copiado do snapshot da questão.
 **Como é atualizado**: `finishSimulado` (reseta dueDate ao now quando o simulado é refeito) e `reviewCard` (aplica SM-2 e agenda próxima revisão).
 
 **Indexação necessária**:
@@ -164,7 +159,7 @@ interface SimuladoResult {
       enunciado: string
       alternativas: Record<string, string>
       resposta: string
-      comentario?: string             // só se existir
+      comentario: string
     }
     issue?: {
       comment?: string                // flag de problema reportado
@@ -179,7 +174,7 @@ interface SimuladoResult {
     enunciado: string
     alternativas: Record<string, string>
     resposta: string
-    comentario?: string
+    comentario: string
   }>
 }
 ```
@@ -198,7 +193,7 @@ interface FlaggedQuestion {
   uid: string                         // FK: usuário que reportou
   questionId: number                  // FK: questão reportada
   resultId?: string                   // FK: simulado onde foi reportada (se via finishSimulado)
-  comment: string | null              // texto livre do problema
+  comment: string | ''                // texto livre do problema
   resolved: boolean                   // false = pendente, true = resolvido
   createdAt: Timestamp
   resolvedAt?: Timestamp              // preenchido por resolveFlaggedQuestion
@@ -244,7 +239,7 @@ interface Announcement {
   message: string                     // texto do banner
   type: 'info' | 'warning' | 'success'
   active: boolean                     // múltiplos podem ser true — carousel exibe todos os ativos
-  url: string | null                  // link opcional ao clicar no banner
+  url: string | ''                    // link opcional ao clicar no banner
   createdAt: Timestamp
   expiresAt: Timestamp | null         // expiração automática (verificada no frontend)
 }
