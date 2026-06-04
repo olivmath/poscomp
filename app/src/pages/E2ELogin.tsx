@@ -28,13 +28,14 @@ export function E2ELogin() {
         if (err?.code === 'auth/email-already-in-use') return signInWithEmailAndPassword(auth, email, pwd)
         throw err
       })
-      .then(async () => {
-        const user = auth.currentUser
+      .then(async (credential) => {
+        const user = credential?.user
         if (user) {
           // garante documento de usuário para habilitar conteúdos premium e outros campos necessários
           await setDoc(doc(db, 'users', user.uid), {
             isPremium,
             planType: isPremium ? planType : 'free',
+            premiumStatus: isPremium ? 'active' : 'free',
             activeDays: [],
             displayName: user.displayName ?? 'E2E Test'
           }, { merge: true })

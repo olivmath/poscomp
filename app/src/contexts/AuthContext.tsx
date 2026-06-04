@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 import { User, onAuthStateChanged } from 'firebase/auth'
-import { onSnapshot, doc, setDoc } from 'firebase/firestore'
+import { onSnapshot, doc } from 'firebase/firestore'
 import { auth, db } from '../firebase'
 import { UserDoc } from '../types'
 
@@ -29,14 +29,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!user) return
-    const unsub = onSnapshot(doc(db, 'users', user.uid), async (snap) => {
+    const unsub = onSnapshot(doc(db, 'users', user.uid), (snap) => {
       if (!snap.exists()) {
-        const defaults: UserDoc = { isPremium: false, planType: 'free', premiumStatus: 'free' }
-        await setDoc(doc(db, 'users', user.uid), defaults)
+        setUserDoc({ isPremium: false, planType: 'free', premiumStatus: 'free' })
       } else {
         setUserDoc(snap.data() as UserDoc)
-        setLoading(false)
       }
+      setLoading(false)
     })
     return unsub
   }, [user])

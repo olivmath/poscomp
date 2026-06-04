@@ -35,26 +35,22 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPixConfig = void 0;
 const https_1 = require("firebase-functions/v2/https");
+const params_1 = require("firebase-functions/params");
 const admin = __importStar(require("firebase-admin"));
 const firestore_1 = require("firebase-admin/firestore");
 const auth_1 = require("../utils/auth");
 const QRCode = __importStar(require("qrcode"));
-exports.getPixConfig = (0, https_1.onCall)(async (request) => {
+const pixKeySecret = (0, params_1.defineSecret)('PIX_KEY');
+exports.getPixConfig = (0, https_1.onCall)({ secrets: [pixKeySecret] }, async (request) => {
     const auth = (0, auth_1.requireAuth)(request);
     const { planType } = request.data;
     console.log('getPixConfig started', { uid: auth.uid, planType });
     if (planType !== 'pro' && planType !== 'pro_max') {
         throw new https_1.HttpsError('invalid-argument', 'planType must be pro or pro_max');
     }
-    let pixKey = process.env.PIX_KEY;
+    const pixKey = pixKeySecret.value() || (process.env.NODE_ENV !== 'production' ? 'local-pix-key' : null);
     if (!pixKey) {
-        if (process.env.NODE_ENV !== 'production') {
-            console.warn('PIX_KEY not configured — using fallback local key for development');
-            pixKey = 'local-pix-key';
-        }
-        else {
-            throw new https_1.HttpsError('internal', 'PIX_KEY not configured');
-        }
+        throw new https_1.HttpsError('internal', 'PIX_KEY not configured');
     }
     const transactionId = admin.firestore().collection('premium_requests').doc().id;
     const pixCopyPaste = `PIX:${pixKey}:${transactionId}`;
