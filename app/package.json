@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "prod": "vite preview --port 5173 --strictPort",
     "lint": "eslint src --ext .ts,.tsx && stylelint \"src/**/*.css\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
