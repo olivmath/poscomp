@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-ifneq ($(filter local dev func fn app admin,$(firstword $(MAKECMDGOALS))),)
+ifneq ($(filter local prof func fn app admin,$(firstword $(MAKECMDGOALS))),)
 up down restart seed gf rf get-flagged resolve-flagged deploy install build lint typecheck test set-admin:
 	@:
 .DEFAULT:
@@ -9,7 +9,7 @@ endif
 
 .PHONY: help validate \
         deploy-hosting deploy-functions deploy \
-        local dev func fn app admin \
+        local prof func fn app admin \
         up seed gf rf get-flagged resolve-flagged deploy admin \
         install build lint typecheck test
 
@@ -45,21 +45,21 @@ help:
 	@echo "  make local up        Start Firebase emulators (builds backend first)"
 	@echo "  make local down      Stop Firebase emulators (kill ports)"
 	@echo "  make local restart   Stop + rebuild + start emulators"
-	@echo "  make local app       Vite dev server connected to emulators (port 5173)"
-	@echo "  make local admin     Admin panel dev server connected to emulators (port 5174)"
+	@echo "  make local app       Vite prof server connected to emulators (port 5173)"
+	@echo "  make local admin     Admin panel prof server connected to emulators (port 5174)"
 	@echo "  make local set-admin foo@bar.com  Set admin:true claim (emulator)"
 	@echo "  make local seed      Seed questions into local Firestore emulator"
 	@echo "  make local gf        List pending flagged questions (emulator)"
 	@echo "  make local rf        Resolve a flagged question (emulator)"
 	@echo ""
-	@echo "dev:"
-	@echo "  make dev app         Vite dev server connected to real Firebase (port 5173)"
-	@echo "  make dev admin       Admin panel dev server connected to real Firebase (port 5174)"
-	@echo "  make dev set-admin foo@bar.com  Set admin:true claim (prod)"
-	@echo "  make dev seed        Seed questions into real Firestore (prod)"
-	@echo "  make dev deploy app   Deploy app to Firebase Hosting"
-	@echo "  make dev deploy admin Deploy admin panel to Firebase Hosting"
-	@echo "  make dev deploy func  Build + deploy Cloud Functions"
+	@echo "prof:"
+	@echo "  make prof app         Vite prof server connected to real Firebase (port 5173)"
+	@echo "  make prof admin       Admin panel prof server connected to real Firebase (port 5174)"
+	@echo "  make prof set-admin foo@bar.com  Set admin:true claim (prod)"
+	@echo "  make prof seed        Seed questions into real Firestore (prod)"
+	@echo "  make prof deploy app   Deploy app to Firebase Hosting"
+	@echo "  make prof deploy admin Deploy admin panel to Firebase Hosting"
+	@echo "  make prof deploy func  Build + deploy Cloud Functions"
 	@echo ""
 	@echo "top-level:"
 	@echo "  validate             Full pipeline: install → lint → typecheck → test → build"
@@ -108,16 +108,16 @@ local:
 			cd backend && npm run build && cd .. && \
 			firebase emulators:start --only auth,functions,firestore,storage ;; \
 		down) \
-			lsof -ti :4000,9099,8080,9199,4400,4500,5001 | xargs kill -9 2>/dev/null; \
+			lsof -ti :4000,9099,8080,9199,4400,4500,5001 | xargs kill -9 2>/prof/null; \
 			echo "Emulators stopped." ;; \
 		restart) \
-			lsof -ti :4000,9099,8080,9199,4400,4500,5001 | xargs kill -9 2>/dev/null; \
+			lsof -ti :4000,9099,8080,9199,4400,4500,5001 | xargs kill -9 2>/prof/null; \
 			cd backend && npm run build && cd .. && \
 			firebase emulators:start --only auth,functions,firestore,storage ;; \
 		app) \
-			VITE_USE_EMULATOR=true pnpm --prefix app dev ;; \
+			VITE_USE_EMULATOR=true pnpm --prefix app prof ;; \
 		admin) \
-			VITE_USE_EMULATOR=true pnpm --prefix admin dev ;; \
+			VITE_USE_EMULATOR=true pnpm --prefix admin prof ;; \
 		set-admin) \
 			FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIREBASE_PROJECT_ID=poscomp-olivmath GOOGLE_CLOUD_PROJECT=poscomp-olivmath \
 			npx tsx backend/src/scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
@@ -134,14 +134,14 @@ local:
 		*) echo "Unknown: make local [up|down|restart|app|admin|set-admin|seed|gf|rf]"; exit 1 ;; \
 	esac
 
-# ── dev namespace (prod) ──────────────────────────────────────────────────────
-dev:
-	@if [ "$(firstword $(MAKECMDGOALS))" != "dev" ]; then exit 0; fi; \
+# ── prof namespace (prod) ──────────────────────────────────────────────────────
+prod:
+	@if [ "$(firstword $(MAKECMDGOALS))" != "prof" ]; then exit 0; fi; \
 	case "$(word 2,$(MAKECMDGOALS))" in \
 		app) \
-			pnpm --prefix app dev ;; \
+			pnpm --prefix app prof ;; \
 		admin) \
-			pnpm --prefix admin dev ;; \
+			pnpm --prefix admin prof ;; \
 		set-admin) \
 			FIREBASE_PROJECT_ID=poscomp-olivmath GOOGLE_CLOUD_PROJECT=poscomp-olivmath \
 			npx tsx backend/src/scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
@@ -153,9 +153,9 @@ dev:
 				app)   pnpm --prefix app build && firebase deploy --only hosting:app ;; \
 				admin) pnpm --prefix admin build && firebase deploy --only hosting:admin ;; \
 				func)  cd backend && npm run build && cd .. && firebase deploy --only functions ;; \
-				*) echo "Unknown: make dev deploy [app|admin|func]"; exit 1 ;; \
+				*) echo "Unknown: make prof deploy [app|admin|func]"; exit 1 ;; \
 			esac ;; \
-		*) echo "Unknown: make dev [app|admin|set-admin|seed|deploy]"; exit 1 ;; \
+		*) echo "Unknown: make prof [app|admin|set-admin|seed|deploy]"; exit 1 ;; \
 	esac
 
 # ── Validate (full pipeline) ──────────────────────────────────────────────────
