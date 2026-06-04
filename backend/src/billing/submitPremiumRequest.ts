@@ -46,7 +46,7 @@ export const submitPremiumRequest = onCall(async (request) => {
   const fileName = `${timestamp}.${ext}`
   const storagePath = `receipts/${auth.uid}/${transactionId}_${fileName}`
 
-  const bucketName = process.env.FIREBASE_STORAGE_BUCKET
+  const bucketName = process.env.STORAGE_BUCKET
     ?? `${process.env.GCLOUD_PROJECT}.firebasestorage.app`
   const bucket = admin.storage().bucket(bucketName)
   const file = bucket.file(storagePath)
