@@ -66,12 +66,3 @@ A barra some completamente no modo imersivo (simulado em andamento).
 Pagamento manual via PIX — usuário envia comprovante, admin aprova em até 1h.
 
 ---
-
-## Contextos / Estado global
-
-| Contexto            | O que provê                                    |
-|---------------------|------------------------------------------------|
-| `AuthContext`       | user, isPremium, planType, premiumStatus       |
-| `SrsContext`        | SRS cards do Firestore (evita double read)     |
-| `ImmersiveModeContext` | flag `isImmersive` (esconde bottom nav)    |
-| `SnackbarProvider`  | toasts globais                                 |
