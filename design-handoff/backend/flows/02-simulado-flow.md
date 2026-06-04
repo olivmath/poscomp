@@ -10,6 +10,11 @@ getSimuladoQuestions({ materias, total })
   └── retorna questions[0..total]
         │
 [Usuário responde questões — tudo local, sem chamada ao backend]
+  │
+  └── [a qualquer momento, se reportar uma questão]
+        └── reportQuestion({ questionId, comment? })
+              └── Cria flagged_questions/{id} imediatamente
+                  (não aguarda o fim do simulado; não é re-enviado em finishSimulado)
         │
         ▼
 finishSimulado({ answers, timeSpentSeconds })
@@ -24,9 +29,6 @@ finishSimulado({ answers, timeSpentSeconds })
   │    │     ├── lastActivity = serverTimestamp
   │    │     └── activeDays = arrayUnion(today)
   │    │
-  │    ├── Para cada questão com issue:
-  │    │     └── Cria flagged_questions/{id}
-  │    │
   │    └── Batch-upsert srs_cards/{questionId} para cada resposta:
   │          ├── Se novo: easeFactor=2.5, interval=1, repetitions=0, materia
   │          └── Se existe: atualiza lastConfidence, dueDate=now, simuladoCorrect, materia
@@ -34,14 +36,14 @@ finishSimulado({ answers, timeSpentSeconds })
   └── retorna resultId, score, materiaBreakdown, answers[]
 ```
 
-## Leituras diretas (sem Cloud Function)
+## Acesso a dados pós-simulado
 
-O frontend lê diretamente do Firestore após `finishSimulado`:
+O frontend **não lê Firestore diretamente** — toda leitura passa pelo backend:
 
-| Coleção                        | Quando                          |
-|--------------------------------|---------------------------------|
-| `users/{uid}/results/{id}`     | tela de relatório pós-simulado  |
-| `announcements` (onSnapshot)   | carousel na Home — filtra `active=true` e `expiresAt > now` client-side, ordena por `createdAt` ASC |
+| Dado                        | Como obtém                                                                 |
+|-----------------------------|----------------------------------------------------------------------------|
+| Resultado do simulado       | Resposta de `finishSimulado` (retorna `resultId, score, materiaBreakdown, answers[]`) |
+| Announcements (carousel)    | Recebidos via push do backend (não onSnapshot client-side); backend filtra `active=true` e `expiresAt > now` antes de entregar |
 
 ## Dados gravados por `finishSimulado`
 
@@ -51,4 +53,4 @@ O frontend lê diretamente do Firestore após `finishSimulado`:
 | `users/{uid}.activeDays`         | arrayUnion com data de hoje (`YYYY-MM-DD`)     |
 | `users/{uid}.lastActivity`       | serverTimestamp                                |
 | `srs_cards/{questionId}`         | estado SM-2 inicial + materia + lastConfidence |
-| `flagged_questions/{id}`         | apenas se o usuário reportou alguma questão    |
+| `flagged_questions/{id}`         | criado por `reportQuestion` durante o simulado (não por `finishSimulado`) |

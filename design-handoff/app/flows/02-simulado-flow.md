@@ -1,18 +1,20 @@
 # Fluxo 2 — Simulado
 
-A tela `/` (Home) implementa uma máquina de estados inline. O mesmo componente renderiza telas diferentes dependendo do `state`.
+Cada fase do simulado tem rota dedicada. O botão "voltar" do browser funciona naturalmente entre fases.
 
 ```
-[Home - state: idle]
+[/]  (Home — idle)
         │
-       ├── "Começar Simulado" ──► start(config padrão) ──► state: running
+       ├── "Começar Simulado" ──► navigate('/simulado/running', { config: padrão })
         │
-       └── "Simulado Customizado" ──► state: config
-                    │
-                   ├── "Voltar" ──► state: idle
-                    └── "Começar Simulado" ──► start(config) ──► state: running
+       └── "Simulado Customizado" ──► navigate('/simulado/config')
 
-[state: running]
+[/simulado/config]
+        │
+       ├── "Voltar" ──► navigate('/')
+        └── "Começar Simulado" ──► navigate('/simulado/running', { config })
+
+[/simulado/running]
         │
        ├── Selecionar opção (A/B/C/D/E)
         │
@@ -27,23 +29,23 @@ A tela `/` (Home) implementa uma máquina de estados inline. O mesmo componente 
         │
        ├── "Reportar" ──► ReportIssueModal ──► flag na questão + comentário opcional
         │
-        │
        ├── "Finalizar" (respondeu todas?)
         │    ├── Não ──► Botão bloqueado
         │    └── Sim ──► FinishModal com mapa
-        │                  ├── "Confirmar" ──► state: finished
+        │                  ├── "Confirmar" ──► navigate('/simulado/resultado', { result })
         │                  ├── "Cancelar" ──► continua na questão
-        │                  └── "Questão N" ──► pode escolher uma questao no mapa para voltar diretamente nela
-        ├── [ícone mapa] ──► QuestionMapModal ──► navegar por número
+        │                  └── "Questão N" ──► volta diretamente para aquela questão
+        │
+       ├── [ícone mapa] ──► QuestionMapModal ──► navegar por número
         │
        └── [ícone sair] ──► ExitModal
-                              ├── "Sair" ──► state: idle (descarta progresso)
+                              ├── "Sair" ──► navigate('/') (descarta progresso)
                               └── "Cancelar" ──► continua
 
-[state: finished]
+[/simulado/resultado]
         │
        └── RelatorioFinal
-              ├── "Novo Simulado" ──► state: idle
+              ├── "Novo Simulado" ──► navigate('/')
               └── "Revisar"       ──► navigate('/revisao')
 ```
 

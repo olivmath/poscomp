@@ -14,6 +14,7 @@ Painel web interno para operações administrativas. Não é uma rota do app do 
 
 | Módulo           | Arquivo                          | Functions backend usadas                                    |
 |------------------|----------------------------------|-------------------------------------------------------------|
+| **Dashboard**    | `screens/00-dashboard.md`        | getAdminDashboard                                           |
 | Usuários         | `screens/01-usuarios.md`         | listUsers, disableUser, enableUser, resetUserSrs, grantPremiumAdmin, setAdminRole |
 | Questões         | `screens/02-questoes.md`         | createQuestion, updateQuestion, deleteQuestion              |
 | Reports          | `screens/03-flags.md`            | getFlaggedQuestions, resolveFlaggedQuestion, deleteFlaggedQuestion |
@@ -32,7 +33,3 @@ Painel web interno para operações administrativas. Não é uma rota do app do 
 | `flows/04-announcements-flow.md` | Publicar e gerenciar banners do app        |
 
 ---
-
-## Stack (assumida)
-
-Não há painel admin dedicado implementado — as operações são feitas via Firebase Console + scripts CLI ou via painel a ser construído. Este handoff especifica o que o painel deveria ter.

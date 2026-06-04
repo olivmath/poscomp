@@ -1,35 +1,39 @@
 # Backend — Fluxo 4: Histórico
 
-Não há Cloud Function neste fluxo. O frontend lê diretamente do Firestore.
+Histórico é recurso **Premium**. Todo acesso passa por Cloud Function — o frontend não lê `results` diretamente do Firestore.
 
 ```
 [Usuário abre /historico]
         │
-        └── onSnapshot  users/{uid}/results
-              ├── ordena por completedAt DESC (client-side)
-              ├── calcula trend: delta % vs resultado anterior (client-side)
-              └── renderiza lista de ResultCards
+        ▼
+getHistorico()
+  ├── Verifica auth → unauthenticated se ausente
+  ├── Lê users/{uid}.isPremium → permission-denied se free
+  ├── Busca users/{uid}/results, ordena por completedAt DESC
+  ├── Calcula trend: delta % vs resultado anterior
+  └── retorna results[], trend, byMateria, streak, activeDaysThisWeek
 
 [Usuário clica em um ResultCard → /historico/:id]
         │
-        └── getDoc  users/{uid}/results/{resultId}
-              └── renderiza RelatorioFinal com:
-                    ├── score, materiaBreakdown
-                    ├── answers[] com snapshot da questão
-                    └── comentario (Premium — já embutido no snapshot)
+        ▼
+getResult({ resultId })
+  ├── Verifica auth → unauthenticated se ausente
+  ├── Lê users/{uid}.isPremium → permission-denied se free
+  ├── Busca users/{uid}/results/{resultId} → not-found se inexistente
+  └── retorna score, materiaBreakdown, answers[] (snapshot + comentario)
 ```
 
 ## Restrição de acesso (Premium)
 
-O controle é feito no **frontend** via `isPremium` do `AuthContext`:
-- Free → exibe `PaywallCard` em vez da lista
-- Premium → exibe a lista normalmente
+Verificação feita no **backend**, não no frontend:
+- Free → `permission-denied` (frontend exibe `PaywallCard` com base no erro)
+- Premium → retorna dados normalmente
 
-Não há verificação de premium no backend para leitura de results — as regras Firestore permitem ao dono ler `users/{uid}/results/*` sem restrição.
+Regras Firestore bloqueiam leitura direta de `users/{uid}/results/*` pelo cliente — acesso só via Cloud Function.
 
-## Cálculo de métricas (client-side)
+## Cálculo de métricas (backend)
 
-Tudo calculado pelo hook `useResults` a partir dos documentos lidos:
+Calculado por `getHistorico` antes de retornar:
 
 | Métrica             | Como é calculada                                              |
 |---------------------|---------------------------------------------------------------|
@@ -38,4 +42,4 @@ Tudo calculado pelo hook `useResults` a partir dos documentos lidos:
 | `streak`            | dias consecutivos com `completedAt` até hoje                  |
 | `activeDaysThisWeek`| datas únicas dos últimos 7 dias com resultado                 |
 
-**Nota**: `activeDays` no `UserDocument` (atualizado pelo backend) é usado pelo WeekHeader. O `streak` do hook `useResults` é calculado client-side a partir dos resultados — pode divergir do `activeDays` se o usuário fez revisão mas não simulado no dia.
+**Nota**: `activeDays` no `UserDocument` (atualizado pelo backend em `finishSimulado` e `reviewCard`) é usado pelo WeekHeader via push — não via leitura direta.

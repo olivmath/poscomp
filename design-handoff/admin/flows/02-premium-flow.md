@@ -8,7 +8,8 @@
 
 [Admin clica em um ticket]
         │
-        ├── Exibe comprovante via Signed URL (receiptUrl)
+        ├── Frontend-admin chama getDownloadURL(ref(storage, ticket.storagePath))
+        │     └── Exibe comprovante via URL obtida on-demand do Storage
         │
         ├── [Aprovar]
         │     └── reviewPremiumRequest({ requestId, action: 'approve' })

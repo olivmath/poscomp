@@ -82,11 +82,13 @@ Quando `finishSimulado` é chamado:
 
 `getPendingCards` não usa SM-2 — apenas ordena por prioridade mapeada da última confiança declarada no simulado:
 
-| `lastConfidence` | Prioridade | Ordem |
-|------------------|-----------|-------|
-| `should_know`    | P1        | 1ª   |
-| `studying`       | P2        | 2ª   |
-| `unsure`         | P3        | 3ª   |
+| `lastConfidence` | Prioridade | Entra na fila? |
+|------------------|-----------|----------------|
+| `should_know`    | P1        | Sim — 1ª       |
+| `studying`       | P2        | Sim — 2ª       |
+| `unsure`         | P3        | **Não — descartado** |
+
+Cards `unsure` não aparecem na fila de revisão. `getPendingCards` os filtra antes de retornar.
 
 Empates dentro da mesma prioridade: ordenado por `dueDate` mais antiga primeiro.
 

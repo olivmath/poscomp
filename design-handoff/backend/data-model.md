@@ -66,6 +66,9 @@ interface UserDocument {
   premiumExpiresAt?: Timestamp        // data de expiração da assinatura
 
   // ── Campos de atividade ────────────────────────────────────────
+  createdAt: Timestamp                // data de criação da conta
+                                      // escrito por finishSimulado na primeira execução (merge: true)
+                                      // necessário para cálculo de retenção por cohort (D1/D7/D30)
   lastActivity: Timestamp             // último simulado ou revisão
                                       // atualizado por: finishSimulado, reviewCard
   activeDays: string[]                // datas com atividade no formato 'YYYY-MM-DD'
@@ -128,6 +131,7 @@ interface SrsCard {
 
 **Coleção**: `/users/{uid}/results/{resultId}`
 **ID do documento**: auto-gerado pelo Firestore
+**Acesso**: somente via Cloud Function (`getHistorico`, `getResult`) — regras Firestore bloqueiam leitura direta pelo cliente. Requer Premium.
 
 ```typescript
 interface SimuladoResult {
@@ -161,9 +165,6 @@ interface SimuladoResult {
       resposta: string
       comentario: string
     }
-    issue?: {
-      comment?: string                // flag de problema reportado
-    }
   }>
 
   // ── Metadado de review ────────────────────────────────────────
@@ -192,7 +193,7 @@ interface SimuladoResult {
 interface FlaggedQuestion {
   uid: string                         // FK: usuário que reportou
   questionId: number                  // FK: questão reportada
-  resultId?: string                   // FK: simulado onde foi reportada (se via finishSimulado)
+  resultId?: string                   // FK: simulado em andamento no momento do report (opcional)
   comment: string | ''                // texto livre do problema
   resolved: boolean                   // false = pendente, true = resolvido
   createdAt: Timestamp
@@ -200,7 +201,7 @@ interface FlaggedQuestion {
 }
 ```
 
-**Como é criado**: via `reportQuestion` (standalone) ou automaticamente por `finishSimulado` se o usuário flagou a questão durante o simulado.
+**Como é criado**: exclusivamente via `reportQuestion`, chamado imediatamente quando o usuário reporta a questão durante o simulado — não é criado por `finishSimulado`.
 
 ---
 
@@ -212,20 +213,26 @@ interface FlaggedQuestion {
 ```typescript
 interface PremiumRequest {
   uid: string                         // FK: usuário que solicitou
-  status: 'pending' | 'approved' | 'denied'
+  status: 'awaiting_receipt' | 'pending' | 'approved' | 'denied'
+                                      // awaiting_receipt: PIX gerado, comprovante não enviado ainda
+                                      // pending: comprovante enviado, aguarda revisão do admin
   planType: 'pro' | 'pro_max'
-  receiptUrl: string                  // Signed URL do comprovante no Storage (expira 2099)
-  receiptType: string | null          // MIME type (image/jpeg, application/pdf, etc.)
-  createdAt: Timestamp
+  storagePath?: string                // caminho no Storage: receipts/{uid}/{transactionId}_{filename}
+                                      // o frontend-admin usa esse path para buscar o arquivo direto do Storage
+  receiptType?: string                // MIME type (image/jpeg, application/pdf, etc.)
+  createdAt: Timestamp                // criado por getPixConfig
+  submittedAt?: Timestamp             // preenchido por submitPremiumRequest
   reviewedAt?: Timestamp              // preenchido por reviewPremiumRequest
   reviewedBy?: string                 // UID do admin que revisou
 }
 ```
 
 **Regras**:
-- Criação exclusiva via Cloud Function (admin SDK bypassa regras de client-side)
-- A regra Firestore só permite `read` para owner ou admin, e `update` só para admin
-- Isso impede que o cliente injete uma `receiptUrl` arbitrária ou altere o status
+- Criação e escrita exclusivas via Cloud Function (admin SDK bypassa regras de client-side)
+- Cliente não escreve diretamente no Storage — upload feito pelo backend via admin SDK
+- A regra Firestore permite apenas `read` para owner ou admin; `update` só para admin
+- Isso impede que o cliente injete `storagePath` ou altere `status`
+- Não há `receiptUrl` pré-gerado: o frontend-admin obtém o download URL on-demand via `getDownloadURL(ref(storage, storagePath))`
 
 ---
 
@@ -245,7 +252,7 @@ interface Announcement {
 }
 ```
 
-**Carousel**: o app exibe todos os announcements com `active=true` (e `expiresAt > now`) como slides ordenados por `createdAt` ASC. Não há invariante de exclusividade — o admin controla quantos ficam ativos.
+**Carousel**: o app recebe os announcements via push do backend (já filtrados: `active=true` e `expiresAt > now`), ordenados por `createdAt` ASC. Não há invariante de exclusividade — o admin controla quantos ficam ativos. O frontend não lê esta coleção diretamente.
 
 ---
 

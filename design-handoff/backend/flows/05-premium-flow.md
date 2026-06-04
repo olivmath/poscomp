@@ -3,26 +3,26 @@
 ```
 [Usuário abre modal de planos — Step 3: Pagamento PIX]
         │
-        └── getPixConfig()
-              ├── lê PIX_KEY de variável de ambiente (não exposta ao cliente)
-              ├── gera QR code server-side (PNG 200×200, base64)
-              └── retorna { pixKey, pixQrBase64 }
-                    (cliente pode cachear por até 1h)
+        ▼
+getPixConfig({ planType })
+  ├── lê PIX_KEY de variável de ambiente (não exposta ao cliente)
+  ├── Gera transactionId único
+  ├── Cria premium_requests/{transactionId} com status='awaiting_receipt', planType, uid
+  ├── Gera QR code server-side (PNG 200×200, base64)
+  ├── Gera PIX Copia e cola server-side
+  └── retorna { transactionId, pixQrBase64, pixCopyPaste }
 
 [Usuário faz upload do comprovante — Step 4]
         │
-        └── uploadBytes(storage, `receipts/{uid}/{timestamp}_{filename}`)
-              ├── Storage rules: uid do path == uid do token
-              └── tipos aceitos: image/*, application/pdf
-
-[Usuário confirma "Pagamento enviado"]
-        │
-        └── submitPremiumRequest({ storagePath, receiptType, planType })
-              ├── Valida: storagePath.startsWith(`receipts/${uid}/`)
-              ├── Gera Signed URL do arquivo (expira 2099)
-              ├── Cria premium_requests/{id} com status='pending'
-              └── retorna { requestId }
-                    → Trigger onPremiumRequestCreated (apenas log)
+        ▼
+submitPremiumRequest({ transactionId, fileBase64, receiptType })
+  ├── Valida transactionId existe em premium_requests e pertence ao uid
+  ├── Valida status == 'awaiting_receipt' (evita re-submit)
+  ├── Backend salva arquivo no Storage: receipts/{transactionId}/receipt
+  ├── Atualiza premium_requests/{transactionId}:
+  │     status='pending', storagePath, receiptType, submittedAt
+  └── retorna { success: true }
+        → Trigger onPremiumRequestCreated (apenas log)
 
 [Admin revisa o comprovante no painel]
         │
@@ -40,24 +40,27 @@
                     ├── Atualiza premium_requests/{id}: status='denied', reviewedAt, reviewedBy
                     └── NÃO altera users/{uid}
 
-[Frontend detecta mudança via onSnapshot de users/{uid}]
+[Frontend recebe atualização de premium via push do backend (FCM)]
         │
         └── isPremium=true → libera Revisão e Histórico imediatamente
+              (não usa onSnapshot direto em users/{uid})
 ```
 
 ## Estados do `premiumStatus` no `UserDocument`
 
-| Status    | Quem seta                     | O que o frontend exibe              |
-|-----------|-------------------------------|-------------------------------------|
-| `free`    | valor padrão                  | "Plano Free" + botão "Ver planos"   |
-| `pending` | `submitPremiumRequest`        | "Aguardando aprovação" (sem botão)  |
-| `active`  | `reviewPremiumRequest` approve| "Plano Pro/Max" + data de renovação |
+| Status              | Quem seta                      | O que o frontend exibe              |
+|---------------------|-------------------------------|-------------------------------------|
+| `free`              | valor padrão                  | "Plano Free" + botão "Ver planos"   |
+| `awaiting_receipt`  | `getPixConfig`                | "Aguardando comprovante"            |
+| `pending`           | `submitPremiumRequest`        | "Aguardando aprovação" (sem botão)  |
+| `active`            | `reviewPremiumRequest` approve| "Plano Pro/Max" + data de renovação |
 
 ## Segurança em camadas
 
-| Camada                  | Proteção                                                        |
-|-------------------------|-----------------------------------------------------------------|
-| Storage rules           | upload só em `receipts/{uid}/` do próprio usuário              |
-| `submitPremiumRequest`  | valida `storagePath` pertence ao uid antes de gerar Signed URL |
-| Firestore rules         | `premium_requests` sem `create` para cliente — só admin SDK    |
-| `reviewPremiumRequest`  | requer custom claim `{ admin: true }`                          |
+| Camada                  | Proteção                                                                      |
+|-------------------------|-------------------------------------------------------------------------------|
+| `getPixConfig`          | cria cobrança vinculada ao uid — transactionId não é adivinhávelF            |
+| `submitPremiumRequest`  | valida transactionId pertence ao uid e status == 'awaiting_receipt'          |
+| Storage                 | escrita feita exclusivamente pelo backend (admin SDK) — cliente não acessa    |
+| Firestore rules         | `premium_requests` sem `create/update` para cliente — só admin SDK           |
+| `reviewPremiumRequest`  | requer custom claim `{ admin: true }`                                        |

@@ -25,11 +25,11 @@ Acionado por: "Ver planos" no Perfil, ou paywall em Revisão/Histórico.
     │              ▼
     ├── Step 4: Upload do comprovante
     │    ├── Aceita: imagem (JPG/PNG) ou PDF
-    │    ├── Estado uploading: spinner + "Enviando..."
+    │    ├── Estado uploading: spinner + "Enviando..."  (arquivo em base64 → CF → Storage)
     │    ├── Estado error: mensagem + "Tentar novamente"
     │    └── btn: "Selecionar arquivo" (dispara input[type=file] oculto)
     │               │
-    │    upload OK ─► callSubmitPremiumRequest()
+    │    CF retorna { success: true } ─► avança para step 5
     │               │
     │              ▼
     └── Step 5: Confirmação

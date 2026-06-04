@@ -2,7 +2,7 @@
 
 ```
 [Usuário abre /revisao]
-        │
+        │ <<<<<<PARA O BADGE ISSO DEVERIA SER CHAMADO LOGO APOS O LOGIN NAO?>>>>>>
         ├── getPendingCount()                ← para o badge no BottomNav
         │     └── COUNT srs_cards WHERE dueDate <= now
         │               AND lastConfidence IN ['should_know','studying']
@@ -46,8 +46,7 @@ getMateriaReviewStats()
 |------------------|------------|----------------|
 | `should_know`    | P1         | Sim            |
 | `studying`       | P2         | Sim            |
-| `unsure`         | P3         | **Não**        |
-| `null`           | —          | Não            |
+| `unsure`         | P3         | Não            |
 
 ## Índices Firestore necessários
 

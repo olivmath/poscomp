@@ -62,7 +62,6 @@ Não há REST endpoints — não há URL pública direta.
     questionId: number
     selected: Option        // 'A'|'B'|'C'|'D'|'E'
     confidence: Confidence  // 'unsure'|'studying'|'should_know'
-    issue?: { comment?: string }
   }>
   timeSpentSeconds: number
 }
@@ -83,10 +82,10 @@ Não há REST endpoints — não há URL pública direta.
 **Side effects** (tudo em paralelo onde possível):
 1. Salva `users/{uid}/results/{resultId}` com o resultado completo
 2. Atualiza `users/{uid}.lastActivity` = serverTimestamp e faz union de `today` em `activeDays`
-3. Para cada questão com `issue`: cria `flagged_questions/{id}`
-4. Batch-update/set `users/{uid}/srs_cards/{questionId}` para cada resposta:
-   - Se card já existe: atualiza `lastConfidence`, `dueDate = now`, `simuladoCorrect`, `materia`
-   - Se card não existe: cria com valores iniciais SM-2 (`easeFactor=2.5`, `interval=1`, `repetitions=0`) + `materia` copiado do snapshot da questão
+3. Batch-update/set `users/{uid}/srs_cards/{questionId}` para cada resposta:
+   - Se card não existe: cria com valores iniciais SM-2 (`easeFactor=2.5`, `interval=1`, `repetitions=0`, `dueDate=now`) + `materia` copiado do snapshot da questão
+   - Se card existe e `studied === false` (nunca foi revisado): atualiza `lastConfidence`, `dueDate=now`, `simuladoCorrect`, `materia`
+   - Se card existe e `studied === true` (já foi revisado): atualiza apenas `lastConfidence`, `simuladoCorrect`, `materia` — **não sobrescreve `dueDate`** (preserva o intervalo SM-2 calculado por `reviewCard`)
 
 **Validações**:
 - `answers` não pode ser vazio
@@ -97,6 +96,87 @@ Não há REST endpoints — não há URL pública direta.
 - Todas as `questionId` devem existir no Firestore (throws `not-found` se alguma faltar)
 
 **Atenção — limite Firestore**: questões são buscadas em chunks de 30 (limite do operador `in`).
+
+---
+
+## Grupo: Histórico
+
+### `getHistorico`
+
+**Auth**: usuário autenticado + Premium
+
+**Input**: nenhum
+
+**Output**:
+```typescript
+{
+  results: Array<{
+    resultId: string
+    score: number
+    totalQuestions: number
+    completedAt: string       // ISO 8601
+    materiaBreakdown: Record<Materia, { correct: number; total: number }>
+  }>
+  trend: number | null        // delta % vs resultado anterior; null se só 1 resultado
+  byMateria: Record<Materia, { correct: number; total: number }>
+  streak: number              // dias consecutivos com completedAt até hoje
+  activeDaysThisWeek: string[] // datas únicas dos últimos 7 dias com resultado
+}
+```
+
+**Comportamento**:
+1. Lê `users/{uid}.isPremium` → lança `permission-denied` se `false`
+2. Busca `users/{uid}/results`, ordena por `completedAt DESC`
+3. Calcula métricas (trend, byMateria, streak, activeDaysThisWeek) server-side
+4. Retorna lista e métricas
+
+**Erros possíveis**:
+- `permission-denied`: usuário free
+- `internal`: falha no Firestore
+
+---
+
+### `getResult`
+
+**Auth**: usuário autenticado + Premium
+
+**Input**: `{ resultId: string }`
+
+**Output**:
+```typescript
+{
+  resultId: string
+  score: number
+  totalQuestions: number
+  timeSpentSeconds: number
+  completedAt: string
+  materiaBreakdown: Record<Materia, { correct: number; total: number }>
+  answers: Array<{
+    questionId: number
+    selected: 'A' | 'B' | 'C' | 'D' | 'E'
+    correct: boolean
+    confidence: 'unsure' | 'studying' | 'should_know'
+    question: {
+      id: number
+      materia: string
+      enunciado: string
+      alternativas: Record<string, string>
+      resposta: string
+      comentario: string    // Premium — já embutido no snapshot
+    }
+  }>
+}
+```
+
+**Comportamento**:
+1. Lê `users/{uid}.isPremium` → lança `permission-denied` se `false`
+2. Busca `users/{uid}/results/{resultId}` → lança `not-found` se inexistente
+3. Retorna documento completo
+
+**Erros possíveis**:
+- `permission-denied`: usuário free
+- `not-found`: resultId inválido ou não pertence ao usuário
+- `internal`: falha no Firestore
 
 ---
 
@@ -220,22 +300,30 @@ Não há REST endpoints — não há URL pública direta.
 
 **Auth**: usuário autenticado
 
-**Input**: nenhum
+**Input**:
+```typescript
+{ planType: 'pro' | 'pro_max' }
+```
 
 **Output**:
 ```typescript
 {
-  pixKey: string        // chave PIX para recebimento
-  pixQrBase64: string   // QR code em base64 (PNG 200×200) gerado pelo backend
+  transactionId: string   // ID da cobrança criada — deve ser repassado a submitPremiumRequest
+  pixQrBase64: string     // QR code PNG 200×200 em base64
+  pixCopyPaste: string    // string PIX Copia e Cola
 }
 ```
 
 **Comportamento**:
-1. Lê configuração PIX de variável de ambiente (não exposta ao cliente)
-2. Gera o QR code server-side e retorna como base64
-3. Resultado pode ser cacheado pelo cliente por até 1h
+1. Lê `PIX_KEY` de variável de ambiente (nunca exposta ao cliente)
+2. Gera `transactionId` único
+3. Cria `premium_requests/{transactionId}` com `status='awaiting_receipt'`, `planType`, `uid`
+4. Gera QR code e PIX Copia e Cola server-side
+5. Retorna `transactionId` + dados do PIX
 
-**Motivo**: chave PIX não deve ser exposta no bundle do frontend (tech-debt #8).
+**Erros possíveis**:
+- `invalid-argument`: `planType` inválido
+- `internal`: falha ao gravar cobrança ou gerar QR
 
 ---
 
@@ -246,21 +334,25 @@ Não há REST endpoints — não há URL pública direta.
 **Input**:
 ```typescript
 {
-  storagePath: string   // ex: "receipts/{uid}/1234567890_comprovante.jpg"
-  receiptType: string   // MIME type do arquivo
-  planType: 'pro' | 'pro_max'
+  transactionId: string   // ID retornado por getPixConfig
+  fileBase64: string      // comprovante codificado em base64
+  receiptType: string     // MIME type: image/* ou application/pdf
 }
 ```
 
-**Output**: `{ requestId: string }`
+**Output**: `{ success: true }`
 
 **Validações de segurança**:
-- `storagePath` deve começar com `receipts/{uid}/` — impede que um usuário submeta comprovante de outro
-- `planType` deve ser `pro` ou `pro_max`
+- `transactionId` deve existir em `premium_requests` e pertencer ao `uid`
+- `status` deve ser `'awaiting_receipt'` (impede re-submit)
+- `receiptType` deve ser `image/*` ou `application/pdf`
 
 **Comportamento**:
-1. Gera Signed URL do arquivo no Storage (expira em 2099)
-2. Cria documento em `premium_requests/{id}` com status `pending`
+1. Valida `transactionId` e `status`
+2. Salva arquivo no Storage via admin SDK: `receipts/{uid}/{transactionId}_{filename}`
+3. Atualiza `premium_requests/{transactionId}`: `status='pending'`, `storagePath`, `receiptType`, `submittedAt`
+4. Retorna `{ success: true }`
+   → dispara trigger `onPremiumRequestCreated` (apenas log)
 
 ---
 
@@ -289,6 +381,67 @@ Não há REST endpoints — não há URL pública direta.
 **Input**: `{ questionId: number, comment?: string }`
 
 **Comportamento**: cria `flagged_questions/{id}` standalone (não vinculado a um simulado).
+
+---
+
+## Grupo: Admin — Dashboard
+
+### `getAdminDashboard`
+
+**Auth**: admin
+
+**Input**: nenhum
+
+**Output**:
+```typescript
+{
+  // Usuários
+  totalUsers: number
+  usersByPlan: { free: number; pro: number; pro_max: number }
+
+  // Atividade (rolling)
+  dau: number      // lastActivity >= hoje 00:00 BRT
+  wau: number      // lastActivity >= 7 dias atrás
+  mau: number      // lastActivity >= 30 dias atrás
+
+  // Retenção por cohort (usuários criados nos últimos 30 dias)
+  retention: {
+    d1: number     // % com atividade em D+1 após cadastro
+    d7: number     // % com atividade em D+2..7
+    d30: number    // % com atividade em D+8..30
+  }
+
+  // Funil de conversão premium
+  premiumFunnel: {
+    total: number
+    pending: number
+    approved: number
+    denied: number
+    approvalRatePct: number          // approved / (approved + denied) * 100
+    avgApprovalTimeHours: number     // média de reviewedAt - createdAt nos aprovados
+  }
+
+  // Risco de churn
+  premiumExpiringIn7Days: number
+  premiumExpiringIn30Days: number
+  expiredPremium: number             // isPremium=false AND premiumExpiresAt existe
+
+  computedAt: Timestamp
+}
+```
+
+**Comportamento**:
+1. Busca todos os documentos `users/` em paralelo com `premium_requests/`
+2. Para `totalUsers`: usa `listUsers()` do Firebase Auth Admin SDK (paginado, sem limite)
+3. Para `usersByPlan`, `dau`, `wau`, `mau`, churn: deriva dos documentos `users/`
+4. Para `retention`: filtra users com `createdAt >= now-30d`, verifica presença de datas em `activeDays[]`
+5. Para `premiumFunnel`: agrega `premium_requests` por `status`; calcula média de `(reviewedAt.toMillis() - createdAt.toMillis()) / 3_600_000` nos aprovados
+6. Retorna com `computedAt = serverTimestamp()`
+
+**Custo estimado**: ~2N leituras (N = total de usuários) + M leituras (M = tickets premium). Para >50k usuários, substituir por job scheduled que escreve em `metrics/dashboard`.
+
+**Erros possíveis**:
+- `internal`: falha no Firestore ou no Firebase Auth Admin SDK
 
 ---
 
