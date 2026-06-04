@@ -33,11 +33,28 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteAnnouncement = exports.updateAnnouncement = exports.createAnnouncement = void 0;
+exports.deleteAnnouncement = exports.updateAnnouncement = exports.createAnnouncement = exports.getAnnouncements = exports.listAnnouncements = void 0;
 const https_1 = require("firebase-functions/v2/https");
 const admin = __importStar(require("firebase-admin"));
 const firestore_1 = require("firebase-admin/firestore");
 const auth_1 = require("../utils/auth");
+exports.listAnnouncements = (0, https_1.onCall)(async (request) => {
+    (0, auth_1.requireAdmin)(request);
+    console.log('listAnnouncements started');
+    const db = admin.firestore();
+    const snap = await db.collection('announcements').orderBy('createdAt', 'desc').get();
+    const announcements = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    console.log('listAnnouncements finished', { count: announcements.length });
+    return { announcements };
+});
+exports.getAnnouncements = (0, https_1.onCall)(async (request) => {
+    console.log('getAnnouncements started');
+    const db = admin.firestore();
+    const snap = await db.collection('announcements').orderBy('createdAt', 'desc').get();
+    const announcements = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    console.log('getAnnouncements finished', { count: announcements.length });
+    return { announcements };
+});
 exports.createAnnouncement = (0, https_1.onCall)(async (request) => {
     (0, auth_1.requireAdmin)(request);
     const { message, type, active, url, expiresAt } = request.data;

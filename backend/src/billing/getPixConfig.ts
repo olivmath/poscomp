@@ -14,9 +14,14 @@ export const getPixConfig = onCall(async (request) => {
     throw new HttpsError('invalid-argument', 'planType must be pro or pro_max')
   }
 
-  const pixKey = process.env.PIX_KEY
+  let pixKey = process.env.PIX_KEY
   if (!pixKey) {
-    throw new HttpsError('internal', 'PIX_KEY not configured')
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn('PIX_KEY not configured — using fallback local key for development')
+      pixKey = 'local-pix-key'
+    } else {
+      throw new HttpsError('internal', 'PIX_KEY not configured')
+    }
   }
 
   const transactionId = admin.firestore().collection('premium_requests').doc().id

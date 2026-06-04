@@ -119,18 +119,18 @@ local:
 		admin) \
 			VITE_USE_EMULATOR=true pnpm --prefix admin dev ;; \
 		set-admin) \
-			FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIREBASE_PROJECT_ID=poscomp-olivmath \
-			npx tsx backend/scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
+			FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIREBASE_PROJECT_ID=poscomp-olivmath GOOGLE_CLOUD_PROJECT=poscomp-olivmath \
+			npx tsx backend/src/scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
 		seed) \
 			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath \
-			npx tsx backend/scripts/seed.ts ;; \
+			cd scripts && ./node_modules/.bin/tsx seed.ts ;; \
 		get-flagged|gf) \
 			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath \
-			npx tsx backend/scripts/get-flagged.ts ;; \
+			npx tsx backend/src/scripts/get-flagged.ts ;; \
 		resolve-flagged|rf) \
 			read -p "Enter flag ID to resolve: " id; \
 			FIRESTORE_EMULATOR_HOST=localhost:8080 FIREBASE_PROJECT_ID=poscomp-olivmath \
-			npx tsx backend/scripts/resolve-flagged.ts "$$id" ;; \
+			npx tsx backend/src/scripts/resolve-flagged.ts "$$id" ;; \
 		*) echo "Unknown: make local [up|down|restart|app|admin|set-admin|seed|gf|rf]"; exit 1 ;; \
 	esac
 
@@ -143,11 +143,11 @@ dev:
 		admin) \
 			pnpm --prefix admin dev ;; \
 		set-admin) \
-			FIREBASE_PROJECT_ID=poscomp-olivmath \
-			npx tsx backend/scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
+			FIREBASE_PROJECT_ID=poscomp-olivmath GOOGLE_CLOUD_PROJECT=poscomp-olivmath \
+			npx tsx backend/src/scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \
 		seed) \
 			FIREBASE_PROJECT_ID=poscomp-olivmath \
-			npx tsx backend/scripts/seed.ts ;; \
+			cd scripts && ./node_modules/.bin/tsx seed.ts ;; \
 		deploy) \
 			case "$(word 3,$(MAKECMDGOALS))" in \
 				app)   pnpm --prefix app build && firebase deploy --only hosting:app ;; \

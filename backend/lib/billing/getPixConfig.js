@@ -46,9 +46,15 @@ exports.getPixConfig = (0, https_1.onCall)(async (request) => {
     if (planType !== 'pro' && planType !== 'pro_max') {
         throw new https_1.HttpsError('invalid-argument', 'planType must be pro or pro_max');
     }
-    const pixKey = process.env.PIX_KEY;
+    let pixKey = process.env.PIX_KEY;
     if (!pixKey) {
-        throw new https_1.HttpsError('internal', 'PIX_KEY not configured');
+        if (process.env.NODE_ENV !== 'production') {
+            console.warn('PIX_KEY not configured — using fallback local key for development');
+            pixKey = 'local-pix-key';
+        }
+        else {
+            throw new https_1.HttpsError('internal', 'PIX_KEY not configured');
+        }
     }
     const transactionId = admin.firestore().collection('premium_requests').doc().id;
     const pixCopyPaste = `PIX:${pixKey}:${transactionId}`;

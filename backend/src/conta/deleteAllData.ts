@@ -4,7 +4,7 @@ import { requireAuth } from '../utils/auth'
 
 async function deleteCollection(db: FirebaseFirestore.Firestore, path: string): Promise<number> {
   let deleted = 0
-  let query = db.collection(path).limit(400)
+  const query = db.collection(path).limit(400)
   let snap = await query.get()
   while (!snap.empty) {
     const batch = db.batch()

@@ -46,7 +46,6 @@ exports.getAdminDashboard = (0, https_1.onCall)(async (request) => {
     let usersSnap;
     let requestsSnap;
     try {
-        ;
         [usersSnap, requestsSnap] = await Promise.all([
             db.collection('users').get(),
             db.collection('premium_requests').get(),

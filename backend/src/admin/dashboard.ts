@@ -13,7 +13,7 @@ export const getAdminDashboard = onCall(async (request) => {
   let usersSnap: FirebaseFirestore.QuerySnapshot
   let requestsSnap: FirebaseFirestore.QuerySnapshot
   try {
-    ;[usersSnap, requestsSnap] = await Promise.all([
+    [usersSnap, requestsSnap] = await Promise.all([
       db.collection('users').get(),
       db.collection('premium_requests').get(),
     ])

@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendWeeklySimuladoReminder = exports.sendStreakReminder = exports.sendReviewReminder = exports.onPremiumRequestCreated = exports.deleteAnnouncement = exports.updateAnnouncement = exports.createAnnouncement = exports.deleteFlaggedQuestion = exports.resolveFlaggedQuestion = exports.getFlaggedQuestions = exports.deleteQuestion = exports.updateQuestion = exports.createQuestion = exports.grantPremiumAdmin = exports.resetUserSrs = exports.enableUser = exports.disableUser = exports.listUsers = exports.revokeAdminRole = exports.setAdminRole = exports.reviewPremiumRequest = exports.getAdminDashboard = exports.registerFcmToken = exports.reportQuestion = exports.deleteAllData = exports.submitPremiumRequest = exports.getPixConfig = exports.getPendingCount = exports.reviewCard = exports.getMateriaReviewStats = exports.getPendingCards = exports.getResult = exports.getHistorico = exports.finishSimulado = exports.getSimuladoQuestions = void 0;
+exports.sendWeeklySimuladoReminder = exports.sendStreakReminder = exports.sendReviewReminder = exports.onPremiumRequestCreated = exports.getAnnouncements = exports.deleteAnnouncement = exports.updateAnnouncement = exports.createAnnouncement = exports.listAnnouncements = exports.deleteFlaggedQuestion = exports.resolveFlaggedQuestion = exports.getFlaggedQuestions = exports.deleteQuestion = exports.updateQuestion = exports.createQuestion = exports.listQuestions = exports.grantPremiumAdmin = exports.resetUserSrs = exports.enableUser = exports.disableUser = exports.listUsers = exports.revokeAdminRole = exports.setAdminRole = exports.reviewPremiumRequest = exports.listPremiumRequests = exports.getAdminDashboard = exports.registerFcmToken = exports.reportQuestion = exports.deleteAllData = exports.submitPremiumRequest = exports.getPixConfig = exports.getPendingCount = exports.reviewCard = exports.getMateriaReviewStats = exports.getPendingCards = exports.getResult = exports.getHistorico = exports.finishSimulado = exports.getSimuladoQuestions = void 0;
 const admin = __importStar(require("firebase-admin"));
 admin.initializeApp();
 var getSimuladoQuestions_1 = require("./simulado/getSimuladoQuestions");
@@ -65,6 +65,7 @@ Object.defineProperty(exports, "registerFcmToken", { enumerable: true, get: func
 var dashboard_1 = require("./admin/dashboard");
 Object.defineProperty(exports, "getAdminDashboard", { enumerable: true, get: function () { return dashboard_1.getAdminDashboard; } });
 var premium_1 = require("./admin/premium");
+Object.defineProperty(exports, "listPremiumRequests", { enumerable: true, get: function () { return premium_1.listPremiumRequests; } });
 Object.defineProperty(exports, "reviewPremiumRequest", { enumerable: true, get: function () { return premium_1.reviewPremiumRequest; } });
 var users_1 = require("./admin/users");
 Object.defineProperty(exports, "setAdminRole", { enumerable: true, get: function () { return users_1.setAdminRole; } });
@@ -75,6 +76,7 @@ Object.defineProperty(exports, "enableUser", { enumerable: true, get: function (
 Object.defineProperty(exports, "resetUserSrs", { enumerable: true, get: function () { return users_1.resetUserSrs; } });
 Object.defineProperty(exports, "grantPremiumAdmin", { enumerable: true, get: function () { return users_1.grantPremiumAdmin; } });
 var questions_1 = require("./admin/questions");
+Object.defineProperty(exports, "listQuestions", { enumerable: true, get: function () { return questions_1.listQuestions; } });
 Object.defineProperty(exports, "createQuestion", { enumerable: true, get: function () { return questions_1.createQuestion; } });
 Object.defineProperty(exports, "updateQuestion", { enumerable: true, get: function () { return questions_1.updateQuestion; } });
 Object.defineProperty(exports, "deleteQuestion", { enumerable: true, get: function () { return questions_1.deleteQuestion; } });
@@ -83,9 +85,11 @@ Object.defineProperty(exports, "getFlaggedQuestions", { enumerable: true, get: f
 Object.defineProperty(exports, "resolveFlaggedQuestion", { enumerable: true, get: function () { return flags_1.resolveFlaggedQuestion; } });
 Object.defineProperty(exports, "deleteFlaggedQuestion", { enumerable: true, get: function () { return flags_1.deleteFlaggedQuestion; } });
 var announcements_1 = require("./admin/announcements");
+Object.defineProperty(exports, "listAnnouncements", { enumerable: true, get: function () { return announcements_1.listAnnouncements; } });
 Object.defineProperty(exports, "createAnnouncement", { enumerable: true, get: function () { return announcements_1.createAnnouncement; } });
 Object.defineProperty(exports, "updateAnnouncement", { enumerable: true, get: function () { return announcements_1.updateAnnouncement; } });
 Object.defineProperty(exports, "deleteAnnouncement", { enumerable: true, get: function () { return announcements_1.deleteAnnouncement; } });
+Object.defineProperty(exports, "getAnnouncements", { enumerable: true, get: function () { return announcements_1.getAnnouncements; } });
 var triggers_1 = require("./background/triggers");
 Object.defineProperty(exports, "onPremiumRequestCreated", { enumerable: true, get: function () { return triggers_1.onPremiumRequestCreated; } });
 var notifications_1 = require("./background/notifications");

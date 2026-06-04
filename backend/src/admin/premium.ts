@@ -4,6 +4,18 @@ import { FieldValue } from 'firebase-admin/firestore'
 import { requireAdmin } from '../utils/auth'
 import { sendPush } from '../background/notifications'
 
+export const listPremiumRequests = onCall(async (request) => {
+  requireAdmin(request)
+  console.log('listPremiumRequests started')
+
+  const db = admin.firestore()
+  const snap = await db.collection('premium_requests').orderBy('createdAt', 'desc').get()
+  const requests = snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+
+  console.log('listPremiumRequests finished', { count: requests.length })
+  return { requests }
+})
+
 export const reviewPremiumRequest = onCall(async (request) => {
   const auth = requireAdmin(request)
   const { requestId, action } = request.data as { requestId: string; action: 'approve' | 'deny' }

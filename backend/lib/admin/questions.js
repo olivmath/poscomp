@@ -33,12 +33,23 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteQuestion = exports.updateQuestion = exports.createQuestion = void 0;
+exports.deleteQuestion = exports.updateQuestion = exports.createQuestion = exports.listQuestions = void 0;
 const https_1 = require("firebase-functions/v2/https");
 const admin = __importStar(require("firebase-admin"));
 const firestore_1 = require("firebase-admin/firestore");
 const auth_1 = require("../utils/auth");
 const types_1 = require("../types");
+exports.listQuestions = (0, https_1.onCall)(async (request) => {
+    (0, auth_1.requireAdmin)(request);
+    console.log('listQuestions started');
+    const db = admin.firestore();
+    const snap = await db.collection('questions').orderBy('id', 'asc').get();
+    const questions = snap.docs
+        .map((d) => ({ id: d.id, ...d.data() }))
+        .filter((q) => !q['deleted']);
+    console.log('listQuestions finished', { count: questions.length });
+    return { questions };
+});
 exports.createQuestion = (0, https_1.onCall)(async (request) => {
     (0, auth_1.requireAdmin)(request);
     const data = request.data;
@@ -53,7 +64,6 @@ exports.createQuestion = (0, https_1.onCall)(async (request) => {
         throw new https_1.HttpsError('invalid-argument', 'Invalid resposta');
     }
     const db = admin.firestore();
-    // Get max id
     const snap = await db.collection('questions').orderBy('id', 'desc').limit(1).get();
     const nextId = snap.empty ? 1 : snap.docs[0].data()['id'] + 1;
     await db.doc(`questions/${nextId}`).set({
@@ -88,7 +98,6 @@ exports.deleteQuestion = (0, https_1.onCall)(async (request) => {
         throw new https_1.HttpsError('invalid-argument', 'id must be a positive integer');
     }
     const db = admin.firestore();
-    // Soft delete
     await db.doc(`questions/${id}`).update({
         deleted: true,
         deletedAt: firestore_1.FieldValue.serverTimestamp(),

@@ -3,6 +3,27 @@ import * as admin from 'firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
 import { requireAdmin } from '../utils/auth'
 
+export const listAnnouncements = onCall(async (request) => {
+  requireAdmin(request)
+  console.log('listAnnouncements started')
+
+  const db = admin.firestore()
+  const snap = await db.collection('announcements').orderBy('createdAt', 'desc').get()
+  const announcements = snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+
+  console.log('listAnnouncements finished', { count: announcements.length })
+  return { announcements }
+})
+
+export const getAnnouncements = onCall(async (request) => {
+  console.log('getAnnouncements started')
+  const db = admin.firestore()
+  const snap = await db.collection('announcements').orderBy('createdAt', 'desc').get()
+  const announcements = snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+  console.log('getAnnouncements finished', { count: announcements.length })
+  return { announcements }
+})
+
 export const createAnnouncement = onCall(async (request) => {
   requireAdmin(request)
   const { message, type, active, url, expiresAt } = request.data as {

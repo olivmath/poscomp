@@ -84,15 +84,9 @@ exports.getHistorico = (0, https_1.onCall)(async (request) => {
     const activeDatesSet = new Set(results.map((r) => r.completedAt.split('T')[0]));
     let streak = 0;
     const check = new Date(today);
-    while (true) {
-        const dateStr = check.toISOString().split('T')[0];
-        if (activeDatesSet.has(dateStr)) {
-            streak++;
-            check.setDate(check.getDate() - 1);
-        }
-        else {
-            break;
-        }
+    while (activeDatesSet.has(check.toISOString().split('T')[0])) {
+        streak++;
+        check.setDate(check.getDate() - 1);
     }
     // activeDaysThisWeek
     const activeDaysThisWeek = [];

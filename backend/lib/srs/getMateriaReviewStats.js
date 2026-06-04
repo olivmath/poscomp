@@ -44,7 +44,6 @@ exports.getMateriaReviewStats = (0, https_1.onCall)(async (request) => {
     let cardsSnap;
     let resultsSnap;
     try {
-        ;
         [cardsSnap, resultsSnap] = await Promise.all([
             db.collection(`users/${auth.uid}/srs_cards`).get(),
             db.collection(`users/${auth.uid}/results`).get(),

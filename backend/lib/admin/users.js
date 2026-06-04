@@ -62,19 +62,48 @@ exports.listUsers = (0, https_1.onCall)(async (request) => {
     (0, auth_1.requireAdmin)(request);
     const { pageToken } = request.data;
     console.log('listUsers started', { pageToken });
-    const result = await admin.auth().listUsers(100, pageToken);
-    const users = result.users.map((u) => ({
-        uid: u.uid,
-        email: u.email ?? '',
-        displayName: u.displayName ?? '',
-        photoURL: u.photoURL ?? '',
-        disabled: u.disabled,
-        isAdmin: u.customClaims?.['admin'] === true,
-        createdAt: u.metadata.creationTime,
-        lastSignIn: u.metadata.lastSignInTime,
-    }));
-    console.log('listUsers finished', { count: users.length });
-    return { users, nextPageToken: result.pageToken ?? null };
+    try {
+        const result = await admin.auth().listUsers(100, pageToken || undefined);
+        const uids = result.users.map((u) => u.uid);
+        // Fetch additional data from Firestore in chunks of 100
+        const db = admin.firestore();
+        const userDataMap = new Map();
+        if (uids.length > 0) {
+            const userDocs = await db.getAll(...uids.map((uid) => db.doc(`users/${uid}`)));
+            userDocs.forEach((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    if (data)
+                        userDataMap.set(doc.id, data);
+                }
+            });
+        }
+        const users = result.users.map((u) => {
+            const firestoreData = userDataMap.get(u.uid) || {};
+            return {
+                uid: u.uid,
+                email: u.email ?? '',
+                displayName: u.displayName ?? '',
+                photoURL: u.photoURL ?? '',
+                disabled: u.disabled,
+                isAdmin: u.customClaims?.['admin'] === true,
+                isPremium: firestoreData.isPremium === true,
+                planType: firestoreData.planType || 'free',
+                premiumExpiresAt: firestoreData.premiumExpiresAt || null,
+                createdAt: u.metadata.creationTime,
+                lastSignIn: u.metadata.lastSignInTime,
+            };
+        });
+        console.log('listUsers finished', { count: users.length });
+        return { users, nextPageToken: result.pageToken || null };
+    }
+    catch (error) {
+        console.error('Error in listUsers:', error);
+        if (error instanceof https_1.HttpsError)
+            throw error;
+        const message = error instanceof Error ? error.message : 'Error listing users';
+        throw new https_1.HttpsError('internal', message);
+    }
 });
 exports.disableUser = (0, https_1.onCall)(async (request) => {
     (0, auth_1.requireAdmin)(request);

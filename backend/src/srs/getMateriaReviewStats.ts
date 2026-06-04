@@ -11,7 +11,7 @@ export const getMateriaReviewStats = onCall(async (request) => {
   let cardsSnap: FirebaseFirestore.QuerySnapshot
   let resultsSnap: FirebaseFirestore.QuerySnapshot
   try {
-    ;[cardsSnap, resultsSnap] = await Promise.all([
+    [cardsSnap, resultsSnap] = await Promise.all([
       db.collection(`users/${auth.uid}/srs_cards`).get(),
       db.collection(`users/${auth.uid}/results`).get(),
     ])

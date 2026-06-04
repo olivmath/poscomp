@@ -33,12 +33,21 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.reviewPremiumRequest = void 0;
+exports.reviewPremiumRequest = exports.listPremiumRequests = void 0;
 const https_1 = require("firebase-functions/v2/https");
 const admin = __importStar(require("firebase-admin"));
 const firestore_1 = require("firebase-admin/firestore");
 const auth_1 = require("../utils/auth");
 const notifications_1 = require("../background/notifications");
+exports.listPremiumRequests = (0, https_1.onCall)(async (request) => {
+    (0, auth_1.requireAdmin)(request);
+    console.log('listPremiumRequests started');
+    const db = admin.firestore();
+    const snap = await db.collection('premium_requests').orderBy('createdAt', 'desc').get();
+    const requests = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    console.log('listPremiumRequests finished', { count: requests.length });
+    return { requests };
+});
 exports.reviewPremiumRequest = (0, https_1.onCall)(async (request) => {
     const auth = (0, auth_1.requireAdmin)(request);
     const { requestId, action } = request.data;

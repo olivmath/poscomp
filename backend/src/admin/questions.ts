@@ -4,6 +4,20 @@ import { FieldValue } from 'firebase-admin/firestore'
 import { requireAdmin } from '../utils/auth'
 import { Question, VALID_OPTIONS, VALID_MATERIAS, Option, Materia } from '../types'
 
+export const listQuestions = onCall(async (request) => {
+  requireAdmin(request)
+  console.log('listQuestions started')
+
+  const db = admin.firestore()
+  const snap = await db.collection('questions').orderBy('id', 'asc').get()
+  const questions = snap.docs
+    .map((d) => ({ id: d.id, ...d.data() }))
+    .filter((q) => !(q as Record<string, unknown>)['deleted'])
+
+  console.log('listQuestions finished', { count: questions.length })
+  return { questions }
+})
+
 export const createQuestion = onCall(async (request) => {
   requireAdmin(request)
   const data = request.data as Omit<Question, 'id'>
@@ -20,7 +34,6 @@ export const createQuestion = onCall(async (request) => {
   }
 
   const db = admin.firestore()
-  // Get max id
   const snap = await db.collection('questions').orderBy('id', 'desc').limit(1).get()
   const nextId = snap.empty ? 1 : (snap.docs[0].data()['id'] as number) + 1
 
@@ -65,7 +78,6 @@ export const deleteQuestion = onCall(async (request) => {
   }
 
   const db = admin.firestore()
-  // Soft delete
   await db.doc(`questions/${id}`).update({
     deleted: true,
     deletedAt: FieldValue.serverTimestamp(),
