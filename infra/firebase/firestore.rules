@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuth() && request.auth.token.admin == true;
+    }
+
+    function isOwner(uid) {
+      return isAuth() && request.auth.uid == uid;
+    }
+
+    // Questions — read: any auth; write: admin only
+    match /questions/{id} {
+      allow read: if isAuth();
+      allow write: if isAdmin();
+    }
+
+    // Announcements — read: any auth; write: admin only
+    match /announcements/{id} {
+      allow read: if isAuth();
+      allow write: if isAdmin();
+    }
+
+    // Flagged questions — read: owner or admin; write: admin (create via CF)
+    match /flagged_questions/{id} {
+      allow read: if isAdmin() || (isAuth() && resource.data.uid == request.auth.uid);
+      allow write: if isAdmin();
+    }
+
+    // Premium requests — read: owner or admin; update: admin; create: CF only
+    match /premium_requests/{id} {
+      allow read: if isAdmin() || (isAuth() && resource.data.uid == request.auth.uid);
+      allow update: if isAdmin();
+    }
+
+    // Users — read: owner or admin; write: admin (premium fields via CF)
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow write: if isAdmin();
+
+      // SRS cards and results — owner or admin
+      match /{subcollection}/{docId} {
+        allow read, write: if isOwner(uid) || isAdmin();
+      }
+    }
+  }
+}
