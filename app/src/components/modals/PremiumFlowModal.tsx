@@ -73,7 +73,7 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  const canClose = step !== 4 && step !== 5
+  const canClose = true
   const canGoBack = (step === 2 || step === 3) || (step === 4 && !uploading)
 
   return (
@@ -333,16 +333,31 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
               <button
                 onClick={() => { setUploadError(''); fileRef.current?.click() }}
                 style={{
-                  background: 'none',
-                  border: '1px solid var(--md-sys-color-error)',
+                  background: 'var(--md-sys-color-primary)',
+                  border: 'none',
                   borderRadius: 8,
-                  padding: '10px 0',
+                  padding: '14px 0',
+                  color: 'var(--md-sys-color-on-primary)',
+                  fontWeight: 700,
+                  fontSize: 15,
                   cursor: 'pointer',
-                  color: 'var(--md-sys-color-error)',
-                  fontWeight: 600,
                 }}
               >
                 Tentar novamente
+              </button>
+              <button
+                onClick={() => { setUploadError(''); setStep(3) }}
+                style={{
+                  background: 'none',
+                  border: '1px solid var(--md-sys-color-outline)',
+                  borderRadius: 8,
+                  padding: '10px 0',
+                  cursor: 'pointer',
+                  color: 'var(--md-sys-color-on-surface)',
+                  fontWeight: 600,
+                }}
+              >
+                Voltar
               </button>
             </div>
           ) : (

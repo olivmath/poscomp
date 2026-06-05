@@ -103,8 +103,8 @@ test('botão X no step 1 fecha o modal', async ({ page }) => {
   await expect(page.getByText('Escolha seu plano')).not.toBeVisible({ timeout: 3000 })
 })
 
-// Happy: step 2 → step 3 PIX (se CF disponível)
-test('step 2 → step 3 PIX (se CF disponível)', async ({ page }) => {
+// Happy: step 2 → step 3 PIX
+test('step 2 → step 3 PIX', async ({ page }) => {
   await loginFreePerfil(page)
   await page.getByRole('button', { name: 'Ver planos' }).click()
 
@@ -112,62 +112,62 @@ test('step 2 → step 3 PIX (se CF disponível)', async ({ page }) => {
   await page.getByRole('button', { name: 'Continuar' }).click()
   await expect(page.getByText('Benefícios inclusos')).toBeVisible()
 
+  // Mock CF
+  await page.route('**/getPixConfig**', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ data: { transactionId: '123', pixQrBase64: 'data:image/png;base64,fake', pixCopyPaste: 'fake' } }),
+  }))
+
   await page.getByRole('button', { name: 'Continuar' }).click()
 
-  // aguarda step 3 (PIX) ou erro de CF
-  await page.waitForTimeout(5000)
-  const hasPix = await page.getByText('Pagamento via PIX').isVisible().catch(() => false)
-  const hasError = await page.getByText(/Erro ao gerar/i).isVisible().catch(() => false)
-
-  if (hasPix) {
-    await expect(page.getByRole('button', { name: 'Pagamento enviado' })).toBeVisible()
-    // avança para step 4
-    await page.getByRole('button', { name: 'Pagamento enviado' }).click()
-    await expect(page.getByText('Enviar comprovante')).toBeVisible()
-  } else if (hasError) {
-    // CF falhou — step 3 não chegou, mas o erro foi exibido corretamente
-    await expect(page.getByText(/Erro ao gerar/i)).toBeVisible()
-  } else {
-    test.skip(true, 'CF getPixConfig não respondeu')
-  }
+  await expect(page.getByText('Pagamento via PIX')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Pagamento enviado' })).toBeVisible()
+  
+  // avança para step 4
+  await page.getByRole('button', { name: 'Pagamento enviado' }).click()
+  await expect(page.getByText('Enviar comprovante')).toBeVisible()
 })
 
-// Happy: step 4 → sem botão fechar → step 5 confirmação (se CF disponível)
-test('step 4 upload → step 5 confirmação (se CF disponível)', async ({ page }) => {
+// Happy: step 4 → botão fechar visível → step 5 confirmação
+test('step 4 upload → step 5 confirmação', async ({ page }) => {
   await loginFreePerfil(page)
   await page.getByRole('button', { name: 'Ver planos' }).click()
 
   await proBtn(page).click()
   await page.getByRole('button', { name: 'Continuar' }).click()
+
+  // Mock CFs
+  await page.route('**/getPixConfig**', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ data: { transactionId: '123', pixQrBase64: 'data:image/png;base64,fake', pixCopyPaste: 'fake' } }),
+  }))
+  await page.route('**/submitPremiumRequest**', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ data: { success: true } }),
+  }))
+
   await page.getByRole('button', { name: 'Continuar' }).click()
-  await page.waitForTimeout(5000)
-
-  if (!(await page.getByText('Pagamento via PIX').isVisible().catch(() => false))) {
-    test.skip(true, 'CF getPixConfig indisponível')
-    return
-  }
-
   await page.getByRole('button', { name: 'Pagamento enviado' }).click()
   await expect(page.getByText('Enviar comprovante')).toBeVisible()
 
-  // Sad: no step 4, botão fechar (X) não está visível
+  // AGORA o botão fechar (X) deve estar visível no step 4
   const closeBtn = page.locator('button').filter({ has: page.locator('.material-symbols-outlined') }).last()
-  // o header do modal não mostra o X quando canClose=false (step 4 ou 5)
-  // verifica que "Escolha seu plano" não está visível (estamos em step 4)
-  await expect(page.getByText('Escolha seu plano')).not.toBeVisible()
+  await expect(closeBtn).toBeVisible()
 
   // faz upload do arquivo de comprovante
   const input = page.locator('input[type="file"]')
   await input.setInputFiles('tests/e2e/assets/receipt.png')
-  await page.waitForTimeout(8000)
 
-  const hasStep5 = await page.getByText('Pedido enviado!').isVisible().catch(() => false)
-  if (hasStep5) {
-    await expect(page.getByText('Estamos liberando seu acesso!')).toBeVisible()
-    // step 5: único botão de saída é "Fechar"
-    await page.getByRole('button', { name: 'Fechar' }).click()
-    await expect(page.getByText('Pedido enviado!')).not.toBeVisible()
-  }
+  await expect(page.getByText('Pedido enviado!')).toBeVisible({ timeout: 10000 })
+  await expect(page.getByText('Estamos liberando seu acesso!')).toBeVisible()
+  
+  // step 5: único botão de saída no corpo é "Fechar", mas o X no header também deve estar lá
+  await expect(closeBtn).toBeVisible()
+  await page.getByRole('button', { name: 'Fechar' }).click()
+  await expect(page.getByText('Pedido enviado!')).not.toBeVisible()
 })
 
 // Happy: step 2 → botão Voltar → volta para step 1
@@ -183,43 +183,42 @@ test('step 2 → Voltar → step 1', async ({ page }) => {
   await expect(page.getByText('Escolha seu plano')).toBeVisible()
 })
 
-// Happy: step 3 → botão Voltar → volta para step 2 (se CF disponível)
+// Happy: step 3 → botão Voltar → volta para step 2
 test('step 3 → Voltar → step 2', async ({ page }) => {
   await loginFreePerfil(page)
   await page.getByRole('button', { name: 'Ver planos' }).click()
 
   await proBtn(page).click()
   await page.getByRole('button', { name: 'Continuar' }).click()
-  await page.getByRole('button', { name: 'Continuar' }).click()
-  await page.waitForTimeout(5000)
 
-  if (!(await page.getByText('Pagamento via PIX').isVisible().catch(() => false))) {
-    test.skip(true, 'CF getPixConfig indisponível')
-    return
-  }
+  // Mock CF
+  await page.route('**/getPixConfig**', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ data: { transactionId: '123', pixQrBase64: 'data:image/png;base64,fake', pixCopyPaste: 'fake' } }),
+  }))
+
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await expect(page.getByText('Pagamento via PIX')).toBeVisible()
 
   await page.getByRole('button', { name: 'Voltar' }).click()
   await expect(page.getByText('Benefícios inclusos')).toBeVisible()
 })
 
-// Sad: step 4 com erro de upload → apenas botão "Tentar novamente" (sem "Selecionar arquivo")
-test('step 4 erro upload → só botão Tentar novamente', async ({ page }) => {
+// Sad: step 4 com erro de upload → botões "Tentar novamente" e "Voltar"
+test('step 4 erro upload → botões Tentar novamente e Voltar', async ({ page }) => {
   await loginFreePerfil(page)
   await page.getByRole('button', { name: 'Ver planos' }).click()
 
   await proBtn(page).click()
   await page.getByRole('button', { name: 'Continuar' }).click()
-  await page.getByRole('button', { name: 'Continuar' }).click()
-  await page.waitForTimeout(5000)
 
-  if (!(await page.getByText('Pagamento via PIX').isVisible().catch(() => false))) {
-    test.skip(true, 'CF getPixConfig indisponível')
-    return
-  }
-
-  await page.getByRole('button', { name: 'Pagamento enviado' }).click()
-  await expect(page.getByText('Enviar comprovante')).toBeVisible()
-
+  // Mock CFs
+  await page.route('**/getPixConfig**', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ data: { transactionId: '123', pixQrBase64: 'data:image/png;base64,fake', pixCopyPaste: 'fake' } }),
+  }))
   // intercepta a CF para forçar erro
   await page.route('**/submitPremiumRequest**', (route) => route.fulfill({
     status: 500,
@@ -227,11 +226,20 @@ test('step 4 erro upload → só botão Tentar novamente', async ({ page }) => {
     body: JSON.stringify({ error: { status: 'INTERNAL', message: 'forced error' } }),
   }))
 
+  await page.getByRole('button', { name: 'Continuar' }).click()
+  await page.getByRole('button', { name: 'Pagamento enviado' }).click()
+  await expect(page.getByText('Enviar comprovante')).toBeVisible()
+
   await page.locator('input[type="file"]').setInputFiles('tests/e2e/assets/receipt.png')
   await expect(page.getByText(/Erro ao enviar comprovante/i)).toBeVisible({ timeout: 10000 })
 
-  // apenas "Tentar novamente" visível — "Selecionar arquivo" NÃO deve aparecer
+  // "Tentar novamente" e "Voltar" visíveis
   await expect(page.getByRole('button', { name: 'Tentar novamente' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Voltar' }).last()).toBeVisible()
   await expect(page.getByRole('button', { name: 'Selecionar arquivo' })).not.toBeVisible()
+
+  // Clica em voltar e deve ir para step 3
+  await page.getByRole('button', { name: 'Voltar' }).last().click()
+  await expect(page.getByText('Pagamento via PIX')).toBeVisible()
 })
 
