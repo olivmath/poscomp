@@ -1,5 +1,7 @@
 import * as admin from 'firebase-admin'
-admin.initializeApp()
+admin.initializeApp({
+  storageBucket: process.env.STORAGE_BUCKET ?? 'poscomp-olivmath.firebasestorage.app',
+})
 
 export { getSimuladoQuestions } from './simulado/getSimuladoQuestions'
 export { finishSimulado } from './simulado/finishSimulado'

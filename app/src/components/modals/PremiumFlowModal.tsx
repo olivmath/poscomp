@@ -25,12 +25,15 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
   const [plan, setPlan] = useState<Plan | null>(null)
   const [pixData, setPixData] = useState<PixConfigResult | null>(null)
   const [copied, setCopied] = useState(false)
+  const [loadingPix, setLoadingPix] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
   const fileRef = useRef<HTMLInputElement>(null)
 
   async function handleGetPix() {
     if (!plan) return
+    setLoadingPix(true)
+    setUploadError('')
     try {
       const fn = httpsCallable<{ planType: Plan }, PixConfigResult>(functions, 'getPixConfig')
       const r = await fn({ planType: plan })
@@ -38,6 +41,8 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
       setStep(3)
     } catch {
       setUploadError('Erro ao gerar QR Code. Tente novamente.')
+    } finally {
+      setLoadingPix(false)
     }
   }
 
@@ -69,6 +74,7 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
   }
 
   const canClose = step !== 4 && step !== 5
+  const canGoBack = (step === 2 || step === 3) || (step === 4 && !uploading)
 
   return (
     <ModalOverlay onBackdropClick={canClose ? onClose : undefined}>
@@ -86,9 +92,9 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          {(step === 2 || step === 3) && (
+          {canGoBack && (
             <button
-              onClick={() => setStep((s) => (s - 1) as Step)}
+              onClick={() => { setUploadError(''); setStep((s) => (s - 1) as Step) }}
               style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex' }}
               aria-label="Voltar"
             >
@@ -226,19 +232,29 @@ export function PremiumFlowModal({ onClose }: PremiumFlowModalProps) {
           ))}
           <button
             onClick={handleGetPix}
+            disabled={loadingPix}
             style={{
               marginTop: 8,
-              background: 'var(--md-sys-color-primary)',
+              background: loadingPix ? 'var(--md-sys-color-outline-variant)' : 'var(--md-sys-color-primary)',
               border: 'none',
               borderRadius: 8,
               padding: '14px 0',
-              color: 'var(--md-sys-color-on-primary)',
+              color: loadingPix ? 'var(--md-sys-color-on-surface-variant)' : 'var(--md-sys-color-on-primary)',
               fontWeight: 700,
               fontSize: 15,
-              cursor: 'pointer',
+              cursor: loadingPix ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
             }}
           >
-            Continuar
+            {loadingPix && (
+              <span className="material-symbols-outlined" style={{ fontSize: 18, animation: 'spin 1s linear infinite' }}>
+                progress_activity
+              </span>
+            )}
+            {loadingPix ? 'Gerando PIX…' : 'Continuar'}
           </button>
           {uploadError && (
             <p style={{ margin: 0, fontSize: 13, color: 'var(--md-sys-color-error)' }}>{uploadError}</p>

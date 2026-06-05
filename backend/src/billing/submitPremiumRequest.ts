@@ -46,17 +46,16 @@ export const submitPremiumRequest = onCall(async (request) => {
   const fileName = `${timestamp}.${ext}`
   const storagePath = `receipts/${auth.uid}/${transactionId}_${fileName}`
 
-  const bucketName = process.env.STORAGE_BUCKET
-    ?? `${process.env.GCLOUD_PROJECT}.firebasestorage.app`
-  const bucket = admin.storage().bucket(bucketName)
+  const bucket = admin.storage().bucket()
   const file = bucket.file(storagePath)
   const buffer = Buffer.from(fileBase64, 'base64')
 
   try {
     await file.save(buffer, { contentType: receiptType })
   } catch (e) {
-    console.error('Storage upload failed', { bucketName, storagePath, error: e })
-    throw new HttpsError('internal', 'Failed to upload file')
+    const err = e as Error
+    console.error('Storage upload failed', { bucket: bucket.name, storagePath, message: err?.message, stack: err?.stack })
+    throw new HttpsError('internal', `Failed to upload file: ${err?.message ?? 'unknown'}`)
   }
 
   await db.doc(`premium_requests/${transactionId}`).update({
