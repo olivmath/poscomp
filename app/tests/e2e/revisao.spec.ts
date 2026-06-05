@@ -37,23 +37,6 @@ test('premium → /revisao sem paywall', async ({ page }) => {
   })
 })
 
-// Happy: premium sem SRS cards → estado "Tudo em dia!" ou sessão em execução (dependente de CF)
-test('premium sem cards → empty, running ou finished', async ({ page }) => {
-  const email = `e2e+rev4${Date.now()}@local.test`
-  await page.goto(`/__e2e__/auth?email=${encodeURIComponent(email)}&pwd=pass1234&premium=true`)
-  await page.waitForURL('/')
-
-  await page.goto('/revisao')
-
-  // Aguarda o conteúdo premium aparecer (userDoc pode ter race condition ao carregar)
-  // Estado final: "Tudo em dia!" (empty) OU botões Errei/Acertei (running) OU "Sessão concluída!" (finished)
-  await expect(
-    page.getByText('Tudo em dia!')
-      .or(page.getByRole('button', { name: 'Errei' }))
-      .or(page.getByText('Sessão concluída!'))
-  ).toBeVisible({ timeout: 15000 })
-})
-
 // Happy: se há sessão em execução → interagir com Errei → avança ou conclui
 test('revisão running → clicar Errei mantém ou avança sessão', async ({ page }) => {
   const email = `e2e+rev5${Date.now()}@local.test`

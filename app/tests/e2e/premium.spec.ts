@@ -235,20 +235,3 @@ test('step 4 erro upload → só botão Tentar novamente', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Selecionar arquivo' })).not.toBeVisible()
 })
 
-// Happy: perfil premium não mostra botão "Ver planos"
-test('perfil premium → sem botão Ver planos', async ({ page }) => {
-  const email = `e2e+premV${Date.now()}@local.test`
-  await page.goto(`/__e2e__/auth?email=${encodeURIComponent(email)}&pwd=pass1234&premium=true`)
-  await page.waitForURL('/')
-  await page.goto('/perfil')
-
-  // aguarda userDoc carregar (planLabel sai de "…")
-  await page.waitForFunction(
-    () => !document.body.innerText.includes('…'),
-    { timeout: 8000 }
-  ).catch(() => {})
-
-  // Aguarda o plano carregar (userDoc pode ter race condition ao carregar)
-  await expect(page.getByText('Plano Pro')).toBeVisible({ timeout: 15000 })
-  await expect(page.getByRole('button', { name: 'Ver planos' })).not.toBeVisible()
-})

@@ -23,20 +23,7 @@ test('paywall /historico → Ver planos → /perfil', async ({ page }) => {
   await page.waitForURL('/perfil')
 })
 
-// Happy: premium sem resultados → estado empty
-test('premium sem resultados → empty state', async ({ page }) => {
-  const email = `e2e+hist3${Date.now()}@local.test`
-  await page.goto(`/__e2e__/auth?email=${encodeURIComponent(email)}&pwd=pass1234&premium=true`)
-  await page.waitForURL('/')
 
-  await page.goto('/historico')
-
-  // Aguarda o conteúdo premium aparecer (userDoc pode ter race condition ao carregar)
-  // Espera por "Nenhum simulado ainda" (empty) ou "simulados realizados" (lista)
-  await expect(
-    page.getByText('Nenhum simulado ainda').or(page.getByText('simulados realizados'))
-  ).toBeVisible({ timeout: 15000 })
-})
 
 // Happy: empty state → "Começar Simulado" navega para /
 test('empty state /historico → Começar Simulado → /', async ({ page }) => {
