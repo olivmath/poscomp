@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, Suspense, lazy } from 'react'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { Layout } from './components/Layout'
 import { Login } from './pages/Login'
@@ -9,6 +9,8 @@ import { Questoes } from './pages/Questoes'
 import { Flags } from './pages/Flags'
 import { Premium } from './pages/Premium'
 import { Announcements } from './pages/Announcements'
+
+const E2EAdminLogin = lazy(() => import('./pages/E2EAdminLogin').then(m => ({ default: m.E2EAdminLogin })))
 
 function AdminRoutes() {
   const { user, isAdmin, loading } = useAuth()
@@ -57,10 +59,15 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<LoginGuard />} />
-          <Route path="/*" element={<AdminRoutes />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            {(import.meta.env.DEV || import.meta.env.VITE_USE_EMULATOR === 'true') && (
+              <Route path="/__e2e__/auth" element={<E2EAdminLogin />} />
+            )}
+            <Route path="/login" element={<LoginGuard />} />
+            <Route path="/*" element={<AdminRoutes />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </AuthProvider>
   )
