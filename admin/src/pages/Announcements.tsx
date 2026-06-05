@@ -2,20 +2,26 @@ import '@material/web/progress/circular-progress.js'
 import '@material/web/button/filled-button.js'
 import '@material/web/button/text-button.js'
 import '@material/web/switch/switch.js'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { httpsCallable } from 'firebase/functions'
-import { functions } from '../firebase'
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
+import { functions, db } from '../firebase'
 import { Announcement, AnnouncementType } from '../types'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 import { ModalOverlay } from '../components/ModalOverlay'
 import { MarkdownEditor } from '../components/MarkdownEditor'
 
-interface GetAnnouncementsResponse { announcements: Announcement[] }
-
 const TYPE_OPTIONS: AnnouncementType[] = ['info', 'warning', 'success']
 
 function emptyForm(): Omit<Announcement, 'id' | 'createdAt'> {
   return { message: '', type: 'info', active: true, url: '', expiresAt: '' }
+}
+
+function toISO(ts: unknown): string {
+  if (!ts) return ''
+  if (typeof ts === 'string') return ts
+  if (typeof (ts as { toDate?: () => Date }).toDate === 'function') return (ts as { toDate: () => Date }).toDate().toISOString()
+  return ''
 }
 
 const TYPE_ICON: Record<AnnouncementType, string> = {
@@ -35,21 +41,32 @@ export function Announcements() {
   const [formError, setFormError] = useState<string | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<Announcement | null>(null)
 
-  const load = useCallback(async () => {
+  useEffect(() => {
     setLoading(true)
-    setError(null)
-    try {
-      const fn = httpsCallable<Record<string, never>, GetAnnouncementsResponse>(functions, 'listAnnouncements')
-      const res = await fn({})
-      setItems(res.data.announcements ?? [])
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Erro ao carregar banners')
-    } finally {
-      setLoading(false)
-    }
+    const unsub = onSnapshot(
+      query(collection(db, 'announcements'), orderBy('createdAt', 'desc')),
+      (snap) => {
+        setItems(snap.docs.map(d => {
+          const data = d.data()
+          return {
+            id: d.id,
+            message: data['message'] ?? '',
+            type: data['type'] ?? 'info',
+            active: data['active'] ?? false,
+            url: data['url'] ?? null,
+            expiresAt: toISO(data['expiresAt']) || null,
+            createdAt: toISO(data['createdAt']),
+          } as Announcement
+        }))
+        setLoading(false)
+      },
+      (err) => {
+        setError(err.message)
+        setLoading(false)
+      }
+    )
+    return unsub
   }, [])
-
-  useEffect(() => { load() }, [load])
 
   function openCreate() {
     setEditing(null)

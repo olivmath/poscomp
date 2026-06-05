@@ -1,5 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useState, Suspense, lazy } from 'react'
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+import { useState, Suspense, lazy, useEffect } from 'react'
+import { signOut } from 'firebase/auth'
+import { collection, query, where, onSnapshot } from 'firebase/firestore'
+import { auth, db } from './firebase'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { Layout } from './components/Layout'
 import { Login } from './pages/Login'
@@ -17,6 +20,22 @@ function AdminRoutes() {
   const [flagsBadge, setFlagsBadge] = useState(0)
   const [premiumBadge, setPremiumBadge] = useState(0)
 
+  useEffect(() => {
+    if (!user || !isAdmin) return
+    return onSnapshot(
+      query(collection(db, 'flagged_questions'), where('resolved', '==', false)),
+      (snap) => setFlagsBadge(snap.size)
+    )
+  }, [user, isAdmin])
+
+  useEffect(() => {
+    if (!user || !isAdmin) return
+    return onSnapshot(
+      query(collection(db, 'premium_requests'), where('status', '==', 'pending')),
+      (snap) => setPremiumBadge(snap.size)
+    )
+  }, [user, isAdmin])
+
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, color: 'var(--md-sys-color-on-surface-variant)' }}>
@@ -28,17 +47,7 @@ function AdminRoutes() {
 
   if (!user) return <Navigate to="/login" replace />
 
-  if (!isAdmin) {
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16, padding: 24, textAlign: 'center' }}>
-        <span className="material-symbols-outlined" style={{ fontSize: 64, color: 'var(--md-sys-color-error)', opacity: 0.6 }}>lock</span>
-        <h2 style={{ fontSize: 20, fontWeight: 700 }}>Acesso negado</h2>
-        <p style={{ color: 'var(--md-sys-color-on-surface-variant)', fontSize: 14 }}>
-          Sua conta não possui claim <code>admin: true</code>.
-        </p>
-      </div>
-    )
-  }
+  if (!isAdmin) return <AccessDenied />
 
   return (
     <Layout flagsBadge={flagsBadge} premiumBadge={premiumBadge}>
@@ -46,8 +55,8 @@ function AdminRoutes() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/usuarios" element={<Usuarios />} />
         <Route path="/questoes" element={<Questoes />} />
-        <Route path="/flags" element={<Flags onBadgeChange={setFlagsBadge} />} />
-        <Route path="/premium" element={<Premium onBadgeChange={setPremiumBadge} />} />
+        <Route path="/flags" element={<Flags />} />
+        <Route path="/premium" element={<Premium />} />
         <Route path="/announcements" element={<Announcements />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
@@ -71,6 +80,16 @@ export default function App() {
       </BrowserRouter>
     </AuthProvider>
   )
+}
+
+function AccessDenied() {
+  const navigate = useNavigate()
+  useEffect(() => {
+    signOut(auth).then(() => {
+      navigate('/login', { state: { error: 'Sua conta não possui permissão de administrador.' }, replace: true })
+    })
+  }, [navigate])
+  return null
 }
 
 function LoginGuard() {

@@ -166,10 +166,10 @@ export function Usuarios() {
     }, [onClose])
 
     const style: React.CSSProperties = {
-      position: 'absolute',
-      left: anchorRect.left + window.scrollX,
-      top: anchorRect.bottom + window.scrollY,
-      minWidth: 160,
+      position: 'fixed',
+      right: window.innerWidth - anchorRect.right,
+      top: anchorRect.bottom + 4,
+      minWidth: 200,
       background: 'var(--md-sys-color-surface)',
       border: '1px solid var(--md-sys-color-outline-variant)',
       borderRadius: 8,

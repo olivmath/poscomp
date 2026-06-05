@@ -65,6 +65,10 @@ export const submitPremiumRequest = onCall(async (request) => {
     submittedAt: FieldValue.serverTimestamp(),
   })
 
+  await db.doc(`users/${auth.uid}`).update({
+    premiumStatus: 'pending',
+  })
+
   console.log('submitPremiumRequest finished', { uid: auth.uid, transactionId, storagePath })
   return { success: true }
 })

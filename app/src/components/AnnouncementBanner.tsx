@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { httpsCallable } from 'firebase/functions'
-import { functions } from '../firebase'
+import { onSnapshot, collection, query, where } from 'firebase/firestore'
+import { db } from '../firebase'
 
 interface Announcement {
   id: string
@@ -20,17 +20,18 @@ const BG: Record<string, string> = {
 export function AnnouncementBanner() {
   const [items, setItems] = useState<Announcement[]>([])
   const [idx, setIdx] = useState(0)
-  const dismissed = JSON.parse(localStorage.getItem('dismissed_announcements') || '[]') as string[]
 
   useEffect(() => {
-    const fn = httpsCallable<Record<string, never>, { announcements: Announcement[] }>(functions, 'getAnnouncements')
-    fn({}).then((r) => {
+    const q = query(collection(db, 'announcements'), where('active', '==', true))
+    const unsub = onSnapshot(q, (snap) => {
       const now = new Date()
-      const active = (r.data.announcements ?? []).filter(
-        (a) => a.active && !dismissed.includes(a.id) && (!a.expiresAt || a.expiresAt.toDate() > now)
-      )
+      const dismissed = JSON.parse(localStorage.getItem('dismissed_announcements') || '[]') as string[]
+      const active = snap.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() } as Announcement))
+        .filter((a) => !dismissed.includes(a.id) && (!a.expiresAt || a.expiresAt.toDate() > now))
       setItems(active)
-    }).catch(() => null)
+    })
+    return unsub
   }, [])
 
   if (items.length === 0) return null
@@ -39,8 +40,8 @@ export function AnnouncementBanner() {
   if (!item) return null
 
   function dismiss() {
-    const updated = [...dismissed, item.id]
-    localStorage.setItem('dismissed_announcements', JSON.stringify(updated))
+    const current = JSON.parse(localStorage.getItem('dismissed_announcements') || '[]') as string[]
+    localStorage.setItem('dismissed_announcements', JSON.stringify([...current, item.id]))
     const remaining = items.filter((a) => a.id !== item.id)
     setItems(remaining)
     setIdx(0)

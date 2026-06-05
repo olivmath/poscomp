@@ -1,13 +1,19 @@
 import '@material/web/progress/circular-progress.js'
 import '@material/web/button/filled-button.js'
 import '@material/web/button/outlined-button.js'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { httpsCallable } from 'firebase/functions'
-import { functions } from '../firebase'
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
+import { functions, db } from '../firebase'
 import { PremiumRequest, PremiumStatus } from '../types'
 
-interface GetRequestsResponse { requests: PremiumRequest[] }
+function toISO(ts: unknown): string {
+  if (!ts) return ''
+  if (typeof ts === 'string') return ts
+  if (typeof (ts as { toDate?: () => Date }).toDate === 'function') return (ts as { toDate: () => Date }).toDate().toISOString()
+  return ''
+}
 
 const STATUS_LABELS: Record<PremiumStatus, string> = {
   awaiting_receipt: 'Aguardando',
@@ -18,7 +24,7 @@ const STATUS_LABELS: Record<PremiumStatus, string> = {
 
 const PLAN_LABELS = { pro: 'Pro (R$10/mês — 30 dias)', pro_max: 'Pro MAX (R$5/mês — 1 ano)', free: 'Free' }
 
-export function Premium({ onBadgeChange }: { onBadgeChange?: (n: number) => void }) {
+export function Premium() {
   const [searchParams] = useSearchParams()
   const [requests, setRequests] = useState<PremiumRequest[]>([])
   const [loading, setLoading] = useState(true)
@@ -27,22 +33,35 @@ export function Premium({ onBadgeChange }: { onBadgeChange?: (n: number) => void
   const [expanded, setExpanded] = useState<string | null>(null)
   const [acting, setActing] = useState<string | null>(null)
 
-  const load = useCallback(async () => {
+  useEffect(() => {
     setLoading(true)
-    setError(null)
-    try {
-      const fn = httpsCallable<Record<string, never>, GetRequestsResponse>(functions, 'listPremiumRequests')
-      const res = await fn({})
-      setRequests(res.data.requests ?? [])
-      onBadgeChange?.((res.data.requests ?? []).filter(r => r.status === 'pending').length)
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Erro ao carregar solicitações')
-    } finally {
-      setLoading(false)
-    }
-  }, [onBadgeChange])
-
-  useEffect(() => { load() }, [load])
+    const unsub = onSnapshot(
+      query(collection(db, 'premium_requests'), orderBy('createdAt', 'desc')),
+      (snap) => {
+        setRequests(snap.docs.map(d => {
+          const data = d.data()
+          return {
+            id: d.id,
+            uid: data['uid'],
+            planType: data['planType'],
+            status: data['status'],
+            storagePath: data['storagePath'],
+            receiptType: data['receiptType'],
+            createdAt: toISO(data['createdAt']),
+            submittedAt: toISO(data['submittedAt']),
+            reviewedAt: toISO(data['reviewedAt']),
+            reviewedBy: data['reviewedBy'],
+          } as PremiumRequest
+        }))
+        setLoading(false)
+      },
+      (err) => {
+        setError(err.message)
+        setLoading(false)
+      }
+    )
+    return unsub
+  }, [])
 
   async function review(requestId: string, action: 'approve' | 'deny') {
     setActing(requestId)
@@ -52,7 +71,6 @@ export function Premium({ onBadgeChange }: { onBadgeChange?: (n: number) => void
       await fn({ requestId, action })
       const newStatus: PremiumStatus = action === 'approve' ? 'approved' : 'denied'
       setRequests(rs => rs.map(r => r.id === requestId ? { ...r, status: newStatus } : r))
-      onBadgeChange?.(requests.filter(r => r.status === 'pending' && r.id !== requestId).length)
       setExpanded(null)
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : `Erro ao ${action === 'approve' ? 'aprovar' : 'negar'}`)

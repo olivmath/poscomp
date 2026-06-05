@@ -1,5 +1,7 @@
 .DEFAULT_GOAL := help
 
+LOCAL_IP := $(shell ipconfig getifaddr en0)
+
 ifneq ($(filter local prod func fn app admin,$(firstword $(MAKECMDGOALS))),)
 up down restart seed gf rf get-flagged resolve-flagged deploy install build lint typecheck test set-admin:
 	@:
@@ -115,9 +117,9 @@ local:
 			cd backend && npm run build && cd .. && \
 			firebase emulators:start --only auth,functions,firestore,storage ;; \
 		app) \
-			VITE_USE_EMULATOR=true pnpm --prefix app prod ;; \
+			VITE_USE_EMULATOR=true VITE_EMULATOR_HOST=$(LOCAL_IP) pnpm --prefix app dev --host ;; \
 		admin) \
-			VITE_USE_EMULATOR=true pnpm --prefix admin prod ;; \
+			VITE_USE_EMULATOR=true VITE_EMULATOR_HOST=$(LOCAL_IP) pnpm --prefix admin dev --host ;; \
 		set-admin) \
 			FIREBASE_AUTH_EMULATOR_HOST=localhost:9099 FIREBASE_PROJECT_ID=poscomp-olivmath GOOGLE_CLOUD_PROJECT=poscomp-olivmath \
 			npx tsx backend/src/scripts/set-admin.ts "$(word 3,$(MAKECMDGOALS))" ;; \

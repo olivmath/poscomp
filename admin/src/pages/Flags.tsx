@@ -1,14 +1,20 @@
 import '@material/web/progress/circular-progress.js'
 import '@material/web/button/filled-button.js'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { httpsCallable } from 'firebase/functions'
-import { functions } from '../firebase'
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
+import { functions, db } from '../firebase'
 import { FlaggedQuestion } from '../types'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 
-interface GetFlagsResponse { flags: FlaggedQuestion[] }
+function toISO(ts: unknown): string {
+  if (!ts) return ''
+  if (typeof ts === 'string') return ts
+  if (typeof (ts as { toDate?: () => Date }).toDate === 'function') return (ts as { toDate: () => Date }).toDate().toISOString()
+  return ''
+}
 
-export function Flags({ onBadgeChange }: { onBadgeChange?: (n: number) => void }) {
+export function Flags() {
   const [flags, setFlags] = useState<FlaggedQuestion[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -16,29 +22,39 @@ export function Flags({ onBadgeChange }: { onBadgeChange?: (n: number) => void }
   const [expanded, setExpanded] = useState<string | null>(null)
   const [deleteTarget, setDeleteTarget] = useState<FlaggedQuestion | null>(null)
 
-  const load = useCallback(async () => {
+  useEffect(() => {
     setLoading(true)
-    setError(null)
-    try {
-      const fn = httpsCallable<Record<string, never>, GetFlagsResponse>(functions, 'getFlaggedQuestions')
-      const res = await fn({})
-      setFlags(res.data.flags ?? [])
-      onBadgeChange?.((res.data.flags ?? []).filter(f => !f.resolved).length)
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Erro ao carregar reports')
-    } finally {
-      setLoading(false)
-    }
-  }, [onBadgeChange])
-
-  useEffect(() => { load() }, [load])
+    const unsub = onSnapshot(
+      query(collection(db, 'flagged_questions'), orderBy('createdAt', 'desc')),
+      (snap) => {
+        setFlags(snap.docs.map(d => {
+          const data = d.data()
+          return {
+            id: d.id,
+            questionId: data['questionId'],
+            comment: data['comment'] ?? '',
+            uid: data['uid'],
+            resultId: data['resultId'],
+            resolved: data['resolved'],
+            createdAt: toISO(data['createdAt']),
+            resolvedAt: toISO(data['resolvedAt']),
+          } as FlaggedQuestion
+        }))
+        setLoading(false)
+      },
+      (err) => {
+        setError(err.message)
+        setLoading(false)
+      }
+    )
+    return unsub
+  }, [])
 
   async function resolve(flag: FlaggedQuestion) {
     try {
       const fn = httpsCallable(functions, 'resolveFlaggedQuestion')
       await fn({ id: flag.id })
       setFlags(fs => fs.map(f => f.id === flag.id ? { ...f, resolved: true } : f))
-      onBadgeChange?.(flags.filter(f => !f.resolved && f.id !== flag.id).length)
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : 'Erro ao resolver report')
     }
@@ -51,7 +67,6 @@ export function Flags({ onBadgeChange }: { onBadgeChange?: (n: number) => void }
       await fn({ id: deleteTarget.id })
       const updated = flags.filter(f => f.id !== deleteTarget.id)
       setFlags(updated)
-      onBadgeChange?.(updated.filter(f => !f.resolved).length)
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : 'Erro ao deletar report')
     } finally {

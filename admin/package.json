@@ -1,5 +1,5 @@
 {
-  "name": "poscomp-admin",
+  "name": "console-poscomp",
   "version": "1.0.0",
   "private": true,
   "scripts": {
