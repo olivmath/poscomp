@@ -1,15 +1,15 @@
 :root {
   --md-sys-color-primary: #6750a4;
   --md-sys-color-primary-container: #eaddff;
-  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-on-primary: #fff;
   --md-sys-color-on-primary-container: #21005d;
   --md-sys-color-secondary: #625b71;
   --md-sys-color-secondary-container: #e8def8;
-  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-on-secondary: #fff;
   --md-sys-color-tertiary: #7d5260;
   --md-sys-color-error: #b3261e;
   --md-sys-color-error-container: #f9dedc;
-  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-on-error: #fff;
   --md-sys-color-on-error-container: #410e0b;
   --md-sys-color-surface: #fffbfe;
   --md-sys-color-surface-variant: #e7e0ec;
@@ -22,7 +22,6 @@
   --md-sys-color-on-surface-variant: #49454f;
   --md-sys-color-inverse-surface: #313033;
   --md-sys-color-inverse-on-surface: #f4eff4;
-
   --color-score-high: #4caf50;
   --color-score-high-bg: #e8f5e9;
   --color-score-mid: #ff9800;
@@ -31,18 +30,16 @@
   --color-score-low-bg: #ffebee;
   --color-divider: #e0e0e0;
   --color-card-bg: var(--md-sys-color-surface-container);
-
   --color-option-a: #4caf50;
-  --color-option-a-faint: rgba(76, 175, 80, 0.13);
+  --color-option-a-faint: rgb(76 175 80 / 13%);
   --color-option-b: #2196f3;
-  --color-option-b-faint: rgba(33, 150, 243, 0.13);
+  --color-option-b-faint: rgb(33 150 243 / 13%);
   --color-option-c: #ff9800;
-  --color-option-c-faint: rgba(255, 152, 0, 0.13);
+  --color-option-c-faint: rgb(255 152 0 / 13%);
   --color-option-d: #e91e63;
-  --color-option-d-faint: rgba(233, 30, 99, 0.13);
+  --color-option-d-faint: rgb(233 30 99 / 13%);
   --color-option-e: #9c27b0;
-  --color-option-e-faint: rgba(156, 39, 176, 0.13);
-
+  --color-option-e-faint: rgb(156 39 176 / 13%);
   --color-streak: #FF5722;
   --color-warning-bg: #fff3cd;
   --color-warning-text: #856404;
@@ -77,18 +74,16 @@
   --color-score-low: #e57373;
   --color-score-low-bg: #3b1111;
   --color-divider: #49454f;
-
   --color-option-a: #388e3c;
-  --color-option-a-faint: rgba(56, 142, 60, 0.2);
+  --color-option-a-faint: rgb(56 142 60 / 20%);
   --color-option-b: #1565c0;
-  --color-option-b-faint: rgba(21, 101, 192, 0.2);
+  --color-option-b-faint: rgb(21 101 192 / 20%);
   --color-option-c: #e65100;
-  --color-option-c-faint: rgba(230, 81, 0, 0.2);
+  --color-option-c-faint: rgb(230 81 0 / 20%);
   --color-option-d: #880e4f;
-  --color-option-d-faint: rgba(136, 14, 79, 0.2);
+  --color-option-d-faint: rgb(136 14 79 / 20%);
   --color-option-e: #6a1b9a;
-  --color-option-e-faint: rgba(106, 27, 154, 0.2);
-
+  --color-option-e-faint: rgb(106 27 154 / 20%);
   --color-streak: #FF7043;
   --color-warning-bg: #3a2e00;
   --color-warning-text: #ffd966;

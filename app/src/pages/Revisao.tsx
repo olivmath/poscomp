@@ -225,7 +225,7 @@ export function Revisao() {
               textAlign: 'center',
               fontSize: 13,
               color: 'var(--md-sys-color-on-surface-variant)',
-              animation: 'fadeIn 0.2s ease',
+              animation: 'fade-in 0.2s ease',
             }}
           >
             {feedback}

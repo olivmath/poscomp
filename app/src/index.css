@@ -1,4 +1,4 @@
-@import './styles/tokens.css';
+@import url('./styles/tokens.css');
 
 *,
 *::before,
@@ -8,7 +8,7 @@
 
 body {
   margin: 0;
-  font-family: 'Roboto', system-ui, sans-serif;
+  font-family: Roboto, system-ui, sans-serif;
   background: var(--md-sys-color-surface);
   color: var(--md-sys-color-on-surface);
   -webkit-font-smoothing: antialiased;
@@ -37,6 +37,21 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
 }
 
 .page-placeholder {
@@ -92,22 +107,7 @@ body {
   to { transform: rotate(360deg); }
 }
 
-@keyframes fadeIn {
+@keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
 }

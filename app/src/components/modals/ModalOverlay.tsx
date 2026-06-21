@@ -18,7 +18,7 @@ export function ModalOverlay({ children, onBackdropClick }: ModalOverlayProps) {
         justifyContent: 'center',
         zIndex: 200,
         padding: 24,
-        animation: 'fadeIn 0.15s ease',
+        animation: 'fade-in 0.15s ease',
       }}
     >
       <div

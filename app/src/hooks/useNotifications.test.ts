@@ -18,10 +18,14 @@ vi.mock('firebase/firestore', () => ({
 }))
 
 vi.mock('firebase/messaging', () => ({
-  getMessaging: (...args: unknown[]) => mockGetMessaging(...args),
-  getToken: (...args: unknown[]) => mockGetToken(...args),
-  onMessage: (...args: unknown[]) => mockOnMessage(...args),
-  deleteToken: (...args: unknown[]) => mockDeleteToken(...args),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getMessaging: (...args: any[]) => mockGetMessaging(...args),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getToken: (...args: any[]) => mockGetToken(...args),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onMessage: (...args: any[]) => mockOnMessage(...args),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  deleteToken: (...args: any[]) => mockDeleteToken(...args),
 }))
 
 vi.mock('../firebase', () => ({
