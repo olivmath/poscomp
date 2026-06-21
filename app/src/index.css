@@ -2169,6 +2169,20 @@ md-filter-chip {
   margin-block: auto;
 }
 
+.simulado-area-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--md-sys-typescale-label-medium-size);
+  font-weight: 600;
+  color: var(--md-sys-color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.simulado-area-badge-icon {
+  font-size: var(--icon-size-sm);
+}
+
 .simulado-question-text {
   font-size: var(--md-sys-typescale-title-large-size);
   line-height: var(--md-sys-typescale-title-large-line-height);
@@ -2556,11 +2570,11 @@ md-filter-chip {
 }
 
 .question-review-item--correct {
-  border-left: 4px solid var(--color-score-high);
+  border-left: 4px solid var(--md-sys-color-primary);
 }
 
 .question-review-item--wrong {
-  border-left: 4px solid var(--color-score-low);
+  border-left: 4px solid var(--md-sys-color-outline);
 }
 
 .question-review-trigger {
@@ -2665,15 +2679,15 @@ md-filter-chip {
 }
 
 .question-review-option--correct {
-  border-color: color-mix(in srgb, var(--color-score-high) 50%, var(--color-divider));
-  background: var(--color-score-high-bg);
-  color: var(--color-score-high);
+  border-color: color-mix(in srgb, var(--md-sys-color-primary) 50%, var(--color-divider));
+  background: var(--color-option-selected-bg);
+  color: var(--md-sys-color-primary);
 }
 
 .question-review-option--selected:not(.question-review-option--correct) {
-  border-color: color-mix(in srgb, var(--color-score-low) 50%, var(--color-divider));
-  background: var(--color-score-low-bg);
-  color: var(--color-score-low);
+  border-color: color-mix(in srgb, var(--md-sys-color-outline) 50%, var(--color-divider));
+  background: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 .question-review-comment {
@@ -2914,9 +2928,9 @@ md-outlined-button.btn-full {
 .md-icon--sm  { font-size: var(--icon-size-md) }
 
 .md-icon--primary { color: var(--md-sys-color-primary); }
-.md-icon--green   { color: var(--color-score-high); }
-.md-icon--red     { color: var(--color-score-low); }
-.md-icon--warning { color: var(--color-score-mid); }
+.md-icon--green   { color: var(--md-sys-color-primary); }
+.md-icon--red     { color: var(--md-sys-color-outline); }
+.md-icon--warning { color: var(--md-sys-color-outline); }
 .md-icon--muted   { color: var(--md-sys-color-on-surface-variant); }
 
 

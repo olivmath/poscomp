@@ -1,5 +1,6 @@
 import '@material/web/button/filled-button.js'
 import { useState, useEffect } from 'react'
+import { AREA_ICONS, AREA_SHORT } from '../../utils/areaIcons'
 import { ImmersiveBar } from './ImmersiveBar'
 import { ExitModal } from './ExitModal'
 import { FinishModal } from './FinishModal'
@@ -82,6 +83,10 @@ export function RunningScreen({
 
       <div className="immersive-question-wrap">
         <div className="simulado-question-card">
+          <div className="simulado-area-badge">
+            <span className="material-symbols-outlined simulado-area-badge-icon">{AREA_ICONS[question.area]}</span>
+            {AREA_SHORT[question.area]}
+          </div>
           <p className="simulado-question-text" data-testid="question-text">{question.enunciado}</p>
 
           <div className="simulado-options">

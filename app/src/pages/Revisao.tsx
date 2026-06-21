@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useRevisao } from '../hooks/useRevisao'
 import { useAuth } from '../hooks/useAuth'
 import MarkdownAnswer from '../components/MarkdownAnswer'
+import { AREA_ICONS, AREA_SHORT } from '../utils/areaIcons'
 import type { Priority, AdaptedCard } from '../hooks/useRevisao'
 
 const PRIORITY_LABELS: Record<Priority, { label: string; color: string }> = {
@@ -162,6 +163,12 @@ export function Revisao() {
         >
           {/* Frente — pergunta */}
           <div className="revisao-face revisao-face--front">
+            {question?.area && (
+              <div className="simulado-area-badge">
+                <span className="material-symbols-outlined simulado-area-badge-icon">{AREA_ICONS[question.area]}</span>
+                {AREA_SHORT[question.area]}
+              </div>
+            )}
             <p className="revisao-question-text">
               {question?.enunciado ?? 'Carregando questão...'}
             </p>
