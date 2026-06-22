@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { AppBarBack } from '../components/AppBarBack'
 import { signOut, deleteUser } from 'firebase/auth'
 import { doc, writeBatch, collection, getDocs } from 'firebase/firestore'
 import { httpsCallable } from 'firebase/functions'
@@ -13,7 +13,6 @@ import { ConfirmDeleteModal } from '../components/modals/ConfirmDeleteModal'
 const APP_VERSION = '1.0.0'
 
 export function Perfil() {
-  const navigate = useNavigate()
   const { user, userDoc } = useAuth()
   const { dark, toggle: toggleTheme } = useTheme()
 
@@ -104,23 +103,7 @@ export function Perfil() {
 
   return (
     <div style={{ minHeight: '100dvh', background: 'var(--md-sys-color-surface)' }}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          padding: '12px 16px',
-          borderBottom: '1px solid var(--md-sys-color-outline-variant)',
-        }}
-      >
-        <button
-          onClick={() => navigate('/')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--md-sys-color-on-surface)' }}
-        >
-          <span className="material-symbols-outlined">arrow_back</span>
-        </button>
-        <span style={{ fontWeight: 600, fontSize: 16 }}>Perfil</span>
-      </div>
+      <AppBarBack title="Perfil" />
 
       <div style={{ maxWidth: 480, margin: '0 auto', padding: '24px 16px', display: 'flex', flexDirection: 'column', gap: 0 }}>
         {/* Avatar + info */}

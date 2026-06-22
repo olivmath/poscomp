@@ -1,4 +1,5 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { AppBarBack } from '../components/AppBarBack'
 import { useEffect, useState } from 'react'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
@@ -42,23 +43,7 @@ export function HistoricoDetalhe() {
 
   return (
     <div style={{ minHeight: '100dvh', background: 'var(--md-sys-color-surface)' }}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          padding: '12px 16px',
-          borderBottom: '1px solid var(--md-sys-color-outline-variant)',
-        }}
-      >
-        <button
-          onClick={() => navigate('/historico')}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', color: 'var(--md-sys-color-on-surface)' }}
-        >
-          <span className="material-symbols-outlined">arrow_back</span>
-        </button>
-        <span style={{ fontWeight: 600, fontSize: 16 }}>Detalhes do Simulado</span>
-      </div>
+      <AppBarBack title="Detalhes do Simulado" onBack={() => navigate('/historico')} />
       <RelatorioFinal result={result} variant="historico-detalhe" />
     </div>
   )

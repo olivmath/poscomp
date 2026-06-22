@@ -1,16 +1,19 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { usePendingCount } from '../hooks/usePendingCount'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 export function BottomNav() {
   const location = useLocation()
   const navigate = useNavigate()
   const pendingCount = usePendingCount()
+  const isMobile = useIsMobile()
+
+  if (!isMobile) return null
 
   const tabs = [
     { path: '/', label: 'Home', icon: 'home' },
     { path: '/revisao', label: 'Revisão', icon: 'article', badge: pendingCount },
     { path: '/historico', label: 'Histórico', icon: 'history' },
-    { path: '/perfil', label: 'Perfil', icon: 'person' },
   ]
 
   const active = tabs.findIndex((t) =>
@@ -20,13 +23,10 @@ export function BottomNav() {
   return (
     <nav
       style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
         background: 'var(--md-sys-color-surface-container)',
         borderTop: '1px solid var(--md-sys-color-outline-variant)',
         display: 'flex',
+        flexShrink: 0,
         zIndex: 100,
       }}
     >

@@ -2,7 +2,10 @@ import { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import { AuthProvider, useAuth } from './contexts/AuthContext'
 import { AppBar } from './components/AppBar'
+import { BottomNav } from './components/BottomNav'
+import { LeftSidebar } from './components/LeftSidebar'
 import { useTheme } from './hooks/useTheme'
+import { useIsMobile } from './hooks/useIsMobile'
 
 const Login = lazy(() => import('./pages/Login').then((m) => ({ default: m.Login })))
 const E2ELogin = lazy(() => import('./pages/E2ELogin').then((m) => ({ default: m.E2ELogin })))
@@ -37,13 +40,35 @@ function PageLoader() {
 
 function PrivateRoutes() {
   const { user, loading } = useAuth()
+  const isMobile = useIsMobile()
   if (loading) return <PageLoader />
   if (!user) return <Navigate to="/login" replace />
   return (
-    <>
-      <AppBar />
-      <Outlet />
-    </>
+    <div style={{ display: 'flex', minHeight: '100dvh' }}>
+      {!isMobile && <LeftSidebar />}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+        <AppBar />
+        <div style={{ flex: 1 }}>
+          <Outlet />
+        </div>
+        {isMobile && <BottomNav />}
+      </div>
+    </div>
+  )
+}
+
+function PrivateRoutesBack() {
+  const { user, loading } = useAuth()
+  const isMobile = useIsMobile()
+  if (loading) return <PageLoader />
+  if (!user) return <Navigate to="/login" replace />
+  return (
+    <div style={{ display: 'flex', minHeight: '100dvh' }}>
+      {!isMobile && <LeftSidebar />}
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <Outlet />
+      </div>
+    </div>
   )
 }
 
@@ -85,13 +110,17 @@ export function App() {
               <Route path="/historico" element={<Historico />} />
             </Route>
 
-            {/* Routes without BottomNav */}
-            <Route element={<PrivateRoutesNoNav />}>
-              <Route path="/simulado/config" element={<SimuladoConfig />} />
-              <Route path="/simulado/running" element={<SimuladoRunning />} />
+            {/* Sub-pages: back button + sidebar on desktop */}
+            <Route element={<PrivateRoutesBack />}>
               <Route path="/simulado/resultado" element={<SimuladoResultado />} />
               <Route path="/historico/:id" element={<HistoricoDetalhe />} />
               <Route path="/perfil" element={<Perfil />} />
+            </Route>
+
+            {/* Immersive pages: no shell */}
+            <Route element={<PrivateRoutesNoNav />}>
+              <Route path="/simulado/config" element={<SimuladoConfig />} />
+              <Route path="/simulado/running" element={<SimuladoRunning />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />
