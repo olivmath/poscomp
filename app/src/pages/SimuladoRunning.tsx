@@ -9,23 +9,13 @@ import { QuestionMapModal } from '../components/modals/QuestionMapModal'
 import { ReportIssueModal } from '../components/modals/ReportIssueModal'
 import { LoadingModal } from '../components/modals/LoadingModal'
 
-const OPTION_COLORS: Record<Option, string> = {
-  A: 'var(--color-option-a)',
-  B: 'var(--color-option-b)',
-  C: 'var(--color-option-c)',
-  D: 'var(--color-option-d)',
-  E: 'var(--color-option-e)',
-}
-
-const OPTION_COLORS_FAINT: Record<Option, string> = {
-  A: 'var(--color-option-a-faint)',
-  B: 'var(--color-option-b-faint)',
-  C: 'var(--color-option-c-faint)',
-  D: 'var(--color-option-d-faint)',
-  E: 'var(--color-option-e-faint)',
-}
-
 const OPTIONS: Option[] = ['A', 'B', 'C', 'D', 'E']
+
+const MATERIA_META: Record<string, { icon: string; label: string }> = {
+  'Matemática':  { icon: 'calculate',   label: 'mat'  },
+  'Computação':  { icon: 'code',        label: 'comp' },
+  'Tecnologias': { icon: 'device_hub',  label: 'fund' },
+}
 
 export function SimuladoRunning() {
   const navigate = useNavigate()
@@ -196,6 +186,21 @@ export function SimuladoRunning() {
 
       {/* Content */}
       <div style={{ flex: 1, overflowY: 'auto', padding: 16, maxWidth: 480, margin: '0 auto', width: '100%' }}>
+        {/* Materia chip */}
+        {MATERIA_META[current.materia] && (
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 4, marginBottom: 12,
+            padding: '4px 10px', borderRadius: 20,
+            background: 'var(--md-sys-color-surface-variant)',
+            color: 'var(--md-sys-color-on-surface-variant)',
+            fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5,
+          }}>
+            <span className="material-symbols-outlined" style={{ fontSize: 14 }}>
+              {MATERIA_META[current.materia].icon}
+            </span>
+            {MATERIA_META[current.materia].label}
+          </div>
+        )}
+
         <p style={{ fontSize: 16, lineHeight: 1.6, marginBottom: 20 }}>{current.enunciado}</p>
 
         {/* Options */}
@@ -212,9 +217,9 @@ export function SimuladoRunning() {
                   alignItems: 'flex-start',
                   gap: 12,
                   padding: '12px 14px',
-                  border: `2px solid ${selected ? OPTION_COLORS[opt] : 'var(--md-sys-color-outline-variant)'}`,
+                  border: `2px solid ${selected ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-outline-variant)'}`,
                   borderRadius: 10,
-                  background: selected ? OPTION_COLORS_FAINT[opt] : 'transparent',
+                  background: selected ? 'var(--md-sys-color-primary-container)' : 'transparent',
                   cursor: isAnswered ? 'default' : 'pointer',
                   textAlign: 'left',
                   width: '100%',
@@ -225,7 +230,7 @@ export function SimuladoRunning() {
                     minWidth: 24,
                     height: 24,
                     borderRadius: '50%',
-                    background: selected ? OPTION_COLORS[opt] : 'var(--md-sys-color-surface-variant)',
+                    background: selected ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-surface-variant)',
                     color: selected ? 'var(--md-sys-color-on-primary)' : 'var(--md-sys-color-on-surface-variant)',
                     display: 'flex',
                     alignItems: 'center',
